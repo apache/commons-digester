@@ -58,7 +58,7 @@ public class DefaultRuleManager extends AbstractRuleManager {
      * Map of namespace-prefix to namespace-uri, used only by the
      * addAction() method.
      */
-    private HashMap namespaces = new HashMap();
+    protected HashMap namespaces = new HashMap();
     
     /**
      * The list of all actions in the cache. This set allows us to
@@ -72,7 +72,7 @@ public class DefaultRuleManager extends AbstractRuleManager {
      * find the pattern that matches the current xml element, then
      * return the list of actions.
      */
-    private MultiHashMap rules = new MultiHashMap();
+    protected MultiHashMap rules = new MultiHashMap();
 
     // --------------------------------------------------------- 
     // Public Methods
