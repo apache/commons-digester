@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright 2001-2004 The Apache Software Foundation
+   Copyright 2001-2005 The Apache Software Foundation
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,10 +19,14 @@
   
   <id>commons-digester</id>
   <inceptionYear>2001</inceptionYear>
-  <currentVersion>1.6</currentVersion>
+  <currentVersion>2.0-alpha</currentVersion>
   <name>Digester</name>
   <shortDescription>Rule based XML->Java object mapping module</shortDescription>
-  <description>The Digester package lets you configure an XML->Java object mapping module which triggers certain actions called rules whenever a particular pattern of nested XML elements is recognized.</description>
+  <description>
+    The Digester package lets you configure an XML->Java object mapping module 
+    which triggers certain actions called rules whenever a particular pattern 
+    of nested XML elements is recognized.
+  </description>
   <logo>/images/logo.png</logo>
   
   <url>http://jakarta.apache.org/commons/${pom.artifactId.substring(8)}/</url>
@@ -71,44 +75,8 @@
 
   <versions>
     <version>
-      <id>1.5</id>
-      <name>1.5</name>
-      <tag>DIGESTER_1_5</tag>
-    </version>
-    <version>
-      <id>1.4.1</id>
-      <name>1.4.1</name>
-      <tag>DIGESTER_1_4_1</tag>
-    </version>
-    <version>
-      <id>1.4</id>
-      <name>1.4</name>
-      <tag>DIGESTER_1_4</tag>
-    </version>
-    <version>
-      <id>1.3</id>
-      <name>1.3</name>
-      <tag>DIGESTER_1_3</tag>
-    </version>
-    <version>
-      <id>1.2</id>
-      <name>1.2</name>
-      <tag>DIGESTER_1_2</tag>
-    </version>
-    <version>
-      <id>1.1.1</id>
-      <name>1.1.1</name>
-      <tag>DIGESTER_1_1_1</tag>
-    </version>
-    <version>
-      <id>1.1</id>
-      <name>1.1</name>
-      <tag>DIGESTER_1_1</tag>
-    </version>
-    <version>
-      <id>1.0</id>
-      <name>1.0</name>
-      <tag>DIGESTER_1_0</tag>
+      <id>2.0</id>
+      <name>2.0</name>
     </version>
   </versions>
 
@@ -202,16 +170,12 @@
   <dependencies>
     <dependency> 
       <id>commons-beanutils</id>
-      <version>1.6</version>
+      <version>1.7.0</version>
     </dependency>
     <dependency> 
       <id>commons-logging</id>
       <version>1.0</version>
     </dependency>
-    <dependency> 
-      <id>commons-collections</id> 
-      <version>2.1</version> 
-    </dependency> 
     <dependency>
       <id>xml-apis</id>
       <version>1.0.b2</version>
