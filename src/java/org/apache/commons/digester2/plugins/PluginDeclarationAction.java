@@ -68,19 +68,7 @@ public class PluginDeclarationAction extends AbstractAction {
     org.xml.sax.Attributes attributes)
     throws ParseException {
 
-        // copy all the attribute values into a properties object so that
-        // the plugin finder strategies can access the properties later.
-        int nAttrs = attributes.getLength();
-        Properties props = new Properties();
-        for(int i=0; i<nAttrs; ++i) {
-            String key = attributes.getLocalName(i);
-            if ((key == null) || (key.length() == 0)) {
-                key = attributes.getQName(i);
-            }
-            String value = attributes.getValue(i);
-            props.setProperty(key, value);
-        }
-        
+        Properties props = attributesToProperties(attributes);
         try {
             declarePlugin(context, props);
         } catch(PluginInvalidInputException ex) {
@@ -125,6 +113,32 @@ public class PluginDeclarationAction extends AbstractAction {
 
         PluginDeclarationScope pds = PluginDeclarationScope.getInstance(context); 
         pds.addDeclaration(newDecl);
+    }
+
+    /**
+     * Copy all the (key,value) pairs in the provided Attributes object into
+     * a java.util.Properties object. If an attribute has an associated
+     * namespace, then the properties key is of form "{namespace}name".
+     */
+    private static Properties attributesToProperties(org.xml.sax.Attributes attrs) {
+        int nAttrs = attrs.getLength();
+        Properties props = new Properties();
+        for(int i=0; i<nAttrs; ++i) {
+            String namespace = attrs.getURI(i);
+
+            String key = attrs.getLocalName(i);
+            if ((key == null) || (key.length() == 0)) {
+                key = attrs.getQName(i);
+            }
+
+            if ((namespace != null) && (namespace.length()>0)) {
+                key = "{" + namespace + "}" + key;
+            }
+            
+            String value = attrs.getValue(i);
+            props.setProperty(key, value);
+        }
+        return props;
     }
 }
 
