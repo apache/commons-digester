@@ -210,16 +210,6 @@ public class PluginRuleManager extends AbstractRuleManager {
     /**
      * Add a custom rule.
      * <p>
-     * If the pattern starts with a forward-slash then the current mountpoint
-     * is automatically prepended to the pattern so that custom rules can add
-     * absolute patterns without caring where they are mounted within the 
-     * input document.
-     * <p>
-     * If the pattern is null, then the pattern is set to the current mountpoint,
-     * so that actions can be triggered on the same element which caused the
-     * plugin class to be created, without needing to know the mountpoint
-     * from the code that adds the custom rule.
-     * <p>
      * Note that this does hard-wire an assumption that the concrete
      * RuleManager this instance is delegating to accepts the "canonical path"
      * as a valid pattern prefix, and treats paths starting with a leading
@@ -229,11 +219,6 @@ public class PluginRuleManager extends AbstractRuleManager {
      */
     public void addRule(String pattern, Action action)
     throws InvalidRuleException {
-        if (pattern == null) {
-            pattern = mountPoint;
-        } else if (pattern.startsWith("/")) {
-            pattern = mountPoint + pattern;
-        }
         delegateRuleManager.addRule(pattern, action);
     }
 
