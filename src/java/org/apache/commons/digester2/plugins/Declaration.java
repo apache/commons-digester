@@ -232,6 +232,13 @@ public class Declaration {
             log.debug("configure being called!");
         }
 
-        ruleLoader.addRules(context);
+        if (ruleLoader != null) {
+            // The ruleloader can be null if findLoader returned null, ie
+            // none of the registered RuleFinder objects could locate a
+            // source of custom rules for the specified class. This
+            // probably indicates that something is wrong: maybe we should
+            // log a warning here?
+            ruleLoader.addRules(context);
+        }
     }
 }
