@@ -249,7 +249,7 @@ public class DefaultRuleManager extends AbstractRuleManager {
             return java.util.Collections.EMPTY_LIST;
         }
         else {
-            return Collections.unmodifiableList(actionList);
+            return actionList;
         }
     }
 
