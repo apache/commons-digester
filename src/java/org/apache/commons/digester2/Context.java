@@ -110,6 +110,15 @@ public class Context {
     private ContentHandler contentHandler = null;
 
     /**
+     * The body text of the current element since the most recent child
+     * element (or start of the element if no child elements have yet been
+     * seen). When a child element is found, this text is reported to 
+     * matching actions via the Action.bodySegment method, then the buffer
+     * can be cleared. There is no need for a stack of these.
+     */
+    private StringBuffer bodyTextSegment = new StringBuffer();
+
+    /**
      * The body text of the current element. As the parser reports chunks
      * of text associated with the current element, they are appended here.
      * When the end of the element is reported, the full text content of the
@@ -275,6 +284,22 @@ public class Context {
     }
 
     /**
+     * Returns the text seen in the current xml element since the last child 
+     * element was seen (or since the start of the xml element if no child
+     * elements have yet been encountered).
+     */
+    public StringBuffer getBodyTextSegment() {
+        return bodyTextSegment;
+    }
+    
+    /**
+     * Clears the bodyTextSegment buffer. See {@link #getBodyTextSegment}.
+     */
+    public void clearBodyTextSegment() {
+        bodyTextSegment.setLength(0);
+    }
+    
+    /**
      * Save the buffer which is currently being used to accumulate text
      * content of the current xml element. This is expected to be called
      * just before starting processing of a child xml element.
@@ -304,12 +329,22 @@ public class Context {
      * <li>The text might be intermingled with child elements.
      * </ul>
      */
-    public void appendToBodyText(char[] buffer, int start, int length) {
+    public void appendBodyText(char[] buffer, int start, int length) {
+        bodyTextSegment.append(buffer, start, length);
         bodyText.append(buffer, start, length);
     }
     
     /**
+     * Return the Path object representing the path from the document root
+     * to the current element.
+     */
+    public Path getCurrentPath() {
+        return currentElementPath;
+    }
+    
+    /**
      * Return the path to the xml element currently being processed.
+     * This is exactly equivalent to <code>getCurrentPath().getPath()</code>.
      */
     public String getMatchPath() {
         return currentElementPath.getPath();
