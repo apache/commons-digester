@@ -55,20 +55,20 @@ public class DigesterTestCase extends TestCase {
     private static class AppenderAction extends AbstractAction {
         private List list;
         private String str;
-        
+
         public AppenderAction(List list, String str) {
             this.list = list;
             this.str = str;
         }
-        
+
         public void begin(
         Context context,
-        String namespace, String name, 
+        String namespace, String name,
         org.xml.sax.Attributes attrs) {
             list.add(str);
         }
     }
-    
+
     // ----------------------------------------------------- Instance Variables
 
     /**
@@ -150,7 +150,7 @@ public class DigesterTestCase extends TestCase {
     public void testXMLReaderAuto() throws Exception {
         String inputText = "<root/>";
         InputSource source = new InputSource(new StringReader(inputText));
-        
+
         Digester d = new Digester();
 
         XMLReader reader = d.getXMLReader();
@@ -173,7 +173,7 @@ public class DigesterTestCase extends TestCase {
     public void testXMLReaderAuto2() throws Exception {
         String inputText = "<root/>";
         InputSource source = new InputSource(new StringReader(inputText));
-        
+
         Digester d = new Digester();
 
         ArrayList list = new ArrayList();
@@ -194,7 +194,7 @@ public class DigesterTestCase extends TestCase {
         // and that parsing works ok with that reader.
         String inputText = "<root/>";
         InputSource source = new InputSource(new StringReader(inputText));
-        
+
         // create XMLReader
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -219,10 +219,89 @@ public class DigesterTestCase extends TestCase {
     // TODO: add test for setValidating/getValidating
 
     // TODO: add test for get/set explicit classloader
+    // TODO: add test for setUseContextClassloader
 
     // TODO: add test for get/set logger. This should probably wait until
     // we figure out whether to revamp the logging approach though.
-    
+
+    // TODO: add tests for setRuleManager/getRuleManager
+
+    /**
+     * Test getDTDPublicId and getDTDSystemId methods.
+     *
+     * This also happens to test the digester when parse is called with
+     * no rules added, and to test ignoring of external DTDs.
+     */
+    public void testDtdInfo1() throws Exception {
+        String inputText =
+              "<!DOCTYPE root PUBLIC 'test-public-id' 'test-system-id'>"
+            + "<root/>";
+
+        InputSource source = new InputSource(new StringReader(inputText));
+
+        // initially, no info is available
+        Digester d = new Digester();
+        assertNull("initial dtd public id is null", d.getDTDPublicId());
+        assertNull("initial dtd system id is null", d.getDTDSystemId());
+
+        // ignore any attempt to load an external dtd with the specified 
+        // public-id
+        d.registerKnownEntity("test-public-id", "");
+        
+        // and parse...
+        d.parse(source);
+
+        String pub = d.getDTDPublicId();
+        String sys = d.getDTDSystemId();
+        assertEquals("DTD public id obtained", "test-public-id", pub);
+        assertEquals("DTD system id obtained", "test-system-id", sys);
+    }
+
+    /**
+     * Test getDTDPublicId and getDTDSystemId methods.
+     *
+     * In this test, the public is null, and an internal DTD is present.
+     */
+    public void testDtdInfo2() throws Exception {
+        String inputText =
+              "<!DOCTYPE root SYSTEM 'test-system-id'"
+            + "[<!ELEMENT root EMPTY>]>"
+            + "<root/>";
+
+        InputSource source = new InputSource(new StringReader(inputText));
+
+        // initially, no info is available
+        Digester d = new Digester();
+        assertNull("initial dtd public id is null", d.getDTDPublicId());
+        assertNull("initial dtd system id is null", d.getDTDSystemId());
+
+        // Ignore any attempt to load an external dtd. Note that it is
+        // impossible to use registerKnownEntity to ignore the DTD, as it
+        // doesn't have a public id, and the systemId is expanded by the
+        // parser to a full path at runtime so we cannot know what the
+        // complete systemId will be..
+        assertFalse("External DTD not ignored by default", d.getIgnoreExternalDTD());
+        d.setIgnoreExternalDTD(true);
+        assertTrue("External DTD ignored", d.getIgnoreExternalDTD());
+        
+        // and parse...
+        d.parse(source);
+
+        String pub = d.getDTDPublicId();
+        String sys = d.getDTDSystemId();
+        assertNull("DTD public id is null", pub);
+        assertEquals("DTD system id obtained", "test-system-id", sys);
+    }
+
+    // TODO: add tests for get/set substitutor
+
+    // TODO: add tests for get/set/register known entities
+    // including testing for allowUnknownExternalEntity
+
+    // TODO: add tests for various parse methods
+
+    // TODO: add test for setInitialObject and getRoot
+
     /**
      * Test the basic property getters and setters.
      */
