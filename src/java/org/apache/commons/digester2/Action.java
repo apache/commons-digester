@@ -75,19 +75,25 @@ public interface Action {
     throws ParseException;
 
     /**
-     * This method is called when the body of a matching XML element is 
-     * encountered.  If the element has no body, this method is not called at 
-     * all.
+     * This method is called when a child element is encountered within
+     * an element, and also when the element's end tag is encountered. It
+     * is intended to be used in order to parse "markup" style XML such as
+     * XHTML.
      * <p>
-     * Note that if the element has multiple pieces of body text separated by
-     * child elements (ie is "mixed content") then this method is called once
-     * for each separate block of text, at the point that the child element
-     * is encountered. In each call, only the text since the last call to this
-     * method is passed.
+     * Example: for the input
+     * <pre>
+     *  [p]this is [i]italic[/i] and this is [b]bold[/b] text.[/p]
+     * </pre>
+     * the action matching [p] will have this method invoked three times,
+     * with the values "this is ", " and this is " and " text." respectively.
      * <p>
      * In the case of an element with just text content (no child elements),
-     * this method is exactly equivalent to the body method; either can be
-     * overridden to perform the necessary work.
+     * this method is called immediately before the body method, with the
+     * same parameters.
+     * <p>
+     * If an element has no body content at all, or if the element is declared
+     * via a DTD or schema to be "element content only" then the bodySegment
+     * method will not be called.
      *
      * @param context is the current processing context object.
      * @param namespace the namespace URI of the matching element, or an 
