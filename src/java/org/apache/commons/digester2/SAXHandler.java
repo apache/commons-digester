@@ -654,7 +654,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      */
     public void addRule(String pattern, Action action)
     throws InvalidRuleException {
-        ruleManager.addRule(pattern, action);
+        getRuleManager().addRule(pattern, action);
     }
 
     /**
@@ -885,7 +885,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         configure();
 
         try {
-            ruleManager.startParse(context);
+            // This also has the side-effect of creating a RuleManager if
+            // one has not been created before. Of course this would only
+            // happen if no rules had ever been added...
+            getRuleManager().startParse(context);
         } catch(DigestionException ex) {
             throw new NestedSAXException(ex);
         }
@@ -1132,6 +1135,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         // Fire "begin" events for all relevant rules
         List actions;
         try {
+            // NB: don't need getRuleManager here, as we know it was
+            // created at startDocument if not before..
             actions = ruleManager.getMatchingActions(matchPath);
         } catch(DigestionException ex) {
             throw new NestedSAXException(ex);
