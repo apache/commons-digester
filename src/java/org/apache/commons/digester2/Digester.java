@@ -1,4 +1,4 @@
-/* $Id: $
+/* $Id$
  *
  * Copyright 2001-2005 The Apache Software Foundation.
  *
@@ -75,25 +75,9 @@ import org.apache.commons.logging.Log;
 
 public class Digester {
 
-    // --------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new Digester with default properties.
-     */
-    public Digester() {
-        this.saxHandler = new SAXHandler();
-    }
-
-    /**
-     * This method allows customisation of the way that sax events are
-     * handled, by allowing a modified subclass of SAXHandler to be
-     * specified as the target for parsing events.
-     */
-    public Digester(SAXHandler saxHandler) {
-        this.saxHandler = saxHandler;
-    }
-
-    // --------------------------------------------------- Instance Variables
+    // --------------------------------------------------- 
+    // Instance Variables
+    // --------------------------------------------------- 
 
     /**
      * The object used to handle event callbacks from the SAX parser as
@@ -116,7 +100,29 @@ public class Digester {
      */
     private boolean validating = false;
 
-    // ------------------------------------------------------------- Properties
+    // --------------------------------------------------------- 
+    // Constructors
+    // --------------------------------------------------------- 
+
+    /**
+     * Construct a new Digester with default properties.
+     */
+    public Digester() {
+        this.saxHandler = new SAXHandler();
+    }
+
+    /**
+     * This method allows customisation of the way that sax events are
+     * handled, by allowing a modified subclass of SAXHandler to be
+     * specified as the target for parsing events.
+     */
+    public Digester(SAXHandler saxHandler) {
+        this.saxHandler = saxHandler;
+    }
+
+    // ------------------------------------------------------------- 
+    // Properties
+    // ------------------------------------------------------------- 
 
     /**
      * Get the SAXHandler object associated with this instance.
@@ -413,6 +419,12 @@ public class Digester {
      * then the parser will attempt to use the system-id directly, potentially
      * downloading the resource from a remote location.</p>
      *
+     * <p>If you are trying to register a systemId here, then be aware that
+     * the value that must be registered is the <i>absolute</i> URL formed by
+     * resolving the system-id in the input document against the base URL of
+     * the document being parsed. If the system-id in the document is absolute,
+     * then this is not an issue.</p>
+     *
      * <p>
      * <strong>Note:</strong> This method will have no effect when a custom
      * <code>EntityResolver</code> has been set. (Setting a custom
@@ -446,6 +458,21 @@ public class Digester {
      * does no such thing, so processing of it can be suppressed.
      * <p>
      * This flag defaults to false (ie external dtds are read during the parse).
+     * <p>
+     * Note that this method would not be necessary if people could be
+     * relied upon to mark their DOCTYPE declarations with the "standalone"
+     * keyword if they can be ignored, as the xml parser would never attempt
+     * to load the dtd unless validation was enabled. And this method would 
+     * not be necessary if people could be relied upon to use PUBLIC ids in 
+     * their DOCTYPES, as method registerKnownEntity(publicId, "") can be used 
+     * to ignore an entity with a specific public-id. However there are large 
+     * volumes of broken XML documents out there that ignore both of these 
+     * basic xml features, so this method provides a workaround. Note that using
+     * registerKnownEntity with a systemId is not usually useful, because
+     * xml parsers expand relative systemIds into absolute ids before calling
+     * the EntityResolver, making it difficult to know before parsing starts
+     * what (absolute) system-id value should be registered in order to
+     * redirect/disable the entity.
      */
     public void setIgnoreExternalDTD(boolean state) {
         saxHandler.setIgnoreExternalDTD(state);
@@ -458,7 +485,9 @@ public class Digester {
         return saxHandler.getIgnoreExternalDTD();
     }
      
-    // ------------------------------------------------------- Public Methods
+    // ------------------------------------------------------- 
+    // Public Methods
+    // ------------------------------------------------------- 
 
     /**
      * Parse the content of the specified file using this Digester.  Returns
@@ -600,7 +629,9 @@ public class Digester {
         saxHandler.addRule(pattern, action);
     }
 
-    // --------------------------------------------------- Object Stack Methods
+    // --------------------------------------------------- 
+    // Object Stack Methods
+    // --------------------------------------------------- 
 
     /**
      * Set the initial object that will form the root of the tree of
