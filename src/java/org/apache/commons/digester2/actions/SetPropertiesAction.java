@@ -82,7 +82,7 @@ public class SetPropertiesAction extends AbstractAction {
      *      HashMap map = new HashMap();
      *      map.put("class", "className");
      *      map.put("ignore", null);
-     *      SetPropertiesAction(map);
+     *      Action action = new SetPropertiesAction(map);
      * </pre></code></p>
      *
      * <p>See also {@link #addAlias} which allows the custom mapping to be
@@ -130,7 +130,7 @@ public class SetPropertiesAction extends AbstractAction {
      * to the <code>state</code> property.
      * All other attributes are mapped as usual using exact name matching.
      * <code><pre>
-     *      SetPropertiesAction(
+     *      Action action = new SetPropertiesAction(
      *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
      * </pre></code>
@@ -142,7 +142,7 @@ public class SetPropertiesAction extends AbstractAction {
      * than be passed to a setIgnore method (the default behaviour). All other
      * attributes are mapped as usual using exact name matching.
      * <code><pre>
-     *      SetPropertiesAction(
+     *      Action action = new SetPropertiesAction(
      *                new String[] {"class", "ignore"},
      *                new String[] {"className"});
      * </pre></code>
