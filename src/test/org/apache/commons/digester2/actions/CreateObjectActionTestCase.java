@@ -98,7 +98,7 @@ public class CreateObjectActionTestCase extends TestCase {
 
         Digester d = new Digester();
         d.addRule("/root/item", new CreateObjectAction(Item.class));
-        d.addRule("/root/item", new SetNextAction("addItem"));
+        d.addRule("/root/item", new LinkObjectsAction("addItem"));
 
         TestObject testObject = new TestObject();
         d.setInitialObject(testObject);

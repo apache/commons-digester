@@ -30,10 +30,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.digester2.Digester;
 
 /**
- * <p>Test Cases for the SetNextAction class.</p>
+ * <p>Test Cases for the LinkObjectsAction class.</p>
  */
 
-public class SetNextActionTestCase extends TestCase {
+public class LinkObjectsActionTestCase extends TestCase {
 
     public static class Item {
     }
@@ -54,7 +54,7 @@ public class SetNextActionTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public SetNextActionTestCase(String name) {
+    public LinkObjectsActionTestCase(String name) {
         super(name);
     }
 
@@ -72,7 +72,7 @@ public class SetNextActionTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(SetNextActionTestCase.class));
+        return (new TestSuite(LinkObjectsActionTestCase.class));
     }
 
     /**
@@ -98,7 +98,7 @@ public class SetNextActionTestCase extends TestCase {
 
         Digester d = new Digester();
         d.addRule("/root/item", new CreateObjectAction(Item.class));
-        d.addRule("/root/item", new SetNextAction("addItem"));
+        d.addRule("/root/item", new LinkObjectsAction("addItem"));
 
         TestObject testObject = new TestObject();
         d.setInitialObject(testObject);
@@ -106,6 +106,6 @@ public class SetNextActionTestCase extends TestCase {
         
         // string was passed ok
         Item item = testObject.getItem();
-        assertNotNull("SetNextAction works", item);
+        assertNotNull("LinkObjectsAction works", item);
     }
 }

@@ -121,7 +121,7 @@ public class CreateObjectWithFactoryActionTestCase extends TestCase {
         Digester d = new Digester();
         d.setInitialObject(root);
         d.addRule("/root/int", new CreateObjectWithFactoryAction(factory));
-        d.addRule("/root/int", new SetNextAction("addInteger"));
+        d.addRule("/root/int", new LinkObjectsAction("addInteger"));
 
         d.parse(source);
 
@@ -153,7 +153,7 @@ public class CreateObjectWithFactoryActionTestCase extends TestCase {
         Digester d = new Digester();
         d.setInitialObject(root);
         d.addRule("/root/int", new CreateObjectWithFactoryAction(IntegerFactory.class));
-        d.addRule("/root/int", new SetNextAction("addInteger"));
+        d.addRule("/root/int", new LinkObjectsAction("addInteger"));
 
         d.parse(source);
 
