@@ -1,6 +1,6 @@
-/* $Id: ActionBeanPropertySetter.java,v 1.20 2004/05/10 06:30:06 skitching Exp $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,40 +32,23 @@ import org.apache.commons.digester2.AbstractAction;
 import org.apache.commons.digester2.ParseException;
 
 /**
- * <p> Action which sets a bean property on the top object to the body text.</p>
- *
- * <p> The property set:</p>
- * <ul><li>can be specified when the rule is created</li>
- * <li>or can match the current element when the rule is called.</li></ul>
- *
- * <p> Using the second method and the {@link ExtendedRuleManager} child match
- * pattern, all the child elements can be automatically mapped to properties
- * on the parent object.</p>
+ * An Action which sets a property on the object on the top of the
+ * digester object stack to the body text from the matched element.
+ * <p>
+ * The name of the property to set:
+ * <ul>
+ * <li>can be specified when the action is created, or</li>
+ * <li>can be the name of the matched xml element (useful when the Action is
+ *  used with a pattern that can match multiple elements).</li>
+ * </ul>
+ * <p>
+ * The text contained in the xml element has all leading and trailing
+ * whitespace removed from it before the property setter method is invoked
+ * on the target object.
  */
 
 public class BeanPropertySetterAction extends AbstractAction {
 
-    // ----------------------------------------------------------- Constructors
-
-    /**
-     * <p>Construct instance that sets the given property from the body text.</p>
-     *
-     * @param propertyName name of property to set
-     */
-    public BeanPropertySetterAction(String propertyName) {
-        this.propertyName = propertyName;
-    }
-
-    /**
-     * <p>Construct instance that automatically sets a property from the body text.
-     *
-     * <p> This construct creates an action that sets the property
-     * on the top object named the same as the current element.
-     */
-    public BeanPropertySetterAction() {
-        this((String)null);
-    }
-    
     // ----------------------------------------------------- Instance Variables
 
     /**
@@ -74,11 +57,39 @@ public class BeanPropertySetterAction extends AbstractAction {
     protected String propertyName = null;
 
     /**
-     * The body text used to set the property.
+     * The identifier of the context "scratch stack" used to store the 
+     * body text passed to the body method, so that it can be used in 
+     * the end method. This stack is per-action-instance, so that other
+     * instances of this class can't ever interfere with the data on this
+     * stack.
      */
-    protected String bodyText = null;
+    protected final Context.StackId BODY_TEXT_STACK =
+        new Context.StackId(BeanPropertySetterAction.class, "bodytext", this);
 
-    // --------------------------------------------------------- Public Methods
+    // ----------------------------------------------------------- 
+    // Constructors
+    // ----------------------------------------------------------- 
+
+    /**
+     * Construct an instance that uses the xml element name to determine
+     * which property to set on the target object.
+     */
+    public BeanPropertySetterAction() {
+        this((String)null);
+    }
+    
+    /**
+     * Construct an instance that sets the given property.
+     *
+     * @param propertyName name of property to set
+     */
+    public BeanPropertySetterAction(String propertyName) {
+        this.propertyName = propertyName;
+    }
+
+    // --------------------------------------------------------- 
+    // Public Methods
+    // --------------------------------------------------------- 
 
     /**
      * Process the body text of this element.
@@ -100,7 +111,7 @@ public class BeanPropertySetterAction extends AbstractAction {
                 + " at path '" + context.getMatchPath() + "'");
         }
 
-        bodyText = text.trim();
+        context.push(BODY_TEXT_STACK, text.trim());
     }
 
     /**
@@ -117,11 +128,14 @@ public class BeanPropertySetterAction extends AbstractAction {
     public void end(Context context, String namespace, String name) 
         throws ParseException {
 
+        String bodyText = (String) context.pop(BODY_TEXT_STACK);
+        
         String property = propertyName;
-
         if (property == null) {
-            // If we don't have a specific property name,
-            // use the element name.
+            // If we don't have a specific property name, use the element name.
+            //
+            // TODO: implement conversion of xml-hyphenated-names to
+            // javaCamelCaseNames. See SetPropertiesAction
             property = name;
         }
 
@@ -172,21 +186,6 @@ public class BeanPropertySetterAction extends AbstractAction {
                 "Unable to set property '" + property + "' for bean of class '"
                 + top.getClass().getName() + "'", ex);
         }
-    }
-
-    /**
-     * Init before parsing commences (just in case a previous parse has
-     * failed, leaving garbage).
-     */
-    public void startParse(Context context) throws ParseException {
-        bodyText = null;
-    }
-
-    /**
-     * Clean up after parsing is complete.
-     */
-    public void finishParse(Context context) throws ParseException {
-        bodyText = null;
     }
 
     /**
