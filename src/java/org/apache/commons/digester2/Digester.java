@@ -17,29 +17,25 @@
 
 package org.apache.commons.digester2;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
-import javax.xml.parsers.ParserConfigurationException;
+import java.util.Map;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
+
+import org.apache.commons.logging.Log;
 
 /**
  * <p>A <strong>Digester</strong> processes an XML input stream by matching a
@@ -123,6 +119,13 @@ public class Digester {
     // ------------------------------------------------------------- Properties
 
     /**
+     * Get the SAXHandler object associated with this instance.
+     */
+    public SAXHandler getSAXHandler() {
+        return saxHandler;
+    }
+
+    /**
      * Determine whether we are to validate the xml input against a DTD.
      * If so, then an error will be reported by the parse() methods if the
      * input doesn't comply with the schema. If validation is disabled, then
@@ -185,10 +188,31 @@ public class Digester {
      *
      * <p>This method does not set up the SAXHandler as the reader's handler
      *  for content, dtd or other events. You should generally call method
-     *  SAXHandler.initCallbacks before starting the parse.
+     *  SAXHandler.initCallbacks before starting the parse.</p>
      */
-    public void setXMLReader(XMLReader reader) {
+    public void setXMLReader(XMLReader reader, boolean initCallbacks) {
         this.reader = reader;
+        if (initCallbacks) {
+            saxHandler.initCallbacks(reader);
+        }
+        
+        boolean isNamespaceAware;
+        try { 
+            isNamespaceAware = 
+                reader.getFeature("http://xml.org/sax/features/namespaces");
+        } catch(org.xml.sax.SAXNotRecognizedException ex) {
+            isNamespaceAware = false;
+        } catch(org.xml.sax.SAXNotSupportedException ex) {
+            isNamespaceAware = false;
+        }
+        
+        if (!isNamespaceAware) {
+            // perhaps we should be throwing an exception here instead of
+            // issuing a warning?
+            saxHandler.getLogger().warn(
+                "Digester.setXMLReader called with a parser that is not"
+                + " namespace-aware");
+        }
     }
 
     /**
