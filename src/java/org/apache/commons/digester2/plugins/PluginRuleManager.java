@@ -80,8 +80,8 @@ public class PluginRuleManager extends AbstractRuleManager {
     private RuleManager parentRuleManager;
     
     /** 
-     * The rulemanager implementation that we are "enhancing" with plugins
-     * functionality, as per the Decorator pattern. This is never a 
+     * The rulemanager implementation that we are using to avoid having
+     * to actually implement the logic of a RuleManager here. This is never a
      * PluginRuleManager, but rather an instance that implements whatever
      * matching behaviour the plugged-in class wants for its custom rules.
      */
@@ -145,7 +145,6 @@ public class PluginRuleManager extends AbstractRuleManager {
      * any reason to copy one of these objects.
      */
      public RuleManager copy() {
-         // this method should never be called
          throw new UnsupportedOperationException(
             "PluginRuleManager.copy is not supported.");
      }
