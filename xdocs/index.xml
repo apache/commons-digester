@@ -67,13 +67,18 @@ as well as fixes for bugs. It represents an important milestone in the evolution
 of the Digester 1 design codebase.
         </p>
         <p>
-Digester has a dependency on 
+Digester has a dependency on
 <a href='http://jakarta.apache.org/commons/collections'>Commons Collections</a>.
-Fortunately, this is only upon a single mature class (ArrayStack) and the versions
-of this class to be found in different versions of the libraries are binary compatible. 
+This threatens to raise compatibility issues 
+now that two incompatible series of releases exist.
+Fortunately, this dependency is only upon a single mature class (ArrayStack) and the versions
+of this class to be found in different versions of the library are binary compatible. 
 Therefore a release from the 2.x series or from the 3.x series of commons collections
-will do equally well even though these libraries are incompatible. The dependency can
-alternatively be satisfied by including the latest BeanUtils release (1.7). 
+will do equally well (even though these libraries are incompatible). The dependency can
+alternatively be satisfied by including the latest BeanUtils release (1.7) 
+(which includes the class). 
+        </p>
+        <p>
 The dependencies neccessary for Digester 1.6 can be summarized as follows:
         </p>
 <table>
