@@ -103,8 +103,8 @@ public class PluginDeclarationScope {
     public static PluginDeclarationScope getInstance(Context context) {
         // Instead of using a "scratch stack" in the context, we
         // just use a "scratch item" which returns the most-recent
-        // PluginDeclarationScope. As each of these objects contains a 
-        // reference to its "parent" scope, this is effectively a 
+        // PluginDeclarationScope. As each of these objects contains a
+        // reference to its "parent" scope, this is effectively a
         // linked-list-stack.
         PluginDeclarationScope pds =
             (PluginDeclarationScope) context.getItem(PLUGIN_DECL_SCOPE);
@@ -115,6 +115,37 @@ public class PluginDeclarationScope {
 
         return pds;
     }
+
+    /**
+     * Create a new instance of this class, and insert it into the
+     * head of the list of scopes. This is done whenever a declaration
+     * occurs which should "shadow" rather than "overwrite" possible
+     * previous declarations of the same class and/or id.
+     */
+    public static PluginDeclarationScope beginScope(Context context) {
+        PluginDeclarationScope pds =
+            (PluginDeclarationScope) context.getItem(PLUGIN_DECL_SCOPE);
+        if (pds == null) {
+            pds = new PluginDeclarationScope();
+            context.putItem(PLUGIN_DECL_SCOPE, pds);
+        } else {
+            pds = new PluginDeclarationScope(pds);
+            context.putItem(PLUGIN_DECL_SCOPE, pds);
+        }
+
+        return pds;
+    }
+
+    /**
+     * Discard the current head of the list of scopes, restoring the previous
+     * head.
+     */
+    public static void endScope(Context context) {
+        PluginDeclarationScope pds =
+            (PluginDeclarationScope) context.getItem(PLUGIN_DECL_SCOPE);
+        context.putItem(PLUGIN_DECL_SCOPE, pds.parent);
+    }
+
 
     //------------------- constructors ---------------------------------------
 
@@ -141,7 +172,15 @@ public class PluginDeclarationScope {
     /**
      * Add the declaration to the set of known declarations.
      * <p>
-     * TODO: somehow get a reference to a Digester object
+     * Note that if two declarations occur for the same plugin class, then
+     * method getDeclarationByClass will return the most recently added one.
+     * If they have different "id" values associated with them, then calling
+     * getDeclarationById will return the appropriate Declaration. And if two
+     * Declarations with different classes but the same id are added, then 
+     * the getDeclarationById method will return the most recently added,
+     * though getDeclarationByClass will return the (sole) matching one.
+     * <p>
+     * TODO: somehow get a reference to a Logger object
      * so that we can really log here. Currently, all
      * logging is disabled from this method.
      *
