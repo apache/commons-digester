@@ -19,17 +19,19 @@
 package org.apache.commons.digester2;
 
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
  * @see DefaultRuleManager
  */
 
-public class SupplementaryRuleManager extends DefaultRuleManager {
+public class SupplementaryRuleManager extends FallbackRuleManager {
 
     public static boolean matches(String path, String pathToMatch) {
         if (pathToMatch.charAt(0) == '/') {
@@ -57,39 +59,25 @@ public class SupplementaryRuleManager extends DefaultRuleManager {
         return false;
     }
     
-    protected final Action supplementaryAction;
-    protected final Action fallbackAction;
+    protected final List supplementaryActions;
+    protected final Map path2ActionsMap = new HashMap();
     
-    protected final List fallbackList = new ArrayList();
-    
-    public SupplementaryRuleManager(Action supplementaryAction) {
-        this(supplementaryAction, null);
+    public SupplementaryRuleManager(List supplementaryActions) {
+        this.supplementaryActions = supplementaryActions;
     }
     
-    public SupplementaryRuleManager(Action supplementaryAction, Action fallbackAction) {
-        
-        if (fallbackAction == null && supplementaryAction == null) {
-            throw new IllegalArgumentException(
-                    "Both parameters set to null makes no sense. Use DefaultRuleManager instead.");
-        }
-
-        this.supplementaryAction = supplementaryAction;
-        this.fallbackAction = fallbackAction;
-
-        if (fallbackAction != null) {
-            fallbackList.add(fallbackAction);
-        }
-
-        if (supplementaryAction != null) {
-            fallbackList.add(supplementaryAction);
-        }
+    public SupplementaryRuleManager(List supplementaryActions, List fallbackActions) {
+        super(fallbackActions);
+        this.supplementaryActions = supplementaryActions;
+    }
+    
+    public SupplementaryRuleManager() {
+        this(new ArrayList());
     }
     
     public SupplementaryRuleManager(SupplementaryRuleManager manager) {
-        this(manager.supplementaryAction, manager.fallbackAction);
-        this.namespaces = (HashMap) manager.namespaces.clone();
-        this.actions = (ArrayList) manager.actions.clone();
-        this.rules = (MultiHashMap) manager.rules.clone();
+        super(manager);
+        this.supplementaryActions = manager.supplementaryActions;
     }
     
     /**
@@ -99,31 +87,73 @@ public class SupplementaryRuleManager extends DefaultRuleManager {
         return new SupplementaryRuleManager(this);
     }
     
+    public void addRule(String pattern, Action action) throws InvalidRuleException {
+        super.addRule(pattern, action);
+        invalidateCache();
+    }
+
+    public void addFallbackAction(Action action) {
+        super.addFallbackAction(action);
+        invalidateCache();
+    }
+
+    public void addSupplementaryAction(Action action) {
+        supplementaryActions.add(action);
+        invalidateCache();
+    }
+
     /**
      * @see DefaultRuleManager#getMatchingActions(String)
      */
     public List getMatchingActions(String path) {
+        
+        List completeList = (List) path2ActionsMap.get(path);
+        if (completeList != null) {
+            return completeList;
+        } 
+        
         List actionList = super.getMatchingActions(path);
-        if (actionList == Collections.EMPTY_LIST) {
-            return fallbackList;
+        if (supplementaryActions.size() != 0) {
+            if (actionList == Collections.EMPTY_LIST) {
+                completeList = Collections.unmodifiableList(supplementaryActions);
+            } else {
+                completeList = new ReadOnlyConcatList(actionList, supplementaryActions);
+            }
+        } else {
+            completeList = actionList;
         }
-        if (supplementaryAction != null) {
-            actionList.add(supplementaryAction);
-        }
-        return actionList;
+
+        path2ActionsMap.put(path, completeList);
+        return completeList;
     }
 
-    /**
-     * @return Returns the fallbackAction.
-     */
-    public Action getFallbackAction() {
-        return fallbackAction;
+    protected void invalidateCache() {
+        path2ActionsMap.clear();
     }
+    
+    protected static class ReadOnlyConcatList extends AbstractList {
 
-    /**
-     * @return Returns the supplementaryAction.
-     */
-    public Action getSupplementaryAction() {
-        return supplementaryAction;
+        final List left;
+        final List right;
+        final int border;
+
+        ReadOnlyConcatList(List left, List right) {
+            this.left = left;
+            this.right = right;
+            this.border = left.size();
+        }
+
+        public Object get(int index) {
+            if (index >= border) {
+                return right.get(index - border);
+            } else {
+                return left.get(index);
+            }
+        }
+
+        public int size() {
+            return left.size() + right.size();
+        }
+
     }
 }
