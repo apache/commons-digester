@@ -47,20 +47,28 @@ public class PluginManager {
      * The object containing data that should only exist once for each
      * Digester instance.
      */
-    private PerDigesterResources perDigesterResources;
+    private PluginContext pluginContext;
     
     //------------------- constructors ---------------------------------------
     
-    /** Constructor. */
-    public PluginManager(PerDigesterResources r) {
-        perDigesterResources = r;
+    /** Construct a "root" PluginManager, ie one with no parent. */
+    public PluginManager(PluginContext r) {
+        pluginContext = r;
     }
 
-    /** Constructor. */
-    public PluginManager(PerDigesterResources r, PluginManager parent) {
+    /** 
+     * Construct a "child" PluginManager. When declarations are added to
+     * a "child", they are stored within the child and do not modify the
+     * parent, so when the child goes out of scope, those declarations
+     * disappear. When asking a "child" to retrieve a declaration, it 
+     * delegates the search to its parent if it does not hold a matching
+     * entry itself.
+     * <p>
+     * @param parent must be non-null.
+     */
+    public PluginManager(PluginManager parent) {
         this.parent = parent;
-        this.perDigesterResources = r;
-        // assert r == parent.perDigesterResources
+        this.pluginContext = parent.pluginContext;
     }
     
     //------------------- methods --------------------------------------------
@@ -144,7 +152,7 @@ public class PluginManager {
         boolean debug = log.isDebugEnabled();
         log.debug("scanning ruleFinders to locate loader..");
         
-        List ruleFinders = perDigesterResources.getRuleFinders();
+        List ruleFinders = pluginContext.getRuleFinders();
         RuleLoader ruleLoader = null;
         try {
             for(Iterator i = ruleFinders.iterator(); 
