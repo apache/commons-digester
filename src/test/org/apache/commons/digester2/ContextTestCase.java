@@ -24,6 +24,7 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 
 import junit.framework.Test;
@@ -34,8 +35,8 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.InputSource;
-import org.apache.commons.logging.Log;
 
+import org.apache.commons.logging.Log;
 
 /**
  * <p>Test Case for the Context class.</p>
@@ -43,6 +44,9 @@ import org.apache.commons.logging.Log;
 
 public class ContextTestCase extends TestCase {
 
+    private static class DummyAction extends AbstractAction {
+    }
+    
     // ----------------------------------------------------------- Constructors
 
     /**
@@ -155,7 +159,6 @@ public class ContextTestCase extends TestCase {
      * Test storage of the 'root' variable
      */
     public void testRoot2() {
-        // setRoot, getRoot
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log);
@@ -190,10 +193,15 @@ public class ContextTestCase extends TestCase {
     }
     
     /**
-     * Test the classloader behaviour
+     * Test the classloader behaviour.
      */
     public void testClassLoader() {
-        // getClassLoader
+        SAXHandler saxHandler = new SAXHandler();
+        Log log = saxHandler.getLogger();
+        Context context = new Context(saxHandler, log);
+
+        ClassLoader cl = context.getClassLoader();
+        assertEquals("get classloader", cl, saxHandler.getClassLoader());
     }
     
     /**
@@ -205,7 +213,40 @@ public class ContextTestCase extends TestCase {
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log);
         
-        // pushMatchingActions, popMatchingActions, peekMatchingActions
+        Action action0 = new DummyAction();
+        Action action1 = new DummyAction();
+        Action action2 = new DummyAction();
+        
+        ArrayList list0 = new ArrayList(2);
+        list0.add(action0);
+        list0.add(action1);
+        
+        context.pushMatchingActions(list0);
+        List list = context.peekMatchingActions();
+        assertEquals("Push/peek matching actions", list, list0);
+        assertEquals("Push/peek matching actions", 2, list.size());
+        assertEquals("Push/peek matching actions", action0, list.get(0));
+        assertEquals("Push/peek matching actions", action1, list.get(1));
+        
+        ArrayList list1 = new ArrayList();
+        list1.add(action2);
+        context.pushMatchingActions(list1);
+        list = context.peekMatchingActions();
+        assertEquals("Push/peek matching actions 2", list, list1);
+        assertEquals("Push/peek matching actions 2", 1, list.size());
+        assertEquals("Push/peek matching actions 2", action2, list.get(0));
+        
+        list = context.popMatchingActions();
+        assertEquals("Push/peek matching actions", list, list1);
+        list = context.popMatchingActions();
+        assertEquals("Push/peek matching actions", list, list0);
+        
+        try {
+            list = context.popMatchingActions();
+            fail("Popping an empty stack");
+        } catch(EmptyStackException ex) {
+            // ok
+        }
     }
 
     /**
@@ -437,11 +478,5 @@ public class ContextTestCase extends TestCase {
         assertTrue(
             "A named stack that has it's last object popped is empty", 
             context.isEmpty(testStackName));
-    }
-
-    /**
-     * Test the getRoot method.
-     */
-    public void testGetRoot() throws Exception {
     }
 }
