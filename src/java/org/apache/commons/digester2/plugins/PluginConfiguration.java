@@ -154,7 +154,7 @@ public class PluginConfiguration {
      * Note that the xml attributes used by PluginDeclarationRules are not
      * affected by this method.
      *
-     * @param namespaceUri is the namespace uri that the specified attribute
+     * @param namespaceURI is the namespace uri that the specified attribute
      * is in. If the attribute is in no namespace, then this should be null.
      * Note that if a namespace is used, the attrName value should <i>not</i>
      * contain any kind of namespace-prefix. Note also that if you are using
@@ -163,9 +163,13 @@ public class PluginConfiguration {
      * @param attrName is the attribute whose value contains the name of the
      * class to be instantiated.
      */
-    public void setPluginClassAttribute(String namespaceUri,
-                                        String attrName) {
-        pluginClassAttrNS = namespaceUri;
+    public void setPluginClassAttribute(String namespaceURI, String attrName) {
+        if (namespaceURI == null) {
+            // The org.xml.sax.Attributes.getValue method expects an empty
+            // string, not null, to be used to indicate no namespace.
+            namespaceURI = "";
+        }
+        pluginClassAttrNS = namespaceURI;
         pluginClassAttr = attrName;
     }
 
@@ -193,7 +197,7 @@ public class PluginConfiguration {
      * Note that the xml attributes used by PluginDeclarationRules are not
      * affected by this method.
      *
-     * @param namespaceUri is the namespace uri that the specified attribute
+     * @param namespaceURI is the namespace uri that the specified attribute
      * is in. If the attribute is in no namespace, then this should be null.
      * Note that if a namespace is used, the attrName value should <i>not</i>
      * contain any kind of namespace-prefix. Note also that if you are using
@@ -202,9 +206,13 @@ public class PluginConfiguration {
      * @param attrName is the attribute whose value contains the id of the
      * plugin declaration to be used when instantiating an object.
      */
-    public void setPluginIdAttribute(String namespaceUri,
-                                     String attrName) {
-        pluginIdAttrNS = namespaceUri;
+    public void setPluginIdAttribute(String namespaceURI, String attrName) {
+        if (namespaceURI == null) {
+            // The org.xml.sax.Attributes.getValue method expects an empty
+            // string, not null, to be used to indicate no namespace.
+            namespaceURI = "";
+        }
+        pluginIdAttrNS = namespaceURI;
         pluginIdAttr = attrName;
     }
 
