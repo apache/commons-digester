@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,110 +15,137 @@
  * limitations under the License.
  */ 
 
-
 package org.apache.commons.digester2.actions;
-
 
 import org.xml.sax.Attributes;
 import org.apache.commons.logging.Log;
-
 
 import org.apache.commons.digester2.Context;
 import org.apache.commons.digester2.AbstractAction;
 import org.apache.commons.digester2.ParseException;
 
 /**
- * Rule implementation that creates a new object and pushes it
- * onto the object stack.  When the element is complete, the
- * object will be popped
+ * An Action that creates a new object and pushes it onto the object stack.
+ * When the element is complete, the object will be popped.
+ * <p>
+ * Normally a SetNextAction or CallMethodAction is used in partnership with
+ * this action to create a reference from some other object to this newly
+ * created object before it is popped from the object stack.
  */
 
 public class CreateObjectAction extends AbstractAction {
 
-    // ----------------------------------------------------------- Constructors
-
-    /**
-     * Construct an object create rule with the specified class name.
-     *
-     * @param className Java class name of the object to be created
-     */
-    public CreateObjectAction(String className) {
-
-        this(className, (String) null);
-
-    }
-
-
-    /**
-     * Construct an object create rule with the specified class.
-     *
-     * @param clazz Java class name of the object to be created
-     */
-    public CreateObjectAction(Class clazz) {
-
-        this(clazz.getName(), (String) null);
-
-    }
-
-
-    /**
-     * Construct an object create rule with the specified class name and an
-     * optional attribute name containing an override.
-     *
-     * @param className Java class name of the object to be created
-     * @param attributeName Attribute name which, if present, contains an
-     *  override of the class name to create
-     */
-    public CreateObjectAction(String className,
-                            String attributeName) {
-
-        this.className = className;
-        this.attributeName = attributeName;
-
-    }
-
-
-    /**
-     * Construct an object create rule with the specified class and an
-     * optional attribute name containing an override.
-     *
-     * @param attributeName Attribute name which, if present, contains an
-     * @param clazz Java class name of the object to be created
-     *  override of the class name to create
-     */
-    public CreateObjectAction(String attributeName,
-                            Class clazz) {
-
-        this(clazz.getName(), attributeName);
-
-    }
-
-    // ----------------------------------------------------- Instance Variables
-
-
-    /**
-     * The attribute containing an override class name if it is present.
-     */
-    protected String attributeName = null;
-
+    // ----------------------------------------------------- 
+    // Instance Variables
+    // ----------------------------------------------------- 
 
     /**
      * The Java class name of the object to be created.
      */
     protected String className = null;
 
+    /**
+     * The attribute containing an override class name if it is present.
+     */
+    protected String attributeName = null;
 
-    // --------------------------------------------------------- Public Methods
+    // ----------------------------------------------------------- 
+    // Constructors
+    // ----------------------------------------------------------- 
 
+    /**
+     * Construct a "create object" action which will create an instance 
+     * of the specified class.
+     * <p>
+     * The classloader used to load the class will be the value returned
+     * from the SAXHandler.getClassLoader method. By default this is the same
+     * classloader which was used to load the Digester classes. For simple
+     * applications the default is fine, but applications running in more
+     * complex environments may need to use the following methods to control
+     * exactly which classloader is used:
+     * <ul>
+     *  <li>setExplicitClassLoader on Digester or SAXHandler classes
+     *  <li>setUseContextClassLoader on Digester or SAXHandler classes
+     * </ul>
+     *
+     * @param className Java class name of the object to be created
+     */
+    public CreateObjectAction(String className) {
+        this.className = className;
+    }
+
+    /**
+     * Construct a "create object" action which will create an instance
+     * of the specified class.
+     * <p>
+     * Note that this is exactly equivalent to calling
+     * <code>new CreateObjectAction(clazz.getClassName())<code>.
+     * Note in particular that the classloader associated with the specified
+     * Class object is ignored; when the rule fires the new instance will
+     * be created from a Class object which has been loaded via the classloader
+     * returned from saxHandler.getClassLoader. See method 
+     * {@link #CreateObjectAction(String className)} for more information.
+     *
+     * @param clazz Java class of the object to be created
+     */
+    public CreateObjectAction(Class clazz) {
+        this.className = clazz.getClassName();
+    }
+
+    /**
+     * Construct a "create object" action which will create an instance of
+     * the specified class unless an xml attribute is present with the
+     * specified name. If such an attribute is present, then the string value
+     * of that attribute is expected to be a java class name, and an instance
+     * of that class will be created instead.
+     * <p>
+     * TODO: allow namespaced attributes to be used. Currently, only 
+     * non-namespaces attributes may be used to override class names.
+     *
+     * @param className Java class name of the object to be created
+     * @param attributeName Attribute name which, if present, contains an
+     *  override of the class name to create
+     */
+    public CreateObjectAction(String className, String attributeName) {
+        this.className = className;
+        this.attributeName = attributeName;
+    }
+
+    /**
+     * Construct a "create object" action which will create an instance of
+     * the specified class unless an xml attribute is present with the
+     * specified name. If such an attribute is present, then the string value
+     * of that attribute is expected to be a java class name, and an instance
+     * of that class will be created instead.
+     * <p>
+     * TODO: allow namespaced attributes to be used. Currently, only 
+     * non-namespaces attributes may be used to override class names.
+     *
+     * @param clazz Java class name of the object to be created
+     *  override of the class name to create
+     * @param attributeName Attribute name which, if present, contains an
+     */
+    public CreateObjectAction(Class clazz, String attributeName) {
+        this.className = clazz.getClassName();
+        this.attributeName = attributeName;
+    }
+
+    // --------------------------------------------------------- 
+    // Public Methods
+    // --------------------------------------------------------- 
 
     /**
      * Process the beginning of this element.
      *
-     * @param attributes The attribute list of this element
+     * @param context is the parsing context currently being used
+     * @param namespace is the xml namespace the current element is in
+     * @param name is the name of the current xml element
+     * @param attributes is the attribute list of the current element
      */
-    public void begin(Context context, String namespace, String name, Attributes attributes) 
+    public void begin(
+    Context context, 
+    String namespace, String name, Attributes attributes) 
     throws ParseException {
-
         // Identify the name of the class to instantiate
         String realClassName = className;
         if (attributeName != null) {
@@ -152,22 +179,18 @@ public class CreateObjectAction extends AbstractAction {
      */
     public void end(Context context, String namespace, String name) 
     throws ParseException {
-
         Object top = context.pop();
         Log log = context.getLogger();
         if (log.isDebugEnabled()) {
             log.debug("[CreateObjectAction]{" + context.getMatchPath() +
                     "} Pop " + top.getClass().getName());
         }
-
     }
-
 
     /**
      * Render a printable version of this Rule.
      */
     public String toString() {
-
         StringBuffer sb = new StringBuffer("CreateObjectAction[");
         sb.append("className=");
         sb.append(className);
@@ -175,8 +198,5 @@ public class CreateObjectAction extends AbstractAction {
         sb.append(attributeName);
         sb.append("]");
         return (sb.toString());
-
     }
-
-
 }
