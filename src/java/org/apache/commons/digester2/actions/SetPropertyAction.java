@@ -233,16 +233,7 @@ public class SetPropertyAction extends AbstractAction {
         if (xmlAttributeName != null) {
             // the target property to set will have been decided in the
             // begin method...
-            //
-            // Note that there is a theoretical problem here; we are pushing
-            // onto the stack in begin, and popping in body not in end. This
-            // means that the stack order can get stuffed up. However we are
-            // using a per-instance stack, so the problem only occurs if
-            // the same rule *instance* matches *the same xml element* multiple
-            // times, and there's no reason to ever do that. And anyway in that
-            // case the targetProperty value will be the same for each entry
-            // on the stack, so it doesn't matter if they get swapped!
-            targetProperty = (String) context.pop(PROPERTY_NAME_STACK);
+            targetProperty = (String) context.peek(PROPERTY_NAME_STACK);
         } else if (targetProperty == null) {
             // If we don't have a specific property name, use the element name.
             //
@@ -300,6 +291,19 @@ public class SetPropertyAction extends AbstractAction {
                 + top.getClass().getName() + "'", ex);
         }
     }
+
+    /**
+     * Process the end of this element.
+     */
+    public void end(Context context, String namespace, String name)
+    throws ParseException {
+        Log log = context.getLogger();
+        if (xmlAttributeName != null) {
+            // discard the target property extracted from the xml attribute.
+            context.pop(PROPERTY_NAME_STACK);
+        }
+    }
+
 
     /**
      * Render a printable version of this Actuib.
