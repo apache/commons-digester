@@ -71,7 +71,7 @@ public class FinderFromClass extends RuleFinder {
      * The returned object (when non-null) will invoke the target method
      * on the selected class whenever its addRules method is invoked. The
      * target method is expected to have the following prototype:
-     * <code> public static void xxxxx(RuleManager rm, String patternPrefix); </code>
+     * <code> public static void xxxxx(RuleManager rm, String path); </code>
      * <p>
      * The target method can be specified in several ways. If this object's
      * constructor was passed a non-null methodAttr parameter, and the

@@ -31,7 +31,7 @@ import org.apache.commons.digester2.plugins.PluginException;
  * A rule-finding algorithm which expects the user to specify whether
  * "automatic property setting" is desired. If this class discovers that
  * this is in fact the case for a declaration, then a RuleLoader is returned
- * which, when invoked, adds a single SetPropertiesRule instance to the
+ * which, when invoked, adds a single SetPropertiesAction instance to the
  * digester.
  * <p>
  * This allows ordinary JavaBean classes to be used as plugins, and have
@@ -56,7 +56,7 @@ public class FinderSetProperties extends RuleFinder {
     }
     
     /**
-     * Create a rule-finder which will arrange for a SetPropertiesRule to
+     * Create a rule-finder which will arrange for a SetPropertiesAction to
      * be defined for each instance of a plugin, so that xml attributes
      * map to bean properties.
      * <p>
@@ -79,10 +79,10 @@ public class FinderSetProperties extends RuleFinder {
      * If no custom source of rules for a plugin is found, then the user
      * almost always wants xml attributes to map to java bean properties,
      * so this is the default behaviour unless the user explicitly indicates
-     * that they do <i>not</i> want a SetPropertiesRule to be provided for
+     * that they do <i>not</i> want a SetPropertiesAction to be provided for
      * the plugged-in class.
      * <p>
-     * The returned object (when non-null) will add a SetPropertiesRule to
+     * The returned object (when non-null) will add a SetPropertiesAction to
      * the digester whenever its addRules method is invoked.
      */
     public RuleLoader findLoader(

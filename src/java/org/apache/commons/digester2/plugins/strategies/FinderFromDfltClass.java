@@ -64,7 +64,7 @@ public class FinderFromDfltClass extends RuleFinder {
      * The returned object (when non-null) will invoke the target method
      * on the selected class whenever its addRules method is invoked. The
      * target method is expected to have the following prototype:
-     * <code> public static void xxxxx(RuleManager rm, String patternPrefix); </code>
+     * <code> public static void xxxxx(RuleManager rm, String path); </code>
      * <p>
      * The classloader used to locate the "RuleInfo" class is the one returned
      * by context.getClassLoader, not the one used to load the pluginClass.

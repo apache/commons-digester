@@ -58,7 +58,7 @@ public class FinderFromMethod extends RuleFinder {
      * The returned object (when non-null) will invoke the target method
      * on the plugin class whenever its addRules method is invoked. The
      * target method is expected to have the following prototype:
-     * <code> public static void xxxxx(Digester d, String patternPrefix); </code>
+     * <code> public static void xxxxx(Digester d, String path); </code>
      */
     public RuleLoader findLoader(
     Context context, Class pluginClass, Properties p)
