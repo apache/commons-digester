@@ -145,7 +145,7 @@ public class PluginDeclarationScope {
      * so that we can really log here. Currently, all
      * logging is disabled from this method.
      *
-     *@param decl an object representing a plugin class.
+     * @param decl an object representing a plugin class.
      */
     public void addDeclaration(Declaration decl) {
         Log log = LogUtils.getLogger(null);
@@ -196,53 +196,5 @@ public class PluginDeclarationScope {
         }
 
         return decl;
-    }
-
-    /**
-     * Given a plugin class and some associated properties, scan the
-     * list of known RuleFinder instances until one detects a source of
-     * custom rules for this plugin (aka a RuleLoader).
-     * <p>
-     * If no source of custom rules can be found, null is returned.
-     */
-    public RuleLoader findLoader(
-    Context context, String id, 
-    Class pluginClass, Properties props) 
-    throws PluginException {    
-
-        // iterate over the list of RuleFinders, trying each one 
-        // until one of them locates a source of dynamic rules given
-        // this specific plugin class and the associated declaration 
-        // properties.
-        Log log = LogUtils.getLogger(context);
-        boolean debug = log.isDebugEnabled();
-        log.debug("scanning ruleFinders to locate loader..");
-        
-        PluginConfiguration pluginConfig = 
-            PluginConfiguration.getInstance(context.getSAXHandler());
-
-        List ruleFinders = pluginConfig.getRuleFinders();
-        RuleLoader ruleLoader = null;
-        try {
-            for(Iterator i = ruleFinders.iterator(); 
-                i.hasNext() && ruleLoader == null; ) {
-                    
-                RuleFinder finder = (RuleFinder) i.next();
-                if (debug) {
-                    log.debug("checking finder of type " + finder.getClass().getName());
-                }
-                ruleLoader = finder.findLoader(context, pluginClass, props);
-            }
-        }
-        catch(PluginException e) {
-            throw new PluginException(
-                "Unable to locate plugin rules for plugin"
-                + " with id [" + id + "]"
-                + ", and class [" + pluginClass.getName() + "]"
-                + ":" + e.getMessage(), e.getCause());
-        }
-        log.debug("scanned ruleFinders.");
-        
-        return ruleLoader;
     }
 }
