@@ -124,8 +124,69 @@ public class ContextTestCase extends TestCase {
     /**
      * Test storage of the 'root' variable
      */
-    public void testRoot() {
+    public void testRoot1() {
         // setRoot, getRoot
+        SAXHandler saxHandler = new SAXHandler();
+        Log log = saxHandler.getLogger();
+        Context context = new Context(saxHandler, log);
+
+        Object root;
+
+        // initially, getRoot returns null
+        root = context.getRoot();
+        assertNull("Initial root object is null", root);
+        
+        // after setRoot, returns the object set
+        context.setRoot("root1");
+        root = context.getRoot();
+        assertEquals("setRoot/getRoot retrieves set object", "root1", root);
+        
+        // can set multiple times, always returns the last object set
+        // also, stack depth should be max of 1
+        context.setRoot("root2");
+        context.setRoot("root3");
+        context.setRoot("root4");
+        root = context.getRoot();
+        assertEquals("setRoot multiple times", "root4", root);
+        assertEquals(context.getStackSize(), 1);
+    }
+    
+    /**
+     * Test storage of the 'root' variable
+     */
+    public void testRoot2() {
+        // setRoot, getRoot
+        SAXHandler saxHandler = new SAXHandler();
+        Log log = saxHandler.getLogger();
+        Context context = new Context(saxHandler, log);
+
+        Object root;
+
+        // initially, getRoot returns null
+        root = context.getRoot();
+        assertNull("Initial root object is null", root);
+        
+        // after pushing an object, root is set
+        context.push("item1");
+        root = context.getRoot();
+        assertEquals("push sets root", "item1", root);
+        
+        // after pushing other objects, root does not change
+        context.push("item2");
+        context.push("item3");
+        context.push("item4");
+        root = context.getRoot();
+        assertEquals("push sets root", "item1", root);
+        assertEquals("push increases stackdepth", 4, context.getStackSize());
+        
+        // after popping all objects off stack, root remains set
+        context.pop();
+        context.pop();
+        context.pop();
+        context.pop();
+        root = context.getRoot();
+        assertEquals("root remains set after pop", "item1", root);
+        assertEquals("root remains set after pop", 0, context.getStackSize());
     }
     
     /**
