@@ -83,7 +83,7 @@ public class ContextTestCase extends TestCase {
     public void testConstructor() {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         assertNotNull("saxHandler log is not null", log);
         assertSame("getSAXHandler", context.getSAXHandler(), saxHandler);
@@ -97,7 +97,7 @@ public class ContextTestCase extends TestCase {
         // setup
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
 
         // initially, the context path is empty
         assertEquals("Initial matchPath empty", "", context.getMatchPath());
@@ -128,7 +128,7 @@ public class ContextTestCase extends TestCase {
         // setRoot, getRoot
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
 
         Object root;
 
@@ -158,7 +158,7 @@ public class ContextTestCase extends TestCase {
     public void testRoot2() {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
 
         Object root;
 
@@ -195,7 +195,7 @@ public class ContextTestCase extends TestCase {
     public void testClassLoader() {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
 
         ClassLoader cl = context.getClassLoader();
         assertSame("get classloader", cl, saxHandler.getClassLoader());
@@ -208,7 +208,7 @@ public class ContextTestCase extends TestCase {
         // setup
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         Action action0 = new DummyAction();
         Action action1 = new DummyAction();
@@ -253,7 +253,7 @@ public class ContextTestCase extends TestCase {
         // setup
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         Object value = null;
 
@@ -338,7 +338,7 @@ public class ContextTestCase extends TestCase {
         // peek, peek(n), pop, push, isEmpty
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         Object value = null;
         String stack1 = "stack1";
@@ -400,7 +400,7 @@ public class ContextTestCase extends TestCase {
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         Object o1 = new Object();
 
@@ -418,7 +418,7 @@ public class ContextTestCase extends TestCase {
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         String testStackOneName = "org.apache.commons.digester.tests.testNamedIndependenceOne";
         String testStackTwoName = "org.apache.commons.digester.tests.testNamedIndependenceTwo";
@@ -433,7 +433,7 @@ public class ContextTestCase extends TestCase {
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         String testStackName = "org.apache.commons.digester.tests.testPopNamedStackNotPushed";
         try {
@@ -456,7 +456,7 @@ public class ContextTestCase extends TestCase {
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
-        Context context = new Context(saxHandler, log);
+        Context context = new Context(saxHandler, log, null);
         
         String testStackName = "org.apache.commons.digester.tests.testNamedStackIsEmpty";
         assertTrue(
