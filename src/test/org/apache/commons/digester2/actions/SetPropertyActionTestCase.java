@@ -31,10 +31,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.digester2.Digester;
 
 /**
- * <p>Test Cases for the BeanPropertySetterActionTestCase class.</p>
+ * <p>Test Cases for the SetPropertyActionTestCase class.</p>
  */
 
-public class BeanPropertySetterActionTestCase extends TestCase {
+public class SetPropertyActionTestCase extends TestCase {
     
     public static class TestObject {
         private String name;
@@ -52,7 +52,7 @@ public class BeanPropertySetterActionTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public BeanPropertySetterActionTestCase(String name) {
+    public SetPropertyActionTestCase(String name) {
         super(name);
     }
 
@@ -70,7 +70,7 @@ public class BeanPropertySetterActionTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(BeanPropertySetterActionTestCase.class));
+        return (new TestSuite(SetPropertyActionTestCase.class));
     }
 
     /**
@@ -84,9 +84,9 @@ public class BeanPropertySetterActionTestCase extends TestCase {
     // ------------------------------------------------ 
 
     /**
-     * Test basic operations.
+     * Test use of xml element name as element property.
      */
-    public void testBasicOperations() throws Exception {
+    public void testPropertyIsXmlElementName() throws Exception {
         String inputText = 
             "<root>" +
             "  <name>  Rumplestiltskin  </name>" +
@@ -97,8 +97,54 @@ public class BeanPropertySetterActionTestCase extends TestCase {
         Digester d = new Digester();
         TestObject testObject = new TestObject();
         
-        BeanPropertySetterAction action = new BeanPropertySetterAction();
+        SetPropertyAction action = new SetPropertyAction();
         d.addRule("/root/name", action);
+        d.setInitialObject(testObject);
+        d.parse(source);
+        
+        // string was passed ok, and surrounding whitespace was trimmed
+        assertEquals("name property", "Rumplestiltskin", testObject.getName());
+    }
+
+    /**
+     * Test use of explicit property name
+     */
+    public void testExplicitPropertyName() throws Exception {
+        String inputText = 
+            "<root>" +
+            "  <data>  Rumplestiltskin  </data>" +
+            "</root>";
+
+        InputSource source = new InputSource(new StringReader(inputText));
+
+        Digester d = new Digester();
+        TestObject testObject = new TestObject();
+        
+        SetPropertyAction action = new SetPropertyAction("name");
+        d.addRule("/root/data", action);
+        d.setInitialObject(testObject);
+        d.parse(source);
+        
+        // string was passed ok, and surrounding whitespace was trimmed
+        assertEquals("name property", "Rumplestiltskin", testObject.getName());
+    }
+
+    /**
+     * Test use of explicit property name
+     */
+    public void testAttributePropertyName() throws Exception {
+        String inputText = 
+            "<root>" +
+            "  <property target='name'>  Rumplestiltskin  </property>" +
+            "</root>";
+
+        InputSource source = new InputSource(new StringReader(inputText));
+
+        Digester d = new Digester();
+        TestObject testObject = new TestObject();
+        
+        SetPropertyAction action = new SetPropertyAction("", "target", null);
+        d.addRule("/root/property", action);
         d.setInitialObject(testObject);
         d.parse(source);
         
