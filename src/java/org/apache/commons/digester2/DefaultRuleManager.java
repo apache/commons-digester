@@ -149,7 +149,7 @@ public class DefaultRuleManager extends AbstractRuleManager {
      * Given a string of form "prefix:name/prefix:name", return a string of
      * form "{namespace-uri}name/{namespace-uri}/name".
      */
-    public String patternToPath(Map namespaces, String pattern) 
+    private String patternToPath(Map namespaces, String pattern) 
     throws InvalidRuleException {
         int nsEndPos = pattern.indexOf(':');
         if (nsEndPos == -1) {
