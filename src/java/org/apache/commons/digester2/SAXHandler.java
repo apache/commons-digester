@@ -865,13 +865,24 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             // And finally for the RuleManager too
             ruleManager.finishParse(context);
         } catch(DigestionException ex) {
-            log.error("finishParse threw exception", ex);
+            log.error("RuleManager.finishParse threw exception", ex);
             throw new NestedSAXException(ex);
         }
 
         // store the root object so the user can access it
         root = context.getRoot();
-        
+
+        // This method verifies that no Actions have misbehaved, leaving the
+        // stacks in a bad state or anything. Of course this is called only
+        // after a parse has successfully completed. It's really a debug method
+        // but as it is pretty quick to check things we leave it in at runtime.
+        try {
+            context.checkForProblems();
+        } catch(ParseException ex) {
+            log.error("Context.checkForProblems threw exception", ex);
+            throw new NestedSAXException(ex);
+        }
+
         // And now we don't need the context any more, so allow it to be
         // reclaimed. Note that in the case where a parse failed, this
         // method is never called, so the user is responsible for calling
