@@ -98,7 +98,7 @@ public class NodeCreateAction extends AbstractAction {
         /**
          * Constructor.
          * 
-         * <p>Stores the content handler currently used by Digester so it can 
+         * <p>Stores the context currently used by Digester so it can 
          * be reset when done, and initializes the DOM objects needed to 
          * build the node.</p>
          * 
@@ -116,38 +116,22 @@ public class NodeCreateAction extends AbstractAction {
             this.root = root;
             this.top = root;
             
-            oldSaxHandler = context.getSAXHandler();
-            oldContext = context;
-            reader = oldSaxHandler.getXMLReader();
-            // assert oldReader.getContentHandler() == oldSaxHandler
+            this.context = context;
         }
 
 
         // ------------------------------------------------- Instance Variables
 
-
-        /**
-         * The content handler used by Digester before it was set to this 
-         * content handler.
-         */
-        protected SAXHandler oldSaxHandler = null;
-
         /**
          * The parsing context currently in use.
          */
-        protected Context oldContext = null;
+        protected Context context = null;
         
-        /**
-         * The XMLReader being used to parse the input xml.
-         */
-        protected XMLReader reader;
-
         /**
          * Depth of the current node, relative to the element where the content
          * handler was put into action.
          */
         protected int depth = 0;
-
 
         /**
          * A DOM Document used to create the various Node instances.
@@ -186,44 +170,6 @@ public class NodeCreateAction extends AbstractAction {
                 if (str.trim().length() > 0) { 
                     top.appendChild(doc.createTextNode(str));
                 }
-            } catch (DOMException e) {
-                throw new SAXException(e.getMessage());
-            }
-
-        }
-
-
-        /**
-         * Checks whether control needs to be returned to Digester.
-         * 
-         * @param namespaceURI the namespace URI
-         * @param localName the local name
-         * @param qName the qualified (prefixed) name
-         * @throws SAXException if the DOM implementation throws an exception
-         */
-        public void endElement(String namespaceURI, String localName,
-                               String qName)
-            throws SAXException {
-            
-            try {
-                if (depth == 0) {
-                    // restore sax event handler
-                    reader.setContentHandler(oldSaxHandler);
-                    
-                    // push built node onto stack so that other rules can
-                    // access it. Note that this node gets popped in the
-                    // end method of the parent NodeCreateAction, so it won't
-                    // be there very long...
-                    oldContext.push(root);
-                    
-                    // and manually fire the rules that would have been fired
-                    // had the normal SAXHandler been receiving parse events
-                    // instead of this temporary handler.
-                    oldSaxHandler.endElement(namespaceURI, localName, qName);
-                }
-    
-                top = top.getParentNode();
-                depth--;
             } catch (DOMException e) {
                 throw new SAXException(e.getMessage());
             }
@@ -290,6 +236,46 @@ public class NodeCreateAction extends AbstractAction {
                 }
                 previousTop.appendChild(top);
                 depth++;
+            } catch (DOMException e) {
+                throw new SAXException(e.getMessage());
+            }
+
+        }
+
+
+        /**
+         * Checks whether control needs to be returned to Digester.
+         * 
+         * @param namespaceURI the namespace URI
+         * @param localName the local name
+         * @param qName the qualified (prefixed) name
+         * @throws SAXException if the DOM implementation throws an exception
+         */
+        public void endElement(String namespaceURI, String localName,
+                               String qName)
+            throws SAXException {
+            
+            try {
+                if (depth == 0) {
+                    SAXHandler saxHandler = context.getSAXHandler();
+                    
+                    // restore sax event handler
+                    saxHandler.setContentHandler(null);
+                   
+                    // push built node onto stack so that other rules can
+                    // access it. Note that this node gets popped in the
+                    // end method of the parent NodeCreateAction, so it won't
+                    // be there very long...
+                    context.push(root);
+                    
+                    // and manually fire the rules that would have been fired
+                    // had the normal SAXHandler been receiving parse events
+                    // instead of this temporary handler.
+                    saxHandler.endElement(namespaceURI, localName, qName);
+                }
+    
+                top = top.getParentNode();
+                depth--;
             } catch (DOMException e) {
                 throw new SAXException(e.getMessage());
             }
@@ -427,9 +413,10 @@ public class NodeCreateAction extends AbstractAction {
             } else {
                 builder = new NodeBuilder(context, doc, doc.createDocumentFragment());
             }
-        
-            XMLReader reader = context.getSAXHandler().getXMLReader();
-            reader.setContentHandler(builder);
+
+            // tell the SAXHandler to forward events from the sax parser to
+            // the builder object
+            context.getSAXHandler().setContentHandler(builder);
         } catch(SAXException ex) {
             throw new ParseException(ex);
         }
@@ -438,6 +425,10 @@ public class NodeCreateAction extends AbstractAction {
 
     /**
      * Pop the Node off the top of the stack.
+     * <p>
+     * Note that while the begin method sets up a custom contenthandler,
+     * it is not this method that undoes that work; the SAXHandler is unable
+     * to call this method until redirection of sax events has been cancelled!
      */
     public void end(Context context, String namespaceURI, String name) 
     throws ParseException {
