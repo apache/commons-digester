@@ -30,6 +30,10 @@ import org.apache.commons.digester2.ParseException;
 /**
  * Action which fetches an object from the digester object stack to use
  * as a parameter for the target method invoked by a CallMethodRule.
+ * <p>
+ * Note that the object to be passed is selected from the stack
+ * at the time this action executes, not at the time that the
+ * associated CallMethodRule executes.
  */
 
 public class CallParamFromStackAction extends AbstractAction {
@@ -49,10 +53,25 @@ public class CallParamFromStackAction extends AbstractAction {
     // ---------------------------------------------------------
 
     /**
-     * Construct a "call parameter" rule that will pass the body text
-     * of the matching xml element as the parameter value.
+     * Construct a "call parameter" rule that will pass the top object
+     * from the digester object stack as the parameter value.
+     */
+    public CallParamFromStackAction(int paramIndex) {
+        this(paramIndex, 0);
+    }
+
+    /**
+     * Construct a "call parameter" rule that will pass an object from
+     * the digester object stack as the parameter value.
+     * <p>
+     * A stack offset of 0 means the top (newest) object. Positive
+     * values count downward from the top of the stack. A stack offset
+     * of -1 means the root (oldest) object. Negative values count upward
+     * from the root of the stack.
      *
-     * @param paramIndex The zero-relative parameter number
+     * @param paramIndex The zero-relative parameter number.
+     * @param stackOffset is the location on the stack of the object to
+     * be passed.
      */
     public CallParamFromStackAction(int paramIndex, int stackOffset) {
         this.paramIndex = paramIndex;
