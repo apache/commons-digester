@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,26 +69,9 @@ public class DigesterTestCase extends TestCase {
         }
     }
 
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The digester instance we will be processing.
-     */
-    protected Digester digester = null;
-
-    /**
-     * The set of public identifiers, and corresponding resource names,
-     * for the versions of the DTDs that we know about.  There
-     * <strong>MUST</strong> be an even number of Strings in this array.
-     */
-    protected static final String registrations[] = {
-        "-//Netscape Communications//DTD RSS 0.9//EN",
-        "/org/apache/commons/digester/rss/rss-0.9.dtd",
-        "-//Netscape Communications//DTD RSS 0.91//EN",
-        "/org/apache/commons/digester/rss/rss-0.91.dtd",
-    };
-
-    // ----------------------------------------------------------- Constructors
+    // -----------------------------------------------------------
+    // Constructors
+    // -----------------------------------------------------------
 
     /**
      * Construct a new instance of this test case.
@@ -99,13 +82,14 @@ public class DigesterTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    // --------------------------------------------------
+    // Overall Test Methods
+    // --------------------------------------------------
 
     /**
      * Set up instance variables required by this test case.
      */
     public void setUp() {
-        digester = new Digester();
     }
 
     /**
@@ -119,10 +103,11 @@ public class DigesterTestCase extends TestCase {
      * Tear down instance variables required by this test case.
      */
     public void tearDown() {
-        digester = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    // ------------------------------------------------
+    // Individual Test Methods
+    // ------------------------------------------------
 
     /**
      * Test the basic constructor functionality.
@@ -244,10 +229,10 @@ public class DigesterTestCase extends TestCase {
         assertNull("initial dtd public id is null", d.getDTDPublicId());
         assertNull("initial dtd system id is null", d.getDTDSystemId());
 
-        // ignore any attempt to load an external dtd with the specified 
+        // ignore any attempt to load an external dtd with the specified
         // public-id
         d.registerKnownEntity("test-public-id", "");
-        
+
         // and parse...
         d.parse(source);
 
@@ -283,7 +268,7 @@ public class DigesterTestCase extends TestCase {
         assertFalse("External DTD not ignored by default", d.getIgnoreExternalDTD());
         d.setIgnoreExternalDTD(true);
         assertTrue("External DTD ignored", d.getIgnoreExternalDTD());
-        
+
         // and parse...
         d.parse(source);
 
@@ -308,25 +293,23 @@ public class DigesterTestCase extends TestCase {
     public void testProperties() {
         DefaultHandler defaultHandler = new org.xml.sax.helpers.DefaultHandler();
 
+        Digester d = new Digester();
+
         // check we can set and get a custom error handler
-        assertNull("Initial error handler is null",
-                digester.getErrorHandler());
-        digester.setErrorHandler(defaultHandler);
-        assertTrue("Set/get error handler failed",
-                digester.getErrorHandler() == defaultHandler);
-        digester.setErrorHandler(null);
-        assertNull("Reset error handler failed",
-                digester.getErrorHandler());
+        assertNull("Initial error handler is null", d.getErrorHandler());
+        d.setErrorHandler(defaultHandler);
+        assertEquals("Set/get error handler failed",
+            defaultHandler, d.getErrorHandler());
+
+        d.setErrorHandler(null);
+        assertNull("Reset error handler failed", d.getErrorHandler());
 
          // check the validation property
-        assertTrue("Initial validating is false",
-                !digester.getValidating());
-        digester.setValidating(true);
-        assertTrue("Set validating is true",
-                digester.getValidating());
-        digester.setValidating(false);
-        assertTrue("Reset validating is false",
-                !digester.getValidating());
+        assertTrue("Initial validating is false", !d.getValidating());
+        d.setValidating(true);
+        assertTrue("Set validating is true", d.getValidating());
+        d.setValidating(false);
+        assertTrue("Reset validating is false", !d.getValidating());
 
         // set and get classloader, and useContextClassLoader
         // get and set saxlogger
@@ -339,36 +322,16 @@ public class DigesterTestCase extends TestCase {
      * Test registration of URLs for specified public identifiers.
      */
     public void testRegistrations() {
+        Digester d = new Digester();
 
-        Map map = digester.getKnownEntities();
+        Map map = d.getKnownEntities();
         assertEquals("Initially zero registrations", 0, map.size());
-        int n = 0;
-        for (int i = 0; i < registrations.length; i += 2) {
-            URL url = this.getClass().getResource(registrations[i + 1]);
-            if (url != null) {
-                digester.registerKnownEntity(registrations[i], url.toString());
-                n++;
-            }
-        }
 
-        assertEquals("Registered two URLs", n, map.size());
+        d.registerKnownEntity("public-1", "url-1");
+        d.registerKnownEntity("public-2", "url-2");
+        d.registerKnownEntity("public-3", "");
 
-        int count[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            count[i] = 0;
-        }
-        Iterator keys = map.keySet().iterator();
-        while (keys.hasNext()) {
-            String key = (String) keys.next();
-            for (int i = 0; i < n; i++) {
-                if (key.equals(registrations[i * 2])) {
-                    count[i]++;
-                    break;
-                }
-            }
-        }
-        for (int i = 0; i < n; i++)
-            assertEquals("Count for key " + registrations[i * 2],
-                    1, count[i]);
+        assertEquals("Registered URLs", 3, map.size());
+        assertEquals("Retrieved registered URL", "url-2", map.get("public-2"));
     }
 }
