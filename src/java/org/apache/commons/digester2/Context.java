@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,16 +38,6 @@ import org.apache.commons.logging.Log;
  */
 
 public class Context {
-
-    // --------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new Context.
-     */
-    public Context(SAXHandler saxHandler, Log log) {
-        this.saxHandler = saxHandler;
-        this.log = log;
-    }
 
     // --------------------------------------------------- 
     // Instance Variables
@@ -109,6 +99,18 @@ public class Context {
      * CallParamAction.
      */
     private ArrayStack params = new ArrayStack();
+
+    // --------------------------------------------------------- 
+    // Constructors
+    // --------------------------------------------------------- 
+
+    /**
+     * Construct a new Context.
+     */
+    public Context(SAXHandler saxHandler, Log log) {
+        this.saxHandler = saxHandler;
+        this.log = log;
+    }
 
     // ---------------------------------------------------
     // Properties
