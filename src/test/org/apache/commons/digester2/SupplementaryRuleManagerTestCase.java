@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
 
 /**
  * <p>
@@ -35,27 +34,33 @@ import org.xml.sax.XMLReader;
 
 public class SupplementaryRuleManagerTestCase extends TestCase {
 
+    private static class NullAction extends AbstractAction {
+    }
+
     private static class XMLLikeAction extends AbstractAction {
-        
+
         boolean rootFoundAbsolute = false;
+
         boolean rootFoundRelative = false;
+
         boolean wrongRelativeFound = false;
+
         boolean longAbsoluteFound = false;
-    
+
         public void begin(Context context, String namespace, String name, Attributes attrs) {
 
             String path = context.getMatchPath();
             if (SupplementaryRuleManager.matches(path, "/root")) {
                 rootFoundAbsolute = true;
-            } 
-            
+            }
+
             if (SupplementaryRuleManager.matches(path, "root")) {
                 rootFoundRelative = true;
             }
 
             if (SupplementaryRuleManager.matches(path, "/root/p/em")) {
                 longAbsoluteFound = true;
-            } 
+            }
 
             if (SupplementaryRuleManager.matches(path, "ot/p")) {
                 wrongRelativeFound = true;
@@ -106,27 +111,52 @@ public class SupplementaryRuleManagerTestCase extends TestCase {
     // Individual Test Methods
     // ------------------------------------------------
 
-    public void testGlobalCallBack() throws Exception {
+    public void testFallback() throws Exception {
         String inputText = "<root><p>Hi <em>There</em></p></root>";
         InputSource source = new InputSource(new StringReader(inputText));
 
-        Digester d = new Digester();
-
-        XMLReader reader = d.getXMLReader();
-
         // xmlio-style digester
-        XMLLikeAction xmlioLikeHandler = new XMLLikeAction();
+        XMLLikeAction xmlioLikeAction = new XMLLikeAction();
 
-        RuleManager manager = new SupplementaryRuleManager(xmlioLikeHandler);
+        FallbackRuleManager manager = new FallbackRuleManager();
+        manager.addFallbackAction(xmlioLikeAction);
+        manager.addRule("/root/p/em", new NullAction());
+
+        Digester d = new Digester();
         d.setRuleManager(manager);
-
         d.parse(source);
 
-        assertTrue("Root element was found absolute", xmlioLikeHandler.rootFoundAbsolute);
-        assertTrue("Root element was found relative", xmlioLikeHandler.rootFoundRelative);
-        assertTrue("Long absolute path was found", xmlioLikeHandler.longAbsoluteFound);
-        assertFalse("Incomplete relative was not found", xmlioLikeHandler.wrongRelativeFound);
-        
+        assertTrue("Root element was found absolute", xmlioLikeAction.rootFoundAbsolute);
+        assertTrue("Root element was found relative", xmlioLikeAction.rootFoundRelative);
+        assertFalse("Long absolute path was found by other rule", xmlioLikeAction.longAbsoluteFound);
+        assertFalse("Incomplete relative was not found", xmlioLikeAction.wrongRelativeFound);
+
+    }
+
+    public void testSupplementary() throws Exception {
+        String inputText = "<root><p>Hi <em>There</em></p></root>";
+
+        // xmlio-style digester
+        XMLLikeAction xmlioLikeAction = new XMLLikeAction();
+
+        SupplementaryRuleManager manager = new SupplementaryRuleManager();
+        manager.addSupplementaryAction(xmlioLikeAction);
+        manager.addRule("root", new NullAction());
+
+        Digester d = new Digester();
+        d.setRuleManager(manager);
+
+        // try twice to check caching
+        for (int i = 0; i < 2; i++) {
+            InputSource source = new InputSource(new StringReader(inputText));
+            d.parse(source);
+
+            assertTrue("Root element was found absolute", xmlioLikeAction.rootFoundAbsolute);
+            assertTrue("Root element was found relative", xmlioLikeAction.rootFoundRelative);
+            assertTrue("Long absolute path was found", xmlioLikeAction.longAbsoluteFound);
+            assertFalse("Incomplete relative was not found", xmlioLikeAction.wrongRelativeFound);
+        }
+
     }
 
 }
