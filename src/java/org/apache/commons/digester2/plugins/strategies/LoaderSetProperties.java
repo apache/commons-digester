@@ -26,7 +26,7 @@ import org.apache.commons.digester2.plugins.RuleLoader;
 import org.apache.commons.digester2.plugins.PluginException;
 
 /**
- * A RuleLoader which creates a single SetPropertiesRule and adds it to the
+ * A RuleLoader which creates a single SetPropertiesAction and adds it to the
  * digester when its addRules() method is invoked.
  * <p>
  * This loader ensures that any xml attributes on the plugin tag get
@@ -38,7 +38,7 @@ import org.apache.commons.digester2.plugins.PluginException;
 public class LoaderSetProperties extends RuleLoader {
     
     /**
-     * Just add a SetPropertiesRule at the specified path.
+     * Just add a SetPropertiesAction at the specified path.
      */
     public void addRules(Context context) 
     throws PluginException {
@@ -53,7 +53,7 @@ public class LoaderSetProperties extends RuleLoader {
         }
 
         try {
-            context.getRuleManager().addRule(null, new SetPropertiesAction());
+            context.getRuleManager().addRule(path, new SetPropertiesAction());
         } catch(InvalidRuleException ex) {
             throw new PluginException(ex);
         }
