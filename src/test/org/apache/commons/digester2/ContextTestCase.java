@@ -332,19 +332,19 @@ public class ContextTestCase extends TestCase {
 
 
     /**
-     * Test the basic named stack mechanisms.
+     * Test the basic scratch stack mechanisms.
      */
-    public void testNamedStackMethods() {
+    public void testScratchStackMethods() {
         // peek, peek(n), pop, push, isEmpty
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log, null);
         
         Object value = null;
-        String stack1 = "stack1";
-        String stack2 = "stack2";
+        Context.StackId stack1 = new Context.StackId(ContextTestCase.class, "stack1", this);
+        Context.StackId stack2 = new Context.StackId(ContextTestCase.class, "stack2", this);
 
-        // Unused named stacks must be empty
+        // Unused scratch stacks must be empty
         assertTrue("New stack is empty", context.isEmpty(stack1));
         
         // peek on empty stack fails
@@ -395,8 +395,8 @@ public class ContextTestCase extends TestCase {
     }
 
     
-    /** Tests the push-peek-pop cycle for a named stack */
-    public void testNamedStackPushPeekPop() throws Exception
+    /** Tests the push-peek-pop cycle for a scratch stack */
+    public void testScratchStackPushPeekPop() throws Exception
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
@@ -404,47 +404,49 @@ public class ContextTestCase extends TestCase {
         
         Object o1 = new Object();
 
-        String testStackName = "org.apache.commons.digester.tests.testNamedStackPushPeekPop";
-        assertTrue("Stack starts empty:", context.isEmpty(testStackName));
-        context.push(testStackName, o1);
+        Context.StackId testStack = new Context.StackId(ContextTestCase.class, "stack", this);
+        assertTrue("Stack starts empty:", context.isEmpty(testStack));
+        context.push(testStack, o1);
         
-        assertSame("Peeked value:", o1, context.peek(testStackName));
-        assertSame("Popped value:", o1, context.pop(testStackName));
-        assertTrue("Stack ends empty:", context.isEmpty(testStackName));
+        assertSame("Peeked value:", o1, context.peek(testStack));
+        assertSame("Popped value:", o1, context.pop(testStack));
+        assertTrue("Stack ends empty:", context.isEmpty(testStack));
     }
     
     /** Tests that values are stored independently */
-    public void testNamedIndependence()
+    public void testScratchStackIndependence()
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log, null);
         
-        String testStackOneName = "org.apache.commons.digester.tests.testNamedIndependenceOne";
-        String testStackTwoName = "org.apache.commons.digester.tests.testNamedIndependenceTwo";
-        context.push(testStackOneName, "Tweedledum");
-        context.push(testStackTwoName, "Tweedledee");
-        assertEquals("Popped value one:", "Tweedledum", context.pop(testStackOneName));
-        assertEquals("Popped value two:", "Tweedledee", context.pop(testStackTwoName));
+        Context.StackId stack1 = new Context.StackId(ContextTestCase.class, "stack1", this);
+        Context.StackId stack2 = new Context.StackId(ContextTestCase.class, "stack2", this);
+
+        context.push(stack1, "Tweedledum");
+        context.push(stack2, "Tweedledee");
+        assertEquals("Popped value one:", "Tweedledum", context.pop(stack1));
+        assertEquals("Popped value two:", "Tweedledee", context.pop(stack2));
     }
     
-    /** Tests popping named stack not yet pushed */
-    public void testPopNamedStackNotPushed() 
+    /** Tests popping scratch stack not yet pushed */
+    public void testPopScratchStackNotPushed() 
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log, null);
         
-        String testStackName = "org.apache.commons.digester.tests.testPopNamedStackNotPushed";
+        Context.StackId testStack = new Context.StackId(ContextTestCase.class, "stack", this);
+
         try {
-            context.pop(testStackName);
+            context.pop(testStack);
             fail("Expected an EmptyStackException");
         } catch (EmptyStackException e) {
             // expected
         }
         
         try {
-            context.peek(testStackName);
+            context.peek(testStack);
             fail("Expected an EmptyStackException");
         } catch (EmptyStackException e) {
             // expected
@@ -452,30 +454,31 @@ public class ContextTestCase extends TestCase {
     }
     
     /** Tests for isEmpty */
-    public void testNamedStackIsEmpty()
+    public void testScratchStackIsEmpty()
     {
         SAXHandler saxHandler = new SAXHandler();
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log, null);
         
-        String testStackName = "org.apache.commons.digester.tests.testNamedStackIsEmpty";
+        Context.StackId testStack = new Context.StackId(ContextTestCase.class, "stack", this);
+
         assertTrue(
-            "A named stack that has no object pushed onto it yet should be empty", 
-            context.isEmpty(testStackName));
+            "A scratch stack that has no object pushed onto it yet should be empty", 
+            context.isEmpty(testStack));
             
-        context.push(testStackName, "Some test value");
+        context.push(testStack, "Some test value");
         assertFalse(
-            "A named stack that has an object pushed onto it should be not empty",
-            context.isEmpty(testStackName));
+            "A scratch stack that has an object pushed onto it should be not empty",
+            context.isEmpty(testStack));
             
-        context.peek(testStackName);
+        context.peek(testStack);
         assertFalse(
             "Peek should not effect whether the stack is empty",
-            context.isEmpty(testStackName));
+            context.isEmpty(testStack));
         
-        context.pop(testStackName);
+        context.pop(testStack);
         assertTrue(
-            "A named stack that has it's last object popped is empty", 
-            context.isEmpty(testStackName));
+            "A scratch stack that has its last object popped is empty", 
+            context.isEmpty(testStack));
     }
 }
