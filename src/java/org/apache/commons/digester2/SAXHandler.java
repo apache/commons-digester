@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.io.StringReader;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.EmptyStackException;
 import java.util.HashMap;
@@ -126,6 +128,13 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     private Locator locator = null;
 
     /**
+     * A count of the number of entities resolved. Currently, we only
+     * care whether this is zero or one, so a boolean could do as well.
+     * However it seems likely that a count could be useful at some time.
+     */
+    private int numEntitiesResolved = 0;
+    
+    /**
      * A map of known external entities that input xml documents may refer to.
      * via public or system IDs. The keys of the map entries are public or
      * system IDs, and the values are URLs (typically local files) pointing
@@ -139,6 +148,11 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * See setAllowUnknownExternalEntities.
      */
     private boolean allowUnknownExternalEntities = false;
+
+    /**
+     * See setIgnoreExternalDTD.
+     */
+    private boolean ignoreExternalDTD = false;
     
     /**
      * An object which contains state information that evolves
@@ -348,6 +362,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     /**
      * Get the system identifier of the DTD associated with the document
      * currently being parsed, or most recently parsed.
+     *
      * <p>
      * If the input document has no DOCTYPE declaration, then null will
      * be returned.
@@ -356,6 +371,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * the org.xml.sax.ext.LexicalHandler interface. If the parser does not
      * provide callbacks via this interface, then no system id information
      * will be available (null will be returned).
+     * <p>
+     * Note also that the SystemId value returned is exactly as it was
+     * defined in the DOCTYPE tag; relative URLs are NOT resolved relative
+     * to the base of the current document.
      */
     public String getDTDSystemId() {
         return this.dtdSystemId;
@@ -576,6 +595,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * Specifies a map of (publicId->URI) pairings that will be used when
      * resolving entities in the input xml (including the DTD specified with
      * DOCTYPE, or schema specified with xsi:schemaLocation).
+     * <p>
+     * If the value in a map entry (ie the "URI") is an empty string, then
+     * when the parser asks for the entity to be resolved, an empty InputSource
+     * will be returned, effectively ignoring the entity.
      */
     public void setKnownEntities(Map knownEntities) {
         this.knownEntities = knownEntities;
@@ -597,6 +620,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * resource pointed to by the registered URL is returned. This is commonly
      * done for the input document's DTD, so that the DTD can be retrieved
      * from a local file.</p>
+     *
+     * <p>If the value in a map entry (ie the "URI") is an empty string, then
+     * when the parser asks for the entity to be resolved, an empty InputSource
+     * will be returned, effectively ignoring the entity.</p>
      *
      * <p>This implementation provides only basic functionality. If more
      * sophisticated features are required,using {@link #setEntityResolver} to
@@ -643,6 +670,27 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      */
     public boolean getAllowUnknownExternalEntities() {
         return allowUnknownExternalEntities;
+    }
+     
+    /**
+     * Specify whether an external DTD should be ignored, ie treated as if
+     * it were an empty file. This can be dangerous; DTDs can potentially
+     * contain definitions for default attribute values and entities that
+     * affect the meaning of the xml document, so skipping them can cause
+     * incorrect output. However in many cases it is known that the DTD 
+     * does no such thing, so processing of it can be suppressed.
+     * <p>
+     * This flag defaults to false (ie external dtds are read during the parse).
+     */
+    public void setIgnoreExternalDTD(boolean state) {
+        ignoreExternalDTD = state;
+    }
+     
+    /**
+     * See setIgnoreExternalDTD.
+     */
+    public boolean getIgnoreExternalDTD() {
+        return ignoreExternalDTD;
     }
      
     /**
@@ -862,6 +910,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             saxLog.debug("startDocument()");
         }
 
+        numEntitiesResolved = 0;
         dtdPublicId = null;
         dtdSystemId = null;
 
@@ -1352,6 +1401,31 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             }
         }
 
+        // Keep count of the number of entities resolved. Currently, we only
+        // care whether this is zero or one, so a boolean could do as well.
+        // However it seems likely that a count could be useful at some time.
+        ++numEntitiesResolved;
+        
+        // Is this the DTD? If there *is* a DTD (ie one was reported to the
+        // lexical handler) then it is presumed here that it will be the first
+        // entity resolved.
+        //
+        // Note that we can't just check whether this systemId is the same
+        // as the dtdSystemId, because the systemId parameter here has been
+        // expanded to an absolute ref, while the one passed to the 
+        // LexicalHandler is in its original (possibly relative) form.
+        //
+        // It would be great to be able to use the EntityResolver2 interface
+        // which provides both the original and system ids, but that is 
+        // probably not supported widely enough yet.
+        if ((numEntitiesResolved == 1) && (dtdSystemId != null)) {
+            if (ignoreExternalDTD) {
+            // this entity is the DTD, and the user wants to completely
+            // ignore it, so we return an "empty file".
+            return new InputSource(new StringReader(""));
+            }
+        }
+       
         // Has this public identifier been registered?
         String entityURL = null;
         if (publicId != null) {
@@ -1398,15 +1472,18 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                 + " registered as a known entity, and systemId is null.");
         }
 
-        // Return an input source to our alternative URL
-        if (log.isDebugEnabled()) {
-            log.debug(" Resolving entity to '" + entityURL + "'");
-        }
-
-        try {
+        if (entityURL.length() == 0) {
+            // special case: when the user has mapped an empty to a URL being
+            // the empty string, we return an empty InputSource to the parser,
+            // effectively ignoring the entity.
+            return new InputSource(new StringReader(""));
+        } else {
+            // Return an input source to our alternative URL
+            if (log.isDebugEnabled()) {
+                log.debug(" Resolving entity to '" + entityURL + "'");
+            }
+    
             return new InputSource(entityURL);
-        } catch (Exception e) {
-            throw createSAXException(e);
         }
     }
 
@@ -1544,6 +1621,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * Invoked when the DOCTYPE tag is found in the input xml. The public
      * and system ids present in that declaration are stored and can be
      * retrieved later via the getDTDPublicId and getDTDSystemId methods.
+     * <p>
+     * This method is always preceded by startDocument.
      */
     public void startDTD(String name, String publicId, String systemId) {
         dtdPublicId = publicId;
@@ -1551,7 +1630,9 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     }
     
     /**
-    * See {@link #startDTD}.
+     * See {@link #startDTD}.
+     * <p>
+     * This method always precedes the first startElement.
      */
     public void endDTD() {
         ; // ignore

@@ -380,6 +380,10 @@ public class Digester {
      * default Entity Resolver when resolving entities in the input xml 
      * (including the DTD or schema specified with the DOCTYPE).
      * <p>
+     * If the value in a map entry (ie the "URI") is an empty string, then
+     * when the parser asks for the entity to be resolved, an empty InputSource
+     * will be returned, effectively ignoring the entity.
+     * <p>
      * See {@link #getKnownEntities}, and {@link #setEntityResolver}.
      */
     public void setKnownEntities(Map knownEntities) {
@@ -397,6 +401,10 @@ public class Digester {
      * resource pointed to by the registered URL is returned. This is commonly
      * done for the input document's DTD, so that the DTD can be retrieved
      * from a local file.</p>
+     *
+     * <p>If the value in a map entry (ie the "URI") is an empty string, then
+     * when the parser asks for the entity to be resolved, an empty InputSource
+     * will be returned, effectively ignoring the entity.</p>
      *
      * <p>This implementation provides only basic functionality. If more
      * sophisticated features are required,using {@link #setEntityResolver} to
@@ -429,6 +437,27 @@ public class Digester {
         return saxHandler.getKnownEntities();
     }
 
+    /**
+     * Specify whether an external DTD should be ignored, ie treated as if
+     * it were an empty file. This can be dangerous; DTDs can potentially
+     * contain definitions for default attribute values and entities that
+     * affect the meaning of the xml document, so skipping them can cause
+     * incorrect output. However in many cases it is known that the DTD 
+     * does no such thing, so processing of it can be suppressed.
+     * <p>
+     * This flag defaults to false (ie external dtds are read during the parse).
+     */
+    public void setIgnoreExternalDTD(boolean state) {
+        saxHandler.setIgnoreExternalDTD(state);
+    }
+     
+    /**
+     * See setIgnoreExternalDTD.
+     */
+    public boolean getIgnoreExternalDTD() {
+        return saxHandler.getIgnoreExternalDTD();
+    }
+     
     // ------------------------------------------------------- Public Methods
 
     /**
