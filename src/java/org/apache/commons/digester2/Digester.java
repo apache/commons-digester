@@ -306,38 +306,6 @@ public class Digester {
     }
 
     /**
-     * Set the XML Schema URI used for validating a XML Instance.
-     *
-     * @param schemaLocation a URI to the schema.
-     */
-    public void setSchema(String schemaLocation){
-        saxHandler.setSchema(schemaLocation);
-    }
-
-    /**
-     * Get the XML Schema URI used for validating an XML instance.
-     */
-    public String getSchema() {
-        return saxHandler.getSchema();
-    }
-
-    /**
-     * Set the XML Schema language used when parsing. By default, we use W3C.
-     *
-     * @param schemaLanguage a URI to the schema language.
-     */
-    public void setSchemaLanguage(String schemaLanguage){
-        saxHandler.setSchemaLanguage(schemaLanguage);
-    }
-
-    /**
-     * Get the XML Schema language used when parsing.
-     */
-    public String getSchemaLanguage() {
-        return saxHandler.getSchemaLanguage();
-    }
-
-    /**
      * Determine whether to use the Context Classloader (the one found by
      * calling <code>Thread.currentThread().getContextClassLoader()</code>)
      * to resolve/load classes when an Action needs to create an instance of
