@@ -47,7 +47,7 @@
   <property name="commons-beanutils.jar"   value="${beanutils.home}/dist/commons-beanutils.jar"/>
   <property name="commons-collections.jar" value="${collections.home}/dist/commons-collections.jar"/>
   <property name="commons-logging.jar"     value="${logging.home}/dist/commons-logging.jar"/>
-  <property name="commons-digester.jar"     value="${digester.home}/dist/commons-digester.jar"/>
+  <property name="commons-digester.jar"    value="${digester.home}/dist/commons-digester.jar"/>
 
 
 <!-- ========== Component Declarations ==================================== -->
