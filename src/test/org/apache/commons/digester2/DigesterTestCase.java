@@ -1,19 +1,19 @@
 /* $Id: $
  *
  * Copyright 2001-2004 The Apache Software Foundation.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.digester2;
@@ -24,7 +24,11 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.parsers.SAXParser;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -35,6 +39,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 import org.apache.commons.logging.Log;
 
@@ -47,6 +52,23 @@ import org.apache.commons.logging.Log;
 
 public class DigesterTestCase extends TestCase {
 
+    private static class AppenderAction extends AbstractAction {
+        private List list;
+        private String str;
+        
+        public AppenderAction(List list, String str) {
+            this.list = list;
+            this.str = str;
+        }
+        
+        public void begin(
+        Context context,
+        String namespace, String name, 
+        org.xml.sax.Attributes attrs) {
+            list.add(str);
+        }
+    }
+    
     // ----------------------------------------------------- Instance Variables
 
     /**
@@ -103,11 +125,110 @@ public class DigesterTestCase extends TestCase {
     // ------------------------------------------------ Individual Test Methods
 
     /**
+     * Test the basic constructor functionality.
+     */
+    public void testConstructor1() {
+        Digester d = new Digester();
+
+        assertNotNull("Default constructor", d.getSAXHandler());
+    }
+
+    /**
+     * Test the basic constructor functionality.
+     */
+    public void testConstructor2() {
+        SAXHandler h = new SAXHandler();
+        Digester d = new Digester(h);
+
+        assertEquals("Constructor with SAXHandler", d.getSAXHandler(), h);
+    }
+
+    /**
+     * Test that digester auto-creates an XMLReader if needed,
+     * and that parsing works ok with that reader.
+     */
+    public void testXMLReaderAuto() throws Exception {
+        String inputText = "<root/>";
+        InputSource source = new InputSource(new StringReader(inputText));
+        
+        Digester d = new Digester();
+
+        XMLReader reader = d.getXMLReader();
+        assertNotNull("getXMLReader", reader);
+
+        ArrayList list = new ArrayList();
+        d.addRule("/root", new AppenderAction(list, "action1"));
+
+        d.parse(source);
+
+        assertEquals("Parse works with auto-created parser", 1, list.size());
+        assertEquals("Parse works with auto-created parser", "action1", list.get(0));
+    }
+
+    /**
+     * Same as testXMLReaderAuto except that getXMLReader is not called.
+     * This is just to make sure getXMLReader hasn't had some necessary
+     * side-effect that causes a parse to fail without it.
+     */
+    public void testXMLReaderAuto2() throws Exception {
+        String inputText = "<root/>";
+        InputSource source = new InputSource(new StringReader(inputText));
+        
+        Digester d = new Digester();
+
+        ArrayList list = new ArrayList();
+        d.addRule("/root", new AppenderAction(list, "action1"));
+
+        d.parse(source);
+
+        assertEquals("Parse works with auto-created parser", 1, list.size());
+        assertEquals("Parse works with auto-created parser", "action1", list.get(0));
+    }
+
+    /**
+     * Test that digester works if an XMLReader has been explicitly created
+     * and passed in to the digester.
+     */
+    public void testXMLReaderManual() throws Exception {
+        // test that digester auto-creates an XMLReader if needed,
+        // and that parsing works ok with that reader.
+        String inputText = "<root/>";
+        InputSource source = new InputSource(new StringReader(inputText));
+        
+        // create XMLReader
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+        SAXParser parser = factory.newSAXParser();
+        XMLReader reader = parser.getXMLReader();
+
+        // Create the digester
+        Digester d = new Digester();
+
+        // connect XMLReader to saxHandler
+        d.setXMLReader(reader, true);
+
+        ArrayList list = new ArrayList();
+        d.addRule("/root", new AppenderAction(list, "action1"));
+
+        d.parse(source);
+
+        assertEquals("Parse works with manual-created parser", 1, list.size());
+        assertEquals("Parse works with manual-created parser", "action1", list.get(0));
+    }
+
+    // TODO: add test for setValidating/getValidating
+
+    // TODO: add test for get/set explicit classloader
+
+    // TODO: add test for get/set logger. This should probably wait until
+    // we figure out whether to revamp the logging approach though.
+    
+    /**
      * Test the basic property getters and setters.
      */
     public void testProperties() {
         DefaultHandler defaultHandler = new org.xml.sax.helpers.DefaultHandler();
-        
+
         // check we can set and get a custom error handler
         assertNull("Initial error handler is null",
                 digester.getErrorHandler());
@@ -127,10 +248,8 @@ public class DigesterTestCase extends TestCase {
         digester.setValidating(false);
         assertTrue("Reset validating is false",
                 !digester.getValidating());
-                
-        // set and get xml reader
+
         // set and get classloader, and useContextClassLoader
-        // get and set logger
         // get and set saxlogger
         // get and set RuleManager
         // get and set Substitutor
