@@ -17,7 +17,6 @@
 
 package org.apache.commons.digester2;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +33,6 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.collections.ArrayStack;
-
 
 /**
  * <p>Holds information that evolves as the parsing of an input xml document
@@ -62,7 +60,9 @@ public class Context {
         this.log = log;
     }
 
-    // --------------------------------------------------- Instance Variables
+    // --------------------------------------------------- 
+    // Instance Variables
+    // --------------------------------------------------- 
 
     /**
      * The owner of this object.
@@ -75,11 +75,6 @@ public class Context {
      * kept here only for performance.
      */
     private Log log;
-
-    /**
-     * The owner of the set of rules (pattern, action pairs).
-     */
-    private RuleManager ruleManager = null;
 
     /**
      * Stack whose elements are List objects, each containing a list of
@@ -95,12 +90,6 @@ public class Context {
      * The path to the xml element for which Actions are currently being fired.
      */
     private Path currentElementPath = new Path();
-
-    /**
-     * The parameters stack being utilized by CallMethodAction and
-     * CallParamAction.
-     */
-    private ArrayStack params = new ArrayStack();
 
     /**
      * The object that forms the root of the tree of objects being
@@ -126,7 +115,15 @@ public class Context {
      */
     private HashMap stacksByName = new HashMap();
 
-    // ------------------------------------------------------------- Properties
+    /**
+     * The parameters stack being utilized by CallMethodAction and
+     * CallParamAction.
+     */
+    private ArrayStack params = new ArrayStack();
+
+    // ---------------------------------------------------
+    // Properties
+    // --------------------------------------------------- 
 
     /**
      * Return the current Logger associated with this instance of the Digester
@@ -158,18 +155,45 @@ public class Context {
         return currentElementPath.getPath();
     }
 
+    /**
+     * Remember the list of Actions which matched the current element. This
+     * method is expected to be called when the element's start tag has been
+     * seen and the matching actions computed. The list is used later to
+     * find the actions to invoke bodySegment/body/end methods on.
+     *
+     * @param actions should be a list of Action objects.
+     */
     public void pushMatchingActions(List actions) {
         matchedActionLists.push(actions);
     }
 
+    /**
+     * Discard the list of Actions which matched the current element. This
+     * method is expected to be called when the element's end tag has been
+     * seen and the matching actions for the element are no longer needed.
+     *
+     * @return a list of Action objects.
+     */
     public List popMatchingActions() {
         return (List) matchedActionLists.pop();
     }
 
+    /**
+     * Retrieve the list of Actions which matched the current element. 
+     *
+     * @return a list of Action objects.
+     */
     public List peekMatchingActions() {
         return (List) matchedActionLists.peek();
     }
 
+    /**
+     * Obtain the classloader object that should be used when an Action class
+     * needs to load a class to be instantiated to represent data in the input
+     * xml being parsed.
+     *
+     * @return a classloader (never null)
+     */
     public ClassLoader getClassLoader() {
         return saxHandler.getClassLoader();
     }
@@ -178,7 +202,9 @@ public class Context {
         return saxHandler;
     }
 
-    // --------------------------------------------------- Object Stack Methods
+    // --------------------------------------------------- 
+    // Object Stack Methods
+    // --------------------------------------------------- 
 
     /**
      * The root object of the Object stack.
@@ -187,6 +213,36 @@ public class Context {
         stack.clear(); // just in case setRoot called multiple times
         stack.push(o);
         root = o;
+    }
+
+    /**
+     * Returns the root element of the tree of objects created as a result
+     * of applying the action objects to the input XML.
+     * <p>
+     * If the digester stack was "primed" by explicitly calling setRoot before
+     * parsing started, then that root object is returned here.
+     * <p>
+     * Alternatively, if an Action which creates an object (eg ObjectCreateAction)
+     * matched the root element of the xml, then the object created will be
+     * returned here.
+     * <p>
+     * In other cases, the object most recently pushed onto an empty digester
+     * stack is returned. This would be a most unusual use of digester, however;
+     * one of the previous configurations is much more likely.
+     * <p>
+     * Note that when using one of the Digester.parse methods, the return
+     * value from the parse method is exactly the same as the return value
+     * from this method. However when the Digester's SAXHandler has been used
+     * explicitly as the content-handler for a user-provided sax parser, no
+     * such return value is available; in this case, this method allows you
+     * to access the root object that has been created after parsing has
+     * completed.
+     *
+     * @return the root object that has been created after parsing
+     *  or null if the digester has not parsed any XML yet.
+     */
+    public Object getRoot() {
+        return root;
     }
 
     /**
@@ -390,36 +446,6 @@ public class Context {
             stacksByName.put(stackName, namedStack);
         }
         namedStack.push(value);
-    }
-
-    /**
-     * Returns the root element of the tree of objects created as a result
-     * of applying the action objects to the input XML.
-     * <p>
-     * If the digester stack was "primed" by explicitly calling setRoot before
-     * parsing started, then that root object is returned here.
-     * <p>
-     * Alternatively, if an Action which creates an object (eg ObjectCreateAction)
-     * matched the root element of the xml, then the object created will be
-     * returned here.
-     * <p>
-     * In other cases, the object most recently pushed onto an empty digester
-     * stack is returned. This would be a most unusual use of digester, however;
-     * one of the previous configurations is much more likely.
-     * <p>
-     * Note that when using one of the Digester.parse methods, the return
-     * value from the parse method is exactly the same as the return value
-     * from this method. However when the Digester's SAXHandler has been used
-     * explicitly as the content-handler for a user-provided sax parser, no
-     * such return value is available; in this case, this method allows you
-     * to access the root object that has been created after parsing has
-     * completed.
-     *
-     * @return the root object that has been created after parsing
-     *  or null if the digester has not parsed any XML yet.
-     */
-    public Object getRoot() {
-        return root;
     }
 
     /**
