@@ -206,6 +206,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * The Locator associated with our parser object. This object can be
      * consulted to find out which line of the input xml document we are
      * currently on - very useful when generating error messages.
+     * <p>
+     * We store this variable on the SAXHandler class as well as the Context
+     * because the Context object is not created until the startDocument 
+     * method is invoked - which is after setDocumentLocator.
      */
     private Locator documentLocator = null;
 
@@ -226,6 +230,15 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * access this data after the parse has completed.
      */
     private String dtdSystemId = null;
+
+    /**
+     * The object that forms the root of the tree of objects being
+     * created during a parse. 
+     * <p>
+     * Note that this info is not on the Context because the user may
+     * access this data after the parse has completed.
+     */
+    private Object root;
 
     // ---------------------------------------------------------
     // Constructors
@@ -474,7 +487,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
     /**
      * Set the object that the stack should be primed with before parsing
-     * starts.
+     * starts. Note that this value is reset to null after parsing a document,
+     * so must be set before each parse.
      */
     public void setInitialObject(Object o) {
         initialObject = o;
@@ -485,11 +499,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * should not be called until parsing has completed.
      */
     public Object getRoot() {
-        if (context == null) {
-            return null;
-        } else {
-            return context.getRoot();
-        }
+        return root;
     }
 
     /**
@@ -654,15 +664,23 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
     /**
      * Cleanup method which releases any memory that is no longer needed
-     * after a parse has completed. There is one exception: the root
-     * object generated during the parse is retained so that it can be
-     * retrieved by getRoot(). If this is no longer needed, then setRoot(null)
-     * should be called to release this member.
+     * after a parse has completed.
+     * <p>
+     * This method should generally be called if the reference to the digester
+     * is to be retained for some time (eg returned to a pool) in order to
+     * avoid holding memory occupied for more time than is necessary.
+     * <p>
+     * This method definitely needs to be called after a parse has failed, ie
+     * an exception has been thrown, in order to free memory (unless all
+     * references to the digester itself are discarded, allowing it to be
+     * recycled together with its dependent objects).
+     * <p>
+     * After this call, the getRoot method will return null.
      */
     public void clear() {
-        // It would be nice to set
-        //   context = null;
-        // but currently that would stuff up the getRoot() method.
+        context = null; // only necessary if parse failed
+        initialObject = null; // should not be necessary
+        root = null;
     }
 
     // -------------------------------------------------------
@@ -780,6 +798,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         numEntitiesResolved = 0;
         dtdPublicId = null;
         dtdSystemId = null;
+        root = null; // just in case
 
         // Create a new parsing context. This guarantees that Actions have
         // a clean slate for handling this new input document.
@@ -787,6 +806,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
         if (initialObject != null) {
             context.setRoot(initialObject);
+
+            // Initial object should apply to a single parse only, so lets
+            // enforce it here.
+            initialObject = null; 
         }
 
         // give subclasses a chance to do custom configuration before each
@@ -846,8 +869,14 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             throw new NestedSAXException(ex);
         }
 
-        // Perform final cleanup to release memory that is no longer needed.
-        clear();
+        // store the root object so the user can access it
+        root = context.getRoot();
+        
+        // And now we don't need the context any more, so allow it to be
+        // reclaimed. Note that in the case where a parse failed, this
+        // method is never called, so the user is responsible for calling
+        // the clear method.
+        context = null;
     }
 
     /**
