@@ -20,7 +20,7 @@ package org.apache.commons.digester2.actions;
 
 import org.xml.sax.Attributes;
 
-import org.apache.commons.collections.ArrayStack;
+import org.apache.commons.digester2.ArrayStack;
 import org.apache.commons.logging.Log;
 
 import org.apache.commons.digester2.Context;

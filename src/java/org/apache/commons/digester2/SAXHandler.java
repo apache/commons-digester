@@ -39,7 +39,6 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.collections.ArrayStack;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
