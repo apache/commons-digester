@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,9 @@ package org.apache.commons.digester2;
  * Thrown when a problem is detected as a rule is added to a RuleManager.
  * One possible cause is that the pattern is invalid, but there may be
  * others depending upon the RuleManager and Action involved.
+ * <p>
+ * This exception is not thrown <i>during</i> parsing; problems at that
+ * stage are represented by instances of ParseException.
  */
 
 public class InvalidRuleException extends DigestionException {
@@ -36,6 +39,5 @@ public class InvalidRuleException extends DigestionException {
     public InvalidRuleException(String msg, Throwable t) {
         super(msg, t);
     }
-    
 }
 

@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@
 package org.apache.commons.digester2;
 
 /**
+ * An exception indicating that some problem occurred during parsing of
+ * the input xml.
  */
 
 public class ParseException extends DigestionException {
@@ -33,6 +35,5 @@ public class ParseException extends DigestionException {
     public ParseException(String msg, Throwable t) {
         super(msg, t);
     }
-    
 }
 
