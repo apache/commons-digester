@@ -86,7 +86,7 @@ public class PluginRules implements Rules {
      * A reference to the object that holds all data which should only
      * exist once per digester instance.
      */
-    private PerDigesterResources perDigesterResources = null;
+    private PluginContext pluginContext = null;
     
     // ------------------------------------------------------------- Constructor
     
@@ -106,8 +106,8 @@ public class PluginRules implements Rules {
     public PluginRules(Rules decoratedRules) {
         this.decoratedRules = decoratedRules;
 
-        perDigesterResources = new PerDigesterResources();
-        pluginManager = new PluginManager(perDigesterResources);
+        pluginContext = new PluginContext();
+        pluginManager = new PluginManager(pluginContext);
     }
 
     /**
@@ -117,6 +117,11 @@ public class PluginRules implements Rules {
      * One of these is created each time a PluginCreateRule's begin method 
      * fires, in order to manage the custom rules associated with whatever 
      * concrete plugin class the user has specified.
+     *
+     * @param mountPoint is the digester match path for the element 
+     * matching a PluginCreateRule which caused this "nested parsing scope"
+     * to begin.
+     * @param parent must be non-null.
      */
      PluginRules(String mountPoint, PluginRules parent) {
         // no need to set digester or decoratedRules.digester,
@@ -124,8 +129,8 @@ public class PluginRules implements Rules {
         // method on this object will be called.
         
         decoratedRules = new RulesBase();
-        perDigesterResources = parent.perDigesterResources;
-        pluginManager = new PluginManager(perDigesterResources, parent.pluginManager);
+        pluginContext = parent.pluginContext;
+        pluginManager = new PluginManager(parent.pluginManager);
         
         this.mountPoint = mountPoint;
         this.parent = parent;
@@ -187,17 +192,17 @@ public class PluginRules implements Rules {
     }
     
     /**
-     * See {@link PerDigesterResources#getRuleFinders}.
+     * See {@link PluginContext#getRuleFinders}.
      */
     public List getRuleFinders() {
-        return perDigesterResources.getRuleFinders();
+        return pluginContext.getRuleFinders();
     }
     
     /**
-     * See {@link PerDigesterResources#setRuleFinders}.
+     * See {@link PluginContext#setRuleFinders}.
      */
     public void setRuleFinders(List ruleFinders) {
-        perDigesterResources.setRuleFinders(ruleFinders);
+        pluginContext.setRuleFinders(ruleFinders);
     }
     
     // --------------------------------------------------------- Public Methods
@@ -358,35 +363,35 @@ public class PluginRules implements Rules {
         return matches;
     }
 
-    /** See {@link PerDigesterResources#setPluginClassAttribute}. */
+    /** See {@link PluginContext#setPluginClassAttribute}. */
     public void setPluginClassAttribute(String namespaceUri, 
                                         String attrName) {
-        perDigesterResources.setPluginClassAttribute(namespaceUri, attrName);
+        pluginContext.setPluginClassAttribute(namespaceUri, attrName);
     }
 
-    /** See {@link PerDigesterResources#setPluginIdAttribute}. */
+    /** See {@link PluginContext#setPluginIdAttribute}. */
     public void setPluginIdAttribute(String namespaceUri, 
                                      String attrName) {
-        perDigesterResources.setPluginIdAttribute(namespaceUri, attrName);
+        pluginContext.setPluginIdAttribute(namespaceUri, attrName);
     }
     
-    /** See {@link PerDigesterResources#getPluginClassAttrNs}. */
+    /** See {@link PluginContext#getPluginClassAttrNs}. */
     public String getPluginClassAttrNs() {
-        return perDigesterResources.getPluginClassAttrNs();
+        return pluginContext.getPluginClassAttrNs();
     }
     
-    /** See {@link PerDigesterResources#getPluginClassAttr}. */
+    /** See {@link PluginContext#getPluginClassAttr}. */
     public String getPluginClassAttr() {
-        return perDigesterResources.getPluginClassAttr();
+        return pluginContext.getPluginClassAttr();
     }
     
-    /** See {@link PerDigesterResources#getPluginIdAttrNs}. */
+    /** See {@link PluginContext#getPluginIdAttrNs}. */
     public String getPluginIdAttrNs() {
-        return perDigesterResources.getPluginIdAttrNs();
+        return pluginContext.getPluginIdAttrNs();
     }
     
-    /** See {@link PerDigesterResources#getPluginIdAttr}. */
+    /** See {@link PluginContext#getPluginIdAttr}. */
     public String getPluginIdAttr() {
-        return perDigesterResources.getPluginIdAttr();
+        return pluginContext.getPluginIdAttr();
     }
 }
