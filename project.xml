@@ -154,6 +154,15 @@
       <id>skitching</id>
       <email>skitching@apache.org</email>
     </developer>
+    <developer>
+      <name>Oliver Zeigermann</name>
+      <id>ozeigermann</id>
+      <email>ozeigermann@apache.org</email>
+      <timezone>+1</timezone>
+      <roles>
+         <role>Java Developer</role>
+      </roles>
+    </developer>
   </developers>
 
   <contributors>
