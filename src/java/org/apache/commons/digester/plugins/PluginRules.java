@@ -82,6 +82,12 @@ public class PluginRules implements Rules {
      */
     private PluginRules parent = null;
     
+    /**
+     * A reference to the object that holds all data which should only
+     * exist once per digester instance.
+     */
+    private PerDigesterResources perDigesterResources = null;
+    
     // ------------------------------------------------------------- Constructor
     
     /**
@@ -90,8 +96,7 @@ public class PluginRules implements Rules {
      * object before parsing starts.
      */
     public PluginRules() {
-        decoratedRules = new RulesBase();
-        pluginManager = new PluginManager();
+        this(new RulesBase());
     }
 
     /**
@@ -100,7 +105,9 @@ public class PluginRules implements Rules {
      */
     public PluginRules(Rules decoratedRules) {
         this.decoratedRules = decoratedRules;
-        pluginManager = new PluginManager();
+
+        perDigesterResources = new PerDigesterResources();
+        pluginManager = new PluginManager(perDigesterResources);
     }
 
     /**
@@ -117,7 +124,8 @@ public class PluginRules implements Rules {
         // method on this object will be called.
         
         decoratedRules = new RulesBase();
-        pluginManager = new PluginManager(parent.pluginManager);
+        perDigesterResources = parent.perDigesterResources;
+        pluginManager = new PluginManager(perDigesterResources, parent.pluginManager);
         
         this.mountPoint = mountPoint;
         this.parent = parent;
@@ -177,7 +185,21 @@ public class PluginRules implements Rules {
     public PluginManager getPluginManager() {
         return pluginManager;
     }
-
+    
+    /**
+     * See {@link PerDigesterResources#getRuleFinders}.
+     */
+    public List getRuleFinders() {
+        return perDigesterResources.getRuleFinders();
+    }
+    
+    /**
+     * See {@link PerDigesterResources#setRuleFinders}.
+     */
+    public void setRuleFinders(List ruleFinders) {
+        perDigesterResources.setRuleFinders(ruleFinders);
+    }
+    
     // --------------------------------------------------------- Public Methods
 
     /**
@@ -329,11 +351,42 @@ public class PluginRules implements Rules {
             // even though this object may hold some rules matching
             // this same path. See PluginCreateRule's begin, body and end
             // methods for the reason.
-        } 
-        else {
+        } else {
             matches = decoratedRules.match(namespaceURI, path); 
         }
 
         return matches;
+    }
+
+    /** See {@link PerDigesterResources#setPluginClassAttribute}. */
+    public void setPluginClassAttribute(String namespaceUri, 
+                                        String attrName) {
+        perDigesterResources.setPluginClassAttribute(namespaceUri, attrName);
+    }
+
+    /** See {@link PerDigesterResources#setPluginIdAttribute}. */
+    public void setPluginIdAttribute(String namespaceUri, 
+                                     String attrName) {
+        perDigesterResources.setPluginIdAttribute(namespaceUri, attrName);
+    }
+    
+    /** See {@link PerDigesterResources#getPluginClassAttrNs}. */
+    public String getPluginClassAttrNs() {
+        return perDigesterResources.getPluginClassAttrNs();
+    }
+    
+    /** See {@link PerDigesterResources#getPluginClassAttr}. */
+    public String getPluginClassAttr() {
+        return perDigesterResources.getPluginClassAttr();
+    }
+    
+    /** See {@link PerDigesterResources#getPluginIdAttrNs}. */
+    public String getPluginIdAttrNs() {
+        return perDigesterResources.getPluginIdAttrNs();
+    }
+    
+    /** See {@link PerDigesterResources#getPluginIdAttr}. */
+    public String getPluginIdAttr() {
+        return perDigesterResources.getPluginIdAttr();
     }
 }
