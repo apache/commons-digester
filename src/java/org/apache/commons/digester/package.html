@@ -23,6 +23,7 @@ XML documents.
 <a href="#doc.RegisteringDTDs">[Registering DTDs]</a>
 <a href="#doc.troubleshooting">[Troubleshooting]</a>
 <a href="#doc.FAQ">[FAQ]</a>
+<a href="#doc.extensions">[Extensions]</a>
 <a href="#doc.Limits">[Known Limitations]</a>
 </div>
 
@@ -1255,6 +1256,29 @@ common-dev mailing list</a>
 </p>
 </li>
 </ul>
+<a name="doc.extensions"></a>
+<h3>Extensions</h3>
+<p>
+Two extension packages are included within the Digester distribution.
+These provide extra functionality extending the core Digester concepts.
+Detailed descriptions are contained within their own package documentation.
+</p>
+<ul>
+    <li>
+<a href='plugins/package-summary.html'>plugins</a> provides a framework for the easy
+dynamic addition of rules during a Digestion. Rules can trigger the dynamic addition 
+of other rules in an intuitive fashion.
+    </li>
+    <li>
+<a href='substitution/package-summary.html'>substitution</a> provides for 
+manipulation of attributes and element body text before it is processed by the rules.
+    </li>
+    <li>
+<a href='xmlrules/package-summary.html'>xmlrules</a> package contains a
+system allowing digester rule configurations to be specifed through an xml file.
+    </li>
+</ul>
+
 <a name="doc.Limits"></a>
 <h3>Known Limitations</h3>
 <h4>Accessing Public Methods In A Default Access Superclass</h4>
