@@ -17,22 +17,11 @@
 
 package org.apache.commons.digester2;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.lang.reflect.InvocationTargetException;
-import java.util.EmptyStackException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.EmptyStackException;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.collections.ArrayStack;
 
 /**
  * <p>Holds information that evolves as the parsing of an input xml document
@@ -198,6 +187,9 @@ public class Context {
         return saxHandler.getClassLoader();
     }
 
+    /**
+     * Return the SAXHandler which owns this object.
+     */
     public SAXHandler getSAXHandler() {
         return saxHandler;
     }
