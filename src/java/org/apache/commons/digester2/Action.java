@@ -106,8 +106,8 @@ public interface Action {
 
     /**
      * This method is called when the body of a matching XML element is 
-     * encountered.  If the element has no body, this method is not called at 
-     * all.
+     * encountered. If the element has no body, this method is called with
+     * an empty string as the body text.
      * <p>
      * Note that if the element has multiple pieces of body text separated by
      * child elements (ie is "mixed content") then all the text is merged
