@@ -30,7 +30,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * on the plugin class.
  */
 
-public class FinderFromDfltMethod implements RuleFinder {
+public class FinderFromDfltMethod extends RuleFinder {
     public static String DFLT_METHOD_NAME = "addRules";
 
     private String methodName;

@@ -27,7 +27,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * on a class whose name is derived from the plugin class name.
  */
 
-public class FinderFromDfltClass implements RuleFinder {
+public class FinderFromDfltClass extends RuleFinder {
     public static String DFLT_RULECLASS_SUFFIX = "RuleInfo";
     public static String DFLT_METHOD_NAME = "addRules";
     

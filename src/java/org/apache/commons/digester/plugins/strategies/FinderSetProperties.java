@@ -42,7 +42,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * custom rules available.
  */
 
-public class FinderSetProperties implements RuleFinder {
+public class FinderSetProperties extends RuleFinder {
     public static String DFLT_PROPS_ATTR = "setprops";
     public static String DFLT_FALSEVAL = "false";
 

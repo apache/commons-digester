@@ -31,7 +31,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * plugin rules.
  */
 
-public class LoaderSetProperties implements RuleLoader {
+public class LoaderSetProperties extends RuleLoader {
     
     /**
      * Just add a SetPropertiesRule at the specified path.

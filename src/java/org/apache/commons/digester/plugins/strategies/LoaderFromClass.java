@@ -29,7 +29,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * method to actually instantiate and add new rules to a Digester instance.
  */
 
-public class LoaderFromClass implements RuleLoader {
+public class LoaderFromClass extends RuleLoader {
     
     private Class rulesClass;
     private Method rulesMethod;

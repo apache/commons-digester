@@ -27,7 +27,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * methodname as plugin properties.
  */
 
-public class FinderFromClass  implements RuleFinder {
+public class FinderFromClass extends RuleFinder {
     public static String DFLT_RULECLASS_ATTR = "ruleclass";
     public static String DFLT_METHOD_ATTR = "method";
     public static String DFLT_METHOD_NAME = "addRules";

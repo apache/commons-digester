@@ -30,7 +30,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * rules in xmlrules format.
  */
 
-public class FinderFromResource  implements RuleFinder {
+public class FinderFromResource extends RuleFinder {
     /** 
      * Name of xml attribute on the plugin declaration which is used
      * to configure rule-loading for that declaration. 

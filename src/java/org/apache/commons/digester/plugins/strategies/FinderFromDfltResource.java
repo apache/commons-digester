@@ -33,7 +33,7 @@ import org.apache.commons.logging.Log;
  * Digester rules in xmlrules format.
  */
 
-public class FinderFromDfltResource  implements RuleFinder {
+public class FinderFromDfltResource extends RuleFinder {
     public static String DFLT_RESOURCE_SUFFIX = "RuleInfo.xml";
 
     private String resourceSuffix;

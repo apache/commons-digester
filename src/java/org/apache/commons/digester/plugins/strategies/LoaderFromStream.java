@@ -34,7 +34,7 @@ import org.apache.commons.logging.Log;
  * Note that the "include" feature of xmlrules is not supported.
  */
 
-public class LoaderFromStream  implements RuleLoader {
+public class LoaderFromStream extends RuleLoader {
 
     private byte[] input;
     private FromXmlRuleSet ruleSet;

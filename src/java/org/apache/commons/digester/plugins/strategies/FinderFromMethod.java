@@ -27,7 +27,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * as a plugin property, where the method exists on the plugin class.
  */
 
-public class FinderFromMethod implements RuleFinder {
+public class FinderFromMethod extends RuleFinder {
     /**
      * Xml attribute that needs to be present on a plugin declaration
      * in order to specify the method to load rules from.

@@ -33,7 +33,7 @@ import org.apache.commons.digester.plugins.PluginException;
  * The file is expected to contain Digester rules in xmlrules format.
  */
 
-public class FinderFromFile implements RuleFinder {
+public class FinderFromFile extends RuleFinder {
     /**
      * Xml attribute that needs to be present on a plugin declaration
      * in order to specify the file to load rules from.
