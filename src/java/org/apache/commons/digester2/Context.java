@@ -48,26 +48,90 @@ import org.apache.commons.logging.Log;
 
 public class Context {
 
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
     // Local classes
     // ---------------------------------------------------
-    
+
     /**
-    * See method {@link #putInstanceData}.
+     * The context provides "scratch stacks" that any other object with
+     * access to the context can use for storing data; instances of this
+     * class are used to identify which "scratch stack" is to be used when
+     * using those push/pop/peek/isEmpty methods that take a StackId parameter.
+     * <p>
+     * An object of class Foo which wishes to store data on a private scratch
+     * stack for its own use should declare a StackId member variable then 
+     * later reference it:
+     * <pre>
+     *    private final Context.StackId WIDGET_STACK 
+     *      = new Context.StackId(Foo.class, "WidgetStack", this);
+     *    ....
+     *    context.push(WIDGET_STACK, someObject);
+     *    ....
+     *    Object savedObject = context.pop(WIDGET_STACK);
+     * </pre>
+     * <p>
+     * If an class Bar wishes to share a scratch stack across all instances of 
+     * itself, then it should declare a static StackId:
+     * <pre>
+     *    private static final Context.StackId GADGET_STACK 
+     *      = new Context.StackId(Bar.class, "GadgetStack");
+     * </pre>
+     * <p>
+     * If a class wishes to share a scratch stack with objects that are not of
+     * the same class, then it can follow the above example but declare access
+     * to be protected or public. Other classes can then access it via:
+     * <pre>
+     *   context.push(Bar.GADGET_STACK, someObject);
+     * </pre>
+     * <p>
+     * The parameters to StackId are actually only used in debugging but
+     * the above conventions should be followed for consistency.
      */
+    public static class StackId {
+        private String desc;
+
+        /**
+         * Create an instance which has no specific owner object.
+         */
+        public StackId(Class sourceClass, String desc) {
+            this.desc = sourceClass.getName() + ":" + desc; 
+        }
+
+        /**
+         * Create an instance which has an owner object.
+         */
+        public StackId(Class sourceClass, String desc, Object owner) {
+            this.desc = sourceClass.getName() + ":" + desc 
+               + ":" + System.identityHashCode(owner);
+        }
+
+        /**
+         * Provides a nice string which shows what class declares this StackId,
+         * what it is intended to be used for ("desc") and what specific
+         * instance of the class (if any) the stack is associated with.
+         */
+        public String toString() {
+            return desc;
+        }
+    }
+
+   /**
+    * See method {@link #putInstanceData}.
+    */
     private static class InstanceItem {
         public Object key;
         public Map map;
-        
+
         public InstanceItem(Object key, Map map) {
             this.key = key;
             this.map = map;
         }
     }
 
-    // --------------------------------------------------- 
+
+    // ---------------------------------------------------
     // Instance Variables
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
 
     /**
      * The owner of this object.
@@ -101,10 +165,10 @@ public class Context {
     private HashMap namespaces = new HashMap();
 
     /**
-     * If not null, then calls to the saxHandler's characters, startElement, 
-     * endElement and processingInstruction methods are forwarded to the 
-     * specified object. This is intended to allow rules to temporarily 
-     * "take control" of the sax events. In particular, this is used by 
+     * If not null, then calls to the saxHandler's characters, startElement,
+     * endElement and processingInstruction methods are forwarded to the
+     * specified object. This is intended to allow rules to temporarily
+     * "take control" of the sax events. In particular, this is used by
      * NodeCreateAction.
      */
     private ContentHandler contentHandler = null;
@@ -112,7 +176,7 @@ public class Context {
     /**
      * The body text of the current element since the most recent child
      * element (or start of the element if no child elements have yet been
-     * seen). When a child element is found, this text is reported to 
+     * seen). When a child element is found, this text is reported to
      * matching actions via the Action.bodySegment method, then the buffer
      * can be cleared. There is no need for a stack of these.
      */
@@ -170,27 +234,24 @@ public class Context {
     /**
      * Stacks used by Action objects to store internal state.
      * They can also be used for inter-action communication.
-     *
-     * By convention, Action instances use their class name as the key
-     * (or as a key prefix) to this map.
      */
-    private HashMap stacksByName = new HashMap();
+    private HashMap scratchStacks = new HashMap();
 
     /**
      * Place where other objects can store any data they like during a parse.
      * See method {@link #putInstanceData} for more information.
      */
     private List instanceData = new ArrayList();
-    
+
     /**
      * The parameters stack being utilized by CallMethodAction and
      * CallParamAction.
      */
     private ArrayStack params = new ArrayStack();
 
-    // --------------------------------------------------------- 
+    // ---------------------------------------------------------
     // Constructors
-    // --------------------------------------------------------- 
+    // ---------------------------------------------------------
 
     /**
      * Construct a new Context.
@@ -203,7 +264,7 @@ public class Context {
 
     // ---------------------------------------------------
     // Properties
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
 
     /**
      * Return the current Logger associated with this instance of the Digester
@@ -213,8 +274,8 @@ public class Context {
     }
 
     /**
-     * Gets the document locator associated with our parser. This object 
-     * can be consulted to find out which line of the input xml document 
+     * Gets the document locator associated with our parser. This object
+     * can be consulted to find out which line of the input xml document
      * we are currently on - very useful when generating error messages.
      *
      * @return the Locator supplied by the document parser
@@ -257,7 +318,7 @@ public class Context {
         }
         stack.push(namespaceURI);
     }
-     
+
     /**
      * Unregister the specified prefix string as being an alias for the
      * specified namespace uri.
@@ -284,21 +345,21 @@ public class Context {
     }
 
     /**
-     * Returns the text seen in the current xml element since the last child 
+     * Returns the text seen in the current xml element since the last child
      * element was seen (or since the start of the xml element if no child
      * elements have yet been encountered).
      */
     public StringBuffer getBodyTextSegment() {
         return bodyTextSegment;
     }
-    
+
     /**
      * Clears the bodyTextSegment buffer. See {@link #getBodyTextSegment}.
      */
     public void clearBodyTextSegment() {
         bodyTextSegment.setLength(0);
     }
-    
+
     /**
      * Save the buffer which is currently being used to accumulate text
      * content of the current xml element. This is expected to be called
@@ -308,7 +369,7 @@ public class Context {
         bodyTexts.push(bodyText);
         bodyText = new StringBuffer();
     }
-    
+
     /**
      * Restore a saved buffer. This is expected to be called just after
      * completing processing of a child xml element, to continue accumulating
@@ -319,7 +380,7 @@ public class Context {
         bodyText = (StringBuffer) bodyTexts.pop();
         return tmp;
     }
-    
+
     /**
      * Append more text to the buffer representing the text content of the
      * current xml element. This is called in multiple stages because:
@@ -333,7 +394,7 @@ public class Context {
         bodyTextSegment.append(buffer, start, length);
         bodyText.append(buffer, start, length);
     }
-    
+
     /**
      * Return the Path object representing the path from the document root
      * to the current element.
@@ -341,7 +402,7 @@ public class Context {
     public Path getCurrentPath() {
         return currentElementPath;
     }
-    
+
     /**
      * Return the path to the xml element currently being processed.
      * This is exactly equivalent to <code>getCurrentPath().getPath()</code>.
@@ -390,7 +451,7 @@ public class Context {
     }
 
     /**
-     * Retrieve the list of Actions which matched the current element. 
+     * Retrieve the list of Actions which matched the current element.
      *
      * @return a list of Action objects.
      */
@@ -440,9 +501,9 @@ public class Context {
         return contentHandler;
     }
 
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
     // Object Stack Methods
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
 
     /**
      * The root object of the Object stack.
@@ -521,17 +582,17 @@ public class Context {
      * is out-of-range. Note that all the Digester.parse methods will turn this
      * into a (checked) DigestionException.
      *
-     * @throws ArrayOutOfBoundsException (a RuntimeException subclass) if 
+     * @throws ArrayOutOfBoundsException (a RuntimeException subclass) if
      * index < 0. Note that all the Digester.parse methods will turn this
      * into a (checked) DigestionException.
      */
-    public Object peek(int n) 
+    public Object peek(int n)
     throws EmptyStackException, IndexOutOfBoundsException {
             return stack.peek(n);
     }
 
     /**
-     * Pop the top object off of the stack, and return it.  
+     * Pop the top object off of the stack, and return it.
      *
      * @throws EmptyStackException (a RuntimeException subclass) if the stack
      * is empty. Note that all the Digester.parse methods will turn this into
@@ -553,59 +614,61 @@ public class Context {
         stack.push(object);
     }
 
+    // ---------------------------------------------------
+    // Scratch Stack Methods
+    // ---------------------------------------------------
+
     /**
-     * <p>Is the stack with the given name empty?</p>
-     * <p><strong>Note:</strong> a stack is considered empty
-     * if no objects have been pushed onto it yet.</p>
+     * Is the stack with the given id empty?
+     * <p>
+     * A stack is considered empty if no objects have been pushed onto it yet.
      *
-     * @param stackName the name of the stack whose emptiness
+     * @param stackId identifies the stack whose emptiness
      * should be evaluated
      *
      * @return true if the given stack if empty
      */
-    public boolean isEmpty(String stackName) {
-        boolean result = true;
-        ArrayStack namedStack = (ArrayStack) stacksByName.get(stackName);
-        if (namedStack != null ) {
-            result = namedStack.isEmpty();
-        }
-        return result;
+    public boolean isEmpty(StackId stackId) {
+        ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
+        return (stack == null) || stack.isEmpty();
     }
 
     /**
-     * Return the current depth of the specified stack.
+     * Return the current depth of the specified stack. A stack is
+     * considered to have depth of zero if no objects have been
+     * pushed onto it yet.
      *
-     * @param stackName the name of the stack to be peeked
+     * @param stackId identifies the stack to be peeked
      */
-    public int getStackSize(String stackName) {
+    public int getStackSize(StackId stackId) {
         boolean result = true;
-        ArrayStack namedStack = (ArrayStack) stacksByName.get(stackName);
-        if (namedStack != null ) {
-            return namedStack.size();
+        ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
+        if (stack != null ) {
+            return stack.size();
         }
         return 0;
     }
 
     /**
-     * <p>Gets the top object from the stack with the given name.
-     * This method does not remove the object from the stack.
-     * </p>
+     * <p>Gets the top object from the stack with the given id.
+     * This method does not remove the object from the stack.</p>
+     *
      * <p><strong>Note:</strong> a stack is considered empty
      * if no objects have been pushed onto it yet.</p>
      *
-     * @param stackName the name of the stack to be peeked
+     * @param stackId identifies the stack to be peeked
      * @return the top <code>Object</code> on the stack.
      * @throws EmptyStackException if the named stack is empty
      */
-    public Object peek(String stackName) throws EmptyStackException {
-        ArrayStack namedStack = (ArrayStack) stacksByName.get(stackName);
-        if (namedStack == null ) {
+    public Object peek(StackId stackId) throws EmptyStackException {
+        ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
+        if (stack == null ) {
             if (log.isDebugEnabled()) {
-                log.debug("Stack '" + stackName + "' is empty");
+                log.debug("Stack '" + stackId + "' is empty");
             }
             throw new EmptyStackException();
         } else {
-            return namedStack.peek();
+            return stack.peek();
         }
     }
 
@@ -617,7 +680,7 @@ public class Context {
      * <p><strong>Note:</strong> a stack is considered empty
      * if no objects have been pushed onto it yet.</p>
      *
-     * @param stackName the name of the stack to be peeked
+     * @param stackId identifies the stack to be peeked
      *
      * @param n Index of the desired element, where 0 is the top of the stack,
      *  1 is the next element down, and so on.
@@ -626,47 +689,48 @@ public class Context {
      * is out-of-range. Note that all the Digester.parse methods will turn this
      * into a (checked) DigestionException.
      *
-     * @throws ArrayOutOfBoundsException (a RuntimeException subclass) if 
+     * @throws ArrayOutOfBoundsException (a RuntimeException subclass) if
      * index < 0. Note that all the Digester.parse methods will turn this
      * into a (checked) DigestionException.
      */
-    public Object peek(String stackName, int n) 
+    public Object peek(StackId stackId, int n)
     throws EmptyStackException, IndexOutOfBoundsException {
-        ArrayStack namedStack = (ArrayStack) stacksByName.get(stackName);
-        if (namedStack == null ) {
+        ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
+        if (stack == null ) {
             if (log.isDebugEnabled()) {
-                log.debug("Stack '" + stackName + "' is empty");
+                log.debug("Stack '" + stackId + "' is empty");
             }
             throw new EmptyStackException();
         } else {
-            return namedStack.peek(n);
+            return stack.peek(n);
         }
     }
 
     /**
-     * <p>Pops (gets and removes) the top object from the stack with the 
+     * <p>Pops (gets and removes) the top object from the stack with the
      * given name.</p>
      *
-     * <p><strong>Note:</strong> a stack is considered empty
-     * if no objects have been pushed onto it yet.</p>
-     *
-     * @param stackName the name of the stack from which the top value is to 
+     * @param stackId identifies the stack from which the top value is to
      * be popped
      *
      * @return the top <code>Object</code> on the stack.
      *
-     * @throws EmptyStackException if the named stack is empty, or has not 
+     * @throws EmptyStackException if the named stack is empty, or has not
      * yet been created.
      */
-    public Object pop(String stackName) throws EmptyStackException {
-        ArrayStack namedStack = (ArrayStack) stacksByName.get(stackName);
-        if (namedStack == null) {
+    public Object pop(StackId stackId) throws EmptyStackException {
+        ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
+        if (stack == null) {
             if (log.isDebugEnabled()) {
-                log.debug("Stack '" + stackName + "' is empty");
+                log.debug("Stack '" + stackId + "' is empty");
             }
             throw new EmptyStackException();
         } else {
-            return namedStack.pop();
+            Object result = stack.pop();
+            if (stack.isEmpty()) {
+                scratchStacks.remove(stackId);
+            }
+            return result;
         }
     }
 
@@ -674,17 +738,21 @@ public class Context {
      * Pushes the given object onto the stack with the given name.
      * If no stack already exists with the given name then one will be created.
      *
-     * @param stackName the name of the stack onto which the object should be pushed
+     * @param stackId identifies the stack onto which the object should be pushed
      * @param value the Object to be pushed onto the named stack.
      */
-    public void push(String stackName, Object value) {
-        ArrayStack namedStack = (ArrayStack) stacksByName.get(stackName);
-        if (namedStack == null) {
-            namedStack = new ArrayStack();
-            stacksByName.put(stackName, namedStack);
+    public void push(StackId stackId, Object value) {
+        ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
+        if (stack == null) {
+            stack = new ArrayStack();
+            scratchStacks.put(stackId, stack);
         }
-        namedStack.push(value);
+        stack.push(value);
     }
+
+    // ---------------------------------------------------
+    // Param Stack Methods
+    // ---------------------------------------------------
 
     /**
      * <p>Return the top object on the parameters stack without removing it.</p>
@@ -699,10 +767,10 @@ public class Context {
     }
 
     /**
-     * <p>Return the n'th object down the parameters stack, where 0 is the 
+     * <p>Return the n'th object down the parameters stack, where 0 is the
      * top element and [stacksize-1] is the bottom element.
      *
-     * <p>The parameters stack is used to store <code>CallMethodAction</code> 
+     * <p>The parameters stack is used to store <code>CallMethodAction</code>
      * parameters. See {@link #params}.</p>
      *
      * @param n Index of the desired element, where 0 is the top of the stack,
@@ -729,7 +797,7 @@ public class Context {
     /**
      * <p>Push a new object onto the top of the parameters stack.</p>
      *
-     * <p>The parameters stack is used to store <code>CallMethodAction</code> 
+     * <p>The parameters stack is used to store <code>CallMethodAction</code>
      * parameters. See {@link #params}.</p>
      *
      * @param object The new object
@@ -738,11 +806,11 @@ public class Context {
         params.push(object);
 
     }
-    
+
     // -----------------------------------------------
     // Other public methods
     // -----------------------------------------------
-    
+
     /**
      * Place where an object (typically an Action) can store any data it likes
      * during a parse. Usually the "named stacks" facility is the most
@@ -772,7 +840,7 @@ public class Context {
         // Note that if we trusted System.identityHashCode to return a unique
         // string for an instance, then we could use a map. However that method
         // doesn't promise to return a unique string on all platforms.
-        
+
         for(Iterator i = instanceData.iterator(); i.hasNext(); ) {
             InstanceItem item = (InstanceItem) i.next();
             if (item.key == instance) {
@@ -780,7 +848,7 @@ public class Context {
                 return;
             }
         }
-        
+
         // this instance has never stored data before
         Map map = new HashMap();
         map.put(category, data);
@@ -798,7 +866,7 @@ public class Context {
                 return item.map.get(category);
             }
         }
-        
+
         return null;
     }
 
@@ -819,8 +887,8 @@ public class Context {
         }
 
         if (documentLocator != null) {
-            String error = 
-                "Error at line " + documentLocator.getLineNumber() 
+            String error =
+                "Error at line " + documentLocator.getLineNumber()
                 + ", column " + documentLocator.getColumnNumber()
                 + ": " + message;
 
