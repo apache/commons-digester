@@ -92,6 +92,47 @@ import org.xml.sax.ext.LexicalHandler;
 public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
     // ---------------------------------------------------
+    // Local classes
+    // ---------------------------------------------------
+
+    /**
+     * The SAXHandler class provides "scratch storage" that any other 
+     * object can use; instances of this class must be used as the key
+     * to identify entries in this storage area. See #putItem for more
+     * information.
+     * <p>
+     * This "scratch storage" is intended to store data that persists 
+     * between parses, in particular configuration information that might be
+     * accessed by all instances of a particular Action class. This facility
+     * is not expected to be frequently used, but when needed is important!
+     * <p>
+     * Configuration information that is associated with a particular Action 
+     * instance would, of course, be stored directly as a member of that 
+     * Action instead.
+     * <p>
+     * Example:
+     * <pre>
+     *    private final static SAXHandler.ItemId MY_CONFIG_ITEM
+     *      = new SAXHandler.ItemId(Foo.class, "MyConfigItem");
+     *    ....
+     *    saxHandler.putItem(MY_CONFIG_ITEM, someObject);
+     *    ....
+     *    Object savedObject = saxHandler.getItem(MY_CONFIG_ITEM);
+     * </pre>
+     * <p>
+     * See method {@link #putItem} for more information.
+     */
+    public static class ItemId extends MapKey {
+        public ItemId(Class sourceClass, String desc) {
+            super(sourceClass, desc);
+        }
+
+        public ItemId(Class sourceClass, String desc, Object owner) {
+            super(sourceClass, desc, owner);
+        }
+    }
+
+    // ---------------------------------------------------
     // Instance Variables
     // ---------------------------------------------------
 
@@ -153,7 +194,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * established before the first rule is added, a default implementation
      * will be provided.
      */
-    private RuleManager ruleManager = null;
+    private RuleManager origRuleManager = null;
 
     /**
      * The initial object (if any) that the stack should be primed with
@@ -197,6 +238,12 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * Has this instance had its initialize method called yet?
      */
     private boolean initialized = false;
+
+    /**
+     * Place where other objects can store any data they like.
+     * See method {@link #putItem} for more information.
+     */
+    private HashMap persistentItems = new HashMap();
 
     // -------------------------------------------------------------------
     // Instance variables that are modified during a parse.
@@ -378,7 +425,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * @param ruleManager New RuleManager implementation
      */
     public void setRuleManager(RuleManager ruleManager) {
-        this.ruleManager = ruleManager;
+        this.origRuleManager = ruleManager;
     }
 
     /**
@@ -387,10 +434,10 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * established, a default implementation will be created and returned.
      */
     public RuleManager getRuleManager() {
-        if (ruleManager == null) {
-            ruleManager = new DefaultRuleManager();
+        if (origRuleManager == null) {
+            origRuleManager = new DefaultRuleManager();
         }
-        return ruleManager;
+        return origRuleManager;
     }
 
     /**
@@ -683,6 +730,44 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         root = null;
     }
 
+    /**
+     * This method provides the ability for other objects to store arbitrary
+     * data that persists between parses, in particular configuration 
+     * information that might be accessed by all instances of a particular 
+     * Action class. This facility is not expected to be frequently used,
+     * but when needed is important!
+     * <p>
+     * Configuration information that is associated with a particular Action 
+     * instance would, of course, be stored directly as a member of that 
+     * Action instead.
+     * <p>
+     * Example:
+     * <pre>
+     *    private final static SAXHandler.ItemId MY_CONFIG_ITEM
+     *      = new SAXHandler.ItemId(Foo.class, "MyConfigItem");
+     *    ....
+     *    saxHandler.putItem(MY_CONFIG_ITEM, someObject);
+     *    ....
+     *    Object savedObject = saxHandler.getItem(MY_CONFIG_ITEM);
+     * </pre>
+     * <p>
+     *
+     * @param id is used as the key to the stored item, and must be passed
+     *  to the getItem method to retrieve the data.
+     *
+     * @param data is the object to be stored for later retrieval.
+     */
+    public void putItem(ItemId id, Object data) {
+        persistentItems.put(id, data);
+    }
+
+    /**
+     * Retrieve a piece of data stored earlier via putItem.
+     */
+    public Object getItem(ItemId id) {
+        return persistentItems.get(id);
+    }
+
     // -------------------------------------------------------
     // Overridable methods
     //
@@ -800,9 +885,16 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         dtdSystemId = null;
         root = null; // just in case
 
+        // Get a reference to the rulemanager containing the actions to
+        // be applied to this input document. Note that this call also
+        // has the side-effect of creating a RuleManager if one has not
+        // been created before. Of course this would only happen if no
+        // rules had ever been added...
+        RuleManager currRuleManager = getRuleManager();
+
         // Create a new parsing context. This guarantees that Actions have
         // a clean slate for handling this new input document.
-        context = new Context(this, log, documentLocator);
+        context = new Context(this, log, documentLocator, currRuleManager);
 
         if (initialObject != null) {
             context.setRoot(initialObject);
@@ -817,11 +909,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         configure();
 
         try {
-            // This also has the side-effect of creating a RuleManager if
-            // one has not been created before. Of course this would only
-            // happen if no rules had ever been added...
-            getRuleManager().startParse(context);
-            List actions = ruleManager.getActions();
+            currRuleManager.startParse(context);
+            List actions = currRuleManager.getActions();
             for(Iterator i = actions.iterator(); i.hasNext(); ) {
                 Action action = (Action) i.next();
                 action.startParse(context);
@@ -854,16 +943,17 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             }
         }
 
+        RuleManager currRuleManager = context.getRuleManager();
         try {
             // Fire "finish" events for all defined actions
-            List actions = ruleManager.getActions();
+            List actions = currRuleManager.getActions();
             for(Iterator i = actions.iterator(); i.hasNext(); ) {
                 Action action = (Action) i.next();
                 action.finishParse(context);
             }
 
             // And finally for the RuleManager too
-            ruleManager.finishParse(context);
+            currRuleManager.finishParse(context);
         } catch(DigestionException ex) {
             log.error("RuleManager.finishParse threw exception", ex);
             throw new NestedSAXException(ex);
@@ -1092,9 +1182,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         // Fire "begin" events for all relevant rules
         List actions;
         try {
-            // NB: don't need getRuleManager here, as we know it was
-            // created at startDocument if not before..
-            actions = ruleManager.getMatchingActions(matchPath);
+            RuleManager currRuleManager = context.getRuleManager();
+            actions = currRuleManager.getMatchingActions(matchPath);
         } catch(DigestionException ex) {
             throw new NestedSAXException(ex);
         }
