@@ -148,8 +148,8 @@ public class CreateNodeAction extends AbstractAction {
          * of SAX events.
          *
          * @param context is the object which holds the current parse context.
-         *  More importantly here, it provides a way to access the current
-         *  saxHandler object which receives sax events from the xml parser.
+         *  It also provides a way to access the current saxHandler object
+         *  which receives sax events from the xml parser.
          */
         public NodeBuilder(Context context) throws SAXException {
             this.context = context;
@@ -164,7 +164,7 @@ public class CreateNodeAction extends AbstractAction {
          */
         public void init(String namespaceURI, String name, Attributes attributes) {
             saxHandler = context.getSAXHandler();
-            oldContentHandler = saxHandler.getContentHandler();
+            oldContentHandler = context.getContentHandler();
 
             // Access the documentBuilder in the enclosing class to build a
             // Document object that we just use as a factory for creating
@@ -205,7 +205,7 @@ public class CreateNodeAction extends AbstractAction {
 
             // Tell the SAXHandler to forward events it receives from the
             // sax parser to the methods on this object
-            saxHandler.setContentHandler(this);
+            context.setContentHandler(this);
         }
 
         // ---------------------------------------------
@@ -308,7 +308,7 @@ public class CreateNodeAction extends AbstractAction {
             try {
                 if (depth == 0) {
                     // Restore sax event handler.
-                    saxHandler.setContentHandler(oldContentHandler);
+                    context.setContentHandler(oldContentHandler);
 
                     // push built node onto stack so that other actions can
                     // access it. Note that this node gets popped in the
