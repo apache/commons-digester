@@ -26,19 +26,35 @@ import org.apache.commons.digester2.AbstractAction;
 import org.apache.commons.digester2.ParseException;
 
 /**
- * <p>Rule implementation that calls a method on the (top-1) (parent)
- * object, passing the top object (child) as an argument.  It is
- * commonly used to establish parent-child relationships.</p>
+ * <p>An Action that calls a method on the (top-1) (parent) object, passing 
+ * the top object (child) as an argument.  It is commonly used to establish 
+ * parent-child relationships between objects on the digester stack.</p>
  */
 
 public class SetNextAction extends AbstractAction {
 
-    // ----------------------------------------------------------- Constructors
+    // ----------------------------------------------------- 
+    // Instance Variables
+    // ----------------------------------------------------- 
 
     /**
-     * Construct a "set next" rule with the specified method name.  The
-     * method's argument type is assumed to be the class of the
-     * child object.
+     * The method name to call on the parent object.
+     */
+    protected String methodName = null;
+
+    /**
+     * The Java class name of the parameter type expected by the method.
+     * Normally this is null, in which case the paramType used is the
+     * concrete type of the object being passed.
+     */
+    protected String paramType = null;
+
+    // ----------------------------------------------------------- 
+    // Constructors
+    // ----------------------------------------------------------- 
+
+    /**
+     * Construct an action which invokes the specified method name.
      *
      * @param methodName Method name of the parent method to call
      */
@@ -55,30 +71,19 @@ public class SetNextAction extends AbstractAction {
      *  Java wrapper class instead, such as <code>java.lang.Boolean</code>
      *  for a <code>boolean</code> parameter)
      */
-    public SetNextAction(String methodName,
-                       String paramType) {
+    public SetNextAction(String methodName, String paramType) {
         this.methodName = methodName;
         this.paramType = paramType;
     }
 
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The method name to call on the parent object.
-     */
-    protected String methodName = null;
-
-    /**
-     * The Java class name of the parameter type expected by the method.
-     */
-    protected String paramType = null;
-
-    // --------------------------------------------------------- Public Methods
+    // --------------------------------------------------------- 
+    // Public Methods
+    // --------------------------------------------------------- 
 
     /**
      * Process the end of this element.
      */
-    public void end(Context context, String namespace, String nme) 
+    public void end(Context context, String namespace, String name) 
     throws ParseException {
         // Identify the objects to be used
         Object child = context.peek(0);
