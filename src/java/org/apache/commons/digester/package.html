@@ -1,3 +1,19 @@
+<!-- $Id: package.html,v 1.30.2.2 2004/08/18 19:59:28 rdonkin Exp $
+  
+ Copyright 2001-2004 The Apache Software Foundation.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+--> 
 <html>
 <head>
 <title>Package Documentation for org.apache.commons.digester Package</title>
@@ -23,6 +39,7 @@ XML documents.
 <a href="#doc.RegisteringDTDs">[Registering DTDs]</a>
 <a href="#doc.troubleshooting">[Troubleshooting]</a>
 <a href="#doc.FAQ">[FAQ]</a>
+<a href="#doc.extensions">[Extensions]</a>
 <a href="#doc.Limits">[Known Limitations]</a>
 </div>
 
@@ -1255,6 +1272,29 @@ common-dev mailing list</a>
 </p>
 </li>
 </ul>
+<a name="doc.extensions"></a>
+<h3>Extensions</h3>
+<p>
+Two extension packages are included within the Digester distribution.
+These provide extra functionality extending the core Digester concepts.
+Detailed descriptions are contained within their own package documentation.
+</p>
+<ul>
+    <li>
+<a href='plugins/package-summary.html'>plugins</a> provides a framework for the easy
+dynamic addition of rules during a Digestion. Rules can trigger the dynamic addition 
+of other rules in an intuitive fashion.
+    </li>
+    <li>
+<a href='substitution/package-summary.html'>substitution</a> provides for 
+manipulation of attributes and element body text before it is processed by the rules.
+    </li>
+    <li>
+<a href='xmlrules/package-summary.html'>xmlrules</a> package contains a
+system allowing digester rule configurations to be specifed through an xml file.
+    </li>
+</ul>
+
 <a name="doc.Limits"></a>
 <h3>Known Limitations</h3>
 <h4>Accessing Public Methods In A Default Access Superclass</h4>

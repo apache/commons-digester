@@ -1,4 +1,4 @@
-/* $Id: FactoryCreateRule.java,v 1.21 2004/05/10 06:30:06 skitching Exp $
+/* $Id: FactoryCreateRule.java,v 1.21.2.1 2004/07/30 20:11:01 rdonkin Exp $
  *
  * Copyright 2001-2004 The Apache Software Foundation.
  * 
@@ -19,6 +19,8 @@
 package org.apache.commons.digester;
 
 import org.xml.sax.Attributes;
+
+import org.apache.commons.collections.ArrayStack;
 
 
 /**
