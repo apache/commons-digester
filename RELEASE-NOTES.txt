@@ -29,7 +29,8 @@ MAJOR CHANGES SINCE 1.x
 
 This section is intended for the use of those familiar with the 1.x releases
 of this product. There are many changes, but those listed below are the
-most significant.
+most significant. Mostly, this information is restricted to listing changes
+in *functionality*; only a few implementation-level changes are listed here.
 
 Versioning
 ----------
@@ -42,10 +43,13 @@ package names should be used.
 
 General principles
 ------------------
-* Protected members are not used. Instead, members are private, and protected
-  setter/getter methods are provided where needed. This makes it easier in
-  future to change classes without breaking existing subclasses that have 
-  been defined by users of the Digester classes.
+* Protected members are not used for classes in the o.a.c.digester2 package. 
+  Instead, members are private, and protected setter/getter methods are provided
+  where needed. This makes it easier in future to change classes without 
+  breaking existing subclasses that have been defined by users of the Digester
+  classes.
+* It is still undecided whether concrete Action classes should follow the above
+  approach or use protected members.
 
 Renamed/repackaged classes
 ----------------
@@ -65,10 +69,14 @@ Renamed/repackaged classes
 * All the basic action classes (formerly Rule classes) now reside in the
   o.a.c.digester2.actions package.
 
-* ObjectCreateRule has been renamed to CreateObjectAction and
-  FactoryCreateRule has been renamed to CreateObjectWithFactoryAction.
-  
-Refactored classes
+* Renamed actions:
+   NodeCreateRule --> CreateNodeRule
+   ObjectCreateRule --> CreateObjectAction
+   FactoryCreateRule --> CreateObjectWithFactoryAction
+   ObjectCreationFactory --> ObjectFactory
+   AbstractObjectCreationFactory --> AbstractObjectFactory
+
+Digester class
 ------------------
 * Digester has been split into:
    * Digester
@@ -98,7 +106,7 @@ Refactored classes
   Note that because parsing state is stored on the Context object now, it
   is easier to implement the often-requested feature of being able to parse
   multiple xml documents with the same Digester instance.
-  
+
 Namespace-aware parsing
 -----------------------
 The Digester now *always* uses a namespace-aware xml parser.
@@ -106,6 +114,16 @@ The DefaultRuleManager patterns properly support namespaces, eg
   /ns1:foo/ns2:bar/baz
 where the URIs that ns1 and ns2 correspond to have been defined via
 earlier calls to method DefaultRuleManager.addNamespace(prefix, uri).
+
+Entity Resolution
+-----------------
+The basic functionality previously provided for entity resolution has been
+improved. 
+* By default any attempt to access an external entity which has not
+  been explicitly mapped to some (presumably local) resource is regarded as a
+  fatal error. See setAllowUnknownExternalEntities
+* External DTDs can be ignored. Yes, this has dangers, but sometimes it is
+  necessary. See setIgnoreExternalDTD.
 
 DefaultRuleManager
 ------------------
@@ -128,9 +146,37 @@ Action (formerly Rule) API changes
   instance both re-entrant and thread-safe.
 * The two regulations above mean that an Action instance can now be used
   concurrently by multiple Digester instances (eg in a pool).
-* New methods startParse, endParse and bodySegment are provided, with empty
-  default implementations for specific Actions to override if they wish.
 * Deprecated methods have been removed.
+* Actions get "bodySegment" callbacks when their content is mixed
+  text and child elements. This allows Actions to process XHTML-style
+  markup input more easily.
+* Actions get a new "beginParse" callback when startDocument occurs.
+* method finish renamed to finishParse
+
+SetPropertiesAction
+-------------------
+* The option now exists to specify the custom attr->property mapping via a
+  Map parameter, not just a pair of String arrays. This is much nicer.
+* hyphenated xml attribute names are now automatically mapped to camelCase,
+  eg some-attr="1" causes a call to setSomeAttr("1").
+  
+CreateNodeAction
+----------------
+* It is now possible to create DOM1 (ie non-namespaced) nodes and attributes
+  even when the parser being used is namespace-aware.
+* Namespace-aware elements and attributes are created by default
+* The implementation has changed; rather than redirecting the xml parser
+  to itself, the SAXHandler object is requested to forward ContentHandler
+  calls to itself. This has no externally-visible effect, but makes the
+  implementation much cleaner (esp. cleanup after a parse failure).
+
+CreateObjectAction
+------------------
+* The ignoreCreateException functionality has been removed. I'm not sure
+  what use-cases it supports, or whether anybody actually uses it. The code
+  is rather complex and nasty, so if someone really needs this functionality
+  they can complain, and we can add it back in later with sufficient comments
+  to allow future maintainers to know when the feature is useful...
   
 Exceptions
 -----------
@@ -188,7 +234,6 @@ Still TO-DO
   This may require a quite different API for RuleManager, so that RuleManager
   is passed the actual Elements required, rather than a string representing
   just the current path.
-* implement the bodySegment callback for Actions
 * break up CallParamAction into multiple simpler actions
 * refactor CallMethodAction to clean up its constructor.
 * Fix rules that store data on themselves.
@@ -198,6 +243,6 @@ Still TO-DO
   default.
 * sort out schemaLocation/schemaLanguage mess.
 * support rules to handle processing instructions.
-* Add feature to default EntityResolver behaviour to block access to any
-  non-registered entities, unless user explicitly enables this.
+* look into moving from BeanUtils to Morph, as BeanUtils has a lot of
+  functionality we don't use.
 
