@@ -704,6 +704,12 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         StringBuffer currTextSegment = context.getBodyTextSegment();
         if (currTextSegment.length() > 0) {
             String segment = currTextSegment.toString();
+
+            Substitutor substitutor = getSubstitutor();
+            if (substitutor != null) {
+                segment = substitutor.substitute(segment);
+            }
+
             List parentMatches = (List) context.peekMatchingActions();
             int len = parentMatches.size();
             for(int i=0; i<len; ++i) {
