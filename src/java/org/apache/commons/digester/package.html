@@ -1,4 +1,4 @@
-<!-- $Id: package.html,v 1.30.2.2 2004/08/18 19:59:28 rdonkin Exp $
+<!-- $Id: package.html,v 1.30.2.3 2004/08/29 18:37:45 rdonkin Exp $
   
  Copyright 2001-2004 The Apache Software Foundation.
  
@@ -46,24 +46,28 @@ XML documents.
 <a name="doc.Depend"></a>
 <h3>External Dependencies</h3>
 
+<p>The <em>Digester</em> component is dependent upon implementations of the following 
+standard components for development and use:</p>
 <ul>
-  <li>An XML parser conforming to
-    <a href="http://java.sun.com/products/xml">JAXP
-    </a>, version 1.1 or later (the first one to support SAX 2.0)
-  </li>
-  <li>
-    <a href="http://jakarta.apache.org/builds/jakarta-commons/release/commons-beanutils">
-Beanutils Package (Jakarta Commons)</a>, version 1.5 or later
-  </li>
-  <li>
-    <a href="http://jakarta.apache.org/builds/jakarta-commons/release/commons-collections">
-Collections Package (Jakarta Commons)</a>, version 2.1 or later
-  </li>
-  <li>
-    <a href="http://jakarta.apache.org/builds/jakarta-commons/release/commons-logging">
-Commons Logging Package (Jakarta Commons)</a>, version 1.0.2 or later
-  </li>
+<li><a href="http://java.sun.com/j2se">Java Development Kit</a>
+    (Version 1.2 or later)</li>
+<li><strong>XML Parser</strong> compatible with the JAXP/1.1 specification.
+    Examples compatible implementations include:
+    <ul>
+    <li><a href="http://java.sun.com/xml">JAXP/1.1 Reference Implementation</a></li>
+    <li><a href="http://xml.apache.org/xerces-j">Xerces</a> (Version 1.3.1 or later)</li>
+    </ul></li>
 </ul>
+<p>
+It is also dependent on a compatible set of 
+<a href='http://jakarta.apache.org/commons'>Jakarta Commons</a> library components:
+</p>
+    <table border="1" width="100%" cellspacing="2" cellpadding="3">
+        <tr class="a"><th colspan="4">Compatible Dependency Sets</th></tr>   
+        <tr class="b"><td>Digester</td><td>+Logging 1.0.x</td><td>+BeanUtils 1.x</td><td>+Collections 2.x</td></tr>
+        <tr class="a"><td>Digester</td><td>+Logging 1.0.x</td><td>+BeanUtils 1.x</td><td>+Collections 3.x</td></tr>
+        <tr class="b"><td>Digester</td><td>+Logging 1.0.x</td><td>+BeanUtils 1.7</td><td>-</td></tr>
+    </table>
 
 <a name="doc.Intro"></a>
 <h3>Introduction</h3>
@@ -1073,7 +1077,7 @@ different channels.
 <p>
 In this case, it is recommended that named stacks are used. In addition to the
 two basic stacks, <code>Digester</code> allows rules to use an unlimited number
-of other stacks referred two by an identifying string (the name). (That's where
+of other stacks referred to by an identifying string (the name). (That's where
 the term <em>named stack</em> comes from.) These stacks are 
 accessed through calls to:
 </p>
@@ -1088,7 +1092,7 @@ accessed through calls to:
 <p>
 <strong>Note:</strong> all stack names beginning with <code>org.apache.commons.digester</code>
 are reserved for future use by the <code>Digester</code> component. It is also recommended
-that users choose stack names perfixed by the name of their own domain to avoid conflicts
+that users choose stack names prefixed by the name of their own domain to avoid conflicts
 with other <code>Rule</code> implementations.
 </p>
 <a name="doc.RegisteringDTDs"></a>
@@ -1275,7 +1279,7 @@ common-dev mailing list</a>
 <a name="doc.extensions"></a>
 <h3>Extensions</h3>
 <p>
-Two extension packages are included within the Digester distribution.
+Three extension packages are included within the Digester distribution.
 These provide extra functionality extending the core Digester concepts.
 Detailed descriptions are contained within their own package documentation.
 </p>
