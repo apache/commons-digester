@@ -78,20 +78,23 @@ The dependencies neccessary for Digester 1.6 can be summarized as follows:
         </p>
 <table>
 <tr>
-<th colspan='3'>Compatible Dependency Sets</th>
+<th colspan='4'>Compatible Dependency Sets</th>
 </tr>
 <tr>
 <td>Digester</td>
+<td>+Logging 1.0.x</td>
 <td>+BeanUtils 1.x</td>
 <td>+Collections 2.x</td>
 </tr>
 <tr>
 <td>Digester</td>
+<td>+Logging 1.0.x</td>
 <td>+BeanUtils 1.x</td>
 <td>+Collections 3.x</td>
 </tr>
 <tr>
 <td>Digester</td>
+<td>+Logging 1.0.x</td>
 <td>+BeanUtils 1.7</td>
 <td>-</td>
 </tr>
