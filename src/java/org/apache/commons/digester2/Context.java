@@ -18,7 +18,10 @@
 package org.apache.commons.digester2;
 
 import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.EmptyStackException;
 
 import org.apache.commons.logging.Log;
@@ -38,6 +41,23 @@ import org.apache.commons.logging.Log;
  */
 
 public class Context {
+
+    // --------------------------------------------------- 
+    // Local classes
+    // ---------------------------------------------------
+    
+    /**
+    * See method {@link #putInstanceData}.
+     */
+    private static class InstanceItem {
+        public Object key;
+        public Map map;
+        
+        public InstanceItem(Object key, Map map) {
+            this.key = key;
+            this.map = map;
+        }
+    }
 
     // --------------------------------------------------- 
     // Instance Variables
@@ -94,6 +114,12 @@ public class Context {
      */
     private HashMap stacksByName = new HashMap();
 
+    /**
+     * Place where other objects can store any data they like during a parse.
+     * See method {@link #putInstanceData} for more information.
+     */
+    private List instanceData = new ArrayList();
+    
     /**
      * The parameters stack being utilized by CallMethodAction and
      * CallParamAction.
@@ -493,5 +519,68 @@ public class Context {
     public void pushParams(Object object) {
         params.push(object);
 
+    }
+    
+    // -----------------------------------------------
+    // Other public methods
+    // -----------------------------------------------
+    
+    /**
+     * Place where an object (typically an Action) can store any data it likes
+     * during a parse. Usually the "named stacks" facility is the most
+     * appropriate location for action-related data, as using stacks allows
+     * Actions to be re-entrant. However in some cases a stack is not
+     * needed (eg when building a cache of Class objects used by an Action).
+     * If the data is specific to an action instance, then the action instance
+     * itself should be passed as the first parameter. If the data is used by
+     * all action instances of a specific class, then the action's Class object
+     * can be used as the first parameter.
+     *
+     * @param instance is a key to separate data related to this object from
+     * other data stored on this context object.
+     *
+     * @param category identifies the particular item of data being stored,
+     * so that an instance can store multiple data items.
+     *
+     * @param data is the object to be stored for later retrieval.
+     */
+    public void putInstanceData(Object instance, String category, Object data) {
+        // Unfortunately, maps use equals to find a matching key rather than
+        // identity, so we can't use a standard Map to implement this. As the
+        // number of entries here is likely to be very small anyway, we will
+        // just use a list-of-maps, and iterate over the list to find the
+        // correct entry.
+        //
+        // Note that if we trusted System.identityHashCode to return a unique
+        // string for an instance, then we could use a map. However that method
+        // doesn't promise to return a unique string on all platforms.
+        
+        for(Iterator i = instanceData.iterator(); i.hasNext(); ) {
+            InstanceItem item = (InstanceItem) i.next();
+            if (item.key == instance) {
+                item.map.put(category, data);
+                return;
+            }
+        }
+        
+        // this instance has never stored data before
+        Map map = new HashMap();
+        map.put(category, data);
+        InstanceItem instanceItem = new InstanceItem(instance, map);
+        instanceData.add(instanceItem);
+    }
+
+    /**
+     * Retrieve a piece of data stored earlier via putInstanceData.
+     */
+    public Object getInstanceData(Object instance, String category) {
+        for(Iterator i = instanceData.iterator(); i.hasNext(); ) {
+            InstanceItem item = (InstanceItem) i.next();
+            if (item.key == instance) {
+                return item.map.get(category);
+            }
+        }
+        
+        return null;
     }
 }
