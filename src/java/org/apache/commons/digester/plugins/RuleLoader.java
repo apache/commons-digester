@@ -25,9 +25,14 @@ import org.apache.commons.digester.Digester;
  * Each plugin declaration has an associated RuleLoader instance, and that
  * instance's addRules method is invoked each time the input xml specifies
  * that an instance of that plugged-in class is to be created.
+ * <p>
+ * This is an abstract class rather than an interface in order to make
+ * it possible to enhance this class in future without breaking binary
+ * compatibility; it is possible to add methods to an abstract class, but
+ * not to an interface. 
  */
 
-public interface RuleLoader {
+public abstract class RuleLoader {
     
     /**
      * Configures the digester with custom rules for some plugged-in
@@ -37,5 +42,5 @@ public interface RuleLoader {
      * which maps to a PluginCreateRule. Any rules added here are removed
      * from the digester when the end of that xml tag is encountered.
      */
-    public void addRules(Digester d, String path) throws PluginException;
+    public abstract void addRules(Digester d, String path) throws PluginException;
 }

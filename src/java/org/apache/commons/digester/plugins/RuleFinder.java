@@ -29,10 +29,15 @@ import org.apache.commons.digester.Digester;
  * Instances of this class can also be regarded as a Factory for RuleLoaders,
  * except that an instance of a RuleLoader is only created if the particular
  * finder algorithm can locate a suitable source of rules given the plugin
- * class and associated properties. 
+ * class and associated properties.
+ * <p>
+ * This is an abstract class rather than an interface in order to make
+ * it possible to enhance this class in future without breaking binary
+ * compatibility; it is possible to add methods to an abstract class, but
+ * not to an interface. 
  */
 
-public interface RuleFinder {
+public abstract class RuleFinder {
 
     /**
      * Apply the finder algorithm to attempt to locate a source of
@@ -60,7 +65,8 @@ public interface RuleFinder {
      * of rules, but there is something invalid about that source.
      */
 
-     public RuleLoader findLoader(Digester d, Class pluginClass, Properties p)
-                            throws PluginException;
+     public abstract RuleLoader findLoader(
+                        Digester d, Class pluginClass, 
+                        Properties p) throws PluginException;
 }
 
