@@ -123,15 +123,31 @@ public class Digester {
     // ------------------------------------------------------------- Properties
 
     /**
-     * Determine whether we are to validate the xml input against a schema.
+     * Determine whether we are to validate the xml input against a DTD.
      * If so, then an error will be reported by the parse() methods if the
      * input doesn't comply with the schema. If validation is disabled, then
      * performance will be improved, but no error will be reported if the
      * input is not correct.
      * <p>
-     * Note that even when validation is disabled, any external schema or DTD
-     * referenced by the input document must still be read, as it can declare
-     * default attributes and similar items which affect xml parsing.
+     * Note that even when validation is disabled, any external DTD referenced
+     * by the input document must still be read, as it can declare default 
+     * attributes and similar items which affect xml parsing.
+     * <p>
+     * In order to validate a document against an xml schema, all of the
+     * following must be done:
+     * <ul>
+     * <li>Validation must be enabled (using this method or by setting feature
+     *   "http://xml.org/sax/features/validation" on the XMLReader object).
+     * <li>Schema-validation must be enabled in a parser-specific manner. For
+     *  the Xerces parser (which is bundled with java 1.4 and 1.5) the feature
+     *  "http://apache.org/xml/features/validation/schema" must be set on the
+     *  XMLReader object.
+     * <li>The input xml document must declare the schema to use by defining
+     *   xml attribute "xsi:noNamespaceSchemaLocation" or "xsi:schemaLocation"
+     *   on some element (usually the root element)
+     * <li>The DOCTYPE declaration on the top of the input xml element must
+     *   be removed; schema validation is ignored if DOCTYPE is present.
+     * </ul>
      *
      * @param validating The new validating parser flag.
      *
@@ -166,6 +182,10 @@ public class Digester {
      *
      * <p>The reader passed here should be configured with namespace-aware
      * parsing enabled, as the digester classes assume this.</p>
+     *
+     * <p>This method does not set up the SAXHandler as the reader's handler
+     *  for content, dtd or other events. You should generally call method
+     *  SAXHandler.initCallbacks before starting the parse.
      */
     public void setXMLReader(XMLReader reader) {
         this.reader = reader;
@@ -174,7 +194,7 @@ public class Digester {
     /**
      * Set the class loader to be used for instantiating application objects
      * when required. If a non-null value is passed to this method, then
-     * method {@link #useContextClassLoader} will have no effect.
+     * method {@link #setUseContextClassLoader} will have no effect.
      * <p>
      * When an Action is executed due to some xml input, and that Action
      * wishes to create an object to represent the input, then the class
@@ -254,34 +274,35 @@ public class Digester {
     }
 
     /**
-     * Set the publid id of the current file being parsed. This will cause
-     * the declared DOCTYPE (if any) of the input document to be ignored.
-     *
-     * Instead the provided publicId will be looked up in the known entities,
-     * and the resource located at the associated URL will be used as the
-     * DTD for this input document.
+     * Get the public identifier of the DTD associated with the document
+     * currently being parsed, or most recently parsed.
      * <p>
-     * NOTE: if the input document doesn't include a DOCTYPE, then the
-     * DTD specified by this call is not used. There is currently no way
-     * to force an input document to be validated against a specific DTD
-     * (due to a lack of this feature in the xml standard).
-     *
-     * @param publicId the DTD/Schema public's id.
+     * If the input document has no DOCTYPE declaration, then null will
+     * be returned.
+     * <p>
+     * Note that this method requires the underlying xml parser to support
+     * the org.xml.sax.ext.LexicalHandler interface. If the parser does not
+     * provide callbacks via this interface, then no public id information
+     * will be available (null will be returned).
      */
-    public void setPublicId(String publicId){
-        saxHandler.setPublicId(publicId);
+    public String getDTDPublicId() {
+        return saxHandler.getDTDPublicId();
     }
 
     /**
-     * Get the public identifier of the DTD we are currently parsing under,
-     * if any. If setPublicId has been called previously, then the value
-     * returned here will be the one explicitly set. Otherwise, if we have
-     * already seen a DOCTYPE declaration in the input data, then the
-     * public id in that DOCTYPE will be returned. Otherwise (parsing hasn't
-     * started or the input document had no DOCTYPE) null is returned.
+     * Get the system identifier of the DTD associated with the document
+     * currently being parsed, or most recently parsed.
+     * <p>
+     * If the input document has no DOCTYPE declaration, then null will
+     * be returned.
+     * <p>
+     * Note that this method requires the underlying xml parser to support
+     * the org.xml.sax.ext.LexicalHandler interface. If the parser does not
+     * provide callbacks via this interface, then no public id information
+     * will be available (null will be returned).
      */
-    public String getPublicId() {
-        return saxHandler.getPublicId();
+    public String getDTDSystemId() {
+        return saxHandler.getDTDSystemId();
     }
 
     /**
@@ -324,7 +345,7 @@ public class Digester {
      * and there is no explicit classloader set, then the same classloader
      * that loaded the Action class is used.
      * <p>
-     * See {@link #setClassLoader}.
+     * See {@link #setExplicitClassLoader}.
      *
      * @param use determines whether to use the Context Classloader.
      */
@@ -626,10 +647,7 @@ public class Digester {
             return null;
         }
 
-        reader.setDTDHandler(saxHandler);
-        reader.setContentHandler(saxHandler);
-        reader.setEntityResolver(saxHandler);
-        reader.setErrorHandler(saxHandler);
+        saxHandler.initCallbacks(reader);
         return reader;
     }
 
