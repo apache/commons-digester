@@ -235,4 +235,11 @@ public class DeclarationTestCase extends TestCase {
         assertEquals("Configure: unexpected rule",
             action2, ruleManager.getActions().get(1));
     }
+
+    // possible additional tests:
+    // * test what happens when context.getClassLoader is not the same
+    //   classloader as our saxHandler was loaded through. The plugin
+    //   class should have classloader=contextclassloader if specified
+    //   by name, and the RuleInfo class should be located via the
+    //   context classloader.
 }
