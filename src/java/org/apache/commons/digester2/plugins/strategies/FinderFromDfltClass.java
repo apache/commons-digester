@@ -65,6 +65,11 @@ public class FinderFromDfltClass extends RuleFinder {
      * on the selected class whenever its addRules method is invoked. The
      * target method is expected to have the following prototype:
      * <code> public static void xxxxx(RuleManager rm, String patternPrefix); </code>
+     * <p>
+     * The classloader used to locate the "RuleInfo" class is the one returned
+     * by context.getClassLoader, not the one used to load the pluginClass.
+     * This allows users to place RuleInfo classes in the "webapp classpath"
+     * even when the pluginClass has been loaded by the "container" classpath.
      */
     public RuleLoader findLoader(
     Context context, Class pluginClass, Properties p)
