@@ -195,27 +195,50 @@ public class ActionFactory {
     }
 
     /**
-     * Add a "bean property setter" rule for the specified parameters.
+     * Add a "property setter" rule for the specified parameters.
      *
      * @param pattern Element matching pattern
-     * @see BeanPropertySetterAction
+     * @see SetPropertyAction
      */
-    public Action addBeanPropertySetter(String pattern)
+    public Action addSetProperty(String pattern)
     throws InvalidRuleException {
-        Action action = new BeanPropertySetterAction();
+        Action action = new SetPropertyAction();
         return addRule(pattern, action);
     }
 
     /**
-     * Add a "bean property setter" rule for the specified parameters.
+     * Add a "property setter" rule for the specified parameters.
      *
      * @param pattern Element matching pattern
      * @param propertyName Name of property to set
-     * @see BeanPropertySetterAction
+     * @see SetPropertyAction
      */
-    public Action addBeanPropertySetter(String pattern, String propertyName) 
+    public Action addSetProperty(String pattern, String propertyName) 
     throws InvalidRuleException {
-        Action action = new BeanPropertySetterAction(propertyName);
+        Action action = new SetPropertyAction(propertyName);
+        return addRule(pattern, action);
+    }
+
+    /**
+     * Add a "property setter" rule for the specified parameters.
+     *
+     * @param pattern Element matching pattern
+     * @param xmlAttributeNS is the namespace of the xml attribute that will
+     *  indicate which property to set. Null means the default namespace.
+     * @param xmlAttributeName is the name of the xml attribute that will 
+     *  indicate which property to set. Must not be null.
+     * @param defaultPropertyName is the name of a property to set if the
+     *  specified xml attribute is not defined. If null, then it is an error
+     *  if the xml attribute is not present in the input.
+     * @see SetPropertyAction
+     */
+    public Action addSetProperty(
+    String pattern, 
+    String xmlAttributeNS, String xmlAttributeName,
+    String defaultPropertyName) 
+    throws InvalidRuleException {
+        Action action = new SetPropertyAction(
+            xmlAttributeNS, xmlAttributeName, defaultPropertyName);
         return addRule(pattern, action);
     }
 
