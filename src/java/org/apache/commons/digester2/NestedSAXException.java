@@ -37,6 +37,7 @@ public class NestedSAXException extends org.xml.sax.SAXException {
     }
     
     public NestedSAXException(Throwable t) {
+        super(t.getMessage());
         cause = t;
     }
     

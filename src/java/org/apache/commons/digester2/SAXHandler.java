@@ -1265,15 +1265,20 @@ public class SAXHandler extends DefaultHandler {
      *
      */
     public InputSource resolveEntity(String publicId, String systemId)
-            throws SAXException, IOException {
+//            throws SAXException, IOException {
+        throws SAXException {
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("resolveEntity('" + publicId + "', '" + systemId + "')");
         }
 
         if (entityResolver != null) {
-            // the user has specified their own EntityResolver, so we just
-            // forward the call to that object:
-            return entityResolver.resolveEntity(publicId, systemId);
+            try {
+                // the user has specified their own EntityResolver, so we just
+                // forward the call to that object:
+                return entityResolver.resolveEntity(publicId, systemId);
+            } catch (IOException e) {
+                throw new NestedSAXException(e);
+            }
         }
 
         // TODO: fix this. We can't assume that every external entity
