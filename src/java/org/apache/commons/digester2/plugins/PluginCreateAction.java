@@ -184,13 +184,11 @@ public class PluginCreateAction extends AbstractAction {
             log.debug("PluginCreateAction.beginParse");
         }
 
+        PluginDeclarationScope pds = PluginDeclarationScope.getInstance(context);
+
         if (baseClass == null) {
             baseClass = Object.class;
         }
-
-        PluginDeclarationScope pds  =
-            (PluginDeclarationScope) context.getItem(
-                PluginDeclarationScope.PLUGIN_DECL_SCOPE);
 
         if (defaultPluginClass != null) {
             // check default class is valid. We can't do this until the parse
@@ -217,9 +215,10 @@ public class PluginCreateAction extends AbstractAction {
             pds.addDeclaration(decl);
         }
 
+        // Because determining what xml attributes to look for is a little
+        // tricky, we figure it out here (once per parse) then cache that
+        // info in the context for use whenever the begin method is called.
         PluginAttrNames pluginAttrNames = createPluginAttrNames(context);
-        // and now we've done all that work, cache the info in the context
-        // as instance-specific data.
         context.putItem(PLUGIN_ATTR_NAMES, pluginAttrNames);
     }
 
