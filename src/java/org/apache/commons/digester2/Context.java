@@ -859,4 +859,32 @@ public class Context {
     public SAXException createSAXException(String message) {
         return createSAXException(message, null);
     }
+ 
+    /**
+     * Verify that no Actions have misbehaved, leaving the stacks in a bad 
+     * state or anything. This should only be called at the end of a 
+     * successful parse. It's really a debug method intended particularly for
+     * use with unit tests but as it is pretty quick to check things we leave 
+     * it in at runtime, to ensure that any bad custom actions also get
+     * reported.
+     */
+    public void checkForProblems() throws ParseException {
+        if (!scratchStacks.isEmpty()) {
+            StringBuffer stacklist = new StringBuffer();
+            for(Iterator i = scratchStacks.keySet().iterator(); i.hasNext(); ) {
+                // The keys should all be StackId objects which have nice
+                // descriptive toString methods. If any bad keys have been
+                // added, then toString() will still work.
+                String id = i.next().toString();
+                stacklist.append(id);
+                stacklist.append(",");
+            }
+            // remove last unused comma
+            stacklist.setLength(stacklist.length()-1);
+            
+            throw new ParseException(
+                "An action has not executed correctly; an item has been"
+                + " left on stack(s) " + stacklist);
+        }
+    }
 }
