@@ -17,6 +17,9 @@
 package org.apache.commons.digester.plugins;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Properties;
+import java.util.Iterator;
 
 import org.apache.commons.digester.Digester;
 
@@ -26,8 +29,7 @@ import org.apache.commons.logging.Log;
  * Coordinates between PluginDeclarationRule and PluginCreateRule objects,
  * providing a place to share data between instances of these rules.
  * <p>
- * One instance of this class exists per PluginRules instance,
- * ie one per Digester instance.
+ * One instance of this class exists per PluginRules instance.
  */
 
 public class PluginManager {
@@ -40,16 +42,25 @@ public class PluginManager {
 
     /** the parent manager to which this one may delegate lookups. */
     private PluginManager parent;
-
+    
+    /** 
+     * The object containing data that should only exist once for each
+     * Digester instance.
+     */
+    private PerDigesterResources perDigesterResources;
+    
     //------------------- constructors ---------------------------------------
     
     /** Constructor. */
-    public PluginManager() {
+    public PluginManager(PerDigesterResources r) {
+        perDigesterResources = r;
     }
 
     /** Constructor. */
-    public PluginManager(PluginManager parent) {
+    public PluginManager(PerDigesterResources r, PluginManager parent) {
         this.parent = parent;
+        this.perDigesterResources = r;
+        // assert r == parent.perDigesterResources
     }
     
     //------------------- methods --------------------------------------------
@@ -112,5 +123,49 @@ public class PluginManager {
         }
 
         return decl;
+    }
+
+    /**
+     * Given a plugin class and some associated properties, scan the
+     * list of known RuleFinder instances until one detects a source of
+     * custom rules for this plugin (aka a RuleLoader).
+     * <p>
+     * If no source of custom rules can be found, null is returned.
+     */
+    public RuleLoader findLoader(Digester digester, String id, 
+                        Class pluginClass, Properties props) 
+                        throws PluginException {    
+
+        // iterate over the list of RuleFinders, trying each one 
+        // until one of them locates a source of dynamic rules given
+        // this specific plugin class and the associated declaration 
+        // properties.
+        Log log = LogUtils.getLogger(digester);
+        boolean debug = log.isDebugEnabled();
+        log.debug("scanning ruleFinders to locate loader..");
+        
+        List ruleFinders = perDigesterResources.getRuleFinders();
+        RuleLoader ruleLoader = null;
+        try {
+            for(Iterator i = ruleFinders.iterator(); 
+                i.hasNext() && ruleLoader == null; ) {
+                    
+                RuleFinder finder = (RuleFinder) i.next();
+                if (debug) {
+                    log.debug("checking finder of type " + finder.getClass().getName());
+                }
+                ruleLoader = finder.findLoader(digester, pluginClass, props);
+            }
+        }
+        catch(PluginException e) {
+            throw new PluginException(
+                "Unable to locate plugin rules for plugin"
+                + " with id [" + id + "]"
+                + ", and class [" + pluginClass.getName() + "]"
+                + ":" + e.getMessage(), e.getCause());
+        }
+        log.debug("scanned ruleFinders.");
+        
+        return ruleLoader;
     }
 }
