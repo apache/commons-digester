@@ -126,21 +126,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     private Locator locator = null;
 
     /**
-     * The XML schema to use for validating an XML instance.
-     *
-     * TODO: properly implement schema validation
-     */
-    private String schemaLocation = null;
-
-    /**
-     * What language the schema is in (W3C, or RELAXNG or ..)
-     *
-     * TODO: properly implement schema validation. This variable is not
-     * actually currently used.
-     */
-    private String schemaLanguage = null;
-
-    /**
      * A map of known external entities that input xml documents may refer to.
      * via public or system IDs. The keys of the map entries are public or
      * system IDs, and the values are URLs (typically local files) pointing
@@ -150,6 +135,11 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      */
     private Map knownEntities = new HashMap();
 
+    /**
+     * See setAllowUnknownExternalEntities.
+     */
+    private boolean allowUnknownExternalEntities = false;
+    
     /**
      * An object which contains state information that evolves
      * as the parse progresses. Rule object commonly interact with
@@ -427,38 +417,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     }
 
     /**
-     * Set the XML Schema URI used for validating a XML Instance.
-     *
-     * @param schemaLocation a URI to the schema.
-     */
-    public void setSchema(String schemaLocation){
-        this.schemaLocation = schemaLocation;
-    }
-
-    /**
-     * Return the XML Schema URI used for validating an XML instance.
-     */
-    public String getSchema() {
-        return (this.schemaLocation);
-    }
-
-    /**
-     * Set the XML Schema language used when parsing. By default, we use W3C.
-     *
-     * @param schemaLanguage a URI to the schema language.
-     */
-    public void setSchemaLanguage(String schemaLanguage){
-        this.schemaLanguage = schemaLanguage;
-    }
-
-    /**
-     * Return the XML Schema language used when parsing.
-     */
-    public String getSchemaLanguage() {
-        return schemaLanguage;
-    }
-
-    /**
      * Determine whether to use the Context ClassLoader (the one found by
      * calling <code>Thread.currentThread().getContextClassLoader()</code>)
      * to resolve/load classes that are defined in various rules.  If not
@@ -616,8 +574,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
     /**
      * Specifies a map of (publicId->URI) pairings that will be used when
-     * resolving entities in the input xml (including the DTD or schema
-     * specified with the DOCTYPE).
+     * resolving entities in the input xml (including the DTD specified with
+     * DOCTYPE, or schema specified with xsi:schemaLocation).
      */
     public void setKnownEntities(Map knownEntities) {
         this.knownEntities = knownEntities;
@@ -663,6 +621,30 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         knownEntities.put(publicOrSystemId, entityURL);
     }
 
+    /**
+     * Specify whether an input xml document is permitted to reference external
+     * entities (including external DTDs, schemas, and include-files) that have
+     * not been specified by methods registerKnownEntity or setKnownEntities.
+     * <p>
+     * If this is allowed, then documents can take unbounded amounts of time
+     * to process, as they can attempt to download entities from the network
+     * (particularly via http urls).
+     * <p>
+     * This flag defaults to false (ie unknown external entities are not allowed).
+     * In this case, any occurrence of such an entity within an xml document
+     * will cause an exception to be thrown.
+     */
+    public void setAllowUnknownExternalEntities(boolean state) {
+        allowUnknownExternalEntities = state;
+    }
+     
+    /**
+     * See setAllowUnknownExternalEntities.
+     */
+    public boolean getAllowUnknownExternalEntities() {
+        return allowUnknownExternalEntities;
+    }
+     
     /**
      * Add a (pattern, action) pair to the RuleManager instance associated
      * with this saxHandler. This is equivalent to
@@ -1350,8 +1332,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      *
      */
     public InputSource resolveEntity(String publicId, String systemId)
-//            throws SAXException, IOException {
-        throws SAXException {
+    throws SAXException {
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("resolveEntity('" + publicId + "', '" + systemId + "')");
         }
@@ -1366,32 +1347,50 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             }
         }
 
-        // Has this system identifier been registered?
+        // Has this public identifier been registered?
         String entityURL = null;
         if (publicId != null) {
             entityURL = (String) knownEntities.get(publicId);
         }
 
-        // Redirect the schema location to a local destination
-        if (schemaLocation != null && entityURL == null && systemId != null){
+        // Has this system identifier been registered?
+        if (entityURL == null && systemId != null) {
             entityURL = (String)knownEntities.get(systemId);
         }
 
-        if (entityURL == null) {
-            if (systemId == null) {
-                // cannot resolve
-                if (log.isDebugEnabled()) {
-                    log.debug(" Cannot resolve entity: '" + entityURL + "'");
-                }
-                return null;
-
-            } else {
-                // try to resolve using system ID
-                if (log.isDebugEnabled()) {
-                    log.debug(" Trying to resolve using system ID '" + systemId + "'");
-                }
-                entityURL = systemId;
+        if ((entityURL == null) && !allowUnknownExternalEntities) {
+            // refuse to load unknown external entity
+            String pub = "null";
+            if (publicId != null) {
+                pub = "'" + publicId + "'";
             }
+            
+            String sys = "null";
+            if (systemId != null) {
+                sys = "'" + systemId + "'";
+            }
+            
+            throw createSAXException(
+                "The external entity with publicId = " + pub
+                + " and systemId = " + sys
+                + " has not been registered as a known entity.");
+        }
+        
+        if ((entityURL == null) && (systemId != null)) {
+            // allow unknown external entity
+            entityURL = systemId;
+        }
+        
+        if (entityURL == null) {
+            // Cannot resolve. PublicId does not map to anything, and
+            // systemId is null.
+            if (log.isDebugEnabled()) {
+                log.debug(" Cannot resolve entity: '" + entityURL + "'");
+            }
+            
+            throw createSAXException(
+                "Cannot resolve entity. PublicId is null or has not been"
+                + " registered as a known entity, and systemId is null.");
         }
 
         // Return an input source to our alternative URL
@@ -1400,7 +1399,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         }
 
         try {
-            return (new InputSource(entityURL));
+            return new InputSource(entityURL);
         } catch (Exception e) {
             throw createSAXException(e);
         }
