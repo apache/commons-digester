@@ -20,6 +20,7 @@ package org.apache.commons.digester2.plugins;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.List;
+import java.util.Properties;
 import java.io.File;
 
 import org.apache.commons.digester2.Context;
@@ -37,6 +38,12 @@ import org.apache.commons.logging.Log;
  * with the appropriate pattern.
  */
 public class PluginCreateAction extends AbstractAction {
+
+    /**
+     * A simple constant object representing a Properties object with
+     * no entries in it.
+     */
+    private static final Properties EMPTY_PROPERTIES = new Properties();
 
     /**
      * Simple data structure to store the names of the xml attributes
@@ -66,11 +73,20 @@ public class PluginCreateAction extends AbstractAction {
     private Class baseClass = null;
 
     /**
-     * Info about optional default plugin to be used if no plugin-id is
+     * Optional default plugin to be used if no plugin-id is
      * specified in the input data. This can simplify the syntax where one
      * particular plugin is usually used.
      */
-    private Declaration defaultPlugin;
+    private Class defaultPluginClass = null;
+
+    /**
+     * Optional object to be used to load rules associated with the
+     * defaultPluginClass. This is ignored if defaultPluginClass is null.
+     * And when defaultPluginClass is not null, this is still optional; when
+     * not specified by the user, the standard "auto-detection" is applied
+     * to find any custom rules for the plugin class.
+     */
+    private RuleLoader defaultPluginRuleLoader = null;
 
     //-------------------- constructors -------------------------------------
 
@@ -92,15 +108,13 @@ public class PluginCreateAction extends AbstractAction {
      *
      * @param baseClass is the class which any specified plugin <i>must</i> be
      * descended from.
-     * @param dfltPluginClass is the class which will be used if the user
+     * @param defaultPluginClass is the class which will be used if the user
      * doesn't specify any plugin-class or plugin-id. This class will have
      * custom rules installed for it just like a declared plugin.
      */
-    public PluginCreateAction(Class baseClass, Class dfltPluginClass) {
+    public PluginCreateAction(Class baseClass, Class defaultPluginClass) {
         this.baseClass = baseClass;
-        if (dfltPluginClass != null) {
-            defaultPlugin = new Declaration(dfltPluginClass);
-        }
+        this.defaultPluginClass = defaultPluginClass;
     }
 
     /**
@@ -110,29 +124,28 @@ public class PluginCreateAction extends AbstractAction {
      *
      * @param baseClass is the class which any specified plugin <i>must</i> be
      * descended from.
-     * @param dfltPluginClass is the class which will be used if the user
+     * @param defaultPluginClass is the class which will be used if the user
      * doesn't specify any plugin-class or plugin-id. This class will have
      * custom rules installed for it just like a declared plugin.
-     * @param dfltPluginRuleLoader is a RuleLoader instance which knows how
+     * @param defaultPluginRuleLoader is a RuleLoader instance which knows how
      * to load the custom rules associated with this default plugin.
      */
-    public PluginCreateAction(Class baseClass, Class dfltPluginClass,
-                    RuleLoader dfltPluginRuleLoader) {
+    public PluginCreateAction(Class baseClass, Class defaultPluginClass,
+                    RuleLoader defaultPluginRuleLoader) {
 
         this.baseClass = baseClass;
-        if (dfltPluginClass != null) {
-            defaultPlugin =
-                new Declaration(dfltPluginClass, dfltPluginRuleLoader);
-        }
+        this.defaultPluginClass = defaultPluginClass;
+        this.defaultPluginRuleLoader = defaultPluginRuleLoader;
     }
 
     //------------------- properties ---------------------------------------
 
     /**
      * Sets the xml attribute which the input xml uses to indicate to a
-     * PluginCreateRule which class should be instantiated.
+     * PluginCreateAction which class should be instantiated.
      * <p>
-     * See {@link PluginRules#setPluginClassAttribute} for more info.
+     * See the PluginConfiguration class for information on setting
+     * digester-wide defaults for this value.
      */
     public void setPluginClassAttribute(String namespaceUri, String attrName) {
         pluginClassAttrNS = namespaceUri;
@@ -141,9 +154,10 @@ public class PluginCreateAction extends AbstractAction {
 
     /**
      * Sets the xml attribute which the input xml uses to indicate to a
-     * PluginCreateRule which plugin declaration is being referenced.
+     * PluginCreateAction which plugin declaration is being referenced.
      * <p>
-     * See {@link PluginRules#setPluginIdAttribute} for more info.
+     * See the PluginConfiguration class for information on setting
+     * digester-wide defaults for this value.
      */
     public void setPluginIdAttribute(String namespaceUri, String attrName) {
         pluginIdAttrNS = namespaceUri;
@@ -158,18 +172,12 @@ public class PluginCreateAction extends AbstractAction {
      * We ensure the default plugin class is loaded into memory, and
      * that it does indeed implement the declared base class for this
      * plugin point. We then ensure any custom rules for the default
-     * plugin have been located, though we don't add them to a RuleManager
-     * yet.
+     * plugin have been located, though we don't add them to a RuleManager.
      *
-     *
-     * @exception PluginConfigurationException
+     * @throws PluginException
      */
     public void startParse(Context context)
     throws PluginException {
-        // TODO: determine whether there will be problems with using
-        // wildcard patterns with a PluginCreateAction, or with adding
-        // the same instance multiple times..
-
         Log log = LogUtils.getLogger(context);
         boolean debug = log.isDebugEnabled();
         if (debug) {
@@ -184,22 +192,29 @@ public class PluginCreateAction extends AbstractAction {
             (PluginDeclarationScope) context.getItem(
                 PluginDeclarationScope.PLUGIN_DECL_SCOPE);
 
-        if (defaultPlugin != null) {
+        if (defaultPluginClass != null) {
             // check default class is valid. We can't do this until the parse
             // begins, as we need to load the baseClass and plugin class via
             // the classloader associated with the context.
-            if (!baseClass.isAssignableFrom(defaultPlugin.getPluginClass())) {
+            if (!baseClass.isAssignableFrom(defaultPluginClass)) {
                 throw new PluginException(
                      "Default class [" +
-                     defaultPlugin.getPluginClass().getName() +
+                     defaultPluginClass.getName() +
                      "] does not inherit from [" +
                      baseClass.getName() + "].");
             }
 
-            // initialise the plugin declaration, which means a RuleLoader
-            // will figure out where the custom rules for the default plugin
-            // class are...
-            defaultPlugin.init(context, pds);
+            Declaration decl;
+            if (defaultPluginRuleLoader == null) {
+                // We don't support passing xml attributes to the RuleFinders
+                // for default plugins, ie the input xml can't control where
+                // the default plugin class gets its custom rules from. That
+                // doesn't really make sense, so no loss there....
+                decl = new Declaration(context, defaultPluginClass, EMPTY_PROPERTIES);
+            } else {
+                decl = new Declaration(context, defaultPluginClass, defaultPluginRuleLoader);
+            }
+            pds.addDeclaration(decl);
         }
 
         PluginAttrNames pluginAttrNames = createPluginAttrNames(context);
@@ -267,9 +282,10 @@ public class PluginCreateAction extends AbstractAction {
             currDeclaration = pds.getDeclarationByClass(pluginClassName);
 
             if (currDeclaration == null) {
-                currDeclaration = new Declaration(pluginClassName);
                 try {
-                    currDeclaration.init(context, pds);
+                    currDeclaration = new Declaration(
+                        context, pluginClassName, 
+                        attributesToProperties(attributes));
                 } catch(PluginException pwe) {
                     throw new PluginInvalidInputException(
                         pwe.getMessage(), pwe.getCause());
@@ -283,8 +299,20 @@ public class PluginCreateAction extends AbstractAction {
                 throw new PluginInvalidInputException(
                     "Plugin id [" + pluginId + "] is not defined.");
             }
-        } else if (defaultPlugin != null) {
-            currDeclaration = defaultPlugin;
+        } else if (defaultPluginClass != null) {
+            try {
+                if (defaultPluginRuleLoader == null) {
+                    currDeclaration = new Declaration(
+                        context, defaultPluginClass,
+                        attributesToProperties(attributes));
+                } else {
+                    currDeclaration = new Declaration(context, defaultPluginClass, defaultPluginRuleLoader);
+                }
+            } catch(PluginException pwe) {
+                throw new PluginInvalidInputException(
+                    pwe.getMessage(), pwe.getCause());
+            }
+            pds.addDeclaration(currDeclaration);
         } else {
             throw new PluginInvalidInputException(
                 "No plugin class specified for element " + path);
@@ -585,5 +613,19 @@ public class PluginCreateAction extends AbstractAction {
         }
 
         return pluginAttrNames;
+    }
+    
+    private static Properties attributesToProperties(org.xml.sax.Attributes attrs) {
+        int nAttrs = attrs.getLength();
+        Properties props = new Properties();
+        for(int i=0; i<nAttrs; ++i) {
+            String key = attrs.getLocalName(i);
+            if ((key == null) || (key.length() == 0)) {
+                key = attrs.getQName(i);
+            }
+            String value = attrs.getValue(i);
+            props.setProperty(key, value);
+        }
+        return props;
     }
 }
