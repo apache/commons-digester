@@ -125,7 +125,7 @@ public class DigesterTestCase extends TestCase {
         SAXHandler h = new SAXHandler();
         Digester d = new Digester(h);
 
-        assertEquals("Constructor with SAXHandler", d.getSAXHandler(), h);
+        assertSame("Constructor with SAXHandler", d.getSAXHandler(), h);
     }
 
     /**
@@ -285,6 +285,26 @@ public class DigesterTestCase extends TestCase {
 
     // TODO: add tests for various parse methods
 
+    /**
+     * Test that setInitialObject works.
+     */
+    public void testInitialObject() throws Exception {
+        // TODO: verify that Action classes see the initial object as
+        // the root object on the stack...
+        
+        String inputText = "<root/>";
+        InputSource source = new InputSource(new StringReader(inputText));
+
+        Object initial = new Object();
+        
+        // Create the digester
+        Digester d = new Digester();
+        d.setInitialObject(initial);
+        d.parse(source);
+        
+        assertSame("Initial object is root", initial, d.getRoot());
+    }
+    
     // TODO: add test for setInitialObject and getRoot
 
     /**
@@ -298,7 +318,7 @@ public class DigesterTestCase extends TestCase {
         // check we can set and get a custom error handler
         assertNull("Initial error handler is null", d.getErrorHandler());
         d.setErrorHandler(defaultHandler);
-        assertEquals("Set/get error handler failed",
+        assertSame("Set/get error handler failed",
             defaultHandler, d.getErrorHandler());
 
         d.setErrorHandler(null);
