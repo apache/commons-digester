@@ -19,6 +19,7 @@
 package org.apache.commons.digester2;
 
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -58,37 +59,56 @@ public class DefaultRuleManager extends AbstractRuleManager {
      * Map of namespace-prefix to namespace-uri, used only by the
      * addAction() method.
      */
-    protected HashMap namespaces = new HashMap();
+    private HashMap namespaces = new HashMap();
     
     /**
      * The list of all actions in the cache. This set allows us to
      * iterate over the set of actions to invoke the startParse/finishParse
      * methods.
      */
-    protected ArrayList actions = new ArrayList(20);
+    private ArrayList actions = new ArrayList(20);
     
     /**
      * Map of expanded-pattern -> list-of-actions, so that we can
      * find the pattern that matches the current xml element, then
      * return the list of actions.
      */
-    protected MultiHashMap rules = new MultiHashMap();
+    private MultiHashMap rules = new MultiHashMap();
 
+    
+    // --------------------------------------------------------- 
+    // Ctor
+    // --------------------------------------------------------- 
+
+    /**
+     * Default ctor.
+     */
+    public DefaultRuleManager() {
+    }
+
+    /**
+     * Returns a clone of this object. The Action objects currently
+     * registered are not copied, as Action objects are required to be
+     * re-entrant and thread-safe.
+     */
+    public DefaultRuleManager(DefaultRuleManager manager) {
+        this.namespaces = (HashMap) manager.namespaces.clone();
+        this.actions = (ArrayList) manager.actions.clone();
+        this.rules = (MultiHashMap) manager.rules.clone();
+    }
+    
+    
     // --------------------------------------------------------- 
     // Public Methods
     // --------------------------------------------------------- 
 
     /**
-     * Return a clone of this object. The Action objects currently
+     * Returns a clone of this object. The Action objects currently
      * registered are not copied, as Action objects are required to be
      * re-entrant and thread-safe.
      */
     public RuleManager copy() {
-        DefaultRuleManager copy = new DefaultRuleManager();
-        copy.namespaces = (HashMap) this.namespaces.clone();
-        copy.actions = (ArrayList) this.actions.clone();
-        copy.rules = (MultiHashMap) this.rules.clone();
-        return copy;
+        return new DefaultRuleManager(this);
     }
     
     /**
@@ -229,7 +249,7 @@ public class DefaultRuleManager extends AbstractRuleManager {
             return java.util.Collections.EMPTY_LIST;
         }
         else {
-            return actionList;
+            return Collections.unmodifiableList(actionList);
         }
     }
 
