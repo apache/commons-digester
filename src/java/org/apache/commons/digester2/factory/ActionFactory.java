@@ -131,18 +131,19 @@ public class ActionFactory {
      * Add a "create object" rule for the specified parameters.
      *
      * @param pattern Element matching pattern
-     * @param attributeName Attribute name that optionally overrides
      * @param clazz Default Java class to be created
+     * @param attributeName Attribute name that optionally overrides
      *  the default Java class name to be created
+     *
      * @see CreateObjectAction
      */
     public void addCreateObject(
     String pattern, 
-    String attributeName, 
-    Class clazz)
+    Class clazz,
+    String attributeName) 
     throws InvalidRuleException {
         addRule(pattern,
-                new CreateObjectAction(attributeName, clazz));
+                new CreateObjectAction(clazz, attributeName));
     }
 
     /**
