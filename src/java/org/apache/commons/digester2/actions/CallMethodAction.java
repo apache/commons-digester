@@ -1,19 +1,19 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
- * 
+ * Copyright 2001-2005 The Apache Software Foundation.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.digester2.actions;
@@ -30,180 +30,165 @@ import org.apache.commons.digester2.AbstractAction;
 import org.apache.commons.digester2.ParseException;
 
 /**
- * <p>Action that calls a method on an object on the stack
- * (normally the top/parent object), passing arguments collected from 
- * subsequent <code>ActionCallParam</code> actions or from the body of this
- * element. </p>
- *
- * <p>By using {@link #ActionCallMethod(String methodName)} 
- * a method call can be made to a method which accepts no
- * arguments.</p>
- *
- * <p>Incompatible method parameter types are converted 
- * using <code>org.apache.commons.beanutils.ConvertUtils</code>.
- * </p>
- *
- * <p>Note that the target method is invoked when the <i>end</i> of
+ * An Action that calls a method on an object on the stack
+ * (normally the top/parent object), passing arguments collected from
+ * subsequent <code>CallParam...Action</code> actions.
+ * <p>
+ * Incompatible method parameter types are converted using the
+ * <code>org.apache.commons.beanutils.ConvertUtils</code>. library.
+ * <p>
+ * Note that the target method is invoked when the <i>end</i> of
  * the tag the CallMethodAction fired on is encountered, <i>not</i> when the
  * last parameter becomes available. This implies that rules which fire on
- * tags nested within the one associated with the CallMethodAction will 
+ * tags nested within the one associated with the CallMethodAction will
  * fire before the CallMethodAction invokes the target method. This behaviour is
- * not configurable. </p>
- *
- * <p>Note also that if a CallMethodAction is expecting exactly one parameter
- * and that parameter is not available (eg CallParamAction is used with an
- * attribute name but the attribute does not exist) then the method will
- * not be invoked. If a CallMethodAction is expecting more than one parameter,
- * then it is always invoked, regardless of whether the parameters were
- * available or not (missing parameters are passed as null values).</p>
+ * not configurable.
  */
 
 public class CallMethodAction extends AbstractAction {
 
-    // ----------------------------------------------------------- Constructors
+    // -----------------------------------------------------
+    // Instance Variables
+    // -----------------------------------------------------
+
+    public static Context.StackId PARAM_STACK 
+        = new Context.StackId(CallMethodAction.class, "ParamStack");
+
+    private Context.ItemId PARAM_TYPES
+        = new Context.ItemId(CallMethodAction.class, "ParamTypes", this);
 
     /**
-     * Construct a "call method" instance with the specified method name.  The
-     * parameter types (if any) default to java.lang.String.
+     * location of the target object for the call, relative to the
+     * top of the digester object stack. The default value of zero
+     * means the target object is the one on top of the stack.
+     */
+    private int targetOffset;
+
+    /**
+     * The method name to call on the parent object.
+     */
+    protected String methodName;
+
+    /**
+     * The number of parameters to collect from CallParam actions.
+     */
+    protected int paramCount;
+
+    /**
+     * The parameter types of the parameters to be collected.
+     */
+    protected Class paramTypes[] = null;
+
+    /**
+     * The names of the classes of the parameters to be collected.
+     * This attribute allows creation of the classes to be postponed until
+     * the digester is set.
+     */
+    private String paramClassNames[] = null;
+
+    // -----------------------------------------------------------
+    // Constructors
+    // -----------------------------------------------------------
+
+    /**
+     * Construct an action which will invoke the specified method on the
+     * top object on the digester object stack.
      *
      * @param methodName Method name of the parent method to call
-     * @param paramCount The number of parameters to collect, or
-     *  zero for a single argument from the body of this element.
+     * @param paramCount The number of parameters to collect.
      */
-    public CallMethodAction(String methodName,
-                          int paramCount) {
+    public CallMethodAction(String methodName, int paramCount) {
         this(0, methodName, paramCount);
     }
 
     /**
-     * Construct a "call method" instance with the specified method name.  The
-     * parameter types (if any) default to java.lang.String.
+     * Construct an action which will invoke the specified method on whichever
+     * object on the digester object stack is at the specified offset.
      *
      * @param targetOffset location of the target object. Positive numbers are
-     * relative to the top of the digester object stack. Negative numbers 
-     * are relative to the bottom of the stack. Zero implies the top
-     * object on the stack.
-     * @param methodName Method name of the parent method to call
-     * @param paramCount The number of parameters to collect, or
-     *  zero for a single argument from the body of this element.
-     */
-    public CallMethodAction(int targetOffset,
-                          String methodName,
-                          int paramCount) {
-
-        this.targetOffset = targetOffset;
-        this.methodName = methodName;
-        this.paramCount = paramCount;        
-        if (paramCount == 0) {
-            this.paramTypes = new Class[] { String.class };
-        } else {
-            this.paramTypes = new Class[paramCount];
-            for (int i = 0; i < this.paramTypes.length; i++) {
-                this.paramTypes[i] = String.class;
-            }
-        }
-    }
-
-    /**
-     * Construct a "call method" instance with the specified method name.  
-     * The method should accept no parameters.
+     * relative to the top (newest) entry on the digester object stack.
+     * Negative numbers are relative to the bottom (oldest) entry on the stack.
+     * Zero implies the top (most recent) object on the stack.
      *
      * @param methodName Method name of the parent method to call
+     * @param paramCount The number of parameters to collect.
      */
-    public CallMethodAction(String methodName) {
-        this(0, methodName, 0, (Class[]) null);
-    }
-    
-    /**
-     * Construct a "call method" instance with the specified method name.  
-     * The method should accept no parameters.
-     *
-     * @param targetOffset location of the target object. Positive numbers are
-     * relative to the top of the digester object stack. Negative numbers 
-     * are relative to the bottom of the stack. Zero implies the top
-     * object on the stack.
-     * @param methodName Method name of the parent method to call
-     */
-    public CallMethodAction(int targetOffset, String methodName) {
-        this(targetOffset, methodName, 0, (Class[]) null);
-    }
-
-    /**
-     * Construct a "call method" rule with the specified method name and
-     * parameter types. If <code>paramCount</code> is set to zero the rule
-     * will use the body of this element as the single argument of the
-     * method, unless <code>paramTypes</code> is null or empty, in this
-     * case the rule will call the specified method with no arguments.
-     *
-     * @param methodName Method name of the parent method to call
-     * @param paramCount The number of parameters to collect, or
-     *  zero for a single argument from the body of ths element
-     * @param paramTypes The Java class names of the arguments
-     *  (if you wish to use a primitive type, specify the corresonding
-     *  Java wrapper class instead, such as <code>java.lang.Boolean</code>
-     *  for a <code>boolean</code> parameter)
-     */
-    public CallMethodAction(
-                            String methodName,
-                            int paramCount, 
-                            String paramTypes[]) {
-        this(0, methodName, paramCount, paramTypes);
-    }
-
-    /**
-     * Construct a "call method" rule with the specified method name and
-     * parameter types. If <code>paramCount</code> is set to zero the rule
-     * will use the body of this element as the single argument of the
-     * method, unless <code>paramTypes</code> is null or empty, in this
-     * case the rule will call the specified method with no arguments.
-     *
-     * @param targetOffset location of the target object. Positive numbers are
-     * relative to the top of the digester object stack. Negative numbers 
-     * are relative to the bottom of the stack. Zero implies the top
-     * object on the stack.
-     * @param methodName Method name of the parent method to call
-     * @param paramCount The number of parameters to collect, or
-     *  zero for a single argument from the body of ths element
-     * @param paramTypes The Java class names of the arguments
-     *  (if you wish to use a primitive type, specify the corresonding
-     *  Java wrapper class instead, such as <code>java.lang.Boolean</code>
-     *  for a <code>boolean</code> parameter)
-     */
-    public CallMethodAction(  int targetOffset,
-                            String methodName,
-                            int paramCount, 
-                            String paramTypes[]) {
-
+    public CallMethodAction(int targetOffset, String methodName, int paramCount) {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
         this.paramCount = paramCount;
-        if (paramTypes == null) {
-            this.paramTypes = new Class[paramCount];
-            for (int i = 0; i < this.paramTypes.length; i++) {
-                this.paramTypes[i] = "abc".getClass();
-            }
-        } else {
-            // copy the parameter class names into an array
-            // the classes will be loaded when the digester is set 
-            this.paramClassNames = new String[paramTypes.length];
-            for (int i = 0; i < this.paramClassNames.length; i++) {
-                this.paramClassNames[i] = paramTypes[i];
-            }
+        this.paramTypes = new Class[paramCount];
+        for (int i = 0; i < this.paramTypes.length; i++) {
+            this.paramTypes[i] = String.class;
         }
-
     }
-
 
     /**
      * Construct a "call method" rule with the specified method name and
-     * parameter types. If <code>paramCount</code> is set to zero the rule
-     * will use the body of this element as the single argument of the
-     * method, unless <code>paramTypes</code> is null or empty, in this
-     * case the rule will call the specified method with no arguments.
+     * parameter types. Before attempting to locate the target method,
+     * the values gathered by the CallParam...Action actions are converted
+     * to the specified types.
      *
      * @param methodName Method name of the parent method to call
+     *
      * @param paramCount The number of parameters to collect, or
      *  zero for a single argument from the body of ths element
+     *
+     * @param paramTypes The Java class names of the arguments
+     *  (if you wish to use a primitive type, specify the corresonding
+     *  Java wrapper class instead, such as <code>java.lang.Boolean</code>
+     *  for a <code>boolean</code> parameter)
+     */
+    public CallMethodAction(
+    String methodName,
+    int paramCount,
+    String paramTypes[]) {
+        this(0, methodName, paramCount, paramTypes);
+    }
+
+    /**
+     * Construct a "call method" rule with the specified method name and
+     * parameter types.
+     *
+     * @param targetOffset location of the target object. Positive numbers are
+     * relative to the top of the digester object stack. Negative numbers
+     * are relative to the bottom of the stack. Zero implies the top
+     * object on the stack.
+     *
+     * @param methodName Method name of the parent method to call
+     *
+     * @param paramCount The number of parameters to collect.
+
+     * @param paramTypes The Java class names of the arguments
+     *  (if you wish to use a primitive type, specify the corresonding
+     *  Java wrapper class instead, such as <code>java.lang.Boolean</code>
+     *  for a <code>boolean</code> parameter)
+     */
+    public CallMethodAction(
+    int targetOffset,
+    String methodName,
+    int paramCount,
+    String paramTypes[]) {
+        this.targetOffset = targetOffset;
+        this.methodName = methodName;
+        this.paramCount = paramCount;
+
+        // copy the parameter class names into an array
+        // the classes will be loaded when the digester is set
+        this.paramClassNames = new String[paramTypes.length];
+        for (int i = 0; i < this.paramClassNames.length; i++) {
+            this.paramClassNames[i] = paramTypes[i];
+        }
+    }
+
+    /**
+     * Construct a "call method" rule with the specified method name and
+     * parameter types.
+     *
+     * @param methodName Method name of the parent method to call
+     *
+     * @param paramCount The number of parameters to collect.
+     *
      * @param paramTypes The Java classes that represent the
      *  parameter types of the method arguments
      *  (if you wish to use a primitive type, specify the corresonding
@@ -211,37 +196,36 @@ public class CallMethodAction extends AbstractAction {
      *  for a <code>boolean</code> parameter)
      */
     public CallMethodAction(
-                            String methodName,
-                            int paramCount, 
-                            Class paramTypes[]) {
+    String methodName,
+    int paramCount,
+    Class paramTypes[]) {
         this(0, methodName, paramCount, paramTypes);
     }
 
     /**
      * Construct a "call method" rule with the specified method name and
-     * parameter types. If <code>paramCount</code> is set to zero the rule
-     * will use the body of this element as the single argument of the
-     * method, unless <code>paramTypes</code> is null or empty, in this
-     * case the rule will call the specified method with no arguments.
+     * parameter types.
      *
      * @param targetOffset location of the target object. Positive numbers are
-     * relative to the top of the digester object stack. Negative numbers 
+     * relative to the top of the digester object stack. Negative numbers
      * are relative to the bottom of the stack. Zero implies the top
      * object on the stack.
+     *
      * @param methodName Method name of the parent method to call
-     * @param paramCount The number of parameters to collect, or
-     *  zero for a single argument from the body of ths element
+     *
+     * @param paramCount The number of parameters to collect.
+     *
      * @param paramTypes The Java classes that represent the
      *  parameter types of the method arguments
      *  (if you wish to use a primitive type, specify the corresonding
      *  Java wrapper class instead, such as <code>java.lang.Boolean.TYPE</code>
      *  for a <code>boolean</code> parameter)
      */
-    public CallMethodAction(  int targetOffset,
-                            String methodName,
-                            int paramCount, 
-                            Class paramTypes[]) {
-
+    public CallMethodAction(
+    int targetOffset,
+    String methodName,
+    int paramCount,
+    Class paramTypes[]) {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
         this.paramCount = paramCount;
@@ -259,45 +243,10 @@ public class CallMethodAction extends AbstractAction {
 
     }
 
-    // ----------------------------------------------------- Instance Variables
+    // --------------------------------------------------------- 
+    // Public Methods
+    // --------------------------------------------------------- 
 
-    /**
-     * The body text collected from this element.
-     */
-    protected String bodyText = null;
-
-    /** 
-     * location of the target object for the call, relative to the
-     * top of the digester object stack. The default value of zero
-     * means the target object is the one on top of the stack.
-     */
-    private int targetOffset = 0;
-
-    /**
-     * The method name to call on the parent object.
-     */
-    protected String methodName = null;
-
-    /**
-     * The number of parameters to collect from <code>MethodParam</code> rules.
-     * If this value is zero, a single parameter will be collected from the
-     * body of this element.
-     */
-    protected int paramCount = 0;
-
-    /**
-     * The parameter types of the parameters to be collected.
-     */
-    protected Class paramTypes[] = null;
-
-    /**
-     * The names of the classes of the parameters to be collected.
-     * This attribute allows creation of the classes to be postponed until the digester is set.
-     */
-    private String paramClassNames[] = null;
-    
-    // --------------------------------------------------------- Public Methods
-    
     /**
      * If needed, this class loads the parameter classes from their names.
      *
@@ -305,22 +254,29 @@ public class CallMethodAction extends AbstractAction {
      * What this probably implies is that the paramTypes member needs to
      * be stored on the Context object.
      */
-    public void startParse(Context context)
+    public void startParse(Context context) throws ParseException
     {
-        // if necessary, load parameter classes
-        if (this.paramClassNames != null) {
-            this.paramTypes = new Class[paramClassNames.length];
+        // if the constructor specified classes using string classnames,
+        // then load them via whatever the current classloader is.
+        if (paramClassNames != null) {
+            ClassLoader classLoader = context.getClassLoader();
+            
+            Class[] paramTypes = new Class[paramClassNames.length];
             for (int i = 0; i < this.paramClassNames.length; i++) {
+                String classname = paramClassNames[i];
                 try {
-                    this.paramTypes[i] =
-                            context.getClassLoader().loadClass(this.paramClassNames[i]);
+                    paramTypes[i] = classLoader.loadClass(classname);
                 } catch (ClassNotFoundException e) {
-                    // use the digester log
                     Log log = context.getLogger();
-                    log.error("(ActionCallMethod) Cannot load class " + this.paramClassNames[i], e);
-                    this.paramTypes[i] = null; // Will cause NPE later
+                    
+                    String msg = "(ActionCallMethod) Cannot load class " + classname;
+                    log.error(msg, e);
+                    throw new ParseException(msg, e);
                 }
             }
+            
+            // now cache it on the context for later use
+            context.putItem(PARAM_TYPES, paramTypes);
         }
     }
 
@@ -329,97 +285,58 @@ public class CallMethodAction extends AbstractAction {
      *
      * @param attributes The attribute list for this element
      */
-    public void begin(Context context, String namespace, String name, Attributes attributes)
-        throws ParseException {
-
-        // Push an array to capture the parameter values if necessary
-        if (paramCount > 0) {
-            Object parameters[] = new Object[paramCount];
-            for (int i = 0; i < parameters.length; i++) {
-                parameters[i] = null;
-            }
-            context.pushParams(parameters);
-        }
+    public void begin(
+    Context context, 
+    String namespace, String name, Attributes attributes)
+    throws ParseException {
+        Parameters parameters = new Parameters(paramCount);
+        context.push(PARAM_STACK, parameters);
     }
-
-    /**
-     * Process the body text of this element.
-     *
-     * TODO: FIXME, the bodyText field should be stored on the Context object.
-     *
-     * @param text The body text of this element
-     */
-    public void body(Context context, String namespace, String name, String text)
-        throws ParseException {
-
-        if (paramCount == 0) {
-            this.bodyText = text.trim();
-        }
-    }
-
 
     /**
      * Process the end of this element.
      */
     public void end(Context context, String namespace, String name)
-        throws ParseException {
-
+    throws ParseException {
         Log log = context.getLogger();
 
-        // Retrieve or construct the parameter values array
-        Object parameters[] = null;
-        if (paramCount > 0) {
-
-            parameters = (Object[]) context.popParams();
-            if (log.isTraceEnabled()) {
-                for (int i=0,size=parameters.length;i<size;i++) {
-                    log.trace("[ActionCallMethod](" + i + ")" + parameters[i]) ;
-                }
+        Parameters parameters = (Parameters) context.pop(PARAM_STACK);
+        Object paramValues[] = parameters.getValues();
+        
+        if (log.isTraceEnabled()) {
+            for (int i=0,size=paramValues.length;i<size;i++) {
+                log.trace("[ActionCallMethod](" + i + ")" + paramValues[i]) ;
             }
-            
-            // In the case where the parameter for the method
-            // is taken from an attribute, and that attribute
-            // isn't actually defined in the source XML file,
-            // skip the method call
-            if (paramCount == 1 && parameters[0] == null) {
-                return;
-            }
-
-        } else if (paramTypes != null && paramTypes.length != 0) {
-
-            // In the case where the parameter for the method
-            // is taken from the body text, but there is no
-            // body text included in the source XML file,
-            // skip the method call
-            if (bodyText == null) {
-                return;
-            }
-
-            parameters = new Object[1];
-            parameters[0] = bodyText;
-            if (paramTypes.length == 0) {
-                paramTypes = new Class[1];
-                paramTypes[0] = "abc".getClass();
-            }
-
         }
 
-        // Construct the parameter values array we will need
-        // We only do the conversion if the param value is a String and
-        // the specified paramType is not String. 
-        Object paramValues[] = new Object[paramTypes.length];
-        for (int i = 0; i < paramTypes.length; i++) {
-            // convert nulls and convert stringy parameters 
-            // for non-stringy param types
-            if(
-                parameters[i] == null ||
-                 (parameters[i] instanceof String && 
-                   !String.class.isAssignableFrom(paramTypes[i]))) {
-                
-                paramValues[i] =
-                        ConvertUtils.convert((String) parameters[i], paramTypes[i]);
-            } else {
-                paramValues[i] = parameters[i];
+        Class[] types = paramTypes;
+        if ((types == null) && (paramClassNames != null)) {
+            types = (Class[]) context.getItem(PARAM_TYPES);
+        }
+
+        if (types != null) {        
+            // Convert the datatypes in the paramValues array to the types
+            // specified in the constructor (if any).
+            //
+            // We do the conversion if the param value is a String and
+            // the specified paramType is not String. We also do the
+            // conversion if the param value is null, as the result of
+            // converting a null may be a non-null value. In all other
+            // cases, the original value is left alone.
+            //
+            // TODO: think about whether we should call toString on
+            // objects where the source is not a String but the target is.
+            // It is probably a fairly rare case..
+            
+            for (int i = 0; i < paramValues.length; ++i) {
+                Object value = paramValues[i];
+                if((value==null) ||
+                     ((value instanceof String) &&
+                       !String.class.isAssignableFrom(types[i]))) {
+    
+                    paramValues[i] =
+                            ConvertUtils.convert((String) value, types[i]);
+                }
             }
         }
 
@@ -430,7 +347,7 @@ public class CallMethodAction extends AbstractAction {
         } else {
             target = context.peek(context.getStackSize() + targetOffset );
         }
-        
+
         if (target == null) {
             StringBuffer sb = new StringBuffer();
             sb.append("[ActionCallMethod]{");
@@ -443,7 +360,7 @@ public class CallMethodAction extends AbstractAction {
             sb.append(")");
             throw new ParseException(sb.toString());
         }
-        
+
         // Invoke the required method on the top object
         if (log.isDebugEnabled()) {
             StringBuffer sb = new StringBuffer("[ActionCallMethod]{");
@@ -463,54 +380,46 @@ public class CallMethodAction extends AbstractAction {
                     sb.append(paramValues[i].toString());
                 }
                 sb.append("/");
-                if (paramTypes[i] == null) {
+                if (types == null) {
                     sb.append("null");
                 } else {
-                    sb.append(paramTypes[i].getName());
+                    sb.append(types[i].getName());
                 }
             }
             sb.append(")");
             log.debug(sb.toString());
         }
 
-        try {        
+        try {
             Object result = MethodUtils.invokeMethod(
                     target, methodName,
-                    paramValues, paramTypes);            
-            
+                    paramValues, types);
+
             processMethodCallResult(result);
         }
         catch(NoSuchMethodException ex) {
             throw new ParseException(
-                "No such method: " + methodName 
+                "No such method: " + methodName
                 + " on object type:" + target.getClass().getName(),
                 ex);
         }
         catch(IllegalAccessException ex) {
             throw new ParseException(
-                "Unable to access method: " + methodName 
+                "Unable to access method: " + methodName
                 + " on object type:" + target.getClass().getName(),
                 ex);
         }
         catch(InvocationTargetException ex) {
             throw new ParseException(
-                "Method: " + methodName 
+                "Method: " + methodName
                 + " on object type:" + target.getClass().getName()
                 + " threw an exception when it was invoked.",
                 ex);
         }
     }
 
-
     /**
-     * Clean up after parsing is complete.
-     */
-    public void finishParse(Context context) throws ParseException {
-        bodyText = null;
-    }
-
-    /**
-     * Subclasses may override this method to perform additional processing of the 
+     * Subclasses may override this method to perform additional processing of the
      * invoked method's result.
      *
      * @param result the Object returned by the method invoked, possibly null
