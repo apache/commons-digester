@@ -23,6 +23,12 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.EmptyStackException;
+import java.lang.reflect.InvocationTargetException;
+
+import org.xml.sax.Locator;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import org.apache.commons.logging.Log;
 
@@ -74,6 +80,53 @@ public class Context {
      * kept here only for performance.
      */
     private Log log;
+
+    /**
+     * The Locator associated with our parser object. This object can be
+     * consulted to find out which line of the input xml document we are
+     * currently on - very useful when generating error messages.
+     */
+    private Locator documentLocator = null;
+
+    /**
+     * Registered namespaces we are currently processing.  The key is the
+     * namespace prefix that was declared in the document.  The value is an
+     * ArrayStack of the namespace URIs this prefix has been mapped to --
+     * the top Stack element is the most current one.  (This architecture
+     * is required because documents can declare nested uses of the same
+     * prefix for different Namespace URIs).
+     * <p>
+     * TODO: move this data to the Context.
+     */
+    private HashMap namespaces = new HashMap();
+
+    /**
+     * If not null, then calls to the saxHandler's characters, startElement, 
+     * endElement and processingInstruction methods are forwarded to the 
+     * specified object. This is intended to allow rules to temporarily 
+     * "take control" of the sax events. In particular, this is used by 
+     * NodeCreateAction.
+     */
+    private ContentHandler contentHandler = null;
+
+    /**
+     * The body text of the current element. As the parser reports chunks
+     * of text associated with the current element, they are appended here.
+     * When the end of the element is reported, the full text content of the
+     * current element should be here. Note that if the element has mixed
+     * content, ie text intermingled with child elements, then this buffer
+     * ends up with all the different text pieces appended to form one string.
+     */
+    private StringBuffer bodyText = new StringBuffer();
+
+    /**
+     * When processing an element with mixed content (ie text and child
+     * elements), then when we start a child element we need to store the
+     * current text seen so far, and restore it after we have finished
+     * with the child element. This stack therefore contains StringBuffer
+     * items containing the body text of "interrupted" xml elements.
+     */
+    private ArrayStack bodyTexts = new ArrayStack();
 
     /**
      * Stack whose elements are List objects, each containing a list of
@@ -133,9 +186,10 @@ public class Context {
     /**
      * Construct a new Context.
      */
-    public Context(SAXHandler saxHandler, Log log) {
+    public Context(SAXHandler saxHandler, Log log, Locator locator) {
         this.saxHandler = saxHandler;
         this.log = log;
+        this.documentLocator = locator;
     }
 
     // ---------------------------------------------------
@@ -149,6 +203,111 @@ public class Context {
         return log;
     }
 
+    /**
+     * Gets the document locator associated with our parser. This object 
+     * can be consulted to find out which line of the input xml document 
+     * we are currently on - very useful when generating error messages.
+     *
+     * @return the Locator supplied by the document parser
+     */
+    public Locator getDocumentLocator() {
+        return documentLocator;
+    }
+
+    /**
+     * Return the currently mapped namespace URI for the specified prefix,
+     * if any; otherwise return <code>null</code>.  These mappings come and
+     * go dynamically as the document is parsed.
+     *
+     * @param prefix Prefix to look up
+     */
+    public String findNamespaceURI(String prefix) {
+        ArrayStack stack = (ArrayStack) namespaces.get(prefix);
+        if (stack == null) {
+            return null;
+        }
+        try {
+            return (String) stack.peek();
+        } catch (EmptyStackException e) {
+            // This should never happen, as endPrefixMapping removes
+            // the prefix from the namespaces map when the stack becomes
+            // empty. Still, better safe than sorry..
+            return null;
+        }
+    }
+
+    /**
+     * Register the specified prefix string as being an alias for the
+     * specified namespace uri.
+     */
+    public void pushNamespace(String prefix, String namespaceURI) {
+        ArrayStack stack = (ArrayStack) namespaces.get(prefix);
+        if (stack == null) {
+            stack = new ArrayStack();
+            namespaces.put(prefix, stack);
+        }
+        stack.push(namespaceURI);
+    }
+     
+    /**
+     * Unregister the specified prefix string as being an alias for the
+     * specified namespace uri.
+     */
+    public void popNamespace(String prefix) throws SAXException {
+        ArrayStack stack = (ArrayStack) namespaces.get(prefix);
+        if (stack == null) {
+            throw createSAXException(
+                "popNamespace called for unknown" +
+                "namespace prefix '" + prefix + "'");
+        }
+
+        try {
+            stack.pop();
+            if (stack.empty())
+                namespaces.remove(prefix);
+        } catch (EmptyStackException e) {
+            // This should never happen; it would indicate a serious
+            // internal software flaw. If a prefix has no mapping, then
+            // stack should have been null, not empty.
+            throw createSAXException(
+                "popNamespace called on prefix with empty stack.");
+        }
+    }
+
+    /**
+     * Save the buffer which is currently being used to accumulate text
+     * content of the current xml element. This is expected to be called
+     * just before starting processing of a child xml element.
+     */
+    public void pushBodyText() {
+        bodyTexts.push(bodyText);
+        bodyText = new StringBuffer();
+    }
+    
+    /**
+     * Restore a saved buffer. This is expected to be called just after
+     * completing processing of a child xml element, to continue accumulating
+     * text content for its parent.
+     */
+    public StringBuffer popBodyText() {
+        StringBuffer tmp = bodyText;
+        bodyText = (StringBuffer) bodyTexts.pop();
+        return tmp;
+    }
+    
+    /**
+     * Append more text to the buffer representing the text content of the
+     * current xml element. This is called in multiple stages because:
+     * <ul>
+     * <li>A sax parser is permitted to deliver a block of contiguous text
+     *   in multiple callbacks if it wishes, and
+     * <li>The text might be intermingled with child elements.
+     * </ul>
+     */
+    public void appendToBodyText(char[] buffer, int start, int length) {
+        bodyText.append(buffer, start, length);
+    }
+    
     /**
      * Return the path to the xml element currently being processed.
      */
@@ -220,6 +379,30 @@ public class Context {
      */
     public SAXHandler getSAXHandler() {
         return saxHandler;
+    }
+
+    /**
+     * Specify a contentHandler to forward calls to. If non-null, then
+     * whenever this object receives calls from the XMLReader to any of
+     * the following methods, the call will be forwarded on to the specified
+     * objects instead of being processed in the normal manner.
+     * <p>
+     * This allows an Action to assume complete control of input handling
+     * for a period of time. For example, this allows the NodeCreateAction
+     * to build a DOM tree representing a portion of input.
+     * <p>
+     * Passing null restores normal operation, ie this object then resumes
+     * processing of the callbacks itself.
+     */
+    public void setContentHandler(ContentHandler contentHandler) {
+        this.contentHandler = contentHandler;
+    }
+
+    /**
+     * See {@link #setContentHandler}.
+     */
+    public ContentHandler getContentHandler() {
+        return contentHandler;
     }
 
     // --------------------------------------------------- 
@@ -582,5 +765,72 @@ public class Context {
         }
         
         return null;
+    }
+
+    /**
+     * Create a SAX exception which also understands about the location in
+     * the digester file where the exception occurs. This method is expected
+     * to be called by Action classes when they detect a problem.
+     *
+     * @return the new exception
+     */
+    public SAXException createSAXException(String message, Exception e) {
+        if ((e != null) &&
+            (e instanceof InvocationTargetException)) {
+            Throwable t = ((InvocationTargetException) e).getTargetException();
+            if ((t != null) && (t instanceof Exception)) {
+                e = (Exception) t;
+            }
+        }
+
+        if (documentLocator != null) {
+            String error = 
+                "Error at line " + documentLocator.getLineNumber() 
+                + ", column " + documentLocator.getColumnNumber()
+                + ": " + message;
+
+            if (e != null) {
+                return new SAXParseException(error, documentLocator, e);
+            } else {
+                return new SAXParseException(error, documentLocator);
+            }
+        }
+
+        // The SAX parser doesn't have location info enabled, so we'll just
+        // generate the best error message we can without it.
+        log.error("No Locator!");
+        if (e != null) {
+            return new SAXException(message, e);
+        } else {
+            return new SAXException(message);
+        }
+    }
+
+    /**
+     * Create a SAX exception which also understands about the location in
+     * the digester file where the exception occurs. This method is expected
+     * to be called by Action classes when they detect a problem.
+     *
+     * @return the new exception
+     */
+    public SAXException createSAXException(Exception e) {
+        if (e instanceof InvocationTargetException) {
+            Throwable t = ((InvocationTargetException) e).getTargetException();
+            if ((t != null) && (t instanceof Exception)) {
+                e = (Exception) t;
+            }
+        }
+        return createSAXException(e.getMessage(), e);
+    }
+
+    /**
+     * Create a SAX exception which also understands about the location in
+     * the digester file where the exception occurs. This method is expected
+     * to be called by Action classes when they detect a problem.
+     *
+     * @return the new exception
+     */
+    public SAXException createSAXException(String message) {
+        return createSAXException(message, null);
     }
 }

@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -92,16 +91,9 @@ import org.xml.sax.ext.LexicalHandler;
 
 public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
-    // --------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new SAXHandler.
-     */
-    public SAXHandler() {
-        super();
-    }
-
-    // --------------------------------------------------- Instance Variables
+    // --------------------------------------------------- 
+    // Instance Variables
+    // --------------------------------------------------- 
 
     /**
      * The EntityResolver used to look up any external entities referenced
@@ -120,11 +112,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * to the provided object.
      */
     private ErrorHandler errorHandler = null;
-
-    /**
-     * The Locator associated with our parser.
-     */
-    private Locator locator = null;
 
     /**
      * A count of the number of entities resolved. Currently, we only
@@ -216,57 +203,40 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     // -------------------------------------------------------------------
 
     /**
-     * If null, then calls to this objects' characters, startElement, endElement
-     * and processingInstruction methods are forwarded to the specified object.
-     * This is intended to allow rules to temporarily "take control" of the
-     * sax events. In particular, this is used by NodeCreateAction.
+     * The Locator associated with our parser object. This object can be
+     * consulted to find out which line of the input xml document we are
+     * currently on - very useful when generating error messages.
      */
-    private ContentHandler contentHandler = null;
+    private Locator documentLocator = null;
 
     /**
      * The public identifier of the DTD we are currently parsing under
      * (if any). See method {@link #startDTD}.
-     *
-     * TODO: Consider if this should be moved to Context.
+     * <p>
+     * Note that this info is not on the Context because the user may
+     * access this data after the parse has completed.
      */
     private String dtdPublicId = null;
 
     /**
      * The system identifier of the DTD we are currently parsing under
      * (if any). See method {@link #startDTD}.
-     *
-     * TODO: Consider if this should be moved to Context.
+     * <p>
+     * Note that this info is not on the Context because the user may
+     * access this data after the parse has completed.
      */
     private String dtdSystemId = null;
 
-    /**
-     * The body text of the current element. As the parser reports chunks
-     * of text associated with the current element, they are appended here.
-     * When the end of the element is reported, the full text content of the
-     * current element should be here. Note that if the element has mixed
-     * content, ie text intermingled with child elements, then this buffer
-     * ends up with all the different text pieces mixed together.
-     */
-    private StringBuffer bodyText = new StringBuffer();
+    // --------------------------------------------------------- 
+    // Constructors
+    // --------------------------------------------------------- 
 
     /**
-     * When processing an element with mixed content (ie text and child
-     * elements), then when we start a child element we need to store the
-     * current text seen so far, and restore it after we have finished
-     * with the child element. This stack therefore contains StringBuffer
-     * items containing the body text of "interrupted" xml elements.
+     * Construct a new SAXHandler.
      */
-    private ArrayStack bodyTexts = new ArrayStack();
-
-    /**
-     * Registered namespaces we are currently processing.  The key is the
-     * namespace prefix that was declared in the document.  The value is an
-     * ArrayStack of the namespace URIs this prefix has been mapped to --
-     * the top Stack element is the most current one.  (This architecture
-     * is required because documents can declare nested uses of the same
-     * prefix for different Namespace URIs).
-     */
-    private HashMap namespaces = new HashMap();
+    public SAXHandler() {
+        super();
+    }
 
     // ---------------------------------------------------------------------
     // General object configuration methods
@@ -316,30 +286,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                 + " interface. Information on dtd public and system ids"
                 + " will not be available.");
         }
-    }
-
-    /**
-     * Specify a contentHandler to forward calls to. If non-null, then
-     * whenever this object receives calls from the XMLReader to any of
-     * the following methods, the call will be forwarded on to the specified
-     * objects instead of being processed in the normal manner.
-     * <p>
-     * This allows an Action to assume complete control of input handling
-     * for a period of time. For example, this allows the NodeCreateAction
-     * to build a DOM tree representing a portion of input.
-     * <p>
-     * Passing null restores normal operation, ie this object then resumes
-     * processing of the callbacks itself.
-     */
-    public void setContentHandler(ContentHandler contentHandler) {
-        this.contentHandler = contentHandler;
-    }
-
-    /**
-     * See {@link #setContentHandler}.
-     */
-    public ContentHandler getContentHandler() {
-        return contentHandler;
     }
 
     /**
@@ -558,7 +504,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * @param entityResolver a class that implement the
      * <code>EntityResolver</code> interface.
      */
-    public void setEntityResolver(EntityResolver entityResolver){
+    public void setEntityResolver(EntityResolver entityResolver) {
         this.entityResolver = entityResolver;
     }
 
@@ -566,7 +512,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * Return the Entity Resolver used by the SAX parser.
      * @return Return the Entity Resolver used by the SAX parser.
      */
-    public EntityResolver getEntityResolver(){
+    public EntityResolver getEntityResolver() {
         return entityResolver;
     }
 
@@ -712,114 +658,9 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * should be called to release this member.
      */
     public void clear() {
-        namespaces.clear();
-
         // It would be nice to set
         //   context = null;
         // but currently that would stuff up the getRoot() method.
-    }
-
-    /**
-     * Return the currently mapped namespace URI for the specified prefix,
-     * if any; otherwise return <code>null</code>.  These mappings come and
-     * go dynamically as the document is parsed.
-     *
-     * @param prefix Prefix to look up
-     */
-    public String findNamespaceURI(String prefix) {
-        ArrayStack stack = (ArrayStack) namespaces.get(prefix);
-        if (stack == null) {
-            return null;
-        }
-        try {
-            return (String) stack.peek();
-        } catch (EmptyStackException e) {
-            // This should never happen, as endPrefixMapping removes
-            // the prefix from the namespaces map when the stack becomes
-            // empty. Still, better safe than sorry..
-            return null;
-        }
-    }
-
-    /**
-     * Gets the document locator associated with our parser.
-     * See {@link #setDocumentLocator}.
-     *
-     * @return the Locator supplied by the document parser
-     */
-    public Locator getDocumentLocator() {
-        return locator;
-    }
-
-    // -------------------------------------------------------
-    // Package Methods
-    //
-    // These methods are intended mainly for the use of Action
-    // classes and other similar "implementation" classes.
-    // -------------------------------------------------------
-
-    /**
-     * Create a SAX exception which also understands about the location in
-     * the digester file where the exception occurs. This method is expected
-     * to be called by Action classes when they detect a problem.
-     *
-     * @return the new exception
-     */
-    public SAXException createSAXException(String message, Exception e) {
-        if ((e != null) &&
-            (e instanceof InvocationTargetException)) {
-            Throwable t = ((InvocationTargetException) e).getTargetException();
-            if ((t != null) && (t instanceof Exception)) {
-                e = (Exception) t;
-            }
-        }
-
-        if (locator != null) {
-            String error = "Error at (" + locator.getLineNumber() + ", " +
-                    locator.getColumnNumber() + ": " + message;
-            if (e != null) {
-                return new SAXParseException(error, locator, e);
-            } else {
-                return new SAXParseException(error, locator);
-            }
-        }
-
-        // The SAX parser doesn't have location info enabled, so we'll just
-        // generate the best error message we can without it.
-        log.error("No Locator!");
-        if (e != null) {
-            return new SAXException(message, e);
-        } else {
-            return new SAXException(message);
-        }
-    }
-
-    /**
-     * Create a SAX exception which also understands about the location in
-     * the digester file where the exception occurs. This method is expected
-     * to be called by Action classes when they detect a problem.
-     *
-     * @return the new exception
-     */
-    public SAXException createSAXException(Exception e) {
-        if (e instanceof InvocationTargetException) {
-            Throwable t = ((InvocationTargetException) e).getTargetException();
-            if ((t != null) && (t instanceof Exception)) {
-                e = (Exception) t;
-            }
-        }
-        return createSAXException(e.getMessage(), e);
-    }
-
-    /**
-     * Create a SAX exception which also understands about the location in
-     * the digester file where the exception occurs. This method is expected
-     * to be called by Action classes when they detect a problem.
-     *
-     * @return the new exception
-     */
-    public SAXException createSAXException(String message) {
-        return createSAXException(message, null);
     }
 
     // -------------------------------------------------------
@@ -881,18 +722,13 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * updated before each SAX event is dispatched to this class.
      *
      * @param locator The new locator
-     *
-     * TODO: Consider whether this object (and the associated createSAXException
-     * method) should be on the Context rather than this object, to make it
-     * easier for Action instances to access.
-     *
      */
     public void setDocumentLocator(Locator locator) {
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("setDocumentLocator(" + locator + ")");
         }
 
-        this.locator = locator;
+        documentLocator = locator;
     }
 
     /**
@@ -913,16 +749,9 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         dtdPublicId = null;
         dtdSystemId = null;
 
-        // This shouldn't be necesary if a parse has completed cleanly, as
-        // endPrefixMapping should have been called for each namespace. But
-        // on error, problems can occur.
-        namespaces.clear();
-        bodyText.setLength(0);
-        bodyTexts.clear();
-
         // Create a new parsing context. This guarantees that Actions have
         // a clean slate for handling this new input document.
-        context = new Context(this, log);
+        context = new Context(this, log, documentLocator);
 
         if (initialObject != null) {
             context.setRoot(initialObject);
@@ -991,13 +820,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                 "startPrefixMapping(" + prefix + "," + namespaceURI + ")");
         }
 
-        // Register this prefix mapping
-        ArrayStack stack = (ArrayStack) namespaces.get(prefix);
-        if (stack == null) {
-            stack = new ArrayStack();
-            namespaces.put(prefix, stack);
-        }
-        stack.push(namespaceURI);
+        context.pushNamespace(prefix, namespaceURI);
     }
 
     /**
@@ -1011,21 +834,8 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("endPrefixMapping(" + prefix + ")");
         }
-
-        // Deregister this prefix mapping
-        ArrayStack stack = (ArrayStack) namespaces.get(prefix);
-        if (stack == null) {
-            return;
-        }
-        try {
-            stack.pop();
-            if (stack.empty())
-                namespaces.remove(prefix);
-        } catch (EmptyStackException e) {
-            // This should never happen; it would indicate a serious
-            // internal software flaw.
-            throw createSAXException("endPrefixMapping popped too many times");
-        }
+        
+        context.popNamespace(prefix);
     }
 
     /**
@@ -1041,6 +851,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      */
     public void characters(char buffer[], int start, int length)
     throws SAXException {
+        ContentHandler contentHandler = context.getContentHandler();
         if (contentHandler != null) {
             // forward calls instead of handling them here
             contentHandler.characters(buffer, start, length);
@@ -1051,7 +862,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             saxLog.debug("characters(" + new String(buffer, start, length) + ")");
         }
 
-        bodyText.append(buffer, start, length);
+        context.appendToBodyText(buffer, start, length);
     }
 
     /**
@@ -1093,6 +904,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      */
     public void processingInstruction(String target, String data)
     throws SAXException {
+        ContentHandler contentHandler = context.getContentHandler();
         if (contentHandler != null) {
             // forward calls instead of handling them here
             contentHandler.processingInstruction(target, data);
@@ -1146,6 +958,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     String qName,
     Attributes attrs)
     throws SAXException {
+        ContentHandler contentHandler = context.getContentHandler();
         if (contentHandler != null) {
             // forward calls instead of handling them here
             contentHandler.startElement(namespaceURI, localName, qName, attrs);
@@ -1161,11 +974,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         }
 
         // Save the body text accumulated for our surrounding element
-        bodyTexts.push(bodyText);
-        if (debug) {
-            log.debug("  Pushing body text '" + bodyText.toString() + "'");
-        }
-        bodyText = new StringBuffer();
+        context.pushBodyText();
 
         // the actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
@@ -1205,7 +1014,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                     action.begin(context, namespaceURI, name, attrs);
                 } catch (Exception e) {
                     log.error("Begin event threw exception", e);
-                    throw createSAXException(e);
+                    throw context.createSAXException(e);
                 } catch (Error e) {
                     log.error("Begin event threw error", e);
                     throw e;
@@ -1235,6 +1044,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     String localName,
     String qName)
     throws SAXException {
+        ContentHandler contentHandler = context.getContentHandler();
         if (contentHandler != null) {
             // forward calls instead of handling them here
             contentHandler.endElement(namespaceURI, localName, qName);
@@ -1243,6 +1053,11 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
         boolean debug = log.isDebugEnabled();
         String matchPath = context.getMatchPath();
+
+        // Retrieve the current bodytext. Also set the current bodytext to
+        // be the text associated with the parent object, so future calls to
+        // characters(...) updates the text associated with the parent.
+        String bodyText = context.popBodyText().toString();
 
         if (debug) {
             if (saxLog.isDebugEnabled()) {
@@ -1265,7 +1080,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         // Fire "body" events for all relevant rules
         List actions = (List) context.peekMatchingActions();
         if ((actions != null) && (actions.size() > 0)) {
-            String bodyText = this.bodyText.toString();
             Substitutor substitutor = getSubstitutor();
             if (substitutor!= null) {
                 bodyText = substitutor.substitute(bodyText);
@@ -1279,7 +1093,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                     action.body(context, namespaceURI, name, bodyText);
                 } catch (Exception e) {
                     log.error("Body event threw exception", e);
-                    throw createSAXException(e);
+                    throw context.createSAXException(e);
                 } catch (Error e) {
                     log.error("Body event threw error", e);
                     throw e;
@@ -1289,13 +1103,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             if (debug) {
                 log.debug("  No rules found matching '" + matchPath + "'.");
             }
-        }
-
-        // Restore the body text for the parent element (now that we have
-        // finished with the body text for this current element).
-        bodyText = (StringBuffer) bodyTexts.pop();
-        if (debug) {
-            log.debug("  Popping body text '" + bodyText.toString() + "'");
         }
 
         // Fire "end" events for all relevant rules in reverse order
@@ -1311,7 +1118,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                     action.end(context, namespaceURI, name);
                 } catch (Exception e) {
                     log.error("End event threw exception", e);
-                    throw createSAXException(e);
+                    throw context.createSAXException(e);
                 } catch (Error e) {
                     log.error("End event threw error", e);
                     throw e;
@@ -1448,7 +1255,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                 sys = "'" + systemId + "'";
             }
             
-            throw createSAXException(
+            throw context.createSAXException(
                 "The external entity with publicId = " + pub
                 + " and systemId = " + sys
                 + " has not been registered as a known entity.");
@@ -1466,7 +1273,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                 log.debug(" Cannot resolve entity: '" + entityURL + "'");
             }
             
-            throw createSAXException(
+            throw context.createSAXException(
                 "Cannot resolve entity. PublicId is null or has not been"
                 + " registered as a known entity, and systemId is null.");
         }
