@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,7 @@
 
 package org.apache.commons.digester2;
 
-import java.math.BigDecimal;
-import java.net.URL;
 import java.io.StringReader;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -31,9 +28,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.Attributes;
-import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.InputSource;
 
 import org.apache.commons.logging.Log;
@@ -79,7 +73,9 @@ public class ContextTestCase extends TestCase {
     public void tearDown() {
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    // ------------------------------------------------ 
+    // Individual Test Methods
+    // ------------------------------------------------ 
 
     /**
      * Test the Constructor, plus the getters that access constructor params.
@@ -90,8 +86,8 @@ public class ContextTestCase extends TestCase {
         Context context = new Context(saxHandler, log);
         
         assertNotNull("saxHandler log is not null", log);
-        assertEquals("getSAXHandler", context.getSAXHandler(), saxHandler);
-        assertEquals("getLogger", context.getLogger(), saxHandler.getLogger());
+        assertSame("getSAXHandler", context.getSAXHandler(), saxHandler);
+        assertSame("getLogger", context.getLogger(), saxHandler.getLogger());
     }
 
     /**
@@ -152,7 +148,8 @@ public class ContextTestCase extends TestCase {
         context.setRoot("root4");
         root = context.getRoot();
         assertEquals("setRoot multiple times", "root4", root);
-        assertEquals(context.getStackSize(), 1);
+        assertEquals("SetRoot multiple times does not increase stack depth",
+            context.getStackSize(), 1);
     }
     
     /**
@@ -201,7 +198,7 @@ public class ContextTestCase extends TestCase {
         Context context = new Context(saxHandler, log);
 
         ClassLoader cl = context.getClassLoader();
-        assertEquals("get classloader", cl, saxHandler.getClassLoader());
+        assertSame("get classloader", cl, saxHandler.getClassLoader());
     }
     
     /**
@@ -223,23 +220,23 @@ public class ContextTestCase extends TestCase {
         
         context.pushMatchingActions(list0);
         List list = context.peekMatchingActions();
-        assertEquals("Push/peek matching actions", list, list0);
+        assertSame("Push/peek matching actions", list, list0);
         assertEquals("Push/peek matching actions", 2, list.size());
-        assertEquals("Push/peek matching actions", action0, list.get(0));
-        assertEquals("Push/peek matching actions", action1, list.get(1));
+        assertSame("Push/peek matching actions", action0, list.get(0));
+        assertSame("Push/peek matching actions", action1, list.get(1));
         
         ArrayList list1 = new ArrayList();
         list1.add(action2);
         context.pushMatchingActions(list1);
         list = context.peekMatchingActions();
-        assertEquals("Push/peek matching actions 2", list, list1);
+        assertSame("Push/peek matching actions 2", list, list1);
         assertEquals("Push/peek matching actions 2", 1, list.size());
-        assertEquals("Push/peek matching actions 2", action2, list.get(0));
+        assertSame("Push/peek matching actions 2", action2, list.get(0));
         
         list = context.popMatchingActions();
-        assertEquals("Push/peek matching actions", list, list1);
+        assertSame("Push/peek matching actions", list, list1);
         list = context.popMatchingActions();
-        assertEquals("Push/peek matching actions", list, list0);
+        assertSame("Push/peek matching actions", list, list0);
         
         try {
             list = context.popMatchingActions();
@@ -405,12 +402,14 @@ public class ContextTestCase extends TestCase {
         Log log = saxHandler.getLogger();
         Context context = new Context(saxHandler, log);
         
-        BigDecimal archimedesAveragePi = new BigDecimal("3.1418");
+        Object o1 = new Object();
+
         String testStackName = "org.apache.commons.digester.tests.testNamedStackPushPeekPop";
         assertTrue("Stack starts empty:", context.isEmpty(testStackName));
-        context.push(testStackName, archimedesAveragePi);
-        assertEquals("Peeked value:", archimedesAveragePi, context.peek(testStackName));
-        assertEquals("Popped value:", archimedesAveragePi, context.pop(testStackName));
+        context.push(testStackName, o1);
+        
+        assertSame("Peeked value:", o1, context.peek(testStackName));
+        assertSame("Popped value:", o1, context.pop(testStackName));
         assertTrue("Stack ends empty:", context.isEmpty(testStackName));
     }
     
