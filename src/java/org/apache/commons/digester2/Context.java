@@ -588,23 +588,25 @@ public class Context {
     }
 
     /**
-     * Return the n'th object down the stack, where 0 is the top element
-     * and [getStackSize()-1] is the bottom element.
+     * Return the specified object on the stack. Positive offsets are distances
+     * from the top object of the stack down towards the root (0 indicates the
+     * top object). Negative offsets are distances from the root object of the
+     * stack up towards the top (-1 indicates the root object).
      *
-     * @param n Index of the desired element, where 0 is the top of the stack,
-     *  1 is the next element down, and so on.
+     * @param n Index of the desired element.
      *
      * @throws EmptyStackException (a RuntimeException subclass) if the index
-     * is out-of-range. Note that all the Digester.parse methods will turn this
-     * into a (checked) DigestionException.
+     * is a positive number greater than the depth of the stack.
      *
      * @throws ArrayOutOfBoundsException (a RuntimeException subclass) if
-     * index < 0. Note that all the Digester.parse methods will turn this
-     * into a (checked) DigestionException.
+     * index is a negative number and stack.size() + offset is less than zero.
      */
-    public Object peek(int n)
+    public Object peek(int offset)
     throws EmptyStackException, IndexOutOfBoundsException {
-            return stack.peek(n);
+        if (offset < 0) {
+            offset = stack.size() + offset;
+        }
+        return stack.peek(offset);
     }
 
     /**
@@ -666,11 +668,11 @@ public class Context {
     }
 
     /**
-     * <p>Gets the top object from the stack with the given id.
-     * This method does not remove the object from the stack.</p>
+     * Gets the top object from the stack with the given id.
+     * This method does not remove the object from the stack.
      *
-     * <p><strong>Note:</strong> a stack is considered empty
-     * if no objects have been pushed onto it yet.</p>
+     * <strong>Note:</strong> a stack is considered empty
+     * if no objects have been pushed onto it yet.
      *
      * @param stackId identifies the stack to be peeked
      * @return the top <code>Object</code> on the stack.
@@ -683,23 +685,23 @@ public class Context {
                 log.debug("Stack '" + stackId + "' is empty");
             }
             throw new EmptyStackException();
-        } else {
-            return stack.peek();
         }
+
+        return stack.peek();
     }
 
     /**
-     * Returns an element from the stack with the given name. The element
-     * returned is the n'th object down the stack, where 0 is the top element
-     * and [getStackSize()-1] is the bottom element.
-     *
-     * <p><strong>Note:</strong> a stack is considered empty
-     * if no objects have been pushed onto it yet.</p>
+     * Returns an element from the specified stack. Positive offsets are distances
+     * from the top object of the stack down towards the root (0 indicates the
+     * top object). Negative offsets are distances from the root object of the
+     * stack up towards the top (-1 indicates the root object).
+     * <p>
+     * <strong>Note:</strong> a stack is considered empty
+     * if no objects have been pushed onto it yet.
      *
      * @param stackId identifies the stack to be peeked
      *
-     * @param n Index of the desired element, where 0 is the top of the stack,
-     *  1 is the next element down, and so on.
+     * @param offset Index of the desired element
      *
      * @throws EmptyStackException (a RuntimeException subclass) if the index
      * is out-of-range. Note that all the Digester.parse methods will turn this
@@ -709,7 +711,7 @@ public class Context {
      * index < 0. Note that all the Digester.parse methods will turn this
      * into a (checked) DigestionException.
      */
-    public Object peek(StackId stackId, int n)
+    public Object peek(StackId stackId, int offset)
     throws EmptyStackException, IndexOutOfBoundsException {
         ArrayStack stack = (ArrayStack) scratchStacks.get(stackId);
         if (stack == null ) {
@@ -717,14 +719,17 @@ public class Context {
                 log.debug("Stack '" + stackId + "' is empty");
             }
             throw new EmptyStackException();
-        } else {
-            return stack.peek(n);
         }
+
+        if (offset < 0) {
+            offset = stack.size() + offset;
+        }
+        return stack.peek(offset);
     }
 
     /**
-     * <p>Pops (gets and removes) the top object from the stack with the
-     * given name.</p>
+     * Pops (gets and removes) the top object from the stack with the
+     * given name.
      *
      * @param stackId identifies the stack from which the top value is to
      * be popped
@@ -741,13 +746,13 @@ public class Context {
                 log.debug("Stack '" + stackId + "' is empty");
             }
             throw new EmptyStackException();
-        } else {
-            Object result = stack.pop();
-            if (stack.isEmpty()) {
-                scratchStacks.remove(stackId);
-            }
-            return result;
         }
+
+        Object result = stack.pop();
+        if (stack.isEmpty()) {
+            scratchStacks.remove(stackId);
+        }
+        return result;
     }
 
     /**
@@ -859,12 +864,12 @@ public class Context {
     public SAXException createSAXException(String message) {
         return createSAXException(message, null);
     }
- 
+
     /**
-     * Verify that no Actions have misbehaved, leaving the stacks in a bad 
-     * state or anything. This should only be called at the end of a 
+     * Verify that no Actions have misbehaved, leaving the stacks in a bad
+     * state or anything. This should only be called at the end of a
      * successful parse. It's really a debug method intended particularly for
-     * use with unit tests but as it is pretty quick to check things we leave 
+     * use with unit tests but as it is pretty quick to check things we leave
      * it in at runtime, to ensure that any bad custom actions also get
      * reported.
      */
@@ -881,7 +886,7 @@ public class Context {
             }
             // remove last unused comma
             stacklist.setLength(stacklist.length()-1);
-            
+
             throw new ParseException(
                 "An action has not executed correctly; an item has been"
                 + " left on stack(s) " + stacklist);
