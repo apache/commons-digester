@@ -79,6 +79,10 @@ public class AbstractRuleManagerTestCase extends TestCase {
             operations.add("getMatchingActions");
             return java.util.Collections.EMPTY_LIST;
         }
+        
+        public List getActions() {
+            return java.util.Collections.EMPTY_LIST;
+        }
     }
     
     // -----------------------------------------------------------
