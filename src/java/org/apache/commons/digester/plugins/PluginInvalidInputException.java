@@ -19,7 +19,7 @@ package org.apache.commons.digester.plugins;
 /**
  * Thrown when an error occurs due to bad data in the file being parsed.
  */
-public class PluginInvalidInputException extends Exception {
+public class PluginInvalidInputException extends PluginException {
 
     private Throwable cause = null;
 
