@@ -331,7 +331,7 @@ public class SetPropertiesAction extends AbstractAction {
      * Render a printable version of this Rule.
      */
     public String toString() {
-        StringBuffer sb = new StringBuffer("SetPropertiesRule[");
+        StringBuffer sb = new StringBuffer("SetPropertiesAction[");
         sb.append("]");
         return (sb.toString());
     }
