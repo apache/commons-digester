@@ -1922,6 +1922,103 @@ public class Digester extends DefaultHandler {
     }
     
     /**
+     * Add an "invoke method" rule for a method.
+     *
+     * @param pattern Element matching pattern
+     * @param methodName Method name to be called
+     * @param paramCount Number of expected parameters (or -1 for a single
+     *  parameter from the element body).
+     * @see InvokeMethodRule
+     */
+    public void addInvokeMethod(String pattern, String methodName, 
+                    int paramCount) {
+
+        addRule(
+                pattern,
+                new InvokeMethodRule(methodName, paramCount));
+    }
+
+    /**
+     * Add an "invoke method" rule for a method.
+     *
+     * @param pattern Element matching pattern
+     * @param methodName Method name to be called
+     * @param paramCount Number of expected parameters (or -1 for a single
+     *  parameter from the element body).
+     * @see InvokeMethodRule
+     */
+    public void addInvokeMethod(String pattern, String methodName, 
+                            int paramCount, String[] types) {
+
+        addRule(
+                pattern,
+                new InvokeMethodRule(methodName, paramCount, types));
+    }
+
+    /**
+     * Add an "invoke method" rule for a method.
+     *
+     * @param pattern Element matching pattern
+     * @param methodName Method name to be called
+     * @param paramCount Number of expected parameters (or -1 for a single
+     *  parameter from the element body).
+     * @see InvokeMethodRule
+     */
+    public void addInvokeMethod(String pattern, String methodName, 
+                        int paramCount, Class[] types) {
+
+        addRule(
+                pattern,
+                new InvokeMethodRule(methodName, paramCount, types));
+    }
+
+    /** Add an InvokeParamFromAttr rule for the specified parameters. */
+    public void addInvokeParamFromAttr(String pattern, int paramIndex, String attrName) {
+        addRule(pattern, new InvokeParamFromAttrRule(paramIndex, attrName));
+      
+    }
+
+    /** Add an InvokeParamFromBody rule for the specified parameters. */
+    public void addInvokeParamFromBody(String pattern, int paramIndex) {
+        addRule(pattern, new InvokeParamFromBodyRule(paramIndex));
+      
+    }
+
+    /** Add an InvokeParamFromObject rule for the specified parameters. */
+    public void addInvokeParamFromObject(String pattern, int paramIndex,
+                    Object obj) {
+        addRule(pattern, new InvokeParamFromObjectRule(paramIndex, obj));
+      
+    }
+
+    /** Add an InvokeParamFromStack rule for the specified parameters. */
+    public void addInvokeParamFromStack(String pattern, int paramIndex) {
+        addRule(pattern, new InvokeParamFromStackRule(paramIndex));
+    }
+
+    /** Add an InvokeParamFromStack rule for the specified parameters. */
+    public void addInvokeParamFromStack(String pattern, int paramIndex, int offset) {
+        addRule(pattern, new InvokeParamFromStackRule(paramIndex, offset));
+    }
+
+    /** Add an InvokeParamFromPath rule for the specified parameters. */
+    public void addInvokeParamFromPath(String pattern, int paramIndex) {
+        addRule(pattern, new InvokeParamFromPathRule(paramIndex));
+      
+    }
+
+    /** Add an InvokeParamFromPath rule for the specified parameters. */
+    public void addInvokeParamFromPath(String pattern, int paramIndex,
+                    boolean passFullPath) {
+        addRule(pattern, new InvokeParamFromPathRule(paramIndex, passFullPath));
+    }
+
+    /** Add an InvokeParamFromDefaults rule for the specified parameters. */
+    public void addInvokeParamFromDefaults(String pattern, Object[] defaults) {
+        addRule(pattern, new InvokeParamFromDefaultsRule(defaults));
+    }
+
+    /**
      * Add a "factory create" rule for the specified parameters.
      * Exceptions thrown during the object creation process will be propagated.
      *
