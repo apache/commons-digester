@@ -42,6 +42,11 @@ public abstract class RuleLoader {
      * This method is invoked when the start of an xml tag is encountered
      * which maps to a PluginCreateRule. Any rules added here are removed
      * from the digester when the end of that xml tag is encountered.
+     * <p>
+     * Note that this method will normally call the addRule method on some
+     * RuleManager instance, which can potentially throw an InvalidRuleException.
+     * In that case, the implementation of that method will wrap that exception
+     * in a PluginException.
      */
     public abstract void addRules(Context context) throws PluginException;
 }
