@@ -910,11 +910,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
         try {
             currRuleManager.startParse(context);
-            List actions = currRuleManager.getActions();
-            for(Iterator i = actions.iterator(); i.hasNext(); ) {
-                Action action = (Action) i.next();
-                action.startParse(context);
-            }
         } catch(DigestionException ex) {
             throw new NestedSAXException(ex);
         }
@@ -945,14 +940,6 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
         RuleManager currRuleManager = context.getRuleManager();
         try {
-            // Fire "finish" events for all defined actions
-            List actions = currRuleManager.getActions();
-            for(Iterator i = actions.iterator(); i.hasNext(); ) {
-                Action action = (Action) i.next();
-                action.finishParse(context);
-            }
-
-            // And finally for the RuleManager too
             currRuleManager.finishParse(context);
         } catch(DigestionException ex) {
             log.error("RuleManager.finishParse threw exception", ex);
