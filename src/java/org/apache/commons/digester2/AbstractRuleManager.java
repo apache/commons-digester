@@ -43,8 +43,7 @@ public abstract class AbstractRuleManager implements RuleManager {
     
     /**
      * Invoked before parsing each input document, this method gives the
-     * RuleManager and the managed Action objects the opportunity to do
-     * per-parse initialisation if required.
+     * RuleManager the opportunity to do per-parse initialisation if required.
      */
     public void startParse(Context context) throws DigestionException {}
      
@@ -75,6 +74,16 @@ public abstract class AbstractRuleManager implements RuleManager {
     public abstract void addRule(String pattern, Action action)
     throws InvalidRuleException;
 
+    /**
+     * Return a List of all registered Action instances, or a zero-length List
+     * if there are no registered Action instances.
+     * <p>
+     * The rules are returned in the order they were added. If an Action
+     * instance has been added multiple times, then its order is set by the
+     * first time it was added.
+     */
+    public abstract List getActions();
+    
     /**
      * Return a List of all registered Action instances that match the specified
      * nesting pattern, or a zero-length List if there are no matches.  If more

@@ -52,15 +52,13 @@ public interface RuleManager {
     
     /**
      * Invoked before parsing each input document, this method gives the
-     * RuleManager and the managed Action objects the opportunity to do
-     * per-parse initialisation if required.
+     * RuleManager opportunity to do per-parse initialisation if required.
      */
     public void startParse(Context context) throws DigestionException;
      
     /**
      * Invoked after parsing each input document, this method gives the
-     * RuleManager and the managed Action objects the opportunity to do
-     * per-parse cleanup if required.
+     * RuleManager the opportunity to do per-parse cleanup if required.
      */
      public void finishParse(Context context) throws DigestionException;
 
@@ -83,6 +81,16 @@ public interface RuleManager {
      */
     public void addRule(String pattern, Action action) throws InvalidRuleException;
 
+    /**
+     * Return a List of all registered Action instances, or a zero-length List
+     * if there are no registered Action instances.
+     * <p>
+     * The rules are returned in the order they were added. If an Action
+     * instance has been added multiple times, then its order is set by the
+     * first time it was added.
+     */
+    public List getActions();
+    
     /**
      * Return a List of all registered Action instances that match the specified
      * nesting pattern, or a zero-length List if there are no matches.  If more
