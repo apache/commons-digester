@@ -693,6 +693,30 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      private void initializePerParse() {
      }
 
+    /**
+     * Iterate over the list of rules most recently matched, and
+     * invoke that rule's bodySegment method passing the current
+     * segment of text from the xml element body.
+     */
+    private void handleBodySegment(
+    Context context, 
+    String namespace, String name) throws SAXException {
+        StringBuffer currTextSegment = context.getBodyTextSegment();
+        if (currTextSegment.length() > 0) {
+            String segment = currTextSegment.toString();
+            List parentMatches = (List) context.peekMatchingActions();
+            int len = parentMatches.size();
+            for(int i=0; i<len; ++i) {
+                Action action = (Action) parentMatches.get(i);
+                try {
+                    action.bodySegment(context, namespace, name, segment);
+                } catch(Exception e) {
+                    throw context.createSAXException(e);
+                }
+            }
+        }
+    }
+
     // -------------------------------------------------
     // Private methods for use of this class only
     // -------------------------------------------------
@@ -766,6 +790,11 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             // one has not been created before. Of course this would only
             // happen if no rules had ever been added...
             getRuleManager().startParse(context);
+            List actions = ruleManager.getActions();
+            for(Iterator i = actions.iterator(); i.hasNext(); ) {
+                Action action = (Action) i.next();
+                action.startParse(context);
+            }
         } catch(DigestionException ex) {
             throw new NestedSAXException(ex);
         }
@@ -794,8 +823,15 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             }
         }
 
-        // Fire "finish" events for all defined rules
         try {
+            // Fire "finish" events for all defined actions
+            List actions = ruleManager.getActions();
+            for(Iterator i = actions.iterator(); i.hasNext(); ) {
+                Action action = (Action) i.next();
+                action.finishParse(context);
+            }
+
+            // And finally for the RuleManager too
             ruleManager.finishParse(context);
         } catch(DigestionException ex) {
             log.error("finishParse threw exception", ex);
@@ -842,6 +878,11 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * Process notification of character data received from the body of
      * an XML element. Note that a sax parser is allowed to split contiguous
      * text into multiple calls to this method.
+     * <p>
+     * Note also that if a DTD or schema has indicated that an element has
+     * "element only" content, then the ignorableWhitespace method is called
+     * instead of this method when whitespace (presumably just for nice
+     * indenting) is found within the element.
      *
      * @param buffer The characters from the XML document
      * @param start Starting offset into the buffer
@@ -862,7 +903,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             saxLog.debug("characters(" + new String(buffer, start, length) + ")");
         }
 
-        context.appendToBodyText(buffer, start, length);
+        context.appendBodyText(buffer, start, length);
     }
 
     /**
@@ -973,10 +1014,21 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
                     qName + ")");
         }
 
+        // First, call the bodySegment method on any rules matching the
+        // parent element before we start this new element. Once that is
+        // done, we can discard the currTextSegment.
+        Path path = context.getCurrentPath();
+        if (path.getDepth() > 0) {
+            String parentNamespaceURI = path.peekNamespace(0);
+            String parentLocalName = path.peekLocalname(0);
+            handleBodySegment(context, parentNamespaceURI, parentLocalName);
+            context.clearBodyTextSegment();
+        }
+        
         // Save the body text accumulated for our surrounding element
         context.pushBodyText();
 
-        // the actual element name is either in localName or qName, depending
+        // The actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
         String name = localName;
         if ((name == null) || (name.length() < 1)) {
@@ -1053,6 +1105,12 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
         boolean debug = log.isDebugEnabled();
         String matchPath = context.getMatchPath();
+
+        // First, call the bodySegment method on any rules matching the
+        // parent element before we start this new element. Once that is
+        // done, we can discard the currTextSegment.
+        handleBodySegment(context, namespaceURI, localName);
+        context.clearBodyTextSegment();
 
         // Retrieve the current bodytext. Also set the current bodytext to
         // be the text associated with the parent object, so future calls to
