@@ -30,10 +30,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.digester2.Digester;
 
 /**
- * Test Cases for the CallParamLiteralAction class.
+ * Test Cases for the CallParamFromStackAction class.
  */
 
-public class CallParamLiteralActionTestCase extends TestCase {
+public class CallParamFromStackActionTestCase extends TestCase {
 
     public static class TargetObject {
         private Object item;
@@ -59,7 +59,7 @@ public class CallParamLiteralActionTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public CallParamLiteralActionTestCase(String name) {
+    public CallParamFromStackActionTestCase(String name) {
         super(name);
     }
 
@@ -77,7 +77,7 @@ public class CallParamLiteralActionTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(CallParamLiteralActionTestCase.class));
+        return (new TestSuite(CallParamFromStackActionTestCase.class));
     }
 
     /**
@@ -91,80 +91,28 @@ public class CallParamLiteralActionTestCase extends TestCase {
     // ------------------------------------------------ 
 
     /**
-     * Test passing a string as a parameter.
+     * Test basic operations.
      */
-    public void testStringLiteral() throws Exception {
+    public void testBasicOperations() throws Exception {
         String inputText = 
             "<root>" + 
-            " <item/>" +
+            " <item value='attr'/>" +
             "</root>";
 
         InputSource source = new InputSource(new StringReader(inputText));
 
         Digester d = new Digester();
         d.addRule("/root/item", new CallMethodAction("addItem", 1));
-        d.addRule("/root/item", new CallParamLiteralAction(0, "literal-string"));
+        d.addRule("/root/item", new CreateObjectAction(StringBuffer.class));
+        d.addRule("/root/item", new CallParamFromStackAction(0));
 
         TargetObject targetObject = new TargetObject();
         d.setInitialObject(targetObject);
         d.parse(source);
         
-        // string was passed ok
+        // created object was passed ok
         Object item = targetObject.getItem();
         assertNotNull("Item set", item);
-        assertSame("Object is a string", String.class, item.getClass());
-        assertEquals("Literal value correct", "literal-string", item);
-    }
-
-    /**
-     * Test passing a reference to an arbitrary object as a parameter.
-     */
-    public void testObjectLiteral() throws Exception {
-        String inputText = 
-            "<root>" + 
-            " <item/>" +
-            "</root>";
-
-        InputSource source = new InputSource(new StringReader(inputText));
-
-        Object literalObj = new Object();
-        
-        Digester d = new Digester();
-        d.addRule("/root/item", new CallMethodAction("addItem", 1));
-        d.addRule("/root/item", new CallParamLiteralAction(0, literalObj));
-
-        TargetObject targetObject = new TargetObject();
-        d.setInitialObject(targetObject);
-        d.parse(source);
-        
-        Object item = targetObject.getItem();
-        assertNotNull("Item set", item);
-        assertSame("Object is same", literalObj, item);
-    }
-
-    /**
-     * Test passing a null reference as a parameter.
-     */
-    public void testNullLiteral() throws Exception {
-        String inputText = 
-            "<root>" + 
-            " <item/>" +
-            "</root>";
-
-        InputSource source = new InputSource(new StringReader(inputText));
-
-        Object literalObj = new Object();
-        
-        Digester d = new Digester();
-        d.addRule("/root/item", new CallMethodAction("addItem", 1));
-        d.addRule("/root/item", new CallParamLiteralAction(0, null));
-
-        TargetObject targetObject = new TargetObject();
-        d.setInitialObject(targetObject);
-        d.parse(source);
-        
-        Object item = targetObject.getItem();
-        assertNull("Item set", item);
-        assertEquals("Method invoked", 1, targetObject.getInvocationCount());
+        assertSame("Object is a stringbuffer", StringBuffer.class, item.getClass());
     }
 }
