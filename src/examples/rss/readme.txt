@@ -20,3 +20,9 @@ commons-digester.jar file, in package "org.apache.commons.digester.rss".
 The package name has not been changed, so the only impact on applications
 relying on these classes will be the need to include an additional JAR
 file (commons-digester-rss.jar) in their classpath.
+
+A packaged distribution can be created by using ant:
+
+1 Copy build.properties.sample to build.properties and edit the properties to 
+match those on your local system
+2 run ant dist

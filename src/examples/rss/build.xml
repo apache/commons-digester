@@ -18,7 +18,7 @@
 
 <!--
         "Digester" RSS Example of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.1.2.1 2004/08/18 19:59:27 rdonkin Exp $
+        $Id: build.xml,v 1.1.2.2 2004/08/29 18:16:46 rdonkin Exp $
 -->
 
 
@@ -231,7 +231,6 @@
                  author="true"
                 private="true"
                 version="true"
-               overview="src/java/overview.html"
                doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
             windowtitle="${component.title} (Version ${component.version})"
                  bottom="Copyright (c) 2001-2004 - Apache Software Foundation">
@@ -252,10 +251,6 @@
     <copy      file="LICENSE.txt"
               todir="${dist.home}"/>
     <mkdir      dir="${build.home}/classes/META-INF"/>
-<!--
-    <copy      file="RELEASE-NOTES.txt"
-              todir="${dist.home}"/>
--->
     <jar    jarfile="${dist.home}/commons-${component.name}.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
