@@ -142,32 +142,6 @@ public class Path {
         localNames.clear();
     }
     
-    public boolean matches(String pathToMatch) {
-        if (pathToMatch.charAt(0) == '/') {
-            // absolute
-            return getPath().equals(pathToMatch);
-        } else {
-            // relative
-            // XXX looks wrong but protects a match of 
-            // "a/b" against a path of "/gotcha/b", but
-            // still allows
-            // "a/b" to match against "/a/b"
-            return getPath().endsWith("/" + pathToMatch);
-        }
-    }
-    
-    /** 
-     * Checks if this path matches any of the paths given. This means we iterate through 
-     * <code>pathsToMatch</code> and match every entry to this path.
-     */
-    public boolean matchsAny(String[] pathsToMatch) {
-        for (int i = 0; i < pathsToMatch.length; i++) {
-            if (matches(pathsToMatch[i]))
-                return true;
-        }
-        return false;
-    }
-
     public String toString() {
         return getPath();
     }

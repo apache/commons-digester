@@ -44,20 +44,20 @@ public class SupplementaryRuleManagerTestCase extends TestCase {
     
         public void begin(Context context, String namespace, String name, Attributes attrs) {
 
-            Path path = context.getCurrentPath();
-            if (path.matches("/root")) {
+            String path = context.getMatchPath();
+            if (SupplementaryRuleManager.matches(path, "/root")) {
                 rootFoundAbsolute = true;
             } 
             
-            if (path.matches("root")) {
+            if (SupplementaryRuleManager.matches(path, "root")) {
                 rootFoundRelative = true;
             }
 
-            if (path.matches("/root/p/em")) {
+            if (SupplementaryRuleManager.matches(path, "/root/p/em")) {
                 longAbsoluteFound = true;
             } 
 
-            if (path.matches("ot/p")) {
+            if (SupplementaryRuleManager.matches(path, "ot/p")) {
                 wrongRelativeFound = true;
             }
 

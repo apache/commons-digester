@@ -31,6 +31,32 @@ import java.util.ArrayList;
 
 public class SupplementaryRuleManager extends DefaultRuleManager {
 
+    public static boolean matches(String path, String pathToMatch) {
+        if (pathToMatch.charAt(0) == '/') {
+            // absolute
+            return path.equals(pathToMatch);
+        } else {
+            // relative
+            // XXX looks wrong but protects a match of 
+            // "a/b" against a path of "/gotcha/b", but
+            // still allows
+            // "a/b" to match against "/a/b"
+            return path.endsWith("/" + pathToMatch);
+        }
+    }
+    
+    /** 
+     * Checks if this path matches any of the paths given. This means we iterate through 
+     * <code>pathsToMatch</code> and match every entry to this path.
+     */
+    public static boolean matchsAny(String path, String[] pathsToMatch) {
+        for (int i = 0; i < pathsToMatch.length; i++) {
+            if (matches(path, pathsToMatch[i]))
+                return true;
+        }
+        return false;
+    }
+    
     protected final Action supplementaryAction;
     protected final Action fallbackAction;
     
