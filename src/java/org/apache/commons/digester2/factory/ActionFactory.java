@@ -243,20 +243,20 @@ public class ActionFactory {
     }
 
     /**
-     * Add a "set next" rule for the specified parameters.
+     * Add a "link objects" rule for the specified parameters.
      *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @see SetNextAction
      */
-    public void addSetNext(String pattern, String methodName)
+    public void addLinkObjects(String pattern, String methodName)
     throws InvalidRuleException {
         addRule(pattern,
-                new SetNextAction(methodName));
+                new LinkObjectsAction(methodName));
     }
 
     /**
-     * Add a "set next" rule for the specified parameters.
+     * Add a "link objects" rule for the specified parameters.
      *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
@@ -266,13 +266,13 @@ public class ActionFactory {
      *  for a <code>boolean</code> parameter)
      * @see SetNextAction
      */
-    public void addSetNext(
+    public void addLinkObjects(
     String pattern, 
     String methodName,
     String paramType)
     throws InvalidRuleException {
         addRule(pattern,
-                new SetNextAction(methodName, paramType));
+                new LinkObjectsAction(methodName, paramType));
     }
 
     /**
