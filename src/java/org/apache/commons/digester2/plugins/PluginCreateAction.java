@@ -254,8 +254,24 @@ public class PluginCreateAction extends AbstractAction {
                   " match=[" + path + "]");
         }
 
-        // load any custom rules associated with the plugin
-        PluginDeclarationScope pds = PluginDeclarationScope.getInstance(context);
+        // Create a new declaration scope to ensure that:
+        // * if this xml tag uses "plugin-class=...", ie the declaration is
+        //   inline, then the declaration goes out-of-scope at the end of
+        //   the current xml element
+        // * any declarations occurring within the plugin (ie if a plugin
+        //   supports nested plugins) then those declarations don't overwrite
+        //   declarations made previously, but instead just "shadow" them until
+        //   the end method of this instance (ie the end of the current xml
+        //   element) causes the new scope to be discarded.
+        //
+        // Note that this code is fundamentally flawed; scope should be
+        // related directly to xml element depth, and not to whether a
+        // PluginCreateAction has been triggered or not. But as digester
+        // currently has no ability to invoke an operation when the *parent*
+        // element of the one which triggered an action occurs, this is
+        // a rough approximation of the correct behavior. See comments on
+        // the PluginDeclarationScope class for more info.
+        PluginDeclarationScope pds = PluginDeclarationScope.beginScope(context);
 
         // and get the cached info calculated at startParse time...
         PluginAttrNames pluginAttrNames = (PluginAttrNames)
@@ -447,6 +463,11 @@ public class PluginCreateAction extends AbstractAction {
         // and get rid of the instance of the plugin class from the
         // digester object stack.
         context.pop();
+        
+        // finally, get rid of the implicit declaration (if any) which
+        // was performed in begin, and get rid of any declarations that
+        // occurred due to custom rules associated with the current plugin.
+        PluginDeclarationScope.endScope(context);
     }
 
     /**
@@ -615,6 +636,8 @@ public class PluginCreateAction extends AbstractAction {
     }
     
     private static Properties attributesToProperties(org.xml.sax.Attributes attrs) {
+        // TODO: use prop names of form "{ns}name" if the attribute has a 
+        // namespace.
         int nAttrs = attrs.getLength();
         Properties props = new Properties();
         for(int i=0; i<nAttrs; ++i) {
