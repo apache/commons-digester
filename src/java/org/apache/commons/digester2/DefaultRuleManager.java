@@ -137,6 +137,9 @@ public class DefaultRuleManager extends AbstractRuleManager {
     /**
      * This method is called at the start of parsing a new input document.
      * <p>
+     * The startParse method is called on each action that has been added
+     * to this rulemanager, in the order that they were added. 
+     * <p>
      * TODO: build a mapping from element-name to "list of patterns ending
      * in that element name". When we have to do leading-wildcard-matching,
      * therefore, we can omit all the patterns that don't match the last
@@ -144,16 +147,28 @@ public class DefaultRuleManager extends AbstractRuleManager {
      * list of patterns. And we only need to compute this first time, or if
      * new rules have been added in the meantime.
      */
-    public void startParse(Context context) {
+    public void startParse(Context context) throws DigestionException {
+        for(Iterator i = actions.iterator(); i.hasNext(); ) {
+            Action action = (Action) i.next();
+            action.startParse(context);
+        }
     }
 
     /**
      * This method is called after parsing of a new input document has completed.
      * <p>
+     * The finishParse method is called on each action that has been added
+     * to this rulemanager, in reverse of the order that they were added. 
+     * <p>
      * Note that if an error has occurred during parsing, then this method
      * might not be called.
      */
-    public void finishParse(Context context) {
+    public void finishParse(Context context) throws DigestionException {
+        // Fire "finish" events for all defined actions
+        for(int i = actions.size()-1; i>=0; --i) {
+            Action action = (Action) actions.get(i);
+            action.finishParse(context);
+        }
     }
 
     /**

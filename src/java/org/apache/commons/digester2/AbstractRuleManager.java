@@ -44,6 +44,9 @@ public abstract class AbstractRuleManager implements RuleManager {
     /**
      * Invoked before parsing each input document, this method gives the
      * RuleManager the opportunity to do per-parse initialisation if required.
+     * <p>
+     * This method must call the startParse method on each action that has
+     * been added to this rulemanager, in the order that they were added. 
      */
     public void startParse(Context context) throws DigestionException {}
 
@@ -51,6 +54,9 @@ public abstract class AbstractRuleManager implements RuleManager {
      * Invoked after parsing each input document, this method gives the
      * RuleManager and the managed Action objects the opportunity to do
      * per-parse cleanup if required.
+     * <p>
+     * This method must call the finishParse method on each action that has
+     * been added to this rulemanager, in the order that they were added. 
      */
      public void finishParse(Context context) throws DigestionException {}
 
