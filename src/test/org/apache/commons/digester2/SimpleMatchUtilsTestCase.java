@@ -89,7 +89,7 @@ public class SimpleMatchUtilsTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(SupplementaryRuleManagerTestCase.class));
+        return (new TestSuite(SimpleMatchUtilsTestCase.class));
     }
 
     /**
