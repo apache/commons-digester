@@ -87,31 +87,13 @@ public class Context {
      * The parameters to StackId are actually only used in debugging but
      * the above conventions should be followed for consistency.
      */
-    public static class StackId {
-        private String desc;
-
-        /**
-         * Create an instance which has no specific owner object.
-         */
+    public static class StackId extends MapKey {
         public StackId(Class sourceClass, String desc) {
-            this.desc = sourceClass.getName() + ":" + desc;
+            super(sourceClass, desc);
         }
 
-        /**
-         * Create an instance which has an owner object.
-         */
         public StackId(Class sourceClass, String desc, Object owner) {
-            this.desc = sourceClass.getName() + ":" + desc
-               + ":" + System.identityHashCode(owner);
-        }
-
-        /**
-         * Provides a nice string which shows what class declares this StackId,
-         * what it is intended to be used for ("desc") and what specific
-         * instance of the class (if any) the stack is associated with.
-         */
-        public String toString() {
-            return desc;
+            super(sourceClass, desc, owner);
         }
     }
 
@@ -134,20 +116,13 @@ public class Context {
      * <p>
      * See method {@link #putItem} for more information.
      */
-    public static class ItemId {
-        private String desc;
-
+    public static class ItemId extends MapKey {
         public ItemId(Class sourceClass, String desc) {
-            this.desc = sourceClass.getName() + ":" + desc;
+            super(sourceClass, desc);
         }
 
         public ItemId(Class sourceClass, String desc, Object owner) {
-            this.desc = sourceClass.getName() + ":" + desc
-               + ":" + System.identityHashCode(owner);
-        }
-
-        public String toString() {
-            return desc;
+            super(sourceClass, desc, owner);
         }
     }
 
@@ -249,6 +224,11 @@ public class Context {
     private Object root;
 
     /**
+     * The RuleManager which map paths to list-of-actions.
+     */
+    private RuleManager currRuleManager;
+
+    /**
      * The object stack being constructed.
      */
     private ArrayStack stack = new ArrayStack();
@@ -272,10 +252,11 @@ public class Context {
     /**
      * Construct a new Context.
      */
-    public Context(SAXHandler saxHandler, Log log, Locator locator) {
+    public Context(SAXHandler saxHandler, Log log, Locator locator, RuleManager ruleManager) {
         this.saxHandler = saxHandler;
         this.log = log;
         this.documentLocator = locator;
+        this.currRuleManager = ruleManager;
     }
 
     // ---------------------------------------------------
@@ -517,6 +498,30 @@ public class Context {
         return contentHandler;
     }
 
+    /**
+     * Change the object which maps path to list-of-actions. If an action
+     * does this, then it would be expected to restore the old value when
+     * the action has completed.
+     */
+    public void setRuleManager(RuleManager newRuleManager) {
+        this.currRuleManager = newRuleManager;
+    }
+
+    /**
+     * Returns the current rulemanager. Normally, this is the same as
+     * would be returned by saxHandler.getRuleManager(); the only
+     * action that currently modifies this is the PluginCreateAction.
+     * <p>
+     * Note that the reason that the RuleManager is duplicated from the
+     * SAXHandler onto this object is that if an Action should change the
+     * current RuleManager, and a parsing error should then occur, then
+     * the original rulemanager object is still held by the SAXHandler so 
+     * parsing of the next document will work as expected.
+     */
+    public RuleManager getRuleManager() {
+        return currRuleManager;
+    }
+    
     // ---------------------------------------------------
     // Object Stack Methods
     // ---------------------------------------------------
