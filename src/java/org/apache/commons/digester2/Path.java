@@ -23,11 +23,54 @@ package org.apache.commons.digester2;
  */
 
 public class Path {
-    StringBuffer buf = new StringBuffer();
-    ArrayStack lengths = new ArrayStack();
+    /**
+     * Contains a string of form "/foo/{ns1}bar/baz" which describes the
+     * complete path from the root of the document to the current element.
+     */
+    private StringBuffer buf = new StringBuffer();
     
+    /**
+     * Contains offsets into the "buf" buffer. As new elements are added to
+     * the path, the old buffer length is stored so that it is easy to
+     * restore the old path when an element is "popped" from the path.
+     * Note that namespaces may have forward-slashes in them, so simply
+     * performing string scans to "remove" an element from the path is
+     * not effective.
+     * <p>
+     * Note that this could be recomputed from the information present
+     * in the namespaces and localNames stacks, but that would be very
+     * inefficient.
+     */
+    private ArrayStack lengths = new ArrayStack();
+    
+    /**
+     * The namespaces of the elements found so far. This stack is correlated
+     * with the localNames stack; they always have the same number of 
+     * elements and entries with the same stack offset are a (namespace, name)
+     * pair.
+     */
+    private ArrayStack namespaces = new ArrayStack();
+
+    /**
+     * The localnames of the elements found so far. This stack is correlated
+     * with the namespaces stack; they always have the same number of 
+     * elements and entries with the same stack offset are a (namespace, name)
+     * pair.
+     */
+    private ArrayStack localNames = new ArrayStack();
+    
+    /**
+     * Create a new initial path. Note that this does not represent
+     * "the root of a document", but rather "no path". It should not
+     * be used until the push method has been called for the first
+     * time, to define the root element of the document.
+     */
     public Path() {
     }
+    
+    /**
+     * Expand the path to include the specified child element.
+     */
     
     public void push(String namespace, String elementName) {
         lengths.push(new Integer(buf.length()));
@@ -38,20 +81,65 @@ public class Path {
             buf.append('}');
         }
         buf.append(elementName);
+        
+        namespaces.push(namespace);
+        localNames.push(elementName);
     }
     
+    /**
+     * Remove the last-pushed element, restoring the path to its
+     * previous state.
+     */
     public void pop() {
         int length = ((Integer)lengths.pop()).intValue();
         buf.setLength(length);
+        
+        namespaces.pop();
+        localNames.pop();
     }
     
+    /**
+     * Return the path to the current element.
+     */
     public String getPath() {
         return buf.toString();
     }
+
+    /**
+     * Returns the number of xml elements currently in the path.
+     */
+    public int getDepth() {
+        return namespaces.size();
+    }
     
+    /**
+     * Returns the namespace of the element at the specified offset from
+     * the top of the stack. An offset of zero returns the most recently
+     * pushed element, while an offset of getDepth()-1 returns the first
+     * pushed element.
+     */
+    public String peekNamespace(int offset) {
+        return (String) namespaces.peek(offset);
+    }
+    
+    /**
+     * Returns the localname of the element at the specified offset from
+     * the top of the stack. An offset of zero returns the most recently
+     * pushed element, while an offset of getDepth()-1 returns the first
+     * pushed element.
+     */
+    public String peekLocalname(int offset) {
+        return (String) localNames.peek(offset);
+    }
+    
+    /**
+     * Reset this object to its initially-constructed state.
+     */
     public void clear() {
         buf.setLength(0);
         lengths.clear();
+        namespaces.clear();
+        localNames.clear();
     }
 }
 
