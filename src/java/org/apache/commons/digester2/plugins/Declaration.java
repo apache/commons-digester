@@ -164,16 +164,20 @@ public class Declaration {
      * custom rules for this plugin (aka a RuleLoader).
      * <p>
      * If no source of custom rules can be found, null is returned.
+     *
+     * @param context is the current parse context.
+     *
+     * @param pluginClass is the class whose custom rules are to be located.
+     *
+     * @param props are any xml attributes included in the declaration which
+     *  RuleFinder objects may wish to inspect in order to determine how to
+     *  find the custom rules for the pluginClass.
      */
     private static RuleLoader findLoader(
     Context context,
     Class pluginClass, Properties props)
     throws PluginException {
 
-        // iterate over the list of RuleFinders, trying each one
-        // until one of them locates a source of dynamic rules given
-        // this specific plugin class and the associated declaration
-        // properties.
         Log log = LogUtils.getLogger(context);
         boolean debug = log.isDebugEnabled();
         log.debug("scanning ruleFinders to locate loader..");
@@ -181,8 +185,10 @@ public class Declaration {
         PluginConfiguration pluginConfig =
             PluginConfiguration.getInstance(context.getSAXHandler());
 
-        // try each available RuleFinder object in order until one returns
-        // a non-null value.
+        // Iterate over the list of RuleFinders, trying each one
+        // until one of them locates a source of custom rules given
+        // this specific plugin class and the associated declaration
+        // properties.
         List ruleFinders = pluginConfig.getRuleFinders();
         RuleLoader ruleLoader = null;
         try {
@@ -213,15 +219,10 @@ public class Declaration {
     }
 
     /**
-     * Attempt to load custom rules for the target class at the specified
-     * pattern.
+     * Attempt to load custom rules for the plugin class into the current
+     * RuleManager associated with the context.
      * <p>
-     * On return, any custom rules associated with the plugin class have
-     * been loaded into the Rules object currently associated with the
-     * specified digester object.
-     * <p>
-     * This method is called by PluginCreateAction, after ensuring that
-     * the declaration exists and has been initialised.
+     * This method is expected to be called by PluginCreateAction.
      */
 
     public void configure(Context context) throws PluginException {
@@ -231,8 +232,6 @@ public class Declaration {
             log.debug("configure being called!");
         }
 
-        if (ruleLoader != null) {
-            ruleLoader.addRules(context);
-        }
+        ruleLoader.addRules(context);
     }
 }
