@@ -23,6 +23,7 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.plugins.RuleFinder;
 import org.apache.commons.digester.plugins.RuleLoader;
 import org.apache.commons.digester.plugins.PluginException;
+import org.apache.commons.logging.Log;
 
 /**
  * A rule-finding algorithm which looks for a resource file in the classpath
@@ -68,7 +69,7 @@ public class FinderFromDfltResource  implements RuleFinder {
                         throws PluginException {
 
         String resourceName = 
-            pluginClass.getClass().getName().replace('.', '/') 
+            pluginClass.getName().replace('.', '/') 
                     + resourceSuffix;
             
         InputStream is = 
@@ -79,16 +80,8 @@ public class FinderFromDfltResource  implements RuleFinder {
             // ok, no such resource
             return null;
         }
-            
-        // the rest is not yet implemented
-        throw new PluginException(
-            "FinderFromDfltResource not implemented.");
 
-        /*
-        RuleLoader loader = new LoaderFromStream(is);
-        close(is);
-        return loader;
-        */
+        return FinderFromResource.loadRules(d, pluginClass, is, resourceName);
     }
 }
 

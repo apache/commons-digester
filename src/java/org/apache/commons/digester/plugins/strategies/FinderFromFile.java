@@ -81,15 +81,22 @@ public class FinderFromFile implements RuleFinder {
                 "Unable to process file [" + rulesFileName + "]", ioe);
         }
         
-        // the rest is not yet implemented
-        throw new PluginException(
-            "FinderFromFile not implemented.");
-
-        /*
-        RuleLoader loader = new LoaderFromStream(is);
-        is.close();
-        return loader;
-        */
+        try {
+            RuleLoader loader = new LoaderFromStream(is);
+            return loader;
+        } catch(Exception e) {
+            throw new PluginException(
+                "Unable to load xmlrules from file [" + 
+                rulesFileName + "]", e);
+        } finally {
+            try {
+                is.close();
+            } catch(java.io.IOException ioe) {
+                throw new PluginException(
+                    "Unable to close stream for file [" + 
+                    rulesFileName + "]", ioe);
+            }
+        }
     }
 }
 

@@ -63,8 +63,8 @@ public class FinderFromResource  implements RuleFinder {
     public RuleLoader findLoader(Digester d, Class pluginClass, Properties p)
                         throws PluginException {
 
-        String ruleResource = p.getProperty(resourceAttr);
-        if (ruleResource == null) {
+        String resourceName = p.getProperty(resourceAttr);
+        if (resourceName == null) {
             // nope, user hasn't requested dynamic rules to be loaded
             // from a specific file.
             return null;
@@ -72,21 +72,47 @@ public class FinderFromResource  implements RuleFinder {
         
         InputStream is = 
             pluginClass.getClassLoader().getResourceAsStream(
-                ruleResource);
+                resourceName);
+
         if (is == null) {
             throw new PluginException(
-                "Resource " + ruleResource + " not found.");
+                "Resource " + resourceName + " not found.");
         }
         
-        // the rest is not yet implemented
-        throw new PluginException(
-            "FinderFromResource not implemented.");
-            
-        /*
-        RuleLoader loader = new LoaderFromStream(is);
-        is.close();
-        return loader;
-        */
+         return loadRules(d, pluginClass, is, resourceName);
+    }
+    
+    /**
+     * Open the specified resource file (ie a file in the classpath, 
+     * including being within a jar in the classpath), run it through
+     * the xmlrules module and return an object encapsulating those rules.
+     * 
+     * @param d is the digester into which rules will eventually be loaded.
+     * @param pluginClass is the class whose xml params the rules are parsing.
+     * @param is is where the xmlrules will be read from, and must be non-null.
+     * @param resourceName is a string describing the source of the xmlrules,
+     *  for use in generating error messages.
+     */
+    public static RuleLoader loadRules(Digester d, Class pluginClass, 
+                        InputStream is, String resourceName)
+                        throws PluginException {
+
+        try {
+            RuleLoader loader = new LoaderFromStream(is);
+            return loader;
+        } catch(Exception e) {
+            throw new PluginException(
+                "Unable to load xmlrules from resource [" + 
+                resourceName + "]", e);
+        } finally {
+            try {
+                is.close();
+            } catch(java.io.IOException ioe) {
+                throw new PluginException(
+                    "Unable to close stream for resource [" + 
+                    resourceName + "]", ioe);
+            }
+        }
     }
 }
 
