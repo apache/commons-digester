@@ -47,9 +47,11 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.EntityResolver;
+import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.ext.LexicalHandler;
 
 /**
  * <p>An object which handles SAX events generated during parsing of an
@@ -87,7 +89,7 @@ import org.xml.sax.EntityResolver;
  * logged, then ignored.
  */
 
-public class SAXHandler extends DefaultHandler {
+public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
     // --------------------------------------------------------- Constructors
 
@@ -99,16 +101,6 @@ public class SAXHandler extends DefaultHandler {
     }
 
     // --------------------------------------------------- Instance Variables
-
-    /**
-     * The XMLReader object that is generating the SAX events being handled
-     * by this object. This member is currently here for only one purpose:
-     * so that the CreateNodeRule can get access to it and (temporarily)
-     * redirect the sax events to its own handler. This isn't entirely
-     * elegant (particularly as it introduces a cyclic dependency between
-     * this class and its XMLReader); alternative solutions are welcome.
-     */
-    private XMLReader reader;
 
     /**
      * The EntityResolver used to look up any external entities referenced
@@ -221,16 +213,28 @@ public class SAXHandler extends DefaultHandler {
     // -------------------------------------------------------------------
 
     /**
-     * The public identifier of the DTD we are currently parsing under
-     * (if any). The user may set this explicitly, in which case we ignore
-     * the DTD specified in the input xml file and use the one provided
-     * by the user. See method resolveEntity.
-     *
-     * TODO: Consider if this should be moved to Context. Maybe not if the
-     * user has explicitly set it, but certainly if it is extracted from
-     * the input data...
+     * If null, then calls to this objects' characters, startElement, endElement
+     * and processingInstruction methods are forwarded to the specified object.
+     * This is intended to allow rules to temporarily "take control" of the
+     * sax events. In particular, this is used by NodeCreateAction.
      */
-    private String publicId = null;
+    private ContentHandler contentHandler = null;
+
+    /**
+     * The public identifier of the DTD we are currently parsing under
+     * (if any). See method {@link #startDTD}.
+     *
+     * TODO: Consider if this should be moved to Context.
+     */
+    private String dtdPublicId = null;
+
+    /**
+     * The system identifier of the DTD we are currently parsing under
+     * (if any). See method {@link #startDTD}.
+     *
+     * TODO: Consider if this should be moved to Context.
+     */
+    private String dtdSystemId = null;
 
     /**
      * The body text of the current element. As the parser reports chunks
@@ -265,7 +269,7 @@ public class SAXHandler extends DefaultHandler {
     // General object configuration methods
     //
     // These methods are expected to be called by the user or by the
-    // Digester class in order to set this object up ready to perform 
+    // Digester class in order to set this object up ready to perform
     // parsing.
     //
     // Some methods (particularly the getters) are also used during
@@ -273,51 +277,98 @@ public class SAXHandler extends DefaultHandler {
     // ---------------------------------------------------------------------
 
     /**
-     * Specify the XMLReader object that will be generating the SAX events
-     * passed to this object. Some Action classes (CreateNodeAction in
-     * particular) need to access the XMLReader, so this object must be able
-     * to provide this data when requested.
+     * Set this object to be the handler for all the event interfaces
+     * provided by the specified reader. This method is called by the
+     * Digester class after the XMLReader is created to ensure this object
+     * gets all the necessary callbacks. If an xml parser has been created
+     * directly rather than via the Digester class, then this method should
+     * be called to configure the callbacks on the parser.
      */
-    public void setXMLReader(XMLReader reader) {
-        this.reader = reader;
+    public void initCallbacks(XMLReader reader) {
+        reader.setDTDHandler(this);
+        reader.setContentHandler(this);
+        reader.setEntityResolver(this);
+        reader.setErrorHandler(this);
+
+        try {
+            reader.setProperty(
+                "http://xml.org/sax/properties/lexical-handler",
+                this);
+        } catch(SAXNotRecognizedException ex) {
+            // The getDTDPublicId and getDTDSystemId methods will not
+            // work if the LexicalHandler interface is not supported by
+            // the parser. That's not a very important feature, though,
+            // so it's not worth throwing an exception for.
+            log.warn(
+                "This sax parser does not recognize the LexicalHandler"
+                + " interface. Information on dtd public and system ids"
+                + " will not be available.");
+        } catch(SAXNotSupportedException ex) {
+            // The getDTDPublicId and getDTDSystemId methods will not
+            // work if the LexicalHandler interface is not supported by
+            // the parser. That's not a very important feature, though,
+            // so it's not worth throwing an exception for.
+            log.warn(
+                "This sax parser does not support the LexicalHandler"
+                + " interface. Information on dtd public and system ids"
+                + " will not be available.");
+        }
     }
 
     /**
-    * See {@link #setXMLReader}.
-     */
-    public XMLReader getXMLReader() {
-        return reader;
-    }
-
-    /**
-     * Set the publid id of the current file being parsed. This will cause
-     * the declared DOCTYPE (if any) of the input document to be ignored.
-     *
-     * Instead the provided publicId will be looked up in the known entities,
-     * and the resource located at the associated URL will be used as the
-     * DTD for this input document.
+     * Specify a contentHandler to forward calls to. If non-null, then
+     * whenever this object receives calls from the XMLReader to any of
+     * the following methods, the call will be forwarded on to the specified
+     * objects instead of being processed in the normal manner.
      * <p>
-     * NOTE: if the input document doesn't include a DOCTYPE, then the
-     * DTD specified by this call is not used. There is currently no way
-     * to force an input document to be validated against a specific DTD
-     * (due to a lack of this feature in the xml standard).
-     *
-     * @param publicId the DTD/Schema public's id.
+     * This allows an Action to assume complete control of input handling
+     * for a period of time. For example, this allows the NodeCreateAction
+     * to build a DOM tree representing a portion of input.
+     * <p>
+     * Passing null restores normal operation, ie this object then resumes
+     * processing of the callbacks itself.
      */
-    public void setPublicId(String publicId){
-        this.publicId = publicId;
+    public void setContentHandler(ContentHandler contentHandler) {
+        this.contentHandler = contentHandler;
     }
 
     /**
-     * Return the public identifier of the DTD we are currently parsing under,
-     * if any. If setPublicId has been called previously, then the value
-     * returned here will be the one explicitly set. Otherwise, if we have
-     * already seen a DOCTYPE declaration in the input data, then the
-     * public id in that DOCTYPE will be returned. Otherwise (parsing hasn't
-     * started or the input document had no DOCTYPE) null is returned.
+     * See {@link #setContentHandler}.
      */
-    public String getPublicId() {
-        return this.publicId;
+    public ContentHandler getContentHandler() {
+        return contentHandler;
+    }
+
+    /**
+     * Get the public identifier of the DTD associated with the document
+     * currently being parsed, or most recently parsed.
+     * <p>
+     * If the input document has no DOCTYPE declaration, then null will
+     * be returned.
+     * <p>
+     * Note that this method requires the underlying xml parser to support
+     * the org.xml.sax.ext.LexicalHandler interface. If the parser does not
+     * provide callbacks via this interface, then no public id information
+     * will be available (null will be returned).
+     */
+    public String getDTDPublicId() {
+        return this.dtdPublicId;
+    }
+
+    /**
+     * Get the system identifier of the DTD associated with the document
+     * currently being parsed, or most recently parsed.
+     * <p>
+     * If the input document has no DOCTYPE declaration, then null will
+     * be returned.
+     * <p>
+     * Note that this method requires the underlying xml parser to support
+     * the org.xml.sax.ext.LexicalHandler interface. If the parser does not
+     * provide callbacks via this interface, then no system id information
+     * will be available (null will be returned).
+     */
+    public String getDTDSystemId() {
+        return this.dtdSystemId;
     }
 
     /**
@@ -463,7 +514,7 @@ public class SAXHandler extends DefaultHandler {
         if (this.explicitClassLoader != null) {
             return this.explicitClassLoader;
         }
-        
+
         if (this.useContextClassLoader) {
             ClassLoader classLoader =
                     Thread.currentThread().getContextClassLoader();
@@ -528,7 +579,7 @@ public class SAXHandler extends DefaultHandler {
      * which is usually to attempt to download from the SYSTEM-ID value (if any)
      * of the entity definition in the input xml.
      *
-     * @param entityResolver a class that implement the 
+     * @param entityResolver a class that implement the
      * <code>EntityResolver</code> interface.
      */
     public void setEntityResolver(EntityResolver entityResolver){
@@ -601,7 +652,7 @@ public class SAXHandler extends DefaultHandler {
      * <code>EntityResolver</code> has been set. (Setting a custom
      * <code>EntityResolver</code> overrides the internal implementation.)
      * </p>
-     * @param publicOrSystemId Public or system identifier of the entity to be 
+     * @param publicOrSystemId Public or system identifier of the entity to be
      *  resolved
      * @param entityURL The URL to use for reading this entity
      */
@@ -671,12 +722,12 @@ public class SAXHandler extends DefaultHandler {
         return locator;
     }
 
-    // ------------------------------------------------------- 
+    // -------------------------------------------------------
     // Package Methods
     //
     // These methods are intended mainly for the use of Action
     // classes and other similar "implementation" classes.
-    // ------------------------------------------------------- 
+    // -------------------------------------------------------
 
     /**
      * Create a SAX exception which also understands about the location in
@@ -748,7 +799,7 @@ public class SAXHandler extends DefaultHandler {
     // These methods provide hooks for users to customise the
     // behavior of this SAXHandler class by subclassing if they
     // wish.
-    // ------------------------------------------------------- 
+    // -------------------------------------------------------
 
     /**
      * <p>Provide a hook for lazy configuration of this <code>SAXHandler</code>
@@ -760,7 +811,7 @@ public class SAXHandler extends DefaultHandler {
      */
      private void initialize() {
      }
-     
+
     /**
      * <p>Provide a hook for lazy configuration of this <code>SAXHandler</code>
      * instance. </p>
@@ -771,10 +822,10 @@ public class SAXHandler extends DefaultHandler {
      */
      private void initializePerParse() {
      }
-     
-    // ------------------------------------------------- 
+
+    // -------------------------------------------------
     // Private methods for use of this class only
-    // ------------------------------------------------- 
+    // -------------------------------------------------
 
     /**
      * Invoke the initialize and initializePerParse methods.
@@ -790,9 +841,9 @@ public class SAXHandler extends DefaultHandler {
         initializePerParse();
     }
 
-    // ------------------------------------------------- 
+    // -------------------------------------------------
     // ContentHandler Methods
-    // ------------------------------------------------- 
+    // -------------------------------------------------
 
     /**
      * Sets the document locator associated with our parser. This method
@@ -829,6 +880,9 @@ public class SAXHandler extends DefaultHandler {
             saxLog.debug("startDocument()");
         }
 
+        dtdPublicId = null;
+        dtdSystemId = null;
+
         // This shouldn't be necesary if a parse has completed cleanly, as
         // endPrefixMapping should have been called for each namespace. But
         // on error, problems can occur.
@@ -847,7 +901,7 @@ public class SAXHandler extends DefaultHandler {
         // give subclasses a chance to do custom configuration before each
         // parse if they wish.
         configure();
-        
+
         try {
             ruleManager.startParse(context);
         } catch(DigestionException ex) {
@@ -869,7 +923,7 @@ public class SAXHandler extends DefaultHandler {
     public void endDocument() throws SAXException {
         if (saxLog.isDebugEnabled()) {
             if (context.getStackSize() > 1) {
-                // A stack depth of one is ok if an initial object was pushed 
+                // A stack depth of one is ok if an initial object was pushed
                 // onto the stack. More than one is very likely to be an error.
                 saxLog.debug("endDocument():  " + context.getStackSize() +
                              " elements left");
@@ -952,7 +1006,14 @@ public class SAXHandler extends DefaultHandler {
      *
      * @exception SAXException if a parsing error is to be reported
      */
-    public void characters(char buffer[], int start, int length) {
+    public void characters(char buffer[], int start, int length)
+    throws SAXException {
+        if (contentHandler != null) {
+            // forward calls instead of handling them here
+            contentHandler.characters(buffer, start, length);
+            return;
+        }
+
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("characters(" + new String(buffer, start, length) + ")");
         }
@@ -998,7 +1059,13 @@ public class SAXHandler extends DefaultHandler {
      * @exception SAXException if a parsing error is to be reported
      */
     public void processingInstruction(String target, String data)
-            throws SAXException {
+    throws SAXException {
+        if (contentHandler != null) {
+            // forward calls instead of handling them here
+            contentHandler.processingInstruction(target, data);
+            return;
+        }
+
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("processingInstruction('" + target + "','" + data + "')");
         }
@@ -1041,8 +1108,17 @@ public class SAXHandler extends DefaultHandler {
      * work without a namespace-aware parser, but no promises...
      */
     public void startElement(
-    String namespaceURI, String localName, String qName, Attributes attrs)
+    String namespaceURI,
+    String localName,
+    String qName,
+    Attributes attrs)
     throws SAXException {
+        if (contentHandler != null) {
+            // forward calls instead of handling them here
+            contentHandler.startElement(namespaceURI, localName, qName, attrs);
+            return;
+        }
+
         boolean debug = log.isDebugEnabled();
 
         if (saxLog.isDebugEnabled()) {
@@ -1119,8 +1195,17 @@ public class SAXHandler extends DefaultHandler {
      *   empty string if qualified names are not available.
      * @exception SAXException if a parsing error is to be reported
      */
-    public void endElement(String namespaceURI, String localName,
-                           String qName) throws SAXException {
+    public void endElement(
+    String namespaceURI,
+    String localName,
+    String qName)
+    throws SAXException {
+        if (contentHandler != null) {
+            // forward calls instead of handling them here
+            contentHandler.endElement(namespaceURI, localName, qName);
+            return;
+        }
+
         boolean debug = log.isDebugEnabled();
         String matchPath = context.getMatchPath();
 
@@ -1201,14 +1286,14 @@ public class SAXHandler extends DefaultHandler {
 
         // Recover the previous match expression
         context.popMatchPath();
-        
+
         // Discard the list of matching actions
         context.popMatchingActions();
     }
 
-    // ----------------------------------------------------- 
+    // -----------------------------------------------------
     // DTDHandler Methods
-    // ----------------------------------------------------- 
+    // -----------------------------------------------------
 
     /**
      * Receive notification of a notation declaration event. Currently
@@ -1241,9 +1326,9 @@ public class SAXHandler extends DefaultHandler {
         }
     }
 
-    // ----------------------------------------------- 
+    // -----------------------------------------------
     // EntityResolver Methods
-    // ----------------------------------------------- 
+    // -----------------------------------------------
 
     /**
      * Resolve the requested external entity. The procedure used is:
@@ -1281,11 +1366,6 @@ public class SAXHandler extends DefaultHandler {
             }
         }
 
-        // TODO: fix this. We can't assume that every external entity
-        // is the doctype!!!!!!
-        if (publicId != null)
-            this.publicId = publicId;
-
         // Has this system identifier been registered?
         String entityURL = null;
         if (publicId != null) {
@@ -1316,7 +1396,7 @@ public class SAXHandler extends DefaultHandler {
 
         // Return an input source to our alternative URL
         if (log.isDebugEnabled()) {
-            log.debug(" Resolving to alternate DTD '" + entityURL + "'");
+            log.debug(" Resolving entity to '" + entityURL + "'");
         }
 
         try {
@@ -1326,9 +1406,9 @@ public class SAXHandler extends DefaultHandler {
         }
     }
 
-    // ------------------------------------------------- 
+    // -------------------------------------------------
     // ErrorHandler Methods
-    // ------------------------------------------------- 
+    // -------------------------------------------------
 
     /**
      * Handle notification from the XMLReader of a problem in the input xml.
@@ -1409,5 +1489,67 @@ public class SAXHandler extends DefaultHandler {
         } else {
             errorHandler.error(exception);
         }
+    }
+
+    // -------------------------------------------------
+    // LexicalHandler Methods
+    // -------------------------------------------------
+
+    /**
+     * Invoked when the xml parser finds an xml comment.
+     */
+    public void comment(char[] ch, int start, int length) {
+        ; // ignore
+    }
+
+    /**
+     * Invoked when the xml parser finds the start of a CDATA section.
+     * The contents of the cdata section are passed to the characters()
+     * methods anyway; this method merely allows code to tell whether the
+     * data was escaped via CDATA or not.
+     */
+    public void startCDATA() {
+        ; // ignore
+    }
+
+    /**
+     * See {@link #startCDATA}.
+     */
+    public void endCDATA() {
+        ; // ignore
+    }
+
+    /**
+     * Invoked when the xml parser starts expanding an internal or external
+     * entity. The expanded version is reported via the normal ContentHandler
+     * methods anyway; this method merely allows code to tell whether the
+     * data was an entity, or inline in the normal manner.
+     */
+    public void startEntity(String name) {
+        ; // ignore
+    }
+
+    /**
+    * See {@link #startEntity}.
+     */
+    public void endEntity(String name) {
+        ; // ignore
+    }
+
+    /**
+     * Invoked when the DOCTYPE tag is found in the input xml. The public
+     * and system ids present in that declaration are stored and can be
+     * retrieved later via the getDTDPublicId and getDTDSystemId methods.
+     */
+    public void startDTD(String name, String publicId, String systemId) {
+        dtdPublicId = publicId;
+        dtdSystemId = systemId;
+    }
+    
+    /**
+    * See {@link #startDTD}.
+     */
+    public void endDTD() {
+        ; // ignore
     }
 }
