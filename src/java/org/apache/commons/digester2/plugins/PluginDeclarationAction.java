@@ -122,19 +122,10 @@ public class PluginDeclarationAction extends AbstractAction {
                 "mandatory attribute class not present on plugin declaration");
         }
 
-        Declaration newDecl = new Declaration(pluginClassName);
+        Declaration newDecl = new Declaration(context, pluginClassName, props);
         newDecl.setId(id);
-        newDecl.setProperties(props);
 
         PluginDeclarationScope pds = PluginDeclarationScope.getInstance(context); 
-        
-        // Create a RuleLoader instance which is capable of adding dynamic
-        // rules for the plugged-in class to a RuleManager instance. The 
-        // dynamic rules don't get added until a PluginCreateAction fires,
-        // so redeclaring a plugin multiple times is fine...
-        newDecl.init(context, pds);
-        
-        // and remember it for later...
         pds.addDeclaration(newDecl);
     }
 }
