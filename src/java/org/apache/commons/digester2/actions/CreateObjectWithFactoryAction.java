@@ -49,6 +49,10 @@ public class CreateObjectWithFactoryAction extends AbstractAction {
     // Instance Variables
     // -----------------------------------------------------
 
+    private Context.ItemId OBJECT_FACTORY_ITEM
+        = new Context.ItemId(
+            CreateObjectWithFactoryAction.class, "ObjectFactory", this);
+    
     /**
      * The object creation factory (if any) explicitly provided to a
      * constructor. Note that (as per Action requirements) this value
@@ -252,7 +256,7 @@ public class CreateObjectWithFactoryAction extends AbstractAction {
         
         // now retrieve the cached ObjectFactory for this classname
         ObjectFactory factory = 
-            (ObjectFactory) context.getInstanceData(this, "objectFactory");
+            (ObjectFactory) context.getItem(OBJECT_FACTORY_ITEM);
         
         if (factory == null) {
             // this rule instance has never created a factory of this class
@@ -267,7 +271,7 @@ public class CreateObjectWithFactoryAction extends AbstractAction {
                 factory = (ObjectFactory) clazz.newInstance();
                 
                 // and cache the object for later retrieval by this instance
-                context.putInstanceData(this, "objectFactory", factory);
+                context.putItem(OBJECT_FACTORY_ITEM, factory);
             } catch(ClassNotFoundException ex) {
                 throw new ParseException(
                     "Unable to load class '" + realClassName + "'", ex);
