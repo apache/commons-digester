@@ -1,4 +1,4 @@
-$Id: RELEASE-NOTES.txt,v 1.13.2.1 2004/08/29 18:05:27 rdonkin Exp $
+$Id: RELEASE-NOTES.txt,v 1.13.2.2 2004/08/30 08:01:47 rdonkin Exp $
 
 
                           Commons Digester Package
@@ -209,7 +209,8 @@ Commons Collections dependency
 ==============================
 The commons-collections library has recently undergone a major release (3.0).
 Digester has been tested with both commons-collections 2.1 and 3.0 and
-there are no known issues with using either version of this library.
+there are no known issues with using either version of this library. See above
+for the list of compatible dependency sets.
 
 
 BUGS FROM PREVIOUS RELEASE
