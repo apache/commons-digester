@@ -28,7 +28,8 @@ import org.apache.commons.digester2.AbstractAction;
 import org.apache.commons.digester2.ParseException;
 
 /**
- * Action which fetches an object from the digester object stack to use
+ * Action which passes a string representing the current path from the 
+ * root element of the document to the current xml element
  * as a parameter for the target method invoked by a CallMethodRule.
  */
 
