@@ -107,8 +107,6 @@ public class PluginDeclarationAction extends AbstractAction {
         Log log = context.getLogger();
         boolean debug = log.isDebugEnabled();
         
-//        PluginConfiguration pc = PluginConfiguration.getInstance(context);
-
         String id = props.getProperty("id");
         String pluginClassName = props.getProperty("class");
         
