@@ -164,12 +164,114 @@ public class DefaultRuleManagerTestCase extends TestCase {
         // match one action
         list = rm.getMatchingActions("/a");
         assertEquals("One rule matched", 1, list.size());
-        assertEquals("A rule matched", "a", list.get(0).toString());
+        assertSame("A rule matched", actionA, list.get(0));
 
         // match multiple actions
         list = rm.getMatchingActions("/a/b");
         assertEquals("Multiple rules matched", 2, list.size());
-        assertEquals("B1 rule matched", "b1", list.get(0).toString());
-        assertEquals("B2 rule matched", "b2", list.get(1).toString());
+        assertSame("B1 rule matched", actionB1, list.get(0));
+        assertSame("B2 rule matched", actionB2, list.get(1));
+    }
+    
+    public void testDefaultActions() throws Exception {
+        DefaultRuleManager rm = new DefaultRuleManager();
+        
+        Action actionA = new DummyAction("a");
+        Action actionB = new DummyAction("b");
+        Action actionC = new DummyAction("c");
+        
+        List list = null;
+
+        rm.addRule("/a", actionA);
+        rm.addFallbackAction(actionB);
+        rm.addFallbackAction(actionC);
+        
+        // verify that all actions are reported in getActions
+        List allActions = rm.getActions();
+        assertTrue("ActionA present", allActions.contains(actionA));
+        assertTrue("ActionB present", allActions.contains(actionB));
+        assertTrue("ActionC present", allActions.contains(actionC));
+
+        // match one action
+        list = rm.getMatchingActions("/a");
+        assertEquals("One rule matched", 1, list.size());
+        assertSame("A rule matched", actionA, list.get(0));
+
+        // match nothing
+        list = rm.getMatchingActions("/c");
+        assertEquals("Action list contains fallbacks no match", 2, list.size());
+        assertSame("B rule matched", actionB, list.get(0));
+        assertSame("C rule matched", actionC, list.get(1));
+    }
+    
+    /**
+     * Test mandatory actions in absence of fallback actions
+     */
+    public void testMandatoryActions1() throws Exception {
+        DefaultRuleManager rm = new DefaultRuleManager();
+        
+        Action actionA = new DummyAction("a");
+        Action actionB = new DummyAction("b");
+        Action actionC = new DummyAction("c");
+        
+        List list = null;
+
+        rm.addRule("/a", actionA);
+        rm.addMandatoryAction(actionB);
+        rm.addMandatoryAction(actionC);
+        
+        // verify that all actions are reported in getActions
+        List allActions = rm.getActions();
+        assertTrue("ActionA present", allActions.contains(actionA));
+        assertTrue("ActionB present", allActions.contains(actionB));
+        assertTrue("ActionC present", allActions.contains(actionC));
+
+        // match one action
+        list = rm.getMatchingActions("/a");
+        assertEquals("Three rules matched", 3, list.size());
+        assertSame("A rule matched", actionA, list.get(0));
+        assertSame("B rule matched", actionB, list.get(1));
+        assertSame("C rule matched", actionC, list.get(2));
+
+        // match nothing
+        list = rm.getMatchingActions("/c");
+        assertEquals("Action list contains mandatory when no match", 2, list.size());
+        assertSame("B rule matched", actionB, list.get(0));
+        assertSame("C rule matched", actionC, list.get(1));
+    }
+    
+    /**
+     * Test mandatory actions in presence of fallback actions
+     */
+    public void testMandatoryActions2() throws Exception {
+        DefaultRuleManager rm = new DefaultRuleManager();
+        
+        Action actionA = new DummyAction("a");
+        Action actionB = new DummyAction("b");
+        Action actionC = new DummyAction("c");
+        
+        List list = null;
+
+        rm.addRule("/a", actionA);
+        rm.addFallbackAction(actionB);
+        rm.addMandatoryAction(actionC);
+        
+        // verify that all actions are reported in getActions
+        List allActions = rm.getActions();
+        assertTrue("ActionA present", allActions.contains(actionA));
+        assertTrue("ActionB present", allActions.contains(actionB));
+        assertTrue("ActionC present", allActions.contains(actionC));
+
+        // match one action
+        list = rm.getMatchingActions("/a");
+        assertEquals("Two rules matched", 2, list.size());
+        assertSame("A rule matched", actionA, list.get(0));
+        assertSame("C rule matched", actionC, list.get(1));
+
+        // match nothing
+        list = rm.getMatchingActions("/c");
+        assertEquals("Two rules matched", 2, list.size());
+        assertSame("B rule matched", actionB, list.get(0));
+        assertSame("C rule matched", actionC, list.get(1));
     }
 }

@@ -66,6 +66,22 @@ public class AbstractRuleManagerTestCase extends TestCase {
         public void finishParse(Context context) throws DigestionException {
             operations.add("finishParse");
         }
+
+        public void addFallbackAction(Action action) {
+            operations.add("addFallbackAction");
+        }
+
+        public void addFallbackActions(List actions) {
+            operations.add("addFallbackActions");
+        }
+
+        public void addMandatoryAction(Action action) {
+            operations.add("addMandatoryAction");
+        }
+
+        public void addMandatoryActions(List actions) {
+            operations.add("addMandatoryActions");
+        }
         
         public void addNamespace(String prefix, String uri) {
             operations.add("addNamespace");
