@@ -1,0 +1,203 @@
+$Id: $
+
+
+                          Commons Digester Package
+                                Version 2.0 alpha
+                               Release Notes
+
+
+INTRODUCTION:
+============
+
+The Apache Jakarta Commons Digester
+Release 2.0 of the Apache Jakarta Commons Digester package is a significant
+rewrite of the original package. All the fundamental concepts remain the same,
+but the APIs have been redesigned based on the lessons learnt from the 1.x
+series of releases.
+
+IMPORTANT NOTES
+===============
+
+
+Dependencies
+------------
+The 2.0 Digester release requires:
+   Logging 1.0.x + BeanUtils 1.7
+
+MAJOR CHANGES SINCE 1.x
+=======================
+
+This section is intended for the use of those familiar with the 1.x releases
+of this product. There are many changes, but those listed below are the
+most significant.
+
+Versioning
+----------
+At the current time, the new code uses the package name
+  org.apache.commons.digester2.*
+There will no doubt be debate over whether this is a good idea, or whether
+the original
+  org.apache.commons.digester.*
+package names should be used.
+
+General principles
+------------------
+* Protected members are not used. Instead, members are private, and protected
+  setter/getter methods are provided where needed. This makes it easier in
+  future to change classes without breaking existing subclasses that have 
+  been defined by users of the Digester classes.
+
+Renamed/repackaged classes
+----------------
+* Rule --> Action
+  The term "rule" has confused a number of people over the years. The new 
+  and hopefully clearer term "action" is used instead. The word "rule" is
+  now used only to refer to a (pattern, action) pair, which is more intuitive.
+  
+* Rules --> RuleManager
+  The word "Rules" to mean *not* a collection of Rule objects, but instead
+  the pattern-matching engine that happens to *contain* a collection of Rule
+  objects was always confusing.
+  
+* RulesBase --> DefaultRuleManager
+  This should speak for itself.
+
+* All the basic action classes (formerly Rule classes) now reside in the
+  o.a.c.digester2.actions package.
+
+* ObjectCreateRule has been renamed to CreateObjectAction and
+  FactoryCreateRule has been renamed to CreateObjectWithFactoryAction.
+  
+Refactored classes
+------------------
+* Digester has been split into:
+   * Digester
+   * SAXHandler
+   * Context
+   * ActionFactory
+
+  The old Digester interface had a huge number of methods. Many of these
+  were only because Digester also implemented the interfaces necessary to:
+  (a) handle the SAX parser callbacks, and
+  (b) for the Rule (now Action) classes to store data on it during the
+      parse (the object stack etc).
+  (c) conveniently create Rule (now Action) instances.
+  
+  These pieces of functionality have now been split out into separate
+  classes, so:
+   * Digester now contains only the basic methods that users of the 
+     library need to interact with.
+   * SAXHandler handles the callbacks from the parser
+   * Context holds the object stack, current match path, and related data.
+   * ActionFactory provides the factory methods to conveniently create,
+     configure and add Action objects to a Digester or RuleManager. Moving
+     this functionality out of the Digester object also allows the Digester
+     class to be distributed with a subset (including none) of the default 
+     Action classes if desired.
+
+  Note that because parsing state is stored on the Context object now, it
+  is easier to implement the often-requested feature of being able to parse
+  multiple xml documents with the same Digester instance.
+  
+Namespace-aware parsing
+-----------------------
+The Digester now *always* uses a namespace-aware xml parser.
+The DefaultRuleManager patterns properly support namespaces, eg
+  /ns1:foo/ns2:bar/baz
+where the URIs that ns1 and ns2 correspond to have been defined via
+earlier calls to method DefaultRuleManager.addNamespace(prefix, uri).
+
+DefaultRuleManager
+------------------
+The DefaultRuleManager (formerly RulesBase) now uses a more xpath-like 
+syntax for its patterns. It still isn't full xpath support, just a little
+closer for general consistency. In particular, a leading slash is required
+on absolute paths. A pattern with no leading slash is a relative path, and
+is equivalent to the old "*/" prefix.
+
+Action (formerly Rule) API changes
+-----------------------------------
+* Action is an interface. The AbstractAction class has been defined and is
+  the recommended base for all custom actions. 
+* Action classes no longer have a "digester" member pointing to their "owner".
+  Instead, the begin/body/end methods are always passed a Context object that
+  allows them to access the object stack etc.
+* Action classes are required to avoid modification of any member variable
+  during parsing (ie from their begin/body/end methods). All data must instead
+  be stored on the provided Context object. This effectively makes an Action
+  instance both re-entrant and thread-safe.
+* The two regulations above mean that an Action instance can now be used
+  concurrently by multiple Digester instances (eg in a pool).
+* New methods startParse, endParse and bodySegment are provided, with empty
+  default implementations for specific Actions to override if they wish.
+* Deprecated methods have been removed.
+  
+Exceptions
+-----------
+A lot more methods are declared to throw explicit Exceptions, which should
+result in more reliable and explicit error-handling.
+
+Terminology
+------------
+The word "pattern" is now used exclusively for a string that is interpreted
+by a RuleManager instance.
+
+The word "path" is now used for a string that describes an absolute path
+from the root document node to the current xml element. When a pattern
+matches the path, the associated Action is executed.
+
+Xml-rules
+------------
+The xmlrules module has not yet been reimplemented. However the following
+changes are planned:
+* A RuleManager instance will be returned rather than a Digester.
+  Because a RuleManager is thread-safe, this allows a pool of Digester
+  instances to be configured with this object without having to reparse
+  the xmlrules input file.
+* the xmlrules file will be able to specify what RuleManager subclass
+  is desired (with the default being the DefaultRuleManager class).
+* The rule parser constructor will take a list of Action (formerly Rule) 
+  classes, and will auto-configure itself by using reflection against these
+  classes rather than the current system where code is written for each
+  Rule class. 
+* Because the list of Actions to support is passed in at runtime, the rule
+  parser class will not have explicit dependencies upon the default actions.
+  This allows the class to be distributed without the set of default actions
+  if desired. The ActionFactory class will provide a factory method for
+  creating a rule parser instance which knows about all the default actions
+* The input xmlrules file will be able to specify custom action classes.
+
+Other notes
+-----------
+* The Digester class now only deals in XMLReader rather than SAXParser.
+  This shouldn't remove any functionality, just simplify the code.
+* The default errorHandler methods now throw an exception for errors and 
+  fatal-errors reported by the parser rather than the old behaviour of just 
+  logging the error then continuing.
+* ParserFeatureSetterFactory and related classes have not been reimplemented,
+  and will not be reimplemented by me. If they are wanted, someone else will
+  have to do this.
+* I haven't implemented RuleSets. Are they useful to anyone?
+* the peek and pop methods on the digester, parameter and named stacks
+  now throw an exception if misused rather than return null.
+  
+Still TO-DO
+------------
+* Think about alternative ways of performing logging.
+* Think about how to support pattern syntax of "/foo[@attr=value]" style.
+  This may require a quite different API for RuleManager, so that RuleManager
+  is passed the actual Elements required, rather than a string representing
+  just the current path.
+* implement the bodySegment callback for Actions
+* break up CallParamAction into multiple simpler actions
+* refactor CallMethodAction to clean up its constructor.
+* Fix rules that store data on themselves.
+* Think about resolving dependency issues on Beanutils by allowing digester
+  to use beanutils via a local classloader. That means that it is ok to use
+  digester even in a situation where another version of beanutils is the
+  default.
+* sort out schemaLocation/schemaLanguage mess.
+* support rules to handle processing instructions.
+* Add feature to default EntityResolver behaviour to block access to any
+  non-registered entities, unless user explicitly enables this.
+

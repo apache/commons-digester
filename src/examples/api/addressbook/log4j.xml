@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+        <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+           <layout class="org.apache.log4j.PatternLayout">
+             <param name="ConversionPattern"
+                    value="aa:%p#%d#%c#%m%n"/>
+           </layout>
+        </appender>
+
+        <category name="org.apache.log4j.xml">
+          <priority value="INFO" />
+        </category>
+
+        <root>
+           <priority value = "DEBUG2"/>
+           <appender-ref ref="STDOUT" />
+        </root>
+</log4j:configuration>
+

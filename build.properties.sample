@@ -1,0 +1,31 @@
+root=/java/jars
+jaxp.home=${root}
+jaxp.jaxp.jar=${jaxp.home}/jaxp.jar
+jaxp.parser.jar=${jaxp.home}/crimson.jar
+
+# Commons projects -- correct if 'ant dist' is run on each project in the
+# default CVS directory layout.  Note that Digester no longer depends on
+# commons-collections itself; there is a runtime dependency currently
+# inherited from commons-beanutils, however.
+commons-beanutils.home=../beanutils/dist
+commons-beanutils.jar=${commons-beanutils.home}/commons-beanutils.jar
+commons-collections.home=../collections/dist
+commons-collections.jar=${commons-collections.home}/commons-collections.jar
+commons-logging.home=../logging/dist
+commons-logging.jar=${commons-logging.home}/commons-logging.jar
+
+# junit.jar - JUnit 3.7+ Classpath
+junit.jar=${root}/junit.jar
+
+# The digester tests output logging information (including Exceptions) 
+# which can often be confusing to new developers.
+# This output is suppressed by default but can be re-enabled by
+#suppressLogOutputDuringTests=false 
+suppressLogOutputDuringTests=true
+
+# Maven Properties
+#
+# Committers using agents may need to fill in and enable the following:
+#digester.cvs=scm:cvs:lserver:rdonkin@cvs.apache.org:/home/cvs:jakarta-commons/digester/
+#maven.username=rdonkin
+
