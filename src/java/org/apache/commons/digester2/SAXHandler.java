@@ -189,9 +189,9 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
     /**
      * Do we want to use the Context classloader when loading classes for
-     * instantiating new objects. Default is false.
+     * instantiating new objects. Default is true.
      */
-    private boolean useContextClassLoader = false;
+    private boolean useContextClassLoader = true;
 
     /**
      * Has this instance had its initialize method called yet?
@@ -383,9 +383,11 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     /**
      * Determine whether to use the Context ClassLoader (the one found by
      * calling <code>Thread.currentThread().getContextClassLoader()</code>)
-     * to resolve/load classes that are defined in various rules.  If not
-     * using Context ClassLoader, then the class-loading defaults to
-     * using the calling-class' ClassLoader.
+     * to resolve/load classes that are defined in various rules.
+     * <p>
+     * The default is true.
+     * <p>
+     * See {@link #getClassLoader} for more information.
      *
      * @param use determines whether to use Context ClassLoader.
      */

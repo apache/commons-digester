@@ -223,12 +223,13 @@ public class Digester {
 
     /**
      * Set the class loader to be used for instantiating application objects
-     * when required. If a non-null value is passed to this method, then
-     * method {@link #setUseContextClassLoader} will have no effect.
+     * when required. 
      * <p>
      * When an Action is executed due to some xml input, and that Action
      * wishes to create an object to represent the input, then the class
      * used will be loaded via the specified classloader.
+     * <p>
+     * See {@link SAXHandler#getClassLoader} for more information.
      *
      * @param classLoader The new class loader to use, or <code>null</code>
      *  to revert to the standard rules
@@ -339,9 +340,9 @@ public class Digester {
      * Determine whether to use the Context Classloader (the one found by
      * calling <code>Thread.currentThread().getContextClassLoader()</code>)
      * to resolve/load classes when an Action needs to create an instance of
-     * an object to represent data in the xml input. If this is set to false,
-     * and there is no explicit classloader set, then the same classloader
-     * that loaded the Action class is used.
+     * an object to represent data in the xml input.
+     * <p>
+     * The default value is true.
      * <p>
      * See {@link #setExplicitClassLoader}.
      *
