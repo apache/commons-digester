@@ -261,7 +261,7 @@ public class ActionFactory {
      */
     public Action addCallMethod(String pattern, String methodName)
     throws InvalidRuleException {
-        Action action = new CallMethodAction(methodName); 
+        Action action = new CallMethodAction(methodName, 0); 
         return addRule(pattern, action);
     }
 
@@ -280,18 +280,12 @@ public class ActionFactory {
         return addRule(pattern, action);
     }
 
-
     /**
      * Add an "call method" rule for the specified parameters.
-     * If <code>paramCount</code> is set to zero the rule will use
-     * the body of the matched element as the single argument of the
-     * method, unless <code>paramTypes</code> is null or empty, in this
-     * case the rule will call the specified method with no arguments.
      *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
-     * @param paramCount Number of expected parameters (or zero
-     *  for a single parameter from the body of this element)
+     * @param paramCount Number of expected parameters.
      * @param paramTypes Set of Java class names for the types
      *  of the expected parameters
      *  (if you wish to use a primitive type, specify the corresonding
@@ -310,10 +304,6 @@ public class ActionFactory {
 
     /**
      * Add an "call method" rule for the specified parameters.
-     * If <code>paramCount</code> is set to zero the rule will use
-     * the body of the matched element as the single argument of the
-     * method, unless <code>paramTypes</code> is null or empty, in this
-     * case the rule will call the specified method with no arguments.
      *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
@@ -338,69 +328,47 @@ public class ActionFactory {
     }
 
     /**
-     * Add a "call parameter" rule for the specified parameters.
+     * Set a call parameter from the body of the matched element.
      *
      * @param pattern Element matching pattern
      * @param paramIndex Zero-relative parameter index to set
-     *  (from the body of this element)
      * @see CallParamAction
      */
-    public Action addCallParam(String pattern, int paramIndex)
+    public Action addCallParamBody(String pattern, int paramIndex)
     throws InvalidRuleException {
-        Action action = new CallParamAction(paramIndex);
+        Action action = new CallParamBodyAction(paramIndex);
         return addRule(pattern, action);
     }
 
     /**
-     * Add a "call parameter" rule for the specified parameters.
+     * Set a call parameter from an xml attribute of the matched element.
      *
      * @param pattern Element matching pattern
      * @param paramIndex Zero-relative parameter index to set
-     *  (from the specified attribute)
-     * @param attributeName Attribute whose value is used as the
-     *  parameter value
+     * @param attributeName Attribute whose value is used.
      * @see CallParamAction
      */
-    public void addCallParam(
+    public void addCallParamAttribute(
     String pattern, 
     int paramIndex, 
     String attributeName)
     throws InvalidRuleException {
         addRule(pattern,
-                new CallParamAction(paramIndex, attributeName));
-    }
-
-
-    /**
-     * Add a "call parameter" rule.
-     * This will either take a parameter from the stack 
-     * or from the current element body text. 
-     *
-     * @param paramIndex The zero-relative parameter number
-     * @param fromStack Should the call parameter be taken from the top of the stack?
-     * @see CallParamAction
-     */    
-    public void addCallParam(
-    String pattern, 
-    int paramIndex, 
-    boolean fromStack)
-    throws InvalidRuleException {
-        addRule(pattern,
-                new CallParamAction(paramIndex, fromStack));
+                new CallParamAttributeAction(paramIndex, attributeName));
     }
 
     /**
-     * Add a "call parameter" rule that sets a parameter from the stack.
-     * This takes a parameter from the given position on the stack.
+     * Set a call parameter from an object on the digester object stack.
      *
      * @param paramIndex The zero-relative parameter number
-     * @param stackIndex set the call parameter to the stackIndex'th object down the stack,
-     * where 0 is the top of the stack, 1 the next element down and so on
+     * @param stackIndex set the call parameter to the stackIndex'th object
+     * down the stack, where 0 is the top of the stack, 1 the next element 
+     * down and so on
      * @see CallMethodAction
      */    
-    public void addCallParam(String pattern, int paramIndex, int stackIndex)
+    public void addCallParamFromStack(String pattern, int paramIndex, int stackIndex)
     throws InvalidRuleException {
          addRule(pattern,
-                new CallParamAction(paramIndex, stackIndex));
+                new CallParamFromStackAction(paramIndex, stackIndex));
     }
 }
