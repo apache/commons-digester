@@ -89,7 +89,7 @@ public class CreateObjectAction extends AbstractAction {
      * @param clazz Java class of the object to be created
      */
     public CreateObjectAction(Class clazz) {
-        this.className = clazz.getClassName();
+        this.className = clazz.getName();
     }
 
     /**
@@ -126,7 +126,7 @@ public class CreateObjectAction extends AbstractAction {
      * @param attributeName Attribute name which, if present, contains an
      */
     public CreateObjectAction(Class clazz, String attributeName) {
-        this.className = clazz.getClassName();
+        this.className = clazz.getName();
         this.attributeName = attributeName;
     }
 
