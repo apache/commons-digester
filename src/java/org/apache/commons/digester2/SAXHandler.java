@@ -91,9 +91,9 @@ import org.xml.sax.ext.LexicalHandler;
 
 public class SAXHandler extends DefaultHandler implements LexicalHandler {
 
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
     // Instance Variables
-    // --------------------------------------------------- 
+    // ---------------------------------------------------
 
     /**
      * The EntityResolver used to look up any external entities referenced
@@ -119,7 +119,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * However it seems likely that a count could be useful at some time.
      */
     private int numEntitiesResolved = 0;
-    
+
     /**
      * A map of known external entities that input xml documents may refer to.
      * via public or system IDs. The keys of the map entries are public or
@@ -139,7 +139,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * See setIgnoreExternalDTD.
      */
     private boolean ignoreExternalDTD = false;
-    
+
     /**
      * An object which contains state information that evolves
      * as the parse progresses. Rule object commonly interact with
@@ -227,9 +227,9 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      */
     private String dtdSystemId = null;
 
-    // --------------------------------------------------------- 
+    // ---------------------------------------------------------
     // Constructors
-    // --------------------------------------------------------- 
+    // ---------------------------------------------------------
 
     /**
      * Construct a new SAXHandler.
@@ -609,20 +609,20 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     public void setAllowUnknownExternalEntities(boolean state) {
         allowUnknownExternalEntities = state;
     }
-     
+
     /**
      * See setAllowUnknownExternalEntities.
      */
     public boolean getAllowUnknownExternalEntities() {
         return allowUnknownExternalEntities;
     }
-     
+
     /**
      * Specify whether an external DTD should be ignored, ie treated as if
      * it were an empty file. This can be dangerous; DTDs can potentially
      * contain definitions for default attribute values and entities that
      * affect the meaning of the xml document, so skipping them can cause
-     * incorrect output. However in many cases it is known that the DTD 
+     * incorrect output. However in many cases it is known that the DTD
      * does no such thing, so processing of it can be suppressed.
      * <p>
      * This flag defaults to false (ie external dtds are read during the parse).
@@ -630,14 +630,14 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     public void setIgnoreExternalDTD(boolean state) {
         ignoreExternalDTD = state;
     }
-     
+
     /**
      * See setIgnoreExternalDTD.
      */
     public boolean getIgnoreExternalDTD() {
         return ignoreExternalDTD;
     }
-     
+
     /**
      * Add a (pattern, action) pair to the RuleManager instance associated
      * with this saxHandler. This is equivalent to
@@ -699,7 +699,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
      * segment of text from the xml element body.
      */
     private void handleBodySegment(
-    Context context, 
+    Context context,
     String namespace, String name) throws SAXException {
         StringBuffer currTextSegment = context.getBodyTextSegment();
         if (currTextSegment.length() > 0) {
@@ -876,7 +876,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("endPrefixMapping(" + prefix + ")");
         }
-        
+
         context.popNamespace(prefix);
     }
 
@@ -1030,7 +1030,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             handleBodySegment(context, parentNamespaceURI, parentLocalName);
             context.clearBodyTextSegment();
         }
-        
+
         // Save the body text accumulated for our surrounding element
         context.pushBodyText();
 
@@ -1275,18 +1275,18 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         // care whether this is zero or one, so a boolean could do as well.
         // However it seems likely that a count could be useful at some time.
         ++numEntitiesResolved;
-        
+
         // Is this the DTD? If there *is* a DTD (ie one was reported to the
         // lexical handler) then it is presumed here that it will be the first
         // entity resolved.
         //
         // Note that we can't just check whether this systemId is the same
         // as the dtdSystemId, because the systemId parameter here has been
-        // expanded to an absolute ref, while the one passed to the 
+        // expanded to an absolute ref, while the one passed to the
         // LexicalHandler is in its original (possibly relative) form.
         //
         // It would be great to be able to use the EntityResolver2 interface
-        // which provides both the original and system ids, but that is 
+        // which provides both the original and system ids, but that is
         // probably not supported widely enough yet.
         if ((numEntitiesResolved == 1) && (dtdSystemId != null)) {
             if (ignoreExternalDTD) {
@@ -1295,7 +1295,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             return new InputSource(new StringReader(""));
             }
         }
-       
+
         // Has this public identifier been registered?
         String entityURL = null;
         if (publicId != null) {
@@ -1313,30 +1313,30 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             if (publicId != null) {
                 pub = "'" + publicId + "'";
             }
-            
+
             String sys = "null";
             if (systemId != null) {
                 sys = "'" + systemId + "'";
             }
-            
+
             throw context.createSAXException(
                 "The external entity with publicId = " + pub
                 + " and systemId = " + sys
                 + " has not been registered as a known entity.");
         }
-        
+
         if ((entityURL == null) && (systemId != null)) {
             // allow unknown external entity
             entityURL = systemId;
         }
-        
+
         if (entityURL == null) {
             // Cannot resolve. PublicId does not map to anything, and
             // systemId is null.
             if (log.isDebugEnabled()) {
                 log.debug(" Cannot resolve entity: '" + entityURL + "'");
             }
-            
+
             throw context.createSAXException(
                 "Cannot resolve entity. PublicId is null or has not been"
                 + " registered as a known entity, and systemId is null.");
@@ -1352,7 +1352,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
             if (log.isDebugEnabled()) {
                 log.debug(" Resolving entity to '" + entityURL + "'");
             }
-    
+
             return new InputSource(entityURL);
         }
     }
@@ -1498,7 +1498,7 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
         dtdPublicId = publicId;
         dtdSystemId = systemId;
     }
-    
+
     /**
      * See {@link #startDTD}.
      * <p>
