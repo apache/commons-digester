@@ -3,7 +3,7 @@
 
 <!--
         "Digester" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.53 2004/05/01 20:42:59 craigmcc Exp $
+        $Id: build.xml,v 1.53.2.1 2004/07/30 20:11:00 rdonkin Exp $
 -->
 
 
@@ -91,6 +91,7 @@
     <pathelement location="${jaxp.jaxp.jar}"/>
     <pathelement location="${jaxp.parser.jar}"/>
     <pathelement location="${commons-beanutils.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
     <pathelement location="${commons-logging.jar}"/>
     <pathelement location="${junit.jar}"/>
   </path>

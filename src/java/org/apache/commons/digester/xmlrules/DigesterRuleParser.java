@@ -1,4 +1,4 @@
-/* $Id: DigesterRuleParser.java,v 1.29 2004/05/10 06:30:08 skitching Exp $
+/* $Id: DigesterRuleParser.java,v 1.29.2.1 2004/07/30 20:11:01 rdonkin Exp $
  *
  * Copyright 2001-2004 The Apache Software Foundation.
  * 
@@ -30,7 +30,7 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.ConvertUtils;
 
-import org.apache.commons.digester.ArrayStack;
+import org.apache.commons.collections.ArrayStack;
 
 import org.apache.commons.digester.AbstractObjectCreationFactory;
 import org.apache.commons.digester.BeanPropertySetterRule;
