@@ -337,7 +337,7 @@ public class PluginCreateAction extends AbstractAction {
         Class pluginClass = currDeclaration.getPluginClass();
 
         // create a new RuleManager object and effectively push it onto a
-        // stack of rules objects. The stack is actually a linked list;
+        // stack of RuleManager objects. The stack is actually a linked list;
         // using the PluginRuleManager constructor below causes the new
         // instance to link to the previous head-of-stack, then calling
         // context.setRules() makes the new instance the new head-of-stack.
@@ -377,8 +377,8 @@ public class PluginCreateAction extends AbstractAction {
                 " pushed instance of plugin [" + pluginClass.getName() + "]");
         }
 
-        // and now we have to fire any custom rules which would have
-        // been matched by the same path that matched this rule, had
+        // and now we have to fire any custom actions which would have
+        // been matched by the same path that matched this action, had
         // they been loaded at that time.
         List actions;
         try {
@@ -404,14 +404,14 @@ public class PluginCreateAction extends AbstractAction {
         // we do need to fire the body methods of all dynamically-added
         // rules matching the same path as this rule. During begin, we had
         // to manually execute the dynamic rules' begin methods because they
-        // didn't exist in the digester's Rules object when the match begin.
-        // So in order to ensure consistent ordering of rule execution, the
-        // PluginRules class deliberately avoids returning any such rules
-        // in later calls to the match method, instead relying on this
-        // object to execute them at the appropriate time.
+        // didn't exist in the digester's RuleManager object when the match
+        // began. So in order to ensure consistent ordering of rule execution,
+        // the PluginRuleManager class deliberately avoids returning any such
+        // rules in later calls to the getMatchingActions method, instead
+        // relying on this object to execute them at the appropriate time.
         //
         // Note that this applies only to rules matching exactly the path
-        // which is also matched by this PluginCreateRule.
+        // which is also matched by this PluginCreateAction.
 
         String path = context.getMatchPath();
         RuleManager newRuleManager = context.getRuleManager();
@@ -428,7 +428,7 @@ public class PluginCreateAction extends AbstractAction {
     }
 
     /**
-     * Invoked by the digester when the closing tag matching this Rule's
+     * Invoked by the digester when the closing tag matching this Action's
      * pattern is encountered.
      *
      * @param namespace Description of the Parameter
@@ -472,7 +472,7 @@ public class PluginCreateAction extends AbstractAction {
 
     /**
      * Duplicate the processing that the Digester does when firing the
-     * begin methods of rules. It would be really nice if the Digester
+     * begin methods of rules. It would be really nice if the Context
      * class provided a way for this functionality to just be invoked
      * directly.
      */
@@ -485,21 +485,17 @@ public class PluginCreateAction extends AbstractAction {
         Log log = context.getLogger();
         boolean debug = log.isDebugEnabled();
         for (int i = 0; i < actions.size(); i++) {
-            try {
-                Action action = (Action) actions.get(i);
-                if (debug) {
-                    log.debug("  Fire begin() for " + action);
-                }
-                action.begin(context, namespace, name, list);
-            } catch (PluginException e) {
-                throw e;
+            Action action = (Action) actions.get(i);
+            if (debug) {
+                log.debug("  Fire begin() for " + action);
             }
+            action.begin(context, namespace, name, list);
         }
     }
 
     /**
      * Duplicate the processing that the Digester does when firing the
-     * body methods of rules. It would be really nice if the Digester
+     * body methods of rules. It would be really nice if the Context
      * class provided a way for this functionality to just be invoked
      * directly.
      */
@@ -513,22 +509,18 @@ public class PluginCreateAction extends AbstractAction {
             Log log = context.getLogger();
             boolean debug = log.isDebugEnabled();
             for (int i = 0; i < actions.size(); i++) {
-                try {
-                    Action action = (Action) actions.get(i);
-                    if (debug) {
-                        log.debug("  Fire body() for " + action);
-                    }
-                    action.body(context, namespaceURI, name, text);
-                } catch (ParseException e) {
-                    throw e;
+                Action action = (Action) actions.get(i);
+                if (debug) {
+                    log.debug("  Fire body() for " + action);
                 }
+                action.body(context, namespaceURI, name, text);
             }
         }
     }
 
     /**
      * Duplicate the processing that the Digester does when firing the
-     * end methods of rules. It would be really nice if the Digester
+     * end methods of rules. It would be really nice if the Context
      * class provided a way for this functionality to just be invoked
      * directly.
      */
@@ -541,17 +533,12 @@ public class PluginCreateAction extends AbstractAction {
         // Fire "end" events for all relevant rules in reverse order
         Log log = context.getLogger();
         boolean debug = log.isDebugEnabled();
-        for (int i = 0; i < actions.size(); i++) {
-            int j = (actions.size() - i) - 1;
-            try {
-                Action action = (Action) actions.get(j);
-                if (debug) {
-                    log.debug("  Fire end() for " + action);
-                }
-                action.end(context, namespaceURI, name);
-            } catch (ParseException e) {
-                throw e;
+        for (int i = actions.size() - 1; i >= 0; --i) {
+            Action action = (Action) actions.get(i);
+            if (debug) {
+                log.debug("  Fire end() for " + action);
             }
+            action.end(context, namespaceURI, name);
         }
     }
 
@@ -634,17 +621,27 @@ public class PluginCreateAction extends AbstractAction {
 
         return pluginAttrNames;
     }
-    
+
+    /**
+     * Copy all the (key,value) pairs in the provided Attributes object into
+     * a java.util.Properties object. If an attribute has an associated
+     * namespace, then the properties key is of form "{namespace}name".
+     */
     private static Properties attributesToProperties(org.xml.sax.Attributes attrs) {
-        // TODO: use prop names of form "{ns}name" if the attribute has a 
-        // namespace.
         int nAttrs = attrs.getLength();
         Properties props = new Properties();
         for(int i=0; i<nAttrs; ++i) {
+            String namespace = attrs.getURI(i);
+
             String key = attrs.getLocalName(i);
             if ((key == null) || (key.length() == 0)) {
                 key = attrs.getQName(i);
             }
+
+            if ((namespace != null) && (namespace.length()>0)) {
+                key = "{" + namespace + "}" + key;
+            }
+            
             String value = attrs.getValue(i);
             props.setProperty(key, value);
         }
