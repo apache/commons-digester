@@ -1,19 +1,19 @@
 /* $Id$
  *
  * Copyright 2001-2005 The Apache Software Foundation.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.digester2.actions;
@@ -38,13 +38,31 @@ import org.apache.commons.digester2.ParseException;
  * The name of the property to set:
  * <ul>
  * <li>can be specified when the action is created, or</li>
- * <li>can be the name of the matched xml element (useful when the Action is
- *  used with a pattern that can match multiple elements).</li>
+ * <li>can be the name of the matched xml element. This is useful when the
+ *  Action is used with a pattern that can match multiple elements, or
+ *  can be used just because it requires less parameters!</li>
  * </ul>
  * <p>
  * The text contained in the xml element has all leading and trailing
  * whitespace removed from it before the property setter method is invoked
  * on the target object.
+ * <p>
+ * Example:<br>
+ * Given rules:
+ * <pre>
+ *  digester.addRule("/person", new CreateObjectAction(Person.class));
+ *  digester.addRule("/person/name", new BeanPropertySetterAction());
+ * </pre>
+ * the input
+ * <pre>
+ *  [person]
+ *    [name]myname[/name]
+ *  [/person]
+ * </pre>
+ * causes a Person object to be created, then setName("myname") is called on it.
+ * <p>
+ * If you wish to map several child elements onto object properties, then you
+ * may wish to consider using the SetNestedPropertiesAction instead.
  */
 
 public class BeanPropertySetterAction extends AbstractAction {
@@ -57,8 +75,8 @@ public class BeanPropertySetterAction extends AbstractAction {
     protected String propertyName = null;
 
     /**
-     * The identifier of the context "scratch stack" used to store the 
-     * body text passed to the body method, so that it can be used in 
+     * The identifier of the context "scratch stack" used to store the
+     * body text passed to the body method, so that it can be used in
      * the end method. This stack is per-action-instance, so that other
      * instances of this class can't ever interfere with the data on this
      * stack.
@@ -66,9 +84,9 @@ public class BeanPropertySetterAction extends AbstractAction {
     protected final Context.StackId BODY_TEXT_STACK =
         new Context.StackId(BeanPropertySetterAction.class, "bodytext", this);
 
-    // ----------------------------------------------------------- 
+    // -----------------------------------------------------------
     // Constructors
-    // ----------------------------------------------------------- 
+    // -----------------------------------------------------------
 
     /**
      * Construct an instance that uses the xml element name to determine
@@ -77,7 +95,7 @@ public class BeanPropertySetterAction extends AbstractAction {
     public BeanPropertySetterAction() {
         this((String)null);
     }
-    
+
     /**
      * Construct an instance that sets the given property.
      *
@@ -87,15 +105,15 @@ public class BeanPropertySetterAction extends AbstractAction {
         this.propertyName = propertyName;
     }
 
-    // --------------------------------------------------------- 
+    // ---------------------------------------------------------
     // Public Methods
-    // --------------------------------------------------------- 
+    // ---------------------------------------------------------
 
     /**
      * Process the body text of this element.
      *
      * @param context is the current parse context.
-     * @param namespace the namespace URI of the matching element, or an 
+     * @param namespace the namespace URI of the matching element, or an
      *   empty string if the element has no namespace
      * @param name the local name of the element.
      * @param text The text of the body of this element
@@ -118,18 +136,18 @@ public class BeanPropertySetterAction extends AbstractAction {
      * Process the end of this element.
      *
      * @param context is the current parse context.
-     * @param namespace the namespace URI of the matching element, or an 
+     * @param namespace the namespace URI of the matching element, or an
      *   empty string if the element has no namespace
      * @param name the local name of the element.
      *
      * @exception NoSuchMethodException if the bean does not
      *  have a writeable property of the specified name
      */
-    public void end(Context context, String namespace, String name) 
+    public void end(Context context, String namespace, String name)
         throws ParseException {
 
         String bodyText = (String) context.pop(BODY_TEXT_STACK);
-        
+
         String property = propertyName;
         if (property == null) {
             // If we don't have a specific property name, use the element name.
@@ -149,7 +167,7 @@ public class BeanPropertySetterAction extends AbstractAction {
                 "[ActionBeanPropertySetter]"
                 + " path='" + context.getMatchPath() + "'"
                 + ": class='" + top.getClass().getName() + "'"
-                + ": property '" + property + "'" 
+                + ": property '" + property + "'"
                 + " with text '" + bodyText + "'");
         }
 
