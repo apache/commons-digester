@@ -450,6 +450,30 @@ public class Digester {
     }
 
     /**
+     * Specify whether an input xml document is permitted to reference external
+     * entities (including external DTDs, schemas, and include-files) that have
+     * not been specified by methods registerKnownEntity or setKnownEntities.
+     * <p>
+     * If this is allowed, then documents can take unbounded amounts of time
+     * to process, as they can attempt to download entities from the network
+     * (particularly via http urls).
+     * <p>
+     * This flag defaults to false (ie unknown external entities are not allowed).
+     * In this case, any occurrence of such an entity within an xml document
+     * will cause an exception to be thrown.
+     */
+    public void setAllowUnknownExternalEntities(boolean state) {
+        saxHandler.setAllowUnknownExternalEntities(state);
+    }
+     
+    /**
+     * See setAllowUnknownExternalEntities.
+     */
+    public boolean getAllowUnknownExternalEntities() {
+        return saxHandler.getAllowUnknownExternalEntities();
+    }
+     
+    /**
      * Specify whether an external DTD should be ignored, ie treated as if
      * it were an empty file. This can be dangerous; DTDs can potentially
      * contain definitions for default attribute values and entities that
@@ -740,19 +764,19 @@ public class Digester {
     }
 
     /**
-     * Return the error handler which will be used if the xml parser detects
-     * errors in the xml input being parsed.
-     */
-    public ErrorHandler getErrorHandler() {
-        return saxHandler.getErrorHandler();
-    }
-
-    /**
      * Set the error handler for this Digester.
      *
      * @param errorHandler The new error handler
      */
     public void setErrorHandler(ErrorHandler errorHandler) {
         saxHandler.setErrorHandler(errorHandler);
+    }
+
+    /**
+     * Return the error handler which will be used if the xml parser detects
+     * errors in the xml input being parsed.
+     */
+    public ErrorHandler getErrorHandler() {
+        return saxHandler.getErrorHandler();
     }
 }
