@@ -193,8 +193,8 @@ class + "RuleInfo" is recommended.
 Here is the addRules method on class SubstituteTransform, from the example:
 <pre>
     public static void addRules(RuleManager rm, String pathPrefix) {
-        rm.addRule("/from", new SetPropertyAction());
-        rm.addRule("/to", new SetPropertyAction());
+        rm.addRule(pathPrefix + "/from", new SetPropertyAction());
+        rm.addRule(pathPrefix + "/to", new SetPropertyAction());
     }
 </pre>
 Note that if many rules are to be added, it might be more convenient to
