@@ -59,10 +59,10 @@ public class Context {
      * using those push/pop/peek/isEmpty methods that take a StackId parameter.
      * <p>
      * An object of class Foo which wishes to store data on a private scratch
-     * stack for its own use should declare a StackId member variable then 
+     * stack for its own use should declare a StackId member variable then
      * later reference it:
      * <pre>
-     *    private final Context.StackId WIDGET_STACK 
+     *    private final Context.StackId WIDGET_STACK
      *      = new Context.StackId(Foo.class, "WidgetStack", this);
      *    ....
      *    context.push(WIDGET_STACK, someObject);
@@ -70,10 +70,10 @@ public class Context {
      *    Object savedObject = context.pop(WIDGET_STACK);
      * </pre>
      * <p>
-     * If an class Bar wishes to share a scratch stack across all instances of 
+     * If an class Bar wishes to share a scratch stack across all instances of
      * itself, then it should declare a static StackId:
      * <pre>
-     *    private static final Context.StackId GADGET_STACK 
+     *    private static final Context.StackId GADGET_STACK
      *      = new Context.StackId(Bar.class, "GadgetStack");
      * </pre>
      * <p>
@@ -94,14 +94,14 @@ public class Context {
          * Create an instance which has no specific owner object.
          */
         public StackId(Class sourceClass, String desc) {
-            this.desc = sourceClass.getName() + ":" + desc; 
+            this.desc = sourceClass.getName() + ":" + desc;
         }
 
         /**
          * Create an instance which has an owner object.
          */
         public StackId(Class sourceClass, String desc, Object owner) {
-            this.desc = sourceClass.getName() + ":" + desc 
+            this.desc = sourceClass.getName() + ":" + desc
                + ":" + System.identityHashCode(owner);
         }
 
@@ -115,19 +115,41 @@ public class Context {
         }
     }
 
-   /**
-    * See method {@link #putInstanceData}.
-    */
-    private static class InstanceItem {
-        public Object key;
-        public Map map;
+    /**
+     * The context provides "scratch storage" that any other object with
+     * access to the context can use for storing data; instances of this
+     * class are used to identify which "scratch item" is to be used when
+     * using the getItem/setItem methods.
+     * <p>
+     * An object of class Foo which wishes to store a private data item
+     * should declare an ItemId member variable then later reference it:
+     * <pre>
+     *    private final Context.ItemId MY_ITEM
+     *      = new Context.ItemId(Foo.class, "MyItem", this);
+     *    ....
+     *    context.putItem(MY_ITEM, someObject);
+     *    ....
+     *    Object savedObject = context.getItem(MY_ITEM);
+     * </pre>
+     * <p>
+     * See method {@link #putItem} for more information.
+     */
+    public static class ItemId {
+        private String desc;
 
-        public InstanceItem(Object key, Map map) {
-            this.key = key;
-            this.map = map;
+        public ItemId(Class sourceClass, String desc) {
+            this.desc = sourceClass.getName() + ":" + desc;
+        }
+
+        public ItemId(Class sourceClass, String desc, Object owner) {
+            this.desc = sourceClass.getName() + ":" + desc
+               + ":" + System.identityHashCode(owner);
+        }
+
+        public String toString() {
+            return desc;
         }
     }
-
 
     // ---------------------------------------------------
     // Instance Variables
@@ -239,15 +261,9 @@ public class Context {
 
     /**
      * Place where other objects can store any data they like during a parse.
-     * See method {@link #putInstanceData} for more information.
+     * See method {@link #putItem} for more information.
      */
-    private List instanceData = new ArrayList();
-
-    /**
-     * The parameters stack being utilized by CallMethodAction and
-     * CallParamAction.
-     */
-    private ArrayStack params = new ArrayStack();
+    private HashMap scratchItems = new HashMap();
 
     // ---------------------------------------------------------
     // Constructors
@@ -750,124 +766,31 @@ public class Context {
         stack.push(value);
     }
 
-    // ---------------------------------------------------
-    // Param Stack Methods
-    // ---------------------------------------------------
-
-    /**
-     * <p>Return the top object on the parameters stack without removing it.</p>
-     *
-     * <p>The parameters stack is used to store <code>CallMethodAction</code>
-     * parameters. See {@link #params}.</p>
-     *
-     * @throws EmptyStackException if the parameters stack is empty.
-     */
-    public Object peekParams() throws EmptyStackException {
-        return params.peek();
-    }
-
-    /**
-     * <p>Return the n'th object down the parameters stack, where 0 is the
-     * top element and [stacksize-1] is the bottom element.
-     *
-     * <p>The parameters stack is used to store <code>CallMethodAction</code>
-     * parameters. See {@link #params}.</p>
-     *
-     * @param n Index of the desired element, where 0 is the top of the stack,
-     *  1 is the next element down, and so on.
-     *
-     * @throws EmptyStackException if the parameters stack is empty.
-     */
-    public Object peekParams(int n) throws EmptyStackException {
-        return params.peek(n);
-    }
-
-    /**
-     * <p>Pop the top object off of the parameters stack, and return it.</p>
-     *
-     * <p>The parameters stack is used to store <code>CallMethodAction</code>
-     * parameters. See {@link #params}.</p>
-     *
-     * @throws EmptyStackException if the parameters stack is empty.
-     */
-    public Object popParams() throws EmptyStackException {
-        return params.pop();
-    }
-
-    /**
-     * <p>Push a new object onto the top of the parameters stack.</p>
-     *
-     * <p>The parameters stack is used to store <code>CallMethodAction</code>
-     * parameters. See {@link #params}.</p>
-     *
-     * @param object The new object
-     */
-    public void pushParams(Object object) {
-        params.push(object);
-
-    }
-
     // -----------------------------------------------
     // Other public methods
     // -----------------------------------------------
 
     /**
      * Place where an object (typically an Action) can store any data it likes
-     * during a parse. Usually the "named stacks" facility is the most
+     * during a parse. Usually the "scratch stacks" facility is the most
      * appropriate location for action-related data, as using stacks allows
      * Actions to be re-entrant. However in some cases a stack is not
      * needed (eg when building a cache of Class objects used by an Action).
-     * If the data is specific to an action instance, then the action instance
-     * itself should be passed as the first parameter. If the data is used by
-     * all action instances of a specific class, then the action's Class object
-     * can be used as the first parameter.
      *
-     * @param instance is a key to separate data related to this object from
-     * other data stored on this context object.
-     *
-     * @param category identifies the particular item of data being stored,
-     * so that an instance can store multiple data items.
+     * @param id is used as the key to the stored item, and must be passed
+     *  to the getItem method to retrieve the data.
      *
      * @param data is the object to be stored for later retrieval.
      */
-    public void putInstanceData(Object instance, String category, Object data) {
-        // Unfortunately, maps use equals to find a matching key rather than
-        // identity, so we can't use a standard Map to implement this. As the
-        // number of entries here is likely to be very small anyway, we will
-        // just use a list-of-maps, and iterate over the list to find the
-        // correct entry.
-        //
-        // Note that if we trusted System.identityHashCode to return a unique
-        // string for an instance, then we could use a map. However that method
-        // doesn't promise to return a unique string on all platforms.
-
-        for(Iterator i = instanceData.iterator(); i.hasNext(); ) {
-            InstanceItem item = (InstanceItem) i.next();
-            if (item.key == instance) {
-                item.map.put(category, data);
-                return;
-            }
-        }
-
-        // this instance has never stored data before
-        Map map = new HashMap();
-        map.put(category, data);
-        InstanceItem instanceItem = new InstanceItem(instance, map);
-        instanceData.add(instanceItem);
+    public void putItem(ItemId id, Object data) {
+        scratchItems.put(id, data);
     }
 
     /**
-     * Retrieve a piece of data stored earlier via putInstanceData.
+     * Retrieve a piece of data stored earlier via putItem.
      */
-    public Object getInstanceData(Object instance, String category) {
-        for(Iterator i = instanceData.iterator(); i.hasNext(); ) {
-            InstanceItem item = (InstanceItem) i.next();
-            if (item.key == instance) {
-                return item.map.get(category);
-            }
-        }
-
-        return null;
+    public Object getItem(ItemId id) {
+        return scratchItems.get(id);
     }
 
     /**
