@@ -644,7 +644,23 @@ public class Digester {
     // --------------------------------------------------------- Rule Methods
 
     /**
-     * <p>Register a new rule (pattern/action pair).
+     * Define a mapping between xml element prefix and namespace uri
+     * for use when rule patterns contain namespace prefixes. This is
+     * equivalent to
+     * <pre>
+     *  getSAXHandler().addNamespace(prefix, uri);
+     * </pre>
+     * which is in turn equivalent to
+     * <pre>
+     *  getRuleManager().addNamespace(prefix, uri);
+     * </pre>
+     */
+     public void addNamespace(String prefix, String uri) {
+        saxHandler.addNamespace(prefix, uri);
+     }
+
+    /**
+     * Register a new rule (pattern/action pair).
      *
      * @param pattern Element matching pattern
      * @param action Action to be registered

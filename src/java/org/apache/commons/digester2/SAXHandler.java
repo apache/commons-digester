@@ -698,6 +698,18 @@ public class SAXHandler extends DefaultHandler implements LexicalHandler {
     }
 
     /**
+     * Define a mapping between xml element prefix and namespace uri
+     * for use when rule patterns contain namespace prefixes. This is
+     * equivalent to
+     * <pre>
+     *  getRuleManager().addNamespace(prefix, uri);
+     * </pre>
+     */
+     public void addNamespace(String prefix, String uri) {
+        getRuleManager().addNamespace(prefix, uri);
+     }
+
+    /**
      * Add a (pattern, action) pair to the RuleManager instance associated
      * with this saxHandler. This is equivalent to
      * <pre>
