@@ -25,15 +25,21 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.plugins.strategies.*;
 
 /**
- * A simple data-holder for items which should exist only once per
- * digester instance. 
+ * Provides data and services which should exist only once per digester.
  * <p>
- * Such data cannot be stored on the PluginRules or PluginManager classes,
- * as there can be multiple instances of these at various times during a
- * parse. 
+ * This class holds a number of useful items which should be shared by all
+ * plugin objects. Such data cannot be stored on the PluginRules or 
+ * PluginManager classes, as there can be multiple instances of these at 
+ * various times during a parse. 
+ * <p>
+ * The name "Context" refers to the similarity between this class and a
+ * ServletContext class in a servlet engine. A ServletContext object provides
+ * access to the container's services such as obtaining global configuration
+ * parameters for the container, or getting access to logging services. For
+ * plugins, a Digester instance can be regarded as "the container".
  */
 
-public class PerDigesterResources {
+public class PluginContext {
 
     // the xml attribute the user uses on an xml element to specify
     // the plugin's class
@@ -66,7 +72,7 @@ public class PerDigesterResources {
 
     //------------------- constructors ---------------------------------------
     
-    public PerDigesterResources() {
+    public PluginContext() {
     }
     
     //------------------- methods ---------------------------------------
