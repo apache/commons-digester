@@ -20,26 +20,17 @@ package org.apache.commons.digester2;
 import java.util.List;
 
 /**
- * Public interface defining a collection of Action instances (and corresponding
- * matching patterns) plus an implementation of a matching policy that selects
- * the Actions that match a particular pattern of nested elements discovered
- * during parsing.
- *  <p>
- * Terminology:
- * <ul>
- * <li>Pattern: a string with namespace prefixes in it, eg "/foo:bob"</li>
- * <li>Path: a string with namespace uris in it, eg /{urn:foo}bob"</li>
- * </ul>
+ * Provides a base implementation for custom RuleManagers (ie classes that
+ * match input xml elements to lists of Actions to be executed).
  * <p>
- * <strong>IMPORTANT NOTE</strong>: Anyone implementing a custom RuleManager is
- * strongly encouraged to subclass AbstractRuleManager rather than implement this
- * interface directly. Digester minor releases (2.x -> 2.y) guarantee that
- * subclasses of AbstractRuleManager will not be broken. However the RuleManager
- * interface <i>may</i> change in minor releases, which will break any class
- * which implements this interface directly.
+ * Note that extending this abstract class rather than directly implementing
+ * the RuleManager interface provides much better "forward compatibility". 
+ * Digester minor releases (2.x -> 2.y) guarantee not to break any classes that 
+ * subclass this abstract class. However no such guarantee exists for classes 
+ * that directly implement the RuleManager interface.
  */
 
-public interface RuleManager {
+public abstract class AbstractRuleManager implements RuleManager {
 
     /**
      * Returns a new instance with the same type as the concrete object this
@@ -48,27 +39,27 @@ public interface RuleManager {
      * Action instances as the old one, as Action instances are expected to be
      * stateless and therefore can be safely shared between RuleManagers. 
      */
-    public RuleManager copy();
+    public abstract RuleManager copy();
     
     /**
      * Invoked before parsing each input document, this method gives the
      * RuleManager and the managed Action objects the opportunity to do
      * per-parse initialisation if required.
      */
-    public void startParse(Context context) throws DigestionException;
+    public void startParse(Context context) throws DigestionException {}
      
     /**
      * Invoked after parsing each input document, this method gives the
      * RuleManager and the managed Action objects the opportunity to do
      * per-parse cleanup if required.
      */
-     public void finishParse(Context context) throws DigestionException;
+     public void finishParse(Context context) throws DigestionException {}
 
     /**
      * Define a mapping between xml element prefix and namespace uri
      * for use when rule patterns contain namespace prefixes.
      */
-    public void addNamespace(String prefix, String uri);
+    public abstract void addNamespace(String prefix, String uri);
     
     /**
      * Cause the specified Action to be invoked whenever an xml element
@@ -81,7 +72,8 @@ public interface RuleManager {
      * Note that it is permitted for the same Action to be added multiple
      * times with different associated patterns.
      */
-    public void addRule(String pattern, Action action) throws InvalidRuleException;
+    public abstract void addRule(String pattern, Action action)
+    throws InvalidRuleException;
 
     /**
      * Return a List of all registered Action instances that match the specified
@@ -96,5 +88,6 @@ public interface RuleManager {
      * for which the caller wants the set of matching Action objects. If an
      * element has no namespace, then the {} part is omitted.
      */
-    public List getMatchingActions(String path) throws DigestionException;
+    public abstract List getMatchingActions(String path)
+        throws DigestionException;
 }

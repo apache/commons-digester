@@ -1,6 +1,6 @@
-/* $Id: $
+/* $Id$
  *
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,11 @@ import java.util.Iterator;
  * an existing RuleManager instance. 
  */
 
-public class DefaultRuleManager extends RuleManager {
+public class DefaultRuleManager extends AbstractRuleManager {
 
-    // ----------------------------------------------------- Instance Variables
+    // ----------------------------------------------------- 
+    // Instance Variables
+    // ----------------------------------------------------- 
 
     /**
      * Map of namespace-prefix to namespace-uri, used only by the
@@ -72,7 +74,9 @@ public class DefaultRuleManager extends RuleManager {
      */
     private MultiHashMap rules = new MultiHashMap();
 
-    // --------------------------------------------------------- Public Methods
+    // --------------------------------------------------------- 
+    // Public Methods
+    // --------------------------------------------------------- 
 
     /**
      * Return a clone of this object. The Action objects currently
@@ -229,7 +233,6 @@ public class DefaultRuleManager extends RuleManager {
         }
     }
 
-
     /**
      * Return a List of all registered Action instances, or a zero-length List
      * if there are no registered Action instances.
@@ -238,8 +241,7 @@ public class DefaultRuleManager extends RuleManager {
      * instance has been added multiple times, then its order is set by the
      * first time it was added.
      */
-    public List actions() {
+    public List getActions() {
         return this.actions;
     }
-
 }
