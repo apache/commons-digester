@@ -42,11 +42,11 @@ jaxp.jaxp.jar=${jaxp.jaxp.home}/xml-apis-1.0.b2.jar
 
 # Commons logging
 commons-logging.home=${repository}/commons-logging/jars
-commons-logging.jar=${commons-logging.home}/commons-logging-1.1.jar
+commons-logging.jar=${commons-logging.home}/commons-logging-1.1.1.jar
 
 # Commons beanutils
 commons-beanutils.home=${repository}/commons-beanutils/jars
-commons-beanutils.jar=${commons-beanutils.home}/commons-beanutils-1.7.0.jar
+commons-beanutils.jar=${commons-beanutils.home}/commons-beanutils-1.8.0.jar
 
 # The digester tests output logging information (including Exceptions) 
 # which can often be confusing to new developers.
