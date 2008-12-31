@@ -54,12 +54,12 @@ include:</p>
 <section name="Documentation">
 
 <p>User documentation is available as package descriptions within the 
-<a href="http://commons.apache.org/digester/commons-digester-1.8/docs/api/">JavaDoc
+<a href="http://commons.apache.org/digester/commons-digester-2.0/docs/api/">JavaDoc
 API documents</a>.  In particular, you should read the package description for 
 the <code>org.apache.commons.digester</code> package for detailed information 
 on using the package.</p>
 
-<p>The <a href="http://commons.apache.org/digester/commons-digester-1.8/RELEASE-NOTES.txt">
+<p>The <a href="http://commons.apache.org/digester/commons-digester-2.0/RELEASE-NOTES.txt">
 Release Notes</a> document the new features and bug fixes that have been
 included in this release.</p>
 
@@ -79,21 +79,50 @@ download the files.
 </section>
 
 <section name="Releases">
-    <subsection name='Digester 1.8 Release (03 December 2006)'>
+    <subsection name='Digester 2.0 Release (January 2008)'>
         <p>
-Digester 1.8 is a minor bugfix and maintenance release. A few small features have been added.
-New projects are encouraged to use this release of digester, but there is no urgency
-for existing projects to upgrade; Digester 1.7 has proven to be a stable release. See
-the release notes for more details.
+Digester 2.0 is a major release. New projects are encouraged to use this release
+of digester. There are breaking changes from Digester 1.8, see release notes
+in detail before choosing to upgrade. There is no urgency for existing
+projects to upgrade; Digester 1.8 has proven to be a stable release.
         </p>
         <p>
-The dependencies for Digester 1.8 are identical to the dependencies for Digester 1.7.
+Digester 2.0 <b>requires a minimum of JDK 1.5</b> and no longer requires any
+classes from Commons Collections (as Digester 1.8 did).
+        </p>
+        <p>
+The recommended dependency set for Digester 2.0 is:
+        </p>
+<table>
+<tr>
+<th colspan='3'>Recommended Dependency Set</th>
+</tr>
+<tr>
+<td>Digester</td>
+<td>+Logging 1.1.1</td>
+<td>+BeanUtils 1.8.0</td>
+</tr>
+</table>
+        <p>
+It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
+        </p>
+    </subsection>
+
+    <subsection name='Digester 1.8.1 Release (January 2008)'>
+        <p>
+Digester 1.8.1 is a minor bugfix and maintenance release. Existing projects
+using Digester 1.8 are encouraged to upgrade to the 1.8.1 release. New projects
+are encouraged to use Digester 2.0, which requires JDK 1.5. See the release
+notes for more details.
+        </p>
+        <p>
+The dependencies for Digester 1.8.1 are identical to the dependencies for Digester 1.8.
         </p>
         <p>
 Digester has a dependency on
 <a href='http://commons.apache.org/collections'>Commons Collections</a>.
 The dependency can alternatively be satisfied by including the latest BeanUtils
-releases (1.7 or above) (which includes the stable collections ArrayStack class
+releases (1.7.0 or above) (which includes the stable collections ArrayStack class
 necessary).
         </p>
         <p>
@@ -105,8 +134,8 @@ The recommended dependency set for Digester 1.8 is:
 </tr>
 <tr>
 <td>Digester</td>
-<td>+Logging 1.1.x</td>
-<td>+BeanUtils 1.7</td>
+<td>+Logging 1.1.1</td>
+<td>+BeanUtils 1.8.0</td>
 </tr>
 </table>
         <p>
@@ -130,7 +159,7 @@ Other compatible dependency sets for Digester 1.8 can be summarized as follows:
 </tr>
 </table>
         <p>
-It is also possible to use Logging 1.0.x instead.
+It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
         </p>
     </subsection>
     <subsection name='Downloading'>
