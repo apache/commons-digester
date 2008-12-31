@@ -22,23 +22,16 @@ $Id$
                                Release Notes
 
 
-** Current as of Dec 23, 2008 (these are 1.8.1 notes, update for next release)
-
 INTRODUCTION
 ============
 
-This is a minor bugfix and maintenance release. New projects are encouraged to
-use this release of digester, but there is no urgency for existing projects to
-upgrade; Digester 1.8 has proven to be a stable release.
+This is a minor bugfix and maintenance release. Existing projects using
+Digester 1.8 are encouraged to upgrade to the 1.8.1 release. New projects are
+encouraged to use Digester 2.0, which requires JDK 1.5.
 
-This release is 100% binary and source compatible with the previous release.
+This release is 100% binary and source compatible with the 1.8 release.
 
-IMPORTANT NOTES
-===============
-
-None.
-
-Dependencies
+DEPENDENCIES
 =============
 
 Digester 1.8.1 works with all sets of dependencies that worked for
@@ -46,7 +39,7 @@ Digester 1.8. Users should upgrade to the recommended dependency set below
 where possible.
 
 The Recommended Dependency Set for Digester 1.8.1 is:
-   Digester 1.8.1 + Logging 1.1.x + BeanUtils 1.8.0
+   Digester 1.8.1 + Logging 1.1.1 + BeanUtils 1.8.0
 
 Other Compatible Dependency Sets:
    Digester 1.8.1 + Logging 1.1.x + BeanUtils 1.x + Collections 2.x
@@ -54,16 +47,20 @@ Other Compatible Dependency Sets:
 
 It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
 
-NEW FEATURES
-=============
-
-
-
 BUGS FROM PREVIOUS RELEASE
 ===========================
 
+ * [DIGESTER-114] SetPropertyRule throws java.lang.IllegalArgumentException:
+                  No name specified when matched element has no attributes.
+
+ * [DIGESTER-117] Missing unit tests using Ant and Maven.
+
+ * [DIGESTER-120] Digesting XML content with NodeCreateRule swallows spaces.
+
  * [DIGESTER-122] Potential NullPointerException if debug is enabled in
                   Digester#resolveEntity()
+
+ * [DIGESTER-125] Clear inputSources list in method Digester.clear()
 
  * [DIGESTER-126] Potential NullPointerException if debug is enabled in
                   FactoryCreateRule#begin()
@@ -71,11 +68,8 @@ BUGS FROM PREVIOUS RELEASE
 IMPROVEMENTS FROM PREVIOUS RELEASE
 ===================================
 
- * [DIGESTER-111] Null arguments to all Digester#parse() methods now an
+ * [DIGESTER-89]  Add jar target to Ant build.xml
+
+ * [DIGESTER-111] Null arguments to all Digester#parse() methods now throw an
                   IllegalArgumentException.
-
-DEPRECATIONS
-============
-
-None.
 
