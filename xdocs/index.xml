@@ -79,7 +79,7 @@ download the files.
 </section>
 
 <section name="Releases">
-    <subsection name='Digester 2.0 Release (January 2008)'>
+    <subsection name='Digester 2.0 Release (January 2009)'>
         <p>
 Digester 2.0 is a major release. New projects are encouraged to use this release
 of digester. There are breaking changes from Digester 1.8, see release notes
@@ -108,7 +108,7 @@ It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
         </p>
     </subsection>
 
-    <subsection name='Digester 1.8.1 Release (January 2008)'>
+    <subsection name='Digester 1.8.1 Release (January 2009)'>
         <p>
 Digester 1.8.1 is a minor bugfix and maintenance release. Existing projects
 using Digester 1.8 are encouraged to upgrade to the 1.8.1 release. New projects
@@ -126,7 +126,7 @@ releases (1.7.0 or above) (which includes the stable collections ArrayStack clas
 necessary).
         </p>
         <p>
-The recommended dependency set for Digester 1.8 is:
+The recommended dependency set for Digester 1.8.1 is:
         </p>
 <table>
 <tr>
@@ -139,7 +139,7 @@ The recommended dependency set for Digester 1.8 is:
 </tr>
 </table>
         <p>
-Other compatible dependency sets for Digester 1.8 can be summarized as follows:
+Other compatible dependency sets for Digester 1.8.1 can be summarized as follows:
         </p>
 <table>
 <tr>
@@ -165,11 +165,11 @@ It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
     <subsection name='Downloading'>
  <ul>
   <li>The most recent release is available from apache mirrors via
-  <a href="http://commons.apache.org/downloads/download_digester.cgi">
+  <a href="http://commons.apache.org/digester/download_digester.cgi">
   the regular download page</a>.</li>
   <li>Reasonably recent releases are also available from apache mirrors, via the
   "browse downloads" link at
-  <a href="http://commons.apache.org/downloads/download_digester.cgi">
+  <a href="http://commons.apache.org/digester/download_digester.cgi">
   the regular download page</a>.</li>
   <li>Older releases can be found 
   <a href="http://archive.apache.org/dist/commons/digester/old">
