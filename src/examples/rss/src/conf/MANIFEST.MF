@@ -1,8 +1,8 @@
 Extension-Name: org.apache.commons.digester.rss
 Specification-Title: "Jakarta Commons Digester RSS Example"
 Specification-Vendor: "Apache Software Foundation"
-Specification-Version: "1.8.1"
+Specification-Version: "1.8.2-SNAPSHOT"
 Implementation-Title: "org.apache.commons.digester.rss"
 Implementation-Vendor: "Apache Software Foundation"
-Implementation-Version: "1.8.1"
+Implementation-Version: "1.8.2-SNAPSHOT"
 

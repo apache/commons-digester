@@ -32,7 +32,7 @@
   <name>Commons Digester</name>
   <groupId>commons-digester</groupId>
   <artifactId>commons-digester</artifactId>
-  <version>1.8.1-SNAPSHOT</version>
+  <version>1.8.2-SNAPSHOT</version>
 
   <inceptionYear>2001</inceptionYear>
   <description>
