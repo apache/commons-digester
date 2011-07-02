@@ -292,7 +292,6 @@ public class ExtendedBaseRules
         // we have to go through for all those universal rules in all cases.
 
         // Find the longest key, ie more discriminant
-        String longKey = "";
         int longKeyLength = 0;
 
         for ( String key : this.cache.keySet() )
@@ -406,7 +405,6 @@ public class ExtendedBaseRules
                             if ( keyLength > longKeyLength )
                             {
                                 rulesList = this.cache.get( key );
-                                longKey = key;
                                 longKeyLength = keyLength;
                             }
                         }
