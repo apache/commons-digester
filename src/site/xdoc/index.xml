@@ -68,7 +68,7 @@ download the files.
 </section>
 
 <section name="Releases">
-    <subsection name="Digester 3.0 Release (Still in sandbox, not released yet)">
+    <subsection name="Digester 3.0 Release">
       <p>
 The Digester 3.0 is an almost complete rewrite of the original Digester implementation, which offers:
 </p>
