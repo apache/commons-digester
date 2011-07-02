@@ -331,11 +331,8 @@ public class CallMethodRule
                 }
                 catch ( ClassNotFoundException e )
                 {
-                    String errorMessage = format( "[CallMethodRule] Cannot load class %s at position %s",
-                                                  this.paramClassNames[i], i );
-                    // use the digester log
-                    digester.getLogger().error( errorMessage, e );
-                    throw new RuntimeException( errorMessage, e );
+                    throw new RuntimeException( format( "[CallMethodRule] Cannot load class %s at position %s",
+                                                        this.paramClassNames[i], i ), e );
                 }
             }
         }
