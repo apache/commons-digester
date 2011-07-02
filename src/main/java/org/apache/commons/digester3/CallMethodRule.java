@@ -446,7 +446,6 @@ public class CallMethodRule
             if ( parameters[i] == null
                 || ( parameters[i] instanceof String && !String.class.isAssignableFrom( paramTypes[i] ) ) )
             {
-
                 paramValues[i] = convert( (String) parameters[i], paramTypes[i] );
             }
             else
