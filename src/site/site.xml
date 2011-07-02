@@ -48,7 +48,7 @@
       - appropriate dirs on the website; maven won't set this up.
     -->
     <menu name="Release 3.0 (Current)">
-      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.0/docs/api" />
+      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.0/apidocs" />
       <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt" />
     </menu>
     <menu name="Release 2.1">
