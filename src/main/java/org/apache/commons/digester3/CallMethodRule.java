@@ -238,12 +238,12 @@ public class CallMethodRule
         this.paramCount = paramCount;
         if ( paramTypes == null )
         {
-            this.paramTypes = new Class[paramCount];
+            this.paramTypes = new Class<?>[paramCount];
             fill( this.paramTypes, String.class );
         }
         else
         {
-            this.paramTypes = new Class[paramTypes.length];
+            this.paramTypes = new Class<?>[paramTypes.length];
             arraycopy( paramTypes, 0, this.paramTypes, 0, paramTypes.length );
         }
     }
@@ -322,7 +322,7 @@ public class CallMethodRule
         // if necessary, load parameter classes
         if ( this.paramClassNames != null )
         {
-            this.paramTypes = new Class[paramClassNames.length];
+            this.paramTypes = new Class<?>[paramClassNames.length];
             for ( int i = 0; i < this.paramClassNames.length; i++ )
             {
                 try
