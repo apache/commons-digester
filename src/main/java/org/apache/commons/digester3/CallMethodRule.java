@@ -163,7 +163,7 @@ public class CallMethodRule
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public CallMethodRule( String methodName, int paramCount, String paramTypes[] )
+    public CallMethodRule( String methodName, int paramCount, String[] paramTypes )
     {
         this( 0, methodName, paramCount, paramTypes );
     }
@@ -182,7 +182,7 @@ public class CallMethodRule
      *            corresponding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public CallMethodRule( int targetOffset, String methodName, int paramCount, String paramTypes[] )
+    public CallMethodRule( int targetOffset, String methodName, int paramCount, String[] paramTypes )
     {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
@@ -231,7 +231,7 @@ public class CallMethodRule
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
      *            <code>java.lang.Boolean.TYPE</code> for a <code>boolean</code> parameter)
      */
-    public CallMethodRule( int targetOffset, String methodName, int paramCount, Class<?> paramTypes[] )
+    public CallMethodRule( int targetOffset, String methodName, int paramCount, Class<?>[] paramTypes )
     {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
@@ -275,13 +275,13 @@ public class CallMethodRule
     /**
      * The parameter types of the parameters to be collected.
      */
-    protected Class<?> paramTypes[] = null;
+    protected Class<?>[] paramTypes = null;
 
     /**
      * The names of the classes of the parameters to be collected. This attribute allows creation of the classes to be
      * postponed until the digester is set.
      */
-    private String paramClassNames[] = null;
+    private String[] paramClassNames = null;
 
     /**
      * Should <code>MethodUtils.invokeExactMethod</code> be used for reflection.
