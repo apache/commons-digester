@@ -22,7 +22,7 @@
     <title>Apache Commons Digester Changes</title>
   </properties>
   <body>
-  <release version="3.0" date="TBD" description="New major release.">
+  <release version="3.0" date="2011-07-06" description="New major release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-28">
       Default ClassLoader policy unusable in EAR archive
     </action>
