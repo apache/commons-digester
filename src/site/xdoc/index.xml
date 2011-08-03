@@ -244,6 +244,10 @@ It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
  <ul>
   <!-- newest first sounds like a reasonable rule -->
   <li>
+    Jul 11, 2011 - The online magazine JaxEnter interviews Commons PMC Member Simone Tripodi asking
+    <a href="http://jaxenter.com/what-s-new-in-apache-commons-digester-3-0-36817.html">What's New in Apache Commons Digester 3.0?</a>.
+  </li>
+  <li>
    <a href="http://wiki.apache.org/commons/Digester">The Apache wiki page for the commons digester component</a>.
   </li>
   <li>
