@@ -93,5 +93,10 @@ If you want to discuss this, please post to <a href="http://commons.apache.org/m
 commons dev mailing list</a>
 </p></answer>
         </faq>
+        <faq id="upgrade_digester3">
+          <question>Does my old Digester 2.X code continue working once upgraded to Digester 3?</question>
+          <answer>No, class imports have to be updated to org.apache.commons.digester3 otherwise Digester and Rule classes won't be found.
+          Old XML Rules and Annotations rule extensions are not 100% compatible, please refer to related documentation.</answer>
+        </faq>
     </part>
 </faqs>
