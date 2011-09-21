@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>21</version>
+    <version>22</version>
   </parent>
 
   <groupId>org.apache.commons</groupId>
@@ -210,17 +210,6 @@
         </includes>
       </resource>
     </resources>
-
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-        <filtering>false</filtering>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.xsd</include>
-        </includes>
-      </testResource>
-    </testResources>
 
     <plugins>
       <plugin>
