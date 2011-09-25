@@ -22,6 +22,11 @@
     <title>Apache Commons Digester Changes</title>
   </properties>
   <body>
+  <release version="3.1" date="2011-??-??" description="New features release.">
+    <action dev="simonetripodi" type="add" issue="DIGESTER-150">
+      Use Java5 Concurrent APIs to asynchronous parse()
+    </action>
+  </release>
   <release version="3.0" date="2011-07-06" description="New major release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-28">
       Default ClassLoader policy unusable in EAR archive

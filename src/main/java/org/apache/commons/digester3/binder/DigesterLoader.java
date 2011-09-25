@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -127,6 +128,12 @@ public final class DigesterLoader
     private StackAction stackAction;
 
     /**
+     * The executor service to run asynchronous parse method.
+     * @since 3.1
+     */
+    private ExecutorService executorService;
+
+    /**
      * Creates a new {@link DigesterLoader} instance given a collection of {@link RulesModule} instance.
      *
      * @param rulesModules The modules containing the {@code Rule} binding
@@ -164,7 +171,7 @@ public final class DigesterLoader
         return this;
     }
 
-    /** 
+    /**
      * Sets the <code>Substitutor</code> to be used to convert attributes and body text.
      *
      * @param substitutor the Substitutor to be used to convert attributes and body text
@@ -263,18 +270,18 @@ public final class DigesterLoader
      * This must be called before the first call to <code>parse()</code>.
      * </p><p>
      * <code>Digester</code> contains an internal <code>EntityResolver</code>
-     * implementation. This maps <code>PUBLICID</code>'s to URLs 
+     * implementation. This maps <code>PUBLICID</code>'s to URLs
      * (from which the resource will be loaded). A common use case for this
-     * method is to register local URLs (possibly computed at runtime by a 
+     * method is to register local URLs (possibly computed at runtime by a
      * classloader) for DTDs. This allows the performance advantage of using
      * a local version without having to ensure every <code>SYSTEM</code>
      * URI on every processed xml document is local. This implementation provides
      * only basic functionality. If more sophisticated features are required,
      * using {@link #setEntityResolver(EntityResolver)} to set a custom resolver is recommended.
      * </p><p>
-     * <strong>Note:</strong> This method will have no effect when a custom 
-     * <code>EntityResolver</code> has been set. (Setting a custom 
-     * <code>EntityResolver</code> overrides the internal implementation.) 
+     * <strong>Note:</strong> This method will have no effect when a custom
+     * <code>EntityResolver</code> has been set. (Setting a custom
+     * <code>EntityResolver</code> overrides the internal implementation.)
      * </p>
      * @param publicId Public identifier of the DTD to be resolved
      * @param entityURL The URL to use for reading this DTD
@@ -319,7 +326,7 @@ public final class DigesterLoader
     /**
      * Set the <code>EntityResolver</code> used by SAX when resolving public id and system id. This must be called
      * before the first call to <code>parse()</code>.
-     * 
+     *
      * @param entityResolver a class that implement the <code>EntityResolver</code> interface.
      * @return This loader instance, useful to chain methods.
      */
@@ -339,6 +346,30 @@ public final class DigesterLoader
     public DigesterLoader setStackAction( StackAction stackAction )
     {
         this.stackAction = stackAction;
+        return this;
+    }
+
+    /**
+     * Returns the executor service used to run asynchronous parse method.
+     *
+     * @return the executor service used to run asynchronous parse method
+     * @since 3.1
+     */
+    public ExecutorService getExecutorService()
+    {
+        return executorService;
+    }
+
+    /**
+     * Sets the executor service to run asynchronous parse method.
+     *
+     * @param executorService the executor service to run asynchronous parse method
+     * @return This loader instance, useful to chain methods.
+     * @since 3.1
+     */
+    public DigesterLoader setExecutorService( ExecutorService executorService )
+    {
+        this.executorService = executorService;
         return this;
     }
 
@@ -449,6 +480,7 @@ public final class DigesterLoader
         digester.setEntityResolver( entityResolver );
         digester.setStackAction( stackAction );
         digester.setNamespaceAware( isNamespaceAware() );
+        digester.setExecutorService( executorService );
 
         addRules( digester );
 

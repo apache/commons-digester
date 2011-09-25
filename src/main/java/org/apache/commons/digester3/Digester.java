@@ -37,6 +37,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -146,7 +149,7 @@ public class Digester
      * As each xml element in the input is entered, the matching rules are pushed onto this stack. After the end tag is
      * reached, the matches are popped again. The depth of is stack is therefore exactly the same as the current
      * "nesting" level of the input xml.
-     * 
+     *
      * @since 1.6
      */
     private final Stack<List<Rule>> matches = new Stack<List<Rule>>();
@@ -199,6 +202,12 @@ public class Digester
     private boolean namespaceAware = false;
 
     /**
+     * The executor service to run asynchronous parse method.
+     * @since 3.1
+     */
+    private ExecutorService executorService;
+
+    /**
      * Registered namespaces we are currently processing. The key is the namespace prefix that was declared in the
      * document. The value is an Stack of the namespace URIs this prefix has been mapped to -- the top Stack element is
      * the most current one. (This architecture is required because documents can declare nested uses of the same prefix
@@ -213,7 +222,7 @@ public class Digester
 
     /**
      * The parameters stack being utilized by CallMethodRule and CallParamRule rules.
-     * 
+     *
      * @since 2.0
      */
     private final Stack<Object[]> params = new Stack<Object[]>();
@@ -246,7 +255,7 @@ public class Digester
 
     /**
      * The XML schema to use for validating an XML instance.
-     * 
+     *
      * @since 2.0
      */
     private Schema schema = null;
@@ -310,7 +319,7 @@ public class Digester
     /**
      * Return the currently mapped namespace URI for the specified prefix, if any; otherwise return <code>null</code>.
      * These mappings come and go dynamically as the document is parsed.
-     * 
+     *
      * @param prefix Prefix to look up
      * @return the currently mapped namespace URI for the specified prefix
      */
@@ -362,7 +371,7 @@ public class Digester
 
     /**
      * Set the class loader to be used for instantiating application objects when required.
-     * 
+     *
      * @param classLoader The new class loader to use, or <code>null</code> to revert to the standard rules
      */
     public void setClassLoader( ClassLoader classLoader )
@@ -408,7 +417,7 @@ public class Digester
 
     /**
      * Set the error handler for this Digester.
-     * 
+     *
      * @param errorHandler The new error handler
      */
     public void setErrorHandler( ErrorHandler errorHandler )
@@ -438,7 +447,7 @@ public class Digester
      * Returns a flag indicating whether the requested feature is supported by the underlying implementation of
      * <code>org.xml.sax.XMLReader</code>. See <a href="http://www.saxproject.org">the saxproject website</a> for
      * information about the standard SAX2 feature flags.
-     * 
+     *
      * @param feature Name of the feature to inquire about
      * @return true, if the requested feature is supported by the underlying implementation of
      *         <code>org.xml.sax.XMLReader</code>, false otherwise
@@ -458,7 +467,7 @@ public class Digester
      * information about the standard SAX2 feature flags. In order to be effective, this method must be called
      * <strong>before</strong> the <code>getParser()</code> method is called for the first time, either directly or
      * indirectly.
-     * 
+     *
      * @param feature Name of the feature to set the status for
      * @param value The new value for this feature
      * @exception ParserConfigurationException if a parser configuration error occurs
@@ -504,7 +513,7 @@ public class Digester
 
     /**
      * Sets the logger used for logging SAX-related information. <strong>Note</strong> the output is finely grained.
-     * 
+     *
      * @param saxLog the logger used for logging SAX-related information, not null
      * @since 1.6
      */
@@ -548,7 +557,7 @@ public class Digester
 
     /**
      * Set the "namespace aware" flag for parsers we create.
-     * 
+     *
      * @param namespaceAware The new "namespace aware" flag
      */
     public void setNamespaceAware( boolean namespaceAware )
@@ -559,7 +568,7 @@ public class Digester
     /**
      * Return the XInclude-aware flag for parsers we create. XInclude functionality additionally requires
      * namespace-awareness.
-     * 
+     *
      * @return The XInclude-aware flag
      * @see #getNamespaceAware()
      * @since 2.0
@@ -571,7 +580,7 @@ public class Digester
 
     /**
      * Set the XInclude-aware flag for parsers we create. This additionally requires namespace-awareness.
-     * 
+     *
      * @param xincludeAware The new XInclude-aware flag
      * @see #setNamespaceAware(boolean)
      * @since 2.0
@@ -583,7 +592,7 @@ public class Digester
 
     /**
      * Set the public id of the current file being parse.
-     * 
+     *
      * @param publicId the DTD/Schema public's id.
      */
     public void setPublicId( String publicId )
@@ -613,7 +622,7 @@ public class Digester
 
     /**
      * Set the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
-     * 
+     *
      * @param ruleNamespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
      *            matching regardless of the current namespace URI
      */
@@ -656,7 +665,7 @@ public class Digester
      *
      * See <a href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2
      * properties.
-     * 
+     *
      * @param property Property name to be retrieved
      * @return the current value of the specified property for the underlying <code>XMLReader</code> implementation.
      * @exception SAXNotRecognizedException if the property name is not recognized
@@ -671,7 +680,7 @@ public class Digester
     /**
      * Set the current value of the specified property for the underlying <code>XMLReader</code> implementation. See <a
      * href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2 properties.
-     * 
+     *
      * @param property Property name to be set
      * @param value Property value to be set
      * @exception SAXNotRecognizedException if the property name is not recognized
@@ -701,7 +710,7 @@ public class Digester
 
     /**
      * Set the <code>Rules</code> implementation object containing our rules collection and associated matching policy.
-     * 
+     *
      * @param rules New Rules implementation
      */
     public void setRules( Rules rules )
@@ -712,7 +721,7 @@ public class Digester
 
     /**
      * Return the XML Schema used when parsing.
-     * 
+     *
      * @return The {@link Schema} instance in use.
      * @since 2.0
      */
@@ -723,7 +732,7 @@ public class Digester
 
     /**
      * Set the XML Schema to be used when parsing.
-     * 
+     *
      * @param schema The {@link Schema} instance to use.
      * @since 2.0
      */
@@ -746,7 +755,7 @@ public class Digester
      * Determine whether to use the Context ClassLoader (the one found by calling
      * <code>Thread.currentThread().getContextClassLoader()</code>) to resolve/load classes that are defined in various
      * rules. If not using Context ClassLoader, then the class-loading defaults to using the calling-class' ClassLoader.
-     * 
+     *
      * @param use determines whether to use Context ClassLoader.
      */
     public void setUseContextClassLoader( boolean use )
@@ -766,7 +775,7 @@ public class Digester
 
     /**
      * Set the validating parser flag. This must be called before <code>parse()</code> is called the first time.
-     * 
+     *
      * @param validating The new validating parser flag.
      */
     public void setValidating( boolean validating )
@@ -776,7 +785,7 @@ public class Digester
 
     /**
      * Return the XMLReader to be used for parsing the input document.
-     * 
+     *
      * FIXME: there is a bug in JAXP/XERCES that prevent the use of a parser that contains a schema with a DTD.
      *
      * @return the XMLReader to be used for parsing the input document.
@@ -808,8 +817,8 @@ public class Digester
 
     /**
      * Gets the <code>Substitutor</code> used to convert attributes and body text.
-     * 
-     * @return the <code>Substitutor</code> used to convert attributes and body text, 
+     *
+     * @return the <code>Substitutor</code> used to convert attributes and body text,
      *         null if not substitutions are to be performed.
      */
     public Substitutor getSubstitutor()
@@ -819,7 +828,7 @@ public class Digester
 
     /**
      * Sets the <code>Substitutor</code> to be used to convert attributes and body text.
-     * 
+     *
      * @param substitutor the Substitutor to be used to convert attributes and body text or null if not substitution of
      *            these values is to be performed.
      */
@@ -855,11 +864,11 @@ public class Digester
      * properly save/restore the value and maybe some day this will come in useful.
      * <p>
      * Note also that this is not quite equivalent to
-     * 
+     *
      * <pre>
      * digester.getXMLReader().setContentHandler( handler )
      * </pre>
-     * 
+     *
      * for these reasons:
      * <ul>
      * <li>Some xml parsers don't like having setContentHandler called after parsing has started. The Aelfred parser is
@@ -905,7 +914,7 @@ public class Digester
 
     /**
      * Get the most current namespaces for all prefixes.
-     * 
+     *
      * @return Map A map with namespace prefixes as keys and most current namespace URIs for the corresponding prefixes
      *         as values
      * @since 1.8
@@ -931,6 +940,28 @@ public class Digester
             }
         }
         return currentNamespaces;
+    }
+
+    /**
+     * Returns the executor service used to run asynchronous parse method.
+     *
+     * @return the executor service used to run asynchronous parse method
+     * @since 3.1
+     */
+    public ExecutorService getExecutorService()
+    {
+        return executorService;
+    }
+
+    /**
+     * Sets the executor service to run asynchronous parse method.
+     *
+     * @param executorService the executor service to run asynchronous parse method
+     * @since 3.1
+     */
+    public void setExecutorService( ExecutorService executorService )
+    {
+        this.executorService = executorService;
     }
 
     // ------------------------------------------------- ContentHandler Methods
@@ -1192,7 +1223,7 @@ public class Digester
 
     /**
      * Gets the document locator associated with our parser.
-     * 
+     *
      * @return the Locator supplied by the document parser
      */
     public Locator getDocumentLocator()
@@ -1392,7 +1423,7 @@ public class Digester
     /**
      * Set the <code>EntityResolver</code> used by SAX when resolving public id and system id. This must be called
      * before the first call to <code>parse()</code>.
-     * 
+     *
      * @param entityResolver a class that implement the <code>EntityResolver</code> interface.
      */
     public void setEntityResolver( EntityResolver entityResolver )
@@ -1402,7 +1433,7 @@ public class Digester
 
     /**
      * Return the Entity Resolver used by the SAX parser.
-     * 
+     *
      * @return the Entity Resolver used by the SAX parser.
      */
     public EntityResolver getEntityResolver()
@@ -1536,7 +1567,7 @@ public class Digester
     /**
      * Parse the content of the specified file using this Digester. Returns the root element from the object stack (if
      * any).
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param file File containing the XML data to be parsed
      * @return the root element from the object stack (if any)
@@ -1558,9 +1589,32 @@ public class Digester
     }
 
     /**
+     * Creates a Callable instance that parse the content of the specified reader using this Digester.
+     *
+     * @param <T> The result type returned by the returned Future's {@code get} method
+     * @param file File containing the XML data to be parsed
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @see Digester#parse(File)
+     * @since 3.1
+     */
+    public <T> Future<T> asyncParse( final File file )
+    {
+        return asyncParse( new Callable<T>()
+        {
+
+            public T call()
+                throws Exception
+            {
+                return Digester.this.<T> parse( file );
+            }
+
+        } );
+    }
+
+    /**
      * Parse the content of the specified input source using this Digester. Returns the root element from the object
      * stack (if any).
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param input Input source containing the XML data to be parsed
      * @return the root element from the object stack (if any)
@@ -1604,9 +1658,32 @@ public class Digester
     }
 
     /**
+     * Creates a Callable instance that parse the content of the specified reader using this Digester.
+     *
+     * @param <T> The result type returned by the returned Future's {@code get} method
+     * @param input Input source containing the XML data to be parsed
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @see Digester#parse(InputSource)
+     * @since 3.1
+     */
+    public <T> Future<T> asyncParse( final InputSource input )
+    {
+        return asyncParse( new Callable<T>()
+        {
+
+            public T call()
+                throws Exception
+            {
+                return Digester.this.<T> parse( input );
+            }
+
+        } );
+    }
+
+    /**
      * Parse the content of the specified input stream using this Digester. Returns the root element from the object
      * stack (if any).
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param input Input stream containing the XML data to be parsed
      * @return the root element from the object stack (if any)
@@ -1625,9 +1702,32 @@ public class Digester
     }
 
     /**
+     * Creates a Callable instance that parse the content of the specified reader using this Digester.
+     *
+     * @param <T> The result type returned by the returned Future's {@code get} method
+     * @param input Input stream containing the XML data to be parsed
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @see Digester#parse(InputStream)
+     * @since 3.1
+     */
+    public <T> Future<T> asyncParse( final InputStream input )
+    {
+        return asyncParse( new Callable<T>()
+        {
+
+            public T call()
+                throws Exception
+            {
+                return Digester.this.<T> parse( input );
+            }
+
+        } );
+    }
+
+    /**
      * Parse the content of the specified reader using this Digester. Returns the root element from the object stack (if
      * any).
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param reader Reader containing the XML data to be parsed
      * @return the root element from the object stack (if any)
@@ -1646,9 +1746,32 @@ public class Digester
     }
 
     /**
+     * Creates a Callable instance that parse the content of the specified reader using this Digester.
+     *
+     * @param <T> The result type returned by the returned Future's {@code get} method
+     * @param reader Reader containing the XML data to be parsed
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @see Digester#parse(Reader)
+     * @since 3.1
+     */
+    public <T> Future<T> asyncParse( final Reader reader )
+    {
+        return asyncParse( new Callable<T>()
+        {
+
+            public T call()
+                throws Exception
+            {
+                return Digester.this.<T> parse( reader );
+            }
+
+        } );
+    }
+
+    /**
      * Parse the content of the specified URI using this Digester. Returns the root element from the object stack (if
      * any).
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param uri URI containing the XML data to be parsed
      * @return the root element from the object stack (if any)
@@ -1667,9 +1790,32 @@ public class Digester
     }
 
     /**
+     * Creates a Callable instance that parse the content of the specified reader using this Digester.
+     *
+     * @param <T> The result type returned by the returned Future's {@code get} method
+     * @param uri URI containing the XML data to be parsed
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @see Digester#parse(String)
+     * @since 3.1
+     */
+    public <T> Future<T> asyncParse( final String uri )
+    {
+        return asyncParse( new Callable<T>()
+        {
+
+            public T call()
+                throws Exception
+            {
+                return Digester.this.<T> parse( uri );
+            }
+
+        } );
+    }
+
+    /**
      * Parse the content of the specified URL using this Digester. Returns the root element from the object stack (if
      * any).
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param url URL containing the XML data to be parsed
      * @return the root element from the object stack (if any)
@@ -1689,6 +1835,47 @@ public class Digester
     }
 
     /**
+     * Creates a Callable instance that parse the content of the specified reader using this Digester.
+     *
+     * @param <T> The result type returned by the returned Future's {@code get} method
+     * @param url URL containing the XML data to be parsed
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @see Digester#parse(URL)
+     * @since 3.1
+     */
+    public <T> Future<T> asyncParse( final URL url )
+    {
+        return asyncParse( new Callable<T>()
+        {
+
+            public T call()
+                throws Exception
+            {
+                return Digester.this.<T> parse( url );
+            }
+
+        } );
+    }
+
+    /**
+     * Execute the parse in async mode.
+     *
+     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param callable
+     * @return a Future that can be used to track when the parse has been fully processed.
+     * @since 3.1
+     */
+    private <T> Future<T> asyncParse( Callable<T> callable )
+    {
+        if ( executorService == null )
+        {
+            throw new IllegalStateException( "ExecutorService not set" );
+        }
+
+        return executorService.submit( callable );
+    }
+
+    /**
      * <p>
      * Register the specified DTD URL for the specified public identifier. This must be called before the first call to
      * <code>parse()</code>.
@@ -1705,7 +1892,7 @@ public class Digester
      * <strong>Note:</strong> This method will have no effect when a custom <code>EntityResolver</code> has been set.
      * (Setting a custom <code>EntityResolver</code> overrides the internal implementation.)
      * </p>
-     * 
+     *
      * @param publicId Public identifier of the DTD to be resolved
      * @param entityURL The URL to use for reading this DTD
      * @since 1.8
@@ -1723,7 +1910,7 @@ public class Digester
      * <p>
      * Convenience method that registers the string version of an entity URL instead of a URL version.
      * </p>
-     * 
+     *
      * @param publicId Public identifier of the entity to be resolved
      * @param entityURL The URL to use for reading this entity
      */
@@ -1778,7 +1965,7 @@ public class Digester
      * be converted into tokens for the rest of the XMLReader code to handle. XMLDocumentScannerImpl calls
      * fEntityManager.startDocumentEntity(source), where fEntityManager is declared in ancestor class XMLScanner to be
      * an XMLEntityManager. In that class, if the input source stream is null, then:
-     * 
+     *
      * <pre>
      * URL location = new URL( expandedSystemId );
      * URLConnection connect = location.openConnection();
@@ -1788,7 +1975,7 @@ public class Digester
      * }
      * stream = connect.getInputStream();
      * </pre>
-     * 
+     *
      * This method pretty much duplicates the standard behaviour, except that it calls URLConnection.setUseCaches(false)
      * before opening the connection.
      *
@@ -1813,7 +2000,7 @@ public class Digester
      * <p>
      * Convenience method that creates an <code>InputSource</code> from the string version of a URL.
      * </p>
-     * 
+     *
      * @param url URL for which to create an <code>InputSource</code>
      * @return The InputSource that reads from the input URL
      * @throws IOException if any error occurs while reading the input URL
@@ -1832,7 +2019,7 @@ public class Digester
      * Register a new Rule matching the specified pattern. This method sets the <code>Digester</code> property on the
      * rule.
      * </p>
-     * 
+     *
      * @param pattern Element matching pattern
      * @param rule Rule to be registered
      */
@@ -1844,7 +2031,7 @@ public class Digester
 
     /**
      * Register a set of Rule instances defined in a RuleSet.
-     * 
+     *
      * @param ruleSet The RuleSet instance to configure from
      */
     public void addRuleSet( RuleSet ruleSet )
@@ -1869,7 +2056,7 @@ public class Digester
 
     /**
      * Add a "bean property setter" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @see BeanPropertySetterRule
      */
@@ -1880,7 +2067,7 @@ public class Digester
 
     /**
      * Add a "bean property setter" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param propertyName Name of property to set
      * @see BeanPropertySetterRule
@@ -1892,7 +2079,7 @@ public class Digester
 
     /**
      * Add an "call method" rule for a method which accepts no arguments.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
      * @see CallMethodRule
@@ -1904,7 +2091,7 @@ public class Digester
 
     /**
      * Add an "call method" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
@@ -1919,7 +2106,7 @@ public class Digester
      * Add an "call method" rule for the specified parameters. If <code>paramCount</code> is set to zero the rule will
      * use the body of the matched element as the single argument of the method, unless <code>paramTypes</code> is null
      * or empty, in this case the rule will call the specified method with no arguments.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
@@ -1937,7 +2124,7 @@ public class Digester
      * Add an "call method" rule for the specified parameters. If <code>paramCount</code> is set to zero the rule will
      * use the body of the matched element as the single argument of the method, unless <code>paramTypes</code> is null
      * or empty, in this case the rule will call the specified method with no arguments.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
@@ -1953,7 +2140,7 @@ public class Digester
 
     /**
      * Add a "call parameter" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param paramIndex Zero-relative parameter index to set (from the body of this element)
      * @see CallParamRule
@@ -1965,7 +2152,7 @@ public class Digester
 
     /**
      * Add a "call parameter" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param paramIndex Zero-relative parameter index to set (from the specified attribute)
      * @param attributeName Attribute whose value is used as the parameter value
@@ -1979,7 +2166,7 @@ public class Digester
     /**
      * Add a "call parameter" rule. This will either take a parameter from the stack or from the current element body
      * text.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param paramIndex The zero-relative parameter number
      * @param fromStack Should the call parameter be taken from the top of the stack?
@@ -1993,7 +2180,7 @@ public class Digester
     /**
      * Add a "call parameter" rule that sets a parameter from the stack. This takes a parameter from the given position
      * on the stack.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param paramIndex The zero-relative parameter number
      * @param stackIndex set the call parameter to the stackIndex'th object down the stack, where 0 is the top of the
@@ -2008,7 +2195,7 @@ public class Digester
     /**
      * Add a "call parameter" rule that sets a parameter from the current <code>Digester</code> matching path. This is
      * sometimes useful when using rules that support wildcards.
-     * 
+     *
      * @param pattern the pattern that this rule should match
      * @param paramIndex The zero-relative parameter number
      * @see CallMethodRule
@@ -2026,7 +2213,7 @@ public class Digester
      * Note that when attempting to locate a matching method to invoke, the true type of the paramObj is used, so that
      * despite the paramObj being passed in here as type Object, the target method can declare its parameters as being
      * the true type of the object (or some ancestor type, according to the usual type-conversion rules).
-     * 
+     *
      * @param pattern Element matching pattern
      * @param paramIndex The zero-relative parameter number
      * @param paramObj Any arbitrary object to be passed to the target method.
@@ -2041,7 +2228,7 @@ public class Digester
     /**
      * Add a "factory create" rule for the specified parameters. Exceptions thrown during the object creation process
      * will be propagated.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
      * @see FactoryCreateRule
@@ -2054,7 +2241,7 @@ public class Digester
     /**
      * Add a "factory create" rule for the specified parameters. Exceptions thrown during the object creation process
      * will be propagated.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
      * @see FactoryCreateRule
@@ -2067,7 +2254,7 @@ public class Digester
     /**
      * Add a "factory create" rule for the specified parameters. Exceptions thrown during the object creation process
      * will be propagated.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
      * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
@@ -2081,7 +2268,7 @@ public class Digester
     /**
      * Add a "factory create" rule for the specified parameters. Exceptions thrown during the object creation process
      * will be propagated.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
      * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
@@ -2096,7 +2283,7 @@ public class Digester
     /**
      * Add a "factory create" rule for the specified parameters. Exceptions thrown during the object creation process
      * will be propagated.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param creationFactory Previously instantiated ObjectCreationFactory to be utilized
      * @see FactoryCreateRule
@@ -2108,7 +2295,7 @@ public class Digester
 
     /**
      * Add a "factory create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
      * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
@@ -2122,7 +2309,7 @@ public class Digester
 
     /**
      * Add a "factory create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
      * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
@@ -2137,7 +2324,7 @@ public class Digester
 
     /**
      * Add a "factory create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
      * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
@@ -2153,7 +2340,7 @@ public class Digester
 
     /**
      * Add a "factory create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
      * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
@@ -2169,7 +2356,7 @@ public class Digester
 
     /**
      * Add a "factory create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param creationFactory Previously instantiated ObjectCreationFactory to be utilized
      * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
@@ -2185,7 +2372,7 @@ public class Digester
 
     /**
      * Add an "object create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param className Java class name to be created
      * @see ObjectCreateRule
@@ -2197,7 +2384,7 @@ public class Digester
 
     /**
      * Add an "object create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param clazz Java class to be created
      * @see ObjectCreateRule
@@ -2209,7 +2396,7 @@ public class Digester
 
     /**
      * Add an "object create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param className Default Java class name to be created
      * @param attributeName Attribute name that optionally overrides the default Java class name to be created
@@ -2222,7 +2409,7 @@ public class Digester
 
     /**
      * Add an "object create" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param attributeName Attribute name that optionally overrides
      * @param clazz Default Java class to be created the default Java class name to be created
@@ -2235,7 +2422,7 @@ public class Digester
 
     /**
      * Adds an {@link SetNestedPropertiesRule}.
-     * 
+     *
      * @param pattern register the rule with this pattern
      * @since 1.6
      */
@@ -2246,7 +2433,7 @@ public class Digester
 
     /**
      * Adds an {@link SetNestedPropertiesRule}.
-     * 
+     *
      * @param pattern register the rule with this pattern
      * @param elementName elment name that a property maps to
      * @param propertyName property name of the element mapped from
@@ -2259,7 +2446,7 @@ public class Digester
 
     /**
      * Adds an {@link SetNestedPropertiesRule}.
-     * 
+     *
      * @param pattern register the rule with this pattern
      * @param elementNames elment names that (in order) map to properties
      * @param propertyNames property names that (in order) elements are mapped to
@@ -2272,7 +2459,7 @@ public class Digester
 
     /**
      * Add a "set next" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @see SetNextRule
@@ -2284,7 +2471,7 @@ public class Digester
 
     /**
      * Add a "set next" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
@@ -2299,7 +2486,7 @@ public class Digester
 
     /**
      * Add {@link SetRootRule} with the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the root object
      * @see SetRootRule
@@ -2311,7 +2498,7 @@ public class Digester
 
     /**
      * Add {@link SetRootRule} with the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the root object
      * @param paramType Java class name of the expected parameter type
@@ -2324,7 +2511,7 @@ public class Digester
 
     /**
      * Add a "set properties" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @see SetPropertiesRule
      */
@@ -2336,7 +2523,7 @@ public class Digester
     /**
      * Add a "set properties" rule with a single overridden parameter. See
      * {@link SetPropertiesRule#SetPropertiesRule(String attributeName, String propertyName)}
-     * 
+     *
      * @param pattern Element matching pattern
      * @param attributeName map this attribute
      * @param propertyName to this property
@@ -2350,7 +2537,7 @@ public class Digester
     /**
      * Add a "set properties" rule with overridden parameters. See
      * {@link SetPropertiesRule#SetPropertiesRule(String [] attributeNames, String [] propertyNames)}
-     * 
+     *
      * @param pattern Element matching pattern
      * @param attributeNames names of attributes with custom mappings
      * @param propertyNames property names these attributes map to
@@ -2363,7 +2550,7 @@ public class Digester
 
     /**
      * Add a "set property" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param name Attribute name containing the property name to be set
      * @param value Attribute name containing the property value to set
@@ -2376,7 +2563,7 @@ public class Digester
 
     /**
      * Add a "set top" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @see SetTopRule
@@ -2388,7 +2575,7 @@ public class Digester
 
     /**
      * Add a "set top" rule for the specified parameters.
-     * 
+     *
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
@@ -2450,7 +2637,7 @@ public class Digester
     /**
      * Return the n'th object down the stack, where 0 is the top element and [getCount()-1] is the bottom element. If
      * the specified index is out of range, return <code>null</code>.
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
      * @return the n'th object down the stack
@@ -2477,7 +2664,7 @@ public class Digester
     /**
      * Pop the top object off of the stack, and return it. If there are no objects on the stack, return
      * <code>null</code>.
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @return the top object popped off of the stack
      */
@@ -2501,7 +2688,7 @@ public class Digester
 
     /**
      * Push a new object onto the top of the object stack.
-     * 
+     *
      * @param <T> any type of the pushed object
      * @param object The new object
      */
@@ -2522,7 +2709,7 @@ public class Digester
     /**
      * Pushes the given object onto the stack with the given name. If no stack already exists with the given name then
      * one will be created.
-     * 
+     *
      * @param <T> any type of the pushed object
      * @param stackName the name of the stack onto which the object should be pushed
      * @param value the Object to be pushed onto the named stack.
@@ -2551,7 +2738,7 @@ public class Digester
      * <p>
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack from which the top value is to be popped.
      * @return the top <code>Object</code> on the stack or or null if the stack is either empty or has not been created
@@ -2588,7 +2775,7 @@ public class Digester
      * <p>
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack to be peeked
      * @return the top <code>Object</code> on the stack or null if the stack is either empty or has not been created yet
@@ -2606,7 +2793,7 @@ public class Digester
      * <p>
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack to be peeked
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
@@ -2643,7 +2830,7 @@ public class Digester
      * <p>
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
-     * 
+     *
      * @param stackName the name of the stack whose emptiness should be evaluated
      * @return true if the given stack if empty
      * @since 1.6
@@ -2676,7 +2863,7 @@ public class Digester
      * same as the return value from this method. However when the Digester is being used as a SAXContentHandler, no
      * such return value is available; in this case, this method allows you to access the root object that has been
      * created after parsing has completed.
-     * 
+     *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @return the root object that has been created after parsing or null if the digester has not parsed any XML yet.
      */
@@ -2690,7 +2877,7 @@ public class Digester
      * <p>
      * It is not considered safe for a digester instance to be reused to parse multiple xml documents. However if you
      * are determined to do so, then you should call both clear() and resetRoot() before each parse.
-     * 
+     *
      * @since 1.7
      */
     public void resetRoot()
@@ -2708,7 +2895,7 @@ public class Digester
      * created by Digester itself. If you override this method in a subclass, be sure to call
      * <code>super.cleanup()</code> to invoke this logic.
      * </p>
-     * 
+     *
      * @since 1.8
      */
     protected void cleanup()
@@ -2757,7 +2944,7 @@ public class Digester
 
     /**
      * Checks the Digester instance has been configured.
-     * 
+     *
      * @return true, if the Digester instance has been configured, false otherwise
      * @since 3.0
      */
@@ -2776,7 +2963,7 @@ public class Digester
      * false. Subclasses that override <code>configure</code> or who set <code>configured</code> may find that this
      * method may be called more than once.
      * </p>
-     * 
+     *
      * @since 1.6
      */
     protected void initialize()
@@ -2829,7 +3016,7 @@ public class Digester
      * <p>
      * The parameters stack is used to store <code>CallMethodRule</code> parameters. See {@link #params}.
      * </p>
-     * 
+     *
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
      * @return the n'th object down the parameters stack
      */
@@ -2887,7 +3074,7 @@ public class Digester
      * <p>
      * The parameters stack is used to store <code>CallMethodRule</code> parameters. See {@link #params}.
      * </p>
-     * 
+     *
      * @param object The new object
      */
     public void pushParams( Object... object )
@@ -2936,7 +3123,7 @@ public class Digester
 
     /**
      * Create a SAX exception which also understands about the location in the digester file where the exception occurs
-     * 
+     *
      * @param e the exception cause
      * @return the new SAX exception
      */
@@ -2955,7 +3142,7 @@ public class Digester
 
     /**
      * Create a SAX exception which also understands about the location in the digester file where the exception occurs
-     * 
+     *
      * @param message the custom SAX exception message
      * @return the new SAX exception
      */
@@ -2966,7 +3153,7 @@ public class Digester
 
     /**
      * Helps casting the input object to given type, avoiding NPEs.
-     * 
+     *
      * @since 3.0
      * @param <T> the type the input object has to be cast.
      * @param obj the object has to be cast.
