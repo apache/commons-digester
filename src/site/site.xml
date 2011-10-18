@@ -47,7 +47,11 @@
       - Note that the links in these menu options require manual installation of the
       - appropriate dirs on the website; maven won't set this up.
     -->
-    <menu name="Release 3.0 (Current)">
+    <menu name="Release 3.1 (Current)">
+      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.1/apidocs" />
+      <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-3.1/RELEASE-NOTES.txt" />
+    </menu>
+    <menu name="Release 3.0">
       <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.0/apidocs" />
       <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt" />
     </menu>
@@ -62,11 +66,6 @@
       </item>
       <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-2.1/docs/api" />
       <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-2.1/RELEASE-NOTES.txt" />
-    </menu>
-    <menu name="Release 1.8.1">
-      <item name="Guide" href="http://commons.apache.org/digester/commons-digester-1.8.1/docs/api/org/apache/commons/digester3/package-summary.html#doc.Description" />
-      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-1.8.1/docs/api" />
-      <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-1.8.1/RELEASE-NOTES.txt" />
     </menu>
 
   </body>
