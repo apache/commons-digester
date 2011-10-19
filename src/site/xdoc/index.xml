@@ -68,6 +68,10 @@ download the files.
 </section>
 
 <section name="Releases">
+    <subsection name="Digester 3.1 Release (October 2011)">
+      <p>The Digester 3.1 release is a maintenance release that adds the <a href="./guide/async.html"></a> feature.</p>
+    </subsection>
+
     <subsection name="Digester 3.0 Release (July 2011)">
       <p>
 The Digester 3.0 is an almost complete rewrite of the original Digester implementation, which offers:
@@ -162,61 +166,6 @@ The recommended dependency set for Digester 2.0 is:
 <td>Digester</td>
 <td>+Logging 1.1.1</td>
 <td>+BeanUtils 1.8.0</td>
-</tr>
-</table>
-        <p>
-It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
-        </p>
-    </subsection>
-
-    <subsection name='Digester 1.8.1 Release (January 2009)'>
-        <p>
-Digester 1.8.1 is a minor bugfix and maintenance release. Existing projects
-using Digester 1.8 are encouraged to upgrade to the 1.8.1 release. New projects
-are encouraged to use Digester 2.0, which requires JDK 1.5. See the release
-notes for more details.
-        </p>
-        <p>
-The dependencies for Digester 1.8.1 are identical to the dependencies for Digester 1.8.
-        </p>
-        <p>
-Digester 1.x versions had a dependency on
-<a href='http://commons.apache.org/collections'>Commons Collections</a>.
-The dependency can alternatively be satisfied by including the latest BeanUtils
-releases (1.7.0 or above) (which include the stable collections ArrayStack class
-necessary).
-        </p>
-        <p>
-The recommended dependency set for Digester 1.8.1 is:
-        </p>
-<table>
-<tr>
-<th colspan='3'>Recommended Dependency Set</th>
-</tr>
-<tr>
-<td>Digester</td>
-<td>+Logging 1.1.1</td>
-<td>+BeanUtils 1.8.0</td>
-</tr>
-</table>
-        <p>
-Other compatible dependency sets for Digester 1.8.1 can be summarized as follows:
-        </p>
-<table>
-<tr>
-<th colspan='4'>Compatible Dependency Sets</th>
-</tr>
-<tr>
-<td>Digester</td>
-<td>+Logging 1.1.x</td>
-<td>+BeanUtils 1.x</td>
-<td>+Collections 2.x</td>
-</tr>
-<tr>
-<td>Digester</td>
-<td>+Logging 1.1.x</td>
-<td>+BeanUtils 1.x</td>
-<td>+Collections 3.x</td>
 </tr>
 </table>
         <p>
