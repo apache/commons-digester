@@ -19,13 +19,53 @@ limitations under the License.
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
-    <title>Apache Commons Digester | Guide | Async Parser</title>
+    <title>Apache Commons Digester | Guide | Asynchronous Parser</title>
     <author email="dev@commons.apache.org">Commons Documentation Team</author>
   </properties>
   <body>
-    <section name="Async Parser">
+    <section name="Asynchronous Digester">
       <p>Since version 3.1 the Digester component offers asynchronous <code>parse()</code> methods.</p>
-      <p>TODO</p>
+      <p>Users can take advantage from that feature when need to process large XML streams without mapping to
+      intermediary POJOs. Take in consideration applications that need to import data from XML documents
+      - maybe obtained by a REST invocation - and transfer to a DataBase.<br/>
+      Putting the data processor in a non-blocking executor would help clients on:</p>
+      <ul>
+        <li>increasing the number of parse operations at the same time;</li>
+        <li></li>
+      </ul>
+      <p><strong>Note</strong> keep always in mind the every single <code>Digester</code> instance is NOT thread-safety,
+      so please use the <i>asynchronous</i> feature carefully!!!</p>
+    </section>
+    <section name="Async in action">
+      <subsection name="Using Digester Loader">
+        <p>First of all, setup the <code>DigesterLoader</code> with <code>java.util.concurrent.ExecutorService</code>:</p>
+        <source>final DigesterLoader digesterLoader = newLoader( new AbstractRulesModule()
+    {
+
+        @Override
+        protected void configure()
+        {
+            forPattern( "employee" ).createObject().ofType( Employee.class );
+            ...
+        }
+
+    } ).setExecutorService( java.util.concurrent.Executors.newFixedThreadPool( 10 ) );</source>
+        <p>Then create the Digester and run the <code>parse</code> method asynchronously:</p>
+        <source>Digester digester = digesterLoader.newDigester();
+...
+Future&ltEmployee&gt; future = digester.asyncParse( new URL( "http://my.rest.server/employees/10" ) );</source>
+      </subsection>
+
+      <subsection name="Using directly with the Digester">
+        <p>First of all, setup the <code>Digester</code> with <code>java.util.concurrent.ExecutorService</code>:</p>
+        <source>Digester digester = new Digester();
+digester.addObjectCreate( "employee", Employee.class);
+...
+digester.setExecutorService( java.util.concurrent.Executors.newFixedThreadPool( 10 ) );
+</source>
+        <p>Then run the <code>parse</code> method asynchronously:</p>
+        <source>Future&ltEmployee&gt; future = digester.asyncParse( new URL( "http://my.rest.server/employees/10" ) );</source>
+      </subsection>
     </section>
   </body>
 </document>
