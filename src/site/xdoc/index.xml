@@ -69,7 +69,8 @@ download the files.
 
 <section name="Releases">
     <subsection name="Digester 3.1 Release (October 2011)">
-      <p>The Digester 3.1 release is a maintenance release that adds the <a href="./guide/async.html"></a> feature.</p>
+      <p>The Digester 3.1 release is a maintenance release that adds the
+      <a href="./guide/async.html">Asynchronous parser</a> feature.</p>
     </subsection>
 
     <subsection name="Digester 3.0 Release (July 2011)">
