@@ -28,7 +28,6 @@ import static org.apache.commons.beanutils.MethodUtils.invokeMethod;
 
 import java.util.Formatter;
 
-import org.apache.commons.beanutils.MethodUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -92,7 +91,7 @@ public class CallMethodRule
     /**
      * Construct a "call method" rule with the specified method name. The parameter types (if any) default to
      * java.lang.String.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of this
      *            element.
@@ -105,7 +104,7 @@ public class CallMethodRule
     /**
      * Construct a "call method" rule with the specified method name. The parameter types (if any) default to
      * java.lang.String.
-     * 
+     *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
      *            the stack.
@@ -131,7 +130,7 @@ public class CallMethodRule
 
     /**
      * Construct a "call method" rule with the specified method name. The method should accept no parameters.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      */
     public CallMethodRule( String methodName )
@@ -141,7 +140,7 @@ public class CallMethodRule
 
     /**
      * Construct a "call method" rule with the specified method name. The method should accept no parameters.
-     * 
+     *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
      *            the stack.
@@ -156,7 +155,7 @@ public class CallMethodRule
      * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of ths element
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
@@ -172,7 +171,7 @@ public class CallMethodRule
      * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
-     * 
+     *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
      *            the stack.
@@ -205,7 +204,7 @@ public class CallMethodRule
      * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java classes that represent the parameter types of the method arguments (if you wish to use
@@ -221,7 +220,7 @@ public class CallMethodRule
      * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
-     * 
+     *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
      *            the stack.
@@ -515,7 +514,7 @@ public class CallMethodRule
 
     /**
      * Subclasses may override this method to perform additional processing of the invoked method's result.
-     * 
+     *
      * @param result the Object returned by the method invoked, possibly null
      */
     protected void processMethodCallResult( Object result )
