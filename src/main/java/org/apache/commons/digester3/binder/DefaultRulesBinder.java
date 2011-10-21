@@ -41,17 +41,17 @@ final class DefaultRulesBinder
     private final List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 
     /**
-     * 
+     *
      */
     private final FromBinderRuleSet fromBinderRuleSet = new FromBinderRuleSet();
 
     /**
-     * 
+     *
      */
     private ClassLoader classLoader;
 
     /**
-     * 
+     *
      *
      * @param classLoader
      */
@@ -81,7 +81,7 @@ final class DefaultRulesBinder
         int stackIndex = stackTrace.length - 1;
         while ( element == null && stackIndex > 0 ) // O(n) there's no better way
         {
-            Class<?> moduleClass = null;
+            Class<?> moduleClass;
             try
             {
                 // check if the set ClassLoader resolves the Class in the StackTrace
@@ -99,6 +99,7 @@ final class DefaultRulesBinder
                 {
                     // Class in the StackTrace can't be found, don't write the file name:line number detail in the
                     // message
+                    moduleClass = null;
                 }
             }
 
@@ -177,7 +178,7 @@ final class DefaultRulesBinder
     }
 
     /**
-     * 
+     *
      *
      * @return
      */
@@ -187,7 +188,7 @@ final class DefaultRulesBinder
     }
 
     /**
-     * 
+     *
      *
      * @return
      */
@@ -197,7 +198,7 @@ final class DefaultRulesBinder
     }
 
     /**
-     * 
+     *
      *
      * @return
      */
@@ -207,7 +208,7 @@ final class DefaultRulesBinder
     }
 
     /**
-     * 
+     *
      *
      * @return
      */
