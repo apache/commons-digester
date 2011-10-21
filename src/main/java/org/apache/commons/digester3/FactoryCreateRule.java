@@ -58,7 +58,7 @@ public class FactoryCreateRule
      * <p>
      * Exceptions thrown during the object creation process will be propagated.
      * </p>
-     * 
+     *
      * @param className Java class name of the object creation factory class
      */
     public FactoryCreateRule( String className )
@@ -74,7 +74,7 @@ public class FactoryCreateRule
      * <p>
      * Exceptions thrown during the object creation process will be propagated.
      * </p>
-     * 
+     *
      * @param clazz Java class name of the object creation factory class
      */
     public FactoryCreateRule( Class<? extends ObjectCreationFactory<?>> clazz )
@@ -91,7 +91,7 @@ public class FactoryCreateRule
      * <p>
      * Exceptions thrown during the object creation process will be propagated.
      * </p>
-     * 
+     *
      * @param className Default Java class name of the factory class
      * @param attributeName Attribute name which, if present, contains an override of the class name of the object
      *            creation factory to create.
@@ -110,7 +110,7 @@ public class FactoryCreateRule
      * <p>
      * Exceptions thrown during the object creation process will be propagated.
      * </p>
-     * 
+     *
      * @param clazz Default Java class name of the factory class
      * @param attributeName Attribute name which, if present, contains an override of the class name of the object
      *            creation factory to create.
@@ -127,7 +127,7 @@ public class FactoryCreateRule
      * <p>
      * Exceptions thrown during the object creation process will be propagated.
      * </p>
-     * 
+     *
      * @param creationFactory called on to create the object.
      */
     public FactoryCreateRule( ObjectCreationFactory<?> creationFactory )
@@ -138,7 +138,7 @@ public class FactoryCreateRule
     /**
      * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
-     * 
+     *
      * @param className Java class name of the object creation factory class
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
@@ -150,7 +150,7 @@ public class FactoryCreateRule
     /**
      * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
-     * 
+     *
      * @param clazz Java class name of the object creation factory class
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
@@ -163,7 +163,7 @@ public class FactoryCreateRule
      * Construct a factory create rule that will use the specified class name (possibly overridden by the specified
      * attribute if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an
      * object instance and push it onto the stack.
-     * 
+     *
      * @param className Default Java class name of the factory class
      * @param attributeName Attribute name which, if present, contains an override of the class name of the object
      *            creation factory to create.
@@ -180,7 +180,7 @@ public class FactoryCreateRule
      * Construct a factory create rule that will use the specified class (possibly overridden by the specified attribute
      * if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an object instance
      * and push it onto the stack.
-     * 
+     *
      * @param clazz Default Java class name of the factory class
      * @param attributeName Attribute name which, if present, contains an override of the class name of the object
      *            creation factory to create.
@@ -194,7 +194,7 @@ public class FactoryCreateRule
 
     /**
      * Construct a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
-     * 
+     *
      * @param creationFactory called on to create the object.
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
@@ -295,20 +295,19 @@ public class FactoryCreateRule
     {
         // check if object was created
         // this only happens if an exception was thrown and we're ignoring them
-        if ( ignoreCreateExceptions && exceptionIgnoredStack != null && !( exceptionIgnoredStack.empty() ) )
+        if ( ignoreCreateExceptions
+                        && exceptionIgnoredStack != null
+                        && !exceptionIgnoredStack.empty()
+                        && exceptionIgnoredStack.pop().booleanValue() )
         {
-
-            if ( exceptionIgnoredStack.pop().booleanValue() )
+            // creation exception was ignored
+            // nothing was put onto the stack
+            if ( getDigester().getLogger().isTraceEnabled() )
             {
-                // creation exception was ignored
-                // nothing was put onto the stack
-                if ( getDigester().getLogger().isTraceEnabled() )
-                {
-                    getDigester().getLogger().trace( format( "[FactoryCreateRule]{%s} No creation so no push so no pop",
-                                                             getDigester().getMatch() ) );
-                }
-                return;
+                getDigester().getLogger().trace( format( "[FactoryCreateRule]{%s} No creation so no push so no pop",
+                                                         getDigester().getMatch() ) );
             }
+            return;
         }
 
         Object top = getDigester().pop();
@@ -353,7 +352,7 @@ public class FactoryCreateRule
 
     /**
      * Return an instance of our associated object creation factory, creating one if necessary.
-     * 
+     *
      * @param attributes Attributes passed to our factory creation element
      * @return An instance of our associated object creation factory, creating one if necessary
      * @exception Exception if any error occurs
