@@ -103,12 +103,9 @@ final class DefaultRulesBinder
                 }
             }
 
-            if ( moduleClass != null )
+            if ( moduleClass != null && RulesModule.class.isAssignableFrom( moduleClass ) )
             {
-                if ( RulesModule.class.isAssignableFrom( moduleClass ) )
-                {
-                    element = stackTrace[stackIndex];
-                }
+                element = stackTrace[stackIndex];
             }
 
             stackIndex--;
