@@ -127,17 +127,13 @@ public class RulesBase
             String longKey = "";
             for ( String key : cache.keySet() )
             {
-                if ( key.startsWith( "*/" ) )
+                if ( key.startsWith( "*/" )
+                                && ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) )
+                                && key.length() > longKey.length() ) )
                 {
-                    if ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) ) )
-                    {
-                        if ( key.length() > longKey.length() )
-                        {
-                            // rulesList = (List) this.cache.get(key);
-                            rulesList = lookup( namespaceURI, key );
-                            longKey = key;
-                        }
-                    }
+                    // rulesList = (List) this.cache.get(key);
+                    rulesList = lookup( namespaceURI, key );
+                    longKey = key;
                 }
             }
         }
@@ -161,7 +157,7 @@ public class RulesBase
     /**
      * Return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any).
      * If there are no such rules, return <code>null</code>.
-     * 
+     *
      * @param namespaceURI Namespace URI to match, or <code>null</code> to select matching rules regardless of namespace
      *            URI
      * @param pattern Pattern to be matched
