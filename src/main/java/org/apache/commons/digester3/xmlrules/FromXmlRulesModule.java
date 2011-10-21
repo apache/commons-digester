@@ -103,7 +103,7 @@ public abstract class FromXmlRulesModule
     }
 
     /**
-     * 
+     *
      */
     protected abstract void loadRules();
 
@@ -122,12 +122,9 @@ public abstract class FromXmlRulesModule
         this.inputSource.add( inputSource );
 
         String systemId = inputSource.getSystemId();
-        if ( systemId != null )
+        if ( systemId != null && !systemIds.add( systemId ) )
         {
-            if ( !systemIds.add( systemId ) )
-            {
-                addError( "XML rules file '%s' already bound", systemId );
-            }
+            addError( "XML rules file '%s' already bound", systemId );
         }
     }
 
