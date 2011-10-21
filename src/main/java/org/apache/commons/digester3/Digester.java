@@ -2911,6 +2911,12 @@ public class Digester
             catch ( IOException e )
             {
                 // Fall through so we get them all
+                if ( log.isWarnEnabled() )
+                {
+                    log.warn( format( "An error occurred while closing resource %s (%s)",
+                                      source.getPublicId(),
+                                      source.getSystemId() ), e );
+                }
             }
         }
         inputSources.clear();
