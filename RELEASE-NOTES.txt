@@ -18,7 +18,7 @@ $Id$
 
 
                           Commons Digester Package
-                                Version 3.0
+                                Version 3.1
                                Release Notes
 
 
