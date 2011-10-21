@@ -118,12 +118,12 @@ import org.xml.sax.Attributes;
  * By default, a Digester instance uses a {@link RulesBase} instance as its pattern matching engine. To use an
  * ExtendedBaseRules instance, call the Digester.setRules method before adding any Rule objects to the digester
  * instance:
- * 
+ *
  * <pre>
  * Digester digester = new Digester();
  * digester.setRules( new ExtendedBaseRules() );
  * </pre>
- * 
+ *
  * </p>
  * <p>
  * The most important thing to remember when using the extended rules is that universal and non-universal patterns are
@@ -320,7 +320,7 @@ public class ExtendedBaseRules
                 if ( parentMatchEnd )
                 {
                     // try for a parent match
-                    parentMatched = parentMatch( key, pattern, parentPattern );
+                    parentMatched = parentMatch( key, parentPattern );
 
                 }
                 else if ( wildcardMatchEnd )
@@ -480,11 +480,10 @@ public class ExtendedBaseRules
      * Checks the input parentPattern contains the input key at the end.
      *
      * @param key The key to be found
-     * @param pattern FIXME unused
      * @param parentPattern The pattern where looking for the key
      * @return true, if {@code key} is found inside {@code parentPattern}, false otherwise
      */
-    private boolean parentMatch( String key, String pattern, String parentPattern )
+    private boolean parentMatch( String key, String parentPattern )
     {
         return parentPattern.endsWith( key.substring( 1, key.length() - 2 ) );
     }
