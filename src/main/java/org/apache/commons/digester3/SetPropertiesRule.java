@@ -19,9 +19,9 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
-import static org.apache.commons.beanutils.BeanUtils.*;
-import static org.apache.commons.beanutils.PropertyUtils.*;
 import static java.lang.String.format;
+import static org.apache.commons.beanutils.BeanUtils.populate;
+import static org.apache.commons.beanutils.PropertyUtils.isWriteable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +61,7 @@ public class SetPropertiesRule
      * For details about how this works, see {@link #SetPropertiesRule(String[] attributeNames, String[] propertyNames)}
      * .
      * </p>
-     * 
+     *
      * @param attributeName map this attribute
      * @param propertyName to a property with this name
      */
@@ -89,7 +89,7 @@ public class SetPropertiesRule
      * and the <code>alt-state</code> to the <code>state</code> property. All other attributes are mapped as usual using
      * exact name matching. <code><pre>
      *      SetPropertiesRule(
-     *                new String[] {"alt-city", "alt-state"}, 
+     *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
      * </pre></code>
      * <h5>Example Two</h5>
@@ -98,10 +98,10 @@ public class SetPropertiesRule
      * property. The attribute <code>ignore-me</code> is not mapped. All other attributes are mapped as usual using
      * exact name matching. <code><pre>
      *      SetPropertiesRule(
-     *                new String[] {"class", "ignore-me"}, 
+     *                new String[] {"class", "ignore-me"},
      *                new String[] {"className"});
      * </pre></code>
-     * 
+     *
      * @param attributeNames names of attributes to map
      * @param propertyNames names of properties mapped to
      */
@@ -260,7 +260,7 @@ public class SetPropertiesRule
      * If false, the parsing will interrupt with an <code>NoSuchMethodException</code> if a property specified in the
      * XML is not found. The default is true.
      * </p>
-     * 
+     *
      * @return true if skipping the unmatched attributes.
      */
     public boolean isIgnoreMissingProperty()
@@ -272,7 +272,7 @@ public class SetPropertiesRule
      * Sets whether attributes found in the xml without matching properties should be ignored. If set to false, the
      * parsing will throw an <code>NoSuchMethodException</code> if an unmatched attribute is found. This allows to trap
      * misspellings in the XML file.
-     * 
+     *
      * @param ignoreMissingProperty false to stop the parsing on unmatched attributes.
      */
     public void setIgnoreMissingProperty( boolean ignoreMissingProperty )
