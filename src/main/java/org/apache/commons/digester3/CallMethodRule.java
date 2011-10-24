@@ -43,9 +43,10 @@ import org.xml.sax.SAXException;
  * Incompatible method parameter types are converted using <code>org.apache.commons.beanutils.ConvertUtils</code>.
  * </p>
  * <p>
- * This rule now uses {@link MethodUtils#invokeMethod} by default. This increases the kinds of methods successfully and
- * allows primitives to be matched by passing in wrapper classes. There are rare cases when
- * {@link MethodUtils#invokeExactMethod} (the old default) is required. This method is much stricter in it's reflection.
+ * This rule now uses {@link org.apache.commons.beanutils.MethodUtils#invokeMethod} by default.
+ * This increases the kinds of methods successfully and allows primitives to be matched by passing in wrapper classes.
+ * There are rare cases when {@link org.apache.commons.beanutils.MethodUtils#invokeExactMethod} (the old default) is
+ * required. This method is much stricter in it's reflection.
  * Setting the <code>UseExactMatch</code> to true reverts to the use of this method.
  * </p>
  * <p>
