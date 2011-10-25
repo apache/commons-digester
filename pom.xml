@@ -151,14 +151,6 @@
     <system>jira</system>
     <url>http://issues.apache.org/jira/browse/DIGESTER</url>
   </issueManagement>
-  <distributionManagement>
-    <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
-    <site>
-      <id>people.apache.org</id>
-      <name>Apache Commons Site</name>
-      <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/digester</url>
-    </site>
-  </distributionManagement>
 
   <properties>
     <maven.compile.source>1.5</maven.compile.source>
@@ -329,6 +321,17 @@
           <id>apache.website</id>
           <name>Apache Commons Release Candidate Staging Site</name>
           <url>${commons.deployment.protocol}://people.apache.org/www/people.apache.org/builds/commons/${commons.componentid}/${commons.release.version}/${commons.rc.version}/site</url>
+        </site>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>release</id>
+      <distributionManagement>
+        <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+        <site>
+          <id>people.apache.org</id>
+          <name>Apache Commons Site</name>
+          <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/digester</url>
         </site>
       </distributionManagement>
     </profile>
