@@ -27,7 +27,7 @@ INTRODUCTION
 
 This is a maintenance release with new features. New projects are encouraged to
 use this release of digester. There is no urgency for existing projects to
-upgrade; Digester 2.1 has proven to be a stable release.
+upgrade; Digester 3.0 has proven to be a stable release.
 
 IMPORTANT NOTES
 ================
