@@ -29,6 +29,7 @@
         <include>NOTICE*</include>
         <include>pom.xml</include>
         <include>RELEASE-NOTES*</include>
+        <include>checkstyle-suppressions.xml</include>
       </includes>
     </fileSet>
     <fileSet>
