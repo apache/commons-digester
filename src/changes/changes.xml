@@ -22,7 +22,7 @@
     <title>Apache Commons Digester Changes</title>
   </properties>
   <body>
-  <release version="3.1" date="2011-??-??" description="New features release.">
+  <release version="3.1" date="2011-10-29" description="New features release.">
     <action dev="simonetripodi" type="add" issue="DIGESTER-150">
       Use Java5 Concurrent APIs to asynchronous parse()
     </action>
