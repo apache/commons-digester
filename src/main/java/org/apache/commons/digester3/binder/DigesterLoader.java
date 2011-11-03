@@ -42,6 +42,7 @@ import org.apache.commons.digester3.RulesBase;
 import org.apache.commons.digester3.StackAction;
 import org.apache.commons.digester3.Substitutor;
 import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
@@ -136,6 +137,12 @@ public final class DigesterLoader
      * @since 3.1
      */
     private ExecutorService executorService;
+
+    /**
+     * The application-supplied error handler that is notified when parsing warnings, errors, or fatal errors occur.
+     * @since 3.2
+     */
+    private ErrorHandler errorHandler = null;
 
     /**
      * Creates a new {@link DigesterLoader} instance given a collection of {@link RulesModule} instance.
@@ -378,6 +385,30 @@ public final class DigesterLoader
     }
 
     /**
+     * Return the error handler for this Digester.
+     *
+     * @return the error handler for this Digester.
+     * @since 3.2
+     */
+    public ErrorHandler getErrorHandler()
+    {
+        return ( this.errorHandler );
+    }
+
+    /**
+     * Set the error handler for this Digester.
+     *
+     * @param errorHandler The new error handler
+     * @return This loader instance, useful to chain methods.
+     * @since 3.2
+     */
+    public DigesterLoader setErrorHandler( ErrorHandler errorHandler )
+    {
+        this.errorHandler = errorHandler;
+        return this;
+    }
+
+    /**
      * Creates a new {@link Digester} instance that relies on the default {@link Rules} implementation.
      *
      * @return a new {@link Digester} instance
@@ -485,6 +516,11 @@ public final class DigesterLoader
         digester.setStackAction( stackAction );
         digester.setNamespaceAware( isNamespaceAware() );
         digester.setExecutorService( executorService );
+
+        if ( errorHandler != null )
+        {
+            digester.setErrorHandler( errorHandler );
+        }
 
         addRules( digester );
 

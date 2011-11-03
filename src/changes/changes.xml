@@ -23,7 +23,9 @@
   </properties>
   <body>
   <release version="3.2" date="201?-??-??" description="Maintenance release.">
-    
+    <action dev="simonetripodi" type="add" issue="DIGESTER-151">
+      The org.apache.commons.digester3.binder.DigesterLoader doesn't allow binding a default org.xml.sax.ErrorHandler.
+    </action>
   </release>
   <release version="3.1" date="2011-10-29" description="New features release.">
     <action dev="simonetripodi" type="add" issue="DIGESTER-150">
