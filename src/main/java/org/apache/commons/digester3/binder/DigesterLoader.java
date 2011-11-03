@@ -115,6 +115,10 @@ public final class DigesterLoader
      */
     private ClassLoader classLoader;
 
+    /**
+     * An optional class that substitutes values in attributes and body text. This may be null and so a null check is
+     * always required before use.
+     */
     private Substitutor substitutor;
 
     /**
