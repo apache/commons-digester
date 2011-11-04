@@ -153,7 +153,7 @@ public abstract class FromAnnotationsRuleModule
     }
 
     /**
-     * 
+     *
      *
      * @param <AE>
      * @param action
@@ -173,7 +173,7 @@ public abstract class FromAnnotationsRuleModule
     }
 
     /**
-     * 
+     *
      *
      * @param annotatedElements
      */

@@ -19,41 +19,23 @@ package org.apache.commons.digester3.xmlrules;
  * under the License.
  */
 
-import org.apache.commons.digester3.binder.LinkedRuleBuilder;
+import org.apache.commons.digester3.Rule;
 import org.apache.commons.digester3.binder.ObjectCreateBuilder;
-import org.apache.commons.digester3.binder.RulesBinder;
 import org.xml.sax.Attributes;
 
 /**
- *
+ * @since 3.2
  */
-final class ObjectCreateRule
-    extends AbstractXmlRule
+final class ConstructorArgumentRule
+    extends Rule
 {
 
-    public ObjectCreateRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    public void begin( String namespace, String name, Attributes attributes )
         throws Exception
     {
-        ObjectCreateBuilder builder = linkedRuleBuilder.createObject()
-            .ofType( attributes.getValue( "classname" ) )
-            .ofTypeSpecifiedByAttribute( attributes.getValue( "attrname" ) );
-        getDigester().push( builder );
-    }
-
-    @Override
-    public void end( String namespace, String name )
-        throws Exception
-    {
-        getDigester().pop();
+        ObjectCreateBuilder builder = getDigester().peek();
+        builder.addConstructorArgument( attributes.getValue( "attrname" ) ).ofType( attributes.getValue( "type" ) );
     }
 
 }

@@ -185,11 +185,15 @@
     ignore-exceptions  CDATA #IMPLIED>
 
 <!-- ObjectCreateRule -->
-<!ELEMENT object-create-rule EMPTY>
+<!ELEMENT object-create-rule (constructor-argument)*>
 <!ATTLIST object-create-rule
     pattern   CDATA #IMPLIED
     classname CDATA #REQUIRED
     attrname  CDATA #IMPLIED>
+<!ELEMENT constructor-argument EMPTY>
+<!ATTLIST constructor-argument
+    attrname  CDATA #IMPLIED
+    type      CDATA #REQUIRED>
 
 <!-- SetPropertiesRule -->
 <!ELEMENT set-properties-rule (alias)*>

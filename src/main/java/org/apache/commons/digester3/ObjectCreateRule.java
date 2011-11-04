@@ -19,7 +19,17 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
+import static java.util.Arrays.asList;
 import static java.lang.String.format;
+
+import static org.apache.commons.beanutils.ConvertUtils.convert;
+import static org.apache.commons.beanutils.ConstructorUtils.getAccessibleConstructor;
+
+import java.lang.reflect.Constructor;
+import java.util.Formatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.xml.sax.Attributes;
 
@@ -35,7 +45,7 @@ public class ObjectCreateRule
 
     /**
      * Construct an object create rule with the specified class name.
-     * 
+     *
      * @param className Java class name of the object to be created
      */
     public ObjectCreateRule( String className )
@@ -45,7 +55,7 @@ public class ObjectCreateRule
 
     /**
      * Construct an object create rule with the specified class.
-     * 
+     *
      * @param clazz Java class name of the object to be created
      */
     public ObjectCreateRule( Class<?> clazz )
@@ -57,7 +67,7 @@ public class ObjectCreateRule
     /**
      * Construct an object create rule with the specified class name and an optional attribute name containing an
      * override.
-     * 
+     *
      * @param className Java class name of the object to be created
      * @param attributeName Attribute name which, if present, contains an override of the class name to create
      */
@@ -69,7 +79,7 @@ public class ObjectCreateRule
 
     /**
      * Construct an object create rule with the specified class and an optional attribute name containing an override.
-     * 
+     *
      * @param attributeName Attribute name which, if present, contains an
      * @param clazz Java class name of the object to be created override of the class name to create
      */
@@ -96,7 +106,33 @@ public class ObjectCreateRule
      */
     protected String className = null;
 
+    /**
+     * The constructor arguments - order is preserved by the LinkedHashMap
+     *
+     * @since 3.2
+     */
+    private final Map<String, Class<?>> constructorArguments = new LinkedHashMap<String, Class<?>>();
+
     // --------------------------------------------------------- Public Methods
+
+    /**
+     * Allows users specify constructor arguments <b>from attributes only</b>.
+     *
+     * @since 3.2
+     */
+    public void addConstructorArgument( String attibuteName, Class<?> type )
+    {
+        if ( attibuteName == null )
+        {
+            throw new IllegalArgumentException( "Parameter 'attibuteName' must not be null" );
+        }
+        if ( type == null )
+        {
+            throw new IllegalArgumentException( "Parameter 'type' must not be null" );
+        }
+
+        constructorArguments.put( attibuteName, type );
+    }
 
     /**
      * {@inheritDoc}
@@ -129,7 +165,63 @@ public class ObjectCreateRule
             // Instantiate the new object and push it on the context stack
             clazz = getDigester().getClassLoader().loadClass( realClassName );
         }
-        Object instance = clazz.newInstance();
+        Object instance;
+        if ( constructorArguments.isEmpty() )
+        {
+            if ( getDigester().getLogger().isDebugEnabled() )
+            {
+                getDigester().getLogger().debug( format( "[ObjectCreateRule]{%s} New '%s' using default empty constructor",
+                                                         getDigester().getMatch(),
+                                                         clazz.getName() ) );
+            }
+
+            instance = clazz.newInstance();
+        }
+        else
+        {
+            Class<?>[] parameterTypes = new Class<?>[constructorArguments.size()];
+            Object[] initargs = new Object[constructorArguments.size()];
+
+            int counter = 0;
+
+            // prepare the arguments types with related values
+            for ( Entry<String, Class<?>> argEntry : constructorArguments.entrySet() )
+            {
+                parameterTypes[counter] = argEntry.getValue();
+
+                String argumentValueAsString = attributes.getValue( argEntry.getKey() );
+                // ConvertUtils manages null values as well
+                initargs[counter] = convert( argumentValueAsString, parameterTypes[counter] );
+
+                counter++;
+            }
+
+            Constructor<?> constructor = getAccessibleConstructor( clazz, parameterTypes );
+
+            if ( constructor == null )
+            {
+                throw new IllegalArgumentException( format( "[ObjectCreateRule]{%s} class '%s' doesn't have a Contructor with params %s",
+                                                            getDigester().getMatch(),
+                                                            clazz.getName(),
+                                                            asList( parameterTypes ) ) );
+            }
+
+            // print out constructor debug
+            if ( getDigester().getLogger().isDebugEnabled() )
+            {
+                Formatter formatter = new Formatter().format( "[ObjectCreateRule]{%s} New '%s' using constructor( ",
+                                                              getDigester().getMatch(),
+                                                              clazz.getName() );
+                for ( int i = 0; i < initargs.length; i++ )
+                {
+                    formatter.format( "%s%s/%s", ( i > 0 ? ", " : "" ), initargs[i], parameterTypes[i].getName() );
+                }
+                formatter.format( " )" );
+                getDigester().getLogger().debug( formatter.toString() );
+            }
+
+            instance = constructor.newInstance( initargs );
+        }
         getDigester().push( instance );
     }
 

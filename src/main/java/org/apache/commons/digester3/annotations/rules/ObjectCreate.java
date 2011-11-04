@@ -32,13 +32,13 @@ import org.apache.commons.digester3.annotations.handlers.ObjectCreateHandler;
 
 /**
  * Classes annotated with {@code ObjectCreate} will be bound with {@code ObjectCreateRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addObjectCreate(String,Class)
  * @since 2.1
  */
 @Documented
 @Retention( RetentionPolicy.RUNTIME )
-@Target( ElementType.TYPE )
+@Target( { ElementType.CONSTRUCTOR, ElementType.TYPE } )
 @CreationRule
 @DigesterRule( reflectsRule = ObjectCreateRule.class, handledBy = ObjectCreateHandler.class )
 public @interface ObjectCreate
@@ -65,7 +65,7 @@ public @interface ObjectCreate
 
     /**
      * Defines several {@code @ObjectCreate} annotations on the same element.
-     * 
+     *
      * @see ObjectCreate
      */
     @Documented

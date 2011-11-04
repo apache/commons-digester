@@ -36,7 +36,8 @@
     <menu name="Developers Guide">
       <item name="Core APIs"            href="/guide/core.html" />
       <item name="Rules Binder"         href="/guide/binder.html" />
-      <item name="Async parser (new)"   href="/guide/async.html" />
+      <item name="Construcotr based rule (new)" href="/guide/constructor.html" />
+      <item name="Async parser"         href="/guide/async.html" />
       <item name="Plugins"              href="/guide/plugins.html" />
       <item name="Substitution"         href="/guide/substitution.html" />
       <item name="XML Rules"            href="/guide/xmlrules.html" />

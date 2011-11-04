@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  <properties>
+    <title>Apache Commons Digester | Guide | Constructor rule</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
+    <section name="Constructor based rule">
+      <p>One of the known limit of the old Digester releases is that the
+      <a href="/apidocs/org/apache/commons/digester3/ObjectCreateRule.html">ObjectCreateRule</a> works just with
+      the default empty constructor.</p>
+      <p>One limit that cannot be exceeded is the fact that constructor arguments cannot be extracted from inner
+      XML elements; that's because the <code>ObjectCreateRule</code> creates the object when the related XML
+      element <code>begins</code>, otherwise properties could not be set when parsing nested elements.</p>
+      <p>On the other hand, constructor arguments can still be extracted from <i>attributes</i> of the matching
+      XML element for whom the <code>ObjectCreateRule</code> is triggered.</p>
+      <p><b>NOTE</b> this feature is available since release 3.2.</p>
+
+      <subsection name="Using plain old Digester APIs">
+        <p><code>ObjectCreateRule</code> has a new API to configure the constructor arguments that have to be extracted
+        from the of the matching XML element attributes; given for example the XML snippet below:</p>
+        <source>&lt;root&gt;
+  &lt;bean super="true" rate="9.99" /&gt;
+&lt;/root&gt;</source>
+        <p>That has to be mapped to the bean:</p>
+        <source>class MyBean
+{
+
+    public MyBean( Double rate, Boolean super )
+    {
+        ...
+    }
+
+}</source>
+        <p>Then the <code>Digester</code> instance can be configured as below:</p>
+        <source>ObjectCreateRule createRule = new ObjectCreateRule( MyBean.class );
+createRule.addConstructorArgument( "rate", java.lang.Double.class );
+createRule.addConstructorArgument( "super", java.lang.Boolean.class );
+
+Digester digester = new Digester();
+digester.addRule( "root/bean", createRule );</source>
+        <p><b>NOTE</b> The order that the arguments are expressed matters!</p>
+      </subsection>
+
+      <subsection name="Using the RulesBinder APIs">
+        <p>The Binder APIs just allow expressing the same rule in a fluent way:</p>
+        <source>DigesterLoader loader = ( new AbstractRulesModule()
+{
+
+    @Override
+    protected void configure()
+    {
+        forPattern( "root/bean" )
+            .createObject().ofType( MyBean.class )
+                .addConstructorArgument( "rate" ).ofType( Double.class )
+                .addConstructorArgument( "super" ).ofType( Boolean.class );
+    }
+
+} );</source>
+      </subsection>
+
+      <subsection name="Using the annotations">
+        <p>Since 3.1, <a href="/apidocs/org/apache/commons/digester3/annotations/rules/ObjectCreate.html">ObjectCreate</a>
+        can be used to annotate constructors as well; with the introduction of
+        <a href="/apidocs/org/apache/commons/digester3/annotations/rules/Attribute.html">Attribute</a> annotation,
+        constructor based rules can be expressed like:</p>
+        <source>class MyBean
+{
+
+    @ObjectCreate( pattern = "root/bean" )
+    public MyBean( @Attribute( "rate" ) Double rate, @Attribute( "super" ) Boolean super )
+    {
+        ...
+    }
+
+}</source>
+        <p><b>NOTE</b> it is not possible in Java, using reflection, retrieving constructors/methods arguments names,
+        that's why the <code>Attribute</code> annotation has to be added.</p>
+      </subsection>
+
+      <subsection name="Using the XML meta-descriptor">
+        <p>The XML ruleset supports as well the new constructor rule, <code>&lt;object-create-rule&gt;</code> supports
+        a new inner element <code>&lt;constructor-argument&gt;</code>:</p>
+        <source>&lt;digester-rules&gt;
+  &lt;pattern value="root/bean"&gt;
+    &lt;object-create-rule classname="MyBean"&gt;
+      &lt;constructor-argument attrname="rate" type="java.lang.Double" /&gt;
+      &lt;constructor-argument attrname="super" type="java.lang.Boolean" /&gt;
+    &lt;/object-create-rule&gt;
+  &lt;/pattern&gt;
+&lt;/digester-rules&gt;</source>
+      </subsection>
+    </section>
+  </body>
+</document>

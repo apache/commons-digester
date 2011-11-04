@@ -26,6 +26,7 @@ import static org.apache.commons.digester3.annotations.utils.AnnotationUtils.get
 import static org.apache.commons.digester3.annotations.utils.AnnotationUtils.getFireOnBegin;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
@@ -113,6 +114,14 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
         for ( Annotation annotation : type.getAnnotations() )
         {
             doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
+        }
+
+        for ( Constructor<?> constructor : type.getConstructors() )
+        {
+            for ( Annotation annotation : constructor.getAnnotations() )
+            {
+                doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
+            }
         }
     }
 

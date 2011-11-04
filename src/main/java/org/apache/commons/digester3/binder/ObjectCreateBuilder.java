@@ -19,6 +19,10 @@ package org.apache.commons.digester3.binder;
  * under the License.
  */
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.apache.commons.digester3.ObjectCreateRule;
 
 /**
@@ -35,6 +39,13 @@ public final class ObjectCreateBuilder
     private Class<?> type;
 
     private String attributeName;
+
+    /**
+     * The constructor arguments - order is preserved by the LinkedHashMap
+     *
+     * @since 3.2
+     */
+    private final Map<String, Class<?>> constructorArguments = new LinkedHashMap<String, Class<?>>();
 
     ObjectCreateBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
                          ClassLoader classLoader )
@@ -101,12 +112,35 @@ public final class ObjectCreateBuilder
     }
 
     /**
+     *
+     * @param attibuteName
+     * @return
+     * @since 3.2
+     */
+    public ConstructorArgumentTypeBinder addConstructorArgument( String attibuteName )
+    {
+        if ( attibuteName == null )
+        {
+            reportError( "createObject().addConstructorArgument( String )", "NULL attibute name not allowed" );
+        }
+
+        return new ConstructorArgumentTypeBinder( this, constructorArguments, attibuteName, classLoader );
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     protected ObjectCreateRule createRule()
     {
-        return new ObjectCreateRule( attributeName, type );
+        ObjectCreateRule objectCreateRule = new ObjectCreateRule( attributeName, type );
+
+        for ( Entry<String, Class<?>> argEntry : constructorArguments.entrySet() )
+        {
+            objectCreateRule.addConstructorArgument( argEntry.getKey(), argEntry.getValue() );
+        }
+
+        return objectCreateRule;
     }
 
 }

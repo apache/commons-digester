@@ -26,7 +26,7 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.apache.commons.digester3.binder.RulesModule;
 
 /**
- * 
+ *
  */
 final class XmlRulesModule
     implements RulesModule
@@ -90,6 +90,7 @@ final class XmlRulesModule
             forPattern( "*/factory-create-rule" ).addRule( new FactoryCreateRule( targetRulesBinder, patternStack ) );
             forPattern( "*/node-create-rule" ).addRule( new NodeCreateRule( targetRulesBinder, patternStack ) );
             forPattern( "*/object-create-rule" ).addRule( new ObjectCreateRule( targetRulesBinder, patternStack ) );
+            forPattern( "*/object-create-rule/constructor-argument" ).addRule( new ConstructorArgumentRule() );
 
             forPattern( "*/set-properties-rule" ).addRule( new SetPropertiesRule( targetRulesBinder, patternStack ) );
             forPattern( "*/set-properties-rule/alias" )

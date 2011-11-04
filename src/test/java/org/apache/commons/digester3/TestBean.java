@@ -18,15 +18,42 @@
 
 package org.apache.commons.digester3;
 
+import org.apache.commons.digester3.annotations.rules.Attribute;
+import org.apache.commons.digester3.annotations.rules.ObjectCreate;
+
 /**
  * General purpose test bean for Digester tests.
- * 
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
 public class TestBean
 {
+
+    public TestBean()
+    {
+        // do nothing
+    }
+
+    @ObjectCreate( pattern = "toplevel/bean" )
+    public TestBean( @Attribute( "boolean" ) boolean booleanProperty,
+                     @Attribute( "double" ) double doubleProperty )
+    {
+        setBooleanProperty( booleanProperty );
+        setDoubleProperty( doubleProperty );
+    }
+
+    /**
+     * see {@link https://issues.apache.org/jira/browse/DIGESTER-154}
+     *
+     * @param booleanProperty
+     * @param doubleProperty
+     */
+    public TestBean( Boolean booleanProperty, Double doubleProperty )
+    {
+        this( booleanProperty.booleanValue(), doubleProperty.doubleValue() );
+    }
 
     // ------------------------------------------------------------- Properties
 
