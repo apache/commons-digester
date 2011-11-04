@@ -18,7 +18,7 @@ $Id$
 
 
                           Commons Digester Package
-                                Version 3.1
+                                Version 3.2
                                Release Notes
 
 
@@ -27,7 +27,7 @@ INTRODUCTION
 
 This is a maintenance release with new features. New projects are encouraged to
 use this release of digester. There is no urgency for existing projects to
-upgrade; Digester 3.0 has proven to be a stable release.
+upgrade; Digester 3.1 has proven to be a stable release.
 
 IMPORTANT NOTES
 ================
@@ -39,7 +39,7 @@ BREAKING CHANGES:
 DEPENDENCIES
 =============
 
-Digester 3.1 users should upgrade to the recommended dependency set below
+Digester 3.2 users should upgrade to the recommended dependency set below
 where possible.
 
 The Recommended Dependency Set for Digester 3.0 is:
@@ -50,8 +50,7 @@ It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
 NEW FEATURES
 =============
 
- * Asynchronous parser
-       Using Java5 Concurrent APIs it is possible to parse documents asynchronously.
+ * NONE
 
 BUGS FROM PREVIOUS RELEASE
 ===========================
@@ -61,7 +60,7 @@ BUGS FROM PREVIOUS RELEASE
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================
 
- * [DIGESTER-150] Use Java5 Concurrent APIs to asynchronous parse()
+ * [DIGESTER-151] The DigesterLoader doesn't allow binding a default ErrorHandler.
 
 DEPRECATIONS
 ============
