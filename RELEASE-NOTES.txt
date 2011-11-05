@@ -52,7 +52,7 @@ NEW FEATURES
 
  * [DIGESTER-153] Add Constructor support to ObjectCreateRule.
 
-BUGS FROM PREVIOUS RELEASE
+BUGS FIXED SINCE PREVIOUS RELEASE
 ===========================
 
  * [DIGESTER-155] ClassLoader reference set to DigesterLoader not set in produced Digester instances
