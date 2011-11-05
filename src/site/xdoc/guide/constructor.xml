@@ -25,7 +25,7 @@ limitations under the License.
   <body>
     <section name="Constructor based rule">
       <p>One of the known limit of the old Digester releases is that the
-      <a href="/apidocs/org/apache/commons/digester3/ObjectCreateRule.html">ObjectCreateRule</a> works just with
+      <a href="../apidocs/org/apache/commons/digester3/ObjectCreateRule.html">ObjectCreateRule</a> works just with
       the default empty constructor.</p>
       <p>One limit that cannot be exceeded is the fact that constructor arguments cannot be extracted from inner
       XML elements; that's because the <code>ObjectCreateRule</code> creates the object when the related XML
@@ -78,9 +78,9 @@ digester.addRule( "root/bean", createRule );</source>
       </subsection>
 
       <subsection name="Using the annotations">
-        <p>Since 3.2, <a href="/apidocs/org/apache/commons/digester3/annotations/rules/ObjectCreate.html">ObjectCreate</a>
+        <p>Since 3.2, <a href="../apidocs/org/apache/commons/digester3/annotations/rules/ObjectCreate.html">ObjectCreate</a>
         can be used to annotate constructors as well; with the introduction of
-        <a href="/apidocs/org/apache/commons/digester3/annotations/rules/Attribute.html">Attribute</a> annotation,
+        <a href="../apidocs/org/apache/commons/digester3/annotations/rules/Attribute.html">Attribute</a> annotation,
         constructor based rules can be expressed like:</p>
         <source>class MyBean
 {
