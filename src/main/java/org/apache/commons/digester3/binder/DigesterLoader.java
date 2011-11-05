@@ -584,7 +584,7 @@ public final class DigesterLoader
      */
     public RuleSet createRuleSet()
     {
-        if ( !classLoader.equals( rulesBinder.getContextClassLoader() ) )
+        if ( classLoader != rulesBinder.getContextClassLoader() )
         {
             rulesBinder.initialize( classLoader );
             for ( RulesModule rulesModule : rulesModules )
