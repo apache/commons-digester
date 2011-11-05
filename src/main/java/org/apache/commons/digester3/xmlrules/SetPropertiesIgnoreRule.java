@@ -19,32 +19,27 @@ package org.apache.commons.digester3.xmlrules;
  * under the License.
  */
 
-import org.apache.commons.digester3.binder.LinkedRuleBuilder;
-import org.apache.commons.digester3.binder.RulesBinder;
+import org.apache.commons.digester3.Rule;
+import org.apache.commons.digester3.binder.SetPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
- * 
+ *
  */
 final class SetPropertiesIgnoreRule
-    extends AbstractXmlRule
+    extends Rule
 {
-
-    public SetPropertiesIgnoreRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
-    }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    public void begin(String namespace, String name, Attributes attributes)
         throws Exception
     {
         String attributeName = attributes.getValue( "attr-name" );
 
-        linkedRuleBuilder.setProperties().ignoreAttribute( attributeName );
+        SetPropertiesBuilder builder = getDigester().peek();
+        builder.ignoreAttribute( attributeName );
     }
 
 }

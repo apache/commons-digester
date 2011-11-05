@@ -19,33 +19,29 @@ package org.apache.commons.digester3.xmlrules;
  * under the License.
  */
 
-import org.apache.commons.digester3.binder.LinkedRuleBuilder;
-import org.apache.commons.digester3.binder.RulesBinder;
+import org.apache.commons.digester3.Rule;
+import org.apache.commons.digester3.binder.SetPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
  *
  */
 final class SetPropertiesAliasRule
-    extends AbstractXmlRule
+    extends Rule
 {
-
-    public SetPropertiesAliasRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
-    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    public void begin( String namespace, String name, Attributes attributes )
         throws Exception
     {
         String attributeName = attributes.getValue( "attr-name" );
         String propertyName = attributes.getValue( "prop-name" );
 
-        linkedRuleBuilder.setProperties().addAlias( attributeName ).forProperty( propertyName );
+        SetPropertiesBuilder builder = getDigester().peek();
+        builder.addAlias( attributeName ).forProperty( propertyName );
     }
 
 }

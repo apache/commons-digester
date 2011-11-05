@@ -19,32 +19,28 @@ package org.apache.commons.digester3.xmlrules;
  * under the License.
  */
 
-import org.apache.commons.digester3.binder.LinkedRuleBuilder;
-import org.apache.commons.digester3.binder.RulesBinder;
+import org.apache.commons.digester3.Rule;
+import org.apache.commons.digester3.binder.NestedPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
- * 
+ *
  */
 final class SetNestedPropertiesIgnoreRule
-    extends AbstractXmlRule
+    extends Rule
 {
-
-    public SetNestedPropertiesIgnoreRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
-    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    public void begin( String namespace, String name, Attributes attributes )
         throws Exception
     {
         String elementName = attributes.getValue( "elem-name" );
 
-        linkedRuleBuilder.setNestedProperties().ignoreElement( elementName );
+        NestedPropertiesBuilder builder = getDigester().peek();
+        builder.ignoreElement( elementName );
     }
 
 }

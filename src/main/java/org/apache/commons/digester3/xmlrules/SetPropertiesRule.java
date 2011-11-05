@@ -21,10 +21,11 @@ package org.apache.commons.digester3.xmlrules;
 
 import org.apache.commons.digester3.binder.LinkedRuleBuilder;
 import org.apache.commons.digester3.binder.RulesBinder;
+import org.apache.commons.digester3.binder.SetPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
- * 
+ *
  */
 final class SetPropertiesRule
     extends AbstractXmlRule
@@ -43,7 +44,19 @@ final class SetPropertiesRule
         throws Exception
     {
         boolean ignoreMissingProperty = "true".equalsIgnoreCase( attributes.getValue( "ignore-missing-property" ) );
-        linkedRuleBuilder.setProperties().ignoreMissingProperty( ignoreMissingProperty );
+
+        SetPropertiesBuilder builder = linkedRuleBuilder.setProperties().ignoreMissingProperty( ignoreMissingProperty );
+        getDigester().push( builder );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void end( String namespace, String name )
+        throws Exception
+    {
+        getDigester().pop();
     }
 
 }

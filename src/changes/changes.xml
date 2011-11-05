@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.2" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-157">
+      Improve Set(Nested)PropertiesRuleAlias performances in the XML ruleset while binding rules.
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-156">
       Make (Nested|Set)PropertiesBuilder#addAlias() fluent.
     </action>

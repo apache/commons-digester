@@ -20,11 +20,12 @@ package org.apache.commons.digester3.xmlrules;
  */
 
 import org.apache.commons.digester3.binder.LinkedRuleBuilder;
+import org.apache.commons.digester3.binder.NestedPropertiesBuilder;
 import org.apache.commons.digester3.binder.RulesBinder;
 import org.xml.sax.Attributes;
 
 /**
- * 
+ *
  */
 final class SetNestedPropertiesRule
     extends AbstractXmlRule
@@ -44,7 +45,20 @@ final class SetNestedPropertiesRule
     {
         boolean allowUnknownChildElements =
             "true".equalsIgnoreCase( attributes.getValue( "allow-unknown-child-elements" ) );
-        linkedRuleBuilder.setNestedProperties().allowUnknownChildElements( allowUnknownChildElements );
+        NestedPropertiesBuilder builder = linkedRuleBuilder
+                                            .setNestedProperties()
+                                            .allowUnknownChildElements( allowUnknownChildElements );
+        getDigester().push( builder );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void end( String namespace, String name )
+        throws Exception
+    {
+        getDigester().pop();
     }
 
 }

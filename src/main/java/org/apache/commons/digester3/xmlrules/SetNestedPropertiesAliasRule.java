@@ -19,33 +19,29 @@ package org.apache.commons.digester3.xmlrules;
  * under the License.
  */
 
-import org.apache.commons.digester3.binder.LinkedRuleBuilder;
-import org.apache.commons.digester3.binder.RulesBinder;
+import org.apache.commons.digester3.Rule;
+import org.apache.commons.digester3.binder.NestedPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
  *
  */
 final class SetNestedPropertiesAliasRule
-    extends AbstractXmlRule
+    extends Rule
 {
-
-    public SetNestedPropertiesAliasRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
-    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    public void begin( String namespace, String name, Attributes attributes )
         throws Exception
     {
         String elementName = attributes.getValue( "attr-name" );
         String propertyName = attributes.getValue( "prop-name" );
 
-        linkedRuleBuilder.setNestedProperties().addAlias( elementName ).forProperty( propertyName );
+        NestedPropertiesBuilder builder = getDigester().peek();
+        builder.addAlias( elementName ).forProperty( propertyName );
     }
 
 }

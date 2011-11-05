@@ -60,6 +60,7 @@ BUGS FIXED SINCE PREVIOUS RELEASE
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================
 
+ * [DIGESTER-157] Improve Set(Nested)PropertiesRuleAlias performances in the XML ruleset while binding rules
  * [DIGESTER-156] Make (Nested|Set)PropertiesBuilder#addAlias() fluent.
  * [DIGESTER-152] The DigesterLoader doesn't allow binding a default Locator
  * [DIGESTER-151] The DigesterLoader doesn't allow binding a default ErrorHandler.

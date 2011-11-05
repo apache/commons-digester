@@ -94,18 +94,18 @@ final class XmlRulesModule
 
             forPattern( "*/set-properties-rule" ).addRule( new SetPropertiesRule( targetRulesBinder, patternStack ) );
             forPattern( "*/set-properties-rule/alias" )
-                .addRule( new SetPropertiesAliasRule( targetRulesBinder, patternStack ) );
+                .addRule( new SetPropertiesAliasRule() );
             forPattern( "*/set-properties-rule/ignore" )
-                .addRule( new SetPropertiesIgnoreRule( targetRulesBinder, patternStack ) );
+                .addRule( new SetPropertiesIgnoreRule() );
 
             forPattern( "*/set-property-rule" ).addRule( new SetPropertyRule( targetRulesBinder, patternStack ) );
 
             forPattern( "*/set-nested-properties-rule" )
                 .addRule( new SetNestedPropertiesRule( targetRulesBinder, patternStack ) );
             forPattern( "*/set-nested-properties-rule/alias" )
-                .addRule( new SetNestedPropertiesAliasRule( targetRulesBinder, patternStack ) );
+                .addRule( new SetNestedPropertiesAliasRule() );
             forPattern( "*/set-nested-properties-rule/ignore" )
-                .addRule( new SetPropertiesIgnoreRule( targetRulesBinder, patternStack ) );
+                .addRule( new SetNestedPropertiesIgnoreRule() );
 
             forPattern( "*/set-top-rule" ).addRule( new SetTopRule( targetRulesBinder, patternStack ) );
             forPattern( "*/set-next-rule" ).addRule( new SetNextRule( targetRulesBinder, patternStack ) );
