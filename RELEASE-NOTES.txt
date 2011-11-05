@@ -55,7 +55,7 @@ NEW FEATURES
 BUGS FROM PREVIOUS RELEASE
 ===========================
 
- * [DIGESTER-155] ClassLoader reference set to DigesterLoader not set in produced Digetser instances
+ * [DIGESTER-155] ClassLoader reference set to DigesterLoader not set in produced Digester instances
 
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================
