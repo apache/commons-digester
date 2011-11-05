@@ -78,7 +78,7 @@ digester.addRule( "root/bean", createRule );</source>
       </subsection>
 
       <subsection name="Using the annotations">
-        <p>Since 3.1, <a href="/apidocs/org/apache/commons/digester3/annotations/rules/ObjectCreate.html">ObjectCreate</a>
+        <p>Since 3.2, <a href="/apidocs/org/apache/commons/digester3/annotations/rules/ObjectCreate.html">ObjectCreate</a>
         can be used to annotate constructors as well; with the introduction of
         <a href="/apidocs/org/apache/commons/digester3/annotations/rules/Attribute.html">Attribute</a> annotation,
         constructor based rules can be expressed like:</p>
