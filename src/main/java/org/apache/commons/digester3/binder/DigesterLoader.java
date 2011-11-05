@@ -516,11 +516,7 @@ public final class DigesterLoader
         digester.setStackAction( stackAction );
         digester.setNamespaceAware( isNamespaceAware() );
         digester.setExecutorService( executorService );
-
-        if ( errorHandler != null )
-        {
-            digester.setErrorHandler( errorHandler );
-        }
+        digester.setErrorHandler( errorHandler );
 
         addRules( digester );
 
