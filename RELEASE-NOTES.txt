@@ -60,6 +60,7 @@ BUGS FROM PREVIOUS RELEASE
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================
 
+ * [DIGESTER-152] The DigesterLoader doesn't allow binding a default Locator
  * [DIGESTER-151] The DigesterLoader doesn't allow binding a default ErrorHandler.
 
 DEPRECATIONS

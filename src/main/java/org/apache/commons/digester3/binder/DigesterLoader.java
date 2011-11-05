@@ -43,6 +43,7 @@ import org.apache.commons.digester3.StackAction;
 import org.apache.commons.digester3.Substitutor;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
+import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
@@ -143,6 +144,12 @@ public final class DigesterLoader
      * @since 3.2
      */
     private ErrorHandler errorHandler = null;
+
+    /**
+     * The Locator associated with our parser.
+     * @since 3.2
+     */
+    private Locator locator = null;
 
     /**
      * Creates a new {@link DigesterLoader} instance given a collection of {@link RulesModule} instance.
@@ -409,6 +416,29 @@ public final class DigesterLoader
     }
 
     /**
+     * Gets the document locator associated with our parser.
+     *
+     * @return the Locator supplied by the document parser
+     * @since 3.2
+     */
+    public Locator getDocumentLocator()
+    {
+        return locator;
+    }
+
+    /**
+     * Sets the document locator associated with our parser.
+     *
+     * @param locator the document locator associated with our parser.
+     * @since 3.2
+     */
+    public DigesterLoader setDocumentLocator( Locator locator )
+    {
+        this.locator = locator;
+        return this;
+    }
+
+    /**
      * Creates a new {@link Digester} instance that relies on the default {@link Rules} implementation.
      *
      * @return a new {@link Digester} instance
@@ -517,6 +547,7 @@ public final class DigesterLoader
         digester.setNamespaceAware( isNamespaceAware() );
         digester.setExecutorService( executorService );
         digester.setErrorHandler( errorHandler );
+        digester.setDocumentLocator( locator );
 
         addRules( digester );
 

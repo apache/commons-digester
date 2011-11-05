@@ -25,6 +25,7 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import org.apache.commons.digester3.Digester;
 import org.junit.Test;
 import org.xml.sax.ErrorHandler;
+import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -72,6 +73,53 @@ public final class DigesterLoaderTestCase
         } ).setErrorHandler( expected ).newDigester();
 
         ErrorHandler actual = digester.getErrorHandler();
+
+        assertSame( expected, actual );
+    }
+
+    @Test
+    public void digeser152()
+    {
+        Locator expected = new Locator()
+        {
+
+            public String getSystemId()
+            {
+                // just fake method
+                return null;
+            }
+
+            public String getPublicId()
+            {
+                // just fake method
+                return null;
+            }
+
+            public int getLineNumber()
+            {
+                // just fake method
+                return 0;
+            }
+
+            public int getColumnNumber()
+            {
+                // just fake method
+                return 0;
+            }
+        };
+
+        Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                // do nothing
+            }
+
+        } ).setDocumentLocator( expected ).newDigester();
+
+        Locator actual = digester.getDocumentLocator();
 
         assertSame( expected, actual );
     }

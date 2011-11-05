@@ -26,6 +26,9 @@
     <action dev="simonetripodi" type="add" issue="DIGESTER-153">
       Add Constructor support to ObjectCreateRule
     </action>
+    <action dev="simonetripodi" type="add" issue="DIGESTER-152">
+      The org.apache.commons.digester3.binder.DigesterLoader doesn't allow binding a default org.xml.sax.Locator
+    </action>
     <action dev="simonetripodi" type="add" issue="DIGESTER-151">
       The org.apache.commons.digester3.binder.DigesterLoader doesn't allow binding a default org.xml.sax.ErrorHandler.
     </action>
