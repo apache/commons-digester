@@ -124,4 +124,25 @@ public final class DigesterLoaderTestCase
         assertSame( expected, actual );
     }
 
+    @Test
+    public void digester155()
+    {
+        ClassLoader expected = getClass().getClassLoader();
+
+        Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                // do nothing
+            }
+
+        } ).setClassLoader( expected ).newDigester();
+
+        ClassLoader actual = digester.getClassLoader();
+
+        assertSame( expected, actual );
+    }
+
 }

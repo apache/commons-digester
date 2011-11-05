@@ -107,8 +107,6 @@ public final class DigesterLoader
 
     private final Iterable<RulesModule> rulesModules;
 
-    private boolean useContextClassLoader = true;
-
     /**
      * The class loader to use for instantiating application objects.
      * If not specified, the context class loader, or the class loader
@@ -159,6 +157,7 @@ public final class DigesterLoader
     private DigesterLoader( Iterable<RulesModule> rulesModules )
     {
         this.rulesModules = rulesModules;
+        setUseContextClassLoader( true );
     }
 
     /**
@@ -173,7 +172,14 @@ public final class DigesterLoader
      */
     public DigesterLoader setUseContextClassLoader( boolean useContextClassLoader )
     {
-        this.useContextClassLoader = useContextClassLoader;
+        if ( useContextClassLoader )
+        {
+            setClassLoader( Thread.currentThread().getContextClassLoader() );
+        }
+        else
+        {
+            setClassLoader( getClass().getClassLoader() );
+        }
         return this;
     }
 
@@ -185,6 +191,11 @@ public final class DigesterLoader
      */
     public DigesterLoader setClassLoader( ClassLoader classLoader )
     {
+        if ( classLoader == null )
+        {
+            throw new IllegalArgumentException( "Parameter 'classLoader' cannot be null" );
+        }
+
         this.classLoader = classLoader;
         return this;
     }
@@ -539,6 +550,7 @@ public final class DigesterLoader
         }
 
         Digester digester = new Digester( reader );
+        digester.setClassLoader( classLoader );
         digester.setRules( rules );
         digester.setSubstitutor( substitutor );
         digester.registerAll( entityValidator );
@@ -572,14 +584,9 @@ public final class DigesterLoader
      */
     public RuleSet createRuleSet()
     {
-        ClassLoader contextClassLoader =
-            classLoader != null ? classLoader
-                            : ( useContextClassLoader ? Thread.currentThread().getContextClassLoader()
-                                            : getClass().getClassLoader() );
-
-        if ( !contextClassLoader.equals( rulesBinder.getContextClassLoader() ) )
+        if ( !classLoader.equals( rulesBinder.getContextClassLoader() ) )
         {
-            rulesBinder.initialize( contextClassLoader );
+            rulesBinder.initialize( classLoader );
             for ( RulesModule rulesModule : rulesModules )
             {
                 rulesModule.configure( rulesBinder );

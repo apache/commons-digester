@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.2" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-155">
+      ClassLoader reference set to DigesterLoader not set in produced Digetser instances
+    </action>
     <action dev="simonetripodi" type="add" issue="DIGESTER-153">
       Add Constructor support to ObjectCreateRule
     </action>
