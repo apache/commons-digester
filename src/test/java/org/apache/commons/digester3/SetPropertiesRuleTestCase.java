@@ -198,7 +198,7 @@ public class SetPropertiesRuleTestCase
                 forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
                     .then()
                     .setProperties()
-                        .addAlias( "ignore", null )
+                        .addAlias( "ignore" ).forProperty( null )
                         .ignoreMissingProperty( false );
             }
 

@@ -47,18 +47,28 @@ public final class SetPropertiesBuilder
      * @param attributeName The attribute to match
      * @param propertyName The java bean property to be assigned the value
      * @return this builder instance
+     * @deprecated
      */
+    @Deprecated
     public SetPropertiesBuilder addAlias( String attributeName, String propertyName )
+    {
+        return addAlias( attributeName ).forProperty( propertyName );
+    }
+
+    /**
+     * Add an additional attribute name to property name mapping.
+     *
+     * @param attributeName The attribute to match
+     * @return the property alias builder
+     * @since 3.2
+     */
+    public AddAliasBuilder<SetPropertiesBuilder> addAlias( String attributeName )
     {
         if ( attributeName == null )
         {
-            reportError( "setProperties().addAlias( String,String )", "empty 'attributeName' not allowed" );
+            reportError( "setProperties().addAlias( String )", "empty 'attributeName' not allowed" );
         }
-        else
-        {
-            aliases.put( attributeName, propertyName );
-        }
-        return this;
+        return new AddAliasBuilder<SetPropertiesBuilder>( this, aliases, attributeName );
     }
 
     /**
@@ -73,16 +83,12 @@ public final class SetPropertiesBuilder
         {
             reportError( "setProperties().ignoreAttribute( String )", "empty 'attributeName' not allowed" );
         }
-        else
-        {
-            addAlias( attributeName, null );
-        }
-        return this;
+        return addAlias( attributeName ).forProperty( null );
     }
 
     /**
      * Sets whether attributes found in the XML without matching properties should be ignored.
-     * 
+     *
      * If set to false, the parsing will throw an {@code NoSuchMethodException}
      * if an unmatched attribute is found.
      * This allows to trap misspellings in the XML file.

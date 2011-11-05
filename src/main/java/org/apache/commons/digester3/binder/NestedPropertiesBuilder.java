@@ -57,11 +57,7 @@ public final class NestedPropertiesBuilder
         {
             reportError( "setNestedProperties().ignoreElement( String )", "empty 'elementName' not allowed" );
         }
-        else
-        {
-            addAlias( elementName, null );
-        }
-        return this;
+        return addAlias( elementName ).forProperty( null );
     }
 
     /**
@@ -70,18 +66,28 @@ public final class NestedPropertiesBuilder
      * @param elementName The child xml element to match
      * @param propertyName The java bean property to be assigned the value
      * @return this builder instance
+     * @deprecated
      */
+    @Deprecated
     public NestedPropertiesBuilder addAlias( String elementName, String propertyName )
+    {
+        return addAlias( elementName ).forProperty( propertyName );
+    }
+
+    /**
+     * Allows element2property mapping to be overridden.
+     *
+     * @param elementName
+     * @return the property alias builder
+     * @since 3.2
+     */
+    public AddAliasBuilder<NestedPropertiesBuilder> addAlias( String elementName )
     {
         if ( elementName == null )
         {
-            reportError( "setNestedProperties().addAlias( String,String )", "empty 'elementName' not allowed" );
+            reportError( "setProperties().addAlias( String )", "empty 'elementName' not allowed" );
         }
-        else
-        {
-            elementNames.put( elementName, propertyName );
-        }
-        return this;
+        return new AddAliasBuilder<NestedPropertiesBuilder>( this, elementNames, elementName );
     }
 
     /**

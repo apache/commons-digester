@@ -142,9 +142,9 @@ public class SetNestedPropertiesRuleTestCase
                 forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
                     .then()
                     .setNestedProperties()
-                        .addAlias( "alpha", null )
-                        .addAlias( "gamma-alt", "gamma" )
-                        .addAlias( "delta", null );
+                        .addAlias( "alpha" ).forProperty( null )
+                        .addAlias( "gamma-alt" ).forProperty( "gamma" )
+                        .addAlias( "delta" ).forProperty(  null );
             }
 
         }).newDigester();
@@ -184,7 +184,7 @@ public class SetNestedPropertiesRuleTestCase
                 forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
                     .then()
                     .setNestedProperties()
-                        .addAlias( "alpha", null );
+                        .addAlias( "alpha" ).forProperty( null );
             }
 
         }).newDigester();
@@ -224,7 +224,7 @@ public class SetNestedPropertiesRuleTestCase
                 forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
                     .then()
                     .setNestedProperties()
-                        .addAlias( "alpha-alt", "alpha" );
+                        .addAlias( "alpha-alt" ).forProperty( "alpha" );
             }
 
         }).newDigester();

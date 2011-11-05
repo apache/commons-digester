@@ -24,7 +24,7 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.xml.sax.Attributes;
 
 /**
- * 
+ *
  */
 final class SetNestedPropertiesAliasRule
     extends AbstractXmlRule
@@ -45,7 +45,7 @@ final class SetNestedPropertiesAliasRule
         String elementName = attributes.getValue( "attr-name" );
         String propertyName = attributes.getValue( "prop-name" );
 
-        linkedRuleBuilder.setNestedProperties().addAlias( elementName, propertyName );
+        linkedRuleBuilder.setNestedProperties().addAlias( elementName ).forProperty( propertyName );
     }
 
 }

@@ -48,7 +48,7 @@ public final class SetPropertiesHandler
         if ( annotation.attributeName() != null && annotation.attributeName().length() > 0
             && !element.getName().equals( annotation.attributeName() ) )
         {
-            builder.addAlias( annotation.attributeName(), element.getName() );
+            builder.addAlias( annotation.attributeName() ).forProperty( element.getName() );
         }
     }
 

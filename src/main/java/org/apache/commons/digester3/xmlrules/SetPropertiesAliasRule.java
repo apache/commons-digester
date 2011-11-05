@@ -24,7 +24,7 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.xml.sax.Attributes;
 
 /**
- * 
+ *
  */
 final class SetPropertiesAliasRule
     extends AbstractXmlRule
@@ -45,7 +45,7 @@ final class SetPropertiesAliasRule
         String attributeName = attributes.getValue( "attr-name" );
         String propertyName = attributes.getValue( "prop-name" );
 
-        linkedRuleBuilder.setProperties().addAlias( attributeName, propertyName );
+        linkedRuleBuilder.setProperties().addAlias( attributeName ).forProperty( propertyName );
     }
 
 }
