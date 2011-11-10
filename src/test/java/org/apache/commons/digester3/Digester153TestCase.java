@@ -43,18 +43,26 @@ public final class Digester153TestCase
         throws Exception
     {
         ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
-        createRule.addConstructorArgument( "boolean", boolean.class );
-        createRule.addConstructorArgument( "double", double.class );
+        createRule.setConstructorArguments( boolean.class, double.class );
 
         Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
+        digester.addCallParam( "toplevel/bean", 0, "boolean" );
+        digester.addCallParam( "toplevel/bean", 1, "double" );
 
         TestBean bean = digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
 
         assertTrue( bean.getBooleanProperty() );
         assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
+
+        // do it again to exercise the cglib Factory:
+        bean = digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
+
+        assertTrue( bean.getBooleanProperty() );
+        assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
     }
 
+    /*
     @Test
     public void basicConstructorViaBinder()
         throws Exception
@@ -163,5 +171,6 @@ public final class Digester153TestCase
         assertTrue( bean.getBooleanProperty() );
         assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
     }
+    */
 
 }

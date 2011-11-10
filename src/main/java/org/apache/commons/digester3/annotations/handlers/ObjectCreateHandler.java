@@ -19,13 +19,10 @@ package org.apache.commons.digester3.annotations.handlers;
  * under the License.
  */
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 
 import org.apache.commons.digester3.annotations.AnnotationHandler;
-import org.apache.commons.digester3.annotations.reflect.MethodArgument;
-import org.apache.commons.digester3.annotations.rules.Attribute;
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 import org.apache.commons.digester3.binder.ObjectCreateBuilder;
 import org.apache.commons.digester3.binder.RulesBinder;
@@ -69,17 +66,7 @@ public final class ObjectCreateHandler
         if ( element instanceof Constructor<?> )
         {
             Constructor<?> method = (Constructor<?>) element;
-            Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            for ( int i = 0; i < parameterTypes.length; i++ )
-            {
-                MethodArgument methodArgument = new MethodArgument( i, parameterTypes[i], parameterAnnotations[i] );
-                if ( methodArgument.isAnnotationPresent( Attribute.class ) )
-                {
-                    Attribute attribute = methodArgument.getAnnotation( Attribute.class );
-                    builder.addConstructorArgument( attribute.value() ).ofType( methodArgument.getParameterType() );
-                }
-            }
+            builder.usingConstructor( method.getParameterTypes() );
         }
     }
 

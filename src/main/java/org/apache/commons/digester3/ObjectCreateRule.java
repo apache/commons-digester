@@ -19,19 +19,21 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
-import static java.util.Arrays.asList;
 import static java.lang.String.format;
-
-import static org.apache.commons.beanutils.ConvertUtils.convert;
+import static java.util.Arrays.fill;
+import static net.sf.cglib.proxy.Enhancer.isEnhanced;
 import static org.apache.commons.beanutils.ConstructorUtils.getAccessibleConstructor;
 
 import java.lang.reflect.Constructor;
-import java.util.Formatter;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Arrays;
+
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.Factory;
+import net.sf.cglib.proxy.LazyLoader;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Rule implementation that creates a new object and pushes it onto the object stack. When the element is complete, the
@@ -111,27 +113,31 @@ public class ObjectCreateRule
      *
      * @since 3.2
      */
-    private final Map<String, Class<?>> constructorArguments = new LinkedHashMap<String, Class<?>>();
+    private Class<?>[] constructorArgumentsTypes;
+
+    /**
+     * cglib Factory for lazily-loaded instances after the first.
+     * Only used in the presence of constructor args.
+     *
+     * @since 3.2
+     */
+    private Factory proxyFactory;
 
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Allows users specify constructor arguments <b>from attributes only</b>.
+     * Allows users specify constructor arguments.
      *
      * @since 3.2
      */
-    public void addConstructorArgument( String attibuteName, Class<?> type )
+    public void setConstructorArguments( Class<?>...constructorArgumentsTypes )
     {
-        if ( attibuteName == null )
+        if ( constructorArgumentsTypes == null )
         {
-            throw new IllegalArgumentException( "Parameter 'attibuteName' must not be null" );
-        }
-        if ( type == null )
-        {
-            throw new IllegalArgumentException( "Parameter 'type' must not be null" );
+            throw new IllegalArgumentException( "Parameter 'constructorArgumentsTypes' must not be null" );
         }
 
-        constructorArguments.put( attibuteName, type );
+        this.constructorArgumentsTypes = constructorArgumentsTypes;
     }
 
     /**
@@ -166,7 +172,7 @@ public class ObjectCreateRule
             clazz = getDigester().getClassLoader().loadClass( realClassName );
         }
         Object instance;
-        if ( constructorArguments.isEmpty() )
+        if ( constructorArgumentsTypes == null || constructorArgumentsTypes.length == 0 )
         {
             if ( getDigester().getLogger().isDebugEnabled() )
             {
@@ -179,50 +185,44 @@ public class ObjectCreateRule
         }
         else
         {
-            Class<?>[] parameterTypes = new Class<?>[constructorArguments.size()];
-            Object[] initargs = new Object[constructorArguments.size()];
-
-            int counter = 0;
-
-            // prepare the arguments types with related values
-            for ( Entry<String, Class<?>> argEntry : constructorArguments.entrySet() )
-            {
-                parameterTypes[counter] = argEntry.getValue();
-
-                String argumentValueAsString = attributes.getValue( argEntry.getKey() );
-                // ConvertUtils manages null values as well
-                initargs[counter] = convert( argumentValueAsString, parameterTypes[counter] );
-
-                counter++;
-            }
-
-            Constructor<?> constructor = getAccessibleConstructor( clazz, parameterTypes );
+            Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentsTypes );
 
             if ( constructor == null )
             {
-                throw new IllegalArgumentException( format( "[ObjectCreateRule]{%s} class '%s' doesn't have a Contructor with params %s",
-                                                            getDigester().getMatch(),
-                                                            clazz.getName(),
-                                                            asList( parameterTypes ) ) );
+                throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types",
+                                                getDigester().getMatch(),
+                                                clazz.getName(),
+                                                Arrays.toString( constructorArgumentsTypes ) ) );
             }
 
-            // print out constructor debug
-            if ( getDigester().getLogger().isDebugEnabled() )
-            {
-                Formatter formatter = new Formatter().format( "[ObjectCreateRule]{%s} New '%s' using constructor( ",
-                                                              getDigester().getMatch(),
-                                                              clazz.getName() );
-                for ( int i = 0; i < initargs.length; i++ )
-                {
-                    formatter.format( "%s%s/%s", ( i > 0 ? ", " : "" ), initargs[i], parameterTypes[i].getName() );
-                }
-                formatter.format( " )" );
-                getDigester().getLogger().debug( formatter.toString() );
-            }
-
-            instance = constructor.newInstance( initargs );
+            instance = createLazyProxy( constructor );
         }
         getDigester().push( instance );
+    }
+
+    private Object createLazyProxy( Constructor<?> constructor ) {
+        Object[] constructorArguments = new Object[constructorArgumentsTypes.length];
+        fill( constructorArguments, null );
+        getDigester().pushParams( constructorArguments );
+
+        ObjectCreateRuleLazyLoader lazyLoader = new ObjectCreateRuleLazyLoader( constructor,
+                                                                                constructorArgumentsTypes,
+                                                                                constructorArguments );
+        if ( proxyFactory == null ) {
+            synchronized ( this ) {
+                // check again for null now that we're in the synchronized block:
+                if ( proxyFactory == null ) {
+                    Enhancer enhancer = new Enhancer();
+                    enhancer.setSuperclass( clazz );
+                    enhancer.setCallback( lazyLoader );
+                    enhancer.setClassLoader( getDigester().getClassLoader() );
+                    Object result = enhancer.create();
+                    proxyFactory = (Factory) result;
+                    return result;
+                }
+            }
+        }
+        return proxyFactory.newInstance( lazyLoader );
     }
 
     /**
@@ -233,6 +233,13 @@ public class ObjectCreateRule
         throws Exception
     {
         Object top = getDigester().pop();
+
+        if ( isEnhanced( top.getClass() ) )
+        {
+            // do lazy load?!?
+            getDigester().popParams();
+        }
+
         if ( getDigester().getLogger().isDebugEnabled() )
         {
             getDigester().getLogger().debug( format( "[ObjectCreateRule]{%s} Pop '%s'",

@@ -18,7 +18,7 @@
 
 package org.apache.commons.digester3;
 
-import org.apache.commons.digester3.annotations.rules.Attribute;
+import org.apache.commons.digester3.annotations.rules.CallParam;
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 
 /**
@@ -37,8 +37,8 @@ public class TestBean
     }
 
     @ObjectCreate( pattern = "toplevel/bean" )
-    public TestBean( @Attribute( "boolean" ) boolean booleanProperty,
-                     @Attribute( "double" ) double doubleProperty )
+    public TestBean( @CallParam( pattern = "toplevel/bean", attributeName = "boolean" ) boolean booleanProperty,
+                     @CallParam( pattern = "toplevel/bean", attributeName = "double" ) double doubleProperty )
     {
         setBooleanProperty( booleanProperty );
         setDoubleProperty( doubleProperty );

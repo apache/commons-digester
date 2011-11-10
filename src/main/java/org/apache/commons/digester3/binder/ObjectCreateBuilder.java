@@ -19,10 +19,6 @@ package org.apache.commons.digester3.binder;
  * under the License.
  */
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.commons.digester3.ObjectCreateRule;
 
 /**
@@ -45,7 +41,7 @@ public final class ObjectCreateBuilder
      *
      * @since 3.2
      */
-    private final Map<String, Class<?>> constructorArguments = new LinkedHashMap<String, Class<?>>();
+    private Class<?>[] constructorArgumentsType;
 
     ObjectCreateBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
                          ClassLoader classLoader )
@@ -113,18 +109,19 @@ public final class ObjectCreateBuilder
 
     /**
      *
-     * @param attibuteName
      * @return
      * @since 3.2
      */
-    public ConstructorArgumentTypeBinder addConstructorArgument( String attibuteName )
+    public ObjectCreateBuilder usingConstructor( Class<?>...constructorArgumentsType )
     {
-        if ( attibuteName == null )
+        if ( constructorArgumentsType == null )
         {
-            reportError( "createObject().addConstructorArgument( String )", "NULL attibute name not allowed" );
+            reportError( "createObject().usingConstructor( Class<?>[] )", "NULL parametersTypes not allowed" );
         }
 
-        return new ConstructorArgumentTypeBinder( this, constructorArguments, attibuteName, classLoader );
+        this.constructorArgumentsType = constructorArgumentsType;
+
+        return this;
     }
 
     /**
@@ -135,9 +132,9 @@ public final class ObjectCreateBuilder
     {
         ObjectCreateRule objectCreateRule = new ObjectCreateRule( attributeName, type );
 
-        for ( Entry<String, Class<?>> argEntry : constructorArguments.entrySet() )
+        if ( constructorArgumentsType != null )
         {
-            objectCreateRule.addConstructorArgument( argEntry.getKey(), argEntry.getValue() );
+            objectCreateRule.setConstructorArguments( constructorArgumentsType );
         }
 
         return objectCreateRule;
