@@ -32,7 +32,7 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-155">
       ClassLoader reference set to DigesterLoader not set in produced Digester instances
     </action>
-    <action dev="simonetripodi" type="add" issue="DIGESTER-153">
+    <action dev="mbenson" type="add" issue="DIGESTER-153">
       Add Constructor support to ObjectCreateRule
     </action>
     <action dev="simonetripodi" type="add" issue="DIGESTER-152">
