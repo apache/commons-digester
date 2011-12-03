@@ -52,7 +52,8 @@ public final class ObjectCreateHandler
         }
         else
         {
-            rulesBinder.addError( "", element );
+            rulesBinder.addError( "Misplaced @ObjectCreate annotation to %s, Class and Constructor only supported",
+                                  element );
             return;
         }
 
