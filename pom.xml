@@ -331,7 +331,7 @@
         <artifactId>maven-changes-plugin</artifactId>
         <version>2.3</version>
         <configuration>
-          <issueLinkTemplate>%URL%/../%ISSUE%</issueLinkTemplate>
+          <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
         </configuration>
         <reportSets>
           <reportSet>
