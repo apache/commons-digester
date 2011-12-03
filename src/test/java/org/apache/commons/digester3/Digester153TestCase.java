@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.RulesModule;
+import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.junit.Test;
 
 /**
@@ -122,7 +123,7 @@ public final class Digester153TestCase
         } );
     }
 
-    /* @Test
+    @Test
     public void basicConstructorViaXML()
         throws Exception
     {
@@ -136,7 +137,7 @@ public final class Digester153TestCase
             }
 
         } );
-    } */
+    }
 
     private void succesfullConstructor( RulesModule rulesModule )
         throws Exception

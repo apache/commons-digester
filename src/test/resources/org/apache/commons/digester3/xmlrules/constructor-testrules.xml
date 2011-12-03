@@ -18,9 +18,9 @@
 -->
 <digester-rules>
   <pattern value="toplevel/bean">
-    <object-create-rule classname="org.apache.commons.digester3.TestBean">
-      <constructor-argument attrname="boolean" type="java.lang.Boolean" />
-      <constructor-argument attrname="double" type="java.lang.Double" />
-    </object-create-rule>
+    <object-create-rule classname="org.apache.commons.digester3.TestBean"
+      paramtypes="java.lang.Boolean,java.lang.Double" />
+    <call-param-rule paramnumber="0" attrname="boolean" />
+    <call-param-rule paramnumber="1" attrname="double" />
   </pattern>
 </digester-rules>

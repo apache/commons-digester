@@ -85,7 +85,6 @@ final class XmlRulesModule
 
             forPattern( "*/call-method-rule" ).addRule( new CallMethodRule( targetRulesBinder, patternStack ) );
             forPattern( "*/call-param-rule" ).addRule( new CallParamRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/object-param-rule" ).addRule( new ObjectParamRule( targetRulesBinder, patternStack ) );
 
             forPattern( "*/factory-create-rule" ).addRule( new FactoryCreateRule( targetRulesBinder, patternStack ) );
             forPattern( "*/node-create-rule" ).addRule( new NodeCreateRule( targetRulesBinder, patternStack ) );

@@ -19,6 +19,8 @@ package org.apache.commons.digester3.xmlrules;
  * under the License.
  */
 
+import java.util.StringTokenizer;
+
 import org.apache.commons.digester3.binder.LinkedRuleBuilder;
 import org.apache.commons.digester3.binder.ObjectCreateBuilder;
 import org.apache.commons.digester3.binder.RulesBinder;
@@ -46,14 +48,19 @@ final class ObjectCreateRule
         ObjectCreateBuilder builder = linkedRuleBuilder.createObject()
             .ofType( attributes.getValue( "classname" ) )
             .ofTypeSpecifiedByAttribute( attributes.getValue( "attrname" ) );
-        getDigester().push( builder );
-    }
 
-    @Override
-    public void end( String namespace, String name )
-        throws Exception
-    {
-        getDigester().pop();
+        String paramTypesStr = attributes.getValue( "paramtypes" );
+        if ( paramTypesStr != null && paramTypesStr.length() > 0 )
+        {
+            StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
+            String[] paramTypeNames = new String[tokens.countTokens()];
+            int counter = 0;
+            while ( tokens.hasMoreTokens() )
+            {
+                paramTypeNames[counter++] = tokens.nextToken();
+            }
+            builder.usingConstructor( paramTypeNames );
+        }
     }
 
 }

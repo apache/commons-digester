@@ -19,6 +19,10 @@ package org.apache.commons.digester3.binder;
  * under the License.
  */
 
+import static java.lang.String.format;
+
+import java.util.Arrays;
+
 import org.apache.commons.digester3.ObjectCreateRule;
 
 /**
@@ -105,6 +109,40 @@ public final class ObjectCreateBuilder
     {
         this.attributeName = attributeName;
         return this;
+    }
+
+    /**
+     *
+     * @return
+     * @since 3.2
+     */
+    public ObjectCreateBuilder usingConstructor( String...paramTypeNames )
+    {
+        if ( paramTypeNames == null )
+        {
+            reportError( "createObject().usingConstructor( String[] )", "NULL parametersTypes not allowed" );
+        }
+
+        Class<?>[] paramTypes = null;
+        if ( paramTypeNames != null )
+        {
+            paramTypes = new Class<?>[paramTypeNames.length];
+            for ( int i = 0; i < paramTypeNames.length; i++ )
+            {
+                try
+                {
+                    paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
+                }
+                catch ( ClassNotFoundException e )
+                {
+                    this.reportError( format( "createObject().usingConstructor( %s )",
+                                              Arrays.toString( paramTypeNames ) ),
+                                      format( "class '%s' cannot be load", paramTypeNames[i] ) );
+                }
+            }
+        }
+
+        return usingConstructor( paramTypes );
     }
 
     /**
