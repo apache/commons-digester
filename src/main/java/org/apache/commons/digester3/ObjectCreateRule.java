@@ -21,16 +21,18 @@ package org.apache.commons.digester3;
 
 import static java.lang.String.format;
 import static java.util.Arrays.fill;
-import static net.sf.cglib.proxy.Enhancer.isEnhanced;
 import static org.apache.commons.beanutils.ConstructorUtils.getAccessibleConstructor;
+import static org.apache.commons.beanutils.ConvertUtils.convert;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.Factory;
-import net.sf.cglib.proxy.LazyLoader;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -42,6 +44,68 @@ import org.xml.sax.SAXException;
 public class ObjectCreateRule
     extends Rule
 {
+    private interface DeferredConstructionProxy
+    {
+        void finish();
+    }
+
+    private static class DeferredConstructionCallback implements MethodInterceptor
+    {
+        Constructor<?> constructor;
+        Object[] constructorArgs;
+        ArrayList<RecordedInvocation> invocations = new ArrayList<RecordedInvocation>();
+        Object delegate;
+
+        DeferredConstructionCallback(Constructor<?> constructor, Object[] constructorArgs)
+        {
+            super();
+            this.constructor = constructor;
+            this.constructorArgs = constructorArgs;
+        }
+
+        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable
+        {
+            boolean hasDelegate;
+            synchronized ( this ) {
+                hasDelegate = delegate != null;
+                if ( method.getDeclaringClass().equals( DeferredConstructionProxy.class ) )
+                {
+                    if ( !hasDelegate )
+                    {
+                        establishDelegate();
+                        hasDelegate = true;
+                    }
+                    return null;
+                }
+            }
+            if ( hasDelegate ) {
+                return proxy.invoke( delegate, args );
+            }
+            invocations.add( new RecordedInvocation( method, args ) );
+            return proxy.invokeSuper( obj, args );
+        }
+
+        private void establishDelegate() throws Exception {
+            // this piece of code is adapted from CallMethodRule
+            for ( int i = 0; i < constructorArgs.length; i++ )
+            {
+                // convert nulls and convert stringy parameters for non-stringy param types
+                if ( constructorArgs[i] == null
+                        || ( constructorArgs[i] instanceof String && !String.class.isAssignableFrom( constructor.getParameterTypes()[i] ) ) )
+                {
+                    constructorArgs[i] = convert( (String) constructorArgs[i], constructor.getParameterTypes()[i] );
+                }
+            }
+            delegate = constructor.newInstance( constructorArgs );
+            for ( RecordedInvocation invocation : invocations )
+            {
+                invocation.getInvokedMethod().invoke( delegate, invocation.getArguments() );
+            }
+            constructor = null;
+            constructorArgs = null;
+            invocations = null;
+        }
+    }
 
     // ----------------------------------------------------------- Constructors
 
@@ -205,16 +269,16 @@ public class ObjectCreateRule
         fill( constructorArguments, null );
         getDigester().pushParams( constructorArguments );
 
-        ObjectCreateRuleLazyLoader lazyLoader = new ObjectCreateRuleLazyLoader( constructor,
-                                                                                constructorArgumentsTypes,
-                                                                                constructorArguments );
+        DeferredConstructionCallback callback = new DeferredConstructionCallback(constructor, constructorArguments);
+
         if ( proxyFactory == null ) {
             synchronized ( this ) {
                 // check again for null now that we're in the synchronized block:
                 if ( proxyFactory == null ) {
                     Enhancer enhancer = new Enhancer();
                     enhancer.setSuperclass( clazz );
-                    enhancer.setCallback( lazyLoader );
+                    enhancer.setInterfaces(new Class[] { DeferredConstructionProxy.class });
+                    enhancer.setCallback( callback );
                     enhancer.setClassLoader( getDigester().getClassLoader() );
                     Object result = enhancer.create();
                     proxyFactory = (Factory) result;
@@ -222,7 +286,7 @@ public class ObjectCreateRule
                 }
             }
         }
-        return proxyFactory.newInstance( lazyLoader );
+        return proxyFactory.newInstance( callback );
     }
 
     /**
@@ -234,10 +298,10 @@ public class ObjectCreateRule
     {
         Object top = getDigester().pop();
 
-        if ( isEnhanced( top.getClass() ) )
+        if (top instanceof DeferredConstructionProxy)
         {
-            // do lazy load?!?
             getDigester().popParams();
+            ((DeferredConstructionProxy) top).finish();
         }
 
         if ( getDigester().getLogger().isDebugEnabled() )

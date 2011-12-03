@@ -62,6 +62,33 @@ public final class Digester153TestCase
         assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
     }
 
+    @Test
+    public void constructorWithAttributeAndElement()
+        throws Exception
+    {
+        ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
+        createRule.setConstructorArguments( boolean.class, double.class );
+
+        Digester digester = new Digester();
+        digester.addRule( "toplevel/bean", createRule );
+        digester.addCallParam( "toplevel/bean", 0, "boolean" );
+        digester.addCallParam( "toplevel/bean/double", 1 );
+        digester.addBeanPropertySetter("toplevel/bean/float", "floatProperty");
+
+        TestBean bean = digester.parse( getClass().getResourceAsStream( "ConstructorWithAttributeAndElement.xml" ) );
+
+        assertTrue( bean.getBooleanProperty() );
+        assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
+        assertEquals( Float.valueOf( 5.5f ), Float.valueOf( bean.getFloatProperty() ) );
+
+        // do it again to exercise the cglib Factory:
+        bean = digester.parse( getClass().getResourceAsStream( "ConstructorWithAttributeAndElement.xml" ) );
+
+        assertTrue( bean.getBooleanProperty() );
+        assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
+        assertEquals( Float.valueOf( 5.5f ), Float.valueOf( bean.getFloatProperty() ) );
+    }
+
     /*
     @Test
     public void basicConstructorViaBinder()
