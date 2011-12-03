@@ -20,17 +20,13 @@ package org.apache.commons.digester3;
  */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.RulesModule;
-import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.junit.Test;
-import org.xml.sax.SAXParseException;
 
 /**
  * {@link https://issues.apache.org/jira/browse/DIGESTER-153}
@@ -89,7 +85,6 @@ public final class Digester153TestCase
         assertEquals( Float.valueOf( 5.5f ), Float.valueOf( bean.getFloatProperty() ) );
     }
 
-    /*
     @Test
     public void basicConstructorViaBinder()
         throws Exception
@@ -101,14 +96,15 @@ public final class Digester153TestCase
             protected void configure()
             {
                 forPattern( "toplevel/bean" )
-                    .createObject().ofType( TestBean.class )
-                        .addConstructorArgument( "boolean" ).ofType( boolean.class )
-                        .addConstructorArgument( "double" ).ofType( double.class );
+                    .createObject().ofType( TestBean.class ).usingConstructor( boolean.class, double.class )
+                    .then()
+                    .callParam().fromAttribute( "boolean" ).ofIndex( 0 )
+                    .then()
+                    .callParam().fromAttribute( "double" ).ofIndex( 1 );
             }
 
         } );
     }
-    */
 
     @Test
     public void basicConstructorViaAnnotations()
