@@ -108,6 +108,7 @@ public final class Digester153TestCase
 
         } );
     }
+    */
 
     @Test
     public void basicConstructorViaAnnotations()
@@ -125,7 +126,7 @@ public final class Digester153TestCase
         } );
     }
 
-    @Test
+    /* @Test
     public void basicConstructorViaXML()
         throws Exception
     {
@@ -139,7 +140,7 @@ public final class Digester153TestCase
             }
 
         } );
-    }
+    } */
 
     private void succesfullConstructor( RulesModule rulesModule )
         throws Exception
@@ -152,7 +153,7 @@ public final class Digester153TestCase
         assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
     }
 
-    @Test
+    /* @Test
     public void basicConstructorWithValuesNotFound()
         throws Exception
     {

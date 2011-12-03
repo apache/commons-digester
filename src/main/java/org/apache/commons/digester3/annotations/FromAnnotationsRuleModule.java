@@ -186,13 +186,26 @@ public abstract class FromAnnotationsRuleModule
                 handle( annotation, element );
             }
 
-            if ( element instanceof Method )
+            if ( element instanceof Constructor || element instanceof Method )
             {
-                // method args
-                Method method = (Method) element;
+                Annotation[][] parameterAnnotations;
+                Class<?>[] parameterTypes;
 
-                Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-                Class<?>[] parameterTypes = method.getParameterTypes();
+                if ( element instanceof Constructor )
+                {
+                    // constructor args
+                    Constructor<?> construcotr = (Constructor<?>) element;
+                    parameterAnnotations = construcotr.getParameterAnnotations();
+                    parameterTypes = construcotr.getParameterTypes();
+                }
+                else
+                {
+                    // method args
+                    Method method = (Method) element;
+                    parameterAnnotations = method.getParameterAnnotations();
+                    parameterTypes = method.getParameterTypes();
+                }
+
                 for ( int i = 0; i < parameterTypes.length; i++ )
                 {
                     visitElements( new MethodArgument( i, parameterTypes[i], parameterAnnotations[i] ) );
