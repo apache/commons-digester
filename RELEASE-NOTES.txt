@@ -55,6 +55,7 @@ NEW FEATURES
 BUGS FIXED SINCE PREVIOUS RELEASE
 ===========================
 
+ * [DIGESTER-159] */object-param-rule is not managed in the XML rules.
  * [DIGESTER-155] ClassLoader reference set to DigesterLoader not set in produced Digester instances
 
 IMPROVEMENTS OVER PREVIOUS RELEASE
