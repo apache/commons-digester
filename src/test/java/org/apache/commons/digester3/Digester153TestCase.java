@@ -21,6 +21,7 @@ package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
@@ -151,23 +152,23 @@ public final class Digester153TestCase
         assertEquals( 9.99D, bean.getDoubleProperty(), 0 );
     }
 
-    /* @Test
+    @Test
     public void basicConstructorWithValuesNotFound()
         throws Exception
     {
         ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
-        createRule.addConstructorArgument( "notfound1", boolean.class );
-        createRule.addConstructorArgument( "notfound2", double.class );
+        createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
         Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
+        digester.addCallParam( "toplevel/bean", 0, "notFound1" );
+        digester.addCallParam( "toplevel/bean", 1, "notFound2" );
 
         TestBean bean = digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
 
         assertFalse( bean.getBooleanProperty() );
         assertEquals( 0D, bean.getDoubleProperty(), 0 );
     }
-    */
 
     @Test( expected = SAXParseException.class )
     public void basicConstructorWithWrongParameters()
