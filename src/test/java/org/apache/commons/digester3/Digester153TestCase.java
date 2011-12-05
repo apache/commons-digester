@@ -28,6 +28,7 @@ import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.RulesModule;
 import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.junit.Test;
+import org.xml.sax.SAXParseException;
 
 /**
  * {@link https://issues.apache.org/jira/browse/DIGESTER-153}
@@ -166,20 +167,20 @@ public final class Digester153TestCase
         assertFalse( bean.getBooleanProperty() );
         assertEquals( 0D, bean.getDoubleProperty(), 0 );
     }
+    */
 
     @Test( expected = SAXParseException.class )
     public void basicConstructorWithWrongParameters()
         throws Exception
     {
         ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
-        createRule.addConstructorArgument( "notfound1", boolean.class );
+        createRule.setConstructorArgumentTypes( boolean.class );
 
         Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
 
         digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
     }
-    */
 
     @Test
     public void constructorWithClassDefinedInAttribute()
