@@ -61,6 +61,18 @@ final class ObjectCreateRule
             }
             builder.usingConstructor( paramTypeNames );
         }
+        String paramsStr = attributes.getValue( "params" );
+        if ( paramsStr != null && paramsStr.length() > 0 )
+        {
+            StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
+            Object[] params = new Object[tokens.countTokens()];
+            int counter = 0;
+            while ( tokens.hasMoreTokens() )
+            {
+                params[counter++] = tokens.nextToken();
+            }
+            builder.usingDefaultConstructorArguments( params );
+        }
     }
 
 }

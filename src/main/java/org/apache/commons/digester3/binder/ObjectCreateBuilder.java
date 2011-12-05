@@ -22,6 +22,9 @@ package org.apache.commons.digester3.binder;
 import static java.lang.String.format;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.digester3.ObjectCreateRule;
 
@@ -33,6 +36,20 @@ import org.apache.commons.digester3.ObjectCreateRule;
 public final class ObjectCreateBuilder
     extends AbstractBackToLinkedRuleBuilder<ObjectCreateRule>
 {
+    private static final Map<String, Class<?>> PRIMITIVE_TYPES;
+    static
+    {
+        HashMap<String, Class<?>> primitiveTypes = new HashMap<String, Class<?>>();
+        primitiveTypes.put("boolean", boolean.class);
+        primitiveTypes.put("byte", byte.class);
+        primitiveTypes.put("short", short.class);
+        primitiveTypes.put("int", int.class);
+        primitiveTypes.put("char", char.class);
+        primitiveTypes.put("long", long.class);
+        primitiveTypes.put("float", float.class);
+        primitiveTypes.put("double", double.class);
+        PRIMITIVE_TYPES = Collections.unmodifiableMap(primitiveTypes);
+    }
 
     private final ClassLoader classLoader;
 
@@ -41,11 +58,18 @@ public final class ObjectCreateBuilder
     private String attributeName;
 
     /**
-     * The constructor arguments - order is preserved by the LinkedHashMap
+     * The constructor argument types
      *
      * @since 3.2
      */
     private Class<?>[] constructorArgumentsType;
+
+    /**
+     * Default constructor arguments.
+     *
+     * @since 3.2
+     */
+    private Object[] defaultConstructorArguments;
 
     ObjectCreateBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
                          ClassLoader classLoader )
@@ -121,24 +145,26 @@ public final class ObjectCreateBuilder
         if ( paramTypeNames == null )
         {
             reportError( "createObject().usingConstructor( String[] )", "NULL parametersTypes not allowed" );
+            return this;
         }
 
-        Class<?>[] paramTypes = null;
-        if ( paramTypeNames != null )
+        Class<?>[] paramTypes = new Class<?>[paramTypeNames.length];
+        for ( int i = 0; i < paramTypeNames.length; i++ )
         {
-            paramTypes = new Class<?>[paramTypeNames.length];
-            for ( int i = 0; i < paramTypeNames.length; i++ )
+            if ( PRIMITIVE_TYPES.containsKey( paramTypeNames[i] ) )
             {
-                try
-                {
-                    paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
-                }
-                catch ( ClassNotFoundException e )
-                {
-                    this.reportError( format( "createObject().usingConstructor( %s )",
-                                              Arrays.toString( paramTypeNames ) ),
-                                      format( "class '%s' cannot be load", paramTypeNames[i] ) );
-                }
+                paramTypes[i] = PRIMITIVE_TYPES.get( paramTypeNames[i] );
+                continue;
+            }
+            try
+            {
+                paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
+            }
+            catch ( ClassNotFoundException e )
+            {
+                this.reportError( format( "createObject().usingConstructor( %s )",
+                                          Arrays.toString( paramTypeNames ) ),
+                                  format( "class '%s' cannot be loaded", paramTypeNames[i] ) );
             }
         }
 
@@ -150,16 +176,31 @@ public final class ObjectCreateBuilder
      * @return
      * @since 3.2
      */
-    public ObjectCreateBuilder usingConstructor( Class<?>...constructorArgumentsType )
+    public ObjectCreateBuilder usingConstructor( Class<?>... constructorArgumentTypes )
     {
-        if ( constructorArgumentsType == null )
+        if ( constructorArgumentTypes == null )
         {
-            reportError( "createObject().usingConstructor( Class<?>[] )", "NULL parametersTypes not allowed" );
+            reportError( "createObject().usingConstructor( Class<?>[] )", "NULL constructorArgumentTypes not allowed" );
+            return this;
         }
 
-        this.constructorArgumentsType = constructorArgumentsType;
+        this.constructorArgumentsType = constructorArgumentTypes;
 
         return this;
+    }
+
+    public ObjectCreateBuilder usingDefaultConstructorArguments( Object... defaultConstructorArguments)
+    {
+        if ( defaultConstructorArguments == null )
+        {
+            reportError( "createObject().usingDefaultConstructorArguments( Object[] )", "NULL defaultConstructorArguments not allowed" );
+            return this;
+        }
+
+        this.defaultConstructorArguments = defaultConstructorArguments;
+
+        return this;
+
     }
 
     /**
@@ -172,7 +213,11 @@ public final class ObjectCreateBuilder
 
         if ( constructorArgumentsType != null )
         {
-            objectCreateRule.setConstructorArguments( constructorArgumentsType );
+            objectCreateRule.setConstructorArgumentTypes( constructorArgumentsType );
+        }
+        if ( defaultConstructorArguments != null )
+        {
+            objectCreateRule.setDefaultConstructorArguments( defaultConstructorArguments );
         }
 
         return objectCreateRule;

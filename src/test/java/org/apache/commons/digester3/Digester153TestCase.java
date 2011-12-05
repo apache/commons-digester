@@ -40,7 +40,7 @@ public final class Digester153TestCase
         throws Exception
     {
         ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
-        createRule.setConstructorArguments( boolean.class, double.class );
+        createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
         Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
@@ -64,7 +64,7 @@ public final class Digester153TestCase
         throws Exception
     {
         ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
-        createRule.setConstructorArguments( boolean.class, double.class );
+        createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
         Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );

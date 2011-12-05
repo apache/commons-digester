@@ -113,13 +113,13 @@
     usingElementBodyAsArgument CDATA #IMPLIED
     useExactMatch              CDATA #IMPLIED>
 
-<!-- 
+<!--
     CallParamRule
     attrname
         - set param from attribute value (cannot be combined with from-stack or
           stack-index)
     from-stack
-        - select an object from the current digester stack to pass as the 
+        - select an object from the current digester stack to pass as the
           parameter value.
     stack-index
         - select an object from the current digester stack to pass as a
@@ -149,7 +149,7 @@
         - Initial value for the object. The BeanUtils converter module will
           be used to convert this to the type specified by the type attribute.
           Optional; if no value is provided then the converter will be invoked
-          to convert NULL to the target type. For most (but not all) converters, 
+          to convert NULL to the target type. For most (but not all) converters,
           NULL input results in NULL output.
     -->
 <!ELEMENT object-param-rule EMPTY>
@@ -162,7 +162,7 @@
 
 <!--
     NodeCreateRule
-    type 
+    type
         - node type: either 'element' or 'fragment'. this is optional, default is 'element'
     -->
 <!ELEMENT node-create-rule EMPTY>
@@ -170,7 +170,7 @@
     pattern CDATA #IMPLIED
     type CDATA #IMPLIED>
 
-<!-- 
+<!--
     FactoryCreateRule
 
     ignore-exceptions - if this attribute is (ignore case) 'true' then any exceptions
@@ -190,7 +190,8 @@
     pattern    CDATA #IMPLIED
     classname  CDATA #REQUIRED
     attrname   CDATA #IMPLIED
-    paramtypes CDATA #IMPLIED>
+    paramtypes CDATA #IMPLIED
+    params CDATA #IMPLIED>
 
 <!-- SetPropertiesRule -->
 <!ELEMENT set-properties-rule (alias)*>

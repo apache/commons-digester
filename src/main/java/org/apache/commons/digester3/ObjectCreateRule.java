@@ -19,8 +19,8 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
+import static java.lang.System.arraycopy;
 import static java.lang.String.format;
-import static java.util.Arrays.fill;
 import static org.apache.commons.beanutils.ConstructorUtils.getAccessibleConstructor;
 import static org.apache.commons.beanutils.ConvertUtils.convert;
 
@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.Factory;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -44,11 +45,6 @@ import org.xml.sax.SAXException;
 public class ObjectCreateRule
     extends Rule
 {
-    private interface DeferredConstructionProxy
-    {
-        void finish();
-    }
-
     private static class DeferredConstructionCallback implements MethodInterceptor
     {
         Constructor<?> constructor;
@@ -56,46 +52,34 @@ public class ObjectCreateRule
         ArrayList<RecordedInvocation> invocations = new ArrayList<RecordedInvocation>();
         Object delegate;
 
-        DeferredConstructionCallback(Constructor<?> constructor, Object[] constructorArgs)
+        DeferredConstructionCallback( Constructor<?> constructor, Object[] constructorArgs )
         {
             super();
             this.constructor = constructor;
             this.constructorArgs = constructorArgs;
         }
 
-        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable
+        public Object intercept( Object obj, Method method, Object[] args, MethodProxy proxy )
+            throws Throwable
         {
             boolean hasDelegate;
             synchronized ( this ) {
                 hasDelegate = delegate != null;
-                if ( method.getDeclaringClass().equals( DeferredConstructionProxy.class ) )
+                if ( !hasDelegate )
                 {
-                    if ( !hasDelegate )
-                    {
-                        establishDelegate();
-                        hasDelegate = true;
-                    }
-                    return null;
+                    invocations.add( new RecordedInvocation( method, args ) );
                 }
             }
             if ( hasDelegate ) {
                 return proxy.invoke( delegate, args );
             }
-            invocations.add( new RecordedInvocation( method, args ) );
             return proxy.invokeSuper( obj, args );
         }
 
-        private void establishDelegate() throws Exception {
-            // this piece of code is adapted from CallMethodRule
-            for ( int i = 0; i < constructorArgs.length; i++ )
-            {
-                // convert nulls and convert stringy parameters for non-stringy param types
-                if ( constructorArgs[i] == null
-                        || ( constructorArgs[i] instanceof String && !String.class.isAssignableFrom( constructor.getParameterTypes()[i] ) ) )
-                {
-                    constructorArgs[i] = convert( (String) constructorArgs[i], constructor.getParameterTypes()[i] );
-                }
-            }
+        synchronized void establishDelegate()
+            throws Exception
+        {
+            convertTo( constructor.getParameterTypes(), constructorArgs );
             delegate = constructor.newInstance( constructorArgs );
             for ( RecordedInvocation invocation : invocations )
             {
@@ -104,6 +88,106 @@ public class ObjectCreateRule
             constructor = null;
             constructorArgs = null;
             invocations = null;
+        }
+    }
+
+    private static class ProxyManager
+    {
+        private final Class<?> clazz;
+        private final Constructor<?> constructor;
+        private final Object[] templateConstructorArguments;
+        private final Digester digester;
+        private final boolean hasDefaultConstructor;
+        private Factory factory;
+
+        ProxyManager( Class<?> clazz, Constructor<?> constructor, Object[] constructorArguments, Digester digester )
+        {
+            this.clazz = clazz;
+            hasDefaultConstructor = getAccessibleConstructor(clazz, new Class[0]) != null;
+            this.constructor = constructor;
+            Class<?>[] argTypes = constructor.getParameterTypes();
+            templateConstructorArguments = new Object[argTypes.length];
+            if ( constructorArguments == null )
+            {
+                for ( int i = 0; i < templateConstructorArguments.length; i++ )
+                {
+                    if ( argTypes[i].equals(boolean.class) )
+                    {
+                        templateConstructorArguments[i] = Boolean.FALSE;
+                        continue;
+                    }
+                    if ( argTypes[i].isPrimitive() )
+                    {
+                        templateConstructorArguments[i] = convert("0", argTypes[i]);
+                        continue;
+                    }
+                    templateConstructorArguments[i] = null;
+                }
+            }
+            else
+            {
+                if ( constructorArguments.length != argTypes.length )
+                {
+                    throw new IllegalArgumentException(
+                        format( "wrong number of constructor arguments specified: %s instead of %s",
+                        constructorArguments.length, argTypes.length ) );
+                }
+                arraycopy( constructorArguments, 0, templateConstructorArguments, 0, constructorArguments.length );
+            }
+            convertTo( argTypes, templateConstructorArguments );
+            this.digester = digester;
+        }
+
+        Object createProxy()
+        {
+            Object[] constructorArguments = new Object[templateConstructorArguments.length];
+            arraycopy( templateConstructorArguments, 0, constructorArguments, 0, constructorArguments.length );
+            digester.pushParams( constructorArguments );
+
+            DeferredConstructionCallback callback = new DeferredConstructionCallback(constructor, constructorArguments);
+
+            Object result;
+            if ( factory == null )
+            {
+                synchronized ( this )
+                {
+                    // check again for null now that we're in the synchronized block:
+                    if ( factory == null )
+                    {
+                        Enhancer enhancer = new Enhancer();
+                        enhancer.setSuperclass( clazz );
+                        enhancer.setCallback( callback );
+                        enhancer.setClassLoader( digester.getClassLoader() );
+                        enhancer.setInterceptDuringConstruction(false);
+                        if ( hasDefaultConstructor )
+                        {
+                            result = enhancer.create();
+                        }
+                        else
+                        {
+                            result = enhancer.create( constructor.getParameterTypes(), constructorArguments );
+                        }
+                        factory = (Factory) result;
+                        return result;
+                    }
+                }
+            }
+            if ( hasDefaultConstructor )
+            {
+                result = factory.newInstance( callback );
+            }
+            else
+            {
+                result = factory.newInstance( constructor.getParameterTypes(),
+                    constructorArguments, new Callback[] { callback } );
+            }
+            return result;
+        }
+
+        void finalize( Object proxy ) throws Exception
+        {
+            digester.popParams();
+            ( ( DeferredConstructionCallback ) ( (Factory) proxy).getCallback( 0 ) ).establishDelegate();
         }
     }
 
@@ -173,35 +257,59 @@ public class ObjectCreateRule
     protected String className = null;
 
     /**
-     * The constructor arguments - order is preserved by the LinkedHashMap
+     * The constructor argument types.
      *
      * @since 3.2
      */
-    private Class<?>[] constructorArgumentsTypes;
+    private Class<?>[] constructorArgumentTypes;
 
     /**
-     * cglib Factory for lazily-loaded instances after the first.
-     * Only used in the presence of constructor args.
+     * The explictly specified default constructor arguments which may be overridden by CallParamRules.
      *
      * @since 3.2
      */
-    private Factory proxyFactory;
+    private Object[] defaultConstructorArguments;
+
+    /**
+     * Helper object for managing proxies.
+     *
+     * @since 3.2
+     */
+    private ProxyManager proxyManager;
 
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Allows users specify constructor arguments.
+     * Allows users to specify constructor argument types.
      *
      * @since 3.2
      */
-    public void setConstructorArguments( Class<?>...constructorArgumentsTypes )
+    public void setConstructorArgumentTypes( Class<?>... constructorArgumentTypes )
     {
-        if ( constructorArgumentsTypes == null )
+        if ( constructorArgumentTypes == null )
         {
-            throw new IllegalArgumentException( "Parameter 'constructorArgumentsTypes' must not be null" );
+            throw new IllegalArgumentException( "Parameter 'constructorArgumentTypes' must not be null" );
         }
 
-        this.constructorArgumentsTypes = constructorArgumentsTypes;
+        this.constructorArgumentTypes = constructorArgumentTypes;
+    }
+
+    /**
+     * Allows users to specify default constructor arguments.  If a default/no-arg constructor is not available
+     * for the target class, these arguments will be used to create the proxy object.  For any argument
+     * not supplied by a {@link CallParamRule}, the corresponding item from this array will be used
+     * to construct the final object as well.
+     *
+     * @since 3.2
+     */
+    public void setDefaultConstructorArguments( Object... constructorArguments )
+    {
+        if ( constructorArguments == null )
+        {
+            throw new IllegalArgumentException( "Parameter 'constructorArguments' must not be null" );
+        }
+
+        this.defaultConstructorArguments = constructorArguments;
     }
 
     /**
@@ -236,7 +344,7 @@ public class ObjectCreateRule
             clazz = getDigester().getClassLoader().loadClass( realClassName );
         }
         Object instance;
-        if ( constructorArgumentsTypes == null || constructorArgumentsTypes.length == 0 )
+        if ( constructorArgumentTypes == null || constructorArgumentTypes.length == 0 )
         {
             if ( getDigester().getLogger().isDebugEnabled() )
             {
@@ -249,44 +357,28 @@ public class ObjectCreateRule
         }
         else
         {
-            Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentsTypes );
-
-            if ( constructor == null )
+            if ( proxyManager == null )
             {
-                throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types",
-                                                getDigester().getMatch(),
-                                                clazz.getName(),
-                                                Arrays.toString( constructorArgumentsTypes ) ) );
-            }
+                synchronized ( this )
+                {
+                    if ( proxyManager == null )
+                    {
+                        Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentTypes );
 
-            instance = createLazyProxy( constructor );
-        }
-        getDigester().push( instance );
-    }
-
-    private Object createLazyProxy( Constructor<?> constructor ) {
-        Object[] constructorArguments = new Object[constructorArgumentsTypes.length];
-        fill( constructorArguments, null );
-        getDigester().pushParams( constructorArguments );
-
-        DeferredConstructionCallback callback = new DeferredConstructionCallback(constructor, constructorArguments);
-
-        if ( proxyFactory == null ) {
-            synchronized ( this ) {
-                // check again for null now that we're in the synchronized block:
-                if ( proxyFactory == null ) {
-                    Enhancer enhancer = new Enhancer();
-                    enhancer.setSuperclass( clazz );
-                    enhancer.setInterfaces(new Class[] { DeferredConstructionProxy.class });
-                    enhancer.setCallback( callback );
-                    enhancer.setClassLoader( getDigester().getClassLoader() );
-                    Object result = enhancer.create();
-                    proxyFactory = (Factory) result;
-                    return result;
+                        if ( constructor == null )
+                        {
+                            throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types",
+                                                            getDigester().getMatch(),
+                                                            clazz.getName(),
+                                                            Arrays.toString( constructorArgumentTypes ) ) );
+                        }
+                        proxyManager = new ProxyManager(clazz, constructor, defaultConstructorArguments, getDigester());
+                    }
                 }
             }
+            instance = proxyManager.createProxy();
         }
-        return proxyFactory.newInstance( callback );
+        getDigester().push( instance );
     }
 
     /**
@@ -298,10 +390,9 @@ public class ObjectCreateRule
     {
         Object top = getDigester().pop();
 
-        if (top instanceof DeferredConstructionProxy)
+        if ( proxyManager != null )
         {
-            getDigester().popParams();
-            ((DeferredConstructionProxy) top).finish();
+            proxyManager.finalize(top);
         }
 
         if ( getDigester().getLogger().isDebugEnabled() )
@@ -319,6 +410,24 @@ public class ObjectCreateRule
     public String toString()
     {
         return format( "ObjectCreateRule[className=%s, attributeName=%s]", className, attributeName );
+    }
+
+    private static void convertTo( Class<?>[] types, Object[] array )
+    {
+        if ( array.length != types.length )
+        {
+            throw new IllegalArgumentException();
+        }
+        // this piece of code is adapted from CallMethodRule
+        for ( int i = 0; i < array.length; i++ )
+        {
+            // convert nulls and convert stringy parameters for non-stringy param types
+            if ( array[i] == null
+                    || ( array[i] instanceof String && !String.class.isAssignableFrom( types[i] ) ) )
+            {
+                array[i] = convert( (String) array[i], types[i] );
+            }
+        }
     }
 
 }
