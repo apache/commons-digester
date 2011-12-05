@@ -22,9 +22,6 @@ package org.apache.commons.digester3.binder;
 import static java.lang.String.format;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.digester3.ObjectCreateRule;
 
@@ -36,20 +33,7 @@ import org.apache.commons.digester3.ObjectCreateRule;
 public final class ObjectCreateBuilder
     extends AbstractBackToLinkedRuleBuilder<ObjectCreateRule>
 {
-    private static final Map<String, Class<?>> PRIMITIVE_TYPES;
-    static
-    {
-        HashMap<String, Class<?>> primitiveTypes = new HashMap<String, Class<?>>();
-        primitiveTypes.put("boolean", boolean.class);
-        primitiveTypes.put("byte", byte.class);
-        primitiveTypes.put("short", short.class);
-        primitiveTypes.put("int", int.class);
-        primitiveTypes.put("char", char.class);
-        primitiveTypes.put("long", long.class);
-        primitiveTypes.put("float", float.class);
-        primitiveTypes.put("double", double.class);
-        PRIMITIVE_TYPES = Collections.unmodifiableMap(primitiveTypes);
-    }
+
 
     private final ClassLoader classLoader;
 
@@ -151,11 +135,6 @@ public final class ObjectCreateBuilder
         Class<?>[] paramTypes = new Class<?>[paramTypeNames.length];
         for ( int i = 0; i < paramTypeNames.length; i++ )
         {
-            if ( PRIMITIVE_TYPES.containsKey( paramTypeNames[i] ) )
-            {
-                paramTypes[i] = PRIMITIVE_TYPES.get( paramTypeNames[i] );
-                continue;
-            }
             try
             {
                 paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );

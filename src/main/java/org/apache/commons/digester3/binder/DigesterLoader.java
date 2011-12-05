@@ -113,7 +113,7 @@ public final class DigesterLoader
      * used to load Digester itself, is used, based on the value of the
      * <code>useContextClassLoader</code> variable.
      */
-    private ClassLoader classLoader;
+    private BinderClassLoader classLoader;
 
     /**
      * An optional class that substitutes values in attributes and body text. This may be null and so a null check is
@@ -196,7 +196,7 @@ public final class DigesterLoader
             throw new IllegalArgumentException( "Parameter 'classLoader' cannot be null" );
         }
 
-        this.classLoader = classLoader;
+        this.classLoader = new BinderClassLoader( classLoader );
         return this;
     }
 
@@ -550,7 +550,8 @@ public final class DigesterLoader
         }
 
         Digester digester = new Digester( reader );
-        digester.setClassLoader( classLoader );
+        // the ClassLoader adapter is no needed anymore
+        digester.setClassLoader( classLoader.getAdaptedClassLoader() );
         digester.setRules( rules );
         digester.setSubstitutor( substitutor );
         digester.registerAll( entityValidator );

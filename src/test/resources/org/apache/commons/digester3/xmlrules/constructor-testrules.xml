@@ -19,7 +19,7 @@
 <digester-rules>
   <pattern value="toplevel/bean">
     <object-create-rule classname="org.apache.commons.digester3.TestBean"
-      paramtypes="java.lang.Boolean,java.lang.Double" params="true,0" />
+      paramtypes="boolean,double" params="true,0" />
     <call-param-rule paramnumber="0" attrname="boolean" />
     <call-param-rule paramnumber="1" attrname="double" />
   </pattern>
