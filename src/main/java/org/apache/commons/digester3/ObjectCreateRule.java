@@ -66,7 +66,8 @@ public class ObjectCreateRule
             {
                 invocations.add( new RecordedInvocation( method, args ) );
             }
-            if ( hasDelegate ) {
+            if ( hasDelegate )
+            {
                 return proxy.invoke( delegate, args );
             }
             return proxy.invokeSuper( obj, args );
@@ -99,7 +100,7 @@ public class ObjectCreateRule
         ProxyManager( Class<?> clazz, Constructor<?> constructor, Object[] constructorArguments, Digester digester )
         {
             this.clazz = clazz;
-            hasDefaultConstructor = getAccessibleConstructor(clazz, new Class[0]) != null;
+            hasDefaultConstructor = getAccessibleConstructor( clazz, new Class[0] ) != null;
             this.constructor = constructor;
             Class<?>[] argTypes = constructor.getParameterTypes();
             templateConstructorArguments = new Object[argTypes.length];
@@ -107,14 +108,14 @@ public class ObjectCreateRule
             {
                 for ( int i = 0; i < templateConstructorArguments.length; i++ )
                 {
-                    if ( argTypes[i].equals(boolean.class) )
+                    if ( argTypes[i].equals( boolean.class ) )
                     {
                         templateConstructorArguments[i] = Boolean.FALSE;
                         continue;
                     }
                     if ( argTypes[i].isPrimitive() )
                     {
-                        templateConstructorArguments[i] = convert("0", argTypes[i]);
+                        templateConstructorArguments[i] = convert( "0", argTypes[i] );
                         continue;
                     }
                     templateConstructorArguments[i] = null;
@@ -140,7 +141,8 @@ public class ObjectCreateRule
             arraycopy( templateConstructorArguments, 0, constructorArguments, 0, constructorArguments.length );
             digester.pushParams( constructorArguments );
 
-            DeferredConstructionCallback callback = new DeferredConstructionCallback(constructor, constructorArguments);
+            DeferredConstructionCallback callback =
+                new DeferredConstructionCallback( constructor, constructorArguments );
 
             Object result;
 
@@ -150,7 +152,7 @@ public class ObjectCreateRule
                 enhancer.setSuperclass( clazz );
                 enhancer.setCallback( callback );
                 enhancer.setClassLoader( digester.getClassLoader() );
-                enhancer.setInterceptDuringConstruction(false);
+                enhancer.setInterceptDuringConstruction( false );
                 if ( hasDefaultConstructor )
                 {
                     result = enhancer.create();
@@ -175,10 +177,11 @@ public class ObjectCreateRule
             return result;
         }
 
-        void finalize( Object proxy ) throws Exception
+        void finalize( Object proxy )
+            throws Exception
         {
             digester.popParams();
-            ( ( DeferredConstructionCallback ) ( (Factory) proxy).getCallback( 0 ) ).establishDelegate();
+            ( (DeferredConstructionCallback) ( (Factory) proxy ).getCallback( 0 ) ).establishDelegate();
         }
     }
 
@@ -359,7 +362,7 @@ public class ObjectCreateRule
                                                     clazz.getName(),
                                                     Arrays.toString( constructorArgumentTypes ) ) );
                 }
-                proxyManager = new ProxyManager(clazz, constructor, defaultConstructorArguments, getDigester());
+                proxyManager = new ProxyManager( clazz, constructor, defaultConstructorArguments, getDigester() );
             }
             instance = proxyManager.createProxy();
         }
@@ -377,7 +380,7 @@ public class ObjectCreateRule
 
         if ( proxyManager != null )
         {
-            proxyManager.finalize(top);
+            proxyManager.finalize( top );
         }
 
         if ( getDigester().getLogger().isDebugEnabled() )
