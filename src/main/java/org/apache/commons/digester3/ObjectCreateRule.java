@@ -367,7 +367,7 @@ public class ObjectCreateRule
 
                         if ( constructor == null )
                         {
-                            throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types",
+                            throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types %s",
                                                             getDigester().getMatch(),
                                                             clazz.getName(),
                                                             Arrays.toString( constructorArgumentTypes ) ) );
