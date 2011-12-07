@@ -54,7 +54,6 @@ public class ObjectCreateRule
 
         DeferredConstructionCallback( Constructor<?> constructor, Object[] constructorArgs )
         {
-            super();
             this.constructor = constructor;
             this.constructorArgs = constructorArgs;
         }
@@ -62,13 +61,10 @@ public class ObjectCreateRule
         public Object intercept( Object obj, Method method, Object[] args, MethodProxy proxy )
             throws Throwable
         {
-            boolean hasDelegate;
-            synchronized ( this ) {
-                hasDelegate = delegate != null;
-                if ( !hasDelegate )
-                {
-                    invocations.add( new RecordedInvocation( method, args ) );
-                }
+            boolean hasDelegate = delegate != null;
+            if ( !hasDelegate )
+            {
+                invocations.add( new RecordedInvocation( method, args ) );
             }
             if ( hasDelegate ) {
                 return proxy.invoke( delegate, args );
@@ -76,7 +72,7 @@ public class ObjectCreateRule
             return proxy.invokeSuper( obj, args );
         }
 
-        synchronized void establishDelegate()
+        void establishDelegate()
             throws Exception
         {
             convertTo( constructor.getParameterTypes(), constructorArgs );
@@ -147,31 +143,26 @@ public class ObjectCreateRule
             DeferredConstructionCallback callback = new DeferredConstructionCallback(constructor, constructorArguments);
 
             Object result;
+
             if ( factory == null )
             {
-                synchronized ( this )
+                Enhancer enhancer = new Enhancer();
+                enhancer.setSuperclass( clazz );
+                enhancer.setCallback( callback );
+                enhancer.setClassLoader( digester.getClassLoader() );
+                enhancer.setInterceptDuringConstruction(false);
+                if ( hasDefaultConstructor )
                 {
-                    // check again for null now that we're in the synchronized block:
-                    if ( factory == null )
-                    {
-                        Enhancer enhancer = new Enhancer();
-                        enhancer.setSuperclass( clazz );
-                        enhancer.setCallback( callback );
-                        enhancer.setClassLoader( digester.getClassLoader() );
-                        enhancer.setInterceptDuringConstruction(false);
-                        if ( hasDefaultConstructor )
-                        {
-                            result = enhancer.create();
-                        }
-                        else
-                        {
-                            result = enhancer.create( constructor.getParameterTypes(), constructorArguments );
-                        }
-                        factory = (Factory) result;
-                        return result;
-                    }
+                    result = enhancer.create();
                 }
+                else
+                {
+                    result = enhancer.create( constructor.getParameterTypes(), constructorArguments );
+                }
+                factory = (Factory) result;
+                return result;
             }
+
             if ( hasDefaultConstructor )
             {
                 result = factory.newInstance( callback );
@@ -359,22 +350,16 @@ public class ObjectCreateRule
         {
             if ( proxyManager == null )
             {
-                synchronized ( this )
-                {
-                    if ( proxyManager == null )
-                    {
-                        Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentTypes );
+                Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentTypes );
 
-                        if ( constructor == null )
-                        {
-                            throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types %s",
-                                                            getDigester().getMatch(),
-                                                            clazz.getName(),
-                                                            Arrays.toString( constructorArgumentTypes ) ) );
-                        }
-                        proxyManager = new ProxyManager(clazz, constructor, defaultConstructorArguments, getDigester());
-                    }
+                if ( constructor == null )
+                {
+                    throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types %s",
+                                                    getDigester().getMatch(),
+                                                    clazz.getName(),
+                                                    Arrays.toString( constructorArgumentTypes ) ) );
                 }
+                proxyManager = new ProxyManager(clazz, constructor, defaultConstructorArguments, getDigester());
             }
             instance = proxyManager.createProxy();
         }
