@@ -1,9 +1,5 @@
 package org.apache.commons.digester3.binder;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,6 +18,14 @@ import java.util.Map;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+import static java.lang.System.getSecurityManager;
+import static java.security.AccessController.doPrivileged;
+
+import java.security.PrivilegedAction;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 final class BinderClassLoader
     extends ClassLoader
@@ -42,9 +46,28 @@ final class BinderClassLoader
         PRIMITIVE_TYPES = Collections.unmodifiableMap( primitiveTypes );
     }
 
+    public static BinderClassLoader createBinderClassLoader( final ClassLoader adaptedClassLoader )
+    {
+        PrivilegedAction<BinderClassLoader> action = new PrivilegedAction<BinderClassLoader>()
+        {
+
+            public BinderClassLoader run()
+            {
+                return new BinderClassLoader( adaptedClassLoader );
+            }
+
+        };
+
+        if ( getSecurityManager() != null )
+        {
+            return doPrivileged( action );
+        }
+        return action.run();
+    }
+
     private final ClassLoader adaptedClassLoader;
 
-    public BinderClassLoader( ClassLoader adaptedClassLoader )
+    private BinderClassLoader( ClassLoader adaptedClassLoader )
     {
         this.adaptedClassLoader = adaptedClassLoader;
     }

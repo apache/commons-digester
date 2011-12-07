@@ -19,6 +19,8 @@ package org.apache.commons.digester3.binder;
  * under the License.
  */
 
+import static org.apache.commons.digester3.binder.BinderClassLoader.createBinderClassLoader;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -196,7 +198,7 @@ public final class DigesterLoader
             throw new IllegalArgumentException( "Parameter 'classLoader' cannot be null" );
         }
 
-        this.classLoader = new BinderClassLoader( classLoader );
+        this.classLoader = createBinderClassLoader( classLoader );
         return this;
     }
 
