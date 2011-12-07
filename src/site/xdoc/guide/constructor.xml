@@ -113,5 +113,14 @@ digester.addCallParam( "root/bean/rate", 0 );</source>
 &lt;/digester-rules&gt;</source>
       </subsection>
     </section>
+
+    <section name="Default constructor arguments">
+      <p>In order to provide that feature, Digester relies on <code>CGLIB</code> that needs to proxy the class of the
+      target object, to avoid constructors issues users can use the
+      <code>ObjectCreateRule#setDefaultConstructorArguments(Object...)</code> method to give safe construction
+      params to the constructor when creating the proxy; that method could be useful also when one parameter needs to
+      take a static value while the other is handled with a <code>CallParam</code> rule. If these are not specified,
+      the super constructor is called with nulls for Objects and default values for primitives.</p>
+    </section>
   </body>
 </document>
