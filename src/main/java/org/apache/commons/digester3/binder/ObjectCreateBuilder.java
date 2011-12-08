@@ -34,7 +34,6 @@ public final class ObjectCreateBuilder
     extends AbstractBackToLinkedRuleBuilder<ObjectCreateRule>
 {
 
-
     private final ClassLoader classLoader;
 
     private Class<?> type;
