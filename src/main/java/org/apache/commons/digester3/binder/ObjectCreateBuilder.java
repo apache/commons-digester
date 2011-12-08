@@ -119,8 +119,9 @@ public final class ObjectCreateBuilder
     }
 
     /**
+     * Allows users to specify constructor argument type names.
      *
-     * @return
+     * @return this builder instance
      * @since 3.2
      */
     public ObjectCreateBuilder usingConstructor( String...paramTypeNames )
@@ -150,8 +151,9 @@ public final class ObjectCreateBuilder
     }
 
     /**
+     * Allows users to specify constructor argument types.
      *
-     * @return
+     * @return this builder instance
      * @since 3.2
      */
     public ObjectCreateBuilder usingConstructor( Class<?>... constructorArgumentTypes )
@@ -167,6 +169,13 @@ public final class ObjectCreateBuilder
         return this;
     }
 
+    /**
+     * Allows users to specify default constructor arguments.
+     *
+     * @param defaultConstructorArguments
+     * @return the default constructor arguments.
+     * @since 3.2
+     */
     public ObjectCreateBuilder usingDefaultConstructorArguments( Object... defaultConstructorArguments)
     {
         if ( defaultConstructorArguments == null )
