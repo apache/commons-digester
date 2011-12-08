@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
  * From Commons [proxy] v2 branch.
  * @author James Carman
  */
-public class RecordedInvocation
+final class RecordedInvocation
 {
 
     //**********************************************************************************************************************
