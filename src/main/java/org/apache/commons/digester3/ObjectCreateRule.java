@@ -344,9 +344,11 @@ public class ObjectCreateRule
         {
             if ( getDigester().getLogger().isDebugEnabled() )
             {
-                getDigester().getLogger().debug( format( "[ObjectCreateRule]{%s} New '%s' using default empty constructor",
-                                                         getDigester().getMatch(),
-                                                         clazz.getName() ) );
+                getDigester()
+                    .getLogger()
+                    .debug( format( "[ObjectCreateRule]{%s} New '%s' using default empty constructor",
+                                    getDigester().getMatch(),
+                                    clazz.getName() ) );
             }
 
             instance = clazz.newInstance();
@@ -359,10 +361,11 @@ public class ObjectCreateRule
 
                 if ( constructor == null )
                 {
-                    throw new SAXException( format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types %s",
-                                                    getDigester().getMatch(),
-                                                    clazz.getName(),
-                                                    Arrays.toString( constructorArgumentTypes ) ) );
+                    throw new SAXException(
+                                   format( "[ObjectCreateRule]{%s} Class '%s' does not have a construcor with types %s",
+                                           getDigester().getMatch(),
+                                           clazz.getName(),
+                                           Arrays.toString( constructorArgumentTypes ) ) );
                 }
                 proxyManager = new ProxyManager( clazz, constructor, defaultConstructorArguments, getDigester() );
             }
