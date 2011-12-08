@@ -23,7 +23,7 @@
 
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-digester3-samples</artifactId>
-  <version>3.1</version>
+  <version>3.2</version>
   <packaging>pom</packaging>
 
   <name>Commons Digester :: Examples</name>
