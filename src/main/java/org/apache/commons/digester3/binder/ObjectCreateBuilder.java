@@ -160,7 +160,8 @@ public final class ObjectCreateBuilder
     {
         if ( constructorArgumentTypes == null )
         {
-            reportError( "createObject().usingConstructor( Class<?>[] )", "NULL constructorArgumentTypes not allowed" );
+            reportError( "createObject().usingConstructor( Class<?>[] )",
+                         "NULL constructorArgumentTypes not allowed" );
             return this;
         }
 
@@ -180,7 +181,8 @@ public final class ObjectCreateBuilder
     {
         if ( defaultConstructorArguments == null )
         {
-            reportError( "createObject().usingDefaultConstructorArguments( Object[] )", "NULL defaultConstructorArguments not allowed" );
+            reportError( "createObject().usingDefaultConstructorArguments( Object[] )",
+                         "NULL defaultConstructorArguments not allowed" );
             return this;
         }
 
