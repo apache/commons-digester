@@ -33,7 +33,7 @@ final class SetPropertiesIgnoreRule
     /**
      * {@inheritDoc}
      */
-    public void begin(String namespace, String name, Attributes attributes)
+    public void begin( String namespace, String name, Attributes attributes )
         throws Exception
     {
         String attributeName = attributes.getValue( "attr-name" );
