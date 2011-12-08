@@ -68,6 +68,27 @@ download the files.
 </section>
 
 <section name="Releases">
+    <subsection name="Digester 3.2 (December 2011)">
+      <p>The Digester 3.2 release is a maintenance release that adds the most innovating feature ever, adding the
+      objects <a href="./guide/constructor.html">Constructor</a> feature.</p>
+      <p>Take a look at Digester 3.2 release <a href="./changes-report.html#a3.2">changes list</a> for more results.</p>
+      <p>Digester 3.2 <b>requires a minimum of JDK 1.5</b>.</p>
+      <p>The recommended dependency set for Digester 3.2 is:</p>
+      <table>
+        <tr>
+          <th colspan="3">Recommended Dependency Set</th>
+        </tr>
+        <tr>
+          <th>Digester</th>
+          <td>+Logging 1.1.1</td>
+          <td>+BeanUtils 1.8.3</td>
+          <td>+CGLIB 2.2.2</td>
+        </tr>
+      </table>
+      <p>Since dependencies increased by number, since 3.2 release, Digester is distributed also in a single artifact
+      with shaded dependencies.</p>
+    </subsection>
+
     <subsection name="Digester 3.1 Release (October 2011)">
       <p>The Digester 3.1 release is a maintenance release that adds the
       <a href="./guide/async.html">Asynchronous parser</a> feature.</p>
@@ -108,85 +129,6 @@ James Carman, who had the initial idea of building a Digester with fluent APIs;
 Daniele Testa [mrwolfgraphics AT gmail DOT com], who provided the Digester3 logo.
 </li>
 </ul>
-    </subsection>
-
-
-    <subsection name="Digester 2.1 Release (September 2010)">
-        <p>
-Digester 2.1 is a minor release with new features, a new <code>annotations</code> package
-adds facilities to configure the Digester using the Java5 language meta-data annotations,
-allowing Digester instances creation introspecting the target POJOs, using a provided set
-of annotations. New projects are encouraged to use this release of digester.
-<br/>
-There are breaking changes from Digester 2.0, see release notes in detail before choosing
-to upgrade.
-<br/>
-There is no urgency for existing projects to upgrade; Digester 2.0 has proven to be a
-stable release.
-        </p>
-        <p>
-Digester 2.1 <b>requires a minimum of JDK 1.5</b>.
-        </p>
-        <p>
-The recommended dependency set for Digester 2.1 is:
-        </p>
-<table>
-<tr>
-<th colspan='3'>Recommended Dependency Set</th>
-</tr>
-<tr>
-<td>Digester</td>
-<td>+Logging 1.1.1</td>
-<td>+BeanUtils 1.8.3</td>
-</tr>
-</table>
-        <p>
-It is also possible to use Logging 1.0.x or BeanUtils 1.8.0 instead.
-        </p>
-    </subsection>
-
-    <subsection name='Digester 2.0 Release (January 2009)'>
-        <p>
-Digester 2.0 is a major release. New projects are encouraged to use this release
-of digester. There are breaking changes from Digester 1.8, see release notes
-in detail before choosing to upgrade. There is no urgency for existing
-projects to upgrade; Digester 1.8 has proven to be a stable release.
-        </p>
-        <p>
-Digester 2.0 <b>requires a minimum of JDK 1.5</b> and no longer requires any
-classes from Commons Collections (as Digester 1.8 did).
-        </p>
-        <p>
-The recommended dependency set for Digester 2.0 is:
-        </p>
-<table>
-<tr>
-<th colspan='3'>Recommended Dependency Set</th>
-</tr>
-<tr>
-<td>Digester</td>
-<td>+Logging 1.1.1</td>
-<td>+BeanUtils 1.8.0</td>
-</tr>
-</table>
-        <p>
-It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
-        </p>
-    </subsection>
-    <subsection name='Downloading'>
- <ul>
-  <li>The most recent release is available from apache mirrors via
-  <a href="http://commons.apache.org/digester/download_digester.cgi">
-  the regular download page</a>.</li>
-  <li>Reasonably recent releases are also available from apache mirrors, via the
-  "browse downloads" link at
-  <a href="http://commons.apache.org/digester/download_digester.cgi">
-  the regular download page</a>.</li>
-  <li>Much older releases can be found 
-  <a href="http://archive.apache.org/dist/commons/digester/old">
-  on the archive site</a>.</li>
- </ul>
-   <p>Please remember to verify the MD5 check sums.</p>
     </subsection>
 </section>
 
