@@ -177,7 +177,7 @@ public final class ObjectCreateBuilder
      * @return the default constructor arguments.
      * @since 3.2
      */
-    public ObjectCreateBuilder usingDefaultConstructorArguments( Object... defaultConstructorArguments)
+    public ObjectCreateBuilder usingDefaultConstructorArguments( Object... defaultConstructorArguments )
     {
         if ( defaultConstructorArguments == null )
         {
