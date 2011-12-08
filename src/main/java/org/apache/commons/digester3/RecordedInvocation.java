@@ -1,3 +1,5 @@
+package org.apache.commons.digester3;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -15,8 +17,6 @@
  * limitations under the License.
  */
 
-package org.apache.commons.digester3;
-
 import java.lang.reflect.Method;
 
 /**
@@ -26,19 +26,22 @@ import java.lang.reflect.Method;
  */
 public class RecordedInvocation
 {
-//**********************************************************************************************************************
-// Fields
-//**********************************************************************************************************************
+
+    //**********************************************************************************************************************
+    // Fields
+    //**********************************************************************************************************************
 
     private final Method invokedMethod;
+
     private final Object[] arguments;
 
-  //**********************************************************************************************************************
- // Constructors
- //**********************************************************************************************************************
+    //**********************************************************************************************************************
+    // Constructors
+    //**********************************************************************************************************************
 
     /**
      * Create a new RecordedInvocation instance.
+     *
      * @param invokedMethod
      * @param arguments
      */
@@ -48,23 +51,27 @@ public class RecordedInvocation
         this.arguments = arguments;
     }
 
-  //**********************************************************************************************************************
- // Canonical Methods
- //**********************************************************************************************************************
+    //**********************************************************************************************************************
+    // Canonical Methods
+    //**********************************************************************************************************************
 
     /**
      * Get the invokedMethod.
+     *
      * @return Method
      */
-    public Method getInvokedMethod() {
+    public Method getInvokedMethod()
+    {
         return invokedMethod;
     }
 
     /**
      * Get the arguments.
+     *
      * @return Object[]
      */
-    public Object[] getArguments() {
+    public Object[] getArguments()
+    {
         return arguments;
     }
 
@@ -74,62 +81,64 @@ public class RecordedInvocation
     public String toString()
     {
         StringBuffer buffer = new StringBuffer();
-        buffer.append(invokedMethod.getDeclaringClass().getName());
-        buffer.append(".");
-        buffer.append(invokedMethod.getName());
-        buffer.append("(");
+        buffer.append( invokedMethod.getDeclaringClass().getName() );
+        buffer.append( "." );
+        buffer.append( invokedMethod.getName() );
+        buffer.append( "(" );
         int count = arguments.length;
-        for( int i = 0; i < count; i++ )
+        for ( int i = 0; i < count; i++ )
         {
             Object arg = arguments[i];
-            if( i > 0 )
+            if ( i > 0 )
             {
-                buffer.append(", ");
+                buffer.append( ", " );
             }
-            convert(buffer, arg);
+            convert( buffer, arg );
         }
-        buffer.append(")");
+        buffer.append( ")" );
         return buffer.toString();
     }
 
     /**
      * Add a string representation of <code>input</code> to <code>buffer</code>.
+     *
      * @param buffer
      * @param input
      */
     protected void convert( StringBuffer buffer, Object input )
     {
-        if( input == null )
+        if ( input == null )
         {
-            buffer.append("<null>");
+            buffer.append( "<null>" );
             return;
         }
 
         // Primitive types, and non-object arrays
         // use toString().
-        if( !( input instanceof Object[] ) )
+        if ( !( input instanceof Object[] ) )
         {
-            buffer.append(input.toString());
+            buffer.append( input.toString() );
             return;
         }
         else
         {
-            buffer.append("(");
-            buffer.append(input.getClass().getSimpleName());
-            buffer.append("){");
-            Object[] array = ( Object[] ) input;
+            buffer.append( "(" );
+            buffer.append( input.getClass().getSimpleName() );
+            buffer.append( "){" );
+            Object[] array = (Object[]) input;
             int count = array.length;
-            for( int i = 0; i < count; i++ )
+            for ( int i = 0; i < count; i++ )
             {
-                if( i > 0 )
+                if ( i > 0 )
                 {
-                    buffer.append(", ");
+                    buffer.append( ", " );
                 }
                 // We use convert() again, because it could be a multi-dimensional array
                 // where each element must be converted.
-                convert(buffer, array[i]);
+                convert( buffer, array[i] );
             }
-            buffer.append("}");
+            buffer.append( "}" );
         }
     }
+
 }
