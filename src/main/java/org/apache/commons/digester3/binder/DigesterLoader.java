@@ -443,6 +443,7 @@ public final class DigesterLoader
      * Sets the document locator associated with our parser.
      *
      * @param locator the document locator associated with our parser.
+     * @return This loader instance, useful to chain methods.
      * @since 3.2
      */
     public DigesterLoader setDocumentLocator( Locator locator )
