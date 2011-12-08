@@ -77,7 +77,7 @@ public final class NestedPropertiesBuilder
     /**
      * Allows element2property mapping to be overridden.
      *
-     * @param elementName
+     * @param elementName The child xml element to match
      * @return the property alias builder
      * @since 3.2
      */
