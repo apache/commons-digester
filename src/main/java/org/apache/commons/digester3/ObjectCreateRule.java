@@ -295,7 +295,7 @@ public class ObjectCreateRule
      * not supplied by a {@link CallParamRule}, the corresponding item from this array will be used
      * to construct the final object as well.
      *
-     * @param the default constructor arguments.
+     * @param constructorArguments the default constructor arguments.
      * @since 3.2
      */
     public void setDefaultConstructorArguments( Object... constructorArguments )
