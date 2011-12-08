@@ -80,7 +80,7 @@ final class RecordedInvocation
      */
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append( invokedMethod.getDeclaringClass().getName() );
         buffer.append( "." );
         buffer.append( invokedMethod.getName() );
@@ -105,7 +105,7 @@ final class RecordedInvocation
      * @param buffer the buffer to append the string representation of the input object.
      * @param input the input object has to be serialized to string.
      */
-    protected void convert( StringBuffer buffer, Object input )
+    protected void convert( StringBuilder buffer, Object input )
     {
         if ( input == null )
         {
