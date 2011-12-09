@@ -71,7 +71,7 @@ download the files.
     <subsection name="Digester 3.2 (December 2011)">
       <p>The Digester 3.2 release is a maintenance release that adds the most innovating feature ever, adding the
       objects <a href="./guide/constructor.html">Constructor</a> feature.</p>
-      <p>Take a look at Digester 3.2 release <a href="./changes-report.html#a3.2">changes list</a> for more results.</p>
+      <p>Take a look at Digester 3.2 release <a href="./changes-report.html#a3.2">changes list</a> for more details.</p>
       <p>Digester 3.2 <b>requires a minimum of JDK 1.5</b>.</p>
       <p>The recommended dependency set for Digester 3.2 is:</p>
       <table>
