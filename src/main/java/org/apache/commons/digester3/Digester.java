@@ -904,7 +904,7 @@ public class Digester
      *
      * @return the callback object which is invoked whenever an object is pushed onto a digester object stack,
      *         or popped off one.
-     * @see #setStackAction(StackAction).
+     * @see #setStackAction(StackAction)
      * @since 1.8
      */
     public StackAction getStackAction()

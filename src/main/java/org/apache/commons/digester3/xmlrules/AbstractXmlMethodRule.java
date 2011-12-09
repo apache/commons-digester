@@ -52,7 +52,6 @@ abstract class AbstractXmlMethodRule
 
     /**
      * @param methodName
-     * @return
      */
     protected abstract void bindRule( LinkedRuleBuilder linkedRuleBuilder, String methodName, String paramType,
                                       boolean exactMatch, boolean fireOnBegin );

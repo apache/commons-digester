@@ -57,7 +57,7 @@ public final class CompoundSubstitutorTestCase
         }
 
         /**
-         * @see org.apache.commons.digester.Substitutor#substitute(org.xml.sax.Attributes)
+         * @see org.apache.commons.digester3.Substitutor#substitute(org.xml.sax.Attributes)
          */
         @Override
         public Attributes substitute( Attributes attributes )
@@ -68,7 +68,7 @@ public final class CompoundSubstitutorTestCase
         }
 
         /**
-         * @see org.apache.commons.digester.Substitutor#substitute(java.lang.String)
+         * @see org.apache.commons.digester3.Substitutor#substitute(java.lang.String)
          */
         @Override
         public String substitute( String bodyText )

@@ -22,7 +22,6 @@ package org.apache.commons.digester3.xmlrules;
 import java.util.Stack;
 
 /**
- * @param <E>
  */
 final class PatternStack
     extends Stack<String>

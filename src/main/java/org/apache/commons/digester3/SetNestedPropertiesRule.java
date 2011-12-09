@@ -264,7 +264,7 @@ public class SetNestedPropertiesRule
      * Return the flag to ignore any child element for which there is no corresponding object property
      *
      * @return flag to ignore any child element for which there is no corresponding object property
-     * @see #setAllowUnknownChildElements(boolean).
+     * @see #setAllowUnknownChildElements(boolean)
      */
     public boolean getAllowUnknownChildElements()
     {
