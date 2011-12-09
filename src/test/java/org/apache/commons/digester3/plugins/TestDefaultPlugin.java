@@ -54,14 +54,7 @@ public class TestDefaultPlugin
         Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test2.xml" ) );
-        }
-        catch ( Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test2.xml" ) );
 
         Object child;
         List<Widget> children = root.getChildren();
@@ -103,25 +96,22 @@ public class TestDefaultPlugin
         Container root = new Container();
         digester.push( root );
 
-        Exception exception = null;
         Log oldLog = digester.getLogger();
         try
         {
             digester.setLogger( new NoOpLog() );
             digester.parse( Utils.getInputStream( this, "test2.xml" ) );
+            fail("Expected SAXParseException");
         }
-        catch ( Exception e )
+        catch ( SAXParseException e )
         {
-            exception = e;
+            assertEquals( PluginInvalidInputException.class, e.getException().getClass() );
         }
         finally
         {
             digester.setLogger( oldLog );
         }
 
-        assertNotNull( exception );
-        assertEquals( SAXParseException.class, exception.getClass() );
-        assertEquals( PluginInvalidInputException.class, ( (SAXParseException) exception ).getException().getClass() );
     }
 
     public void testDefaultPlugins3()
@@ -140,24 +130,20 @@ public class TestDefaultPlugin
         Container root = new Container();
         digester.push( root );
 
-        Exception exception = null;
         Log oldLog = digester.getLogger();
         try
         {
             digester.setLogger( new NoOpLog() );
             digester.parse( Utils.getInputStream( this, "test2.xml" ) );
+            fail("Expected SAXParseException");
         }
-        catch ( Exception e )
+        catch ( SAXParseException e )
         {
-            exception = e;
+            assertEquals( PluginConfigurationException.class, e.getException().getClass() );
         }
         finally
         {
             digester.setLogger( oldLog );
         }
-
-        assertNotNull( exception );
-        assertEquals( SAXParseException.class, exception.getClass() );
-        assertEquals( PluginConfigurationException.class, ( (SAXParseException) exception ).getException().getClass() );
     }
 }
