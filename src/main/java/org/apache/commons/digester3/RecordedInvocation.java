@@ -81,6 +81,7 @@ final class RecordedInvocation
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString()
     {
         StringBuilder buffer = new StringBuilder();

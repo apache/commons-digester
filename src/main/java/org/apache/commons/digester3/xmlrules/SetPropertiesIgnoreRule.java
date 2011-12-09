@@ -33,6 +33,7 @@ final class SetPropertiesIgnoreRule
     /**
      * {@inheritDoc}
      */
+    @Override
     public void begin( String namespace, String name, Attributes attributes )
         throws Exception
     {
