@@ -32,7 +32,7 @@ import org.junit.Test;
 import org.xml.sax.SAXParseException;
 
 /**
- * {@link https://issues.apache.org/jira/browse/DIGESTER-153}
+ * DIGESTER-153
  */
 public final class Digester153TestCase
 {

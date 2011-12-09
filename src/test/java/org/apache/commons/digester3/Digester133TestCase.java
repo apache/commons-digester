@@ -34,6 +34,9 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+/**
+ * DIGESTER-133
+ */
 public final class Digester133TestCase
 {
 
