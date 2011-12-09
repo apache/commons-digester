@@ -92,7 +92,7 @@ final class WithMemoryRulesBinder
      * 
      *
      * @param bindingClass
-     * @return
+     * @return true if the specified element has not yet been marked
      */
     public boolean markAsBound( Class<?> bindingClass )
     {
@@ -103,7 +103,7 @@ final class WithMemoryRulesBinder
      * 
      *
      * @param bindingClass
-     * @return
+     * @return true if the specified element has been marked
      */
     public boolean isAlreadyBound( Class<?> bindingClass )
     {

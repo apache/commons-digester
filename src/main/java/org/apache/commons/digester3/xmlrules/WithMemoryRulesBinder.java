@@ -93,7 +93,7 @@ class WithMemoryRulesBinder
     }
 
     /**
-     * @return
+     * @return the pattern stack
      */
     public PatternStack getPatternStack()
     {
@@ -101,7 +101,7 @@ class WithMemoryRulesBinder
     }
 
     /**
-     * @return
+     * @return the set of included files
      */
     public Set<String> getIncludedFiles()
     {
