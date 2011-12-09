@@ -301,6 +301,34 @@
         </executions>
       </plugin>
       <plugin>
+        <!--
+          - Copy the specific LICENSE.txt and NOTICE.txt files so that they are included
+          - in the uberjar jar file.
+          -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>uberjar.resources</id>
+            <!-- has to run after default N&L files are copied -->
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy todir="${project.build.directory}/classes-shaded/META-INF/" overwrite="true">
+                  <fileset dir="${basedir}/src/main/assembly/">
+                    <include name="*.txt"/>
+                  </fileset>
+                  <mapper type="regexp" from="^(.*)-with-deps\.txt" to="\1.txt"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <executions>
           <execution>
