@@ -87,6 +87,13 @@ download the files.
       </table>
       <p>Since dependencies increased by number, since 3.2 release, Digester is distributed also in a single artifact
       with shaded dependencies.</p>
+      <p>Maven users that want to switch over shaded artifact, must use the <code>with-deps</code> classifier:</p>
+      <source><![CDATA[<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-digester3</artifactId>
+  <version>3.2</version>
+  <classifier>with-deps</classifier>
+</dependency>]]></source>
     </subsection>
 
     <subsection name="Digester 3.1 Release (October 2011)">
