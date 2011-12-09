@@ -31,7 +31,7 @@ limitations under the License.
       XML elements; that's because the <code>ObjectCreateRule</code> creates the object when the related XML
       element <code>begins</code>, otherwise properties could not be set when parsing nested elements.</p>
       <p>That is no longer true :) Constructor arguments can be extracted from <i>attributes</i> and
-      <i>nested elements</i>of the matching XML element for whom the <code>ObjectCreateRule</code> is triggered.</p>
+      <i>nested elements</i> of the matching XML element for whom the <code>ObjectCreateRule</code> is triggered.</p>
       <p><b>NOTE</b> this feature is available since release 3.2.</p>
 
       <subsection name="Using plain old Digester APIs">
