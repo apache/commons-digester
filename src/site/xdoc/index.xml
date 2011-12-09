@@ -76,10 +76,10 @@ download the files.
       <p>The recommended dependency set for Digester 3.2 is:</p>
       <table>
         <tr>
-          <th colspan="3">Recommended Dependency Set</th>
+          <th colspan="4">Recommended Dependency Set</th>
         </tr>
         <tr>
-          <th>Digester</th>
+          <td><strong>Digester</strong></td>
           <td>+Logging 1.1.1</td>
           <td>+BeanUtils 1.8.3</td>
           <td>+CGLIB 2.2.2</td>
