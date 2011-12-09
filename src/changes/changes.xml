@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.2" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
+      provide an additional artifact with shaded dependencies
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-159">
       */object-param-rule is not managed in the XML rules
     </action>
