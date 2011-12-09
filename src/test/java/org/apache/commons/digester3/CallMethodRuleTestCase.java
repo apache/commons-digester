@@ -268,19 +268,10 @@ public class CallMethodRuleTestCase
 
         }).newDigester();
 
-        // Parse our test input
-        NamedBean root1 = null;
-        try
-        {
-            // an exception will be thrown if the method can't be found
-            root1 = digester.parse( getInputStream( "Test8.xml" ) );
+       // Parse our test input
+       // an exception will be thrown if the method can't be found
+        NamedBean root1 = digester.parse( getInputStream( "Test8.xml" ) );
 
-        }
-        catch ( Throwable t )
-        {
-            // this means that the method can't be found and so the test fails
-            fail( "Digester threw Exception:  " + t );
-        }
 
         // if the CallMethodRule were to incorrectly invoke the method call
         // on the second-created NamedBean instance, then the root one would
