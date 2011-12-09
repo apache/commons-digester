@@ -33,7 +33,7 @@ public final class DigesterLoaderTestCase
 {
 
     /**
-     * {@link https://issues.apache.org/jira/browse/DIGESTER-151}
+     * DIGESTER-151
      */
     @Test
     public void digester151()

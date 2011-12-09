@@ -45,7 +45,7 @@ public class TestBean
     }
 
     /**
-     * see {@link https://issues.apache.org/jira/browse/DIGESTER-154}
+     * see DIGESTER-154
      *
      * @param booleanProperty
      * @param doubleProperty
