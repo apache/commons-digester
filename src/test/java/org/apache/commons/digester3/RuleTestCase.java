@@ -40,12 +40,10 @@ import org.xml.sax.SAXException;
  * <p>
  * Test Case for the Digester class. These tests perform parsing of XML documents to exercise the built-in rules.
  * </p>
- * 
+ *
  * @author Craig R. McClanahan
  * @author Janek Bogucki
- * @version $Revision$ $Date$
  */
-
 public class RuleTestCase
 {
 
@@ -527,7 +525,7 @@ public class RuleTestCase
 
     /**
      * Return an appropriate InputStream for the specified test file (which must be inside our current package.
-     * 
+     *
      * @param name Name of the test file we want
      * @exception IOException if an input/output error occurs
      */
@@ -541,7 +539,7 @@ public class RuleTestCase
 
     /**
      * Validate the assertions for ObjectCreateRule3.
-     * 
+     *
      * @param root Root object returned by <code>digester.parse()</code>
      */
     protected void validateObjectCreate3( Object root )

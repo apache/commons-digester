@@ -47,11 +47,9 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Test case for the <code>NodeCreateRule</code>.
- * 
+ *
  * @author Christopher Lenz
- * @version $Revision$ $Date$
  */
-
 public class NodeCreateRuleTestCase
 {
 
@@ -530,7 +528,7 @@ public class NodeCreateRuleTestCase
 
     /**
      * Return an appropriate InputStream for the specified test file (which must be inside our current package.
-     * 
+     *
      * @param name Name of the test file we want
      * @exception IOException if an input/output error occurs
      */

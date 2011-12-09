@@ -30,11 +30,9 @@ import org.junit.Test;
 
 /**
  * Test case for WithDefaultsRulesWrapper
- * 
+ *
  * @author Robert Burrell Donkin
- * @version $Revision$ $Date$
  */
-
 public class WithDefaultsRulesWrapperTestCase
 {
 

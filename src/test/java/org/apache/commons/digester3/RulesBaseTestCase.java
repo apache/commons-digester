@@ -36,11 +36,9 @@ import org.junit.Test;
  * Test Case for the RulesBase matching rules. Most of this material was original contained in the digester test case
  * but was moved into this class so that extensions of the basic matching rules behaviour can extend this test case.
  * </p>
- * 
+ *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
  */
-
 public class RulesBaseTestCase
 {
 
@@ -68,7 +66,7 @@ public class RulesBaseTestCase
     /**
      * <p>
      * This should be overriden by subclasses.
-     * 
+     *
      * @return the matching rules to be tested.
      */
     protected Rules createMatchingRulesForTest()

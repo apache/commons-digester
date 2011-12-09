@@ -24,11 +24,9 @@ import org.apache.commons.digester3.RuleSetBase;
 /**
  * RuleSet that mimics the rules set used for Employee and Address creation, optionally associated with a particular
  * namespace URI.
- * 
+ *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
  */
-
 public class TestRuleSet
     extends RuleSetBase
 {
@@ -47,7 +45,7 @@ public class TestRuleSet
 
     /**
      * Construct an instance of this RuleSet associated with the specified prefix, associated with no namespace URI.
-     * 
+     *
      * @param prefix Matching pattern prefix (must end with '/') or null.
      */
     public TestRuleSet( String prefix )
@@ -59,7 +57,7 @@ public class TestRuleSet
 
     /**
      * Construct an instance of this RuleSet associated with the specified prefix and namespace URI.
-     * 
+     *
      * @param prefix Matching pattern prefix (must end with '/') or null.
      * @param namespaceURI The namespace URI these rules belong to
      */

@@ -36,11 +36,9 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Test Case for the variable expansion facility in Digester.
- * 
+ *
  * @author Simon Kitching
- * @version $Revision$ $Date$
  */
-
 public class VariableExpansionTestCase
 {
 
@@ -69,7 +67,7 @@ public class VariableExpansionTestCase
 
     /**
      * Creates a Digester configured to show Ant-like capability.
-     * 
+     *
      * @return a Digester with rules and variable substitutor
      */
     private Digester createDigesterThatCanDoAnt()
@@ -278,7 +276,7 @@ public class VariableExpansionTestCase
      * property could be expanded via a variable used either in an attribute or in body text. This test shows that if
      * properties were also set while processing a document, you could still perform variable expansion (i.e. just like
      * using the "property" task in Ant).
-     * 
+     *
      * @throws IOException
      * @throws SAXException
      */
@@ -305,7 +303,7 @@ public class VariableExpansionTestCase
      * be expanded within a property element. This is thus effectively a "closure" test, since it shows that the
      * mechanism used to bind properties is also capable of having property values that are driven by property
      * variables.
-     * 
+     *
      * @throws IOException
      * @throws SAXException
      */

@@ -25,9 +25,7 @@ import org.apache.commons.digester3.annotations.rules.ObjectCreate;
  * General purpose test bean for Digester tests.
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
  */
-
 public class TestBean
 {
 

@@ -31,11 +31,9 @@ import org.junit.Test;
 /**
  * <p>
  * Runs standard tests for RulesBase as well as tests of extensions.
- * 
+ *
  * @author Robert Burrell Donkin <robertdonkin@mac.com>
- * @version $Revision$ $Date$
  */
-
 public class ExtendedBaseRulesTestCase
     extends RulesBaseTestCase
 {
@@ -45,7 +43,7 @@ public class ExtendedBaseRulesTestCase
     /**
      * <p>
      * This should be overriden by subclasses.
-     * 
+     *
      * @return the matching rules to be tested.
      */
     @Override
