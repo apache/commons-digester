@@ -181,7 +181,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testElement()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -210,7 +210,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testDocumentFragment()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -263,7 +263,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testNested()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -305,7 +305,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testAttributes()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -350,7 +350,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testNamespaces()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -401,7 +401,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testNamespacedAttribute()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -436,7 +436,7 @@ public class NodeCreateRuleTestCase
      */
     @Test
     public void testNonNamespacedAttribute()
-        throws SAXException, ParserConfigurationException, IOException
+        throws SAXException, IOException
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
