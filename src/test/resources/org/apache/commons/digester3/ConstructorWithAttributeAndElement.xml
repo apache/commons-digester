@@ -17,7 +17,7 @@
 -->
 <toplevel>
   <bean boolean="true">
-  	<double>9.99</double>
-  	<float>5.5</float>
+    <double>9.99</double>
+    <float>5.5</float>
   </bean>
 </toplevel>
