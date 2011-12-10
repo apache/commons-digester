@@ -22,11 +22,20 @@
     <format>zip</format>
   </formats>
   <includeSiteDirectory>false</includeSiteDirectory>
+  <!-- Use the N&L files which apply to the included dependencies -->
+  <files>
+    <file>
+      <source>${basedir}/src/main/assembly/LICENSE-with-deps.txt</source>
+      <destName>LICENSE.txt</destName>
+    </file>
+    <file>
+      <source>${basedir}/src/main/assembly/NOTICE-with-deps.txt</source>
+      <destName>NOTICE.txt</destName>
+    </file>
+  </files>
   <fileSets>
     <fileSet>
       <includes>
-        <include>LICENSE*</include>
-        <include>NOTICE*</include>
         <include>RELEASE-NOTES.txt</include>
       </includes>
     </fileSet>
