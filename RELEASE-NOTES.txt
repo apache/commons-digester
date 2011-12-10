@@ -42,10 +42,8 @@ DEPENDENCIES
 Digester 3.2 users should upgrade to the recommended dependency set below
 where possible.
 
-The Recommended Dependency Set for Digester 3.0 is:
-   Digester 3.1 + Logging 1.1.1 + BeanUtils 1.8.3
-
-It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
+The Recommended Dependency Set for Digester 3.2 is:
+   Digester 3.2 + Logging 1.1.1 + BeanUtils 1.8.3 + CGLIB 2.2.2
 
 NEW FEATURES
 =============
