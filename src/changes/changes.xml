@@ -22,7 +22,7 @@
     <title>Apache Commons Digester Changes</title>
   </properties>
   <body>
-  <release version="3.2" date="201?-??-??" description="Maintenance release.">
+  <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
       provide an additional artifact with shaded dependencies
     </action>
