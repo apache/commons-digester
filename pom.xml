@@ -215,29 +215,6 @@
 
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>apt-maven-plugin</artifactId>
-        <version>1.0-alpha-4</version>
-        <executions>
-          <execution>
-            <phase>generate-test-resources</phase>
-            <goals>
-              <goal>test-process</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <factory>org.apache.commons.digester3.annotations.processor.DigesterAnnotationProcessorFactory</factory>
-          <verbose>true</verbose>
-          <includes>
-            <include>**/annotations/rss/*.java</include>
-          </includes>
-          <outputFileEndings>
-            <outputFileEnding>.txt</outputFileEnding>
-          </outputFileEndings>
-        </configuration>
-      </plugin>
-      <plugin>
         <!--
           - A number of the pre-maven test case "suport" classes have names starting with Test.
           - This confuses the maven surefire "auto-detect test case" functionality, so we
