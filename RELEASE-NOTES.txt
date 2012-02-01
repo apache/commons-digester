@@ -18,7 +18,7 @@ $Id$
 
 
                           Commons Digester Package
-                                Version 3.2
+                                Version 3.3
                                Release Notes
 
 
@@ -27,7 +27,7 @@ INTRODUCTION
 
 This is a maintenance release with new features. New projects are encouraged to
 use this release of digester. There is no urgency for existing projects to
-upgrade; Digester 3.1 has proven to be a stable release.
+upgrade; Digester 3.2 has proven to be a stable release.
 
 IMPORTANT NOTES
 ================
@@ -48,23 +48,17 @@ The Recommended Dependency Set for Digester 3.2 is:
 NEW FEATURES
 =============
 
- * [DIGESTER-153] Add Constructor support to ObjectCreateRule.
+ * NONE
 
 BUGS FIXED SINCE PREVIOUS RELEASE
 ===========================
 
- * [DIGESTER-159] */object-param-rule is not managed in the XML rules.
- * [DIGESTER-155] ClassLoader reference set to DigesterLoader not set in produced Digester instances
- * [DIGESTER-154] The DigesterBinder is not able to load primitive classes by name
+ * [DIGESTER-161] Document thread-safety in javadoc of Rule class.
 
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================
 
- * [DIGESTER-160] provide an additional artifact with shaded dependencies
- * [DIGESTER-157] Improve Set(Nested)PropertiesRuleAlias performances in the XML ruleset while binding rules
- * [DIGESTER-156] Make (Nested|Set)PropertiesBuilder#addAlias() fluent.
- * [DIGESTER-152] The DigesterLoader doesn't allow binding a default Locator
- * [DIGESTER-151] The DigesterLoader doesn't allow binding a default ErrorHandler.
+ NONE
 
 DEPRECATIONS
 ============

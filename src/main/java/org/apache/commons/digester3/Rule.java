@@ -22,25 +22,34 @@ package org.apache.commons.digester3;
 import org.xml.sax.Attributes;
 
 /**
- * Concrete implementations of this class implement actions to be taken when a corresponding nested pattern of XML
- * elements has been matched.
+ * Concrete implementations of this class implement actions to be taken when a
+ * corresponding nested pattern of XML elements has been matched.
  * <p>
- * Writing a custom Rule is considered perfectly normal when using Digester, and is encouraged whenever the default set
- * of Rule classes don't meet your requirements; the digester framework can help process xml even when the built-in
- * rules aren't quite what is needed. Creating a custom Rule is just as easy as subclassing
- * javax.servlet.http.HttpServlet for webapps, or javax.swing.Action for GUI applications.
+ * Writing a custom Rule is considered perfectly normal when using Digester, and
+ * is encouraged whenever the default set of Rule classes don't meet your
+ * requirements; the digester framework can help process xml even when the
+ * built-in rules aren't quite what is needed. Creating a custom Rule is just as
+ * easy as subclassing javax.servlet.http.HttpServlet for webapps, or
+ * javax.swing.Action for GUI applications.
  * <p>
- * If a rule wishes to manipulate a digester stack (the default object stack, a named stack, or the parameter stack)
- * then it should only ever push objects in the rule's begin method and always pop exactly the same number of objects
- * off the stack during the rule's end method. Of course peeking at the objects on the stacks can be done from anywhere.
+ * If a rule wishes to manipulate a digester stack (the default object stack, a
+ * named stack, or the parameter stack) then it should only ever push objects in
+ * the rule's begin method and always pop exactly the same number of objects off
+ * the stack during the rule's end method. Of course peeking at the objects on
+ * the stacks can be done from anywhere.
  * <p>
- * Rule objects should be stateless, ie they should not update any instance member during the parsing process. A rule
- * instance that changes state will encounter problems if invoked in a "nested" manner; this can happen if the same
- * instance is added to digester multiple times or if a wildcard pattern is used which can match both an element and a
- * child of the same element. The digester object stack and named stacks should be used to store any state that a rule
- * requires, making the rule class safe under all possible uses.
- */
-public abstract class Rule
+ * Rule objects should limit their state data to the digester object stack and
+ * named stacks. Storing state in instance fields (other than digester) during
+ * the parsing process will cause problems if invoked in a "nested" manner; this
+ * can happen if the same instance is added to digester multiple times or if a
+ * wildcard pattern is used which can match both an element and a child of the
+ * same element.
+ * <p>
+ * Rule objects are not thread-safe when each thread creates a new digester, as
+ * is commonly the case. In a multithreaded context you should create new Rule
+ * instances for every digester or synchronize read/write access to the digester
+ * within the Rule.
+ */public abstract class Rule
 {
 
     // ----------------------------------------------------- Instance Variables
@@ -89,7 +98,7 @@ public abstract class Rule
 
     /**
      * Set the namespace URI for which this Rule is relevant, if any.
-     * 
+     *
      * @param namespaceURI Namespace URI for which this Rule is relevant, or <code>null</code> to match independent of
      *            namespace.
      */
@@ -102,7 +111,7 @@ public abstract class Rule
 
     /**
      * This method is called when the beginning of a matching XML element is encountered.
-     * 
+     *
      * @param namespace the namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
@@ -119,7 +128,7 @@ public abstract class Rule
     /**
      * This method is called when the body of a matching XML element is encountered. If the element has no body, this
      * method is called with an empty string as the body text.
-     * 
+     *
      * @param namespace the namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
@@ -135,7 +144,7 @@ public abstract class Rule
 
     /**
      * This method is called when the end of a matching XML element is encountered.
-     * 
+     *
      * @param namespace the namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
