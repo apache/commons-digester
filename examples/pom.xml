@@ -21,30 +21,17 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.apache.commons</groupId>
+  <parent>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-digester3-parent</artifactId>
+    <version>3.3-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+
   <artifactId>commons-digester3-samples</artifactId>
-  <version>3.2</version>
   <packaging>pom</packaging>
 
   <name>Commons Digester :: Examples</name>
-  <description>
-    The Digester package lets you configure an XML to Java object mapping module
-    which triggers certain actions called rules whenever a particular 
-    pattern of nested XML elements is recognized.
-  </description>
-  <url>http://commons.apache.org/digester/</url>
-  <inceptionYear>2001</inceptionYear>
-  <organization>
-    <name>The Apache Software Foundation</name>
-    <url>http://www.apache.org/</url>
-  </organization>
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
 
   <modules>
     <module>annotations/atom</module>
@@ -58,19 +45,11 @@
     <module>xmlrules/addressbook</module>
   </modules>
 
-  <properties>
-    <maven.compile.source>1.5</maven.compile.source>
-    <maven.compile.target>1.5</maven.compile.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
-      <groupId>org.apache.commons</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>commons-digester3</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

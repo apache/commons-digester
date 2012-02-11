@@ -28,26 +28,17 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>commons-digester3</artifactId>
+  <artifactId>commons-digester3-ap</artifactId>
   <packaging>jar</packaging>
 
-  <name>Apache Commons Digester :: Core</name>
+  <name>Apache Commons Digester :: Annotations Processor</name>
 
   <dependencies>
     <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib</artifactId>
-      <version>2.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-beanutils</groupId>
-      <artifactId>commons-beanutils</artifactId>
-      <version>1.8.3</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.1.1</version>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-digester3</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

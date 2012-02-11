@@ -17,16 +17,20 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>org.apache.commons</groupId>
-    <artifactId>commons-digester3-samples</artifactId>
-    <version>3.0-SNAPSHOT</version>
-    <relativePath>../../</relativePath>
+    <artifactId>commons-digester3-parent</artifactId>
+    <version>3.3-SNAPSHOT</version>
+    <relativePath>../../../</relativePath>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
+
   <artifactId>commons-digester3-samples-annotations-atom</artifactId>
   <packaging>jar</packaging>
+
   <name>Apache Commons Digester :: Examples :: Annotations :: Atom</name>
+
   <build>
     <plugins>
       <plugin>
@@ -41,4 +45,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>

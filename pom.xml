@@ -160,7 +160,15 @@
   <modules>
     <module>core</module>
     <module>annotations-processor</module>
-    <module>examples</module>
+    <module>examples/annotations/atom</module>
+    <module>examples/api/addressbook</module>
+    <module>examples/api/catalog</module>
+    <module>examples/api/dbinsert</module>
+    <module>examples/api/document-markup</module>
+    <module>examples/edsl/atom</module>
+    <module>examples/plugins/pipeline</module>
+    <module>examples/rss</module>
+    <module>examples/xmlrules/addressbook</module>
   </modules>
 
   <properties>
@@ -176,49 +184,7 @@
     <commons.jira.pid>12310471</commons.jira.pid>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib</artifactId>
-      <version>2.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-beanutils</groupId>
-      <artifactId>commons-beanutils</artifactId>
-      <version>1.8.3</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
   <build>
-    <resources>
-      <resource>
-        <directory>.</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>NOTICE.txt</include>
-          <include>LICENSE.txt</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>false</filtering>
-        <includes>
-          <include>**/*.dtd</include>
-        </includes>
-      </resource>
-    </resources>
-
     <plugins>
       <plugin>
         <!--
@@ -429,6 +395,22 @@
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.1</version>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>java</goal>
+              </goals>
+              <configuration>
+                <classpathScope>compile</classpathScope>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
