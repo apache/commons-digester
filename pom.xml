@@ -25,9 +25,9 @@
   </parent>
 
   <groupId>org.apache.commons</groupId>
-  <artifactId>commons-digester3</artifactId>
+  <artifactId>commons-digester3-parent</artifactId>
   <version>3.3-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>Apache Commons Digester</name>
   <description>
@@ -157,15 +157,21 @@
     <url>http://issues.apache.org/jira/browse/DIGESTER</url>
   </issueManagement>
 
+  <modules>
+    <module>core</module>
+    <module>annotations-processor</module>
+    <module>examples</module>
+  </modules>
+
   <properties>
     <maven.compile.source>1.5</maven.compile.source>
     <maven.compile.target>1.5</maven.compile.target>
     <commons.componentid>digester</commons.componentid>
-    <commons.release.version>3.2</commons.release.version>
+    <commons.release.version>3.3</commons.release.version>
     <commons.release.desc>(minimum JDK 1.5)</commons.release.desc>
     <commons.release.2.version>2.1</commons.release.2.version>
     <commons.release.2.desc>(minimum JDK 1.5)</commons.release.2.desc>
-    <commons.rc.version>RC2</commons.rc.version>
+    <commons.rc.version>RC1</commons.rc.version>
     <commons.jira.id>DIGESTER</commons.jira.id>
     <commons.jira.pid>12310471</commons.jira.pid>
   </properties>
