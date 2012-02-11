@@ -208,25 +208,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>shaded-manifest</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-            <configuration>
-              <manifestLocation>${project.build.directory}/osgi-shaded</manifestLocation>
-              <instructions>
-                <Import-Package>javax.xml.parsers,javax.xml.validation,org.w3c.dom,org.xml.sax,org.xml.sax.helpers</Import-Package>
-              </instructions>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <descriptors>
