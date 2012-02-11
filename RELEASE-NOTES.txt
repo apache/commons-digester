@@ -39,7 +39,7 @@ BREAKING CHANGES:
 DEPENDENCIES
 =============
 
-Digester 3.2 users should upgrade to the recommended dependency set below
+Digester 3.3 users should upgrade to the recommended dependency set below
 where possible.
 
 The Recommended Dependency Set for Digester 3.2 is:
