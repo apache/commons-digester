@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>22</version>
+    <version>23</version>
   </parent>
 
   <groupId>org.apache.commons</groupId>
@@ -238,18 +238,6 @@
         </configuration>
       </plugin>
     </plugins>
-
-    <!--
-     | Maven3 doesn't handle ssh/scp by default
-     | let's take in consideration to add it in the parent pom
-    -->
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh</artifactId>
-        <version>1.0</version>
-      </extension>
-    </extensions>
 
     <pluginManagement>
       <plugins>
