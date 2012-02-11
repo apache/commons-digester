@@ -75,6 +75,114 @@
         </includes>
       </resource>
     </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>jarjar-maven-plugin</artifactId>
+        <version>1.5</version>
+        <configuration>
+          <input>{classes}</input>
+          <output>${project.build.directory}/classes-shaded</output>
+          <overwrite>true</overwrite>
+          <skipManifest>true</skipManifest>
+          <includes>
+            <include>*:asm</include>
+            <include>*:cglib</include>
+            <include>*:commons-beanutils</include>
+            <include>*:commons-logging</include>
+          </includes>
+          <rules>
+            <rule>
+              <pattern>net.sf.cglib.*</pattern>
+              <result>org.apache.commons.digester3.internal.cglib.$@1</result>
+            </rule>
+            <rule>
+              <pattern>net.sf.cglib.**.*</pattern>
+              <result>org.apache.commons.digester3.internal.cglib.@1.$@2</result>
+            </rule>
+            <rule>
+              <pattern>org.objectweb.asm.*</pattern>
+              <result>org.apache.commons.digester3.internal.asm.$@1</result>
+            </rule>
+            <rule>
+              <pattern>org.objectweb.asm.**.*</pattern>
+              <result>org.apache.commons.digester3.internal.asm.@1.$@2</result>
+            </rule>
+            <keep>
+              <pattern>org.apache.commons.**</pattern>
+            </keep>
+          </rules>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>jarjar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!--
+          - Copy the specific LICENSE.txt and NOTICE.txt files so that they are included
+          - in the uberjar jar file.
+          -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>uberjar.resources</id>
+            <!-- has to run after default N&L files are copied -->
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy todir="${project.build.directory}/classes-shaded/META-INF/" overwrite="true">
+                  <fileset dir="${basedir}/src/main/assembly/">
+                    <include name="*.txt" />
+                  </fileset>
+                  <mapper type="regexp" from="^(.*)-with-deps\.txt" to="\1.txt" />
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>jar</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jarjar</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifestFile>${project.build.directory}/osgi-shaded/MANIFEST.MF</manifestFile>
+              </archive>
+              <classesDirectory>${project.build.directory}/classes-shaded</classesDirectory>
+              <classifier>with-deps</classifier>
+              <excludes>
+                <exclude>**/LICENSE</exclude>
+                <exclude>**/NOTICE</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
 </project>
