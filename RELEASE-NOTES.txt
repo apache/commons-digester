@@ -68,4 +68,4 @@ DEPRECATIONS
 OTHER NOTES
 ============
 
- * NONE
+ * This is the first version of Apache Commons Digester which contains sub-modules
