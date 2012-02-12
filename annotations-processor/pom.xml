@@ -68,4 +68,17 @@
     </resources>
   </build>
 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <configLocation>config/maven_checks.xml</configLocation>
+          <headerLocation>config/maven-header.txt</headerLocation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
 </project>

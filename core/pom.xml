@@ -204,4 +204,19 @@
     </plugins>
   </build>
 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <configLocation>config/maven_checks.xml</configLocation>
+          <headerLocation>config/maven-header.txt</headerLocation>
+          <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
+          <suppressionsFileExpression>${basedir}/checkstyle-suppressions.xml</suppressionsFileExpression>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
 </project>
