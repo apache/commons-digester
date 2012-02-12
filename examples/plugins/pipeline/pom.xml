@@ -21,35 +21,15 @@
 
   <parent>
     <groupId>org.apache.commons</groupId>
-    <artifactId>commons-digester3-parent</artifactId>
+    <artifactId>commons-digester3-samples-parent</artifactId>
     <version>3.3-SNAPSHOT</version>
-    <relativePath>../../../</relativePath>
+    <relativePath>../../</relativePath>
   </parent>
 
   <artifactId>commons-digester3-samples-plugins-pipeline</artifactId>
   <packaging>jar</packaging>
 
   <name>Apache Commons Digester :: Examples :: Plugins :: Pipeline</name>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>commons-digester3</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <skipAssembly>true</skipAssembly>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
   <profiles>
     <profile>

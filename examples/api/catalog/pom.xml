@@ -21,24 +21,15 @@
 
   <parent>
     <groupId>org.apache.commons</groupId>
-    <artifactId>commons-digester3-parent</artifactId>
+    <artifactId>commons-digester3-samples-parent</artifactId>
     <version>3.3-SNAPSHOT</version>
-    <relativePath>../../../</relativePath>
+    <relativePath>../../</relativePath>
   </parent>
 
   <artifactId>commons-digester3-samples-catalog</artifactId>
   <packaging>jar</packaging>
 
   <name>Apache Commons Digester :: Examples :: API :: Catalog</name>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>commons-digester3</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
 
   <build>
     <plugins>
@@ -50,12 +41,6 @@
           <arguments>
             <argument>${basedir}/example.xml</argument>
           </arguments>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <skipAssembly>true</skipAssembly>
         </configuration>
       </plugin>
     </plugins>
