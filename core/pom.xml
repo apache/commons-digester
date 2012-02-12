@@ -160,7 +160,7 @@
             <configuration>
               <target>
                 <copy todir="${project.build.directory}/classes-shaded/META-INF/" overwrite="true">
-                  <fileset dir="${basedir}/src/main/assembly/">
+                  <fileset dir="${basedir}/../src/main/assembly/">
                     <include name="*.txt" />
                   </fileset>
                   <mapper type="regexp" from="^(.*)-with-deps\.txt" to="\1.txt" />
@@ -200,6 +200,12 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <skipAssembly>true</skipAssembly>
+        </configuration>
       </plugin>
     </plugins>
   </build>

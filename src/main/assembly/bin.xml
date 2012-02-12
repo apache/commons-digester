@@ -40,7 +40,14 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>target</directory>
+      <directory>${basedir}/core/target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>${basedir}/annotations-processor/target</directory>
       <outputDirectory></outputDirectory>
       <includes>
         <include>*.jar</include>
