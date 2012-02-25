@@ -19,13 +19,19 @@ package org.apache.commons.digester3.annotations.processor;
  * under the License.
  */
 
+import static java.lang.String.format;
+
+import static javax.tools.Diagnostic.Kind.*;
+
 import static java.util.Arrays.asList;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Messager;
 import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
@@ -72,7 +78,21 @@ public class DigesterAnnotationsProcessor
     @Override
     public boolean process( Set<? extends TypeElement> annotations, RoundEnvironment environment )
     {
-        return false;
+        // processingEnv is a predefined member in AbstractProcessor class
+        // Messager allows the processor to output messages to the environment
+        Messager messager = processingEnv.getMessager();
+
+        // Loop through the annotations that we are going to process
+        for (TypeElement annotation: annotations) {
+            // Get the members
+            for ( Element element : environment.getElementsAnnotatedWith( annotation ) )
+            {
+                System.out.println( format( "Processing @%s %s", annotation, element ) );
+                messager.printMessage( OTHER, format( "Processing @%s %s", annotation, element ) );
+            }
+        }
+
+        return true;
     }
 
 }

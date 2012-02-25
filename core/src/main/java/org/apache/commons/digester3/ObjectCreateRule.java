@@ -229,7 +229,7 @@ public class ObjectCreateRule
      */
     public ObjectCreateRule( String attributeName, Class<?> clazz )
     {
-        this( clazz.getName(), attributeName );
+        this( clazz != null ? clazz.getName() : null, attributeName );
         this.clazz = clazz;
     }
 
