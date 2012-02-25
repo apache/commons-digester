@@ -161,6 +161,7 @@
     <module>core</module>
     <module>annotations-processor</module>
     <module>examples</module>
+    <module>dist</module>
   </modules>
 
   <properties>
@@ -197,17 +198,6 @@
             <org.apache.commons.logging.Log>org.apache.commons.logging.impl.SimpleLog</org.apache.commons.logging.Log>
             <org.apache.commons.logging.simplelog.defaultlog>fatal</org.apache.commons.logging.simplelog.defaultlog>
           </systemPropertyVariables>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptors>
-            <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
-            <descriptor>${basedir}/src/main/assembly/src.xml</descriptor>
-          </descriptors>
-          <tarLongFileMode>gnu</tarLongFileMode>
-          <attach>false</attach>
         </configuration>
       </plugin>
     </plugins>

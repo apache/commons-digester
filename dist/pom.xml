@@ -28,55 +28,60 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>commons-digester3-ap</artifactId>
-  <packaging>jar</packaging>
+  <artifactId>commons-digester3-dist</artifactId>
+  <packaging>pom</packaging>
 
-  <name>Apache Commons Digester :: Annotations Processor</name>
+  <name>Commons Digester :: Distribution Packages</name>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>commons-digester3</artifactId>
       <version>${project.parent.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-digester3</artifactId>
+      <version>${project.parent.version}</version>
+      <classifier>with-deps</classifier>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-digester3-ap</artifactId>
+      <version>${project.parent.version}</version>
     </dependency>
   </dependencies>
 
-  <properties>
-    <maven.compile.source>1.6</maven.compile.source>
-    <maven.compile.target>1.6</maven.compile.target>
-  </properties>
-
   <build>
-    <resources>
-      <resource>
-        <directory>${basedir}/../</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>NOTICE.txt</include>
-          <include>LICENSE.txt</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
-
-  <reporting>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
         <configuration>
-          <configLocation>config/maven_checks.xml</configLocation>
-          <headerLocation>config/maven-header.txt</headerLocation>
+          <descriptors>
+            <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
+            <descriptor>${basedir}/src/main/assembly/src.xml</descriptor>
+          </descriptors>
+          <tarLongFileMode>gnu</tarLongFileMode>
+          <attach>false</attach>
+          <finalName>commons-digester3-${project.version}</finalName>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
         </configuration>
       </plugin>
     </plugins>
-  </reporting>
+  </build>
 
 </project>
