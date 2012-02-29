@@ -35,13 +35,11 @@
       <source>${basedir}/src/main/assembly/NOTICE-with-deps.txt</source>
       <destName>NOTICE.txt</destName>
     </file>
+    <file>
+      <source>${basedir}/../RELEASE-NOTES.txt</source>
+    </file>
   </files>
   <fileSets>
-    <fileSet>
-      <includes>
-        <include>${basedir}/../RELEASE-NOTES.txt</include>
-      </includes>
-    </fileSet>
     <fileSet>
       <directory>${basedir}/../target/site/apidocs</directory>
       <outputDirectory>apidocs</outputDirectory>
