@@ -29,9 +29,7 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.digester3.Digester;
@@ -54,8 +52,6 @@ public abstract class FromXmlRulesModule
 
     private final URL xmlRulesDtdUrl = FromXmlRulesModule.class.getResource( DIGESTER_DTD_PATH );
 
-    private final List<InputSource> inputSource = new ArrayList<InputSource>();
-
     private final Set<String> systemIds = new HashSet<String>();
 
     private String rootPath;
@@ -66,7 +62,7 @@ public abstract class FromXmlRulesModule
     @Override
     protected void configure()
     {
-        if ( !inputSource.isEmpty() )
+        if ( !systemIds.isEmpty() )
         {
             throw new IllegalStateException( "Re-entry is not allowed." );
         }
@@ -74,31 +70,10 @@ public abstract class FromXmlRulesModule
         try
         {
             loadRules();
-
-            XmlRulesModule xmlRulesModule = new XmlRulesModule( new NameSpaceURIRulesBinder( rulesBinder() ),
-                                                                getSystemIds(), rootPath );
-            Digester digester = newLoader( xmlRulesModule )
-                    .register( DIGESTER_PUBLIC_ID, xmlRulesDtdUrl.toString() )
-                    .setXIncludeAware( true )
-                    .setValidating( true )
-                    .newDigester();
-
-            for ( InputSource source : inputSource )
-            {
-                try
-                {
-                    digester.parse( source );
-                }
-                catch ( Exception e )
-                {
-                    addError( "Impossible to load XML defined in the InputSource '%s': %s", source.getSystemId(),
-                              e.getMessage() );
-                }
-            }
         }
         finally
         {
-            inputSource.clear();
+            systemIds.clear();
         }
     }
 
@@ -119,12 +94,28 @@ public abstract class FromXmlRulesModule
             throw new IllegalArgumentException( "Argument 'inputSource' must be not null" );
         }
 
-        this.inputSource.add( inputSource );
-
         String systemId = inputSource.getSystemId();
         if ( systemId != null && !systemIds.add( systemId ) )
         {
             addError( "XML rules file '%s' already bound", systemId );
+        }
+
+        XmlRulesModule xmlRulesModule = new XmlRulesModule( new NameSpaceURIRulesBinder( rulesBinder() ),
+                                                            getSystemIds(), rootPath );
+        Digester digester = newLoader( xmlRulesModule )
+                .register( DIGESTER_PUBLIC_ID, xmlRulesDtdUrl.toString() )
+                .setXIncludeAware( true )
+                .setValidating( true )
+                .newDigester();
+
+        try
+        {
+            digester.parse( inputSource );
+        }
+        catch ( Exception e )
+        {
+            addError( "Impossible to load XML defined in the InputSource '%s': %s", inputSource.getSystemId(),
+                      e.getMessage() );
         }
     }
 
