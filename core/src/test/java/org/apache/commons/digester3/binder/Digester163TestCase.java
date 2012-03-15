@@ -34,7 +34,6 @@ import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * Test.
  */
@@ -43,10 +42,10 @@ public class Digester163TestCase
 
     public static final int MAX_THREADS = 4;
 
-    private DigesterLoader loader;
+    private DigesterLoader loader = null;
 
     @Before
-    public void setUp()
+    public void before()
     {
         loader = newLoader( new FromXmlRulesModule()
         {
@@ -64,10 +63,12 @@ public class Digester163TestCase
     public void test()
         throws InterruptedException
     {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor( MAX_THREADS, MAX_THREADS,
+        ThreadPoolExecutor executor = new ThreadPoolExecutor( MAX_THREADS,
+                                                              MAX_THREADS,
                                                               Long.MAX_VALUE,
                                                               TimeUnit.NANOSECONDS,
                                                               new LinkedBlockingQueue<Runnable>() );
+        final LinkedBlockingQueue<Exception> exceptions = new LinkedBlockingQueue<Exception>();
         for ( int i = 0; i < MAX_THREADS * 2; i++ )
         {
             executor.submit( new Runnable()
@@ -75,17 +76,19 @@ public class Digester163TestCase
 
                 public void run()
                 {
-                    Digester dig = loader.newDigester();
+
+                    Digester dig = null;
                     InputStream in = null;
                     try
                     {
-                        in = this.getClass().getClassLoader().getResourceAsStream( "test.xml" );
+                        dig = loader.newDigester();
+                        in = Digester163TestCase.class.getResourceAsStream( "test.xml" );
                         Entity et = dig.parse( in );
                         assertEquals( "Author 1", et.getAuthor() );
                     }
                     catch ( Exception e )
                     {
-                        fail( e.getMessage() );
+                        exceptions.add( e );
                     }
                     finally
                     {
@@ -101,6 +104,7 @@ public class Digester163TestCase
                             }
                         }
                     }
+
                 }
             } );
         }
@@ -116,6 +120,13 @@ public class Digester163TestCase
                 break;
             }
         }
-    }
 
+        Exception e = exceptions.poll();
+        if ( e != null )
+        {
+            e.printStackTrace();
+            fail( "Throwable caught -> " + e.getMessage() != null ? e.getMessage() : "" );
+        }
+
+    }
 }

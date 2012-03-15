@@ -15,12 +15,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<root>
-  <container>
-    <header>
-      <authors>
-        <author>Author 1</author>
-      </authors>
-    </header>
-  </container>
-</root>
+<container>
+  <header>
+    <authors>
+      <author>Author 1</author>
+    </authors>
+  </header>
+</container>
