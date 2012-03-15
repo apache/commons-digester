@@ -525,6 +525,9 @@ public final class DigesterLoader
      * Creates a new {@link XMLReader} instance that relies on the given {@code XMLReader}
      * and the default {@link Rules} implementation.
      *
+     * <b>WARNING</b> Input {@link XMLReader} will be linked to built Digester instance so it is recommended
+     * to <b>NOT</b> share same {@link XMLReader} instance to produce the Digester.
+     *
      * @param reader The user defined {@code XMLReader}
      * @return a new {@link Digester} instance
      */
@@ -536,6 +539,9 @@ public final class DigesterLoader
     /**
      * Creates a new {@link XMLReader} instance that relies on the given {@code XMLReader}
      * and custom user define {@link Rules} implementation.
+     *
+     * <b>WARNING</b> Input {@link XMLReader} and {@link Rules} will be linked to built Digester instance,
+     * so it is recommended to <b>NOT</b> share same {@link XMLReader} and {@link Rules} instance to produce the Digester.
      *
      * @param reader The user defined {@code XMLReader}
      * @param rules The custom user define {@link Rules} implementation
