@@ -24,7 +24,7 @@ import static junit.framework.Assert.fail;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -33,6 +33,7 @@ import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 /**
  * Test.
@@ -47,16 +48,27 @@ public class Digester163TestCase
     @Before
     public void before()
     {
+        final URL url = getClass().getResource( "rules.xml" );
         loader = newLoader( new FromXmlRulesModule()
         {
-
             @Override
             protected void loadRules()
             {
-                loadXMLRules( getClass().getResourceAsStream( "rules.xml" ) );
+                loadXMLRules( url );
             }
 
         } );
+    }
+
+    @Test
+    public void testSingle()
+        throws IOException, SAXException
+    {
+        Digester dig = loader.newDigester();
+        URL url = Digester163TestCase.class.getResource( "test.xml" );
+        // lets parse - result does not matter here
+        Entity et = dig.parse( url );
+        assertEquals( "Author 1", et.getAuthor() );
     }
 
     @Test
@@ -68,43 +80,24 @@ public class Digester163TestCase
                                                               Long.MAX_VALUE,
                                                               TimeUnit.NANOSECONDS,
                                                               new LinkedBlockingQueue<Runnable>() );
+        final URL url = Digester163TestCase.class.getResource( "test.xml" );
         final LinkedBlockingQueue<Exception> exceptions = new LinkedBlockingQueue<Exception>();
         for ( int i = 0; i < MAX_THREADS * 2; i++ )
         {
             executor.submit( new Runnable()
             {
-
                 public void run()
                 {
-
-                    Digester dig = null;
-                    InputStream in = null;
                     try
                     {
-                        dig = loader.newDigester();
-                        in = Digester163TestCase.class.getResourceAsStream( "test.xml" );
-                        Entity et = dig.parse( in );
-                        assertEquals( "Author 1", et.getAuthor() );
+                        Digester dig = loader.newDigester();
+                        // lets parse - result does not matter here
+                        dig.parse( url );
                     }
                     catch ( Exception e )
                     {
                         exceptions.add( e );
                     }
-                    finally
-                    {
-                        if ( in != null )
-                        {
-                            try
-                            {
-                                in.close();
-                            }
-                            catch ( IOException e )
-                            {
-                                // close quietly
-                            }
-                        }
-                    }
-
                 }
             } );
         }
@@ -121,12 +114,20 @@ public class Digester163TestCase
             }
         }
 
-        Exception e = exceptions.poll();
+        Exception e = exceptions.peek();
         if ( e != null )
         {
-            e.printStackTrace();
-            fail( "Throwable caught -> " + e.getMessage() != null ? e.getMessage() : "" );
+            while ( true )
+            {
+                e = exceptions.poll();
+                if ( e == null )
+                {
+                    break;
+                }
+                e.printStackTrace();
+            }
+            fail( "Caught " + exceptions.size() + " exceptions." );
         }
-
     }
+
 }

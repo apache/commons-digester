@@ -17,7 +17,10 @@
    limitations under the License.
 -->
 <digester-rules>
-  <object-create-rule classname="org.apache.commons.digester3.binder.Entity" pattern="container"/>
-  <!-- author -->
-  <call-method-rule methodname="setAuthor" paramcount="1" pattern="container/header/authors/author"/>
+  <pattern value="employee">
+    <object-create-rule classname="org.apache.commons.digester3.binder.Entity" />
+    <pattern value="name">
+      <call-method-rule methodname="setAuthor" paramcount="1" paramtypes="java.lang.String" usingElementBodyAsArgument="true" />
+    </pattern>
+  </pattern>  
 </digester-rules>

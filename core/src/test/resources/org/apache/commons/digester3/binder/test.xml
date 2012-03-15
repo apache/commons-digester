@@ -15,10 +15,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<container>
-  <header>
-    <authors>
-      <author>Author 1</author>
-    </authors>
-  </header>
-</container>
+<employee>
+  <name>Author 1</name>
+</employee> 
