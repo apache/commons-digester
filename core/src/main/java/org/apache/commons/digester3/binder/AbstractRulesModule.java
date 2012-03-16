@@ -28,26 +28,26 @@ public abstract class AbstractRulesModule
     implements RulesModule
 {
 
-    private final ThreadLocal<RulesBinder> rulesBinders = new ThreadLocal<RulesBinder>();
+    private RulesBinder rulesBinder;
 
     /**
      * {@inheritDoc}
      */
     public final void configure( RulesBinder rulesBinder )
     {
-        if ( rulesBinders.get() != null )
+        if ( this.rulesBinder != null )
         {
             throw new IllegalStateException( "Re-entry is not allowed." );
         }
 
-        rulesBinders.set( rulesBinder );
+        this.rulesBinder = rulesBinder;
         try
         {
             configure();
         }
         finally
         {
-            rulesBinders.remove();
+            this.rulesBinder = null;
         }
     }
 
@@ -68,7 +68,7 @@ public abstract class AbstractRulesModule
      */
     protected void addError( String messagePattern, Object... arguments )
     {
-        rulesBinders.get().addError( messagePattern, arguments );
+        rulesBinder.addError( messagePattern, arguments );
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class AbstractRulesModule
      */
     protected void addError( Throwable t )
     {
-        rulesBinders.get().addError( t );
+        rulesBinder.addError( t );
     }
 
     /**
@@ -91,7 +91,7 @@ public abstract class AbstractRulesModule
      */
     protected void install( RulesModule rulesModule )
     {
-        rulesBinders.get().install( rulesModule );
+        rulesBinder.install( rulesModule );
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class AbstractRulesModule
      */
     protected LinkedRuleBuilder forPattern( String pattern )
     {
-        return rulesBinders.get().forPattern( pattern );
+        return rulesBinder.forPattern( pattern );
     }
 
     /**
@@ -113,7 +113,7 @@ public abstract class AbstractRulesModule
      */
     protected RulesBinder rulesBinder()
     {
-        return rulesBinders.get();
+        return rulesBinder;
     }
 
 }

@@ -199,6 +199,13 @@ public final class DigesterLoader
         }
 
         this.classLoader = createBinderClassLoader( classLoader );
+
+        rulesBinder.initialize( this.classLoader );
+        for ( RulesModule rulesModule : rulesModules )
+        {
+            rulesModule.configure( rulesBinder );
+        }
+
         return this;
     }
 
@@ -594,15 +601,6 @@ public final class DigesterLoader
      */
     public RuleSet createRuleSet()
     {
-        if ( classLoader != rulesBinder.getContextClassLoader() )
-        {
-            rulesBinder.initialize( classLoader );
-            for ( RulesModule rulesModule : rulesModules )
-            {
-                rulesModule.configure( rulesBinder );
-            }
-        }
-
         if ( rulesBinder.hasError() )
         {
             Formatter fmt = new Formatter().format( HEADING );
