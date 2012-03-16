@@ -52,7 +52,7 @@ public abstract class FromXmlRulesModule
 
     private final URL xmlRulesDtdUrl = FromXmlRulesModule.class.getResource( DIGESTER_DTD_PATH );
 
-    private final Set<String> systemIds = new HashSet<String>();
+    private final ThreadLocal<Set<String>> systemIds = new ThreadLocal<Set<String>>();
 
     private String rootPath;
 
@@ -62,18 +62,19 @@ public abstract class FromXmlRulesModule
     @Override
     protected void configure()
     {
-        if ( !systemIds.isEmpty() )
+        if ( systemIds.get() != null )
         {
             throw new IllegalStateException( "Re-entry is not allowed." );
         }
 
+        systemIds.set( new HashSet<String>() );
         try
         {
             loadRules();
         }
         finally
         {
-            systemIds.clear();
+            systemIds.remove();
         }
     }
 
@@ -95,7 +96,7 @@ public abstract class FromXmlRulesModule
         }
 
         String systemId = inputSource.getSystemId();
-        if ( systemId != null && !systemIds.add( systemId ) )
+        if ( systemId != null && !systemIds.get().add( systemId ) )
         {
             addError( "XML rules file '%s' already bound", systemId );
         }
@@ -253,7 +254,7 @@ public abstract class FromXmlRulesModule
      */
     public final Set<String> getSystemIds()
     {
-        return unmodifiableSet( systemIds );
+        return unmodifiableSet( systemIds.get() );
     }
 
 }
