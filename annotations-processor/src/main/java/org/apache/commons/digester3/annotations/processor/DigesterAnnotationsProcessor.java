@@ -124,7 +124,6 @@ public class DigesterAnnotationsProcessor
                 // Get the members
                 for ( Element element : environment.getElementsAnnotatedWith( annotation ) )
                 {
-                    System.out.println( format( "Processing @%s %s", annotation, element ) );
                     messager.printMessage( OTHER, format( "Processing @%s %s", annotation, element ) );
                 }
             }
