@@ -36,6 +36,7 @@ import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -51,6 +52,7 @@ import org.apache.commons.digester3.annotations.rules.SetNext;
 import org.apache.commons.digester3.annotations.rules.SetProperty;
 import org.apache.commons.digester3.annotations.rules.SetRoot;
 import org.apache.commons.digester3.annotations.rules.SetTop;
+import org.kohsuke.MetaInfServices;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
@@ -61,6 +63,7 @@ import com.sun.codemodel.JPackage;
 /**
  * @since 3.3
  */
+@MetaInfServices( Processor.class )
 public class DigesterAnnotationsProcessor
     extends AbstractProcessor
 {
