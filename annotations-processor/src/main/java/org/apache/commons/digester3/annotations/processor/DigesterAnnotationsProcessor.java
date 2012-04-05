@@ -115,6 +115,7 @@ public class DigesterAnnotationsProcessor
             rulesModuleClass._extends( AbstractRulesModule.class );
 
             JMethod configureMethod = rulesModuleClass.method( PROTECTED, parse( codeModel, "void" ), "configure" );
+            configureMethod.javadoc().add( "{@inheritDoc}" );
             configureMethod.annotate( Override.class );
             JBlock configureMethodBody = configureMethod.body();
 
