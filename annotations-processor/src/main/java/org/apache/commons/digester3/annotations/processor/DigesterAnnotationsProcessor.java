@@ -94,6 +94,7 @@ public class DigesterAnnotationsProcessor
         // Messager allows the processor to output messages to the environment
         Messager messager = processingEnv.getMessager();
 
+        // TODO get these values from -A parameters
         String packageName = "com.acme";
         String className = "MyRules";
 
