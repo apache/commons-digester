@@ -100,8 +100,8 @@ public class DigesterAnnotationsProcessor
         Messager messager = processingEnv.getMessager();
 
         // TODO get these values from -A parameters
-        String packageName = "com.acme";
-        String className = "MyRules";
+        String packageName = getClass().getPackage().getName();
+        String className = "GeneratedRulesModule";
 
         JCodeModel codeModel = new JCodeModel();
 
@@ -121,6 +121,8 @@ public class DigesterAnnotationsProcessor
             // Loop through the annotations that we are going to process
             for ( TypeElement annotation : annotations )
             {
+
+
                 // Get the members
                 for ( Element element : environment.getElementsAnnotatedWith( annotation ) )
                 {
