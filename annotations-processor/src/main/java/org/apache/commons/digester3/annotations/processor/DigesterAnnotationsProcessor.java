@@ -25,8 +25,6 @@ import static com.sun.codemodel.JMod.PUBLIC;
 import static com.sun.codemodel.JType.parse;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
-import static javax.tools.Diagnostic.Kind.ERROR;
-import static javax.tools.Diagnostic.Kind.OTHER;
 
 import java.io.IOException;
 import java.util.Date;
@@ -34,7 +32,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Messager;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
@@ -96,7 +93,7 @@ public class DigesterAnnotationsProcessor
     {
         // processingEnv is a predefined member in AbstractProcessor class
         // Messager allows the processor to output messages to the environment
-        Messager messager = processingEnv.getMessager();
+        FormattingMessager messager = new FormattingMessager( processingEnv.getMessager() );
 
         // TODO get these values from -A parameters
         String packageName = getClass().getPackage().getName();
@@ -125,7 +122,7 @@ public class DigesterAnnotationsProcessor
                 // Get the members
                 for ( Element element : environment.getElementsAnnotatedWith( annotation ) )
                 {
-                    messager.printMessage( OTHER, format( "Processing @%s %s", annotation, element ) );
+                    messager.error( "Processing @%s %s", annotation, element );
                 }
             }
 
@@ -135,12 +132,11 @@ public class DigesterAnnotationsProcessor
         }
         catch ( JClassAlreadyExistsException e )
         {
-            messager.printMessage( ERROR, format( "Class %s.%s has been already defined", packageName, className ) );
+            messager.error( "Class %s.%s has been already defined", packageName, className );
         }
         catch ( IOException e )
         {
-            messager.printMessage( ERROR, format( "Impossible to generate class %s.%s: %s",
-                                                  packageName, className, e.getMessage() ) );
+            messager.error( "Impossible to generate class %s.%s: %s", packageName, className, e.getMessage() );
         }
 
         return success;
