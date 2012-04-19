@@ -94,6 +94,7 @@ public class DigesterAnnotationsProcessor
         // processingEnv is a predefined member in AbstractProcessor class
         // Messager allows the processor to output messages to the environment
         final FormattingMessager messager = new FormattingMessager( processingEnv.getMessager() );
+        final DigesterElementVisitor elementVisitor = new DigesterElementVisitor( messager );
 
         // TODO get these values from -A parameters
         String packageName = getClass().getPackage().getName();
@@ -118,15 +119,20 @@ public class DigesterAnnotationsProcessor
             configureMethod.annotate( Override.class );
             final JBlock configureMethodBody = configureMethod.body();
 
+            for ( Element element : environment.getRootElements() )
+            {
+                element.accept( elementVisitor, null );
+            }
+
             // Loop through the annotations that we are going to process
-            for ( TypeElement annotation : annotations )
+            /* for ( TypeElement annotation : annotations )
             {
                 // Get the members
                 for ( Element element : environment.getElementsAnnotatedWith( annotation ) )
                 {
                     messager.error( "Processing @%s %s", annotation, element );
                 }
-            }
+            } */
 
             codeModel.build( new FilerCodeWriter( processingEnv.getFiler() ) );
 

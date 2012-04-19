@@ -21,6 +21,7 @@ package org.apache.commons.digester3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.xml.sax.Attributes;
@@ -61,6 +62,11 @@ public class RulesBase
     protected HashMap<String, List<Rule>> cache = new HashMap<String, List<Rule>>();
 
     /**
+     * The subset of registered Rule instances with wildcard pattern.
+     */
+    protected List<String> wildcardCache = new LinkedList<String>();
+
+    /**
      * The set of registered Rule instances, in the order that they were originally registered.
      */
     protected ArrayList<Rule> rules = new ArrayList<Rule>();
@@ -99,6 +105,10 @@ public class RulesBase
         if ( list == null )
         {
             list = new ArrayList<Rule>();
+            if ( pattern.startsWith( "*/" ) )
+            {
+                wildcardCache.add( pattern.substring( 1 ) );
+            }
             cache.put( pattern, list );
         }
         list.add( rule );
@@ -110,6 +120,7 @@ public class RulesBase
      */
     public void clear()
     {
+        wildcardCache.clear();
         cache.clear();
         rules.clear();
     }
@@ -125,16 +136,17 @@ public class RulesBase
         {
             // Find the longest key, ie more discriminant
             String longKey = "";
-            for ( String key : cache.keySet() )
+            for ( String key : wildcardCache )
             {
-                if ( key.startsWith( "*/" )
-                                && ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) )
-                                && key.length() > longKey.length() ) )
+                if ( ( pattern.equals( key.substring( 1 ) ) || pattern.endsWith( key ) )
+                    && key.length() > longKey.length() )
                 {
-                    // rulesList = (List) this.cache.get(key);
-                    rulesList = lookup( namespaceURI, key );
                     longKey = key;
                 }
+            }
+            if ( longKey.length() > 0 )
+            {
+                rulesList = lookup( namespaceURI, "*" + longKey );
             }
         }
         if ( rulesList == null )

@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.3" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-164" due-to="Frank David Martinez">
+      RulesBase performance optimization.
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-163" due-to="Torsten Krah">
       ConcurrentModificationException creating a new Digester via loaderInstance.newDigester()
     </action>

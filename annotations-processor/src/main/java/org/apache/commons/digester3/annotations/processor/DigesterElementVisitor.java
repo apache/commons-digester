@@ -69,6 +69,7 @@ final class DigesterElementVisitor
     @Override
     public Void visitType( TypeElement clazz, TypeElement annotation )
     {
+        System.out.println( ">>>>>>>>>" + clazz.getAnnotationMirrors() );
         messager.note( "visiting @%s on class %s", annotation, clazz );
         return null;
     }
