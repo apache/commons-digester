@@ -69,6 +69,7 @@ final class BinderClassLoader
 
     private BinderClassLoader( ClassLoader adaptedClassLoader )
     {
+        super( adaptedClassLoader );
         this.adaptedClassLoader = adaptedClassLoader;
     }
 

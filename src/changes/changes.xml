@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.3" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-165" due-to="Dirk Schaube">
+      BinderClassLoader does not override getResource
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-164" due-to="Frank David Martinez">
       RulesBase performance optimization.
     </action>
