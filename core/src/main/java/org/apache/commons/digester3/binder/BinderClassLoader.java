@@ -65,17 +65,14 @@ final class BinderClassLoader
         return action.run();
     }
 
-    private final ClassLoader adaptedClassLoader;
-
     private BinderClassLoader( ClassLoader adaptedClassLoader )
     {
         super( adaptedClassLoader );
-        this.adaptedClassLoader = adaptedClassLoader;
     }
 
     public ClassLoader getAdaptedClassLoader()
     {
-        return adaptedClassLoader;
+        return getParent();
     }
 
     /**
@@ -89,7 +86,7 @@ final class BinderClassLoader
         {
             return PRIMITIVE_TYPES.get( name );
         }
-        return adaptedClassLoader.loadClass( name );
+        return getParent().loadClass( name );
     }
 
 }

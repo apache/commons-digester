@@ -21,6 +21,9 @@ package org.apache.commons.digester3.binder;
 
 import static org.apache.commons.digester3.binder.BinderClassLoader.createBinderClassLoader;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotNull;
+
+import java.net.URL;
 
 import org.junit.Test;
 
@@ -93,6 +96,27 @@ public final class BinderClassLoaderTestCase
     {
         Class<?> actual = classLoader.loadClass( name );
         assertSame( expected, actual );
+    }
+
+    @Test
+    public void testGetResource()
+    {
+        ClassLoader clToAdapt = new ClassLoader()
+        {
+
+            @Override
+            public URL getResource( String name )
+            {
+                if ( "xxx".equals( name ) )
+                {
+                    return super.getResource( "org/apache/commons/digester3/binder/BinderClassLoaderTestCase.class" );
+                }
+                return super.getResource( name );
+            }
+
+        };
+        ClassLoader binderCl = createBinderClassLoader( clToAdapt );
+        assertNotNull( binderCl.getResource( "xxx" ) );
     }
 
 }
