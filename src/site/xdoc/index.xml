@@ -46,7 +46,7 @@ use, or you can also create your own.</p>
 <section name="Documentation">
 
 <p>User documentation is available in the website, you can start reading the
-<a href="http://commons.apache.org/digester/commons-digester-3.0/core.html">Core APIs</a>.</p>
+<a href="http://commons.apache.org/digester/guide/core.html">Core APIs</a>.</p>
 
 <p>The <a href="http://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt">
 Release Notes</a> document the new features and bug fixes that have been
