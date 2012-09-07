@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.3" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-170" due-to="Dale Wijnand">
+      Digester.pop(String) throws EmptyStackException where API doc says it returns null
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-169" due-to="Eugene Fedotov">
       Problem when including rules XML file with "classpath:" URL prefix
     </action>
