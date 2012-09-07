@@ -22,6 +22,7 @@ package org.apache.commons.digester3.binder;
 import static java.lang.System.getSecurityManager;
 import static java.security.AccessController.doPrivileged;
 
+import java.net.URL;
 import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.HashMap;
@@ -87,6 +88,15 @@ final class BinderClassLoader
             return PRIMITIVE_TYPES.get( name );
         }
         return getParent().loadClass( name );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public URL getResource( String name )
+    {
+        return getAdaptedClassLoader().getResource( name );
     }
 
 }
