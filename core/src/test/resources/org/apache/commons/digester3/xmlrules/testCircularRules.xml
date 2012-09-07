@@ -19,7 +19,7 @@
 <!-- Rules to test the DigesterLoader's circular include detection. 
      Attempting to create a digester with these rules should result
      in an exception. -->
-
+<!DOCTYPE digester-rules PUBLIC "-//Apache Commons //DTD digester-rules XML V1.0//EN" "http://commons.apache.org/digester/dtds/digester-rules-3.0.dtd">
 <digester-rules>
   <pattern value="root/foo">
     <object-create-rule classname="org.apache.commons.digester3.xmlrules.ObjectTestImpl" />

@@ -19,7 +19,6 @@
 package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-
 import static org.junit.Assert.assertEquals;
 
 import java.io.StringReader;
@@ -52,7 +51,7 @@ public class IncludeTest
                 public void body( String namespace, String name, String text )
                     throws Exception
                 {
-                    ArrayList<String> stringList = getDigester().peek();
+                    List<String> stringList = getDigester().peek();
                     stringList.add( text );
                 }
 
@@ -66,6 +65,8 @@ public class IncludeTest
         throws Exception
     {
         final String rulesXml = "<?xml version='1.0'?>"
+                + "<!DOCTYPE digester-rules PUBLIC \"-//Apache Commons //DTD digester-rules XML V1.0//EN\" "
+                + "\"http://commons.apache.org/digester/dtds/digester-rules-3.0.dtd\">"
                 + "<digester-rules>"
                 + " <pattern value='root/foo'>"
                 + "   <include class='org.apache.commons.digester3.xmlrules.IncludeTest$TestDigesterRulesModule' />"
@@ -84,12 +85,46 @@ public class IncludeTest
                 loadXMLRulesFromText( rulesXml );
             }
 
-        }).newDigester();
+        } ).newDigester();
         digester.push( list );
         digester.parse( new StringReader( xml ) );
 
         assertEquals( "Number of entries", 1, list.size() );
         assertEquals( "Entry value", "short", list.get( 0 ) );
+    }
+
+    @Test
+    public void testUrlInclude()
+        throws Exception
+    {
+        final String rulesXml = "<?xml version='1.0'?>"
+                + "<!DOCTYPE digester-rules PUBLIC \"-//Apache Commons //DTD digester-rules XML V1.0//EN\" "
+                + "\"http://commons.apache.org/digester/dtds/digester-rules-3.0.dtd\">"
+                + "<digester-rules>"
+                + " <pattern value='root/foo1'>"
+                + "   <include url='classpath:org/apache/commons/digester3/xmlrules/testrulesinclude.xml' />"
+                + " </pattern>"
+                + " <pattern value='root/foo2'>"
+                + "   <include url='classpath:org/apache/commons/digester3/xmlrules/testrulesinclude.xml' />"
+                + " </pattern>"
+                + "</digester-rules>";
+
+        String xml = "<?xml version='1.0' ?><root><foo1><bar><foo value='foo1'/></bar></foo1><foo2><bar><foo value='foo2'/></bar></foo2></root>";
+
+        List<String> list = new ArrayList<String>();
+        Digester digester = newLoader( new FromXmlRulesModule()
+        {
+
+            @Override
+            protected void loadRules()
+            {
+                loadXMLRulesFromText( rulesXml );
+            }
+
+        }).newDigester();
+        digester.push( list );
+        digester.parse( new StringReader( xml ) );
+        assertEquals( "[foo1, foo2]", list.toString() );
     }
 
     /**

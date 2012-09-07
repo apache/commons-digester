@@ -21,6 +21,7 @@ package org.apache.commons.digester3.xmlrules;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Set;
 
 import org.apache.commons.digester3.Rule;
 import org.apache.commons.digester3.binder.RulesBinder;
@@ -92,18 +93,27 @@ final class IncludeRule
                 }
             }
 
-            if ( memoryRulesBinder.getIncludedFiles().add( xmlRulesResource.toString() ) )
+            Set<String> includedFiles = memoryRulesBinder.getIncludedFiles();
+            String xmlRulesResourceString = xmlRulesResource.toString();
+            if ( includedFiles.add( xmlRulesResourceString ) )
             {
-                install( new FromXmlRulesModule()
+                try
                 {
-
-                    @Override
-                    protected void loadRules()
+                    install( new FromXmlRulesModule()
                     {
-                        loadXMLRules( xmlRulesResource );
-                    }
 
-                } );
+                        @Override
+                        protected void loadRules()
+                        {
+                            loadXMLRules( xmlRulesResource );
+                        }
+
+                    } );
+                }
+                finally
+                {
+                    includedFiles.remove( xmlRulesResourceString );
+                }
             }
             else
             {

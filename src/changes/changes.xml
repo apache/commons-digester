@@ -26,6 +26,9 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-169" due-to="Eugene Fedotov">
       Problem when including rules XML file with "classpath:" URL prefix
     </action>
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-167" due-to="Eugene Fedotov">
+      Groundless "Circular file inclusion detected" exception when including rules XML file
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-165" due-to="Dirk Schaube">
       BinderClassLoader does not override getResource
     </action>
