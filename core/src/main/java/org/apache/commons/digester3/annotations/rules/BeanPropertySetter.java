@@ -32,7 +32,7 @@ import org.apache.commons.digester3.annotations.handlers.BeanPropertySetterHandl
 
 /**
  * Fields annotated with {@code BeanPropertySetter} will be bound with {@code BeanPropertySetterRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addBeanPropertySetter(String,String)
  * @since 2.1
  */
@@ -57,12 +57,12 @@ public @interface BeanPropertySetter
 
     /**
      * Defines several {@code @BeanPropertySetter} annotations on the same element.
-     * 
+     *
      * @see BeanPropertySetter
      */
     @Documented
     @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
+    @Target( ElementType.FIELD )
     @DigesterRuleList
     @interface List
     {

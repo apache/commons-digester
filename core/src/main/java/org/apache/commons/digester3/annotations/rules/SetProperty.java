@@ -32,7 +32,7 @@ import org.apache.commons.digester3.annotations.handlers.SetPropertiesHandler;
 
 /**
  * Fields annotated with {@code SetProperty} will be bound with {@code SetPropertiesRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addSetProperties(String,String[],String[])
  * @since 2.1
  */
@@ -62,12 +62,12 @@ public @interface SetProperty
 
     /**
      * Defines several {@code @SetProperty} annotations on the same element.
-     * 
+     *
      * @see SetProperty
      */
     @Documented
     @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
+    @Target( ElementType.FIELD )
     @DigesterRuleList
     @interface List
     {

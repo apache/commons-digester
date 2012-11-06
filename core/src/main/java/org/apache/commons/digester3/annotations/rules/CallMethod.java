@@ -32,7 +32,7 @@ import org.apache.commons.digester3.annotations.handlers.CallMethodHandler;
 
 /**
  * Methods annotated with {@code CallMethod} will be bound with {@code CallMethodRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addCallMethod(String,String,int,Class[])
  * @since 2.1
  */
@@ -62,12 +62,12 @@ public @interface CallMethod
 
     /**
      * Defines several {@code @CallMethod} annotations on the same element.
-     * 
+     *
      * @see CallMethod
      */
     @Documented
     @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
+    @Target( ElementType.METHOD )
     @DigesterRuleList
     @interface List
     {

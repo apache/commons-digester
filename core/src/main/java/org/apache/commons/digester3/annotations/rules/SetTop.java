@@ -32,7 +32,7 @@ import org.apache.commons.digester3.annotations.handlers.SetTopHandler;
 
 /**
  * Methods annotated with {@code SetTop} will be bound with {@code SetTopRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addSetTop(String,String,String)
  * @since 2.1
  */
@@ -62,12 +62,12 @@ public @interface SetTop
 
     /**
      * Defines several {@code @SetTop} annotations on the same element
-     * 
+     *
      * @see SetTop
      */
     @Documented
     @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
+    @Target( ElementType.METHOD )
     @DigesterRuleList
     @interface List
     {

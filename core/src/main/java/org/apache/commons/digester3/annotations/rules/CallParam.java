@@ -32,7 +32,7 @@ import org.apache.commons.digester3.annotations.handlers.CallParamHandler;
 
 /**
  * Methods arguments annotated with {@code CallParam} will be bound with {@code CallParamRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addCallParam(String,int)
  * @since 2.1
  */
@@ -78,12 +78,12 @@ public @interface CallParam
 
     /**
      * Defines several {@code @CallParam} annotations on the same element.
-     * 
+     *
      * @see CallParam
      */
     @Documented
     @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
+    @Target( ElementType.PARAMETER )
     @DigesterRuleList
     @interface List
     {

@@ -32,7 +32,7 @@ import org.apache.commons.digester3.annotations.handlers.PathCallParamHandler;
 
 /**
  * Methods arguments annotated with {@code PathCallParam} will be bound with {@code PathCallParamRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addCallParamPath(String,int)
  * @since 2.1
  */
@@ -57,12 +57,12 @@ public @interface PathCallParam
 
     /**
      * Defines several {@code @PathCallParam} annotations on the same element.
-     * 
+     *
      * @see PathCallParam
      */
     @Documented
     @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
+    @Target( ElementType.PARAMETER )
     @DigesterRuleList
     @interface List
     {
