@@ -811,7 +811,15 @@ public class Digester
             reader.setEntityResolver( entityResolver );
         }
 
-        reader.setErrorHandler( this );
+        if ( this.errorHandler != null )
+        {
+            reader.setErrorHandler( this.errorHandler );
+        }
+        else
+        {
+            reader.setErrorHandler( this );
+        }
+
         return reader;
     }
 
@@ -1523,12 +1531,8 @@ public class Digester
     public void error( SAXParseException exception )
         throws SAXException
     {
-        log.error( "Parse Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
-            + exception.getMessage(), exception );
-        if ( errorHandler != null )
-        {
-            errorHandler.error( exception );
-        }
+    	log.error( "Parse Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
+                + exception.getMessage(), exception );
     }
 
     /**
@@ -1539,11 +1543,7 @@ public class Digester
         throws SAXException
     {
         log.error( "Parse Fatal Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber()
-            + ": " + exception.getMessage(), exception );
-        if ( errorHandler != null )
-        {
-            errorHandler.fatalError( exception );
-        }
+                + ": " + exception.getMessage(), exception );
     }
 
     /**
@@ -1553,13 +1553,8 @@ public class Digester
     public void warning( SAXParseException exception )
         throws SAXException
     {
-        if ( errorHandler != null )
-        {
-            log.warn( "Parse Warning Error at line " + exception.getLineNumber() + " column "
-                          + exception.getColumnNumber() + ": " + exception.getMessage(), exception );
-
-            errorHandler.warning( exception );
-        }
+        log.warn( "Parse Warning Error at line " + exception.getLineNumber() + " column "
+                + exception.getColumnNumber() + ": " + exception.getMessage(), exception );
     }
 
     // ------------------------------------------------------- Public Methods
@@ -1644,12 +1639,6 @@ public class Digester
         catch ( IOException e )
         {
             log.error( format( "An error occurred while reading stream from '%s', see nested exceptions", systemId ),
-                       e );
-            throw e;
-        }
-        catch ( SAXException e )
-        {
-            log.error( format( "An error occurred while parsing XML from '%s', see nested exceptions", systemId ),
                        e );
             throw e;
         }
