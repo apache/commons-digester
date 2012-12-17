@@ -169,6 +169,14 @@
     <url>http://issues.apache.org/jira/browse/DIGESTER</url>
   </issueManagement>
 
+  <distributionManagement>
+    <site>
+      <id>apache.website</id>
+      <name>Apache Commons Site</name>
+      <url>scm:svn:${commons.scmPubUrl}</url>
+    </site>
+  </distributionManagement>
+
   <modules>
     <module>core</module>
     <module>annotations-processor</module>
@@ -187,6 +195,13 @@
     <commons.rc.version>RC1</commons.rc.version>
     <commons.jira.id>DIGESTER</commons.jira.id>
     <commons.jira.pid>12310471</commons.jira.pid>
+
+    <!-- TODO remove those properties when upgrading to parent 28 -->
+    <commons.site.cache>${user.home}/commons-sites</commons.site.cache>
+
+    <commons.site.path>digester</commons.site.path>
+    <commons.scmPubUrl>https://svn.apache.org/repos/asf/commons/cms-site/trunk/${commons.site.path}</commons.scmPubUrl>
+    <commons.scmPubCheckoutDirectory>${commons.site.cache}/${commons.site.path}</commons.scmPubCheckoutDirectory>
   </properties>
 
   <build>
@@ -212,10 +227,43 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
+
+      <!-- TODO remove when upgrading to parent 28 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <version>1.0-beta-2</version>
+        <configuration>
+          <content>${project.reporting.outputDirectory}</content>
+          <pubScmUrl>scm:svn:${commons.scmPubUrl}</pubScmUrl>
+          <checkoutDirectory>${commons.scmPubCheckoutDirectory}</checkoutDirectory>
+          <tryUpdate>true</tryUpdate>
+        </configuration>
+        <executions>
+          <execution>
+            <id>scm-publish</id>
+            <phase>site-deploy</phase><!-- deploy site with maven-scm-publish-plugin -->
+            <goals>
+              <goal>publish-scm</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
 
     <pluginManagement>
       <plugins>
+        <!-- TODO remove when upgrading to parent 28 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.2</version>
+          <configuration>
+            <!-- don't deploy site with maven-site-plugin -->
+            <skipDeploy>true</skipDeploy>
+          </configuration>
+        </plugin>
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
@@ -263,6 +311,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.7</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
