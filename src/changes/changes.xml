@@ -26,6 +26,9 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-174" due-to="Andreas Sahlbach">
       Inner List Annotation has wrong @Target for most of the predefined annotation rules
     </action>
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-173" due-to="Ivan Diana">
+      No way to enable schema validation from DigesterLoader
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-172" due-to="Ivan Diana">
       Even with custom ErrorHandler, SAX errors are still written to stderr
     </action>

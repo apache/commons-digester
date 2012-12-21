@@ -47,6 +47,8 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
 /**
@@ -270,10 +272,11 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the validating parser flag.
+     * Set the {@code DOCTYPE} validation parser flag and should not be used when using schemas.
      *
      * @param validating The new validating parser flag.
      * @return This loader instance, useful to chain methods.
+     * @see javax.xml.parsers.SAXParserFactory#setValidating(boolean)
      */
     public DigesterLoader setValidating( boolean validating )
     {
@@ -282,7 +285,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Return the validating parser flag.
+     * Return the {@code DOCTYPE} validation parser flag.
      *
      * @return true, if the validating parser flag is set, false otherwise
      */
@@ -300,6 +303,26 @@ public final class DigesterLoader
     public DigesterLoader setSchema( Schema schema )
     {
         factory.setSchema( schema );
+        return this;
+    }
+
+    /**
+     * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
+     * <code>org.xml.sax.XMLReader</code>.
+     * 
+     * @see org.apache.commons.digester3.Digester#setFeature(String, boolean)
+     * @param feature Name of the feature to set the status for
+     * @param value The new value for this feature
+     * @return This loader instance, useful to chain methods.
+     * @exception ParserConfigurationException if a parser configuration error occurs
+     * @exception SAXNotRecognizedException if the property name is not recognized
+     * @exception SAXNotSupportedException if the property name is recognized but not supported
+     * @since 3.3
+     */
+    public DigesterLoader setFeature( String feature, boolean value )
+        throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException
+    {
+        factory.setFeature(feature, value);
         return this;
     }
 
