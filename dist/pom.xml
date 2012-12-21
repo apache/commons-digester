@@ -31,7 +31,7 @@
   <artifactId>commons-digester3-dist</artifactId>
   <packaging>pom</packaging>
 
-  <name>Commons Digester :: Distribution Packages</name>
+  <name>Apache Commons Digester :: Distribution Packages</name>
 
   <dependencies>
     <dependency>

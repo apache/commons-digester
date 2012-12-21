@@ -31,7 +31,7 @@
   <artifactId>commons-digester3-samples-parent</artifactId>
   <packaging>pom</packaging>
 
-  <name>Commons Digester :: Examples</name>
+  <name>Apache Commons Digester :: Examples</name>
 
   <modules>
     <module>annotations/atom</module>
