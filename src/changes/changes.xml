@@ -23,6 +23,9 @@
   </properties>
   <body>
   <release version="3.3" date="201?-??-??" description="Maintenance release.">
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-175">
+      Regression: DigesterTestCase#testPopNamedStackNotPushed expects EmptyStackException
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-174" due-to="Andreas Sahlbach">
       Inner List Annotation has wrong @Target for most of the predefined annotation rules
     </action>

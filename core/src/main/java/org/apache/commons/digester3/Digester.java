@@ -2741,6 +2741,7 @@ public class Digester
      */
     public <T> T pop( String stackName )
     {
+        T result = null;
         Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack == null )
         {
@@ -2748,23 +2749,17 @@ public class Digester
             {
                 log.debug( "Stack '" + stackName + "' is empty" );
             }
-            return null;
+            throw new EmptyStackException();
         }
 
-        try
+        result = this.<T> npeSafeCast( namedStack.pop() );
+
+        if ( stackAction != null )
         {
-            T popped = this.<T> npeSafeCast( namedStack.pop() );
-            if ( stackAction != null )
-            {
-                popped = stackAction.onPop( this, stackName, popped );
-            }
-            return popped;
+            result = stackAction.onPop( this, stackName, result );
         }
-        catch ( EmptyStackException e )
-        {
-            log.warn( "Empty stack (returning null)" );
-            return ( null );
-        }
+
+        return result;
     }
 
     /**
