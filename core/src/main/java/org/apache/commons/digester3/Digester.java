@@ -2735,8 +2735,8 @@ public class Digester
      *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack from which the top value is to be popped.
-     * @return the top <code>Object</code> on the stack or or null if the stack is either empty or has not been created
-     *         yet
+     * @return the top <code>Object</code> on the stack or throws {@code EmptyStackException}
+     *         if the stack is either empty or has not been created yet
      * @since 1.6
      */
     public <T> T pop( String stackName )
