@@ -183,7 +183,7 @@
 
   <modules>
     <module>core</module>
-    <module>annotations-processor</module>
+    <!-- >module>annotations-processor</module -->
     <module>examples</module>
     <module>dist</module>
   </modules>
