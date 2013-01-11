@@ -203,9 +203,6 @@
     <!-- TODO remove those properties when upgrading to parent 28 -->
     <commons.site.cache>${user.home}/commons-sites</commons.site.cache>
 
-    <commons.site.path>digester</commons.site.path>
-    <commons.scmPubUrl>https://svn.apache.org/repos/asf/commons/cms-site/trunk/${commons.site.path}</commons.scmPubUrl>
-    <commons.scmPubCheckoutDirectory>${commons.site.cache}/${commons.site.path}</commons.scmPubCheckoutDirectory>
   </properties>
 
   <build>
