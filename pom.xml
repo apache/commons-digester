@@ -203,7 +203,7 @@
     <!-- TODO remove those properties when upgrading to parent 28 -->
     <commons.site.cache>${user.home}/commons-sites</commons.site.cache>
 
-    <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/propers/commons-digester</commons.scmPubUrl>
+    <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-digester</commons.scmPubUrl>
   </properties>
 
   <build>
