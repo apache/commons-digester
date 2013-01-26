@@ -200,9 +200,6 @@
     <commons.jira.id>DIGESTER</commons.jira.id>
     <commons.jira.pid>12310471</commons.jira.pid>
 
-    <!-- TODO remove those properties when upgrading to parent 28 -->
-    <commons.site.cache>${user.home}/commons-sites</commons.site.cache>
-
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-digester</commons.scmPubUrl>
   </properties>
 
@@ -238,8 +235,11 @@
         <configuration>
           <content>${project.reporting.outputDirectory}</content>
           <pubScmUrl>scm:svn:${commons.scmPubUrl}</pubScmUrl>
-          <checkoutDirectory>${commons.scmPubCheckoutDirectory}</checkoutDirectory>
+          <checkoutDirectory>site-content</checkoutDirectory>
           <tryUpdate>true</tryUpdate>
+          <ignorePathsToDelete>
+            <ignorePathToDelete>commons-digester-*</ignorePathToDelete>
+          </ignorePathsToDelete>
         </configuration>
         <executions>
           <execution>
@@ -398,5 +398,6 @@
         </site>
       </distributionManagement>
     </profile>
+
   </profiles>
 </project>
