@@ -35,6 +35,9 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-172" due-to="Ivan Diana">
       Even with custom ErrorHandler, SAX errors are still written to stderr
     </action>
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-171" due-to="Nick Williams">
+      Add DefaultThrowingErrorHandler to Digester API - patch provided by Ivan Diana
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-170" due-to="Dale Wijnand">
       Digester.pop(String) throws EmptyStackException where API doc says it returns null
     </action>
