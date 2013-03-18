@@ -32,8 +32,8 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-173" due-to="Nick Williams">
       No way to enable schema validation from DigesterLoader - patch provided by Ivan Diana
     </action>
-    <action dev="simonetripodi" type="fix" issue="DIGESTER-172" due-to="Ivan Diana">
-      Even with custom ErrorHandler, SAX errors are still written to stderr
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-172" due-to="Nick Williams">
+      Even with custom ErrorHandler, SAX errors are still written to stderr - patch provided by Ivan Diana
     </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-171" due-to="Nick Williams">
       Add DefaultThrowingErrorHandler to Digester API - patch provided by Ivan Diana
