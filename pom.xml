@@ -35,7 +35,7 @@
     object mapping module which triggers certain actions called rules whenever
     a particular pattern of nested XML elements is recognized.
   </description>
-  <url>http://commons.apache.org/digester/</url>
+  <url>http://commons.apache.org/proper/commons-digester/</url>
   <inceptionYear>2001</inceptionYear>
 
   <developers>
