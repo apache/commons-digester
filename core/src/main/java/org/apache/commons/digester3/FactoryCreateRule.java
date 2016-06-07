@@ -355,7 +355,7 @@ public class FactoryCreateRule
      *
      * @param attributes Attributes passed to our factory creation element
      * @return An instance of our associated object creation factory, creating one if necessary
-     * @exception Exception if any error occurs
+     * @throws Exception if any error occurs
      */
     protected ObjectCreationFactory<?> getFactory( Attributes attributes )
         throws Exception

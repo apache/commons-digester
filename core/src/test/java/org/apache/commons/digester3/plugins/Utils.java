@@ -33,7 +33,7 @@ public class Utils
      * 
      * @param caller is always "this" for the calling object.
      * @param name is the test file we want
-     * @exception IOException if an input/output error occurs
+     * @throws IOException if an input/output error occurs
      */
     public static InputStream getInputStream( Object caller, String name )
         throws IOException

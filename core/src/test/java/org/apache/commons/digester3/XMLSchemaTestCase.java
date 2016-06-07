@@ -143,7 +143,7 @@ public class XMLSchemaTestCase
      * Return an appropriate InputStream for the specified test file (which must be inside our current package.
      * 
      * @param name Name of the test file we want
-     * @exception IOException if an input/output error occurs
+     * @throws IOException if an input/output error occurs
      */
     protected InputStream getInputStream( String name )
         throws IOException

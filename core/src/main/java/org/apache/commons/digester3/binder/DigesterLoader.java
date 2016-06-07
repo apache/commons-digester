@@ -314,9 +314,9 @@ public final class DigesterLoader
      * @param feature Name of the feature to set the status for
      * @param value The new value for this feature
      * @return This loader instance, useful to chain methods.
-     * @exception ParserConfigurationException if a parser configuration error occurs
-     * @exception SAXNotRecognizedException if the property name is not recognized
-     * @exception SAXNotSupportedException if the property name is recognized but not supported
+     * @throws ParserConfigurationException if a parser configuration error occurs
+     * @throws SAXNotRecognizedException if the property name is not recognized
+     * @throws SAXNotSupportedException if the property name is recognized but not supported
      * @since 3.3
      */
     public DigesterLoader setFeature( String feature, boolean value )

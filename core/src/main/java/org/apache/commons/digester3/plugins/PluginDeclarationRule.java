@@ -58,7 +58,7 @@ public class PluginDeclarationRule
      * @param namespace The xml namespace in which the xml element which triggered this rule resides.
      * @param name The name of the xml element which triggered this rule.
      * @param attributes The set of attributes on the xml element which triggered this rule.
-     * @exception Exception if any error occurs
+     * @throws Exception if any error occurs
      */
     @Override
     public void begin( String namespace, String name, Attributes attributes )

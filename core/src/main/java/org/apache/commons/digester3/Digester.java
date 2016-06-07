@@ -451,9 +451,9 @@ public class Digester
      * @param feature Name of the feature to inquire about
      * @return true, if the requested feature is supported by the underlying implementation of
      *         <code>org.xml.sax.XMLReader</code>, false otherwise
-     * @exception ParserConfigurationException if a parser configuration error occurs
-     * @exception SAXNotRecognizedException if the property name is not recognized
-     * @exception SAXNotSupportedException if the property name is recognized but not supported
+     * @throws ParserConfigurationException if a parser configuration error occurs
+     * @throws SAXNotRecognizedException if the property name is not recognized
+     * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
     public boolean getFeature( String feature )
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException
@@ -470,9 +470,9 @@ public class Digester
      *
      * @param feature Name of the feature to set the status for
      * @param value The new value for this feature
-     * @exception ParserConfigurationException if a parser configuration error occurs
-     * @exception SAXNotRecognizedException if the property name is not recognized
-     * @exception SAXNotSupportedException if the property name is recognized but not supported
+     * @throws ParserConfigurationException if a parser configuration error occurs
+     * @throws SAXNotRecognizedException if the property name is not recognized
+     * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
     public void setFeature( String feature, boolean value )
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException
@@ -668,8 +668,8 @@ public class Digester
      *
      * @param property Property name to be retrieved
      * @return the current value of the specified property for the underlying <code>XMLReader</code> implementation.
-     * @exception SAXNotRecognizedException if the property name is not recognized
-     * @exception SAXNotSupportedException if the property name is recognized but not supported
+     * @throws SAXNotRecognizedException if the property name is not recognized
+     * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
     public Object getProperty( String property )
         throws SAXNotRecognizedException, SAXNotSupportedException
@@ -683,8 +683,8 @@ public class Digester
      *
      * @param property Property name to be set
      * @param value Property value to be set
-     * @exception SAXNotRecognizedException if the property name is not recognized
-     * @exception SAXNotSupportedException if the property name is recognized but not supported
+     * @throws SAXNotRecognizedException if the property name is not recognized
+     * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
     public void setProperty( String property, Object value )
         throws SAXNotRecognizedException, SAXNotSupportedException
@@ -794,7 +794,7 @@ public class Digester
      * FIXME: there is a bug in JAXP/XERCES that prevent the use of a parser that contains a schema with a DTD.
      *
      * @return the XMLReader to be used for parsing the input document.
-     * @exception SAXException if no XMLReader can be instantiated
+     * @throws SAXException if no XMLReader can be instantiated
      */
     public XMLReader getXMLReader()
         throws SAXException
@@ -1571,8 +1571,8 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param file File containing the XML data to be parsed
      * @return the root element from the object stack (if any)
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     public <T> T parse( File file )
         throws IOException, SAXException
@@ -1618,8 +1618,8 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param input Input source containing the XML data to be parsed
      * @return the root element from the object stack (if any)
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     public <T> T parse( InputSource input )
         throws IOException, SAXException
@@ -1681,8 +1681,8 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param input Input stream containing the XML data to be parsed
      * @return the root element from the object stack (if any)
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     public <T> T parse( InputStream input )
         throws IOException, SAXException
@@ -1725,8 +1725,8 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param reader Reader containing the XML data to be parsed
      * @return the root element from the object stack (if any)
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     public <T> T parse( Reader reader )
         throws IOException, SAXException
@@ -1769,8 +1769,8 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param uri URI containing the XML data to be parsed
      * @return the root element from the object stack (if any)
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     public <T> T parse( String uri )
         throws IOException, SAXException
@@ -1813,8 +1813,8 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param url URL containing the XML data to be parsed
      * @return the root element from the object stack (if any)
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      * @since 1.8
      */
     public <T> T parse( URL url )
