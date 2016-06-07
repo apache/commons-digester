@@ -70,7 +70,7 @@ public class MarkupDigester
      * @param start Starting offset into the buffer
      * @param length Number of characters from the buffer
      *
-     * @exception SAXException if a parsing error is to be reported
+     * @throws SAXException if a parsing error is to be reported
      */
     @Override
     public void characters( char buffer[], int start, int length )
@@ -91,7 +91,7 @@ public class MarkupDigester
      *   string if qualified names are not available.
      * @param list The attributes attached to the element. If there are
      *   no attributes, it shall be an empty Attributes object. 
-     * @exception SAXException if a parsing error is to be reported
+     * @throws SAXException if a parsing error is to be reported
      */
     @Override
     public void startElement( String namespaceURI, String localName, String qName, Attributes list )
@@ -117,7 +117,7 @@ public class MarkupDigester
      *   string if Namespace processing is not being performed.
      * @param qName - The qualified XML 1.0 name (with prefix), or the
      *   empty string if qualified names are not available.
-     * @exception SAXException if a parsing error is to be reported
+     * @throws SAXException if a parsing error is to be reported
      */
     @Override
     public void endElement( String namespaceURI, String localName, String qName )

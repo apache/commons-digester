@@ -128,8 +128,8 @@ public class RSSDigester
      *
      * @param file File containing the XML data to be parsed
      *
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     @Override
     public <T> T parse( File file )
@@ -146,8 +146,8 @@ public class RSSDigester
      *
      * @param input Input source containing the XML data to be parsed
      *
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     @Override
     public <T> T parse( InputSource input )
@@ -165,8 +165,8 @@ public class RSSDigester
      *
      * @param input Input stream containing the XML data to be parsed
      *
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     @Override
     public <T> T parse( InputStream input )
@@ -183,8 +183,8 @@ public class RSSDigester
      *
      * @param uri URI containing the XML data to be parsed
      *
-     * @exception IOException if an input/output error occurs
-     * @exception SAXException if a parsing exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws SAXException if a parsing exception occurs
      */
     @Override
     public <T> T parse( String uri )
