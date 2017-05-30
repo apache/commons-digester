@@ -192,6 +192,7 @@
     <maven.compile.source>1.5</maven.compile.source>
     <maven.compile.target>1.5</maven.compile.target>
     <commons.componentid>digester</commons.componentid>
+    <commons.module.name>org.apache.commons.digester3</commons.module.name>
     <commons.release.version>3.3</commons.release.version>
     <commons.release.desc>(minimum JDK 1.5)</commons.release.desc>
     <commons.release.2.version>2.1</commons.release.2.version>
