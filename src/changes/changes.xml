@@ -65,6 +65,9 @@
     <action dev="ggregory" type="update" issue="DIGESTER-185">
       Update Apache Commons Logging from 1.1.1 to 1.2.
     </action>
+    <action dev="ggregory" type="update" issue="DIGESTER-186">
+      Update Java requirement from version 5 to 6.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
