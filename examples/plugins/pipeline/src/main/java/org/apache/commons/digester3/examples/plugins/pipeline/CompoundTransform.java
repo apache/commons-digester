@@ -42,6 +42,7 @@ public class CompoundTransform
         transforms.add( transform );
     }
 
+    @Override
     public String transform( String s )
     {
         for ( Iterator<Transform> i = transforms.iterator(); i.hasNext(); )

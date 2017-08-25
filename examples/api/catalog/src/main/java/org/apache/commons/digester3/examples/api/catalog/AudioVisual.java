@@ -68,6 +68,7 @@ public class AudioVisual
         this.type = type;
     }
 
+    @Override
     public void print()
     {
         System.out.println( "AudioVisual:" );

@@ -44,6 +44,7 @@ public class CaseTransform
         }
     }
 
+    @Override
     public String transform( String s )
     {
         if ( toLower )

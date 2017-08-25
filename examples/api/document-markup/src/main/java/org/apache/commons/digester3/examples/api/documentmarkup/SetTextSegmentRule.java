@@ -48,6 +48,7 @@ public class SetTextSegmentRule
     /**
      * Process the end of this element.
      */
+    @Override
     public void textSegment( String text )
         throws Exception
     {
