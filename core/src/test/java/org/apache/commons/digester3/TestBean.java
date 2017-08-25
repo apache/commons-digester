@@ -206,8 +206,9 @@ public class TestBean
 
     public TestBean getNested()
     {
-        if ( nested == null )
+        if ( nested == null ) {
             nested = new TestBean();
+        }
         return ( nested );
     }
 

@@ -258,8 +258,9 @@ public class DigesterTestCase
         assertEquals( "Registered two URLs", n, map.size() );
 
         int count[] = new int[n];
-        for ( int i = 0; i < n; i++ )
+        for ( int i = 0; i < n; i++ ) {
             count[i] = 0;
+        }
         for ( String key : map.keySet() )
         {
             for ( int i = 0; i < n; i++ )
@@ -271,8 +272,9 @@ public class DigesterTestCase
                 }
             }
         }
-        for ( int i = 0; i < n; i++ )
+        for ( int i = 0; i < n; i++ ) {
             assertEquals( "Count for key " + registrations[i * 2], 1, count[i] );
+        }
 
     }
 

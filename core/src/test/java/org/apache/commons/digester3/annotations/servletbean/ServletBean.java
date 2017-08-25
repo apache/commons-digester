@@ -75,34 +75,43 @@ public final class ServletBean
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         ServletBean other = (ServletBean) obj;
         if ( initParams == null )
         {
-            if ( other.initParams != null )
+            if ( other.initParams != null ) {
                 return false;
+            }
         }
-        else if ( !initParams.equals( other.initParams ) )
+        else if ( !initParams.equals( other.initParams ) ) {
             return false;
+        }
         if ( servletClass == null )
         {
-            if ( other.servletClass != null )
+            if ( other.servletClass != null ) {
                 return false;
+            }
         }
-        else if ( !servletClass.equals( other.servletClass ) )
+        else if ( !servletClass.equals( other.servletClass ) ) {
             return false;
+        }
         if ( servletName == null )
         {
-            if ( other.servletName != null )
+            if ( other.servletName != null ) {
                 return false;
+            }
         }
-        else if ( !servletName.equals( other.servletName ) )
+        else if ( !servletName.equals( other.servletName ) ) {
             return false;
+        }
         return true;
     }
 

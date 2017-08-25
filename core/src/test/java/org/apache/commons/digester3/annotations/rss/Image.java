@@ -108,45 +108,58 @@ public final class Image
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         Image other = (Image) obj;
         if ( description == null )
         {
-            if ( other.description != null )
+            if ( other.description != null ) {
                 return false;
+            }
         }
-        else if ( !description.equals( other.description ) )
+        else if ( !description.equals( other.description ) ) {
             return false;
-        if ( height != other.height )
+        }
+        if ( height != other.height ) {
             return false;
+        }
         if ( link == null )
         {
-            if ( other.link != null )
+            if ( other.link != null ) {
                 return false;
+            }
         }
-        else if ( !link.equals( other.link ) )
+        else if ( !link.equals( other.link ) ) {
             return false;
+        }
         if ( title == null )
         {
-            if ( other.title != null )
+            if ( other.title != null ) {
                 return false;
+            }
         }
-        else if ( !title.equals( other.title ) )
+        else if ( !title.equals( other.title ) ) {
             return false;
+        }
         if ( url == null )
         {
-            if ( other.url != null )
+            if ( other.url != null ) {
                 return false;
+            }
         }
-        else if ( !url.equals( other.url ) )
+        else if ( !url.equals( other.url ) ) {
             return false;
-        if ( width != other.width )
+        }
+        if ( width != other.width ) {
             return false;
+        }
         return true;
     }
 

@@ -71,34 +71,43 @@ public class Employee
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         Employee other = (Employee) obj;
         if ( this.addresses == null )
         {
-            if ( other.getAddresses() != null )
+            if ( other.getAddresses() != null ) {
                 return false;
+            }
         }
-        else if ( !this.addresses.equals( other.getAddresses() ) )
+        else if ( !this.addresses.equals( other.getAddresses() ) ) {
             return false;
+        }
         if ( this.firstName == null )
         {
-            if ( other.getFirstName() != null )
+            if ( other.getFirstName() != null ) {
                 return false;
+            }
         }
-        else if ( !this.firstName.equals( other.getFirstName() ) )
+        else if ( !this.firstName.equals( other.getFirstName() ) ) {
             return false;
+        }
         if ( this.lastName == null )
         {
-            if ( other.getLastName() != null )
+            if ( other.getLastName() != null ) {
                 return false;
+            }
         }
-        else if ( !this.lastName.equals( other.getLastName() ) )
+        else if ( !this.lastName.equals( other.getLastName() ) ) {
             return false;
+        }
         return true;
     }
 

@@ -46,20 +46,25 @@ public final class Catalog
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         Catalog other = (Catalog) obj;
         if ( this.items == null )
         {
-            if ( other.getItems() != null )
+            if ( other.getItems() != null ) {
                 return false;
+            }
         }
-        else if ( !this.items.equals( other.getItems() ) )
+        else if ( !this.items.equals( other.getItems() ) ) {
             return false;
+        }
         return true;
     }
 

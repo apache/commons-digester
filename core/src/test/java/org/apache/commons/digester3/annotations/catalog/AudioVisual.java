@@ -92,38 +92,49 @@ public final class AudioVisual
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         AudioVisual other = (AudioVisual) obj;
         if ( this.category == null )
         {
-            if ( other.getCategory() != null )
+            if ( other.getCategory() != null ) {
                 return false;
+            }
         }
-        else if ( !this.category.equals( other.getCategory() ) )
+        else if ( !this.category.equals( other.getCategory() ) ) {
             return false;
+        }
         if ( this.desc == null )
         {
-            if ( other.getDesc() != null )
+            if ( other.getDesc() != null ) {
                 return false;
+            }
         }
-        else if ( !this.desc.equals( other.getDesc() ) )
+        else if ( !this.desc.equals( other.getDesc() ) ) {
             return false;
+        }
         if ( this.name == null )
         {
-            if ( other.getName() != null )
+            if ( other.getName() != null ) {
                 return false;
+            }
         }
-        else if ( !this.name.equals( other.getName() ) )
+        else if ( !this.name.equals( other.getName() ) ) {
             return false;
-        if ( this.runtime != other.getRuntime() )
+        }
+        if ( this.runtime != other.getRuntime() ) {
             return false;
-        if ( this.yearMade != other.getYearMade() )
+        }
+        if ( this.yearMade != other.getYearMade() ) {
             return false;
+        }
         return true;
     }
 

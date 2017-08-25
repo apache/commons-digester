@@ -103,48 +103,61 @@ public class Address
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         Address other = (Address) obj;
         if ( this.city == null )
         {
-            if ( other.getCity() != null )
+            if ( other.getCity() != null ) {
                 return false;
+            }
         }
-        else if ( !this.city.equals( other.getCity() ) )
+        else if ( !this.city.equals( other.getCity() ) ) {
             return false;
+        }
         if ( this.state == null )
         {
-            if ( other.getState() != null )
+            if ( other.getState() != null ) {
                 return false;
+            }
         }
-        else if ( !this.state.equals( other.getState() ) )
+        else if ( !this.state.equals( other.getState() ) ) {
             return false;
+        }
         if ( this.street == null )
         {
-            if ( other.getStreet() != null )
+            if ( other.getStreet() != null ) {
                 return false;
+            }
         }
-        else if ( !this.street.equals( other.getStreet() ) )
+        else if ( !this.street.equals( other.getStreet() ) ) {
             return false;
+        }
         if ( this.type == null )
         {
-            if ( other.getType() != null )
+            if ( other.getType() != null ) {
                 return false;
+            }
         }
-        else if ( !this.type.equals( other.getType() ) )
+        else if ( !this.type.equals( other.getType() ) ) {
             return false;
+        }
         if ( this.zipCode == null )
         {
-            if ( other.getZipCode() != null )
+            if ( other.getZipCode() != null ) {
                 return false;
+            }
         }
-        else if ( !this.zipCode.equals( other.getZipCode() ) )
+        else if ( !this.zipCode.equals( other.getZipCode() ) ) {
             return false;
+        }
         return true;
     }
 

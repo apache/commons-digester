@@ -105,43 +105,55 @@ public class Person
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         Person other = (Person) obj;
         if ( addresses == null )
         {
-            if ( other.addresses != null )
+            if ( other.addresses != null ) {
                 return false;
+            }
         }
-        else if ( !addresses.equals( other.addresses ) )
+        else if ( !addresses.equals( other.addresses ) ) {
             return false;
+        }
         if ( category == null )
         {
-            if ( other.category != null )
+            if ( other.category != null ) {
                 return false;
+            }
         }
-        else if ( !category.equals( other.category ) )
+        else if ( !category.equals( other.category ) ) {
             return false;
+        }
         if ( emails == null )
         {
-            if ( other.emails != null )
+            if ( other.emails != null ) {
                 return false;
+            }
         }
-        else if ( !emails.equals( other.emails ) )
+        else if ( !emails.equals( other.emails ) ) {
             return false;
-        if ( id != other.id )
+        }
+        if ( id != other.id ) {
             return false;
+        }
         if ( name == null )
         {
-            if ( other.name != null )
+            if ( other.name != null ) {
                 return false;
+            }
         }
-        else if ( !name.equals( other.name ) )
+        else if ( !name.equals( other.name ) ) {
             return false;
+        }
         return true;
     }
 

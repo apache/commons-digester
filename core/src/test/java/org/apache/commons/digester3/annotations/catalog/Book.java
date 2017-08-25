@@ -82,41 +82,52 @@ public final class Book
     @Override
     public boolean equals( Object obj )
     {
-        if ( this == obj )
+        if ( this == obj ) {
             return true;
-        if ( obj == null )
+        }
+        if ( obj == null ) {
             return false;
-        if ( getClass() != obj.getClass() )
+        }
+        if ( getClass() != obj.getClass() ) {
             return false;
+        }
         Book other = (Book) obj;
         if ( this.author == null )
         {
-            if ( other.getAuthor() != null )
+            if ( other.getAuthor() != null ) {
                 return false;
+            }
         }
-        else if ( !this.author.equals( other.getAuthor() ) )
+        else if ( !this.author.equals( other.getAuthor() ) ) {
             return false;
+        }
         if ( this.desc == null )
         {
-            if ( other.getDesc() != null )
+            if ( other.getDesc() != null ) {
                 return false;
+            }
         }
-        else if ( !this.desc.equals( other.getDesc() ) )
+        else if ( !this.desc.equals( other.getDesc() ) ) {
             return false;
+        }
         if ( this.isbn == null )
         {
-            if ( other.getIsbn() != null )
+            if ( other.getIsbn() != null ) {
                 return false;
+            }
         }
-        else if ( !this.isbn.equals( other.getIsbn() ) )
+        else if ( !this.isbn.equals( other.getIsbn() ) ) {
             return false;
+        }
         if ( this.title == null )
         {
-            if ( other.getTitle() != null )
+            if ( other.getTitle() != null ) {
                 return false;
+            }
         }
-        else if ( !this.title.equals( other.getTitle() ) )
+        else if ( !this.title.equals( other.getTitle() ) ) {
             return false;
+        }
         return true;
     }
 

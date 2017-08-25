@@ -115,8 +115,9 @@ public class TestRule
      */
     protected void appendCall()
     {
-        if ( order != null )
+        if ( order != null ) {
             order.add( this );
+        }
     }
 
     /**

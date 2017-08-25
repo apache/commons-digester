@@ -50,8 +50,9 @@ public class Employee
     {
         for ( Address address : addresses )
         {
-            if ( type.equals( address.getType() ) )
+            if ( type.equals( address.getType() ) ) {
                 return ( address );
+            }
         }
         return ( null );
     }
