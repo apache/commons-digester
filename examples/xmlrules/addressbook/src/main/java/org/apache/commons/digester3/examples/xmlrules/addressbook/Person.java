@@ -19,7 +19,6 @@ package org.apache.commons.digester3.examples.xmlrules.addressbook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -73,17 +72,13 @@ public class Person
         System.out.println( "  category=" + category );
         System.out.println( "  name=" + name );
 
-        for ( Iterator<String> i = emails.keySet().iterator(); i.hasNext(); )
-        {
-            String type = i.next();
+        for (String type : emails.keySet()) {
             String address = emails.get( type );
 
             System.out.println( "  email (type " + type + ") : " + address );
         }
 
-        for ( Iterator<Address> i = addresses.iterator(); i.hasNext(); )
-        {
-            Address addr = i.next();
+        for (Address addr : addresses) {
             addr.print( System.out, 2 );
         }
     }

@@ -600,10 +600,9 @@ public class Channel
         if ( skipDays.length > 0 )
         {
             writer.println( "    <skipDays>" );
-            for ( int i = 0; i < skipDays.length; i++ )
-            {
+            for (String skipDay : skipDays) {
                 writer.print( "      <skipDay>" );
-                writer.print( skipDays[i] );
+                writer.print( skipDay );
                 writer.println( "</skipDay>" );
             }
             writer.println( "    </skipDays>" );
@@ -613,10 +612,9 @@ public class Channel
         if ( skipHours.length > 0 )
         {
             writer.println( "    <skipHours>" );
-            for ( int i = 0; i < skipHours.length; i++ )
-            {
+            for (String skipHour : skipHours) {
                 writer.print( "      <skipHour>" );
-                writer.print( skipHours[i] );
+                writer.print( skipHour );
                 writer.println( "</skipHour>" );
             }
             writer.println( "    </skipHours>" );
@@ -624,9 +622,8 @@ public class Channel
         }
 
         Item items[] = findItems();
-        for ( int i = 0; i < items.length; i++ )
-        {
-            items[i].render( writer );
+        for (Item item : items) {
+            item.render( writer );
             writer.println();
         }
 

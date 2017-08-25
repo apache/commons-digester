@@ -18,7 +18,6 @@ package org.apache.commons.digester3.examples.api.catalog;
  */ 
 
 import java.util.LinkedList;
-import java.util.Iterator;
 
 /**
  * See Main.java.
@@ -37,9 +36,7 @@ public class Catalog
     {
         System.out.println( "This catalog has " + items.size() + " items" );
 
-        for ( Iterator<Item> i = items.iterator(); i.hasNext(); )
-        {
-            Item item = i.next();
+        for (Item item : items) {
             item.print();
         }
     }

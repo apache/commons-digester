@@ -18,7 +18,6 @@ package org.apache.commons.digester3.examples.api.addressbook;
  */ 
 
 import java.util.LinkedList;
-import java.util.Iterator;
 
 /**
  * See Main.java.
@@ -37,9 +36,7 @@ public class AddressBook
     {
         System.out.println( "Address book has " + people.size() + " entries" );
 
-        for ( Iterator<Person> i = people.iterator(); i.hasNext(); )
-        {
-            Person p = i.next();
+        for (Person p : people) {
             p.print();
         }
     }

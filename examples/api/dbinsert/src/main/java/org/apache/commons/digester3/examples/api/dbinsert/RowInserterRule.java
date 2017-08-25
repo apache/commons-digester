@@ -18,7 +18,6 @@ package org.apache.commons.digester3.examples.api.dbinsert;
  */ 
 
 import java.sql.Connection;
-import java.util.Iterator;
 
 import org.apache.commons.digester3.Rule;
 import org.apache.commons.digester3.examples.api.dbinsert.Row.Column;
@@ -80,10 +79,7 @@ public class RowInserterRule
         StringBuilder colnames = new StringBuilder();
         StringBuilder colvalues = new StringBuilder();
 
-        for ( Iterator<Column> i = row.getColumns().iterator(); i.hasNext(); )
-        {
-            Column column = i.next();
-
+        for (Column column : row.getColumns()) {
             if ( colnames.length() > 0 )
             {
                 colnames.append( ", " );

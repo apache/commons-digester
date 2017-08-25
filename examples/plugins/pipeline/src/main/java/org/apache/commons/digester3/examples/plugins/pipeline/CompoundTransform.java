@@ -18,7 +18,6 @@ package org.apache.commons.digester3.examples.plugins.pipeline;
  */ 
 
 import java.util.LinkedList;
-import java.util.Iterator;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.plugins.PluginCreateRule;
@@ -45,9 +44,7 @@ public class CompoundTransform
     @Override
     public String transform( String s )
     {
-        for ( Iterator<Transform> i = transforms.iterator(); i.hasNext(); )
-        {
-            Transform t = i.next();
+        for (Transform t : transforms) {
             s = t.transform( s );
         }
         return s;
