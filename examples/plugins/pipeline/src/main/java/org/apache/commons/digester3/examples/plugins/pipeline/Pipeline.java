@@ -124,8 +124,9 @@ public class Pipeline
         while ( true )
         {
             String inStr = in.readLine();
-            if ( inStr == null )
+            if ( inStr == null ) {
                 break;
+            }
 
             String outStr = transformer.transform( inStr );
             out.write( outStr );
