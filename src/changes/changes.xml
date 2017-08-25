@@ -68,6 +68,9 @@
     <action dev="ggregory" type="update" issue="DIGESTER-186">
       Update Java requirement from version 5 to 6.
     </action>
+    <action dev="ggregory" type="update" issue="DIGESTER-187">
+      Update Apache Commons Bean Utils from 1.8.3 to 1.9.3.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
