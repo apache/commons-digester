@@ -35,7 +35,7 @@ public class VariableAttributes
 {
 
     // list of mapped attributes.
-    private ArrayList<String> values = new ArrayList<String>( 10 );
+    private final ArrayList<String> values = new ArrayList<String>( 10 );
 
     private Attributes attrs;
 

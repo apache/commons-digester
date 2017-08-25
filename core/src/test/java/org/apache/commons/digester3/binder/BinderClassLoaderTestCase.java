@@ -49,7 +49,7 @@ import org.junit.Test;
 public final class BinderClassLoaderTestCase
 {
 
-    private BinderClassLoader classLoader = createBinderClassLoader( new ExtendedClassLoader() );
+    private final BinderClassLoader classLoader = createBinderClassLoader( new ExtendedClassLoader() );
 
     @Test
     public void loadBoolean()

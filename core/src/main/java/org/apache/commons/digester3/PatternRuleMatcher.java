@@ -32,7 +32,7 @@ final class PatternRuleMatcher
 
     private final String pattern;
 
-    private String namespaceURI;
+    private final String namespaceURI;
 
     public PatternRuleMatcher( String pattern )
     {

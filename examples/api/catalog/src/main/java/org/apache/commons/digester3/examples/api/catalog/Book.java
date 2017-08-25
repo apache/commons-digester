@@ -24,7 +24,7 @@ public class Book
     implements Item
 {
 
-    private String isbn;
+    private final String isbn;
 
     private String title;
 

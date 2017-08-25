@@ -156,7 +156,7 @@ public class ExtendedBaseRules
      * The decision algorithm used (unfortunately) doesn't preserve the entry order. This map is used by a comparator
      * which orders the list of matches before it's returned. This map stores the entry number keyed by the rule.
      */
-    private Map<Rule, Integer> order = new HashMap<Rule, Integer>();
+    private final Map<Rule, Integer> order = new HashMap<Rule, Integer>();
 
     // --------------------------------------------------------- Public Methods
 

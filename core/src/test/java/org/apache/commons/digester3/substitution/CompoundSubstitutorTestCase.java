@@ -37,15 +37,15 @@ public final class CompoundSubstitutorTestCase
         extends Substitutor
     {
 
-        private String newBodyText;
+        private final String newBodyText;
 
-        private String uri;
+        private final String uri;
 
-        private String localName;
+        private final String localName;
 
-        private String type;
+        private final String type;
 
-        private String value;
+        private final String value;
 
         public SubstitutorStub( String bodyText, String uri, String localName, String type, String value )
         {

@@ -37,13 +37,13 @@ public class Declaration
     private Class<?> pluginClass;
 
     /** The name of the class of the object to be instantiated. */
-    private String pluginClassName;
+    private final String pluginClassName;
 
     /** See {@link #setId}. */
     private String id;
 
     /** See {@link #setProperties}. */
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     /** See {@link #init}. */
     private boolean initialized = false;

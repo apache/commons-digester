@@ -62,13 +62,13 @@ public class WithDefaultsRulesWrapper
     // --------------------------------------------------------- Fields
 
     /** The Rules implementation that this class wraps. */
-    private Rules wrappedRules;
+    private final Rules wrappedRules;
 
     /** Rules to be fired when the wrapped implementations returns none. */
-    private List<Rule> defaultRules = new ArrayList<Rule>();
+    private final List<Rule> defaultRules = new ArrayList<Rule>();
 
     /** All rules (preserves order in which they were originally added) */
-    private List<Rule> allRules = new ArrayList<Rule>();
+    private final List<Rule> allRules = new ArrayList<Rule>();
 
     // --------------------------------------------------------- Constructor
 

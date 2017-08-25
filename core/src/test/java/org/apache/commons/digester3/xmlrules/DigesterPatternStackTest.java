@@ -31,7 +31,7 @@ import org.junit.Test;
 public class DigesterPatternStackTest
 {
 
-    private PatternStack patternStack = new PatternStack();
+    private final PatternStack patternStack = new PatternStack();
 
     @Before
     public void setUp()

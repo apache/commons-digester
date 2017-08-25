@@ -108,7 +108,7 @@ public class SetNestedPropertiesRule
 
     private boolean allowUnknownChildElements = false;
 
-    private HashMap<String, String> elementNames = new HashMap<String, String>();
+    private final HashMap<String, String> elementNames = new HashMap<String, String>();
 
     // ----------------------------------------------------------- Constructors
 
@@ -334,9 +334,9 @@ public class SetNestedPropertiesRule
 
         private Rules decoratedRules = null;
 
-        private ArrayList<Rule> rules = new ArrayList<Rule>( 1 );
+        private final ArrayList<Rule> rules = new ArrayList<Rule>( 1 );
 
-        private AnyChildRule rule;
+        private final AnyChildRule rule;
 
         public AnyChildRules( AnyChildRule rule )
         {

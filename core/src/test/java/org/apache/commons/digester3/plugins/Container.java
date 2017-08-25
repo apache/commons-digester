@@ -24,7 +24,7 @@ import java.util.LinkedList;
 public class Container
     implements Widget
 {
-    private LinkedList<Widget> children = new LinkedList<Widget>();
+    private final LinkedList<Widget> children = new LinkedList<Widget>();
 
     public Container()
     {

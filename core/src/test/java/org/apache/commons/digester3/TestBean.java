@@ -130,7 +130,7 @@ public class TestBean
         this.intArray = intArray;
     }
 
-    private int intIndexed[] = { 0, 10, 20, 30, 40 };
+    private final int intIndexed[] = { 0, 10, 20, 30, 40 };
 
     public int getIntIndexed( int index )
     {
@@ -272,7 +272,7 @@ public class TestBean
         this.stringArray = stringArray;
     }
 
-    private String stringIndexed[] = { "String 0", "String 1", "String 2", "String 3", "String 4" };
+    private final String stringIndexed[] = { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String getStringIndexed( int index )
     {

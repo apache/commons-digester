@@ -45,7 +45,7 @@ public class VariableExpansionTestCase
     // --------------------------------------------------- Overall Test Methods
 
     // method used in tests4
-    private LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<SimpleTestBean>();
+    private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<SimpleTestBean>();
 
     public void addSimpleTestBean( SimpleTestBean bean )
     {
@@ -54,7 +54,7 @@ public class VariableExpansionTestCase
 
     // implementation of source shared by the variable expander and
     // is updatable during digesting via an Ant-like property element
-    private HashMap<String, Object> mutableSource = new HashMap<String, Object>();
+    private final HashMap<String, Object> mutableSource = new HashMap<String, Object>();
 
     /**
      * Used in test case "testExpansionWithMutableSource", where the set of variables available to be substituted into

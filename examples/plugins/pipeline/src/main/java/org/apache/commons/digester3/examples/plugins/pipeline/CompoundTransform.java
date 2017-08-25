@@ -34,7 +34,7 @@ public class CompoundTransform
     implements Transform
 {
 
-    private LinkedList<Transform> transforms = new LinkedList<Transform>();
+    private final LinkedList<Transform> transforms = new LinkedList<Transform>();
 
     public void addTransform( Transform transform )
     {

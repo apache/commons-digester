@@ -31,7 +31,7 @@ import java.util.HashMap;
 public class ObjectTestImpl
 {
 
-    private ArrayList<Object> children = new ArrayList<Object>();
+    private final ArrayList<Object> children = new ArrayList<Object>();
 
     private String value = "";
 
@@ -39,7 +39,7 @@ public class ObjectTestImpl
 
     private String property = "";
 
-    private HashMap<String, String> mapValue = new HashMap<String, String>();
+    private final HashMap<String, String> mapValue = new HashMap<String, String>();
 
     private boolean pushed = false;
 

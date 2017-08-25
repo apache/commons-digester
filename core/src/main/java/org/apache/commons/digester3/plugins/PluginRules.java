@@ -65,7 +65,7 @@ public class PluginRules
     private Rules decoratedRules;
 
     /** Object which contains information about all known plugins. */
-    private PluginManager pluginManager;
+    private final PluginManager pluginManager;
 
     /**
      * The path below which this rules object has responsibility. For paths shorter than or equal the mountpoint, the

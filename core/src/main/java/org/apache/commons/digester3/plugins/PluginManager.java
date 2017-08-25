@@ -39,10 +39,10 @@ public class PluginManager
 {
 
     /** Map of classname->Declaration */
-    private HashMap<String, Declaration> declarationsByClass = new HashMap<String, Declaration>();
+    private final HashMap<String, Declaration> declarationsByClass = new HashMap<String, Declaration>();
 
     /** Map of id->Declaration */
-    private HashMap<String, Declaration> declarationsById = new HashMap<String, Declaration>();
+    private final HashMap<String, Declaration> declarationsById = new HashMap<String, Declaration>();
 
     /** the parent manager to which this one may delegate lookups. */
     private PluginManager parent;
@@ -50,7 +50,7 @@ public class PluginManager
     /**
      * The object containing data that should only exist once for each Digester instance.
      */
-    private PluginContext pluginContext;
+    private final PluginContext pluginContext;
 
     // ------------------- constructors ---------------------------------------
 

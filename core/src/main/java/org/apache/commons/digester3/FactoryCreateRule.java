@@ -43,7 +43,7 @@ public class FactoryCreateRule
     // ----------------------------------------------------------- Fields
 
     /** Should exceptions thrown by the factory be ignored? */
-    private boolean ignoreCreateExceptions;
+    private final boolean ignoreCreateExceptions;
 
     /** Stock to manage */
     private Stack<Boolean> exceptionIgnoredStack;

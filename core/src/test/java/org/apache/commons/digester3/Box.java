@@ -28,7 +28,7 @@ public class Box
 {
     private String id;
 
-    private List<Box> children = new LinkedList<Box>();
+    private final List<Box> children = new LinkedList<Box>();
 
     public Box()
     {

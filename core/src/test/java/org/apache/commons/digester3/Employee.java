@@ -39,7 +39,7 @@ public class Employee
         setLastName( lastName );
     }
 
-    private ArrayList<Address> addresses = new ArrayList<Address>();
+    private final ArrayList<Address> addresses = new ArrayList<Address>();
 
     public void addAddress( Address address )
     {

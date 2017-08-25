@@ -29,7 +29,7 @@ public class RowInserterRule
     extends Rule
 {
 
-    private Connection conn;
+    private final Connection conn;
 
     public RowInserterRule( Connection conn )
     {

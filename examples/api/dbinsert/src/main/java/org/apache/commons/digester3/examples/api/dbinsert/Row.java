@@ -37,7 +37,7 @@ public class Row
      */
     public static class Column
     {
-        private String name, value;
+        private final String name, value;
 
         public Column( String name, String value )
         {
@@ -56,7 +56,7 @@ public class Row
         }
     }
 
-    private LinkedList<Column> columns = new LinkedList<Column>();
+    private final LinkedList<Column> columns = new LinkedList<Column>();
 
     public Row()
     {
