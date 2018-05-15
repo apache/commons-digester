@@ -930,7 +930,7 @@ that:</p>
         <p><a href="../apidocs/ExtendedBaseRules.html">ExtendedBaseRules</a>,
 adds some additional expression syntax for pattern matching
 to the default mechanism, but it also executes more slowly.  See the
-JavaDocs for more details on the new pattern matching syntax, and suggestions
+Javadocs for more details on the new pattern matching syntax, and suggestions
 on when this implementation should be used.  To use it, simply do the
 following as part of your Digester initialization:</p>
 
