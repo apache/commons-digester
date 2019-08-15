@@ -164,9 +164,9 @@
   </contributors>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/digester/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/digester/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/digester/trunk</url>
+    <connection>scm:git:https://gitbox.apache.org/repos/asf/commons-digester</connection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-digester</developerConnection>
+    <url>https://gitbox.apache.org/repos/asf/commons-digester</url>
   </scm>
   <issueManagement>
     <system>jira</system>
