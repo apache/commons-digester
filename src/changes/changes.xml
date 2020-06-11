@@ -74,6 +74,9 @@
     <action dev="ggregory" type="update" issue="DIGESTER-188">
       Update cglib from 2.2.2 to 3.2.5.
     </action>
+    <action dev="ggregory" type="update">
+      Update JUnit from 4.10 to 4.13.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
