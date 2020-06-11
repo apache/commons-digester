@@ -24,7 +24,6 @@
     <version>28</version>
   </parent>
 
-  <groupId>org.apache.commons</groupId>
   <artifactId>commons-digester3-parent</artifactId>
   <version>3.3-SNAPSHOT</version>
   <packaging>pom</packaging>
