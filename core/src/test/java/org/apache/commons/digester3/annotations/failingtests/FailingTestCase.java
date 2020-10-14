@@ -18,10 +18,15 @@
 package org.apache.commons.digester3.annotations.failingtests;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringStartsWith.startsWith;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
 import org.apache.commons.digester3.binder.DigesterLoadingException;
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public final class FailingTestCase
 {
@@ -29,20 +34,25 @@ public final class FailingTestCase
     /**
      * Tests to make sure loader fails
      */
-    @Test(expected = DigesterLoadingException.class)
+    @Test
     public void failsBecauseFailingDigesterLoaderHandlerFactory() {
 
-        newLoader(new FromAnnotationsRuleModule()
-        {
+        // FIXME Simplification once upgraded to Java 1.8 and use lambda
+        final Executable testMethod = new Executable() {
+            public void execute() throws Throwable {
+                newLoader(new FromAnnotationsRuleModule() {
 
-            @Override
-            protected void configureRules()
-            {
-                useAnnotationHandlerFactory( new FailingDigesterLoaderHandlerFactory() );
-                bindRulesFrom( BeanWithFakeHandler.class );
+                    @Override
+                    protected void configureRules() {
+                        useAnnotationHandlerFactory(new FailingDigesterLoaderHandlerFactory());
+                        bindRulesFrom(BeanWithFakeHandler.class);
+                    }
+
+                }).newDigester();
             }
-
-        }).newDigester();
+        };
+        final DigesterLoadingException thrown = assertThrows(DigesterLoadingException.class, testMethod);
+        assertThat(thrown.getMessage(), is(startsWith("Digester creation errors:")));
     }
 
 }
