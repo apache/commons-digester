@@ -32,7 +32,6 @@ public class NamespacedBox
 
     public NamespacedBox()
     {
-        super();
     }
 
     public Map<String, String> getNamespaces()

@@ -34,7 +34,6 @@ public class Employee
 
     public Employee( String firstName, String lastName )
     {
-        super();
         setFirstName( firstName );
         setLastName( lastName );
     }

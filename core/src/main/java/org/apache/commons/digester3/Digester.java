@@ -103,7 +103,6 @@ public class Digester
      */
     public Digester()
     {
-        super();
     }
 
     /**
@@ -115,7 +114,6 @@ public class Digester
      */
     public Digester( SAXParser parser )
     {
-        super();
         this.parser = parser;
     }
 
@@ -128,7 +126,6 @@ public class Digester
      */
     public Digester( XMLReader reader )
     {
-        super();
         this.reader = reader;
     }
 

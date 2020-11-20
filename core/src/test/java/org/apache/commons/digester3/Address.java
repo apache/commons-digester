@@ -32,7 +32,6 @@ public class Address
 
     public Address( String street, String city, String state, String zipCode )
     {
-        super();
         setStreet( street );
         setCity( city );
         setState( state );

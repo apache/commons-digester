@@ -43,7 +43,6 @@ public class PluginDeclarationRule
     /** constructor */
     public PluginDeclarationRule()
     {
-        super();
     }
 
     // ------------------- methods --------------------------------------------
