@@ -71,10 +71,10 @@ public class ObjectParamRuleTestCase
                     .objectParam( new Long( 999999999 ) );
                 forPattern( "arraylist/D" ).callMethod( "add" ).withParamCount( 1 )
                     .then()
-                    .objectParam( new String( "foobarbazbing" ) ).matchingAttribute( "desc" );
+                    .objectParam( "foobarbazbing" ).matchingAttribute( "desc" );
                 forPattern( "arraylist/E" ).callMethod( "add" ).withParamCount( 1 )
                     .then()
-                    .objectParam( new String( "ignore" ) ).matchingAttribute( "nonexistentattribute" );
+                    .objectParam( "ignore" ).matchingAttribute( "nonexistentattribute" );
             }
 
         }).newDigester();
@@ -86,8 +86,8 @@ public class ObjectParamRuleTestCase
         assertTrue( al.contains( new Integer( -9 ) ) );
         assertTrue( al.contains( new Float( 3.14159 ) ) );
         assertTrue( al.contains( new Long( 999999999 ) ) );
-        assertTrue( al.contains( new String( "foobarbazbing" ) ) );
-        assertTrue( !( al.contains( new String( "ignore" ) ) ) );
+        assertTrue( al.contains( "foobarbazbing" ) );
+        assertTrue( !( al.contains( "ignore" ) ) );
     }
 
 }

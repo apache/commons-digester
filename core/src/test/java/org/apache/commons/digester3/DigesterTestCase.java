@@ -654,13 +654,13 @@ public class DigesterTestCase
     {
         final TrackingStackAction action = new TrackingStackAction();
 
-        final Object obj1 = new String( "obj1" );
-        final Object obj2 = new String( "obj2" );
-        final Object obj3 = new String( "replpop.obj3" );
-        final Object obj4 = new String( "replpush.obj4" );
+        final Object obj1 = "obj1";
+        final Object obj2 = "obj2";
+        final Object obj3 = "replpop.obj3";
+        final Object obj4 = "replpush.obj4";
 
-        final Object obj8 = new String( "obj8" );
-        final Object obj9 = new String( "obj9" );
+        final Object obj8 = "obj8";
+        final Object obj9 = "obj9";
 
         final Digester d = new Digester();
         d.setStackAction( action );

@@ -114,7 +114,7 @@ public class TestFactoryCreate
         Digester digester = new Digester();
         ObjectCreationFactoryTestImpl factory = new ObjectCreationFactoryTestImpl();
         digester.addFactoryCreate( "root", factory, ignoreCreateExceptions );
-        String xml = new String( "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>" );
+        String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>";
         digester.parse( new StringReader( xml ) );
 
         assertEquals( "Object create not called(1)[" + ignoreCreateExceptions + "]", factory.called, true );
@@ -129,7 +129,7 @@ public class TestFactoryCreate
         digester.addFactoryCreate( "root", "org.apache.commons.digester3.ObjectCreationFactoryTestImpl",
                                    ignoreCreateExceptions );
         digester.addSetNext( "root", "add" );
-        xml = new String( "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>" );
+        xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>";
         List<ObjectCreationFactoryTestImpl> list = new ArrayList<ObjectCreationFactoryTestImpl>();
         digester.push( list );
         digester.parse( new StringReader( xml ) );
@@ -148,7 +148,7 @@ public class TestFactoryCreate
         digester.addFactoryCreate( "root", "org.apache.commons.digester3.ObjectCreationFactoryTestImpl", "override",
                                    ignoreCreateExceptions );
         digester.addSetNext( "root", "add" );
-        xml = new String( "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>" );
+        xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>";
         list = new ArrayList<ObjectCreationFactoryTestImpl>();
         digester.push( list );
         digester.parse( new StringReader( xml ) );
@@ -168,8 +168,8 @@ public class TestFactoryCreate
                                    ignoreCreateExceptions );
         digester.addSetNext( "root", "add" );
         xml =
-            new String( "<?xml version='1.0' ?><root one='good' two='bad' three='ugly' "
-                + " override='org.apache.commons.digester3.OtherTestObjectCreationFactory' >" + "<element/></root>" );
+            ("<?xml version='1.0' ?><root one='good' two='bad' three='ugly' "
+                + " override='org.apache.commons.digester3.OtherTestObjectCreationFactory' >" + "<element/></root>");
         list = new ArrayList<ObjectCreationFactoryTestImpl>();
         digester.push( list );
         digester.parse( new StringReader( xml ) );
@@ -189,7 +189,7 @@ public class TestFactoryCreate
         digester = new Digester();
         digester.addFactoryCreate( "root", ObjectCreationFactoryTestImpl.class, "override", ignoreCreateExceptions );
         digester.addSetNext( "root", "add" );
-        xml = new String( "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>" );
+        xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><element/></root>";
         list = new ArrayList<ObjectCreationFactoryTestImpl>();
         digester.push( list );
         digester.parse( new StringReader( xml ) );
@@ -208,8 +208,8 @@ public class TestFactoryCreate
         digester.addFactoryCreate( "root", ObjectCreationFactoryTestImpl.class, "override", ignoreCreateExceptions );
         digester.addSetNext( "root", "add" );
         xml =
-            new String( "<?xml version='1.0' ?><root one='good' two='bad' three='ugly' "
-                + " override='org.apache.commons.digester3.OtherTestObjectCreationFactory' >" + "<element/></root>" );
+            ("<?xml version='1.0' ?><root one='good' two='bad' three='ugly' "
+                + " override='org.apache.commons.digester3.OtherTestObjectCreationFactory' >" + "<element/></root>");
         list = new ArrayList<ObjectCreationFactoryTestImpl>();
         digester.push( list );
         digester.parse( new StringReader( xml ) );
