@@ -1084,11 +1084,9 @@ public class Digester
             {
                 bodyText = substitutor.substitute( bodyText );
             }
-            for ( int i = 0; i < rules.size(); i++ )
-            {
+            for (Rule rule : rules) {
                 try
                 {
-                    Rule rule = rules.get( i );
                     if ( debug )
                     {
                         log.debug( "  Fire body() for " + rule );
@@ -1348,11 +1346,9 @@ public class Digester
             {
                 list = substitutor.substitute( list );
             }
-            for ( int i = 0; i < rules.size(); i++ )
-            {
+            for (Rule rule : rules) {
                 try
                 {
-                    Rule rule = rules.get( i );
                     if ( debug )
                     {
                         log.debug( "  Fire begin() for " + rule );
