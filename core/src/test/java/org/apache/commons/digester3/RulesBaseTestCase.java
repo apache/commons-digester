@@ -175,9 +175,6 @@ public class RulesBaseTestCase
     public void testBasicNamespaceMatching()
     {
 
-        List<Rule> list = null;
-        Iterator<Rule> it = null;
-
         // clear any existing rules
         digester.getRules().clear();
 
@@ -187,14 +184,14 @@ public class RulesBaseTestCase
         digester.addRule( "alpha/beta/gamma", new TestRule( "No-Namespace" ) );
         digester.addRule( "alpha/beta/gamma", new TestRule( "Euclidean-Namespace", "euclidean" ) );
 
-        list = digester.getRules().rules();
+        List<Rule> list = digester.getRules().rules();
 
         // test that matching null namespace brings back namespace and non-namespace rules
         list = digester.getRules().match( null, "alpha/beta/gamma", null, null );
 
         assertEquals( "Null namespace match (A)", 2, list.size() );
 
-        it = list.iterator();
+        Iterator<Rule> it = list.iterator();
         assertEquals( "Null namespace match (B)", "No-Namespace", ( (TestRule) it.next() ).getIdentifier() );
         assertEquals( "Null namespace match (C)", "Euclidean-Namespace", ( (TestRule) it.next() ).getIdentifier() );
 

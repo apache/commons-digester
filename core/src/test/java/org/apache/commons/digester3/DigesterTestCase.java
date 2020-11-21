@@ -345,7 +345,7 @@ public class DigesterTestCase
     public void testStackMethods()
     {
 
-        Object value = null;
+        Object value;
 
         // New stack must be empty
         assertEquals( "New stack is empty", 0, digester.getCount() );

@@ -74,16 +74,13 @@ public class ExtendedBaseRulesTestCase
         digester.addRule( "alpha/beta/gamma/?", new TestRule( "exact_parent" ) );
         digester.addRule( "*/beta/gamma/?", new TestRule( "wild_parent" ) );
 
-        List<Rule> list = null;
-        Iterator<Rule> it = null;
-
         // this should match just the exact since this has presidence
-        list = digester.getRules().match( null, "alpha/beta/gamma/delta", null, null );
+        List<Rule> list = digester.getRules().match( null, "alpha/beta/gamma/delta", null, null );
 
         // all three rules should match
         assertEquals( "Testing basic parent mismatch (A)", 1, list.size() );
 
-        it = list.iterator();
+        Iterator<Rule> it = list.iterator();
         assertEquals( "Testing basic parent mismatch (B)", "exact", ( (TestRule) it.next() ).getIdentifier() );
 
         // we don't have an exact match for this child so we should get the exact parent
@@ -142,8 +139,8 @@ public class ExtendedBaseRulesTestCase
         digester.addRule( "*/gamma/?", new TestRule( "non_wildhead_child" ) );
         digester.addRule( "!*/epsilon/beta/gamma/?", new TestRule( "universal_wildhead_child" ) );
 
-        List<Rule> list = null;
-        Iterator<Rule> it = null;
+        List<Rule> list;
+        Iterator<Rule> it;
 
         // test universal wild head
         list = digester.getRules().match( null, "alpha/beta/gamma", null, null );
@@ -222,8 +219,8 @@ public class ExtendedBaseRulesTestCase
         digester.addRule( "alpha/beta/gamma/delta", new TestRule( "exact" ) );
         digester.addRule( "*/beta/gamma/?", new TestRule( "wild_parent" ) );
 
-        List<Rule> list = null;
-        Iterator<Rule> it = null;
+        List<Rule> list;
+        Iterator<Rule> it;
 
         // The universal wild will always match whatever else does
         list = digester.getRules().match( null, "alpha/beta/gamma/delta", null, null );
@@ -276,7 +273,7 @@ public class ExtendedBaseRulesTestCase
         // The combinations a little large to test everything but we'll pick a couple and try them.
         digester.addRule( "*/a", new TestRule( "a_tail" ) );
 
-        List<Rule> list = null;
+        List<Rule> list;
 
         list = digester.getRules().match( null, "a", null, null );
 

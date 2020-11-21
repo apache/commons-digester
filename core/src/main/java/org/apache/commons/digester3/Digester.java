@@ -2738,7 +2738,6 @@ public class Digester
      */
     public <T> T pop( String stackName )
     {
-        T result = null;
         Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack == null )
         {
@@ -2749,7 +2748,7 @@ public class Digester
             throw new EmptyStackException();
         }
 
-        result = this.<T> npeSafeCast( namedStack.pop() );
+        T result = this.<T> npeSafeCast( namedStack.pop() );
 
         if ( stackAction != null )
         {
@@ -2793,7 +2792,7 @@ public class Digester
      */
     public <T> T peek( String stackName, int n )
     {
-        T result = null;
+        T result;
         Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack == null )
         {

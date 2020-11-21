@@ -145,8 +145,7 @@ public class RuleTestCase
         digester.addSetNext( "employee/address", "addAddress" );
 
         // Parse our test input once
-        Object root = null;
-        root = digester.parse( getInputStream( "Test1.xml" ) );
+        Object root = digester.parse( getInputStream( "Test1.xml" ) );
 
         validateObjectCreate3( root );
 
@@ -228,13 +227,13 @@ public class RuleTestCase
         digester.addSetNext( "employee/address", "addAddress" );
 
         // Parse our test input the first time
-        Object root1 = null;
+        Object root1;
         root1 = digester.parse( getInputStream( "Test1.xml" ) );
 
         validateObjectCreate3( root1 );
 
         // Parse our test input the second time
-        Object root2 = null;
+        Object root2;
         root2 = digester.parse( getInputStream( "Test1.xml" ) );
 
         validateObjectCreate3( root2 );
@@ -338,7 +337,7 @@ public class RuleTestCase
         digester.addSetTop( "employee/address", "setEmployee" );
 
         // Parse our test input.
-        Object root = null;
+        Object root;
         root = digester.parse( getInputStream( "Test1.xml" ) );
         validateObjectCreate3( root );
 
@@ -360,7 +359,7 @@ public class RuleTestCase
         digester.addSetTop( "employee/address", "setEmployee", "org.apache.commons.digester3.Employee" );
 
         // Parse our test input.
-        Object root = null;
+        Object root;
         root = digester.parse( getInputStream( "Test1.xml" ) );
 
         validateObjectCreate3( root );
