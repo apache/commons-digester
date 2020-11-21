@@ -1595,6 +1595,7 @@ public class Digester
         return asyncParse( new Callable<T>()
         {
 
+            @Override
             public T call()
                 throws Exception
             {
@@ -1658,6 +1659,7 @@ public class Digester
         return asyncParse( new Callable<T>()
         {
 
+            @Override
             public T call()
                 throws Exception
             {
@@ -1702,6 +1704,7 @@ public class Digester
         return asyncParse( new Callable<T>()
         {
 
+            @Override
             public T call()
                 throws Exception
             {
@@ -1746,6 +1749,7 @@ public class Digester
         return asyncParse( new Callable<T>()
         {
 
+            @Override
             public T call()
                 throws Exception
             {
@@ -1790,6 +1794,7 @@ public class Digester
         return asyncParse( new Callable<T>()
         {
 
+            @Override
             public T call()
                 throws Exception
             {
@@ -1835,6 +1840,7 @@ public class Digester
         return asyncParse( new Callable<T>()
         {
 
+            @Override
             public T call()
                 throws Exception
             {

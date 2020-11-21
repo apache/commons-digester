@@ -162,16 +162,19 @@ public class XMLSchemaTestCase
         {
         }
 
+        @Override
         public void error( final SAXParseException exception )
         {
             clean = false;
         }
 
+        @Override
         public void fatalError( final SAXParseException exception )
         {
             clean = false;
         }
 
+        @Override
         public void warning( final SAXParseException exception )
         {
             clean = false;

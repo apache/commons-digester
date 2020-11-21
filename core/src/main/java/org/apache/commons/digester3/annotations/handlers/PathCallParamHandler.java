@@ -36,6 +36,7 @@ public final class PathCallParamHandler
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handle( final PathCallParam annotation, final MethodArgument element, final RulesBinder rulesBinder )
     {
         rulesBinder

@@ -51,18 +51,21 @@ public class DTDValidationTestCase
         .setErrorHandler( new ErrorHandler()
         {
 
+            @Override
             public void warning( final SAXParseException e )
                 throws SAXException
             {
                 throw e;
             }
 
+            @Override
             public void fatalError( final SAXParseException e )
                 throws SAXException
             {
                 throw e;
             }
 
+            @Override
             public void error( final SAXParseException e )
                 throws SAXException
             {

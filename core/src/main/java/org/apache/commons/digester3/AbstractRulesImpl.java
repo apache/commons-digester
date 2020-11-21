@@ -51,6 +51,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
+    @Override
     public Digester getDigester()
     {
         return digester;
@@ -59,6 +60,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setDigester( final Digester digester )
     {
         this.digester = digester;
@@ -67,6 +69,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNamespaceURI()
     {
         return namespaceURI;
@@ -75,6 +78,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setNamespaceURI( final String namespaceURI )
     {
         this.namespaceURI = namespaceURI;
@@ -85,6 +89,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void add( final String pattern, final Rule rule )
     {
         // set up rule

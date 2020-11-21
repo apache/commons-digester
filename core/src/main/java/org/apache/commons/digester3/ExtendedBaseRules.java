@@ -447,6 +447,7 @@ public class ExtendedBaseRules
         Collections.sort( universalList, new Comparator<Rule>()
         {
 
+            @Override
             public int compare( final Rule r1, final Rule r2 )
             {
                 // Get the entry order from the map

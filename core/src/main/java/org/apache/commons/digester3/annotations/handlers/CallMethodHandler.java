@@ -38,6 +38,7 @@ public class CallMethodHandler
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handle( final CallMethod annotation, final Method element, final RulesBinder rulesBinder )
     {
         final CallMethodBuilder callMethodBuilder = rulesBinder

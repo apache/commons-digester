@@ -58,6 +58,7 @@ public class ObjectCreateRule
             this.constructorArgs = constructorArgs;
         }
 
+        @Override
         public Object intercept( final Object obj, final Method method, final Object[] args, final MethodProxy proxy )
             throws Throwable
         {

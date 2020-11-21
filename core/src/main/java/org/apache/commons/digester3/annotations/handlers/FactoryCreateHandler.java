@@ -36,6 +36,7 @@ public final class FactoryCreateHandler
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handle( final FactoryCreate annotation, final Class<?> element, final RulesBinder rulesBinder )
     {
         final FactoryCreateBuilder builder = rulesBinder.forPattern( annotation.pattern() )

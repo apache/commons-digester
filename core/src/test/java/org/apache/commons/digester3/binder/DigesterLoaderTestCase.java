@@ -41,18 +41,21 @@ public final class DigesterLoaderTestCase
         final ErrorHandler expected = new ErrorHandler()
         {
 
+            @Override
             public void warning( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
             }
 
+            @Override
             public void fatalError( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
             }
 
+            @Override
             public void error( final SAXParseException exception )
                 throws SAXException
             {
@@ -83,24 +86,28 @@ public final class DigesterLoaderTestCase
         final Locator expected = new Locator()
         {
 
+            @Override
             public String getSystemId()
             {
                 // just fake method
                 return null;
             }
 
+            @Override
             public String getPublicId()
             {
                 // just fake method
                 return null;
             }
 
+            @Override
             public int getLineNumber()
             {
                 // just fake method
                 return 0;
             }
 
+            @Override
             public int getColumnNumber()
             {
                 // just fake method

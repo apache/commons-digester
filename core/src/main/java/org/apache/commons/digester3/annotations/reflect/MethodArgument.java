@@ -96,6 +96,7 @@ public final class MethodArgument
     /**
      * {@inheritDoc}
      */
+    @Override
     public <T extends Annotation> T getAnnotation( final Class<T> annotationType )
     {
         for ( final Annotation annotation : this.annotations )
@@ -111,6 +112,7 @@ public final class MethodArgument
     /**
      * {@inheritDoc}
      */
+    @Override
     public Annotation[] getAnnotations()
     {
         return this.getAnnotationsArrayCopy();
@@ -119,6 +121,7 @@ public final class MethodArgument
     /**
      * {@inheritDoc}
      */
+    @Override
     public Annotation[] getDeclaredAnnotations()
     {
         return this.getAnnotationsArrayCopy();
@@ -139,6 +142,7 @@ public final class MethodArgument
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isAnnotationPresent( final Class<? extends Annotation> annotationType )
     {
         for ( final Annotation annotation : this.annotations )

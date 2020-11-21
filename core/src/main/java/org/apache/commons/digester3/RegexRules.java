@@ -100,6 +100,7 @@ public class RegexRules
     /**
      * {@inheritDoc}
      */
+    @Override
     public void clear()
     {
         registeredRules.clear();
@@ -108,6 +109,7 @@ public class RegexRules
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
         //
@@ -132,6 +134,7 @@ public class RegexRules
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Rule> rules()
     {
         final ArrayList<Rule> rules = new ArrayList<Rule>( registeredRules.size() );

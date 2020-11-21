@@ -53,6 +53,7 @@ final class PatternRuleMatcher
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean match( final String namespace, final String pattern, final String name, final Attributes attributes )
     {
         if ( namespaceURI != null && !namespace.equals( namespaceURI ) )

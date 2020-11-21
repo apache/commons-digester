@@ -39,6 +39,7 @@ public final class ObjectCreateHandler
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handle( final ObjectCreate annotation, final AnnotatedElement element, final RulesBinder rulesBinder )
     {
         Class<?> type = null;

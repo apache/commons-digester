@@ -118,6 +118,7 @@ public class RulesBase
     /**
      * {@inheritDoc}
      */
+    @Override
     public void clear()
     {
         wildcardCache.clear();
@@ -128,6 +129,7 @@ public class RulesBase
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
         // List rulesList = (List) this.cache.get(pattern);
@@ -159,6 +161,7 @@ public class RulesBase
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Rule> rules()
     {
         return ( this.rules );

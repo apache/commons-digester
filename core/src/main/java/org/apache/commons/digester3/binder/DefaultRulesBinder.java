@@ -65,6 +65,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public ClassLoader getContextClassLoader()
     {
         return this.classLoader;
@@ -73,6 +74,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addError( String messagePattern, final Object... arguments )
     {
         final StackTraceElement[] stackTrace = new Exception().getStackTrace();
@@ -121,6 +123,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addError( final Throwable t )
     {
         final String message = "An exception was caught and reported. Message: " + t.getMessage();
@@ -141,6 +144,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public void install( final RulesModule rulesModule )
     {
         rulesModule.configure( this );
@@ -149,6 +153,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public LinkedRuleBuilder forPattern( final String pattern )
     {
         final String keyPattern;

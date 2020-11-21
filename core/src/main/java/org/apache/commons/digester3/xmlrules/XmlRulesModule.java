@@ -51,6 +51,7 @@ final class XmlRulesModule
     /**
      * {@inheritDoc}
      */
+    @Override
     public void configure( final RulesBinder rulesBinder )
     {
         if ( rulesBinder instanceof WithMemoryRulesBinder )

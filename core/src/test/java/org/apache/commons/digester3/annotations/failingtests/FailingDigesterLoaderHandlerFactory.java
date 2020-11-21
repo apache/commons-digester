@@ -28,6 +28,7 @@ public class FailingDigesterLoaderHandlerFactory
     implements AnnotationHandlerFactory
 {
 
+    @Override
     public <H extends AnnotationHandler<? extends Annotation, ? extends AnnotatedElement>> H newInstance( final Class<H> type )
         throws Exception
     {

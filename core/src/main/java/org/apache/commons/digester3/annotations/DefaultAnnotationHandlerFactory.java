@@ -34,6 +34,7 @@ final class DefaultAnnotationHandlerFactory
     /**
      * {@inheritDoc}
      */
+    @Override
     public <L extends AnnotationHandler<? extends Annotation, ? extends AnnotatedElement>> L newInstance( final Class<L> type )
         throws Exception
     {

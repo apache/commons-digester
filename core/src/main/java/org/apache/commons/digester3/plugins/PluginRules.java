@@ -163,6 +163,7 @@ public class PluginRules
      *
      * @return the Digester instance with which this instance is associated.
      */
+    @Override
     public Digester getDigester()
     {
         return digester;
@@ -173,6 +174,7 @@ public class PluginRules
      * 
      * @param digester The newly associated Digester instance
      */
+    @Override
     public void setDigester( final Digester digester )
     {
         this.digester = digester;
@@ -184,6 +186,7 @@ public class PluginRules
      *
      * @return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
      */
+    @Override
     public String getNamespaceURI()
     {
         return decoratedRules.getNamespaceURI();
@@ -195,6 +198,7 @@ public class PluginRules
      * @param namespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
      *            matching regardless of the current namespace URI
      */
+    @Override
     public void setNamespaceURI( final String namespaceURI )
     {
         decoratedRules.setNamespaceURI( namespaceURI );
@@ -271,6 +275,7 @@ public class PluginRules
      * 
      * @return list of all Rule objects known to this Rules instance.
      */
+    @Override
     public List<Rule> rules()
     {
         return decoratedRules.rules();
@@ -283,6 +288,7 @@ public class PluginRules
      *            with and without a leading slash ('/').
      * @param rule Rule instance to be registered
      */
+    @Override
     public void add( String pattern, final Rule rule )
     {
         final Log log = LogUtils.getLogger( digester );
@@ -349,6 +355,7 @@ public class PluginRules
     /**
      * Clear all rules.
      */
+    @Override
     public void clear()
     {
         decoratedRules.clear();
@@ -357,6 +364,7 @@ public class PluginRules
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Rule> match( final String namespaceURI, final String path, final String name, final Attributes attributes )
     {
         final Log log = LogUtils.getLogger( digester );

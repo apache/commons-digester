@@ -123,6 +123,7 @@ public abstract class FromAnnotationsRuleModule
             // CONSTRUCTOR
             visitElements( new PrivilegedAction<Constructor<?>[]>()
             {
+                @Override
                 public Constructor<?>[] run()
                 {
                     return type.getDeclaredConstructors();
@@ -132,6 +133,7 @@ public abstract class FromAnnotationsRuleModule
             // FIELD
             visitElements( new PrivilegedAction<Field[]>()
             {
+                @Override
                 public Field[] run()
                 {
                     return type.getDeclaredFields();
@@ -142,6 +144,7 @@ public abstract class FromAnnotationsRuleModule
         // METHOD
         visitElements( new PrivilegedAction<Method[]>()
         {
+            @Override
             public Method[] run()
             {
                 return type.getDeclaredMethods();

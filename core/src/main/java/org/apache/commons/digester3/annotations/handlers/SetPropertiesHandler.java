@@ -38,6 +38,7 @@ public final class SetPropertiesHandler
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handle( final SetProperty annotation, final Field element, final RulesBinder rulesBinder )
     {
         final SetPropertiesBuilder builder = rulesBinder

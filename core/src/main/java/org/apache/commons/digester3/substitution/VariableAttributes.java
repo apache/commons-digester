@@ -62,6 +62,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getValue( final int index )
     {
         if ( index >= values.size() )
@@ -99,6 +100,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getValue( final String qname )
     {
         final int index = attrs.getIndex( qname );
@@ -112,6 +114,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getValue( final String uri, final String localname )
     {
         final int index = attrs.getIndex( uri, localname );
@@ -126,6 +129,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getIndex( final String qname )
     {
         return attrs.getIndex( qname );
@@ -134,6 +138,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getIndex( final String uri, final String localpart )
     {
         return attrs.getIndex( uri, localpart );
@@ -142,6 +147,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLength()
     {
         return attrs.getLength();
@@ -150,6 +156,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getLocalName( final int index )
     {
         return attrs.getLocalName( index );
@@ -158,6 +165,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getQName( final int index )
     {
         return attrs.getQName( index );
@@ -166,6 +174,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getType( final int index )
     {
         return attrs.getType( index );
@@ -174,6 +183,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getType( final String qname )
     {
         return attrs.getType( qname );
@@ -182,6 +192,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getType( final String uri, final String localname )
     {
         return attrs.getType( uri, localname );
@@ -190,6 +201,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getURI( final int index )
     {
         return attrs.getURI( index );

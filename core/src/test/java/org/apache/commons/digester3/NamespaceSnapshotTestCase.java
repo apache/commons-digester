@@ -61,6 +61,7 @@ public class NamespaceSnapshotTestCase
             /**
              * {@inheritDoc}
              */
+            @Override
             public NamespaceSnapshotRule get()
             {
                 return new NamespaceSnapshotRule();

@@ -618,6 +618,7 @@ public class DigesterTestCase
     {
         public ArrayList<String> events = new ArrayList<String>();
 
+        @Override
         public Object onPush( final Digester d, final String stackName, final Object o )
         {
             final String msg = "push:" + stackName + ":" + o.toString();
@@ -631,6 +632,7 @@ public class DigesterTestCase
             return o;
         }
 
+        @Override
         public Object onPop( final Digester d, final String stackName, final Object o )
         {
             final String msg = "pop:" + stackName + ":" + o.toString();

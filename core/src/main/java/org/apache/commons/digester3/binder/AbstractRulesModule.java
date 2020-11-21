@@ -33,6 +33,7 @@ public abstract class AbstractRulesModule
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void configure( final RulesBinder rulesBinder )
     {
         if ( this.rulesBinder != null )

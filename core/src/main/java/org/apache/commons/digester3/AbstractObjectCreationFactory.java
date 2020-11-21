@@ -46,12 +46,14 @@ public abstract class AbstractObjectCreationFactory<T>
      * @return creates a new T instance
      * @throws Exception any exception thrown will be propagated upwards
      */
+    @Override
     public abstract T createObject( Attributes attributes )
         throws Exception;
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public Digester getDigester()
     {
         return ( this.digester );
@@ -60,6 +62,7 @@ public abstract class AbstractObjectCreationFactory<T>
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setDigester( final Digester digester )
     {
         this.digester = digester;

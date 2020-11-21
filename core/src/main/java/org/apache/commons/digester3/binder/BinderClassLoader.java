@@ -52,6 +52,7 @@ final class BinderClassLoader
         final PrivilegedAction<BinderClassLoader> action = new PrivilegedAction<BinderClassLoader>()
         {
 
+            @Override
             public BinderClassLoader run()
             {
                 return new BinderClassLoader( adaptedClassLoader );

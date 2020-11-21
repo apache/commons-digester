@@ -255,6 +255,7 @@ public final class BinderClassLoaderTestCase
         private static class InMemoryURLStreamHandlerFactory
             implements URLStreamHandlerFactory
         {
+            @Override
             public URLStreamHandler createURLStreamHandler( final String protocol )
             {
                 return new URLStreamHandler()

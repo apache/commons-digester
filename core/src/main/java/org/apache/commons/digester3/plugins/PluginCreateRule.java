@@ -160,6 +160,7 @@ public class PluginCreateRule
     /**
      * {@inheritDoc}
      */
+    @Override
     public void postRegisterInit( final String matchPattern )
     {
         final Log log = LogUtils.getLogger( getDigester() );

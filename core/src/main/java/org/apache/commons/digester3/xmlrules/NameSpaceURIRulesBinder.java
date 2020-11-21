@@ -62,6 +62,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public ClassLoader getContextClassLoader()
     {
         return wrappedBinder.getContextClassLoader();
@@ -70,6 +71,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         wrappedBinder.addError( messagePattern, arguments );
@@ -78,6 +80,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addError( final Throwable t )
     {
         wrappedBinder.addError( t );
@@ -86,6 +89,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public void install( final RulesModule rulesModule )
     {
         wrappedBinder.install( rulesModule );
@@ -94,6 +98,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
+    @Override
     public LinkedRuleBuilder forPattern( final String pattern )
     {
         return wrappedBinder.forPattern( pattern ).withNamespaceURI( namespaceURIs.peek() );

@@ -37,6 +37,7 @@ public final class BeanPropertySetterHandler
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handle( final BeanPropertySetter annotation, final Field element, final RulesBinder rulesBinder )
     {
         rulesBinder.forPattern( annotation.pattern() )

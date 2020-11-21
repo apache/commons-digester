@@ -55,6 +55,7 @@ public class MultiVariableExpander
     /**
      * {@inheritDoc}
      */
+    @Override
     public String expand( String param )
     {
         for ( int i = 0; i < nEntries; ++i )

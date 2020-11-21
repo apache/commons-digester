@@ -344,32 +344,39 @@ public class SetNestedPropertiesRule
             rules.add( rule );
         }
 
+        @Override
         public Digester getDigester()
         {
             return null;
         }
 
+        @Override
         public void setDigester( final Digester digester )
         {
         }
 
+        @Override
         public String getNamespaceURI()
         {
             return null;
         }
 
+        @Override
         public void setNamespaceURI( final String namespaceURI )
         {
         }
 
+        @Override
         public void add( final String pattern, final Rule rule )
         {
         }
 
+        @Override
         public void clear()
         {
         }
 
+        @Override
         public List<Rule> match( final String namespaceURI, final String matchPath, final String name, final Attributes attributes )
         {
             final List<Rule> match = decoratedRules.match( namespaceURI, matchPath, name, attributes );
@@ -403,6 +410,7 @@ public class SetNestedPropertiesRule
             return match;
         }
 
+        @Override
         public List<Rule> rules()
         {
             // This is not actually expected to be called during normal

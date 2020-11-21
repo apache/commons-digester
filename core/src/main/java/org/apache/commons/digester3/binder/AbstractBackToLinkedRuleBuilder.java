@@ -70,6 +70,7 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
     /**
      * {@inheritDoc}
      */
+    @Override
     public final R get()
     {
         final R rule = this.createRule();

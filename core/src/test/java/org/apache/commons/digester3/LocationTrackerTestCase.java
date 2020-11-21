@@ -46,6 +46,7 @@ public class LocationTrackerTestCase
     {
         public Map<Object, String> locations = new HashMap<Object, String>();
 
+        @Override
         public <T> T onPush( final Digester d, final String stackName, final T o )
         {
             if ( stackName == null )
@@ -63,6 +64,7 @@ public class LocationTrackerTestCase
             return o;
         }
 
+        @Override
         public <T> T onPop( final Digester d, final String stackName, final T o )
         {
             return o;

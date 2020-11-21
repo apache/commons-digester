@@ -125,6 +125,7 @@ final class FromBinderRuleSet
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addRuleInstances( final Digester digester )
     {
         for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> provider : providers )
@@ -136,6 +137,7 @@ final class FromBinderRuleSet
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNamespaceURI()
     {
         return null;
