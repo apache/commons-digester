@@ -23,6 +23,6 @@ package org.apache.commons.digester3.examples.api.catalog;
 public interface Item
 {
 
-    public void print();
+    void print();
 
 }

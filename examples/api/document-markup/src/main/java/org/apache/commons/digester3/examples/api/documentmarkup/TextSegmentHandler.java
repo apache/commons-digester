@@ -24,7 +24,7 @@ package org.apache.commons.digester3.examples.api.documentmarkup;
 public interface TextSegmentHandler
 {
 
-    public void textSegment( String text )
+    void textSegment( String text )
         throws Exception;
 
 }
