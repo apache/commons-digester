@@ -122,7 +122,6 @@ final class RecordedInvocation
         if ( !( input instanceof Object[] ) )
         {
             buffer.append( input.toString() );
-            return;
         }
         else
         {
