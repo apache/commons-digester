@@ -99,7 +99,7 @@ public class PluginRules
      *
      * @param decoratedRules The top-level Rules object which handles rule-matching using the specified implementation.
      */
-    public PluginRules( Rules decoratedRules )
+    public PluginRules( final Rules decoratedRules )
     {
         this.decoratedRules = decoratedRules;
 
@@ -121,7 +121,7 @@ public class PluginRules
      * @param pluginClass is the plugin class whose custom rules will be loaded into this new PluginRules object.
      * @throws PluginException if any error occurs
      */
-    PluginRules( Digester digester, String mountPoint, PluginRules parent, Class<?> pluginClass )
+    PluginRules( final Digester digester, final String mountPoint, final PluginRules parent, final Class<?> pluginClass )
         throws PluginException
     {
         // no need to set digester or decoratedRules.digester,
@@ -173,7 +173,7 @@ public class PluginRules
      * 
      * @param digester The newly associated Digester instance
      */
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         this.digester = digester;
         decoratedRules.setDigester( digester );
@@ -195,7 +195,7 @@ public class PluginRules
      * @param namespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
      *            matching regardless of the current namespace URI
      */
-    public void setNamespaceURI( String namespaceURI )
+    public void setNamespaceURI( final String namespaceURI )
     {
         decoratedRules.setNamespaceURI( namespaceURI );
     }
@@ -225,7 +225,7 @@ public class PluginRules
      *
      * @param ruleFinders the list of RuleFinder objects
      */
-    public void setRuleFinders( List<RuleFinder> ruleFinders )
+    public void setRuleFinders( final List<RuleFinder> ruleFinders )
     {
         pluginContext.setRuleFinders( ruleFinders );
     }
@@ -246,7 +246,7 @@ public class PluginRules
      *
      * @param factory the rules factory object
      */
-    public void setRulesFactory( RulesFactory factory )
+    public void setRulesFactory( final RulesFactory factory )
     {
         rulesFactory = factory;
     }
@@ -283,10 +283,10 @@ public class PluginRules
      *            with and without a leading slash ('/').
      * @param rule Rule instance to be registered
      */
-    public void add( String pattern, Rule rule )
+    public void add( String pattern, final Rule rule )
     {
-        Log log = LogUtils.getLogger( digester );
-        boolean debug = log.isDebugEnabled();
+        final Log log = LogUtils.getLogger( digester );
+        final boolean debug = log.isDebugEnabled();
 
         if ( debug )
         {
@@ -323,7 +323,7 @@ public class PluginRules
             {
                 ( (InitializableRule) rule ).postRegisterInit( pattern );
             }
-            catch ( PluginConfigurationException e )
+            catch ( final PluginConfigurationException e )
             {
                 // Currently, Digester doesn't handle exceptions well
                 // from the add method. The workaround is for the
@@ -357,10 +357,10 @@ public class PluginRules
     /**
      * {@inheritDoc}
      */
-    public List<Rule> match( String namespaceURI, String path, String name, Attributes attributes )
+    public List<Rule> match( final String namespaceURI, final String path, final String name, final Attributes attributes )
     {
-        Log log = LogUtils.getLogger( digester );
-        boolean debug = log.isDebugEnabled();
+        final Log log = LogUtils.getLogger( digester );
+        final boolean debug = log.isDebugEnabled();
 
         if ( debug )
         {
@@ -401,7 +401,7 @@ public class PluginRules
      *            this parameter <i>must</i> be null.
      * @param attrName is the attribute whose value contains the name of the class to be instantiated.
      * */
-    public void setPluginClassAttribute( String namespaceUri, String attrName )
+    public void setPluginClassAttribute( final String namespaceUri, final String attrName )
     {
         pluginContext.setPluginClassAttribute( namespaceUri, attrName );
     }
@@ -416,7 +416,7 @@ public class PluginRules
      * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
      *            instantiating an object.
      **/
-    public void setPluginIdAttribute( String namespaceUri, String attrName )
+    public void setPluginIdAttribute( final String namespaceUri, final String attrName )
     {
         pluginContext.setPluginIdAttribute( namespaceUri, attrName );
     }

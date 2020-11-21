@@ -75,7 +75,7 @@ public class PluginCreateRule
      * 
      * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
      */
-    public PluginCreateRule( Class<?> baseClass )
+    public PluginCreateRule( final Class<?> baseClass )
     {
         this.baseClass = baseClass;
     }
@@ -88,7 +88,7 @@ public class PluginCreateRule
      * @param dfltPluginClass is the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *            This class will have custom rules installed for it just like a declared plugin.
      */
-    public PluginCreateRule( Class<?> baseClass, Class<?> dfltPluginClass )
+    public PluginCreateRule( final Class<?> baseClass, final Class<?> dfltPluginClass )
     {
         this.baseClass = baseClass;
         if ( dfltPluginClass != null )
@@ -107,7 +107,7 @@ public class PluginCreateRule
      * @param dfltPluginRuleLoader is a RuleLoader instance which knows how to load the custom rules associated with
      *            this default plugin.
      */
-    public PluginCreateRule( Class<?> baseClass, Class<?> dfltPluginClass, RuleLoader dfltPluginRuleLoader )
+    public PluginCreateRule( final Class<?> baseClass, final Class<?> dfltPluginClass, final RuleLoader dfltPluginRuleLoader )
     {
         this.baseClass = baseClass;
         if ( dfltPluginClass != null )
@@ -130,7 +130,7 @@ public class PluginCreateRule
      *            this parameter <i>must</i> be null.
      * @param attrName is the attribute whose value contains the name of the class to be instantiated.
      */
-    public void setPluginClassAttribute( String namespaceUri, String attrName )
+    public void setPluginClassAttribute( final String namespaceUri, final String attrName )
     {
         pluginClassAttrNs = namespaceUri;
         pluginClassAttr = attrName;
@@ -149,7 +149,7 @@ public class PluginCreateRule
      * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
      *            instantiating an object.
      */
-    public void setPluginIdAttribute( String namespaceUri, String attrName )
+    public void setPluginIdAttribute( final String namespaceUri, final String attrName )
     {
         pluginIdAttrNs = namespaceUri;
         pluginIdAttr = attrName;
@@ -160,10 +160,10 @@ public class PluginCreateRule
     /**
      * {@inheritDoc}
      */
-    public void postRegisterInit( String matchPattern )
+    public void postRegisterInit( final String matchPattern )
     {
-        Log log = LogUtils.getLogger( getDigester() );
-        boolean debug = log.isDebugEnabled();
+        final Log log = LogUtils.getLogger( getDigester() );
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "PluginCreateRule.postRegisterInit" + ": rule registered for pattern [" + matchPattern + "]" );
@@ -220,8 +220,8 @@ public class PluginCreateRule
             baseClass = Object.class;
         }
 
-        PluginRules rules = (PluginRules) getDigester().getRules();
-        PluginManager pm = rules.getPluginManager();
+        final PluginRules rules = (PluginRules) getDigester().getRules();
+        final PluginManager pm = rules.getPluginManager();
 
         // check default class is valid
         if ( defaultPlugin != null )
@@ -239,7 +239,7 @@ public class PluginCreateRule
                 defaultPlugin.init( getDigester(), pm );
 
             }
-            catch ( PluginException pwe )
+            catch ( final PluginException pwe )
             {
 
                 throw new PluginConfigurationException( pwe.getMessage(), pwe.getCause() );
@@ -309,11 +309,11 @@ public class PluginCreateRule
      * @throws Exception if any error occurs
      */
     @Override
-    public void begin( String namespace, String name, org.xml.sax.Attributes attributes )
+    public void begin( final String namespace, final String name, final org.xml.sax.Attributes attributes )
         throws Exception
     {
-        Log log = getDigester().getLogger();
-        boolean debug = log.isDebugEnabled();
+        final Log log = getDigester().getLogger();
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "PluginCreateRule.begin" + ": pattern=[" + pattern + "]" + " match=[" + getDigester().getMatch()
@@ -328,8 +328,8 @@ public class PluginCreateRule
         }
 
         // load any custom rules associated with the plugin
-        PluginRules oldRules = (PluginRules) getDigester().getRules();
-        PluginManager pluginManager = oldRules.getPluginManager();
+        final PluginRules oldRules = (PluginRules) getDigester().getRules();
+        final PluginManager pluginManager = oldRules.getPluginManager();
         Declaration currDeclaration = null;
 
         String pluginClassName;
@@ -376,7 +376,7 @@ public class PluginCreateRule
                 {
                     currDeclaration.init( getDigester(), pluginManager );
                 }
-                catch ( PluginException pwe )
+                catch ( final PluginException pwe )
                 {
                     throw new PluginInvalidInputException( pwe.getMessage(), pwe.getCause() );
                 }
@@ -402,16 +402,16 @@ public class PluginCreateRule
         }
 
         // get the class of the user plugged-in type
-        Class<?> pluginClass = currDeclaration.getPluginClass();
+        final Class<?> pluginClass = currDeclaration.getPluginClass();
 
-        String path = getDigester().getMatch();
+        final String path = getDigester().getMatch();
 
         // create a new Rules object and effectively push it onto a stack of
         // rules objects. The stack is actually a linked list; using the
         // PluginRules constructor below causes the new instance to link
         // to the previous head-of-stack, then the Digester.setRules() makes
         // the new instance the new head-of-stack.
-        PluginRules newRules = new PluginRules( getDigester(), path, oldRules, pluginClass );
+        final PluginRules newRules = new PluginRules( getDigester(), path, oldRules, pluginClass );
         getDigester().setRules( newRules );
 
         if ( debug )
@@ -424,7 +424,7 @@ public class PluginCreateRule
         currDeclaration.configure( getDigester(), pattern );
 
         // create an instance of the plugin class
-        Object instance = pluginClass.newInstance();
+        final Object instance = pluginClass.newInstance();
         getDigester().push( instance );
         if ( debug )
         {
@@ -435,7 +435,7 @@ public class PluginCreateRule
         // and now we have to fire any custom rules which would have
         // been matched by the same path that matched this rule, had
         // they been loaded at that time.
-        List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, attributes );
+        final List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, attributes );
         fireBeginMethods( rules, namespace, name, attributes );
     }
 
@@ -443,7 +443,7 @@ public class PluginCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
 
@@ -460,9 +460,9 @@ public class PluginCreateRule
         // Note that this applies only to rules matching exactly the path
         // which is also matched by this PluginCreateRule.
 
-        String path = getDigester().getMatch();
-        PluginRules newRules = (PluginRules) getDigester().getRules();
-        List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, null );
+        final String path = getDigester().getMatch();
+        final PluginRules newRules = (PluginRules) getDigester().getRules();
+        final List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, null );
         fireBodyMethods( rules, namespace, name, text );
     }
 
@@ -470,13 +470,13 @@ public class PluginCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         // see body method for more info
-        String path = getDigester().getMatch();
-        PluginRules newRules = (PluginRules) getDigester().getRules();
-        List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, null );
+        final String path = getDigester().getMatch();
+        final PluginRules newRules = (PluginRules) getDigester().getRules();
+        final List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, null );
         fireEndMethods( rules, namespace, name );
 
         // pop the stack of PluginRules instances, which
@@ -514,15 +514,15 @@ public class PluginCreateRule
      * @param list The attribute list of this element
      * @throws Exception if any error occurs
      */
-    public void fireBeginMethods( List<Rule> rules, String namespace, String name, Attributes list )
+    public void fireBeginMethods( final List<Rule> rules, final String namespace, final String name, final Attributes list )
         throws Exception
     {
 
         if ( ( rules != null ) && ( !rules.isEmpty() ) )
         {
-            Log log = getDigester().getLogger();
-            boolean debug = log.isDebugEnabled();
-            for ( Rule rule : rules )
+            final Log log = getDigester().getLogger();
+            final boolean debug = log.isDebugEnabled();
+            for ( final Rule rule : rules )
             {
                 if ( debug )
                 {
@@ -532,11 +532,11 @@ public class PluginCreateRule
                 {
                     rule.begin( namespace, name, list );
                 }
-                catch ( Exception e )
+                catch ( final Exception e )
                 {
                     throw getDigester().createSAXException( e );
                 }
-                catch ( Error e )
+                catch ( final Error e )
                 {
                     throw e;
                 }
@@ -557,14 +557,14 @@ public class PluginCreateRule
      * @param text The text of the body of this element
      * @throws Exception if any error occurs
      */
-    private void fireBodyMethods( List<Rule> rules, String namespaceURI, String name, String text )
+    private void fireBodyMethods( final List<Rule> rules, final String namespaceURI, final String name, final String text )
         throws Exception
     {
         if ( ( rules != null ) && ( !rules.isEmpty() ) )
         {
-            Log log = getDigester().getLogger();
-            boolean debug = log.isDebugEnabled();
-            for ( Rule rule : rules )
+            final Log log = getDigester().getLogger();
+            final boolean debug = log.isDebugEnabled();
+            for ( final Rule rule : rules )
             {
                 if ( debug )
                 {
@@ -574,11 +574,11 @@ public class PluginCreateRule
                 {
                     rule.body( namespaceURI, name, text );
                 }
-                catch ( Exception e )
+                catch ( final Exception e )
                 {
                     throw getDigester().createSAXException( e );
                 }
-                catch ( Error e )
+                catch ( final Error e )
                 {
                     throw e;
                 }
@@ -597,18 +597,18 @@ public class PluginCreateRule
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
      * @throws Exception if any error occurs
      */
-    public void fireEndMethods( List<Rule> rules, String namespaceURI, String name )
+    public void fireEndMethods( final List<Rule> rules, final String namespaceURI, final String name )
         throws Exception
     {
         // Fire "end" events for all relevant rules in reverse order
         if ( rules != null )
         {
-            Log log = getDigester().getLogger();
-            boolean debug = log.isDebugEnabled();
+            final Log log = getDigester().getLogger();
+            final boolean debug = log.isDebugEnabled();
             for ( int i = 0; i < rules.size(); i++ )
             {
-                int j = ( rules.size() - i ) - 1;
-                Rule rule = rules.get( j );
+                final int j = ( rules.size() - i ) - 1;
+                final Rule rule = rules.get( j );
                 if ( debug )
                 {
                     log.debug( "  Fire end() for " + rule );
@@ -617,11 +617,11 @@ public class PluginCreateRule
                 {
                     rule.end( namespaceURI, name );
                 }
-                catch ( Exception e )
+                catch ( final Exception e )
                 {
                     throw getDigester().createSAXException( e );
                 }
-                catch ( Error e )
+                catch ( final Error e )
                 {
                     throw e;
                 }

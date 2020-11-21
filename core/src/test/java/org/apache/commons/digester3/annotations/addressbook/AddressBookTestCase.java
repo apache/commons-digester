@@ -31,7 +31,7 @@ public final class AddressBookTestCase
     public void testAddressBook()
         throws Exception
     {
-        AddressBook addressBook = new AddressBook();
+        final AddressBook addressBook = new AddressBook();
 
         Person person = new Person();
         person.setId( 1 );

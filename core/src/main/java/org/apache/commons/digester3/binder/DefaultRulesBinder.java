@@ -55,7 +55,7 @@ final class DefaultRulesBinder
      *
      * @param classLoader
      */
-    void initialize( ClassLoader classLoader )
+    void initialize( final ClassLoader classLoader )
     {
         this.classLoader = classLoader;
         fromBinderRuleSet.clear();
@@ -73,9 +73,9 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( String messagePattern, Object... arguments )
+    public void addError( String messagePattern, final Object... arguments )
     {
-        StackTraceElement[] stackTrace = new Exception().getStackTrace();
+        final StackTraceElement[] stackTrace = new Exception().getStackTrace();
         StackTraceElement element = null;
 
         int stackIndex = stackTrace.length - 1;
@@ -87,7 +87,7 @@ final class DefaultRulesBinder
                 // check if the set ClassLoader resolves the Class in the StackTrace
                 moduleClass = Class.forName( stackTrace[stackIndex].getClassName(), false, this.classLoader );
             }
-            catch ( ClassNotFoundException e )
+            catch ( final ClassNotFoundException e )
             {
                 try
                 {
@@ -95,7 +95,7 @@ final class DefaultRulesBinder
                     moduleClass =
                         Class.forName( stackTrace[stackIndex].getClassName(), false, this.getClass().getClassLoader() );
                 }
-                catch ( ClassNotFoundException e1 )
+                catch ( final ClassNotFoundException e1 )
                 {
                     // Class in the StackTrace can't be found, don't write the file name:line number detail in the
                     // message
@@ -121,9 +121,9 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( Throwable t )
+    public void addError( final Throwable t )
     {
-        String message = "An exception was caught and reported. Message: " + t.getMessage();
+        final String message = "An exception was caught and reported. Message: " + t.getMessage();
         addError( new ErrorMessage( message, t ) );
     }
 
@@ -133,7 +133,7 @@ final class DefaultRulesBinder
      *
      * @param errorMessage The error to record.
      */
-    private void addError( ErrorMessage errorMessage )
+    private void addError( final ErrorMessage errorMessage )
     {
         this.errors.add( errorMessage );
     }
@@ -141,7 +141,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void install( RulesModule rulesModule )
+    public void install( final RulesModule rulesModule )
     {
         rulesModule.configure( this );
     }
@@ -149,7 +149,7 @@ final class DefaultRulesBinder
     /**
      * {@inheritDoc}
      */
-    public LinkedRuleBuilder forPattern( String pattern )
+    public LinkedRuleBuilder forPattern( final String pattern )
     {
         final String keyPattern;
 

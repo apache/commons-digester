@@ -35,8 +35,8 @@ public final class SetPropertiesBuilder
 
     private boolean ignoreMissingProperty = true;
 
-    SetPropertiesBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                          LinkedRuleBuilder mainBuilder )
+    SetPropertiesBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                          final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -50,7 +50,7 @@ public final class SetPropertiesBuilder
      * @deprecated
      */
     @Deprecated
-    public SetPropertiesBuilder addAlias( String attributeName, String propertyName )
+    public SetPropertiesBuilder addAlias( final String attributeName, final String propertyName )
     {
         return addAlias( attributeName ).forProperty( propertyName );
     }
@@ -62,7 +62,7 @@ public final class SetPropertiesBuilder
      * @return the property alias builder
      * @since 3.2
      */
-    public AddAliasBuilder<SetPropertiesBuilder> addAlias( String attributeName )
+    public AddAliasBuilder<SetPropertiesBuilder> addAlias( final String attributeName )
     {
         if ( attributeName == null )
         {
@@ -77,7 +77,7 @@ public final class SetPropertiesBuilder
      * @param attributeName The attribute to match has to be ignored
      * @return this builder instance
      */
-    public SetPropertiesBuilder ignoreAttribute( String attributeName )
+    public SetPropertiesBuilder ignoreAttribute( final String attributeName )
     {
         if ( attributeName == null )
         {
@@ -96,7 +96,7 @@ public final class SetPropertiesBuilder
      * @param ignoreMissingProperty false to stop the parsing on unmatched attributes
      * @return this builder instance
      */
-    public SetPropertiesBuilder ignoreMissingProperty( boolean ignoreMissingProperty )
+    public SetPropertiesBuilder ignoreMissingProperty( final boolean ignoreMissingProperty )
     {
         this.ignoreMissingProperty = ignoreMissingProperty;
         return this;
@@ -108,7 +108,7 @@ public final class SetPropertiesBuilder
     @Override
     protected SetPropertiesRule createRule()
     {
-        SetPropertiesRule rule = new SetPropertiesRule( aliases );
+        final SetPropertiesRule rule = new SetPropertiesRule( aliases );
         rule.setIgnoreMissingProperty( ignoreMissingProperty );
         return rule;
     }

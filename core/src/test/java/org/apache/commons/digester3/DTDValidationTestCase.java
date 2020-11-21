@@ -51,19 +51,19 @@ public class DTDValidationTestCase
         .setErrorHandler( new ErrorHandler()
         {
 
-            public void warning( SAXParseException e )
+            public void warning( final SAXParseException e )
                 throws SAXException
             {
                 throw e;
             }
 
-            public void fatalError( SAXParseException e )
+            public void fatalError( final SAXParseException e )
                 throws SAXException
             {
                 throw e;
             }
 
-            public void error( SAXParseException e )
+            public void error( final SAXParseException e )
                 throws SAXException
             {
                 throw e;

@@ -137,7 +137,7 @@ public class SetNestedPropertiesRule
      * @param propertyName is the java bean property to be assigned the value of the specified xml element. This may be
      *            null, in which case the specified xml element will be ignored.
      */
-    public SetNestedPropertiesRule( String elementName, String propertyName )
+    public SetNestedPropertiesRule( final String elementName, final String propertyName )
     {
         elementNames.put( elementName, propertyName );
     }
@@ -179,7 +179,7 @@ public class SetNestedPropertiesRule
      * @param elementNames names of elements to map
      * @param propertyNames names of properties mapped to
      */
-    public SetNestedPropertiesRule( String[] elementNames, String[] propertyNames )
+    public SetNestedPropertiesRule( final String[] elementNames, final String[] propertyNames )
     {
         for ( int i = 0, size = elementNames.length; i < size; i++ )
         {
@@ -199,7 +199,7 @@ public class SetNestedPropertiesRule
      * @param elementNames names of elements->properties to map
      * @since 3.0
      */
-    public SetNestedPropertiesRule( Map<String, String> elementNames )
+    public SetNestedPropertiesRule( final Map<String, String> elementNames )
     {
         if ( elementNames != null && !elementNames.isEmpty() )
         {
@@ -213,7 +213,7 @@ public class SetNestedPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         super.setDigester( digester );
         log = digester.getLogger();
@@ -225,7 +225,7 @@ public class SetNestedPropertiesRule
      *
      * @param trimData flag to have leading and trailing whitespace removed
      */
-    public void setTrimData( boolean trimData )
+    public void setTrimData( final boolean trimData )
     {
         this.trimData = trimData;
     }
@@ -255,7 +255,7 @@ public class SetNestedPropertiesRule
      * @param allowUnknownChildElements flag to ignore any child element for which there is no corresponding
      *        object property
      */
-    public void setAllowUnknownChildElements( boolean allowUnknownChildElements )
+    public void setAllowUnknownChildElements( final boolean allowUnknownChildElements )
     {
         this.allowUnknownChildElements = allowUnknownChildElements;
     }
@@ -275,13 +275,13 @@ public class SetNestedPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        Rules oldRules = getDigester().getRules();
-        AnyChildRule anyChildRule = new AnyChildRule();
+        final Rules oldRules = getDigester().getRules();
+        final AnyChildRule anyChildRule = new AnyChildRule();
         anyChildRule.setDigester( getDigester() );
-        AnyChildRules newRules = new AnyChildRules( anyChildRule );
+        final AnyChildRules newRules = new AnyChildRules( anyChildRule );
         newRules.init( getDigester().getMatch() + "/", oldRules );
         getDigester().setRules( newRules );
     }
@@ -290,10 +290,10 @@ public class SetNestedPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
-        AnyChildRules newRules = (AnyChildRules) getDigester().getRules();
+        final AnyChildRules newRules = (AnyChildRules) getDigester().getRules();
         getDigester().setRules( newRules.getOldRules() );
     }
 
@@ -307,7 +307,7 @@ public class SetNestedPropertiesRule
      * @param elementName the xml-element has to be mapped
      * @param propertyName the property name target
      */
-    public void addAlias( String elementName, String propertyName )
+    public void addAlias( final String elementName, final String propertyName )
     {
         elementNames.put( elementName, propertyName );
     }
@@ -338,7 +338,7 @@ public class SetNestedPropertiesRule
 
         private final AnyChildRule rule;
 
-        public AnyChildRules( AnyChildRule rule )
+        public AnyChildRules( final AnyChildRule rule )
         {
             this.rule = rule;
             rules.add( rule );
@@ -349,7 +349,7 @@ public class SetNestedPropertiesRule
             return null;
         }
 
-        public void setDigester( Digester digester )
+        public void setDigester( final Digester digester )
         {
         }
 
@@ -358,11 +358,11 @@ public class SetNestedPropertiesRule
             return null;
         }
 
-        public void setNamespaceURI( String namespaceURI )
+        public void setNamespaceURI( final String namespaceURI )
         {
         }
 
-        public void add( String pattern, Rule rule )
+        public void add( final String pattern, final Rule rule )
         {
         }
 
@@ -370,9 +370,9 @@ public class SetNestedPropertiesRule
         {
         }
 
-        public List<Rule> match( String namespaceURI, String matchPath, String name, Attributes attributes )
+        public List<Rule> match( final String namespaceURI, final String matchPath, final String name, final Attributes attributes )
         {
-            List<Rule> match = decoratedRules.match( namespaceURI, matchPath, name, attributes );
+            final List<Rule> match = decoratedRules.match( namespaceURI, matchPath, name, attributes );
 
             if ( ( matchPath.startsWith( matchPrefix ) ) && ( matchPath.indexOf( '/', matchPrefix.length() ) == -1 ) )
             {
@@ -396,7 +396,7 @@ public class SetNestedPropertiesRule
                 //
                 // It might not be safe to modify the returned list,
                 // so clone it first.
-                LinkedList<Rule> newMatch = new LinkedList<Rule>( match );
+                final LinkedList<Rule> newMatch = new LinkedList<Rule>( match );
                 newMatch.addLast( rule );
                 return newMatch;
             }
@@ -423,7 +423,7 @@ public class SetNestedPropertiesRule
             return decoratedRules.rules();
         }
 
-        public void init( String prefix, Rules rules )
+        public void init( final String prefix, final Rules rules )
         {
             matchPrefix = prefix;
             decoratedRules = rules;
@@ -442,14 +442,14 @@ public class SetNestedPropertiesRule
         private String currChildElementName = null;
 
         @Override
-        public void begin( String namespaceURI, String name, Attributes attributes )
+        public void begin( final String namespaceURI, final String name, final Attributes attributes )
             throws Exception
         {
             currChildElementName = name;
         }
 
         @Override
-        public void body( String namespace, String name, String text )
+        public void body( final String namespace, final String name, String text )
             throws Exception
         {
             String propName = currChildElementName;
@@ -464,7 +464,7 @@ public class SetNestedPropertiesRule
                 }
             }
 
-            boolean debug = log.isDebugEnabled();
+            final boolean debug = log.isDebugEnabled();
 
             if ( debug )
             {
@@ -473,7 +473,7 @@ public class SetNestedPropertiesRule
             }
 
             // Populate the corresponding properties of the top object
-            Object top = getDigester().peek();
+            final Object top = getDigester().peek();
             if ( debug )
             {
                 if ( top != null )
@@ -498,7 +498,7 @@ public class SetNestedPropertiesRule
                 // (BeanUtils.setProperty() silently returns in this case)
                 if ( top instanceof DynaBean )
                 {
-                    DynaProperty desc = ( (DynaBean) top ).getDynaClass().getDynaProperty( propName );
+                    final DynaProperty desc = ( (DynaBean) top ).getDynaClass().getDynaProperty( propName );
                     if ( desc == null )
                     {
                         throw new NoSuchMethodException( "Bean has no property named " + propName );
@@ -507,7 +507,7 @@ public class SetNestedPropertiesRule
                 else
                 /* this is a standard JavaBean */
                 {
-                    PropertyDescriptor desc = getPropertyDescriptor( top, propName );
+                    final PropertyDescriptor desc = getPropertyDescriptor( top, propName );
                     if ( desc == null )
                     {
                         throw new NoSuchMethodException( "Bean has no property named " + propName );
@@ -519,7 +519,7 @@ public class SetNestedPropertiesRule
             {
                 setProperty( top, propName, text );
             }
-            catch ( NullPointerException e )
+            catch ( final NullPointerException e )
             {
                 log.error( "NullPointerException: " + "top=" + top + ",propName=" + propName + ",value=" + text + "!" );
                 throw e;
@@ -527,7 +527,7 @@ public class SetNestedPropertiesRule
         }
 
         @Override
-        public void end( String namespace, String name )
+        public void end( final String namespace, final String name )
             throws Exception
         {
             currChildElementName = null;

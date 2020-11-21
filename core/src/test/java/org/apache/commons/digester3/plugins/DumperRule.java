@@ -27,17 +27,17 @@ public class DumperRule
     extends Rule
 {
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         System.out.print( "<" );
         System.out.print( name );
 
-        int nAttributes = attributes.getLength();
+        final int nAttributes = attributes.getLength();
         for ( int i = 0; i < nAttributes; ++i )
         {
-            String key = attributes.getQName( i );
-            String value = attributes.getValue( i );
+            final String key = attributes.getQName( i );
+            final String value = attributes.getValue( i );
             System.out.print( " " );
             System.out.print( key );
             System.out.print( "=" );
@@ -49,14 +49,14 @@ public class DumperRule
     }
 
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
         System.out.print( text );
     }
 
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         System.out.print( "</" );

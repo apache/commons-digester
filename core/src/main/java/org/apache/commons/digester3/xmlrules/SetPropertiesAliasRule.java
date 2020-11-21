@@ -34,13 +34,13 @@ final class SetPropertiesAliasRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        String attributeName = attributes.getValue( "attr-name" );
-        String propertyName = attributes.getValue( "prop-name" );
+        final String attributeName = attributes.getValue( "attr-name" );
+        final String propertyName = attributes.getValue( "prop-name" );
 
-        SetPropertiesBuilder builder = getDigester().peek();
+        final SetPropertiesBuilder builder = getDigester().peek();
         builder.addAlias( attributeName ).forProperty( propertyName );
     }
 

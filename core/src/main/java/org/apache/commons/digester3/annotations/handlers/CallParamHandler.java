@@ -37,9 +37,9 @@ public final class CallParamHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( CallParam annotation, MethodArgument element, RulesBinder rulesBinder )
+    public void handle( final CallParam annotation, final MethodArgument element, final RulesBinder rulesBinder )
     {
-        CallParamBuilder builder = rulesBinder
+        final CallParamBuilder builder = rulesBinder
             .forPattern( annotation.pattern() )
             .withNamespaceURI( annotation.namespaceURI() )
             .callParam()

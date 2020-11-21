@@ -83,7 +83,7 @@ public abstract class FromAnnotationsRuleModule
      * @param annotationHandlerFactory A custom {@link AnnotationHandlerFactory} to create
      *        {@link AnnotationHandler} instances
      */
-    protected final void useAnnotationHandlerFactory( AnnotationHandlerFactory annotationHandlerFactory )
+    protected final void useAnnotationHandlerFactory( final AnnotationHandlerFactory annotationHandlerFactory )
     {
         if ( annotationHandlerFactory == null )
         {
@@ -158,7 +158,7 @@ public abstract class FromAnnotationsRuleModule
      * @param <AE>
      * @param action
      */
-    private <AE extends AnnotatedElement> void visitElements( PrivilegedAction<AE[]> action )
+    private <AE extends AnnotatedElement> void visitElements( final PrivilegedAction<AE[]> action )
     {
         AE[] annotatedElements = null;
         if ( System.getSecurityManager() != null )
@@ -177,11 +177,11 @@ public abstract class FromAnnotationsRuleModule
      *
      * @param annotatedElements
      */
-    private void visitElements( AnnotatedElement... annotatedElements )
+    private void visitElements( final AnnotatedElement... annotatedElements )
     {
-        for ( AnnotatedElement element : annotatedElements )
+        for ( final AnnotatedElement element : annotatedElements )
         {
-            for ( Annotation annotation : element.getAnnotations() )
+            for ( final Annotation annotation : element.getAnnotations() )
             {
                 handle( annotation, element );
             }
@@ -194,14 +194,14 @@ public abstract class FromAnnotationsRuleModule
                 if ( element instanceof Constructor )
                 {
                     // constructor args
-                    Constructor<?> construcotr = (Constructor<?>) element;
+                    final Constructor<?> construcotr = (Constructor<?>) element;
                     parameterAnnotations = construcotr.getParameterAnnotations();
                     parameterTypes = construcotr.getParameterTypes();
                 }
                 else
                 {
                     // method args
-                    Method method = (Method) element;
+                    final Method method = (Method) element;
                     parameterAnnotations = method.getParameterAnnotations();
                     parameterTypes = method.getParameterTypes();
                 }
@@ -222,18 +222,18 @@ public abstract class FromAnnotationsRuleModule
      * @param element the current visited element.
      */
     @SuppressWarnings( "unchecked" )
-    private <A extends Annotation, E extends AnnotatedElement, R extends Rule> void handle( A annotation, E element )
+    private <A extends Annotation, E extends AnnotatedElement, R extends Rule> void handle( final A annotation, final E element )
     {
-        Class<?> annotationType = annotation.annotationType();
+        final Class<?> annotationType = annotation.annotationType();
 
         // check if it is one of the @*.List annotation
         if ( annotationType.isAnnotationPresent( DigesterRuleList.class ) )
         {
-            Annotation[] annotations = getAnnotationsArrayValue( annotation );
+            final Annotation[] annotations = getAnnotationsArrayValue( annotation );
             if ( annotations != null && annotations.length > 0 )
             {
                 // if it is an annotations array, process them
-                for ( Annotation ptr : annotations )
+                for ( final Annotation ptr : annotations )
                 {
                     handle( ptr, element );
                 }
@@ -241,20 +241,20 @@ public abstract class FromAnnotationsRuleModule
         }
         else if ( annotationType.isAnnotationPresent( DigesterRule.class ) )
         {
-            DigesterRule digesterRule = annotationType.getAnnotation( DigesterRule.class );
+            final DigesterRule digesterRule = annotationType.getAnnotation( DigesterRule.class );
 
             // the default behavior if the handler is not specified
-            Class<? extends AnnotationHandler<Annotation, AnnotatedElement>> handlerType =
+            final Class<? extends AnnotationHandler<Annotation, AnnotatedElement>> handlerType =
                 (Class<? extends AnnotationHandler<Annotation, AnnotatedElement>>) digesterRule.handledBy();
             try
             {
-                AnnotationHandler<Annotation, AnnotatedElement> handler =
+                final AnnotationHandler<Annotation, AnnotatedElement> handler =
                     annotationHandlerFactory.newInstance( handlerType );
 
                 // run!
                 handler.handle( annotation, element, this.rulesBinder );
             }
-            catch ( Exception e )
+            catch ( final Exception e )
             {
                 rulesBinder.addError( e );
             }

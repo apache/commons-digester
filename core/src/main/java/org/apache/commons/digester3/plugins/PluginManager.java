@@ -59,7 +59,7 @@ public class PluginManager
      *
      * @param r The object containing data that should only exist once for each Digester instance.
      */
-    public PluginManager( PluginContext r )
+    public PluginManager( final PluginContext r )
     {
         pluginContext = r;
     }
@@ -73,7 +73,7 @@ public class PluginManager
      * 
      * @param parent must be non-null.
      */
-    public PluginManager( PluginManager parent )
+    public PluginManager( final PluginManager parent )
     {
         this.parent = parent;
         this.pluginContext = parent.pluginContext;
@@ -89,13 +89,13 @@ public class PluginManager
      * 
      * @param decl an object representing a plugin class.
      */
-    public void addDeclaration( Declaration decl )
+    public void addDeclaration( final Declaration decl )
     {
-        Log log = LogUtils.getLogger( null );
-        boolean debug = log.isDebugEnabled();
+        final Log log = LogUtils.getLogger( null );
+        final boolean debug = log.isDebugEnabled();
 
-        Class<?> pluginClass = decl.getPluginClass();
-        String id = decl.getId();
+        final Class<?> pluginClass = decl.getPluginClass();
+        final String id = decl.getId();
 
         declarationsByClass.put( pluginClass.getName(), decl );
 
@@ -115,7 +115,7 @@ public class PluginManager
      * @param className The {@link Declaration} class name
      * @return The Declaration instance obtained by the input class name
      */
-    public Declaration getDeclarationByClass( String className )
+    public Declaration getDeclarationByClass( final String className )
     {
         Declaration decl = declarationsByClass.get( className );
 
@@ -133,7 +133,7 @@ public class PluginManager
      * @param id Description of the Parameter
      * @return The declaration value
      */
-    public Declaration getDeclarationById( String id )
+    public Declaration getDeclarationById( final String id )
     {
         Declaration decl = declarationsById.get( id );
 
@@ -159,7 +159,7 @@ public class PluginManager
      * @return The discovered Rule loader instance
      * @throws PluginException if any error occurs while finding the loader
      */
-    public RuleLoader findLoader( Digester digester, String id, Class<?> pluginClass, Properties props )
+    public RuleLoader findLoader( final Digester digester, final String id, final Class<?> pluginClass, final Properties props )
         throws PluginException
     {
 
@@ -167,16 +167,16 @@ public class PluginManager
         // until one of them locates a source of dynamic rules given
         // this specific plugin class and the associated declaration
         // properties.
-        Log log = LogUtils.getLogger( digester );
-        boolean debug = log.isDebugEnabled();
+        final Log log = LogUtils.getLogger( digester );
+        final boolean debug = log.isDebugEnabled();
         log.debug( "scanning ruleFinders to locate loader.." );
 
-        List<RuleFinder> ruleFinders = pluginContext.getRuleFinders();
+        final List<RuleFinder> ruleFinders = pluginContext.getRuleFinders();
         RuleLoader ruleLoader = null;
-        for ( Iterator<RuleFinder> i = ruleFinders.iterator(); i.hasNext() && ruleLoader == null; )
+        for ( final Iterator<RuleFinder> i = ruleFinders.iterator(); i.hasNext() && ruleLoader == null; )
         {
 
-            RuleFinder finder = i.next();
+            final RuleFinder finder = i.next();
             if ( debug )
             {
                 log.debug( "checking finder of type " + finder.getClass().getName() );
@@ -185,7 +185,7 @@ public class PluginManager
             {
                 ruleLoader = finder.findLoader( digester, pluginClass, props );
             }
-            catch ( PluginException e )
+            catch ( final PluginException e )
             {
                 throw new PluginException( "Unable to locate plugin rules for plugin" + " with id [" + id + "]"
                     + ", and class [" + pluginClass.getName() + "]" + ":" + e.getMessage(), e.getCause() );

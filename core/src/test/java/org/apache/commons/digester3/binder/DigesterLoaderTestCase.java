@@ -38,22 +38,22 @@ public final class DigesterLoaderTestCase
     @Test
     public void digester151()
     {
-        ErrorHandler expected = new ErrorHandler()
+        final ErrorHandler expected = new ErrorHandler()
         {
 
-            public void warning( SAXParseException exception )
+            public void warning( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
             }
 
-            public void fatalError( SAXParseException exception )
+            public void fatalError( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
             }
 
-            public void error( SAXParseException exception )
+            public void error( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
@@ -61,7 +61,7 @@ public final class DigesterLoaderTestCase
 
         };
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -72,7 +72,7 @@ public final class DigesterLoaderTestCase
 
         } ).setErrorHandler( expected ).newDigester();
 
-        ErrorHandler actual = digester.getErrorHandler();
+        final ErrorHandler actual = digester.getErrorHandler();
 
         assertSame( expected, actual );
     }
@@ -80,7 +80,7 @@ public final class DigesterLoaderTestCase
     @Test
     public void digeser152()
     {
-        Locator expected = new Locator()
+        final Locator expected = new Locator()
         {
 
             public String getSystemId()
@@ -108,7 +108,7 @@ public final class DigesterLoaderTestCase
             }
         };
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -119,7 +119,7 @@ public final class DigesterLoaderTestCase
 
         } ).setDocumentLocator( expected ).newDigester();
 
-        Locator actual = digester.getDocumentLocator();
+        final Locator actual = digester.getDocumentLocator();
 
         assertSame( expected, actual );
     }
@@ -127,9 +127,9 @@ public final class DigesterLoaderTestCase
     @Test
     public void digester155()
     {
-        ClassLoader expected = getClass().getClassLoader();
+        final ClassLoader expected = getClass().getClassLoader();
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -140,7 +140,7 @@ public final class DigesterLoaderTestCase
 
         } ).setClassLoader( expected ).newDigester();
 
-        ClassLoader actual = digester.getClassLoader();
+        final ClassLoader actual = digester.getClassLoader();
 
         assertSame( expected, actual );
     }

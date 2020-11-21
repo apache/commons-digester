@@ -36,9 +36,9 @@ public final class FactoryCreateHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( FactoryCreate annotation, Class<?> element, RulesBinder rulesBinder )
+    public void handle( final FactoryCreate annotation, final Class<?> element, final RulesBinder rulesBinder )
     {
-        FactoryCreateBuilder builder = rulesBinder.forPattern( annotation.pattern() )
+        final FactoryCreateBuilder builder = rulesBinder.forPattern( annotation.pattern() )
             .withNamespaceURI( annotation.namespaceURI() )
             .factoryCreate()
             .overriddenByAttribute( annotation.attributeName().length() > 0 ? annotation.attributeName() : null )

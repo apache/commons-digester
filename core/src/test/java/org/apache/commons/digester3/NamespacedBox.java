@@ -39,7 +39,7 @@ public class NamespacedBox
         return namespaces;
     }
 
-    public void setNamespaces( Map<String, String> namespaces )
+    public void setNamespaces( final Map<String, String> namespaces )
     {
         this.namespaces = namespaces;
     }

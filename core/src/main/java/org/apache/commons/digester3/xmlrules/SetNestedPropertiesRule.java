@@ -31,7 +31,7 @@ final class SetNestedPropertiesRule
     extends AbstractXmlRule
 {
 
-    public SetNestedPropertiesRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public SetNestedPropertiesRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -40,12 +40,12 @@ final class SetNestedPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        boolean allowUnknownChildElements =
+        final boolean allowUnknownChildElements =
             "true".equalsIgnoreCase( attributes.getValue( "allow-unknown-child-elements" ) );
-        NestedPropertiesBuilder builder = linkedRuleBuilder
+        final NestedPropertiesBuilder builder = linkedRuleBuilder
                                             .setNestedProperties()
                                             .allowUnknownChildElements( allowUnknownChildElements );
         getDigester().push( builder );
@@ -55,7 +55,7 @@ final class SetNestedPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         getDigester().pop();

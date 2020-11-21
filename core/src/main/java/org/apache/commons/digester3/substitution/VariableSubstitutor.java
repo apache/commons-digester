@@ -55,7 +55,7 @@ public class VariableSubstitutor
      * 
      * @param expander VariableExpander implementation, null if no substitutions are to be performed
      */
-    public VariableSubstitutor( VariableExpander expander )
+    public VariableSubstitutor( final VariableExpander expander )
     {
         this( expander, expander );
     }
@@ -68,7 +68,7 @@ public class VariableSubstitutor
      * @param bodyTextExpander VariableExpander implementation to be used for bodyTextExpander, null if no attribute
      *            substitutions are to be performed
      */
-    public VariableSubstitutor( VariableExpander attributesExpander, VariableExpander bodyTextExpander )
+    public VariableSubstitutor( final VariableExpander attributesExpander, final VariableExpander bodyTextExpander )
     {
         this.attributesExpander = attributesExpander;
         this.bodyTextExpander = bodyTextExpander;
@@ -79,7 +79,7 @@ public class VariableSubstitutor
      * {@inheritDoc}
      */
     @Override
-    public Attributes substitute( Attributes attributes )
+    public Attributes substitute( final Attributes attributes )
     {
         Attributes results = attributes;
         if ( attributesExpander != null )
@@ -94,7 +94,7 @@ public class VariableSubstitutor
      * {@inheritDoc}
      */
     @Override
-    public String substitute( String bodyText )
+    public String substitute( final String bodyText )
     {
         String result = bodyText;
         if ( bodyTextExpander != null )

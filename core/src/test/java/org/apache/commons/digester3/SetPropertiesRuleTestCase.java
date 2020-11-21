@@ -68,7 +68,7 @@ public class SetPropertiesRuleTestCase
     public void testPositive()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -82,7 +82,7 @@ public class SetPropertiesRuleTestCase
         }).newDigester();
 
         // Parse the input
-        SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
+        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
 
         // Check that the properties were set correctly
         assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
@@ -99,7 +99,7 @@ public class SetPropertiesRuleTestCase
     public void testIgnoreMissing()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -113,7 +113,7 @@ public class SetPropertiesRuleTestCase
         }).newDigester();
 
         // Parse the input
-        SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_2 ) );
+        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_2 ) );
 
         // Check that the properties were set correctly
         assertNull( "alpha property not set", bean.getAlpha() );
@@ -130,7 +130,7 @@ public class SetPropertiesRuleTestCase
     public void testNegativeNotIgnoreMissing()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -146,11 +146,11 @@ public class SetPropertiesRuleTestCase
         try
         {
             // Parse the input
-            SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_2 ) );
+            final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_2 ) );
             fail( "Should have thrown NoSuchMethodException" );
             assertNotNull( bean ); // just to prevent compiler warning on unused var
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             if ( e instanceof NoSuchMethodException )
             {
@@ -158,7 +158,7 @@ public class SetPropertiesRuleTestCase
             }
             else if ( e instanceof SAXException )
             {
-                Exception ee = ( (SAXException) e ).getException();
+                final Exception ee = ( (SAXException) e ).getException();
                 if ( ee != null )
                 {
                     if ( ee instanceof NoSuchMethodException )
@@ -189,7 +189,7 @@ public class SetPropertiesRuleTestCase
     public void testPositiveNotIgnoreMissingWithIgnoreAttributes()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -205,7 +205,7 @@ public class SetPropertiesRuleTestCase
         }).newDigester();
 
         // Parse the input
-        SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_3 ) );
+        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_3 ) );
 
         // Check that the properties were set correctly
         assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
@@ -217,7 +217,7 @@ public class SetPropertiesRuleTestCase
     /**
      * Get input stream from specified String containing XML data.
      */
-    private Reader xmlTestReader( String xml )
+    private Reader xmlTestReader( final String xml )
     {
         return new StringReader( xml );
     }

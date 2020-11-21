@@ -35,7 +35,7 @@ public final class Main
     /**
      * @param args
      */
-    public static void main( String[] args )
+    public static void main( final String[] args )
     {
         if ( args.length != 1 )
         {
@@ -44,25 +44,25 @@ public final class Main
         }
 
         // Drive commons-beanutils how to convert dates
-        DateConverter dateConverter = new DateConverter();
+        final DateConverter dateConverter = new DateConverter();
         dateConverter.setPatterns( new String[] { "yyyy-MM-dd'T'HH:mm" } );
         ConvertUtils.register( dateConverter, Date.class );
 
-        String filename = args[0];
+        final String filename = args[0];
 
-        Digester digester = newLoader( new AtomRulesModule() ).newDigester();
+        final Digester digester = newLoader( new AtomRulesModule() ).newDigester();
 
         try
         {
-            Feed feed = digester.parse( filename );
+            final Feed feed = digester.parse( filename );
             System.out.println( feed );
         }
-        catch ( IOException ioe )
+        catch ( final IOException ioe )
         {
             System.out.println( "Error reading input file:" + ioe.getMessage() );
             System.exit( -1 );
         }
-        catch ( SAXException se )
+        catch ( final SAXException se )
         {
             System.out.println( "Error parsing input file:" + se.getMessage() );
             System.exit( -1 );

@@ -42,31 +42,31 @@ public class TestDeclaration
     {
         // * tests that rules can be declared via a PluginDeclarationRule
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test3.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 2, children.size() );
 

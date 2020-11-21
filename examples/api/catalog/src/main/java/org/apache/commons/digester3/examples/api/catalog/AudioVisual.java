@@ -37,33 +37,33 @@ public class AudioVisual
     private String type;
 
     // note: digester can convert a string in the xml file to an int.
-    public void setYearMade( int yearMade )
+    public void setYearMade( final int yearMade )
     {
         this.yearMade = yearMade;
     }
 
-    public void setCategory( String category )
+    public void setCategory( final String category )
     {
         this.category = category;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
 
-    public void setDesc( String desc )
+    public void setDesc( final String desc )
     {
         this.desc = desc;
     }
 
     // note: digester can convert a string in the xml file to an Integer
-    public void setRuntime( Integer runtime )
+    public void setRuntime( final Integer runtime )
     {
         this.runtime = runtime;
     }
 
-    public void setType( String type )
+    public void setType( final String type )
     {
         this.type = type;
     }

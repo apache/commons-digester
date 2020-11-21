@@ -46,8 +46,8 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
 
     private boolean fireOnBegin = false;
 
-    AbstractParamTypeBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                              LinkedRuleBuilder mainBuilder, String methodName, ClassLoader classLoader )
+    AbstractParamTypeBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                              final LinkedRuleBuilder mainBuilder, final String methodName, final ClassLoader classLoader )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.methodName = methodName;
@@ -64,7 +64,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
      * @param paramType The Java class of the method's argument
      * @return this builder instance
      */
-    public final AbstractParamTypeBuilder<R> withParameterType( Class<?> paramType )
+    public final AbstractParamTypeBuilder<R> withParameterType( final Class<?> paramType )
     {
         if ( paramType == null )
         {
@@ -85,7 +85,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
      * @param paramType The Java class name of the method's argument
      * @return this builder instance
      */
-    public final AbstractParamTypeBuilder<R> withParameterType( String paramType )
+    public final AbstractParamTypeBuilder<R> withParameterType( final String paramType )
     {
         if ( paramType == null )
         {
@@ -99,7 +99,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
             {
                 this.paramType = classLoader.loadClass( paramType );
             }
-            catch ( ClassNotFoundException e )
+            catch ( final ClassNotFoundException e )
             {
                 this.reportError( format( ".%s.withParameterType( Class<?> )", methodName ),
                                   format( "class '%s' cannot be load", paramType ) );
@@ -114,7 +114,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
      * @param useExactMatch The exact matching being used
      * @return this builder instance
      */
-    public final AbstractParamTypeBuilder<R> useExactMatch( boolean useExactMatch )
+    public final AbstractParamTypeBuilder<R> useExactMatch( final boolean useExactMatch )
     {
         this.useExactMatch = useExactMatch;
         return this;
@@ -126,7 +126,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
      * @param fireOnBegin true, to invoke the rule at {@code begin}, false for {@code end}
      * @return this builder instance
      */
-    public final AbstractParamTypeBuilder<R> fireOnBegin( boolean fireOnBegin )
+    public final AbstractParamTypeBuilder<R> fireOnBegin( final boolean fireOnBegin )
     {
         this.fireOnBegin = fireOnBegin;
         return this;

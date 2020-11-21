@@ -66,7 +66,7 @@ public class FinderSetProperties
      * @param propsAttr must be non-null.
      * @param falseval must be non-null.
      */
-    public FinderSetProperties( String propsAttr, String falseval )
+    public FinderSetProperties( final String propsAttr, final String falseval )
     {
         this.propsAttr = propsAttr;
         this.falseval = falseval;
@@ -92,10 +92,10 @@ public class FinderSetProperties
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester d, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester d, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
-        String state = p.getProperty( propsAttr );
+        final String state = p.getProperty( propsAttr );
         if ( ( state != null ) && state.equals( falseval ) )
         {
             // user has explicitly disabled automatic setting of properties.

@@ -118,7 +118,7 @@ public class PluginContext
      *
      * @param ruleFinders the list of RuleFinder objects
      */
-    public void setRuleFinders( List<RuleFinder> ruleFinders )
+    public void setRuleFinders( final List<RuleFinder> ruleFinders )
     {
         this.ruleFinders = ruleFinders;
     }
@@ -157,7 +157,7 @@ public class PluginContext
      *            this parameter <i>must</i> be null.
      * @param attrName is the attribute whose value contains the name of the class to be instantiated.
      */
-    public void setPluginClassAttribute( String namespaceUri, String attrName )
+    public void setPluginClassAttribute( final String namespaceUri, final String attrName )
     {
         pluginClassAttrNs = namespaceUri;
         pluginClassAttr = attrName;
@@ -198,7 +198,7 @@ public class PluginContext
      * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
      *            instantiating an object.
      */
-    public void setPluginIdAttribute( String namespaceUri, String attrName )
+    public void setPluginIdAttribute( final String namespaceUri, final String attrName )
     {
         pluginIdAttrNs = namespaceUri;
         pluginIdAttr = attrName;

@@ -33,7 +33,7 @@ public abstract class AbstractRulesModule
     /**
      * {@inheritDoc}
      */
-    public final void configure( RulesBinder rulesBinder )
+    public final void configure( final RulesBinder rulesBinder )
     {
         if ( this.rulesBinder != null )
         {
@@ -66,7 +66,7 @@ public abstract class AbstractRulesModule
      * @param arguments Arguments referenced by the format specifiers in the format string
      * @see RulesBinder#addError(String, Object...)
      */
-    protected void addError( String messagePattern, Object... arguments )
+    protected void addError( final String messagePattern, final Object... arguments )
     {
         rulesBinder.addError( messagePattern, arguments );
     }
@@ -78,7 +78,7 @@ public abstract class AbstractRulesModule
      * @param t The exception has to be recorded
      * @see RulesBinder#addError(Throwable)
      */
-    protected void addError( Throwable t )
+    protected void addError( final Throwable t )
     {
         rulesBinder.addError( t );
     }
@@ -89,7 +89,7 @@ public abstract class AbstractRulesModule
      * @param rulesModule The module used to configure more bindings
      * @see RulesBinder#install(RulesModule)
      */
-    protected void install( RulesModule rulesModule )
+    protected void install( final RulesModule rulesModule )
     {
         rulesBinder.install( rulesModule );
     }
@@ -101,7 +101,7 @@ public abstract class AbstractRulesModule
      * @return The Digester rules builder
      * @see RulesBinder#forPattern(String)
      */
-    protected LinkedRuleBuilder forPattern( String pattern )
+    protected LinkedRuleBuilder forPattern( final String pattern )
     {
         return rulesBinder.forPattern( pattern );
     }

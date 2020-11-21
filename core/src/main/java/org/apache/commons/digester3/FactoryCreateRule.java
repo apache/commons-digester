@@ -61,7 +61,7 @@ public class FactoryCreateRule
      *
      * @param className Java class name of the object creation factory class
      */
-    public FactoryCreateRule( String className )
+    public FactoryCreateRule( final String className )
     {
         this( className, false );
     }
@@ -77,7 +77,7 @@ public class FactoryCreateRule
      *
      * @param clazz Java class name of the object creation factory class
      */
-    public FactoryCreateRule( Class<? extends ObjectCreationFactory<?>> clazz )
+    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz )
     {
         this( clazz, false );
     }
@@ -96,7 +96,7 @@ public class FactoryCreateRule
      * @param attributeName Attribute name which, if present, contains an override of the class name of the object
      *            creation factory to create.
      */
-    public FactoryCreateRule( String className, String attributeName )
+    public FactoryCreateRule( final String className, final String attributeName )
     {
         this( className, attributeName, false );
     }
@@ -115,7 +115,7 @@ public class FactoryCreateRule
      * @param attributeName Attribute name which, if present, contains an override of the class name of the object
      *            creation factory to create.
      */
-    public FactoryCreateRule( Class<? extends ObjectCreationFactory<?>> clazz, String attributeName )
+    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final String attributeName )
     {
         this( clazz, attributeName, false );
     }
@@ -130,7 +130,7 @@ public class FactoryCreateRule
      *
      * @param creationFactory called on to create the object.
      */
-    public FactoryCreateRule( ObjectCreationFactory<?> creationFactory )
+    public FactoryCreateRule( final ObjectCreationFactory<?> creationFactory )
     {
         this( creationFactory, false );
     }
@@ -142,7 +142,7 @@ public class FactoryCreateRule
      * @param className Java class name of the object creation factory class
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
-    public FactoryCreateRule( String className, boolean ignoreCreateExceptions )
+    public FactoryCreateRule( final String className, final boolean ignoreCreateExceptions )
     {
         this( className, null, ignoreCreateExceptions );
     }
@@ -154,7 +154,7 @@ public class FactoryCreateRule
      * @param clazz Java class name of the object creation factory class
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
-    public FactoryCreateRule( Class<? extends ObjectCreationFactory<?>> clazz, boolean ignoreCreateExceptions )
+    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final boolean ignoreCreateExceptions )
     {
         this( clazz, null, ignoreCreateExceptions );
     }
@@ -169,7 +169,7 @@ public class FactoryCreateRule
      *            creation factory to create.
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
-    public FactoryCreateRule( String className, String attributeName, boolean ignoreCreateExceptions )
+    public FactoryCreateRule( final String className, final String attributeName, final boolean ignoreCreateExceptions )
     {
         this.className = className;
         this.attributeName = attributeName;
@@ -186,8 +186,8 @@ public class FactoryCreateRule
      *            creation factory to create.
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
-    public FactoryCreateRule( Class<? extends ObjectCreationFactory<?>> clazz, String attributeName,
-                              boolean ignoreCreateExceptions )
+    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final String attributeName,
+                              final boolean ignoreCreateExceptions )
     {
         this( clazz.getName(), attributeName, ignoreCreateExceptions );
     }
@@ -198,7 +198,7 @@ public class FactoryCreateRule
      * @param creationFactory called on to create the object.
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
-    public FactoryCreateRule( ObjectCreationFactory<?> creationFactory, boolean ignoreCreateExceptions )
+    public FactoryCreateRule( final ObjectCreationFactory<?> creationFactory, final boolean ignoreCreateExceptions )
     {
         this.creationFactory = creationFactory;
         this.ignoreCreateExceptions = ignoreCreateExceptions;
@@ -228,7 +228,7 @@ public class FactoryCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         if ( ignoreCreateExceptions )
@@ -240,7 +240,7 @@ public class FactoryCreateRule
 
             try
             {
-                Object instance = getFactory( attributes ).createObject( attributes );
+                final Object instance = getFactory( attributes ).createObject( attributes );
 
                 if ( getDigester().getLogger().isDebugEnabled() )
                 {
@@ -253,7 +253,7 @@ public class FactoryCreateRule
                 exceptionIgnoredStack.push( Boolean.FALSE );
 
             }
-            catch ( Exception e )
+            catch ( final Exception e )
             {
                 // log message and error
                 if ( getDigester().getLogger().isInfoEnabled() )
@@ -273,7 +273,7 @@ public class FactoryCreateRule
         }
         else
         {
-            Object instance = getFactory( attributes ).createObject( attributes );
+            final Object instance = getFactory( attributes ).createObject( attributes );
 
             if ( getDigester().getLogger().isDebugEnabled() )
             {
@@ -290,7 +290,7 @@ public class FactoryCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         // check if object was created
@@ -310,7 +310,7 @@ public class FactoryCreateRule
             return;
         }
 
-        Object top = getDigester().pop();
+        final Object top = getDigester().pop();
         if ( getDigester().getLogger().isDebugEnabled() )
         {
             getDigester().getLogger().debug( format( "[FactoryCreateRule]{%s} Pop %s",
@@ -338,7 +338,7 @@ public class FactoryCreateRule
     @Override
     public String toString()
     {
-        Formatter formatter = new Formatter().format( "FactoryCreateRule[className=%s, attributeName=%s",
+        final Formatter formatter = new Formatter().format( "FactoryCreateRule[className=%s, attributeName=%s",
                                                       className, attributeName );
         if ( creationFactory != null )
         {
@@ -357,7 +357,7 @@ public class FactoryCreateRule
      * @return An instance of our associated object creation factory, creating one if necessary
      * @throws Exception if any error occurs
      */
-    protected ObjectCreationFactory<?> getFactory( Attributes attributes )
+    protected ObjectCreationFactory<?> getFactory( final Attributes attributes )
         throws Exception
     {
         if ( creationFactory == null )
@@ -365,7 +365,7 @@ public class FactoryCreateRule
             String realClassName = className;
             if ( attributeName != null )
             {
-                String value = attributes.getValue( attributeName );
+                final String value = attributes.getValue( attributeName );
                 if ( value != null )
                 {
                     realClassName = value;
@@ -376,7 +376,7 @@ public class FactoryCreateRule
                 getDigester().getLogger().debug( format( "[FactoryCreateRule]{%s} New factory %s",
                                                          getDigester().getMatch(), realClassName ) );
             }
-            Class<?> clazz = getDigester().getClassLoader().loadClass( realClassName );
+            final Class<?> clazz = getDigester().getClassLoader().loadClass( realClassName );
             creationFactory = (ObjectCreationFactory<?>) clazz.newInstance();
             creationFactory.setDigester( getDigester() );
         }

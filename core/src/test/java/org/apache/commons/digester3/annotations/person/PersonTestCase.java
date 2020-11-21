@@ -31,7 +31,7 @@ public final class PersonTestCase
     public void testPerson()
         throws Exception
     {
-        Person person = new Person();
+        final Person person = new Person();
         person.setId( 1 );
         person.setName( "Gonzo" );
         person.setCategory( "acquaintance" );

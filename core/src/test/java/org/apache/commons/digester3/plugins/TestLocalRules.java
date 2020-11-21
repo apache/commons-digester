@@ -42,31 +42,31 @@ public class TestLocalRules
     {
         // * tests that the plugin class can define an addRules method,
         // which gets detected and executed.
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr2 = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr2 = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr2 );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test4a.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 3, children.size() );
 
@@ -75,7 +75,7 @@ public class TestLocalRules
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( Slider.class, child.getClass() );
-        Slider slider1 = (Slider) child;
+        final Slider slider1 = (Slider) child;
         assertEquals( "slider1", slider1.getLabel() );
         assertEquals( 1, slider1.getMin() );
         assertEquals( 2, slider1.getMax() );
@@ -85,7 +85,7 @@ public class TestLocalRules
         child = children.get( 1 );
         assertNotNull( child );
         assertEquals( Slider.class, child.getClass() );
-        Slider slider2 = (Slider) child;
+        final Slider slider2 = (Slider) child;
         assertEquals( "slider2", slider2.getLabel() );
         assertEquals( 0, slider2.getMin() );
         assertEquals( 0, slider2.getMax() );
@@ -109,31 +109,31 @@ public class TestLocalRules
         // rule is not automatically added.
         // * tests that a SetProperties rule applying to one class doesn't
         // apply to different plugin classes mounted at the same rule.
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr2 = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr2 = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr2 );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test4b.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 3, children.size() );
 
@@ -142,7 +142,7 @@ public class TestLocalRules
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( Slider.class, child.getClass() );
-        Slider slider1 = (Slider) child;
+        final Slider slider1 = (Slider) child;
         assertEquals( "nolabel", slider1.getLabel() );
         assertEquals( 0, slider1.getMin() );
         assertEquals( 0, slider1.getMax() );
@@ -152,7 +152,7 @@ public class TestLocalRules
         child = children.get( 1 );
         assertNotNull( child );
         assertEquals( Slider.class, child.getClass() );
-        Slider slider2 = (Slider) child;
+        final Slider slider2 = (Slider) child;
         assertEquals( "nolabel", slider2.getLabel() );
         assertEquals( 10, slider2.getMin() );
         assertEquals( 20, slider2.getMax() );

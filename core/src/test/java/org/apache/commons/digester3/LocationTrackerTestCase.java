@@ -46,7 +46,7 @@ public class LocationTrackerTestCase
     {
         public Map<Object, String> locations = new HashMap<Object, String>();
 
-        public <T> T onPush( Digester d, String stackName, T o )
+        public <T> T onPush( final Digester d, final String stackName, final T o )
         {
             if ( stackName == null )
             {
@@ -54,8 +54,8 @@ public class LocationTrackerTestCase
 
                 // note that a Locator object can also provide
                 // publicId and systemId info.
-                Locator l = d.getDocumentLocator();
-                StringBuilder locn = new StringBuilder();
+                final Locator l = d.getDocumentLocator();
+                final StringBuilder locn = new StringBuilder();
                 locn.append( "line=" );
                 locn.append( l.getLineNumber() );
                 locations.put( o, locn.toString() );
@@ -63,7 +63,7 @@ public class LocationTrackerTestCase
             return o;
         }
 
-        public <T> T onPop( Digester d, String stackName, T o )
+        public <T> T onPop( final Digester d, final String stackName, final T o )
         {
             return o;
         }
@@ -77,9 +77,9 @@ public class LocationTrackerTestCase
             "<?xml version='1.0'?>\n" + "<box id='root'>\n" + "  <subBox id='box1'/>\n" + "  <ignoreme/>\n"
                 + "  <subBox id='box2'/> <subBox id='box3'/>\n" + "</box>";
 
-        LocationTracker locnTracker = new LocationTracker();
+        final LocationTracker locnTracker = new LocationTracker();
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -99,13 +99,13 @@ public class LocationTrackerTestCase
         .setStackAction( locnTracker )
         .newDigester();
 
-        Box root = digester.parse( new StringReader( TEST_XML ) );
+        final Box root = digester.parse( new StringReader( TEST_XML ) );
         assertNotNull( root );
-        List<Box> children = root.getChildren();
+        final List<Box> children = root.getChildren();
         assertEquals( 3, children.size() );
-        Box box1 = children.get( 0 );
-        Box box2 = children.get( 1 );
-        Box box3 = children.get( 2 );
+        final Box box1 = children.get( 0 );
+        final Box box2 = children.get( 1 );
+        final Box box3 = children.get( 2 );
 
         assertEquals( "line=2", locnTracker.locations.get( root ) );
         assertEquals( "line=3", locnTracker.locations.get( box1 ) );

@@ -52,7 +52,7 @@ public final class Channel
         return title;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -62,7 +62,7 @@ public final class Channel
         return link;
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -72,7 +72,7 @@ public final class Channel
         return description;
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -82,7 +82,7 @@ public final class Channel
         return language;
     }
 
-    public void setLanguage( String language )
+    public void setLanguage( final String language )
     {
         this.language = language;
     }
@@ -98,19 +98,19 @@ public final class Channel
     }
 
     @SetNext
-    public void setImage( Image image )
+    public void setImage( final Image image )
     {
         this.image = image;
     }
 
     @SetNext
-    public void addItem( Item item )
+    public void addItem( final Item item )
     {
         this.items.add( item );
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -121,7 +121,7 @@ public final class Channel
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Channel other = (Channel) obj;
+        final Channel other = (Channel) obj;
         if ( description == null )
         {
             if ( other.description != null ) {

@@ -42,13 +42,13 @@ public abstract class AbstractAnnotatedPojoTestCase
      * @param expected the expected object
      * @throws Exception if any error occurs
      */
-    public final void verifyExpectedEqualsToParsed(Object expected) throws Exception {
+    public final void verifyExpectedEqualsToParsed(final Object expected) throws Exception {
         final Class<?> clazz = expected.getClass();
 
-        String resource = clazz.getSimpleName() + ".xml";
-        InputStream input = clazz.getResourceAsStream(resource);
+        final String resource = clazz.getSimpleName() + ".xml";
+        final InputStream input = clazz.getResourceAsStream(resource);
 
-        Collection<RulesModule> modules = this.getAuxModules();
+        final Collection<RulesModule> modules = this.getAuxModules();
         modules.add(new FromAnnotationsRuleModule()
         {
 
@@ -60,8 +60,8 @@ public abstract class AbstractAnnotatedPojoTestCase
 
         });
 
-        Digester digester = newLoader(modules).newDigester();
-        Object actual = digester.parse(input);
+        final Digester digester = newLoader(modules).newDigester();
+        final Object actual = digester.parse(input);
 
         if (input != null) {
             input.close();

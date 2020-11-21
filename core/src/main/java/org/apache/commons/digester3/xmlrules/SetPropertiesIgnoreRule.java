@@ -34,12 +34,12 @@ final class SetPropertiesIgnoreRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        String attributeName = attributes.getValue( "attr-name" );
+        final String attributeName = attributes.getValue( "attr-name" );
 
-        SetPropertiesBuilder builder = getDigester().peek();
+        final SetPropertiesBuilder builder = getDigester().peek();
         builder.ignoreAttribute( attributeName );
     }
 

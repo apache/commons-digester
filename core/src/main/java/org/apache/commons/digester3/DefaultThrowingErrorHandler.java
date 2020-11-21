@@ -33,7 +33,7 @@ public class DefaultThrowingErrorHandler
     /**
      * {@inheritDoc}
      */
-    public void warning( SAXParseException e )
+    public void warning( final SAXParseException e )
         throws SAXException
     {
         throw e;
@@ -42,7 +42,7 @@ public class DefaultThrowingErrorHandler
     /**
      * {@inheritDoc}
      */
-    public void fatalError( SAXParseException e )
+    public void fatalError( final SAXParseException e )
         throws SAXException
     {
         throw e;
@@ -51,7 +51,7 @@ public class DefaultThrowingErrorHandler
     /**
      * {@inheritDoc}
      */
-    public void error( SAXParseException e )
+    public void error( final SAXParseException e )
         throws SAXException
     {
         throw e;

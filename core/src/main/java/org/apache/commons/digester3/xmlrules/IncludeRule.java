@@ -55,11 +55,11 @@ final class IncludeRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         // The path attribute gives the URI to another digester rules xml file
-        String fileName = attributes.getValue( "url" );
+        final String fileName = attributes.getValue( "url" );
         if ( fileName != null && fileName.length() > 0 )
         {
             final URL xmlRulesResource;
@@ -85,7 +85,7 @@ final class IncludeRule
                 {
                     xmlRulesResource = new URL( fileName );
                 }
-                catch ( MalformedURLException e )
+                catch ( final MalformedURLException e )
                 {
                     targetRulesBinder.addError( "An error occurred while inculing file from '%s': %s", fileName,
                                                 e.getMessage() );
@@ -93,8 +93,8 @@ final class IncludeRule
                 }
             }
 
-            Set<String> includedFiles = memoryRulesBinder.getIncludedFiles();
-            String xmlRulesResourceString = xmlRulesResource.toString();
+            final Set<String> includedFiles = memoryRulesBinder.getIncludedFiles();
+            final String xmlRulesResourceString = xmlRulesResource.toString();
             if ( includedFiles.add( xmlRulesResourceString ) )
             {
                 try
@@ -123,12 +123,12 @@ final class IncludeRule
 
         // The class attribute gives the name of a class that implements
         // the DigesterRulesSource interface
-        String className = attributes.getValue( "class" );
+        final String className = attributes.getValue( "class" );
         if ( className != null && className.length() > 0 )
         {
             try
             {
-                Class<?> cls = Class.forName( className );
+                final Class<?> cls = Class.forName( className );
                 if ( !RulesModule.class.isAssignableFrom( cls ) )
                 {
                     targetRulesBinder.addError( "Class '%s' if not a '%s' implementation", className,
@@ -136,11 +136,11 @@ final class IncludeRule
                     return;
                 }
 
-                RulesModule rulesSource = (RulesModule) cls.newInstance();
+                final RulesModule rulesSource = (RulesModule) cls.newInstance();
 
                 install( rulesSource );
             }
-            catch ( Exception e )
+            catch ( final Exception e )
             {
                 targetRulesBinder.addError( "Impossible to include programmatic rules from class '%s': %s", className,
                                             e.getMessage() );
@@ -148,7 +148,7 @@ final class IncludeRule
         }
     }
 
-    private void install( RulesModule rulesModule )
+    private void install( final RulesModule rulesModule )
     {
         // that's an hack, shall not be taken in consideration!!! :)
         rulesModule.configure( new PrefixedRulesBinder( targetRulesBinder,

@@ -31,7 +31,7 @@ public class ObjectTestImpl
     {
     }
 
-    public void setValue( String val )
+    public void setValue( final String val )
     {
         value = val;
     }

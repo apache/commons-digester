@@ -41,8 +41,8 @@ public final class FactoryCreateBuilder
 
     private ObjectCreationFactory<?> creationFactory;
 
-    FactoryCreateBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                          LinkedRuleBuilder mainBuilder, ClassLoader classLoader )
+    FactoryCreateBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                          final LinkedRuleBuilder mainBuilder, final ClassLoader classLoader )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.classLoader = classLoader;
@@ -56,7 +56,7 @@ public final class FactoryCreateBuilder
      * @return this builder instance
      */
     @SuppressWarnings( "unchecked" ) // if class not assignable, will be notified via exception
-    public FactoryCreateBuilder ofType( String className )
+    public FactoryCreateBuilder ofType( final String className )
     {
         if ( className == null )
         {
@@ -65,7 +65,7 @@ public final class FactoryCreateBuilder
 
         try
         {
-            Class<?> type = this.classLoader.loadClass( className );
+            final Class<?> type = this.classLoader.loadClass( className );
             if ( !ObjectCreationFactory.class.isAssignableFrom( type ) )
             {
                 reportError( "factoryCreate().ofType( String )", "NULL Java type not allowed" );
@@ -74,7 +74,7 @@ public final class FactoryCreateBuilder
 
             this.type = (Class<? extends ObjectCreationFactory<?>>) type;
         }
-        catch ( ClassNotFoundException e )
+        catch ( final ClassNotFoundException e )
         {
             reportError( "factoryCreate().ofType( String )", String.format( "class '%s' cannot be load", className ) );
         }
@@ -89,7 +89,7 @@ public final class FactoryCreateBuilder
      * @param type Java class of the object creation factory class
      * @return this builder instance
      */
-    public FactoryCreateBuilder ofType( Class<? extends ObjectCreationFactory<?>> type )
+    public FactoryCreateBuilder ofType( final Class<? extends ObjectCreationFactory<?>> type )
     {
         if ( type == null )
         {
@@ -109,7 +109,7 @@ public final class FactoryCreateBuilder
      * @param creationFactory called on to create the object
      * @return this builder instance
      */
-    public <T> FactoryCreateBuilder usingFactory( /* @Nullable */ObjectCreationFactory<T> creationFactory )
+    public <T> FactoryCreateBuilder usingFactory( /* @Nullable */final ObjectCreationFactory<T> creationFactory )
     {
         this.creationFactory = creationFactory;
         return this;
@@ -121,7 +121,7 @@ public final class FactoryCreateBuilder
      * @param attributeName The attribute containing an override class name if it is present
      * @return this builder instance
      */
-    public FactoryCreateBuilder overriddenByAttribute( /* @Nullable */String attributeName )
+    public FactoryCreateBuilder overriddenByAttribute( /* @Nullable */final String attributeName )
     {
         this.attributeName = attributeName;
         return this;
@@ -133,7 +133,7 @@ public final class FactoryCreateBuilder
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored
      * @return this builder instance
      */
-    public FactoryCreateBuilder ignoreCreateExceptions( boolean ignoreCreateExceptions )
+    public FactoryCreateBuilder ignoreCreateExceptions( final boolean ignoreCreateExceptions )
     {
         this.ignoreCreateExceptions = ignoreCreateExceptions;
         return this;

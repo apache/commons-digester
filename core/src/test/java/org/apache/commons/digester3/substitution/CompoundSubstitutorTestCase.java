@@ -47,7 +47,7 @@ public final class CompoundSubstitutorTestCase
 
         private final String value;
 
-        public SubstitutorStub( String bodyText, String uri, String localName, String type, String value )
+        public SubstitutorStub( final String bodyText, final String uri, final String localName, final String type, final String value )
         {
             this.newBodyText = bodyText;
             this.uri = uri;
@@ -60,9 +60,9 @@ public final class CompoundSubstitutorTestCase
          * @see org.apache.commons.digester3.Substitutor#substitute(org.xml.sax.Attributes)
          */
         @Override
-        public Attributes substitute( Attributes attributes )
+        public Attributes substitute( final Attributes attributes )
         {
-            AttributesImpl attribs = new AttributesImpl( attributes );
+            final AttributesImpl attribs = new AttributesImpl( attributes );
             attribs.addAttribute( uri, localName, uri + ":" + localName, type, value );
             return attribs;
         }
@@ -71,7 +71,7 @@ public final class CompoundSubstitutorTestCase
          * @see org.apache.commons.digester3.Substitutor#substitute(java.lang.String)
          */
         @Override
-        public String substitute( String bodyText )
+        public String substitute( final String bodyText )
         {
             return newBodyText;
         }
@@ -85,7 +85,7 @@ public final class CompoundSubstitutorTestCase
     @Before
     public void setUp()
     {
-        AttributesImpl aImpl = new AttributesImpl();
+        final AttributesImpl aImpl = new AttributesImpl();
         aImpl.addAttribute( "", "b", ":b", "", "bcd" );
         aImpl.addAttribute( "", "c", ":c", "", "cde" );
         aImpl.addAttribute( "", "d", ":d", "", "def" );
@@ -102,19 +102,19 @@ public final class CompoundSubstitutorTestCase
             new CompoundSubstitutor( null, null );
             fail();
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // OK
         }
 
-        Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
+        final Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
 
         try
         {
             new CompoundSubstitutor( a, null );
             fail();
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // OK
         }
@@ -124,7 +124,7 @@ public final class CompoundSubstitutorTestCase
             new CompoundSubstitutor( null, a );
             fail();
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // OK
         }
@@ -133,12 +133,12 @@ public final class CompoundSubstitutorTestCase
     @Test
     public void testChaining()
     {
-        Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
-        Substitutor b = new SubstitutorStub( "STU", "", "b", "", "bcd" );
+        final Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
+        final Substitutor b = new SubstitutorStub( "STU", "", "b", "", "bcd" );
 
-        Substitutor test = new CompoundSubstitutor( a, b );
+        final Substitutor test = new CompoundSubstitutor( a, b );
 
-        AttributesImpl attribFixture = new AttributesImpl( attrib );
+        final AttributesImpl attribFixture = new AttributesImpl( attrib );
         attribFixture.addAttribute( "", "a", ":a", "", "abc" );
         attribFixture.addAttribute( "", "b", ":b", "", "bcd" );
 
@@ -146,7 +146,7 @@ public final class CompoundSubstitutorTestCase
         assertEquals( test.substitute( bodyText ), "STU" );
     }
 
-    private boolean areEqual( Attributes a, Attributes b )
+    private boolean areEqual( final Attributes a, final Attributes b )
     {
         if ( a.getLength() != b.getLength() )
         {

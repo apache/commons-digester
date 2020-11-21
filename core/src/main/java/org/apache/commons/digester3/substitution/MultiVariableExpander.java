@@ -45,7 +45,7 @@ public class MultiVariableExpander
      * @param marker The input variables marker
      * @param source The variables source
      */
-    public void addSource( String marker, Map<String, Object> source )
+    public void addSource( final String marker, final Map<String, Object> source )
     {
         ++nEntries;
         markers.add( marker );
@@ -78,10 +78,10 @@ public class MultiVariableExpander
      * @param source The variables source
      * @return The input string where variables have been expanded by replacing values found in source
      */
-    public String expand( String str, String marker, Map<String, Object> source )
+    public String expand( String str, final String marker, final Map<String, Object> source )
     {
-        String startMark = marker + "{";
-        int markLen = startMark.length();
+        final String startMark = marker + "{";
+        final int markLen = startMark.length();
 
         int index = 0;
         for ( ;; )
@@ -92,25 +92,25 @@ public class MultiVariableExpander
                 return str;
             }
 
-            int startIndex = index + markLen;
+            final int startIndex = index + markLen;
             if ( startIndex > str.length() )
             {
                 throw new IllegalArgumentException( "var expression starts at end of string" );
             }
 
-            int endIndex = str.indexOf( "}", index + markLen );
+            final int endIndex = str.indexOf( "}", index + markLen );
             if ( endIndex == -1 )
             {
                 throw new IllegalArgumentException( "var expression starts but does not end" );
             }
 
-            String key = str.substring( index + markLen, endIndex );
-            Object value = source.get( key );
+            final String key = str.substring( index + markLen, endIndex );
+            final Object value = source.get( key );
             if ( value == null )
             {
                 throw new IllegalArgumentException( "parameter [" + key + "] is not defined." );
             }
-            String varValue = value.toString();
+            final String varValue = value.toString();
 
             str = str.substring( 0, index ) + varValue + str.substring( endIndex + 1 );
             index += varValue.length();

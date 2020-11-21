@@ -57,7 +57,7 @@ public class FinderFromMethod
      * @param methodAttr The XML attribute that needs to be present on a plugin declaration in order to specify the
      *        method to load rules from.
      */
-    public FinderFromMethod( String methodAttr )
+    public FinderFromMethod( final String methodAttr )
     {
         this.methodAttr = methodAttr;
     }
@@ -81,11 +81,11 @@ public class FinderFromMethod
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester d, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester d, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
 
-        String methodName = p.getProperty( methodAttr );
+        final String methodName = p.getProperty( methodAttr );
         if ( methodName == null )
         {
             // nope, user hasn't requested dynamic rules to be loaded

@@ -31,9 +31,9 @@ public final class BeanPropertySetterRuleTestCase
     @Test
     public void extractPropertyNameFromAttribute() throws Exception
     {
-        Employee expected = new Employee( "John", "Doe" );
+        final Employee expected = new Employee( "John", "Doe" );
 
-        Employee actual = newLoader( new FromXmlRulesModule()
+        final Employee actual = newLoader( new FromXmlRulesModule()
         {
 
             @Override

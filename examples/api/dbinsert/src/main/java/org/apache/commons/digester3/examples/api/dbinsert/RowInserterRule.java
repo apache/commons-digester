@@ -31,7 +31,7 @@ public class RowInserterRule
 
     private final Connection conn;
 
-    public RowInserterRule( Connection conn )
+    public RowInserterRule( final Connection conn )
     {
         this.conn = conn;
     }
@@ -43,7 +43,7 @@ public class RowInserterRule
      * can be stored on it.
      */
     @Override
-    public void begin( String namespace, String name, org.xml.sax.Attributes attrs )
+    public void begin( final String namespace, final String name, final org.xml.sax.Attributes attrs )
     {
         getDigester().push( new Row() );
     }
@@ -63,10 +63,10 @@ public class RowInserterRule
      * valid use of Digester.
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
     {
-        Row row = getDigester().pop();
-        Table table = getDigester().peek();
+        final Row row = getDigester().pop();
+        final Table table = getDigester().peek();
 
         // Obviously, all this would be replaced by code like:
         // stmt = conn.prepareStatement();
@@ -76,10 +76,10 @@ public class RowInserterRule
         // PreparedStatement.getParameterMetaData method to retrieve
         // retrieve parameter types, etc.
 
-        StringBuilder colnames = new StringBuilder();
-        StringBuilder colvalues = new StringBuilder();
+        final StringBuilder colnames = new StringBuilder();
+        final StringBuilder colvalues = new StringBuilder();
 
-        for (Column column : row.getColumns()) {
+        for (final Column column : row.getColumns()) {
             if ( colnames.length() > 0 )
             {
                 colnames.append( ", " );
@@ -95,7 +95,7 @@ public class RowInserterRule
             colvalues.append( "'" );
         }
 
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         buf.append( "insert into " );
         buf.append( table.getName() );
         buf.append( " (" );

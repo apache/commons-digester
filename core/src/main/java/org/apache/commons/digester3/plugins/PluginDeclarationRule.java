@@ -60,11 +60,11 @@ public class PluginDeclarationRule
      * @throws Exception if any error occurs
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        int nAttrs = attributes.getLength();
-        Properties props = new Properties();
+        final int nAttrs = attributes.getLength();
+        final Properties props = new Properties();
         for ( int i = 0; i < nAttrs; ++i )
         {
             String key = attributes.getLocalName( i );
@@ -72,7 +72,7 @@ public class PluginDeclarationRule
             {
                 key = attributes.getQName( i );
             }
-            String value = attributes.getValue( i );
+            final String value = attributes.getValue( i );
             props.setProperty( key, value );
         }
 
@@ -80,7 +80,7 @@ public class PluginDeclarationRule
         {
             declarePlugin( getDigester(), props );
         }
-        catch ( PluginInvalidInputException ex )
+        catch ( final PluginInvalidInputException ex )
         {
             throw new PluginInvalidInputException( "Error on element [" + getDigester().getMatch() + "]: "
                 + ex.getMessage() );
@@ -94,11 +94,11 @@ public class PluginDeclarationRule
      * @param props the properties where extracting plugin attributes
      * @throws PluginException if any error occurs while declaring the plugin
      */
-    public static void declarePlugin( Digester digester, Properties props )
+    public static void declarePlugin( final Digester digester, final Properties props )
         throws PluginException
     {
-        String id = props.getProperty( "id" );
-        String pluginClassName = props.getProperty( "class" );
+        final String id = props.getProperty( "id" );
+        final String pluginClassName = props.getProperty( "class" );
 
         if ( id == null )
         {
@@ -110,12 +110,12 @@ public class PluginDeclarationRule
             throw new PluginInvalidInputException( "mandatory attribute class not present on plugin declaration" );
         }
 
-        Declaration newDecl = new Declaration( pluginClassName );
+        final Declaration newDecl = new Declaration( pluginClassName );
         newDecl.setId( id );
         newDecl.setProperties( props );
 
-        PluginRules rc = (PluginRules) digester.getRules();
-        PluginManager pm = rc.getPluginManager();
+        final PluginRules rc = (PluginRules) digester.getRules();
+        final PluginManager pm = rc.getPluginManager();
 
         newDecl.init( digester, pm );
         pm.addDeclaration( newDecl );

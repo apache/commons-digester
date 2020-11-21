@@ -36,8 +36,8 @@ public final class SetPropertyBuilder
 
     private String valueAttributeName;
 
-    SetPropertyBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
-                        String attributePropertyName )
+    SetPropertyBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder,
+                        final String attributePropertyName )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.attributePropertyName = attributePropertyName;
@@ -49,7 +49,7 @@ public final class SetPropertyBuilder
      * @param valueAttributeName Name of the attribute that will contain the value to which the property should be set.
      * @return this builder instance
      */
-    public SetPropertyBuilder extractingValueFromAttribute( String valueAttributeName )
+    public SetPropertyBuilder extractingValueFromAttribute( final String valueAttributeName )
     {
         if ( attributePropertyName == null || attributePropertyName.length() == 0 )
         {

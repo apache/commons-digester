@@ -48,7 +48,7 @@ public class LoaderFromClass
      * @param rulesClass The target class
      * @param rulesMethod The method has to be invoked
      */
-    public LoaderFromClass( Class<?> rulesClass, Method rulesMethod )
+    public LoaderFromClass( final Class<?> rulesClass, final Method rulesMethod )
     {
         this.rulesClass = rulesClass;
         this.rulesMethod = rulesMethod;
@@ -61,11 +61,11 @@ public class LoaderFromClass
      * @param methodName The method name has to be invoked
      * @throws PluginException if input method can't be located inside the given class
      */
-    public LoaderFromClass( Class<?> rulesClass, String methodName )
+    public LoaderFromClass( final Class<?> rulesClass, final String methodName )
         throws PluginException
     {
 
-        Method method = locateMethod( rulesClass, methodName );
+        final Method method = locateMethod( rulesClass, methodName );
 
         if ( method == null )
         {
@@ -81,11 +81,11 @@ public class LoaderFromClass
      * {@inheritDoc}
      */
     @Override
-    public void addRules( Digester d, String path )
+    public void addRules( final Digester d, final String path )
         throws PluginException
     {
-        Log log = d.getLogger();
-        boolean debug = log.isDebugEnabled();
+        final Log log = d.getLogger();
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "LoaderFromClass loading rules for plugin at path [" + path + "]" );
@@ -93,10 +93,10 @@ public class LoaderFromClass
 
         try
         {
-            Object[] params = { d, path };
+            final Object[] params = { d, path };
             rulesMethod.invoke( null, params );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw new PluginException(
                                        "Unable to invoke rules method " + rulesMethod + " on rules class " + rulesClass,
@@ -113,11 +113,11 @@ public class LoaderFromClass
      * @return The method name has to be invoked, or null if no such method exists.
      * @throws PluginException if any error occurs while discovering the method
      */
-    public static Method locateMethod( Class<?> rulesClass, String methodName )
+    public static Method locateMethod( final Class<?> rulesClass, final String methodName )
         throws PluginException
     {
-        Class<?>[] paramSpec = { Digester.class, String.class };
-        Method rulesMethod = getAccessibleMethod( rulesClass, methodName, paramSpec );
+        final Class<?>[] paramSpec = { Digester.class, String.class };
+        final Method rulesMethod = getAccessibleMethod( rulesClass, methodName, paramSpec );
 
         return rulesMethod;
     }

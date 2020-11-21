@@ -31,7 +31,7 @@ public class AlphaBean
     {
     }
 
-    public AlphaBean( String name )
+    public AlphaBean( final String name )
     {
         setName( name );
     }
@@ -41,12 +41,12 @@ public class AlphaBean
         return name;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
 
-    public void setParent( Nameable parent )
+    public void setParent( final Nameable parent )
     {
         this.parent = parent;
     }
@@ -56,7 +56,7 @@ public class AlphaBean
         return parent;
     }
 
-    public void setChild( Nameable child )
+    public void setChild( final Nameable child )
     {
         this.child = child;
     }

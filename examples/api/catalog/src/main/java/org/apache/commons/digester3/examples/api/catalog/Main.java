@@ -46,7 +46,7 @@ public class Main
      * <p>
      * Usage: java CatalogDigester example.xml
      */
-    public static void main( String[] args )
+    public static void main( final String[] args )
     {
         if ( args.length != 1 )
         {
@@ -54,10 +54,10 @@ public class Main
             System.exit( -1 );
         }
 
-        String filename = args[0];
+        final String filename = args[0];
 
         // Create a Digester instance
-        Digester d = new Digester();
+        final Digester d = new Digester();
 
         // Add rules to the digester that will be triggered while
         // parsing occurs.
@@ -66,15 +66,15 @@ public class Main
         // Process the input file.
         try
         {
-            java.io.Reader reader = getInputData( filename );
+            final java.io.Reader reader = getInputData( filename );
             d.parse( reader );
         }
-        catch ( java.io.IOException ioe )
+        catch ( final java.io.IOException ioe )
         {
             System.out.println( "Error reading input file:" + ioe.getMessage() );
             System.exit( -1 );
         }
-        catch ( org.xml.sax.SAXException se )
+        catch ( final org.xml.sax.SAXException se )
         {
             System.out.println( "Error parsing input file:" + se.getMessage() );
             System.exit( -1 );
@@ -83,14 +83,14 @@ public class Main
         // Get the first object created by the digester's rules
         // (the "root" object). Note that this is exactly the same object
         // returned by the Digester.parse method; either approach works.
-        Catalog catalog = (Catalog) d.getRoot();
+        final Catalog catalog = (Catalog) d.getRoot();
 
         // Print out all the contents of the catalog, as loaded from
         // the input file.
         catalog.print();
     }
 
-    private static void addRules( Digester d )
+    private static void addRules( final Digester d )
     {
 
         // --------------------------------------------------
@@ -114,7 +114,7 @@ public class Main
         // constructor (one with no arguments), so we can't use
         // the ObjectCreateRule. Instead, we use the FactoryCreateRule.
 
-        BookFactory factory = new BookFactory();
+        final BookFactory factory = new BookFactory();
         d.addFactoryCreate( "catalog/book", factory );
 
         // and add the book to the parent catalog object (which is
@@ -201,17 +201,17 @@ public class Main
      * the digester. <p> Clearly, if the data is always coming from a file, then calling the Digester.parse method that
      * takes a File object would be more sensible (see AddressBook example).
      */
-    private static java.io.Reader getInputData( String filename )
+    private static java.io.Reader getInputData( final String filename )
         throws java.io.IOException
     {
-        java.io.File srcfile = new java.io.File( filename );
+        final java.io.File srcfile = new java.io.File( filename );
 
-        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream( 1000 );
-        byte[] buf = new byte[100];
-        java.io.FileInputStream fis = new java.io.FileInputStream( srcfile );
+        final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream( 1000 );
+        final byte[] buf = new byte[100];
+        final java.io.FileInputStream fis = new java.io.FileInputStream( srcfile );
         for ( ;; )
         {
-            int nread = fis.read( buf );
+            final int nread = fis.read( buf );
             if ( nread == -1 )
             {
                 break;

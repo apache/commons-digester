@@ -31,7 +31,7 @@ final class SetPropertiesRule
     extends AbstractXmlRule
 {
 
-    public SetPropertiesRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public SetPropertiesRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -40,12 +40,12 @@ final class SetPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        boolean ignoreMissingProperty = "true".equalsIgnoreCase( attributes.getValue( "ignore-missing-property" ) );
+        final boolean ignoreMissingProperty = "true".equalsIgnoreCase( attributes.getValue( "ignore-missing-property" ) );
 
-        SetPropertiesBuilder builder = linkedRuleBuilder.setProperties().ignoreMissingProperty( ignoreMissingProperty );
+        final SetPropertiesBuilder builder = linkedRuleBuilder.setProperties().ignoreMissingProperty( ignoreMissingProperty );
         getDigester().push( builder );
     }
 
@@ -53,7 +53,7 @@ final class SetPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         getDigester().pop();

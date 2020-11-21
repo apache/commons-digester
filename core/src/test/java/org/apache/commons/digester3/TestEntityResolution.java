@@ -38,10 +38,10 @@ public class TestEntityResolution
     public void testParserResolveRelative()
         throws Exception
     {
-        SAXParserFactory factory = SAXParserFactory.newInstance();
+        final SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setValidating( true );
         factory.setNamespaceAware( true );
-        SAXParser parser = factory.newSAXParser();
+        final SAXParser parser = factory.newSAXParser();
 
         parser.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ),
                       new DefaultHandler() );
@@ -51,7 +51,7 @@ public class TestEntityResolution
     public void testDigesterResolveRelative()
         throws Exception
     {
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.setValidating( true );
         digester.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ) );
     }

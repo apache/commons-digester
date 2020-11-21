@@ -34,13 +34,13 @@ final class SetNestedPropertiesAliasRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        String elementName = attributes.getValue( "attr-name" );
-        String propertyName = attributes.getValue( "prop-name" );
+        final String elementName = attributes.getValue( "attr-name" );
+        final String propertyName = attributes.getValue( "prop-name" );
 
-        NestedPropertiesBuilder builder = getDigester().peek();
+        final NestedPropertiesBuilder builder = getDigester().peek();
         builder.addAlias( elementName ).forProperty( propertyName );
     }
 

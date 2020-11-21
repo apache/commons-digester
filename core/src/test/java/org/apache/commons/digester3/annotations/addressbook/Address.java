@@ -50,7 +50,7 @@ public class Address
         return type;
     }
 
-    public void setType( String type )
+    public void setType( final String type )
     {
         this.type = type;
     }
@@ -60,7 +60,7 @@ public class Address
         return street;
     }
 
-    public void setStreet( String street )
+    public void setStreet( final String street )
     {
         this.street = street;
     }
@@ -70,7 +70,7 @@ public class Address
         return city;
     }
 
-    public void setCity( String city )
+    public void setCity( final String city )
     {
         this.city = city;
     }
@@ -80,7 +80,7 @@ public class Address
         return state;
     }
 
-    public void setState( String state )
+    public void setState( final String state )
     {
         this.state = state;
     }
@@ -90,7 +90,7 @@ public class Address
         return zip;
     }
 
-    public void setZip( String zip )
+    public void setZip( final String zip )
     {
         this.zip = zip;
     }
@@ -100,13 +100,13 @@ public class Address
         return country;
     }
 
-    public void setCountry( String country )
+    public void setCountry( final String country )
     {
         this.country = country;
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -117,7 +117,7 @@ public class Address
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Address other = (Address) obj;
+        final Address other = (Address) obj;
         if ( city == null )
         {
             if ( other.city != null ) {

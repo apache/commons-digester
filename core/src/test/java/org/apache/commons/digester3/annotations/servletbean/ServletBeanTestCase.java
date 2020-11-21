@@ -31,7 +31,7 @@ public final class ServletBeanTestCase
     public void testServletBean()
         throws Exception
     {
-        ServletBean servletBean = new ServletBean();
+        final ServletBean servletBean = new ServletBean();
         servletBean.setServletName( "action" );
         servletBean.setServletClass( "org.apache.struts.action.ActionServlet" );
         servletBean.addInitParam( "application", "org.apache.struts.example.ApplicationResources" );

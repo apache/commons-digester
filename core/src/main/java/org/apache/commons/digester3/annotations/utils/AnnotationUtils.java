@@ -65,7 +65,7 @@ public class AnnotationUtils
      * @param annotation the annotation has to be introspected.
      * @return the annotation {@code value()}.
      */
-    public static Object getAnnotationValue( Annotation annotation )
+    public static Object getAnnotationValue( final Annotation annotation )
     {
         return invokeAnnotationMethod( annotation, VALUE );
     }
@@ -76,9 +76,9 @@ public class AnnotationUtils
      * @param annotation the annotation has to be introspected.
      * @return the annotation {@code pattern()}.
      */
-    public static String getAnnotationPattern( Annotation annotation )
+    public static String getAnnotationPattern( final Annotation annotation )
     {
-        Object ret = invokeAnnotationMethod( annotation, PATTERN );
+        final Object ret = invokeAnnotationMethod( annotation, PATTERN );
         if ( ret != null )
         {
             return (String) ret;
@@ -92,9 +92,9 @@ public class AnnotationUtils
      * @param annotation The annotation has to be introspected
      * @return The annotation {@code namespaceURI()}
      */
-    public static String getAnnotationNamespaceURI( Annotation annotation )
+    public static String getAnnotationNamespaceURI( final Annotation annotation )
     {
-        Object ret = invokeAnnotationMethod( annotation, NAMESPACE_URI );
+        final Object ret = invokeAnnotationMethod( annotation, NAMESPACE_URI );
         if ( ret != null )
         {
             return (String) ret;
@@ -108,9 +108,9 @@ public class AnnotationUtils
      * @param annotation The annotation has to be introspected
      * @return The annotation {@code fireOnBegin()}
      */
-    public static boolean getFireOnBegin( Annotation annotation )
+    public static boolean getFireOnBegin( final Annotation annotation )
     {
-        Object ret = invokeAnnotationMethod( annotation, FIRE_ON_BEGIN );
+        final Object ret = invokeAnnotationMethod( annotation, FIRE_ON_BEGIN );
         if ( ret != null )
         {
             return (Boolean) ret;
@@ -124,9 +124,9 @@ public class AnnotationUtils
      * @param annotation the annotation has to be introspected.
      * @return the annotation {@code value()} as Annotations array.
      */
-    public static Annotation[] getAnnotationsArrayValue( Annotation annotation )
+    public static Annotation[] getAnnotationsArrayValue( final Annotation annotation )
     {
-        Object value = getAnnotationValue( annotation );
+        final Object value = getAnnotationValue( annotation );
         if ( value != null && value.getClass().isArray()
             && Annotation.class.isAssignableFrom( value.getClass().getComponentType() ) )
         {
@@ -142,13 +142,13 @@ public class AnnotationUtils
      * @param method the method name to execute.
      * @return the annotation method value, null if any error occurs.
      */
-    private static Object invokeAnnotationMethod( Annotation annotation, String method )
+    private static Object invokeAnnotationMethod( final Annotation annotation, final String method )
     {
         try
         {
             return invokeExactMethod( annotation, method, null );
         }
-        catch ( Throwable t )
+        catch ( final Throwable t )
         {
             return null;
         }

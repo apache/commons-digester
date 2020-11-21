@@ -33,7 +33,7 @@ public class TextLabel
         return id;
     }
 
-    public void setId( String id )
+    public void setId( final String id )
     {
         this.id = id;
     }
@@ -43,7 +43,7 @@ public class TextLabel
         return label;
     }
 
-    public void setLabel( String label )
+    public void setLabel( final String label )
     {
         this.label = label;
     }

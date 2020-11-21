@@ -24,17 +24,17 @@ import org.apache.commons.digester3.plugins.PluginDeclarationRule;
 
 public class ContainerCustomRules
 {
-    public static void addRules( Digester digester, String pattern )
+    public static void addRules( final Digester digester, final String pattern )
     {
         // A Container object can have subtags called "widget" which
         // define any object of type Widget. Because a Container is
         // itself a widget, this allows us to build trees of objects.
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( pattern + "/widget", pcr );
         digester.addSetNext( pattern + "/widget", "addChild" );
 
         // allow users to declare plugins under a container as well
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( pattern + "/plugin", pdr );
     }
 }

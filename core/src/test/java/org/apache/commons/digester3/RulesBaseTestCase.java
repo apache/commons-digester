@@ -235,11 +235,11 @@ public class RulesBaseTestCase
         digester.addRule( "alpha/beta/gamma", new TestRule( "three" ) );
 
         // test that rules are returned in set order
-        List<Rule> list = digester.getRules().match( null, "alpha/beta/gamma", null, null );
+        final List<Rule> list = digester.getRules().match( null, "alpha/beta/gamma", null, null );
 
         assertEquals( "Testing ordering mismatch (A)", 3, list.size() );
 
-        Iterator<Rule> it = list.iterator();
+        final Iterator<Rule> it = list.iterator();
         assertEquals( "Testing ordering mismatch (B)", "one", ( (TestRule) it.next() ).getIdentifier() );
         assertEquals( "Testing ordering mismatch (C)", "two", ( (TestRule) it.next() ).getIdentifier() );
         assertEquals( "Testing ordering mismatch (D)", "three", ( (TestRule) it.next() ).getIdentifier() );
@@ -264,11 +264,11 @@ public class RulesBaseTestCase
         digester.addRule( "beta/gamma/alpha", new TestRule( "three" ) );
 
         // test that rules are returned in set order
-        List<Rule> list = digester.getRules().match( null, "alpha/beta/gamma", null, null );
+        final List<Rule> list = digester.getRules().match( null, "alpha/beta/gamma", null, null );
 
         assertEquals( "Testing number of matches", 1, list.size() );
 
-        Iterator<Rule> it = list.iterator();
+        final Iterator<Rule> it = list.iterator();
         assertEquals( "Testing ordering (A)", "one", ( (TestRule) it.next() ).getIdentifier() );
 
         // clean up

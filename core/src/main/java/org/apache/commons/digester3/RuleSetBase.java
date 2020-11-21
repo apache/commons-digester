@@ -52,7 +52,7 @@ public abstract class RuleSetBase
      * @param namespaceURI The namespace URI that all Rule instances will be associated with.
      * @since 3.0
      */
-    public RuleSetBase( String namespaceURI )
+    public RuleSetBase( final String namespaceURI )
     {
         this.namespaceURI = namespaceURI;
     }

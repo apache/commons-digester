@@ -67,7 +67,7 @@ public final class AsyncReaderTestCase
     public void parseFromFile()
         throws Exception
     {
-        Future<Employee> future = digester.asyncParse( new File( getProperty( "user.dir" ),
+        final Future<Employee> future = digester.asyncParse( new File( getProperty( "user.dir" ),
             "src/test/resources/org/apache/commons/digester3/Test9.xml" ) );
         verify( future );
     }
@@ -76,7 +76,7 @@ public final class AsyncReaderTestCase
     public void parseFromClasspathURL()
         throws Exception
     {
-        Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ) );
+        final Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ) );
         verify( future );
     }
 
@@ -84,7 +84,7 @@ public final class AsyncReaderTestCase
     public void parseFromInputStream()
         throws Exception
     {
-        Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ).openStream() );
+        final Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ).openStream() );
         verify( future );
     }
 
@@ -92,7 +92,7 @@ public final class AsyncReaderTestCase
     public void parseFromInputSource()
         throws Exception
     {
-        Future<Employee> future =
+        final Future<Employee> future =
             digester.asyncParse( new InputSource( getClass().getResource( "Test9.xml" ).openStream() ) );
         verify( future );
     }
@@ -101,7 +101,7 @@ public final class AsyncReaderTestCase
     public void parseFromReader()
         throws Exception
     {
-        Future<Employee> future =
+        final Future<Employee> future =
             digester.asyncParse( new InputStreamReader( getClass().getResource( "Test9.xml" ).openStream() ) );
         verify( future );
     }
@@ -110,14 +110,14 @@ public final class AsyncReaderTestCase
     public void parseFromUri()
         throws Exception
     {
-        Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ).toExternalForm() );
+        final Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ).toExternalForm() );
         verify( future );
     }
 
-    private void verify( Future<Employee> result )
+    private void verify( final Future<Employee> result )
         throws Exception
     {
-        Employee employee = result.get();
+        final Employee employee = result.get();
         assertNotNull( employee );
     }
 

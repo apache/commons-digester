@@ -51,24 +51,24 @@ public class ObjectTestImpl
     public String toString()
     {
         String str = value;
-        for ( Object o : children )
+        for ( final Object o : children )
         {
             str += " " + o;
         }
         return str;
     }
 
-    public void add( Object o )
+    public void add( final Object o )
     {
         children.add( o );
     }
 
-    public void setValue( String val )
+    public void setValue( final String val )
     {
         value = val;
     }
 
-    public void setLongValue( Long val )
+    public void setLongValue( final Long val )
     {
         longValue = val;
     }
@@ -78,7 +78,7 @@ public class ObjectTestImpl
         return longValue;
     }
 
-    public void setStringValue( String val )
+    public void setStringValue( final String val )
     {
     }
 
@@ -92,12 +92,12 @@ public class ObjectTestImpl
         pushed = true;
     }
 
-    public void setMapValue( String name, String value )
+    public void setMapValue( final String name, final String value )
     {
         this.mapValue.put( name, value );
     }
 
-    public String getMapValue( String name )
+    public String getMapValue( final String name )
     {
         return this.mapValue.get( name );
     }
@@ -107,7 +107,7 @@ public class ObjectTestImpl
         return property;
     }
 
-    public void setProperty( String pProperty )
+    public void setProperty( final String pProperty )
     {
         property = pProperty;
     }

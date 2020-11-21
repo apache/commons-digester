@@ -38,7 +38,7 @@ final class ObjectParamRule
      * @param targetRulesBinder
      * @param patternStack
      */
-    public ObjectParamRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public ObjectParamRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -47,19 +47,19 @@ final class ObjectParamRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
         // create callparamrule
-        String paramNumber = attributes.getValue( "paramnumber" );
-        String attributeName = attributes.getValue( "attrname" );
-        String type = attributes.getValue( "type" );
-        String value = attributes.getValue( "value" );
+        final String paramNumber = attributes.getValue( "paramnumber" );
+        final String attributeName = attributes.getValue( "attrname" );
+        final String type = attributes.getValue( "type" );
+        final String value = attributes.getValue( "value" );
 
-        int paramIndex = parseInt( paramNumber );
+        final int paramIndex = parseInt( paramNumber );
 
         // create object instance
-        Class<?> clazz = getDigester().getClassLoader().loadClass( type );
+        final Class<?> clazz = getDigester().getClassLoader().loadClass( type );
         Object param;
         if ( value != null )
         {
@@ -70,7 +70,7 @@ final class ObjectParamRule
             param = clazz.newInstance();
         }
 
-        ObjectParamBuilder<?> builder = linkedRuleBuilder.objectParam( param ).ofIndex( paramIndex );
+        final ObjectParamBuilder<?> builder = linkedRuleBuilder.objectParam( param ).ofIndex( paramIndex );
 
         if ( attributeName != null )
         {

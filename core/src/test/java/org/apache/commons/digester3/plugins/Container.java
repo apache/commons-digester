@@ -30,7 +30,7 @@ public class Container
     {
     }
 
-    public void addChild( Widget child )
+    public void addChild( final Widget child )
     {
         children.add( child );
     }

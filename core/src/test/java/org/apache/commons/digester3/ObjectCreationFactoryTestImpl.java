@@ -36,7 +36,7 @@ public class ObjectCreationFactoryTestImpl
     public Attributes attributes;
 
     @Override
-    public Object createObject( Attributes attributes )
+    public Object createObject( final Attributes attributes )
     {
         this.attributes = new AttributesImpl( attributes );
         called = true;

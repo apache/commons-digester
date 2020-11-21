@@ -35,7 +35,7 @@ final class BinderClassLoader
     private static final Map<String, Class<?>> PRIMITIVE_TYPES;
     static
     {
-        HashMap<String, Class<?>> primitiveTypes = new HashMap<String, Class<?>>();
+        final HashMap<String, Class<?>> primitiveTypes = new HashMap<String, Class<?>>();
         primitiveTypes.put( "boolean", boolean.class );
         primitiveTypes.put( "byte", byte.class );
         primitiveTypes.put( "short", short.class );
@@ -49,7 +49,7 @@ final class BinderClassLoader
 
     public static BinderClassLoader createBinderClassLoader( final ClassLoader adaptedClassLoader )
     {
-        PrivilegedAction<BinderClassLoader> action = new PrivilegedAction<BinderClassLoader>()
+        final PrivilegedAction<BinderClassLoader> action = new PrivilegedAction<BinderClassLoader>()
         {
 
             public BinderClassLoader run()
@@ -66,7 +66,7 @@ final class BinderClassLoader
         return action.run();
     }
 
-    private BinderClassLoader( ClassLoader adaptedClassLoader )
+    private BinderClassLoader( final ClassLoader adaptedClassLoader )
     {
         super( adaptedClassLoader );
     }
@@ -80,7 +80,7 @@ final class BinderClassLoader
      * {@inheritDoc}
      */
     @Override
-    protected synchronized Class<?> loadClass( String name, boolean resolve )
+    protected synchronized Class<?> loadClass( final String name, final boolean resolve )
         throws ClassNotFoundException
     {
         if ( PRIMITIVE_TYPES.containsKey( name ) )
@@ -94,7 +94,7 @@ final class BinderClassLoader
      * {@inheritDoc}
      */
     @Override
-    public URL getResource( String name )
+    public URL getResource( final String name )
     {
         return getAdaptedClassLoader().getResource( name );
     }

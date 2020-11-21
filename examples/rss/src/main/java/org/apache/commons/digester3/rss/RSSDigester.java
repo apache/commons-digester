@@ -67,7 +67,7 @@ public class RSSDigester
         return ( this.channelClass );
     }
 
-    public void setChannelClass( String channelClass )
+    public void setChannelClass( final String channelClass )
     {
         this.channelClass = channelClass;
     }
@@ -83,7 +83,7 @@ public class RSSDigester
         return ( this.imageClass );
     }
 
-    public void setImageClass( String imageClass )
+    public void setImageClass( final String imageClass )
     {
         this.imageClass = imageClass;
     }
@@ -99,7 +99,7 @@ public class RSSDigester
         return ( this.itemClass );
     }
 
-    public void setItemClass( String itemClass )
+    public void setItemClass( final String itemClass )
     {
         this.itemClass = itemClass;
     }
@@ -115,7 +115,7 @@ public class RSSDigester
         return ( this.textInputClass );
     }
 
-    public void setTextInputClass( String textInputClass )
+    public void setTextInputClass( final String textInputClass )
     {
         this.textInputClass = textInputClass;
     }
@@ -132,7 +132,7 @@ public class RSSDigester
      * @throws SAXException if a parsing exception occurs
      */
     @Override
-    public <T> T parse( File file )
+    public <T> T parse( final File file )
         throws IOException, SAXException
     {
         configure();
@@ -150,7 +150,7 @@ public class RSSDigester
      * @throws SAXException if a parsing exception occurs
      */
     @Override
-    public <T> T parse( InputSource input )
+    public <T> T parse( final InputSource input )
         throws IOException, SAXException
     {
         configure();
@@ -169,7 +169,7 @@ public class RSSDigester
      * @throws SAXException if a parsing exception occurs
      */
     @Override
-    public <T> T parse( InputStream input )
+    public <T> T parse( final InputStream input )
         throws IOException, SAXException
     {
         configure();
@@ -187,7 +187,7 @@ public class RSSDigester
      * @throws SAXException if a parsing exception occurs
      */
     @Override
-    public <T> T parse( String uri )
+    public <T> T parse( final String uri )
         throws IOException, SAXException
     {
         configure();
@@ -264,28 +264,28 @@ public class RSSDigester
      *
      * @param args The command line arguments (ignored)
      */
-    public static void main( String args[] )
+    public static void main( final String args[] )
     {
         try
         {
             System.out.println( "RSSDigester Test Program" );
             System.out.println( "Opening input stream ..." );
-            InputStream is =
+            final InputStream is =
                 RSSDigester.class.getResourceAsStream( "/org/apache/commons/digester3/rss/rss-example.xml" );
             System.out.println( "Creating new digester ..." );
-            RSSDigester digester = new RSSDigester();
+            final RSSDigester digester = new RSSDigester();
             if ( ( args.length > 0 ) && ( args[0].equals( "-debug" ) ) )
             {
                 digester.setLogger( LogFactory.getLog( "RSSDigester" ) );
             }
             System.out.println( "Parsing input stream ..." );
-            Channel channel = (Channel) digester.parse( is );
+            final Channel channel = (Channel) digester.parse( is );
             System.out.println( "Closing input stream ..." );
             is.close();
             System.out.println( "Dumping channel info ..." );
             channel.render( System.out );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             System.out.println( "-->Exception" );
             e.printStackTrace( System.out );

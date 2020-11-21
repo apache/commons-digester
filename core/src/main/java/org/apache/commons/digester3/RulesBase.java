@@ -77,10 +77,10 @@ public class RulesBase
      * {@inheritDoc}
      */
     @Override
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         super.setDigester( digester );
-        for ( Rule rule : rules )
+        for ( final Rule rule : rules )
         {
             rule.setDigester( digester );
         }
@@ -92,10 +92,10 @@ public class RulesBase
      * {@inheritDoc}
      */
     @Override
-    protected void registerRule( String pattern, Rule rule )
+    protected void registerRule( String pattern, final Rule rule )
     {
         // to help users who accidently add '/' to the end of their patterns
-        int patternLength = pattern.length();
+        final int patternLength = pattern.length();
         if ( patternLength > 1 && pattern.endsWith( "/" ) )
         {
             pattern = pattern.substring( 0, patternLength - 1 );
@@ -128,7 +128,7 @@ public class RulesBase
     /**
      * {@inheritDoc}
      */
-    public List<Rule> match( String namespaceURI, String pattern, String name, Attributes attributes )
+    public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
         // List rulesList = (List) this.cache.get(pattern);
         List<Rule> rulesList = lookup( namespaceURI, pattern );
@@ -136,7 +136,7 @@ public class RulesBase
         {
             // Find the longest key, ie more discriminant
             String longKey = "";
-            for ( String key : wildcardCache )
+            for ( final String key : wildcardCache )
             {
                 if ( ( pattern.equals( key.substring( 1 ) ) || pattern.endsWith( key ) )
                     && key.length() > longKey.length() )
@@ -175,10 +175,10 @@ public class RulesBase
      * @param pattern Pattern to be matched
      * @return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any)
      */
-    protected List<Rule> lookup( String namespaceURI, String pattern )
+    protected List<Rule> lookup( final String namespaceURI, final String pattern )
     {
         // Optimize when no namespace URI is specified
-        List<Rule> list = this.cache.get( pattern );
+        final List<Rule> list = this.cache.get( pattern );
         if ( list == null )
         {
             return ( null );
@@ -189,8 +189,8 @@ public class RulesBase
         }
 
         // Select only Rules that match on the specified namespace URI
-        ArrayList<Rule> results = new ArrayList<Rule>();
-        for ( Rule item : list )
+        final ArrayList<Rule> results = new ArrayList<Rule>();
+        for ( final Rule item : list )
         {
             if ( ( namespaceURI.equals( item.getNamespaceURI() ) ) || ( item.getNamespaceURI() == null ) )
             {

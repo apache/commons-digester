@@ -60,7 +60,7 @@ public class Declaration
      *
      * @param pluginClassName The name of the class of the object to be instantiated (will be load in the init method)
      */
-    public Declaration( String pluginClassName )
+    public Declaration( final String pluginClassName )
     {
         // We can't load the pluginClass at this time, because we don't
         // have a digester instance yet to load it through. So just
@@ -74,7 +74,7 @@ public class Declaration
      *
      * @param pluginClass The class of the object to be instantiated (will be load in the init method)
      */
-    public Declaration( Class<?> pluginClass )
+    public Declaration( final Class<?> pluginClass )
     {
         this.pluginClass = pluginClass;
         this.pluginClassName = pluginClass.getName();
@@ -87,7 +87,7 @@ public class Declaration
      * @param pluginClass The class of the object to be instantiated (will be load in the init method)
      * @param ruleLoader Class which is responsible for dynamically loading this plugin's rules on demand
      */
-    public Declaration( Class<?> pluginClass, RuleLoader ruleLoader )
+    public Declaration( final Class<?> pluginClass, final RuleLoader ruleLoader )
     {
         this.pluginClass = pluginClass;
         this.pluginClassName = pluginClass.getName();
@@ -104,7 +104,7 @@ public class Declaration
      *
      * @param id The id that the user associated with a particular plugin declaration in the input xml
      */
-    public void setId( String id )
+    public void setId( final String id )
     {
         this.id = id;
     }
@@ -131,7 +131,7 @@ public class Declaration
      *
      * @param p The properties have to be copied into the properties member of this object
      */
-    public void setProperties( Properties p )
+    public void setProperties( final Properties p )
     {
         properties.putAll( p );
     }
@@ -155,11 +155,11 @@ public class Declaration
      * @param pm The plugin manager reference
      * @throws PluginException if any error occurs while loading the rules
      */
-    public void init( Digester digester, PluginManager pm )
+    public void init( final Digester digester, final PluginManager pm )
         throws PluginException
     {
-        Log log = digester.getLogger();
-        boolean debug = log.isDebugEnabled();
+        final Log log = digester.getLogger();
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "init being called!" );
@@ -177,7 +177,7 @@ public class Declaration
                 // load the plugin class object
                 pluginClass = digester.getClassLoader().loadClass( pluginClassName );
             }
-            catch ( ClassNotFoundException cnfe )
+            catch ( final ClassNotFoundException cnfe )
             {
                 throw new PluginException( "Unable to load class " + pluginClassName, cnfe );
             }
@@ -223,11 +223,11 @@ public class Declaration
      * @param pattern The pattern the custom rules have to be bound
      * @throws PluginException if any error occurs
      */
-    public void configure( Digester digester, String pattern )
+    public void configure( final Digester digester, final String pattern )
         throws PluginException
     {
-        Log log = digester.getLogger();
-        boolean debug = log.isDebugEnabled();
+        final Log log = digester.getLogger();
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "configure being called!" );

@@ -61,7 +61,7 @@ public class FinderFromFile
      * @param filenameAttr the XML attribute that needs to be present on a plugin declaration in order to specify the
      *        file to load rules from.
      */
-    public FinderFromFile( String filenameAttr )
+    public FinderFromFile( final String filenameAttr )
     {
         this.filenameAttr = filenameAttr;
     }
@@ -84,11 +84,11 @@ public class FinderFromFile
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester d, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester d, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
 
-        String rulesFileName = p.getProperty( filenameAttr );
+        final String rulesFileName = p.getProperty( filenameAttr );
         if ( rulesFileName == null )
         {
             // nope, user hasn't requested dynamic rules to be loaded
@@ -101,17 +101,17 @@ public class FinderFromFile
         {
             is = new FileInputStream( rulesFileName );
         }
-        catch ( IOException ioe )
+        catch ( final IOException ioe )
         {
             throw new PluginException( "Unable to process file [" + rulesFileName + "]", ioe );
         }
 
         try
         {
-            RuleLoader loader = new LoaderFromStream( is );
+            final RuleLoader loader = new LoaderFromStream( is );
             return loader;
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw new PluginException( "Unable to load xmlrules from file [" + rulesFileName + "]", e );
         }
@@ -121,7 +121,7 @@ public class FinderFromFile
             {
                 is.close();
             }
-            catch ( IOException ioe )
+            catch ( final IOException ioe )
             {
                 throw new PluginException( "Unable to close stream for file [" + rulesFileName + "]", ioe );
             }

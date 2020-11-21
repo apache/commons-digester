@@ -97,7 +97,7 @@ public class CallMethodRule
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of this
      *            element.
      */
-    public CallMethodRule( String methodName, int paramCount )
+    public CallMethodRule( final String methodName, final int paramCount )
     {
         this( 0, methodName, paramCount );
     }
@@ -113,7 +113,7 @@ public class CallMethodRule
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of this
      *            element.
      */
-    public CallMethodRule( int targetOffset, String methodName, int paramCount )
+    public CallMethodRule( final int targetOffset, final String methodName, final int paramCount )
     {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
@@ -134,7 +134,7 @@ public class CallMethodRule
      *
      * @param methodName Method name of the parent method to call
      */
-    public CallMethodRule( String methodName )
+    public CallMethodRule( final String methodName )
     {
         this( 0, methodName, 0, (Class[]) null );
     }
@@ -147,7 +147,7 @@ public class CallMethodRule
      *            the stack.
      * @param methodName Method name of the parent method to call
      */
-    public CallMethodRule( int targetOffset, String methodName )
+    public CallMethodRule( final int targetOffset, final String methodName )
     {
         this( targetOffset, methodName, 0, (Class[]) null );
     }
@@ -163,7 +163,7 @@ public class CallMethodRule
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public CallMethodRule( String methodName, int paramCount, String[] paramTypes )
+    public CallMethodRule( final String methodName, final int paramCount, final String[] paramTypes )
     {
         this( 0, methodName, paramCount, paramTypes );
     }
@@ -182,7 +182,7 @@ public class CallMethodRule
      *            corresponding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public CallMethodRule( int targetOffset, String methodName, int paramCount, String[] paramTypes )
+    public CallMethodRule( final int targetOffset, final String methodName, final int paramCount, final String[] paramTypes )
     {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
@@ -212,7 +212,7 @@ public class CallMethodRule
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
      *            <code>java.lang.Boolean.TYPE</code> for a <code>boolean</code> parameter)
      */
-    public CallMethodRule( String methodName, int paramCount, Class<?> paramTypes[] )
+    public CallMethodRule( final String methodName, final int paramCount, final Class<?> paramTypes[] )
     {
         this( 0, methodName, paramCount, paramTypes );
     }
@@ -231,7 +231,7 @@ public class CallMethodRule
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
      *            <code>java.lang.Boolean.TYPE</code> for a <code>boolean</code> parameter)
      */
-    public CallMethodRule( int targetOffset, String methodName, int paramCount, Class<?>[] paramTypes )
+    public CallMethodRule( final int targetOffset, final String methodName, final int paramCount, final Class<?>[] paramTypes )
     {
         this.targetOffset = targetOffset;
         this.methodName = methodName;
@@ -306,7 +306,7 @@ public class CallMethodRule
      *
      * @param useExactMatch The <code>MethodUtils.invokeExactMethod</code> flag
      */
-    public void setUseExactMatch( boolean useExactMatch )
+    public void setUseExactMatch( final boolean useExactMatch )
     {
         this.useExactMatch = useExactMatch;
     }
@@ -315,7 +315,7 @@ public class CallMethodRule
      * {@inheritDoc}
      */
     @Override
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         // call superclass
         super.setDigester( digester );
@@ -329,7 +329,7 @@ public class CallMethodRule
                 {
                     this.paramTypes[i] = digester.getClassLoader().loadClass( this.paramClassNames[i] );
                 }
-                catch ( ClassNotFoundException e )
+                catch ( final ClassNotFoundException e )
                 {
                     throw new RuntimeException( format( "[CallMethodRule] Cannot load class %s at position %s",
                                                         this.paramClassNames[i], i ), e );
@@ -342,13 +342,13 @@ public class CallMethodRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         // Push an array to capture the parameter values if necessary
         if ( paramCount > 0 )
         {
-            Object parameters[] = new Object[paramCount];
+            final Object parameters[] = new Object[paramCount];
             fill( parameters, null );
             getDigester().pushParams( parameters );
         }
@@ -358,7 +358,7 @@ public class CallMethodRule
      * {@inheritDoc}
      */
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
         if ( paramCount == 0 )
@@ -371,7 +371,7 @@ public class CallMethodRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         // Retrieve or construct the parameter values array
@@ -438,7 +438,7 @@ public class CallMethodRule
         // Construct the parameter values array we will need
         // We only do the conversion if the param value is a String and
         // the specified paramType is not String.
-        Object[] paramValues = new Object[paramTypes.length];
+        final Object[] paramValues = new Object[paramTypes.length];
         for ( int i = 0; i < paramTypes.length; i++ )
         {
             // convert nulls and convert stringy parameters
@@ -474,7 +474,7 @@ public class CallMethodRule
         // Invoke the required method on the top object
         if ( getDigester().getLogger().isDebugEnabled() )
         {
-            Formatter formatter =
+            final Formatter formatter =
                 new Formatter().format( "[CallMethodRule]{%s} Call %s.%s(",
                                         getDigester().getMatch(),
                                         target.getClass().getName(),
@@ -518,7 +518,7 @@ public class CallMethodRule
      *
      * @param result the Object returned by the method invoked, possibly null
      */
-    protected void processMethodCallResult( Object result )
+    protected void processMethodCallResult( final Object result )
     {
         // do nothing
     }
@@ -529,7 +529,7 @@ public class CallMethodRule
     @Override
     public String toString()
     {
-        Formatter formatter = new Formatter().format( "CallMethodRule[methodName=%s, paramCount=%s, paramTypes={",
+        final Formatter formatter = new Formatter().format( "CallMethodRule[methodName=%s, paramCount=%s, paramTypes={",
                                                       methodName, paramCount );
         if ( paramTypes != null )
         {

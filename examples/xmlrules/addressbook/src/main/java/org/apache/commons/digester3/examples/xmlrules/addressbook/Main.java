@@ -58,7 +58,7 @@ public class Main
      * <p>
      * Usage: java Example example.xml
      */
-    public static void main( String[] args )
+    public static void main( final String[] args )
         throws Exception
     {
         if ( args.length != 2 )
@@ -68,11 +68,11 @@ public class Main
         }
 
         final String rulesfileName = args[0];
-        String datafileName = args[1];
+        final String datafileName = args[1];
 
         // Create a Digester instance which has been initialised with
         // rules loaded from the specified file.
-        Digester d = newLoader( new FromXmlRulesModule()
+        final Digester d = newLoader( new FromXmlRulesModule()
         {
 
             @Override
@@ -86,21 +86,21 @@ public class Main
         // Prime the digester stack with an object for rules to
         // operate on. Note that it is quite common for "this"
         // to be the object pushed.
-        AddressBook book = new AddressBook();
+        final AddressBook book = new AddressBook();
         d.push( book );
 
         // Process the input file.
         try
         {
-            File srcfile = new java.io.File( datafileName );
+            final File srcfile = new java.io.File( datafileName );
             d.parse( srcfile );
         }
-        catch ( IOException ioe )
+        catch ( final IOException ioe )
         {
             System.out.println( "Error reading input file:" + ioe.getMessage() );
             System.exit( -1 );
         }
-        catch ( SAXException se )
+        catch ( final SAXException se )
         {
             System.out.println( "Error parsing input file:" + se.getMessage() );
             System.exit( -1 );

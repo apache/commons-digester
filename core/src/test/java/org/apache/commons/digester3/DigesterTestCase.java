@@ -116,7 +116,7 @@ public class DigesterTestCase
             digester.parse( (File) null );
             fail( "Expected IllegalArgumentException with null argument" );
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // expected
         }
@@ -133,7 +133,7 @@ public class DigesterTestCase
             digester.parse( (InputSource) null );
             fail( "Expected IllegalArgumentException with null argument" );
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // expected
         }
@@ -150,7 +150,7 @@ public class DigesterTestCase
             digester.parse( (InputStream) null );
             fail( "Expected IllegalArgumentException with null argument" );
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // expected
         }
@@ -167,7 +167,7 @@ public class DigesterTestCase
             digester.parse( (Reader) null );
             fail( "Expected IllegalArgumentException with null argument" );
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // expected
         }
@@ -184,7 +184,7 @@ public class DigesterTestCase
             digester.parse( (String) null );
             fail( "Expected IllegalArgumentException with null argument" );
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // expected
         }
@@ -201,7 +201,7 @@ public class DigesterTestCase
             digester.parse( (URL) null );
             fail( "Expected IllegalArgumentException with null argument" );
         }
-        catch ( IllegalArgumentException e )
+        catch ( final IllegalArgumentException e )
         {
             // expected
         }
@@ -247,7 +247,7 @@ public class DigesterTestCase
         int n = 0;
         for ( int i = 0; i < registrations.length; i += 2 )
         {
-            URL url = this.getClass().getResource( registrations[i + 1] );
+            final URL url = this.getClass().getResource( registrations[i + 1] );
             if ( url != null )
             {
                 digester.register( registrations[i], url );
@@ -257,11 +257,11 @@ public class DigesterTestCase
         map = digester.getRegistrations();
         assertEquals( "Registered two URLs", n, map.size() );
 
-        int count[] = new int[n];
+        final int count[] = new int[n];
         for ( int i = 0; i < n; i++ ) {
             count[i] = 0;
         }
-        for ( String key : map.keySet() )
+        for ( final String key : map.keySet() )
         {
             for ( int i = 0; i < n; i++ )
             {
@@ -408,9 +408,9 @@ public class DigesterTestCase
             }
         }
 
-        TestConfigureDigester digester = new TestConfigureDigester();
+        final TestConfigureDigester digester = new TestConfigureDigester();
 
-        String xml = "<?xml version='1.0'?><document/>";
+        final String xml = "<?xml version='1.0'?><document/>";
         digester.parse( new StringReader( xml ) );
 
         assertEquals( "Initialize should be called once and only once", 1, digester.called );
@@ -428,24 +428,24 @@ public class DigesterTestCase
             public Attributes attributes;
 
             @Override
-            public void begin( String namespace, String name, Attributes attributes )
+            public void begin( final String namespace, final String name, final Attributes attributes )
             {
                 this.attributes = new AttributesImpl( attributes );
             }
 
             @Override
-            public void body( String namespace, String name, String text )
+            public void body( final String namespace, final String name, final String text )
             {
                 this.body = text;
             }
         }
 
-        TestSubRule tsr = new TestSubRule();
-        Digester digester = new Digester();
+        final TestSubRule tsr = new TestSubRule();
+        final Digester digester = new Digester();
         digester.addRule( "alpha/beta", tsr );
 
         // it's not easy to transform dirty harry into the mighty circus - but let's give it a try
-        String xml =
+        final String xml =
             "<?xml version='1.0'?><alpha><beta forname='Dirty' surname='Harry'>Do you feel luck punk?</beta></alpha>";
         InputSource in = new InputSource( new StringReader( xml ) );
 
@@ -459,15 +459,15 @@ public class DigesterTestCase
         digester.setSubstitutor( new Substitutor()
         {
             @Override
-            public Attributes substitute( Attributes attributes )
+            public Attributes substitute( final Attributes attributes )
             {
-                AttributesImpl results = new AttributesImpl();
+                final AttributesImpl results = new AttributesImpl();
                 results.addAttribute( "", "python", "python", "CDATA", "Cleese" );
                 return results;
             }
 
             @Override
-            public String substitute( String bodyText )
+            public String substitute( final String bodyText )
             {
                 return "And now for something completely different...";
             }
@@ -487,9 +487,9 @@ public class DigesterTestCase
     public void testNamedStackPushPeekPop()
         throws Exception
     {
-        BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
-        String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";
-        Digester digester = new Digester();
+        final BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
+        final String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";
+        final Digester digester = new Digester();
         assertTrue( "Stack starts empty:", digester.isEmpty( testStackName ) );
         digester.push( testStackName, archimedesAveragePi );
         assertEquals( "Peeked value:", archimedesAveragePi, digester.peek( testStackName ) );
@@ -511,7 +511,7 @@ public class DigesterTestCase
             digester.peek( testStackName, 3 );
             fail( "Peek#4 failed to throw an exception." );
         }
-        catch ( EmptyStackException ex )
+        catch ( final EmptyStackException ex )
         {
             // ok, expected
         }
@@ -522,7 +522,7 @@ public class DigesterTestCase
             digester.peek( "no.such.stack", 0 );
             fail( "Peeking a non-existent stack failed to throw an exception." );
         }
-        catch ( EmptyStackException ex )
+        catch ( final EmptyStackException ex )
         {
             // ok, expected
         }
@@ -532,9 +532,9 @@ public class DigesterTestCase
     @Test
     public void testNamedIndependence()
     {
-        String testStackOneName = "org.apache.commons.digester3.tests.testNamedIndependenceOne";
-        String testStackTwoName = "org.apache.commons.digester3.tests.testNamedIndependenceTwo";
-        Digester digester = new Digester();
+        final String testStackOneName = "org.apache.commons.digester3.tests.testNamedIndependenceOne";
+        final String testStackTwoName = "org.apache.commons.digester3.tests.testNamedIndependenceTwo";
+        final Digester digester = new Digester();
         digester.push( testStackOneName, "Tweedledum" );
         digester.push( testStackTwoName, "Tweedledee" );
         assertEquals( "Popped value one:", "Tweedledum", digester.pop( testStackOneName ) );
@@ -545,8 +545,8 @@ public class DigesterTestCase
     @Test
     public void testPopNamedStackNotPushed()
     {
-        String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
-        Digester digester = new Digester();
+        final String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
+        final Digester digester = new Digester();
         try
         {
 
@@ -554,7 +554,7 @@ public class DigesterTestCase
             fail( "Expected an EmptyStackException" );
 
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             // expected
         }
@@ -566,7 +566,7 @@ public class DigesterTestCase
             fail( "Expected an EmptyStackException" );
 
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             // expected
         }
@@ -576,8 +576,8 @@ public class DigesterTestCase
     @Test
     public void testNamedStackIsEmpty()
     {
-        String testStackName = "org.apache.commons.digester3.tests.testNamedStackIsEmpty";
-        Digester digester = new Digester();
+        final String testStackName = "org.apache.commons.digester3.tests.testNamedStackIsEmpty";
+        final Digester digester = new Digester();
         assertTrue( "A named stack that has no object pushed onto it yet should be empty",
                     digester.isEmpty( testStackName ) );
 
@@ -599,15 +599,15 @@ public class DigesterTestCase
     public void testGetRoot()
         throws Exception
     {
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addRule( "root", new ObjectCreateRule( TestBean.class ) );
 
-        String xml = "<root/>";
-        InputSource in = new InputSource( new StringReader( xml ) );
+        final String xml = "<root/>";
+        final InputSource in = new InputSource( new StringReader( xml ) );
 
         digester.parse( in );
 
-        Object root = digester.getRoot();
+        final Object root = digester.getRoot();
         assertNotNull( "root object not retrieved", root );
         assertTrue( "root object not a TestRule instance", ( root instanceof TestBean ) );
     }
@@ -618,12 +618,12 @@ public class DigesterTestCase
     {
         public ArrayList<String> events = new ArrayList<String>();
 
-        public Object onPush( Digester d, String stackName, Object o )
+        public Object onPush( final Digester d, final String stackName, final Object o )
         {
-            String msg = "push:" + stackName + ":" + o.toString();
+            final String msg = "push:" + stackName + ":" + o.toString();
             events.add( msg );
 
-            String str = o.toString();
+            final String str = o.toString();
             if ( str.startsWith( "replpush" ) )
             {
                 return new String( str );
@@ -631,11 +631,11 @@ public class DigesterTestCase
             return o;
         }
 
-        public Object onPop( Digester d, String stackName, Object o )
+        public Object onPop( final Digester d, final String stackName, final Object o )
         {
-            String msg = "pop:" + stackName + ":" + o.toString();
+            final String msg = "pop:" + stackName + ":" + o.toString();
             events.add( msg );
-            String str = o.toString();
+            final String str = o.toString();
             if ( str.startsWith( "replpop" ) )
             {
                 return new String( str );
@@ -650,17 +650,17 @@ public class DigesterTestCase
     @Test
     public void testStackAction()
     {
-        TrackingStackAction action = new TrackingStackAction();
+        final TrackingStackAction action = new TrackingStackAction();
 
-        Object obj1 = new String( "obj1" );
-        Object obj2 = new String( "obj2" );
-        Object obj3 = new String( "replpop.obj3" );
-        Object obj4 = new String( "replpush.obj4" );
+        final Object obj1 = new String( "obj1" );
+        final Object obj2 = new String( "obj2" );
+        final Object obj3 = new String( "replpop.obj3" );
+        final Object obj4 = new String( "replpush.obj4" );
 
-        Object obj8 = new String( "obj8" );
-        Object obj9 = new String( "obj9" );
+        final Object obj8 = new String( "obj8" );
+        final Object obj9 = new String( "obj9" );
 
-        Digester d = new Digester();
+        final Digester d = new Digester();
         d.setStackAction( action );
 
         assertEquals( 0, action.events.size() );
@@ -678,10 +678,10 @@ public class DigesterTestCase
         assertSame( obj2, d.peek( 2 ) );
         assertSame( obj1, d.peek( 3 ) );
 
-        Object obj4a = d.pop();
-        Object obj3a = d.pop();
-        Object obj2a = d.pop();
-        Object obj1a = d.pop();
+        final Object obj4a = d.pop();
+        final Object obj3a = d.pop();
+        final Object obj2a = d.pop();
+        final Object obj1a = d.pop();
 
         assertFalse( obj4 == obj4a );
         assertEquals( obj4, obj4a );
@@ -692,8 +692,8 @@ public class DigesterTestCase
 
         d.push( "stack1", obj8 );
         d.push( "stack1", obj9 );
-        Object obj9a = d.pop( "stack1" );
-        Object obj8a = d.pop( "stack1" );
+        final Object obj9a = d.pop( "stack1" );
+        final Object obj8a = d.pop( "stack1" );
 
         assertSame( obj8, obj8a );
         assertSame( obj9, obj9a );

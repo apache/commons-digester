@@ -33,7 +33,7 @@ final class CallMethodRule
     extends AbstractXmlRule
 {
 
-    public CallMethodRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public CallMethodRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -42,15 +42,15 @@ final class CallMethodRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        CallMethodBuilder builder = linkedRuleBuilder.callMethod( attributes.getValue( "methodname" ) );
+        final CallMethodBuilder builder = linkedRuleBuilder.callMethod( attributes.getValue( "methodname" ) );
 
         // Select which element is to be the target. Default to zero,
         // ie the top object on the stack.
         int targetOffset = 0;
-        String targetOffsetStr = attributes.getValue( "targetoffset" );
+        final String targetOffsetStr = attributes.getValue( "targetoffset" );
         if ( targetOffsetStr != null )
         {
             targetOffset = Integer.parseInt( targetOffsetStr );
@@ -59,19 +59,19 @@ final class CallMethodRule
 
         builder.useExactMatch( "true".equalsIgnoreCase( attributes.getValue( "useExactMatch" ) ) );
 
-        String paramCountStr = attributes.getValue( "paramcount" );
+        final String paramCountStr = attributes.getValue( "paramcount" );
         if ( paramCountStr != null )
         {
-            int paramCount = Integer.parseInt( attributes.getValue( "paramcount" ) );
+            final int paramCount = Integer.parseInt( attributes.getValue( "paramcount" ) );
 
             builder.withParamCount( paramCount );
         }
 
-        String paramTypesStr = attributes.getValue( "paramtypes" );
+        final String paramTypesStr = attributes.getValue( "paramtypes" );
         if ( paramTypesStr != null && paramTypesStr.length() > 0 )
         {
-            StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
-            String[] paramTypeNames = new String[tokens.countTokens()];
+            final StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
+            final String[] paramTypeNames = new String[tokens.countTokens()];
             int counter = 0;
             while ( tokens.hasMoreTokens() )
             {

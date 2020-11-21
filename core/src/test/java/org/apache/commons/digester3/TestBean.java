@@ -35,8 +35,8 @@ public class TestBean
     }
 
     @ObjectCreate( pattern = "toplevel/bean" )
-    public TestBean( @CallParam( pattern = "toplevel/bean", attributeName = "boolean" ) boolean booleanProperty,
-                     @CallParam( pattern = "toplevel/bean", attributeName = "double" ) double doubleProperty )
+    public TestBean( @CallParam( pattern = "toplevel/bean", attributeName = "boolean" ) final boolean booleanProperty,
+                     @CallParam( pattern = "toplevel/bean", attributeName = "double" ) final double doubleProperty )
     {
         setBooleanProperty( booleanProperty );
         setDoubleProperty( doubleProperty );
@@ -48,7 +48,7 @@ public class TestBean
      * @param booleanProperty
      * @param doubleProperty
      */
-    public TestBean( Boolean booleanProperty, Double doubleProperty )
+    public TestBean( final Boolean booleanProperty, final Double doubleProperty )
     {
         this( booleanProperty.booleanValue(), doubleProperty.doubleValue() );
     }
@@ -65,7 +65,7 @@ public class TestBean
         return ( booleanProperty );
     }
 
-    public void setBooleanProperty( boolean booleanProperty )
+    public void setBooleanProperty( final boolean booleanProperty )
     {
         this.booleanProperty = booleanProperty;
     }
@@ -80,7 +80,7 @@ public class TestBean
         return ( this.doubleProperty );
     }
 
-    public void setDoubleProperty( double doubleProperty )
+    public void setDoubleProperty( final double doubleProperty )
     {
         this.doubleProperty = doubleProperty;
     }
@@ -95,7 +95,7 @@ public class TestBean
         return ( falseProperty );
     }
 
-    public void setFalseProperty( boolean falseProperty )
+    public void setFalseProperty( final boolean falseProperty )
     {
         this.falseProperty = falseProperty;
     }
@@ -110,7 +110,7 @@ public class TestBean
         return ( this.floatProperty );
     }
 
-    public void setFloatProperty( float floatProperty )
+    public void setFloatProperty( final float floatProperty )
     {
         this.floatProperty = floatProperty;
     }
@@ -125,19 +125,19 @@ public class TestBean
         return ( this.intArray );
     }
 
-    public void setIntArray( int intArray[] )
+    public void setIntArray( final int intArray[] )
     {
         this.intArray = intArray;
     }
 
     private final int intIndexed[] = { 0, 10, 20, 30, 40 };
 
-    public int getIntIndexed( int index )
+    public int getIntIndexed( final int index )
     {
         return ( intIndexed[index] );
     }
 
-    public void setIntIndexed( int index, int value )
+    public void setIntIndexed( final int index, final int value )
     {
         intIndexed[index] = value;
     }
@@ -149,7 +149,7 @@ public class TestBean
         return ( this.intMultibox );
     }
 
-    public void setIntMultibox( int intMultibox[] )
+    public void setIntMultibox( final int intMultibox[] )
     {
         this.intMultibox = intMultibox;
     }
@@ -164,7 +164,7 @@ public class TestBean
         return ( this.intProperty );
     }
 
-    public void setIntProperty( int intProperty )
+    public void setIntProperty( final int intProperty )
     {
         this.intProperty = intProperty;
     }
@@ -179,7 +179,7 @@ public class TestBean
         return ( this.longProperty );
     }
 
-    public void setLongProperty( long longProperty )
+    public void setLongProperty( final long longProperty )
     {
         this.longProperty = longProperty;
     }
@@ -194,7 +194,7 @@ public class TestBean
         return ( this.multipleSelect );
     }
 
-    public void setMultipleSelect( String multipleSelect[] )
+    public void setMultipleSelect( final String multipleSelect[] )
     {
         this.multipleSelect = multipleSelect;
     }
@@ -222,7 +222,7 @@ public class TestBean
         return ( this.nullProperty );
     }
 
-    public void setNullProperty( String nullProperty )
+    public void setNullProperty( final String nullProperty )
     {
         this.nullProperty = nullProperty;
     }
@@ -237,7 +237,7 @@ public class TestBean
         return ( this.shortProperty );
     }
 
-    public void setShortProperty( short shortProperty )
+    public void setShortProperty( final short shortProperty )
     {
         this.shortProperty = shortProperty;
     }
@@ -252,7 +252,7 @@ public class TestBean
         return ( this.singleSelect );
     }
 
-    public void setSingleSelect( String singleSelect )
+    public void setSingleSelect( final String singleSelect )
     {
         this.singleSelect = singleSelect;
     }
@@ -267,19 +267,19 @@ public class TestBean
         return ( this.stringArray );
     }
 
-    public void setStringArray( String stringArray[] )
+    public void setStringArray( final String stringArray[] )
     {
         this.stringArray = stringArray;
     }
 
     private final String stringIndexed[] = { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
-    public String getStringIndexed( int index )
+    public String getStringIndexed( final int index )
     {
         return ( stringIndexed[index] );
     }
 
-    public void setStringIndexed( int index, String value )
+    public void setStringIndexed( final int index, final String value )
     {
         stringIndexed[index] = value;
     }
@@ -294,7 +294,7 @@ public class TestBean
         return ( this.stringProperty );
     }
 
-    public void setStringProperty( String stringProperty )
+    public void setStringProperty( final String stringProperty )
     {
         this.stringProperty = stringProperty;
     }
@@ -309,7 +309,7 @@ public class TestBean
         return ( this.emptyStringProperty );
     }
 
-    public void setEmptyStringProperty( String emptyStringProperty )
+    public void setEmptyStringProperty( final String emptyStringProperty )
     {
         this.emptyStringProperty = emptyStringProperty;
     }

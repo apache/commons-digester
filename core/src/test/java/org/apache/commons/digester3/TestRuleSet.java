@@ -48,7 +48,7 @@ public class TestRuleSet
      *
      * @param prefix Matching pattern prefix (must end with '/') or null.
      */
-    public TestRuleSet( String prefix )
+    public TestRuleSet( final String prefix )
     {
 
         this( prefix, null );
@@ -61,7 +61,7 @@ public class TestRuleSet
      * @param prefix Matching pattern prefix (must end with '/') or null.
      * @param namespaceURI The namespace URI these rules belong to
      */
-    public TestRuleSet( String prefix, String namespaceURI )
+    public TestRuleSet( final String prefix, final String namespaceURI )
     {
 
         super(namespaceURI);
@@ -88,7 +88,7 @@ public class TestRuleSet
     /**
      * {@inheritDoc}
      */
-    public void addRuleInstances( Digester digester )
+    public void addRuleInstances( final Digester digester )
     {
 
         digester.addObjectCreate( prefix + "employee", Employee.class );

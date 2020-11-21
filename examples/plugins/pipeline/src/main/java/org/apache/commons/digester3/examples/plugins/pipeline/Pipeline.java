@@ -49,17 +49,17 @@ public class Pipeline
 
     private Transform transformer;
 
-    public static void main( String[] args )
+    public static void main( final String[] args )
     {
         if ( args.length != 1 )
         {
             System.err.println( "usage: pipeline config-file" );
             System.exit( -1 );
         }
-        String configFile = args[0];
+        final String configFile = args[0];
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
         digester.addObjectCreate( "pipeline", Pipeline.class );
@@ -67,7 +67,7 @@ public class Pipeline
         digester.addCallMethod( "pipeline/source", "setSource", 1 );
         digester.addCallParam( "pipeline/source", 0, "file" );
 
-        PluginCreateRule pcr = new PluginCreateRule( Transform.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Transform.class );
         digester.addRule( "pipeline/transform", pcr );
         digester.addSetNext( "pipeline/transform", "setTransform" );
 
@@ -79,7 +79,7 @@ public class Pipeline
         {
             pipeline = digester.parse( configFile );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             System.err.println( "oops exception occurred during parse." );
             e.printStackTrace();
@@ -90,7 +90,7 @@ public class Pipeline
         {
             pipeline.execute();
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             System.err.println( "oops exception occurred during pipeline execution." );
             e.printStackTrace();
@@ -98,17 +98,17 @@ public class Pipeline
         }
     }
 
-    public void setSource( String source )
+    public void setSource( final String source )
     {
         this.source = source;
     }
 
-    public void setDest( String dest )
+    public void setDest( final String dest )
     {
         this.dest = dest;
     }
 
-    public void setTransform( Transform transformer )
+    public void setTransform( final Transform transformer )
     {
         this.transformer = transformer;
     }
@@ -116,19 +116,19 @@ public class Pipeline
     private void execute()
         throws IOException
     {
-        FileReader inRaw = new FileReader( source );
-        FileWriter out = new FileWriter( dest );
+        final FileReader inRaw = new FileReader( source );
+        final FileWriter out = new FileWriter( dest );
 
-        BufferedReader in = new BufferedReader( inRaw );
+        final BufferedReader in = new BufferedReader( inRaw );
 
         while ( true )
         {
-            String inStr = in.readLine();
+            final String inStr = in.readLine();
             if ( inStr == null ) {
                 break;
             }
 
-            String outStr = transformer.transform( inStr );
+            final String outStr = transformer.transform( inStr );
             out.write( outStr );
             out.write( '\n' );
         }

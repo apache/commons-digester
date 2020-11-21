@@ -30,7 +30,7 @@ abstract class AbstractXmlMethodRule
     extends AbstractXmlRule
 {
 
-    public AbstractXmlMethodRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public AbstractXmlMethodRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -39,13 +39,13 @@ abstract class AbstractXmlMethodRule
      * {@inheritDoc}
      */
     @Override
-    protected final void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected final void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        String methodName = attributes.getValue( "methodname" );
-        String paramType = attributes.getValue( "paramtype" );
-        String exactMatch = attributes.getValue( "exactMatch" );
-        String fireOnBegin = attributes.getValue( "fireOnBegin" );
+        final String methodName = attributes.getValue( "methodname" );
+        final String paramType = attributes.getValue( "paramtype" );
+        final String exactMatch = attributes.getValue( "exactMatch" );
+        final String fireOnBegin = attributes.getValue( "fireOnBegin" );
 
         bindRule( linkedRuleBuilder, methodName, paramType, "true".equals( exactMatch ), "true".equals( fireOnBegin ) );
     }

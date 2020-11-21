@@ -32,10 +32,10 @@ final class PatternStack
     @Override
     public String toString()
     {
-        StringBuilder str = new StringBuilder();
+        final StringBuilder str = new StringBuilder();
         for ( int i = 0; i < size(); i++ )
         {
-            String elem = get( i );
+            final String elem = get( i );
             if ( elem.length() > 0 )
             {
                 if ( str.length() > 0 )

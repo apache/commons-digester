@@ -45,7 +45,7 @@ public class Main
      * <p>
      * Usage: java Example example.xml
      */
-    public static void main( String[] args )
+    public static void main( final String[] args )
     {
         if ( args.length != 1 )
         {
@@ -53,15 +53,15 @@ public class Main
             System.exit( -1 );
         }
 
-        String filename = args[0];
+        final String filename = args[0];
 
         // Create a Digester instance
-        Digester d = new Digester();
+        final Digester d = new Digester();
 
         // Prime the digester stack with an object for rules to
         // operate on. Note that it is quite common for "this"
         // to be the object pushed.
-        AddressBook book = new AddressBook();
+        final AddressBook book = new AddressBook();
         d.push( book );
 
         // Add rules to the digester that will be triggered while
@@ -71,15 +71,15 @@ public class Main
         // Process the input file.
         try
         {
-            java.io.File srcfile = new java.io.File( filename );
+            final java.io.File srcfile = new java.io.File( filename );
             d.parse( srcfile );
         }
-        catch ( java.io.IOException ioe )
+        catch ( final java.io.IOException ioe )
         {
             System.out.println( "Error reading input file:" + ioe.getMessage() );
             System.exit( -1 );
         }
-        catch ( org.xml.sax.SAXException se )
+        catch ( final org.xml.sax.SAXException se )
         {
             System.out.println( "Error parsing input file:" + se.getMessage() );
             System.exit( -1 );
@@ -90,7 +90,7 @@ public class Main
         book.print();
     }
 
-    private static void addRules( Digester d )
+    private static void addRules( final Digester d )
     {
 
         // --------------------------------------------------

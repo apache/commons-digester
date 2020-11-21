@@ -47,7 +47,7 @@ class WithMemoryRulesBinder
 
     private final RulesBinder wrappedRulesBinder;
 
-    public WithMemoryRulesBinder( RulesBinder wrappedRulesBinder )
+    public WithMemoryRulesBinder( final RulesBinder wrappedRulesBinder )
     {
         this.wrappedRulesBinder = wrappedRulesBinder;
     }
@@ -63,7 +63,7 @@ class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( String messagePattern, Object... arguments )
+    public void addError( final String messagePattern, final Object... arguments )
     {
         this.wrappedRulesBinder.addError( messagePattern, arguments );
     }
@@ -71,7 +71,7 @@ class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( Throwable t )
+    public void addError( final Throwable t )
     {
         this.wrappedRulesBinder.addError( t );
     }
@@ -79,7 +79,7 @@ class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void install( RulesModule rulesModule )
+    public void install( final RulesModule rulesModule )
     {
         this.wrappedRulesBinder.install( rulesModule );
     }
@@ -87,7 +87,7 @@ class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public LinkedRuleBuilder forPattern( String pattern )
+    public LinkedRuleBuilder forPattern( final String pattern )
     {
         return this.wrappedRulesBinder.forPattern( pattern );
     }

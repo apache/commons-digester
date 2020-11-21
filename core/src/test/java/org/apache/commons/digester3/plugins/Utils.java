@@ -35,7 +35,7 @@ public class Utils
      * @param name is the test file we want
      * @throws IOException if an input/output error occurs
      */
-    public static InputStream getInputStream( Object caller, String name )
+    public static InputStream getInputStream( final Object caller, final String name )
         throws IOException
     {
         return ( caller.getClass().getResourceAsStream( "/org/apache/commons/digester3/plugins/" + name ) );

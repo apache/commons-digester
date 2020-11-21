@@ -31,7 +31,7 @@ final class BeanPropertySetterRule
     extends AbstractXmlRule
 {
 
-    public BeanPropertySetterRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public BeanPropertySetterRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -40,13 +40,13 @@ final class BeanPropertySetterRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        BeanPropertySetterBuilder builder =
+        final BeanPropertySetterBuilder builder =
             linkedRuleBuilder.setBeanProperty().withName( attributes.getValue( "propertyname" ) );
 
-        int propertyNameFromAttributeIndex = attributes.getIndex( "propertynameFromAttribute" );
+        final int propertyNameFromAttributeIndex = attributes.getIndex( "propertynameFromAttribute" );
         if ( propertyNameFromAttributeIndex >= 0 )
         {
             builder.extractPropertyNameFromAttribute( attributes.getValue( propertyNameFromAttributeIndex ) );

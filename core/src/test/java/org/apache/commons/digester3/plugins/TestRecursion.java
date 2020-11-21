@@ -45,38 +45,38 @@ public class TestRecursion
         // that allow it to plug in instances of itself below
         // itself.
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "*/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test6.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        int nDescendants = countWidgets( root );
+        final int nDescendants = countWidgets( root );
         assertEquals( 10, nDescendants );
     }
 
-    private int countWidgets( Container c )
+    private int countWidgets( final Container c )
     {
-        List<Widget> l = c.getChildren();
+        final List<Widget> l = c.getChildren();
         int sum = 0;
-        for ( Widget w : l )
+        for ( final Widget w : l )
         {
             ++sum;
             if ( w instanceof Container )

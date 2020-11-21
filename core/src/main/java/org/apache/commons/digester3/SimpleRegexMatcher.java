@@ -66,7 +66,7 @@ public class SimpleRegexMatcher
      *
      * @param log the current <code>Log</code> implementation used by this class.
      */
-    public void setLog( Log log )
+    public void setLog( final Log log )
     {
         this.log = log;
     }
@@ -77,7 +77,7 @@ public class SimpleRegexMatcher
      * {@inheritDoc}
      */
     @Override
-    public boolean match( String basePattern, String regexPattern )
+    public boolean match( final String basePattern, final String regexPattern )
     {
         // check for nulls
         if ( basePattern == null || regexPattern == null )
@@ -97,7 +97,7 @@ public class SimpleRegexMatcher
      * @param baseAt FIXME
      * @param regexAt FIXME
      */
-    private boolean match( String basePattern, String regexPattern, int baseAt, int regexAt )
+    private boolean match( final String basePattern, final String regexPattern, int baseAt, int regexAt )
     {
         if ( log.isTraceEnabled() )
         {
@@ -127,7 +127,7 @@ public class SimpleRegexMatcher
         }
 
         // ok both within bounds
-        char regexCurrent = regexPattern.charAt( regexAt );
+        final char regexCurrent = regexPattern.charAt( regexAt );
         switch ( regexCurrent )
         {
             case '*':
@@ -140,7 +140,7 @@ public class SimpleRegexMatcher
                 }
                 // go through every subsequent apperance of the next character
                 // and so if the rest of the regex matches
-                char nextRegex = regexPattern.charAt( regexAt );
+                final char nextRegex = regexPattern.charAt( regexAt );
                 if ( log.isTraceEnabled() )
                 {
                     log.trace( "Searching for next '" + nextRegex + "' char" );

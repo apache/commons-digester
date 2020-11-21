@@ -53,7 +53,7 @@ public class ObjectParamRuleTestCase
     public void testBasic()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -80,7 +80,7 @@ public class ObjectParamRuleTestCase
         }).newDigester();
 
         // Parse it and obtain the ArrayList
-        ArrayList<?> al = digester.parse( new StringReader( sb.toString() ) );
+        final ArrayList<?> al = digester.parse( new StringReader( sb.toString() ) );
         assertNotNull( al );
         assertEquals( al.size(), 4 );
         assertTrue( al.contains( new Integer( -9 ) ) );

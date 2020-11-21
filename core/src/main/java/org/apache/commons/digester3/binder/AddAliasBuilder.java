@@ -34,7 +34,7 @@ public final class AddAliasBuilder<B>
 
     private final String alias;
 
-    AddAliasBuilder( B parentBuilder, Map<String, String> aliases, String alias )
+    AddAliasBuilder( final B parentBuilder, final Map<String, String> aliases, final String alias )
     {
         this.parentBuilder = parentBuilder;
         this.aliases = aliases;
@@ -47,7 +47,7 @@ public final class AddAliasBuilder<B>
      * @param propertyName The java bean property to be assigned the value
      * @return the parent builder to chain.
      */
-    public B forProperty( /*@Nullable*/ String propertyName )
+    public B forProperty( /*@Nullable*/ final String propertyName )
     {
         if ( alias != null )
         {

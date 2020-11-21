@@ -33,7 +33,7 @@ final class ObjectCreateRule
     extends AbstractXmlRule
 {
 
-    public ObjectCreateRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public ObjectCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -42,18 +42,18 @@ final class ObjectCreateRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        ObjectCreateBuilder builder = linkedRuleBuilder.createObject()
+        final ObjectCreateBuilder builder = linkedRuleBuilder.createObject()
             .ofType( attributes.getValue( "classname" ) )
             .ofTypeSpecifiedByAttribute( attributes.getValue( "attrname" ) );
 
-        String paramTypesStr = attributes.getValue( "paramtypes" );
+        final String paramTypesStr = attributes.getValue( "paramtypes" );
         if ( paramTypesStr != null && paramTypesStr.length() > 0 )
         {
-            StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
-            String[] paramTypeNames = new String[tokens.countTokens()];
+            final StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
+            final String[] paramTypeNames = new String[tokens.countTokens()];
             int counter = 0;
             while ( tokens.hasMoreTokens() )
             {
@@ -61,11 +61,11 @@ final class ObjectCreateRule
             }
             builder.usingConstructor( paramTypeNames );
         }
-        String paramsStr = attributes.getValue( "params" );
+        final String paramsStr = attributes.getValue( "params" );
         if ( paramsStr != null && paramsStr.length() > 0 )
         {
-            StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
-            Object[] params = new Object[tokens.countTokens()];
+            final StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
+            final Object[] params = new Object[tokens.countTokens()];
             int counter = 0;
             while ( tokens.hasMoreTokens() )
             {

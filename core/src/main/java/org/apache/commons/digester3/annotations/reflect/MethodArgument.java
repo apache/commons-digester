@@ -55,7 +55,7 @@ public final class MethodArgument
      * @param parameterType the method argument type.
      * @param annotations the method argument annotations.
      */
-    public MethodArgument( int index, Class<?> parameterType, Annotation[] annotations )
+    public MethodArgument( final int index, final Class<?> parameterType, final Annotation[] annotations )
     {
         if ( parameterType == null )
         {
@@ -96,9 +96,9 @@ public final class MethodArgument
     /**
      * {@inheritDoc}
      */
-    public <T extends Annotation> T getAnnotation( Class<T> annotationType )
+    public <T extends Annotation> T getAnnotation( final Class<T> annotationType )
     {
-        for ( Annotation annotation : this.annotations )
+        for ( final Annotation annotation : this.annotations )
         {
             if ( annotationType == annotation.annotationType() )
             {
@@ -131,7 +131,7 @@ public final class MethodArgument
      */
     private Annotation[] getAnnotationsArrayCopy()
     {
-        Annotation[] annotations = new Annotation[this.annotations.length];
+        final Annotation[] annotations = new Annotation[this.annotations.length];
         System.arraycopy( this.annotations, 0, annotations, 0, annotations.length );
         return annotations;
     }
@@ -139,9 +139,9 @@ public final class MethodArgument
     /**
      * {@inheritDoc}
      */
-    public boolean isAnnotationPresent( Class<? extends Annotation> annotationType )
+    public boolean isAnnotationPresent( final Class<? extends Annotation> annotationType )
     {
-        for ( Annotation annotation : this.annotations )
+        for ( final Annotation annotation : this.annotations )
         {
             if ( annotationType == annotation.annotationType() )
             {

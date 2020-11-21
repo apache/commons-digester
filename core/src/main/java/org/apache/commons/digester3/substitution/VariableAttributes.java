@@ -49,7 +49,7 @@ public class VariableAttributes
      * @param attrs The attributes where variables have to be expanded.
      * @param expander The variables expander instance.
      */
-    public void init( Attributes attrs, VariableExpander expander )
+    public void init( final Attributes attrs, final VariableExpander expander )
     {
         this.attrs = attrs;
         this.expander = expander;
@@ -62,7 +62,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getValue( int index )
+    public String getValue( final int index )
     {
         if ( index >= values.size() )
         {
@@ -99,9 +99,9 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getValue( String qname )
+    public String getValue( final String qname )
     {
-        int index = attrs.getIndex( qname );
+        final int index = attrs.getIndex( qname );
         if ( index == -1 )
         {
             return null;
@@ -112,9 +112,9 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getValue( String uri, String localname )
+    public String getValue( final String uri, final String localname )
     {
-        int index = attrs.getIndex( uri, localname );
+        final int index = attrs.getIndex( uri, localname );
         if ( index == -1 )
         {
             return null;
@@ -126,7 +126,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public int getIndex( String qname )
+    public int getIndex( final String qname )
     {
         return attrs.getIndex( qname );
     }
@@ -134,7 +134,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public int getIndex( String uri, String localpart )
+    public int getIndex( final String uri, final String localpart )
     {
         return attrs.getIndex( uri, localpart );
     }
@@ -150,7 +150,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getLocalName( int index )
+    public String getLocalName( final int index )
     {
         return attrs.getLocalName( index );
     }
@@ -158,7 +158,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getQName( int index )
+    public String getQName( final int index )
     {
         return attrs.getQName( index );
     }
@@ -166,7 +166,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getType( int index )
+    public String getType( final int index )
     {
         return attrs.getType( index );
     }
@@ -174,7 +174,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getType( String qname )
+    public String getType( final String qname )
     {
         return attrs.getType( qname );
     }
@@ -182,7 +182,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getType( String uri, String localname )
+    public String getType( final String uri, final String localname )
     {
         return attrs.getType( uri, localname );
     }
@@ -190,7 +190,7 @@ public class VariableAttributes
     /**
      * {@inheritDoc}
      */
-    public String getURI( int index )
+    public String getURI( final int index )
     {
         return attrs.getURI( index );
     }

@@ -40,10 +40,10 @@ public class LoaderSetProperties
      * {@inheritDoc}
      */
     @Override
-    public void addRules( Digester digester, String path )
+    public void addRules( final Digester digester, final String path )
     {
-        Log log = digester.getLogger();
-        boolean debug = log.isDebugEnabled();
+        final Log log = digester.getLogger();
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "LoaderSetProperties loading rules for plugin at path [" + path + "]" );

@@ -56,18 +56,18 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
     /**
      * {@inheritDoc}
      */
-    public void handle( A annotation, Method element, RulesBinder rulesBinder )
+    public void handle( final A annotation, final Method element, final RulesBinder rulesBinder )
     {
         if ( SUPPORTED_ARGS != element.getParameterTypes().length )
         {
-            DigesterRule rule = annotation.annotationType().getAnnotation( DigesterRule.class );
+            final DigesterRule rule = annotation.annotationType().getAnnotation( DigesterRule.class );
 
             rulesBinder.addError( "Methods annotated with digester annotation rule @%s must have just one argument",
                                   rule.reflectsRule().getName() );
             return;
         }
 
-        Object explicitTypesObject = getAnnotationValue( annotation );
+        final Object explicitTypesObject = getAnnotationValue( annotation );
         if ( explicitTypesObject == null || !explicitTypesObject.getClass().isArray()
             || Class.class != explicitTypesObject.getClass().getComponentType() )
         {
@@ -76,13 +76,13 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
             return;
         }
 
-        Class<?>[] explicitTypes = (Class<?>[]) explicitTypesObject;
-        Class<?> paramType = element.getParameterTypes()[0];
-        boolean fireOnBegin = getFireOnBegin( annotation );
+        final Class<?>[] explicitTypes = (Class<?>[]) explicitTypesObject;
+        final Class<?> paramType = element.getParameterTypes()[0];
+        final boolean fireOnBegin = getFireOnBegin( annotation );
 
         if ( explicitTypes.length > 0 )
         {
-            for ( Class<?> explicitType : explicitTypes )
+            for ( final Class<?> explicitType : explicitTypes )
             {
                 if ( !paramType.isAssignableFrom( explicitType ) )
                 {
@@ -101,8 +101,8 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
         }
     }
 
-    private void doHandle( A methodAnnotation, Method method, Class<?> type, boolean fireOnBegin,
-                           RulesBinder rulesBinder )
+    private void doHandle( final A methodAnnotation, final Method method, final Class<?> type, final boolean fireOnBegin,
+                           final RulesBinder rulesBinder )
     {
         if ( type.isInterface() && Modifier.isAbstract( type.getModifiers() ) )
         {
@@ -111,22 +111,22 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
             return;
         }
 
-        for ( Annotation annotation : type.getAnnotations() )
+        for ( final Annotation annotation : type.getAnnotations() )
         {
             doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
         }
 
-        for ( Constructor<?> constructor : type.getConstructors() )
+        for ( final Constructor<?> constructor : type.getConstructors() )
         {
-            for ( Annotation annotation : constructor.getAnnotations() )
+            for ( final Annotation annotation : constructor.getAnnotations() )
             {
                 doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
             }
         }
     }
 
-    private void doHandle( A methodAnnotation, Annotation annotation, Method method, final Class<?> type,
-                           boolean fireOnBegin, RulesBinder rulesBinder )
+    private void doHandle( final A methodAnnotation, final Annotation annotation, final Method method, final Class<?> type,
+                           final boolean fireOnBegin, final RulesBinder rulesBinder )
     {
         if ( annotation.annotationType().isAnnotationPresent( DigesterRule.class )
             && annotation.annotationType().isAnnotationPresent( CreationRule.class ) )
@@ -142,18 +142,18 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
 
             } );
 
-            String pattern = getAnnotationPattern( annotation );
-            String namespaceURI = getAnnotationNamespaceURI( annotation );
+            final String pattern = getAnnotationPattern( annotation );
+            final String namespaceURI = getAnnotationNamespaceURI( annotation );
             doBind( pattern, namespaceURI, method, type, fireOnBegin, rulesBinder );
         }
         else if ( annotation.annotationType().isAnnotationPresent( DigesterRuleList.class ) )
         {
             // check if it is one of the *.List annotation
-            Annotation[] annotations = getAnnotationsArrayValue( annotation );
+            final Annotation[] annotations = getAnnotationsArrayValue( annotation );
             if ( annotations != null )
             {
                 // if it is an annotations array, process them
-                for ( Annotation ptr : annotations )
+                for ( final Annotation ptr : annotations )
                 {
                     doHandle( methodAnnotation, ptr, method, type, fireOnBegin, rulesBinder );
                 }

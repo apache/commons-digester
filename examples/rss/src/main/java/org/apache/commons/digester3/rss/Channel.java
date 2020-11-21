@@ -68,7 +68,7 @@ public class Channel
         return ( this.copyright );
     }
 
-    public void setCopyright( String copyright )
+    public void setCopyright( final String copyright )
     {
         this.copyright = copyright;
     }
@@ -83,7 +83,7 @@ public class Channel
         return ( this.description );
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -98,7 +98,7 @@ public class Channel
         return ( this.docs );
     }
 
-    public void setDocs( String docs )
+    public void setDocs( final String docs )
     {
         this.docs = docs;
     }
@@ -113,7 +113,7 @@ public class Channel
         return ( this.image );
     }
 
-    public void setImage( Image image )
+    public void setImage( final Image image )
     {
         this.image = image;
     }
@@ -128,7 +128,7 @@ public class Channel
         return ( this.language );
     }
 
-    public void setLanguage( String language )
+    public void setLanguage( final String language )
     {
         this.language = language;
     }
@@ -143,7 +143,7 @@ public class Channel
         return ( this.lastBuildDate );
     }
 
-    public void setLastBuildDate( String lastBuildDate )
+    public void setLastBuildDate( final String lastBuildDate )
     {
         this.lastBuildDate = lastBuildDate;
     }
@@ -158,7 +158,7 @@ public class Channel
         return ( this.link );
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -173,7 +173,7 @@ public class Channel
         return ( this.managingEditor );
     }
 
-    public void setManagingEditor( String managingEditor )
+    public void setManagingEditor( final String managingEditor )
     {
         this.managingEditor = managingEditor;
     }
@@ -188,7 +188,7 @@ public class Channel
         return ( this.pubDate );
     }
 
-    public void setPubDate( String pubDate )
+    public void setPubDate( final String pubDate )
     {
         this.pubDate = pubDate;
     }
@@ -203,7 +203,7 @@ public class Channel
         return ( this.rating );
     }
 
-    public void setRating( String rating )
+    public void setRating( final String rating )
     {
         this.rating = rating;
     }
@@ -218,7 +218,7 @@ public class Channel
         return ( this.textInput );
     }
 
-    public void setTextInput( TextInput textInput )
+    public void setTextInput( final TextInput textInput )
     {
         this.textInput = textInput;
     }
@@ -233,7 +233,7 @@ public class Channel
         return ( this.title );
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -248,7 +248,7 @@ public class Channel
         return ( this.version );
     }
 
-    public void setVersion( double version )
+    public void setVersion( final double version )
     {
         this.version = version;
     }
@@ -263,7 +263,7 @@ public class Channel
         return ( this.webMaster );
     }
 
-    public void setWebMaster( String webMaster )
+    public void setWebMaster( final String webMaster )
     {
         this.webMaster = webMaster;
     }
@@ -275,7 +275,7 @@ public class Channel
      *
      * @param item The item to be added
      */
-    public void addItem( Item item )
+    public void addItem( final Item item )
     {
         synchronized ( items )
         {
@@ -288,7 +288,7 @@ public class Channel
      *
      * @param skipDay The skip day to be added
      */
-    public void addSkipDay( String skipDay )
+    public void addSkipDay( final String skipDay )
     {
         synchronized ( skipDays )
         {
@@ -301,7 +301,7 @@ public class Channel
      *
      * @param skipHour The skip hour to be added
      */
-    public void addSkipHour( String skipHour )
+    public void addSkipHour( final String skipHour )
     {
         synchronized ( skipHours )
         {
@@ -316,7 +316,7 @@ public class Channel
     {
         synchronized ( items )
         {
-            Item items[] = new Item[this.items.size()];
+            final Item items[] = new Item[this.items.size()];
             return this.items.toArray( items );
         }
     }
@@ -336,7 +336,7 @@ public class Channel
     {
         synchronized ( skipDays )
         {
-            String skipDays[] = new String[this.skipDays.size()];
+            final String skipDays[] = new String[this.skipDays.size()];
             return this.skipDays.toArray( skipDays );
         }
     }
@@ -356,7 +356,7 @@ public class Channel
     {
         synchronized ( skipHours )
         {
-            String skipHours[] = new String[this.skipHours.size()];
+            final String skipHours[] = new String[this.skipHours.size()];
             return this.skipHours.toArray( skipHours );
         }
     }
@@ -374,7 +374,7 @@ public class Channel
      *
      * @param item The item to be removed
      */
-    public void removeItem( Item item )
+    public void removeItem( final Item item )
     {
         synchronized ( items )
         {
@@ -387,7 +387,7 @@ public class Channel
      *
      * @param skipDay The skip day to be removed
      */
-    public void removeSkipDay( String skipDay )
+    public void removeSkipDay( final String skipDay )
     {
         synchronized ( skipDays )
         {
@@ -400,7 +400,7 @@ public class Channel
      *
      * @param skipHour The skip hour to be removed
      */
-    public void removeSkipHour( String skipHour )
+    public void removeSkipHour( final String skipHour )
     {
         synchronized ( skipHours )
         {
@@ -415,13 +415,13 @@ public class Channel
      *
      * @param stream The output stream to write to
      */
-    public void render( OutputStream stream )
+    public void render( final OutputStream stream )
     {
         try
         {
             render( stream, null );
         }
-        catch ( UnsupportedEncodingException e )
+        catch ( final UnsupportedEncodingException e )
         {
             // Can not happen
         }
@@ -438,7 +438,7 @@ public class Channel
      * @throws UnsupportedEncodingException if the named encoding
      *  is not supported
      */
-    public void render( OutputStream stream, String encoding )
+    public void render( final OutputStream stream, final String encoding )
         throws UnsupportedEncodingException
     {
         PrintWriter pw = null;
@@ -460,7 +460,7 @@ public class Channel
      *
      * @param writer The writer to render output to
      */
-    public void render( Writer writer )
+    public void render( final Writer writer )
     {
         render( writer, null );
     }
@@ -473,9 +473,9 @@ public class Channel
      * @param encoding The character encoding to declare, or <code>null</code>
      *  for no declaration
      */
-    public void render( Writer writer, String encoding )
+    public void render( final Writer writer, final String encoding )
     {
-        PrintWriter pw = new PrintWriter( writer );
+        final PrintWriter pw = new PrintWriter( writer );
         render( pw, encoding );
         pw.flush();
     }
@@ -486,7 +486,7 @@ public class Channel
      *
      * @param writer The writer to render output to
      */
-    public void render( PrintWriter writer )
+    public void render( final PrintWriter writer )
     {
         render( writer, null );
     }
@@ -499,7 +499,7 @@ public class Channel
      * @param encoding The character encoding to declare, or <code>null</code>
      *  for no declaration
      */
-    public void render( PrintWriter writer, String encoding )
+    public void render( final PrintWriter writer, final String encoding )
     {
         writer.print( "<?xml version=\"1.0\"" );
         if ( encoding != null )
@@ -596,11 +596,11 @@ public class Channel
             writer.println();
         }
 
-        String skipDays[] = findSkipDays();
+        final String skipDays[] = findSkipDays();
         if ( skipDays.length > 0 )
         {
             writer.println( "    <skipDays>" );
-            for (String skipDay : skipDays) {
+            for (final String skipDay : skipDays) {
                 writer.print( "      <skipDay>" );
                 writer.print( skipDay );
                 writer.println( "</skipDay>" );
@@ -608,11 +608,11 @@ public class Channel
             writer.println( "    </skipDays>" );
         }
 
-        String skipHours[] = findSkipHours();
+        final String skipHours[] = findSkipHours();
         if ( skipHours.length > 0 )
         {
             writer.println( "    <skipHours>" );
-            for (String skipHour : skipHours) {
+            for (final String skipHour : skipHours) {
                 writer.print( "      <skipHour>" );
                 writer.print( skipHour );
                 writer.println( "</skipHour>" );
@@ -621,8 +621,8 @@ public class Channel
             writer.println();
         }
 
-        Item items[] = findItems();
-        for (Item item : items) {
+        final Item items[] = findItems();
+        for (final Item item : items) {
             item.render( writer );
             writer.println();
         }

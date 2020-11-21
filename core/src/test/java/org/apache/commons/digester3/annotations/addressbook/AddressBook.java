@@ -33,13 +33,13 @@ public class AddressBook
     private final List<Person> people = new ArrayList<Person>();
 
     @SetNext
-    public void addPerson( Person p )
+    public void addPerson( final Person p )
     {
         this.people.add( p );
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -50,7 +50,7 @@ public class AddressBook
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        AddressBook other = (AddressBook) obj;
+        final AddressBook other = (AddressBook) obj;
         if ( people == null )
         {
             if ( other.people != null ) {

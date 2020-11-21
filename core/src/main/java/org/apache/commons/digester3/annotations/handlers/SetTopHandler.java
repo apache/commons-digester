@@ -37,7 +37,7 @@ public final class SetTopHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( SetTop annotation, Method element, RulesBinder rulesBinder )
+    public void handle( final SetTop annotation, final Method element, final RulesBinder rulesBinder )
     {
         if ( element.getParameterTypes().length != 1 )
         {

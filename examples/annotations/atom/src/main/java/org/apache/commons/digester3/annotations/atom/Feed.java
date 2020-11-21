@@ -55,7 +55,7 @@ public final class Feed
         return title;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -65,7 +65,7 @@ public final class Feed
         return link;
     }
 
-    public void setLink( URL link )
+    public void setLink( final URL link )
     {
         this.link = link;
     }
@@ -75,7 +75,7 @@ public final class Feed
         return updated;
     }
 
-    public void setUpdated( Date updated )
+    public void setUpdated( final Date updated )
     {
         this.updated = updated;
     }
@@ -85,7 +85,7 @@ public final class Feed
         return id;
     }
 
-    public void setId( String id )
+    public void setId( final String id )
     {
         this.id = id;
     }
@@ -96,7 +96,7 @@ public final class Feed
     }
 
     @CallMethod( pattern = "feed/author/name", usingElementBodyAsArgument = true )
-    public void addAuthor( String author )
+    public void addAuthor( final String author )
     {
         authors.add( author );
     }
@@ -107,7 +107,7 @@ public final class Feed
     }
 
     @SetNext
-    public void addEntry( Entry entry )
+    public void addEntry( final Entry entry )
     {
         entries.add( entry );
     }

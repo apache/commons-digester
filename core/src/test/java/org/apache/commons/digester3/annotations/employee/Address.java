@@ -45,7 +45,7 @@ public class Address
     private String zipCode;
 
     @SetTop( pattern = "employee/address" )
-    public void setEmployee( Employee employee )
+    public void setEmployee( final Employee employee )
     {
         employee.addAddress( this );
     }
@@ -55,7 +55,7 @@ public class Address
         return this.city;
     }
 
-    public void setCity( String city )
+    public void setCity( final String city )
     {
         this.city = city;
     }
@@ -65,7 +65,7 @@ public class Address
         return this.state;
     }
 
-    public void setState( String state )
+    public void setState( final String state )
     {
         this.state = state;
     }
@@ -75,7 +75,7 @@ public class Address
         return this.street;
     }
 
-    public void setStreet( String street )
+    public void setStreet( final String street )
     {
         this.street = street;
     }
@@ -85,7 +85,7 @@ public class Address
         return this.type;
     }
 
-    public void setType( String type )
+    public void setType( final String type )
     {
         this.type = type;
     }
@@ -95,13 +95,13 @@ public class Address
         return this.zipCode;
     }
 
-    public void setZipCode( String zipCode )
+    public void setZipCode( final String zipCode )
     {
         this.zipCode = zipCode;
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -112,7 +112,7 @@ public class Address
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Address other = (Address) obj;
+        final Address other = (Address) obj;
         if ( this.city == null )
         {
             if ( other.getCity() != null ) {

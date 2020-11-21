@@ -37,23 +37,23 @@ public class SubstituteTransform
 
     private String to;
 
-    public void setFrom( String from )
+    public void setFrom( final String from )
     {
         this.from = from;
     }
 
-    public void setTo( String to )
+    public void setTo( final String to )
     {
         this.to = to;
     }
 
     @Override
-    public String transform( String s )
+    public String transform( final String s )
     {
-        StringBuilder buf = new StringBuilder( s );
+        final StringBuilder buf = new StringBuilder( s );
         while ( true )
         {
-            int idx = buf.indexOf( from );
+            final int idx = buf.indexOf( from );
             if ( idx == -1 )
             {
                 break;
@@ -64,7 +64,7 @@ public class SubstituteTransform
         return buf.toString();
     }
 
-    public static void addRules( Digester d, String patternPrefix )
+    public static void addRules( final Digester d, final String patternPrefix )
     {
         d.addCallMethod( patternPrefix + "/from", "setFrom", 0 );
         d.addCallMethod( patternPrefix + "/to", "setTo", 0 );

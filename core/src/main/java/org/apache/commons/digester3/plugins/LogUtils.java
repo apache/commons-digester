@@ -55,7 +55,7 @@ class LogUtils
      * <p>
      * You should use this method instead of digester.getLogger() in any situation where the digester might be null.
      */
-    static Log getLogger( Digester digester )
+    static Log getLogger( final Digester digester )
     {
         if ( digester == null )
         {

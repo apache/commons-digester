@@ -66,7 +66,7 @@ public final class LinkedRuleBuilder
      * @param methodName Method name of the parent object to call
      * @return a new {@link CallMethodBuilder} instance.
      */
-    public CallMethodBuilder callMethod( String methodName )
+    public CallMethodBuilder callMethod( final String methodName )
     {
         if ( methodName == null || methodName.length() == 0 )
         {
@@ -128,7 +128,7 @@ public final class LinkedRuleBuilder
      * @param paramObj The parameter to pass along
      * @return a new {@link ObjectParamBuilder} instance.
      */
-    public <T> ObjectParamBuilder<T> objectParam( /* @Nullable */T paramObj )
+    public <T> ObjectParamBuilder<T> objectParam( /* @Nullable */final T paramObj )
     {
         return addProvider( new ObjectParamBuilder<T>( keyPattern, namespaceURI, mainBinder, this, paramObj ) );
     }
@@ -142,7 +142,7 @@ public final class LinkedRuleBuilder
     public NestedPropertiesBuilder setNestedProperties()
     {
         // that would be useful when adding rules via automatically generated rules binding (such annotations)
-        NestedPropertiesBuilder nestedPropertiesBuilder =
+        final NestedPropertiesBuilder nestedPropertiesBuilder =
             fromBinderRuleSet.getProvider( keyPattern, namespaceURI, NestedPropertiesBuilder.class );
         if ( nestedPropertiesBuilder != null )
         {
@@ -159,7 +159,7 @@ public final class LinkedRuleBuilder
      * @param methodName Method name of the parent method to call
      * @return a new {@link SetNextBuilder} instance.
      */
-    public SetNextBuilder setNext( String methodName )
+    public SetNextBuilder setNext( final String methodName )
     {
         if ( methodName == null || methodName.length() == 0 )
         {
@@ -178,7 +178,7 @@ public final class LinkedRuleBuilder
     public SetPropertiesBuilder setProperties()
     {
         // that would be useful when adding rules via automatically generated rules binding (such annotations)
-        SetPropertiesBuilder setPropertiesBuilder =
+        final SetPropertiesBuilder setPropertiesBuilder =
             fromBinderRuleSet.getProvider( keyPattern, namespaceURI, SetPropertiesBuilder.class );
         if ( setPropertiesBuilder != null )
         {
@@ -194,7 +194,7 @@ public final class LinkedRuleBuilder
      * @param attributePropertyName Name of the attribute that will contain the name of the property to be set
      * @return a new {@link SetPropertyBuilder} instance.
      */
-    public SetPropertyBuilder setProperty( String attributePropertyName )
+    public SetPropertyBuilder setProperty( final String attributePropertyName )
     {
         if ( attributePropertyName == null || attributePropertyName.length() == 0 )
         {
@@ -216,7 +216,7 @@ public final class LinkedRuleBuilder
      * @param methodName Method name of the parent method to call
      * @return a new {@link SetRootBuilder} instance.
      */
-    public SetRootBuilder setRoot( String methodName )
+    public SetRootBuilder setRoot( final String methodName )
     {
         if ( methodName == null || methodName.length() == 0 )
         {
@@ -233,7 +233,7 @@ public final class LinkedRuleBuilder
      * @param methodName Method name of the "set parent" method to call
      * @return a new {@link SetTopBuilder} instance.
      */
-    public SetTopBuilder setTop( String methodName )
+    public SetTopBuilder setTop( final String methodName )
     {
         if ( methodName == null || methodName.length() == 0 )
         {
@@ -294,7 +294,7 @@ public final class LinkedRuleBuilder
      * @param rule The custom user rule
      * @return a new {@link ByRuleBuilder} instance.
      */
-    public <R extends Rule> ByRuleBuilder<R> addRule( R rule )
+    public <R extends Rule> ByRuleBuilder<R> addRule( final R rule )
     {
         if ( rule == null )
         {
@@ -311,7 +311,7 @@ public final class LinkedRuleBuilder
      * @param provider The rule provider
      * @return a new {@link ByRuleProviderBuilder} instance.
      */
-    public <R extends Rule> ByRuleProviderBuilder<R> addRuleCreatedBy( RuleProvider<R> provider )
+    public <R extends Rule> ByRuleProviderBuilder<R> addRuleCreatedBy( final RuleProvider<R> provider )
     {
         if ( provider == null )
         {
@@ -328,7 +328,7 @@ public final class LinkedRuleBuilder
      * @param namespaceURI the namespace URI associated to the rule pattern.
      * @return this {@link LinkedRuleBuilder} instance
      */
-    public LinkedRuleBuilder withNamespaceURI( /* @Nullable */String namespaceURI )
+    public LinkedRuleBuilder withNamespaceURI( /* @Nullable */final String namespaceURI )
     {
         if ( namespaceURI == null || namespaceURI.length() > 0 )
         {
@@ -350,7 +350,7 @@ public final class LinkedRuleBuilder
      * @param provider The provider has to be stored in the data structure
      * @return The provider itself has to be stored in the data structure
      */
-    private <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB addProvider( RB provider )
+    private <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB addProvider( final RB provider )
     {
         fromBinderRuleSet.registerProvider( provider );
         return provider;

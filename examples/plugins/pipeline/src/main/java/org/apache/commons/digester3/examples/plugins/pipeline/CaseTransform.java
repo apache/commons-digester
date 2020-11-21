@@ -32,7 +32,7 @@ public class CaseTransform
 
     private boolean toLower = true;
 
-    public void setCase( String caseType )
+    public void setCase( final String caseType )
     {
         if ( caseType.equalsIgnoreCase( "upper" ) )
         {
@@ -45,7 +45,7 @@ public class CaseTransform
     }
 
     @Override
-    public String transform( String s )
+    public String transform( final String s )
     {
         if ( toLower )
         {

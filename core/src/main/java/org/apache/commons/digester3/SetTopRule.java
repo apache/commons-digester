@@ -42,7 +42,7 @@ public class SetTopRule
      * 
      * @param methodName Method name of the parent method to call
      */
-    public SetTopRule( String methodName )
+    public SetTopRule( final String methodName )
     {
         super( methodName );
     }
@@ -55,7 +55,7 @@ public class SetTopRule
      *                  specify the corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code>
      *                  for a <code>boolean</code> parameter)
      */
-    public SetTopRule( String methodName, String paramType )
+    public SetTopRule( final String methodName, final String paramType )
     {
         super( methodName, paramType );
     }
@@ -68,7 +68,7 @@ public class SetTopRule
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public SetTopRule( String methodName, Class<?> paramType )
+    public SetTopRule( final String methodName, final Class<?> paramType )
     {
         super( methodName, paramType );
     }

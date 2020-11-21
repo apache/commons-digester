@@ -37,7 +37,7 @@ public final class BeanPropertySetterHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( BeanPropertySetter annotation, Field element, RulesBinder rulesBinder )
+    public void handle( final BeanPropertySetter annotation, final Field element, final RulesBinder rulesBinder )
     {
         rulesBinder.forPattern( annotation.pattern() )
             .withNamespaceURI( annotation.namespaceURI() )

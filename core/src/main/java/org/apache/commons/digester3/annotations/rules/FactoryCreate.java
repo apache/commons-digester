@@ -100,7 +100,7 @@ public @interface FactoryCreate
          * {@inheritDoc}
          */
         @Override
-        public Object createObject( Attributes attributes )
+        public Object createObject( final Attributes attributes )
             throws Exception
         {
             // do nothing

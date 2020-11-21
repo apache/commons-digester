@@ -52,7 +52,7 @@ public class Main
      * <p>
      * Usage: java Main example.xml
      */
-    public static void main( String[] args )
+    public static void main( final String[] args )
     {
         if ( args.length != 1 )
         {
@@ -60,15 +60,15 @@ public class Main
             System.exit( -1 );
         }
 
-        String filename = args[0];
+        final String filename = args[0];
 
         // Create a Digester instance
-        Digester d = new Digester();
+        final Digester d = new Digester();
 
         // Here you would establish a real connection.
         // There would also be a finally clause to ensure it is
         // closed after parsing terminates, etc.
-        Connection connection = null;
+        final Connection connection = null;
 
         // Add rules to the digester that will be triggered while
         // parsing occurs.
@@ -78,15 +78,15 @@ public class Main
         System.out.println( "Parsing commencing..." );
         try
         {
-            File srcfile = new File( filename );
+            final File srcfile = new File( filename );
             d.parse( srcfile );
         }
-        catch ( IOException ioe )
+        catch ( final IOException ioe )
         {
             System.out.println( "Error reading input file:" + ioe.getMessage() );
             System.exit( -1 );
         }
-        catch ( SAXException se )
+        catch ( final SAXException se )
         {
             System.out.println( "Error parsing input file:" + se.getMessage() );
             System.exit( -1 );
@@ -98,7 +98,7 @@ public class Main
         System.out.println( "Parsing complete." );
     }
 
-    private static void addRules( Digester d, java.sql.Connection conn )
+    private static void addRules( final Digester d, final java.sql.Connection conn )
     {
 
         // --------------------------------------------------
@@ -141,7 +141,7 @@ public class Main
         // factory methods to create the rule instance; that's just a
         // convenience - and obviously not an option for Rule classes
         // that are not part of the digester core implementation.
-        RowInserterRule rowInserterRule = new RowInserterRule( conn );
+        final RowInserterRule rowInserterRule = new RowInserterRule( conn );
         d.addRule( "database/table/row", rowInserterRule );
 
         // --------------------------------------------------

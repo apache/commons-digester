@@ -48,10 +48,10 @@ public class IncludeTest
             {
 
                 @Override
-                public void body( String namespace, String name, String text )
+                public void body( final String namespace, final String name, final String text )
                     throws Exception
                 {
-                    List<String> stringList = getDigester().peek();
+                    final List<String> stringList = getDigester().peek();
                     stringList.add( text );
                 }
 
@@ -73,10 +73,10 @@ public class IncludeTest
                 + " </pattern>"
                 + "</digester-rules>";
 
-        String xml = "<?xml version='1.0' ?><root><foo><bar>short</bar></foo></root>";
+        final String xml = "<?xml version='1.0' ?><root><foo><bar>short</bar></foo></root>";
 
-        List<String> list = new ArrayList<String>();
-        Digester digester = newLoader( new FromXmlRulesModule()
+        final List<String> list = new ArrayList<String>();
+        final Digester digester = newLoader( new FromXmlRulesModule()
         {
 
             @Override
@@ -109,10 +109,10 @@ public class IncludeTest
                 + " </pattern>"
                 + "</digester-rules>";
 
-        String xml = "<?xml version='1.0' ?><root><foo1><bar><foo value='foo1'/></bar></foo1><foo2><bar><foo value='foo2'/></bar></foo2></root>";
+        final String xml = "<?xml version='1.0' ?><root><foo1><bar><foo value='foo1'/></bar></foo1><foo2><bar><foo value='foo2'/></bar></foo2></root>";
 
-        List<String> list = new ArrayList<String>();
-        Digester digester = newLoader( new FromXmlRulesModule()
+        final List<String> list = new ArrayList<String>();
+        final Digester digester = newLoader( new FromXmlRulesModule()
         {
 
             @Override

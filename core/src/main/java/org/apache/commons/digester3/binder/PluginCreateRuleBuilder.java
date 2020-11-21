@@ -45,8 +45,8 @@ public final class PluginCreateRuleBuilder
 
     private RuleLoader dfltPluginRuleLoader;
 
-    PluginCreateRuleBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                                    LinkedRuleBuilder mainBuilder )
+    PluginCreateRuleBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                                    final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -58,7 +58,7 @@ public final class PluginCreateRuleBuilder
      * @param type the class which any specified plugin <i>must</i> be descended from
      * @return this builder instance
      */
-    public <T> PluginCreateRuleBuilder ofType( Class<T> type )
+    public <T> PluginCreateRuleBuilder ofType( final Class<T> type )
     {
         if ( type == null )
         {
@@ -78,7 +78,7 @@ public final class PluginCreateRuleBuilder
      * @param type the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      * @return this builder instance
      */
-    public <T> PluginCreateRuleBuilder usingDefaultPluginClass( /* @Nullable */Class<T> type )
+    public <T> PluginCreateRuleBuilder usingDefaultPluginClass( /* @Nullable */final Class<T> type )
     {
         this.dfltPluginClass = type;
         return this;
@@ -92,7 +92,7 @@ public final class PluginCreateRuleBuilder
      *        the default plugin.
      * @return this builder instance
      */
-    public <RL extends RuleLoader> PluginCreateRuleBuilder usingRuleLoader( /* @Nullable */RL ruleLoader )
+    public <RL extends RuleLoader> PluginCreateRuleBuilder usingRuleLoader( /* @Nullable */final RL ruleLoader )
     {
         this.dfltPluginRuleLoader = ruleLoader;
         return this;
@@ -106,7 +106,7 @@ public final class PluginCreateRuleBuilder
      *                 PluginCreateRule which class should be instantiated.
      * @return this builder instance
      */
-    public PluginCreateRuleBuilder setPluginClassAttribute( String attrName )
+    public PluginCreateRuleBuilder setPluginClassAttribute( final String attrName )
     {
         if ( attrName == null )
         {
@@ -125,7 +125,7 @@ public final class PluginCreateRuleBuilder
      * @param attrName The attribute name
      * @return this builder instance
      */
-    public PluginCreateRuleBuilder setPluginClassAttribute( /* @Nullable */String namespaceUri, String attrName )
+    public PluginCreateRuleBuilder setPluginClassAttribute( /* @Nullable */final String namespaceUri, final String attrName )
     {
         if ( attrName == null )
         {
@@ -144,7 +144,7 @@ public final class PluginCreateRuleBuilder
      * @param attrName The attribute name
      * @return this builder instance
      */
-    public PluginCreateRuleBuilder setPluginIdAttribute( String attrName )
+    public PluginCreateRuleBuilder setPluginIdAttribute( final String attrName )
     {
         if ( attrName == null )
         {
@@ -163,7 +163,7 @@ public final class PluginCreateRuleBuilder
      * @param attrName The attribute name
      * @return this builder instance
      */
-    public PluginCreateRuleBuilder setPluginIdAttribute( /* @Nullable */String namespaceUri, String attrName )
+    public PluginCreateRuleBuilder setPluginIdAttribute( /* @Nullable */final String namespaceUri, final String attrName )
     {
         if ( attrName == null )
         {
@@ -182,7 +182,7 @@ public final class PluginCreateRuleBuilder
      * @param attrName The attribute name
      * @return this builder instance
      */
-    private PluginCreateRuleBuilder addToMap( Map<String, String> map, String namespaceUri, String attrName )
+    private PluginCreateRuleBuilder addToMap( final Map<String, String> map, final String namespaceUri, final String attrName )
     {
         map.put( namespaceUri, attrName );
         return this;
@@ -216,12 +216,12 @@ public final class PluginCreateRuleBuilder
             rule = new PluginCreateRule( baseClass );
         }
 
-        for ( Entry<String, String> entry : pluginClassAttributes.entrySet() )
+        for ( final Entry<String, String> entry : pluginClassAttributes.entrySet() )
         {
             rule.setPluginClassAttribute( entry.getKey(), entry.getValue() );
         }
 
-        for ( Entry<String, String> entry : pluginIdAttributes.entrySet() )
+        for ( final Entry<String, String> entry : pluginIdAttributes.entrySet() )
         {
             rule.setPluginIdAttribute( entry.getKey(), entry.getValue() );
         }

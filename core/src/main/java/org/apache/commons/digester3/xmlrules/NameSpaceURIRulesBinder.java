@@ -37,7 +37,7 @@ final class NameSpaceURIRulesBinder
 
     private final RulesBinder wrappedBinder;
 
-    public NameSpaceURIRulesBinder( RulesBinder wrappedBinder )
+    public NameSpaceURIRulesBinder( final RulesBinder wrappedBinder )
     {
         this.wrappedBinder = wrappedBinder;
     }
@@ -46,7 +46,7 @@ final class NameSpaceURIRulesBinder
      * 
      * @param namespaceURI
      */
-    public void addNamespaceURI( String namespaceURI )
+    public void addNamespaceURI( final String namespaceURI )
     {
         namespaceURIs.push( namespaceURI );
     }
@@ -70,7 +70,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( String messagePattern, Object... arguments )
+    public void addError( final String messagePattern, final Object... arguments )
     {
         wrappedBinder.addError( messagePattern, arguments );
     }
@@ -78,7 +78,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( Throwable t )
+    public void addError( final Throwable t )
     {
         wrappedBinder.addError( t );
     }
@@ -86,7 +86,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void install( RulesModule rulesModule )
+    public void install( final RulesModule rulesModule )
     {
         wrappedBinder.install( rulesModule );
     }
@@ -94,7 +94,7 @@ final class NameSpaceURIRulesBinder
     /**
      * {@inheritDoc}
      */
-    public LinkedRuleBuilder forPattern( String pattern )
+    public LinkedRuleBuilder forPattern( final String pattern )
     {
         return wrappedBinder.forPattern( pattern ).withNamespaceURI( namespaceURIs.peek() );
     }

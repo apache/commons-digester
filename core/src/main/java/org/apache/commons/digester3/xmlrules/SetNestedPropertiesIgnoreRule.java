@@ -34,12 +34,12 @@ final class SetNestedPropertiesIgnoreRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        String elementName = attributes.getValue( "elem-name" );
+        final String elementName = attributes.getValue( "elem-name" );
 
-        NestedPropertiesBuilder builder = getDigester().peek();
+        final NestedPropertiesBuilder builder = getDigester().peek();
         builder.ignoreElement( elementName );
     }
 

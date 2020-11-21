@@ -39,7 +39,7 @@ public class Row
     {
         private final String name, value;
 
-        public Column( String name, String value )
+        public Column( final String name, final String value )
         {
             this.name = name;
             this.value = value;
@@ -62,7 +62,7 @@ public class Row
     {
     }
 
-    public void addColumn( String name, String value )
+    public void addColumn( final String name, final String value )
     {
         columns.add( new Column( name, value ) );
     }

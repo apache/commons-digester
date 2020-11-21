@@ -65,10 +65,10 @@ public class BookFactory
 {
 
     @Override
-    public Book createObject( Attributes attributes )
+    public Book createObject( final Attributes attributes )
         throws Exception
     {
-        String isbn = attributes.getValue( "isbn" );
+        final String isbn = attributes.getValue( "isbn" );
 
         if ( isbn == null )
         {

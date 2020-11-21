@@ -49,7 +49,7 @@ public class CompoundSubstitutor
      * @param a Substitutor a
      * @param b Substitutor b
      */
-    public CompoundSubstitutor( Substitutor a, Substitutor b )
+    public CompoundSubstitutor( final Substitutor a, final Substitutor b )
     {
         if ( a == null )
         {
@@ -67,7 +67,7 @@ public class CompoundSubstitutor
      * {@inheritDoc}
      */
     @Override
-    public Attributes substitute( Attributes attributes )
+    public Attributes substitute( final Attributes attributes )
     {
         return b.substitute( a.substitute( attributes ) );
     }
@@ -76,7 +76,7 @@ public class CompoundSubstitutor
      * {@inheritDoc}
      */
     @Override
-    public String substitute( String bodyText )
+    public String substitute( final String bodyText )
     {
         return b.substitute( a.substitute( bodyText ) );
     }

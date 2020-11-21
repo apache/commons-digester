@@ -30,8 +30,8 @@ public final class PluginDeclarationRuleBuilder
     extends AbstractBackToLinkedRuleBuilder<PluginDeclarationRule>
 {
 
-    PluginDeclarationRuleBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                                  LinkedRuleBuilder mainBuilder )
+    PluginDeclarationRuleBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                                  final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }

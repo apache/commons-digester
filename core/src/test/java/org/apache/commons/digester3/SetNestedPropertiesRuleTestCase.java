@@ -56,7 +56,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testAutomaticallySetProperties()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -69,7 +69,7 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        SimpleTestBean bean = digester.parse( xmlTestReader() );
+        final SimpleTestBean bean = digester.parse( xmlTestReader() );
 
         // check properties are set correctly
         assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
@@ -88,7 +88,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testMandatoryProperties()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -101,19 +101,19 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<badprop>ALPHA BODY</badprop>" + "</root>";
+        final String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<badprop>ALPHA BODY</badprop>" + "</root>";
 
         try
         {
-            SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
+            final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
             // we should never get here...
             fail( "No exception thrown by parse when unknown child element found." );
             assertNotNull( bean ); // just to prevent compiler warning on unused var
         }
-        catch ( org.xml.sax.SAXParseException e )
+        catch ( final org.xml.sax.SAXParseException e )
         {
-            String msg = e.getMessage();
+            final String msg = e.getMessage();
             if ( msg.indexOf( "badprop" ) >= 0 )
             {
                 // ok, this is expected; there is no "setBadprop" method on the
@@ -133,7 +133,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testCustomisedProperties1()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -149,11 +149,11 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String TEST_XML =
+        final String TEST_XML =
             "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<alpha>ALPHA BODY</alpha>" + "<beta>BETA BODY</beta>"
                 + "<gamma-alt>GAMMA BODY</gamma-alt>" + "<delta>DELTA BODY</delta>" + "</root>";
 
-        SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
+        final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
         // check properties are set correctly
         assertEquals( "Property alpha was not ignored (it should be)", null, bean.getAlpha() );
@@ -175,7 +175,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testCustomisedProperties2a()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -189,11 +189,11 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String TEST_XML =
+        final String TEST_XML =
             "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<alpha>ALPHA BODY</alpha>" + "<beta>BETA BODY</beta>"
                 + "<gamma>GAMMA BODY</gamma>" + "<delta>DELTA BODY</delta>" + "</root>";
 
-        SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
+        final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
         // check properties are set correctly
         assertEquals( "Property alpha was not ignored (it should be)", null, bean.getAlpha() );
@@ -215,7 +215,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testCustomisedProperties2b()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -229,11 +229,11 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String TEST_XML =
+        final String TEST_XML =
             "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<alpha-alt>ALPHA BODY</alpha-alt>"
                 + "<beta>BETA BODY</beta>" + "<gamma>GAMMA BODY</gamma>" + "<delta>DELTA BODY</delta>" + "</root>";
 
-        SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
+        final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
         // check properties are set correctly
         assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
@@ -260,7 +260,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testMultiRuleMatch()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -276,14 +276,14 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String testXml =
+        final String testXml =
             "<?xml version='1.0'?>" + "<root>" + "<testbean alpha='alpha-attr'>ROOT BODY" + "<beta>BETA BODY</beta>"
                 + "<gamma>GAMMA " + "<prop name='delta' value='delta-prop'/>" + "BODY" + "</gamma>" + "</testbean>"
                 + "</root>";
 
-        Reader reader = new StringReader( testXml );
+        final Reader reader = new StringReader( testXml );
 
-        SimpleTestBean bean = digester.parse( reader );
+        final SimpleTestBean bean = digester.parse( reader );
 
         assertNotNull( "No object created", bean );
 
@@ -307,7 +307,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testUnknownChildrenCausesException()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -320,21 +320,21 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String testXml =
+        final String testXml =
             "<?xml version='1.0'?>" + "<root>" + "<testbean>" + "<beta>BETA BODY</beta>" + "<foo>GAMMA</foo>"
                 + "</testbean>" + "</root>";
 
-        Reader reader = new StringReader( testXml );
+        final Reader reader = new StringReader( testXml );
 
         try
         {
-            SimpleTestBean bean = digester.parse( reader );
+            final SimpleTestBean bean = digester.parse( reader );
             fail( "Expected to generate an exception." );
             assertNotNull( bean ); // just to prevent compiler warning on unused var
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
-            Exception nested = e.getException();
+            final Exception nested = e.getException();
             if ( ( nested == null ) || !( nested instanceof NoSuchMethodException ) )
             {
                 // nope, not the sort of exception we expected
@@ -350,7 +350,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testUnknownChildrenExceptionOverride()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -363,13 +363,13 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String testXml =
+        final String testXml =
             "<?xml version='1.0'?>" + "<root>" + "<testbean>" + "<beta>BETA BODY</beta>" + "<foo>GAMMA</foo>"
                 + "</testbean>" + "</root>";
 
-        Reader reader = new StringReader( testXml );
+        final Reader reader = new StringReader( testXml );
 
-        SimpleTestBean bean = digester.parse( reader );
+        final SimpleTestBean bean = digester.parse( reader );
         assertNotNull( bean );
     }
 
@@ -383,7 +383,7 @@ public class SetNestedPropertiesRuleTestCase
     public void testRecursiveNestedProperties()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -396,13 +396,13 @@ public class SetNestedPropertiesRuleTestCase
 
         }).newDigester();
 
-        String testXml =
+        final String testXml =
             "<?xml version='1.0'?>" + "<testbean>" + "<beta>BETA BODY</beta>" + "<testbean>" + "<beta>BETA BODY</beta>"
                 + "</testbean>" + "</testbean>";
 
-        Reader reader = new StringReader( testXml );
+        final Reader reader = new StringReader( testXml );
 
-        SimpleTestBean bean = digester.parse( reader );
+        final SimpleTestBean bean = digester.parse( reader );
         assertNotNull( bean );
     }
 

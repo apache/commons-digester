@@ -43,18 +43,18 @@ public class TestDelegate
         // data below the specified pattern, and printing it to stdout.
         // I can't for the moment think how to turn this into a unit test,
         // so this test is disabled.
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        DumperRule dr = new DumperRule();
+        final DumperRule dr = new DumperRule();
         digester.addRule( "root", dr );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test1.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }

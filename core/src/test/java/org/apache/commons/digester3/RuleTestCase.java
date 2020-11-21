@@ -94,7 +94,7 @@ public class RuleTestCase
         digester.addSetProperties( "employee" );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -119,7 +119,7 @@ public class RuleTestCase
         digester.addSetProperties( "employee/address" );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -154,7 +154,7 @@ public class RuleTestCase
         {
             root = digester.parse( getInputStream( "Test1.xml" ) );
         }
-        catch ( Throwable t )
+        catch ( final Throwable t )
         {
             fail( "Digester threw IOException: " + t );
         }
@@ -178,7 +178,7 @@ public class RuleTestCase
         digester.addCallParam( "employee", 0, "lastName" );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -202,7 +202,7 @@ public class RuleTestCase
         digester.addCallMethod( "employee/lastName", "setLastName", 0 );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test5.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test5.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -254,11 +254,11 @@ public class RuleTestCase
     {
 
         // Configure the digester as required
-        RuleSet rs = new TestRuleSet();
+        final RuleSet rs = new TestRuleSet();
         digester.addRuleSet( rs );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -278,11 +278,11 @@ public class RuleTestCase
 
         // Configure the digester as required
         digester.setNamespaceAware( true );
-        RuleSet rs = new TestRuleSet( null, "http://commons.apache.org/digester/Foo" );
+        final RuleSet rs = new TestRuleSet( null, "http://commons.apache.org/digester/Foo" );
         digester.addRuleSet( rs );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test2.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test2.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -303,11 +303,11 @@ public class RuleTestCase
 
         // Configure the digester as required
         digester.setNamespaceAware( true );
-        RuleSet rs = new TestRuleSet( null, "http://commons.apache.org/digester/Foo" );
+        final RuleSet rs = new TestRuleSet( null, "http://commons.apache.org/digester/Foo" );
         digester.addRuleSet( rs );
 
         // Parse our test input.
-        Employee employee = digester.parse( getInputStream( "Test3.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test3.xml" ) );
 
         assertNotNull( "Digester returned an object", employee );
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
@@ -372,8 +372,8 @@ public class RuleTestCase
     @Test
     public void testAddRule()
     {
-        Digester digester = new Digester();
-        TestRule rule = new TestRule( "Test" );
+        final Digester digester = new Digester();
+        final TestRule rule = new TestRule( "Test" );
         digester.addRule( "/root", rule );
 
         assertEquals( "Digester is not properly on rule addition.", digester, rule.getDigester() );
@@ -384,7 +384,7 @@ public class RuleTestCase
     public void testSetNext()
         throws SAXException, IOException
     {
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
         digester.setValidating( false );
 
@@ -395,20 +395,20 @@ public class RuleTestCase
         digester.addSetNext( "!*/b/?", "setChild" );
         digester.addSetNext( "!*/a/?", "setChild" );
         digester.addSetNext( "!root/?", "add" );
-        ArrayList<?> root = digester.parse( getInputStream( "Test4.xml" ) );
+        final ArrayList<?> root = digester.parse( getInputStream( "Test4.xml" ) );
 
         assertEquals( "Wrong array size", 2, root.size() );
-        AlphaBean one = (AlphaBean) root.get( 0 );
+        final AlphaBean one = (AlphaBean) root.get( 0 );
         assertTrue( one.getChild() instanceof BetaBean );
-        BetaBean two = (BetaBean) one.getChild();
+        final BetaBean two = (BetaBean) one.getChild();
         assertEquals( "Wrong name (1)", two.getName(), "TWO" );
         assertTrue( two.getChild() instanceof AlphaBean );
-        AlphaBean three = (AlphaBean) two.getChild();
+        final AlphaBean three = (AlphaBean) two.getChild();
         assertEquals( "Wrong name (2)", three.getName(), "THREE" );
-        BetaBean four = (BetaBean) root.get( 1 );
+        final BetaBean four = (BetaBean) root.get( 1 );
         assertEquals( "Wrong name (3)", four.getName(), "FOUR" );
         assertTrue( four.getChild() instanceof BetaBean );
-        BetaBean five = (BetaBean) four.getChild();
+        final BetaBean five = (BetaBean) four.getChild();
         assertEquals( "Wrong name (4)", five.getName(), "FIVE" );
 
     }
@@ -417,7 +417,7 @@ public class RuleTestCase
     public void testSetTop()
         throws SAXException, IOException
     {
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
         digester.setValidating( false );
 
@@ -429,7 +429,7 @@ public class RuleTestCase
         digester.addSetTop( "!*/a/?", "setParent" );
         digester.addSetRoot( "!*/a", "add" );
         digester.addSetRoot( "!*/b", "add" );
-        ArrayList<?> root = digester.parse( getInputStream( "Test4.xml" ) );
+        final ArrayList<?> root = digester.parse( getInputStream( "Test4.xml" ) );
 
         assertEquals( "Wrong array size", 5, root.size() );
 
@@ -437,21 +437,21 @@ public class RuleTestCase
 
         Object obj = root.get( 1 );
         assertTrue( "TWO should be a BetaBean", obj instanceof BetaBean );
-        BetaBean two = (BetaBean) obj;
+        final BetaBean two = (BetaBean) obj;
         assertNotNull( "Two's parent should not be null", two.getParent() );
         assertEquals( "Wrong name (1)", "TWO", two.getName() );
         assertEquals( "Wrong name (2)", "ONE", two.getParent().getName() );
 
         obj = root.get( 0 );
         assertTrue( "THREE should be an AlphaBean", obj instanceof AlphaBean );
-        AlphaBean three = (AlphaBean) obj;
+        final AlphaBean three = (AlphaBean) obj;
         assertNotNull( "Three's parent should not be null", three.getParent() );
         assertEquals( "Wrong name (3)", "THREE", three.getName() );
         assertEquals( "Wrong name (4)", "TWO", three.getParent().getName() );
 
         obj = root.get( 3 );
         assertTrue( "FIVE should be a BetaBean", obj instanceof BetaBean );
-        BetaBean five = (BetaBean) obj;
+        final BetaBean five = (BetaBean) obj;
         assertNotNull( "Five's parent should not be null", five.getParent() );
         assertEquals( "Wrong name (5)", "FIVE", five.getName() );
         assertEquals( "Wrong name (6)", "FOUR", five.getParent().getName() );
@@ -465,7 +465,7 @@ public class RuleTestCase
         throws SAXException, IOException
     {
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
 
         digester.setValidating( false );
 
@@ -484,7 +484,7 @@ public class RuleTestCase
         digester.addSetProperties( "toplevel/three", new String[] { "aCity", "state" }, new String[] { "city" } );
         digester.addSetProperties( "toplevel/four", "alt-city", "city" );
 
-        ArrayList<?> root = digester.parse( getInputStream( "Test7.xml" ) );
+        final ArrayList<?> root = digester.parse( getInputStream( "Test7.xml" ) );
 
         assertEquals( "Wrong array size", 4, root.size() );
 
@@ -492,28 +492,28 @@ public class RuleTestCase
 
         Object obj = root.get( 0 );
         assertTrue( "(1) Should be an Address ", obj instanceof Address );
-        Address addressOne = (Address) obj;
+        final Address addressOne = (Address) obj;
         assertEquals( "(1) Street attribute", "New Street", addressOne.getStreet() );
         assertEquals( "(1) City attribute", "Las Vegas", addressOne.getCity() );
         assertEquals( "(1) State attribute", "Nevada", addressOne.getState() );
 
         obj = root.get( 1 );
         assertTrue( "(2) Should be an Address ", obj instanceof Address );
-        Address addressTwo = (Address) obj;
+        final Address addressTwo = (Address) obj;
         assertEquals( "(2) Street attribute", "Old Street", addressTwo.getStreet() );
         assertEquals( "(2) City attribute", "Portland", addressTwo.getCity() );
         assertEquals( "(2) State attribute", "Oregon", addressTwo.getState() );
 
         obj = root.get( 2 );
         assertTrue( "(3) Should be an Address ", obj instanceof Address );
-        Address addressThree = (Address) obj;
+        final Address addressThree = (Address) obj;
         assertEquals( "(3) Street attribute", "4th Street", addressThree.getStreet() );
         assertEquals( "(3) City attribute", "Dayton", addressThree.getCity() );
         assertEquals( "(3) State attribute", "US", addressThree.getState() );
 
         obj = root.get( 3 );
         assertTrue( "(4) Should be an Address ", obj instanceof Address );
-        Address addressFour = (Address) obj;
+        final Address addressFour = (Address) obj;
         assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
         assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
         assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
@@ -528,7 +528,7 @@ public class RuleTestCase
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs
      */
-    protected InputStream getInputStream( String name )
+    protected InputStream getInputStream( final String name )
         throws IOException
     {
 
@@ -541,18 +541,18 @@ public class RuleTestCase
      *
      * @param root Root object returned by <code>digester.parse()</code>
      */
-    protected void validateObjectCreate3( Object root )
+    protected void validateObjectCreate3( final Object root )
     {
 
         // Validate the retrieved Employee
         assertNotNull( "Digester returned an object", root );
         assertTrue( "Digester returned an Employee", root instanceof Employee );
-        Employee employee = (Employee) root;
+        final Employee employee = (Employee) root;
         assertEquals( "First name is correct", "First Name", employee.getFirstName() );
         assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
 
         // Validate the corresponding "home" Address
-        Address home = employee.getAddress( "home" );
+        final Address home = employee.getAddress( "home" );
         assertNotNull( "Retrieved home address", home );
         assertEquals( "Home street", "Home Street", home.getStreet() );
         assertEquals( "Home city", "Home City", home.getCity() );
@@ -560,7 +560,7 @@ public class RuleTestCase
         assertEquals( "Home zip", "HmZip", home.getZipCode() );
 
         // Validate the corresponding "office" Address
-        Address office = employee.getAddress( "office" );
+        final Address office = employee.getAddress( "office" );
         assertNotNull( "Retrieved office address", office );
         assertEquals( "Office street", "Office Street", office.getStreet() );
         assertEquals( "Office city", "Office City", office.getCity() );

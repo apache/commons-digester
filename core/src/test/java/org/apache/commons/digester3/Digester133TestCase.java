@@ -53,7 +53,7 @@ public final class Digester133TestCase
             return flag;
         }
 
-        public void setFlag( boolean flag )
+        public void setFlag( final boolean flag )
 
         {
             this.flag = flag;
@@ -64,7 +64,7 @@ public final class Digester133TestCase
     {
 
         @Override
-        protected Object getPropertyOfMapBean( @SuppressWarnings( "rawtypes" ) Map bean, String propertyName )
+        protected Object getPropertyOfMapBean( @SuppressWarnings( "rawtypes" ) final Map bean, final String propertyName )
             throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
         {
             if ( isReadable( bean, propertyName ) )
@@ -75,12 +75,12 @@ public final class Digester133TestCase
         }
 
         @Override
-        protected void setPropertyOfMapBean( @SuppressWarnings( "rawtypes" ) Map bean, String propertyName, Object value )
+        protected void setPropertyOfMapBean( @SuppressWarnings( "rawtypes" ) final Map bean, final String propertyName, final Object value )
             throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
         {
             if ( isWriteable( bean, propertyName ) )
             {
-                Class<?> propertyType = getPropertyType( bean, propertyName );
+                final Class<?> propertyType = getPropertyType( bean, propertyName );
                 setSimpleProperty( bean, propertyName, ConvertUtils.convert( value, propertyType ) );
             }
             else
@@ -95,9 +95,9 @@ public final class Digester133TestCase
     public void testDigester()
         throws IOException, SAXException
     {
-        PropertyUtilsBean propertyUtils = new MyPropertyUtilsBean();
-        ConvertUtilsBean convertUtils = new ConvertUtilsBean();
-        BeanUtilsBean beanUtils = new BeanUtilsBean( convertUtils, propertyUtils );
+        final PropertyUtilsBean propertyUtils = new MyPropertyUtilsBean();
+        final ConvertUtilsBean convertUtils = new ConvertUtilsBean();
+        final BeanUtilsBean beanUtils = new BeanUtilsBean( convertUtils, propertyUtils );
         BeanUtilsBean.setInstance( beanUtils );
 
         final String xml = "<myclass flag='true' />";

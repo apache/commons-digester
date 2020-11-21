@@ -38,7 +38,7 @@ public final class CallParamBuilder
 
     private String attributeName;
 
-    CallParamBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder )
+    CallParamBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -49,7 +49,7 @@ public final class CallParamBuilder
      * @param paramIndex The zero-relative parameter number
      * @return this builder instance
      */
-    public CallParamBuilder ofIndex( int paramIndex )
+    public CallParamBuilder ofIndex( final int paramIndex )
     {
         if ( paramIndex < 0 )
         {
@@ -66,7 +66,7 @@ public final class CallParamBuilder
      * @param attributeName The attribute from which to save the parameter value
      * @return this builder instance
      */
-    public CallParamBuilder fromAttribute( /* @Nullable */String attributeName )
+    public CallParamBuilder fromAttribute( /* @Nullable */final String attributeName )
     {
         this.attributeName = attributeName;
         return this;
@@ -78,7 +78,7 @@ public final class CallParamBuilder
      * @param fromStack the parameter flag to be set from the stack
      * @return this builder instance
      */
-    public CallParamBuilder fromStack( boolean fromStack )
+    public CallParamBuilder fromStack( final boolean fromStack )
     {
         this.fromStack = fromStack;
         return this;
@@ -90,7 +90,7 @@ public final class CallParamBuilder
      * @param stackIndex The position of the object from the top of the stack
      * @return this builder instance
      */
-    public CallParamBuilder withStackIndex( int stackIndex )
+    public CallParamBuilder withStackIndex( final int stackIndex )
     {
         this.stackIndex = stackIndex;
         this.fromStack = true;

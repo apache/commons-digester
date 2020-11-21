@@ -28,7 +28,7 @@ public class FailingDigesterLoaderHandlerFactory
     implements AnnotationHandlerFactory
 {
 
-    public <H extends AnnotationHandler<? extends Annotation, ? extends AnnotatedElement>> H newInstance( Class<H> type )
+    public <H extends AnnotationHandler<? extends Annotation, ? extends AnnotatedElement>> H newInstance( final Class<H> type )
         throws Exception
     {
         throw new Exception( format( "Impossible to create '%s' instances", type.getName() ) );

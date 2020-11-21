@@ -43,7 +43,7 @@ public class PathCallParamRule
      * 
      * @param paramIndex The zero-relative parameter number
      */
-    public PathCallParamRule( int paramIndex )
+    public PathCallParamRule( final int paramIndex )
     {
         this.paramIndex = paramIndex;
     }
@@ -61,14 +61,14 @@ public class PathCallParamRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        String param = getDigester().getMatch();
+        final String param = getDigester().getMatch();
 
         if ( param != null )
         {
-            Object parameters[] = getDigester().peekParams();
+            final Object parameters[] = getDigester().peekParams();
             parameters[paramIndex] = param;
         }
     }

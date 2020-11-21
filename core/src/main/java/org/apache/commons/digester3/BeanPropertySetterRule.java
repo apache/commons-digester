@@ -58,7 +58,7 @@ public class BeanPropertySetterRule
      * 
      * @param propertyName name of property to set
      */
-    public BeanPropertySetterRule( String propertyName )
+    public BeanPropertySetterRule( final String propertyName )
     {
         this.propertyName = propertyName;
     }
@@ -109,7 +109,7 @@ public class BeanPropertySetterRule
      * @param propertyNameFromAttribute the attribute name from which the property name has to be extracted.
      * @since 3.0
      */
-    public void setPropertyNameFromAttribute( String propertyNameFromAttribute )
+    public void setPropertyNameFromAttribute( final String propertyNameFromAttribute )
     {
         this.propertyNameFromAttribute = propertyNameFromAttribute;
     }
@@ -128,7 +128,7 @@ public class BeanPropertySetterRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         if ( propertyNameFromAttribute != null )
@@ -144,7 +144,7 @@ public class BeanPropertySetterRule
      * {@inheritDoc}
      */
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
         // log some debugging information
@@ -162,7 +162,7 @@ public class BeanPropertySetterRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         String property = propertyName;
@@ -175,7 +175,7 @@ public class BeanPropertySetterRule
         }
 
         // Get a reference to the top object
-        Object top = getDigester().peek();
+        final Object top = getDigester().peek();
 
         // log some debugging information
         if ( getDigester().getLogger().isDebugEnabled() )
@@ -191,7 +191,7 @@ public class BeanPropertySetterRule
         // (BeanUtils.setProperty() silently returns in this case)
         if ( top instanceof DynaBean )
         {
-            DynaProperty desc = ( (DynaBean) top ).getDynaClass().getDynaProperty( property );
+            final DynaProperty desc = ( (DynaBean) top ).getDynaClass().getDynaProperty( property );
             if ( desc == null )
             {
                 throw new NoSuchMethodException( "Bean has no property named " + property );
@@ -200,7 +200,7 @@ public class BeanPropertySetterRule
         else
         /* this is a standard JavaBean */
         {
-            PropertyDescriptor desc = getPropertyDescriptor( top, property );
+            final PropertyDescriptor desc = getPropertyDescriptor( top, property );
             if ( desc == null )
             {
                 throw new NoSuchMethodException( "Bean has no property named " + property );

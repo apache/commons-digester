@@ -32,14 +32,14 @@ public class CallParamTestObject
 
     private String middle = "UNSET";
 
-    public void triple( String left, String middle, String right )
+    public void triple( final String left, final String middle, final String right )
     {
         this.left = left;
         this.right = right;
         this.middle = middle;
     }
 
-    public void duo( String left, String right )
+    public void duo( final String left, final String right )
     {
         this.left = left;
         this.right = right;
@@ -60,17 +60,17 @@ public class CallParamTestObject
         return middle;
     }
 
-    public void setLeft( String left )
+    public void setLeft( final String left )
     {
         this.left = left;
     }
 
-    public void setRight( String right )
+    public void setRight( final String right )
     {
         this.right = right;
     }
 
-    public void setMiddle( String middle )
+    public void setMiddle( final String middle )
     {
         this.middle = middle;
     }

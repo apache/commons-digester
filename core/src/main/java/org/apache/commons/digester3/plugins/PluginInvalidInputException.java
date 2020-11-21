@@ -35,7 +35,7 @@ public class PluginInvalidInputException
      *
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginInvalidInputException( Throwable cause )
+    public PluginInvalidInputException( final Throwable cause )
     {
         super( cause );
     }
@@ -45,7 +45,7 @@ public class PluginInvalidInputException
      *
      * @param msg describes the reason this exception is being thrown.
      */
-    public PluginInvalidInputException( String msg )
+    public PluginInvalidInputException( final String msg )
     {
         super( msg );
     }
@@ -56,7 +56,7 @@ public class PluginInvalidInputException
      * @param msg describes the reason this exception is being thrown.
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginInvalidInputException( String msg, Throwable cause )
+    public PluginInvalidInputException( final String msg, final Throwable cause )
     {
         super( msg, cause );
     }

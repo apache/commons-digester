@@ -50,8 +50,8 @@ public class NamespaceSnapshotTestCase
         @Override
         public final void begin( final String namespace, final String name, final Attributes attributes )
         {
-            Digester d = getDigester();
-            Map<String, String> namespaces = d.getCurrentNamespaces();
+            final Digester d = getDigester();
+            final Map<String, String> namespaces = d.getCurrentNamespaces();
             ( (NamespacedBox) d.peek() ).setNamespaces( namespaces );
         }
 
@@ -78,7 +78,7 @@ public class NamespaceSnapshotTestCase
         throws Exception
     {
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -100,7 +100,7 @@ public class NamespaceSnapshotTestCase
 
         }).setNamespaceAware( true ).newDigester();
 
-        NamespacedBox root = digester.parse( getInputStream( "Test11.xml" ) );
+        final NamespacedBox root = digester.parse( getInputStream( "Test11.xml" ) );
 
         Map<String, String> nsmap = root.getNamespaces();
         assertEquals( 3, nsmap.size() );
@@ -108,17 +108,17 @@ public class NamespaceSnapshotTestCase
         assertEquals( "http://commons.apache.org/digester/Foo", nsmap.get( "foo" ) );
         assertEquals( "http://commons.apache.org/digester/Bar", nsmap.get( "bar" ) );
 
-        List<Box> children = root.getChildren();
+        final List<Box> children = root.getChildren();
         assertEquals( 3, children.size() );
 
-        NamespacedBox child1 = (NamespacedBox) children.get( 0 );
+        final NamespacedBox child1 = (NamespacedBox) children.get( 0 );
         nsmap = child1.getNamespaces();
         assertEquals( 3, nsmap.size() );
         assertEquals( "", nsmap.get( "" ) );
         assertEquals( "http://commons.apache.org/digester/Foo1", nsmap.get( "foo" ) );
         assertEquals( "http://commons.apache.org/digester/Bar1", nsmap.get( "bar" ) );
 
-        NamespacedBox child2 = (NamespacedBox) children.get( 1 );
+        final NamespacedBox child2 = (NamespacedBox) children.get( 1 );
         nsmap = child2.getNamespaces();
         assertEquals( 5, nsmap.size() );
         assertEquals( "", nsmap.get( "" ) );
@@ -127,7 +127,7 @@ public class NamespaceSnapshotTestCase
         assertEquals( "http://commons.apache.org/digester/Alpha", nsmap.get( "alpha" ) );
         assertEquals( "http://commons.apache.org/digester/Beta", nsmap.get( "beta" ) );
 
-        NamespacedBox child3 = (NamespacedBox) children.get( 2 );
+        final NamespacedBox child3 = (NamespacedBox) children.get( 2 );
         nsmap = child3.getNamespaces();
         assertEquals( 4, nsmap.size() );
         assertEquals( "", nsmap.get( "" ) );
@@ -145,7 +145,7 @@ public class NamespaceSnapshotTestCase
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs
      */
-    protected InputStream getInputStream( String name )
+    protected InputStream getInputStream( final String name )
         throws IOException
     {
 

@@ -54,7 +54,7 @@ public class PluginAssertionFailure
      *
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginAssertionFailure( Throwable cause )
+    public PluginAssertionFailure( final Throwable cause )
     {
         super( cause );
     }
@@ -64,7 +64,7 @@ public class PluginAssertionFailure
      *
      * @param msg describes the reason this exception is being thrown.
      */
-    public PluginAssertionFailure( String msg )
+    public PluginAssertionFailure( final String msg )
     {
         super( msg );
     }
@@ -75,7 +75,7 @@ public class PluginAssertionFailure
      * @param msg describes the reason this exception is being thrown.
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginAssertionFailure( String msg, Throwable cause )
+    public PluginAssertionFailure( final String msg, final Throwable cause )
     {
         super( msg, cause );
     }

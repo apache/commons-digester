@@ -41,7 +41,7 @@ public class ParamBean
         return cool;
     }
 
-    public void setCool( boolean cool )
+    public void setCool( final boolean cool )
     {
         this.cool = cool;
     }
@@ -56,7 +56,7 @@ public class ParamBean
         return that;
     }
 
-    public String setThisAndThat( String _this, String that )
+    public String setThisAndThat( final String _this, final String that )
     {
         this._this = _this;
         this.that = that;

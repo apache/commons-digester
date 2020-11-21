@@ -72,7 +72,7 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
      */
     public final R get()
     {
-        R rule = this.createRule();
+        final R rule = this.createRule();
         if ( rule != null && this.namespaceURI != null )
         {
             rule.setNamespaceURI( this.namespaceURI );
@@ -80,7 +80,7 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
         return rule;
     }
 
-    protected final void reportError( String methodChain, String message )
+    protected final void reportError( final String methodChain, final String message )
     {
         this.mainBinder.addError( "{ forPattern( \"%s\" ).%s } %s", this.keyPattern, methodChain, message );
     }

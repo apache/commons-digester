@@ -64,10 +64,10 @@ public class Digester163TestCase
     public void testSingle()
         throws IOException, SAXException
     {
-        Digester dig = loader.newDigester();
-        URL url = Digester163TestCase.class.getResource( "test.xml" );
+        final Digester dig = loader.newDigester();
+        final URL url = Digester163TestCase.class.getResource( "test.xml" );
         // lets parse - result does not matter here
-        Entity et = dig.parse( url );
+        final Entity et = dig.parse( url );
         assertEquals( "Author 1", et.getAuthor() );
     }
 
@@ -75,7 +75,7 @@ public class Digester163TestCase
     public void test()
         throws InterruptedException
     {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor( MAX_THREADS,
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor( MAX_THREADS,
                                                               MAX_THREADS,
                                                               Long.MAX_VALUE,
                                                               TimeUnit.NANOSECONDS,
@@ -90,11 +90,11 @@ public class Digester163TestCase
                 {
                     try
                     {
-                        Digester dig = loader.newDigester();
+                        final Digester dig = loader.newDigester();
                         // lets parse - result does not matter here
                         dig.parse( url );
                     }
-                    catch ( Exception e )
+                    catch ( final Exception e )
                     {
                         exceptions.add( e );
                     }

@@ -34,7 +34,7 @@ final class SetNextRule
      * @param targetRulesBinder
      * @param patternStack
      */
-    public SetNextRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public SetNextRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -43,10 +43,10 @@ final class SetNextRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, String methodName, String paramType,
-                             boolean exactMatch, boolean fireOnBegin )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final String methodName, final String paramType,
+                             final boolean exactMatch, final boolean fireOnBegin )
     {
-        SetNextBuilder builder = linkedRuleBuilder.setNext( methodName );
+        final SetNextBuilder builder = linkedRuleBuilder.setNext( methodName );
 
         if ( paramType != null && paramType.length() > 0 )
         {

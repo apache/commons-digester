@@ -32,22 +32,22 @@ public class Book
 
     private String desc;
 
-    public Book( String isbn )
+    public Book( final String isbn )
     {
         this.isbn = isbn;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
 
-    public void setAuthor( String author )
+    public void setAuthor( final String author )
     {
         this.author = author;
     }
 
-    public void setDesc( String desc )
+    public void setDesc( final String desc )
     {
         this.desc = desc;
     }

@@ -56,7 +56,7 @@ public class FinderFromDfltClass
      * @param rulesClassSuffix must be non-null.
      * @param methodName may be null.
      */
-    public FinderFromDfltClass( String rulesClassSuffix, String methodName )
+    public FinderFromDfltClass( final String rulesClassSuffix, final String methodName )
     {
         this.rulesClassSuffix = rulesClassSuffix;
         this.methodName = methodName;
@@ -82,17 +82,17 @@ public class FinderFromDfltClass
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester digester, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester digester, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
-        String rulesClassName = pluginClass.getName() + rulesClassSuffix;
+        final String rulesClassName = pluginClass.getName() + rulesClassSuffix;
 
         Class<?> rulesClass = null;
         try
         {
             rulesClass = digester.getClassLoader().loadClass( rulesClassName );
         }
-        catch ( ClassNotFoundException cnfe )
+        catch ( final ClassNotFoundException cnfe )
         {
             // nope, no rule-info class in the classpath
             return null;

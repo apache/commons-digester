@@ -36,7 +36,7 @@ public final class CatalogTestCase
     public void testCatalog()
         throws Exception
     {
-        Catalog catalog = new Catalog();
+        final Catalog catalog = new Catalog();
 
         Book book = new Book( "0-596-00184-3" );
         book.setTitle( "Ant, The Definitive Guide" );
@@ -72,7 +72,7 @@ public final class CatalogTestCase
     @Override
     protected Collection<RulesModule> getAuxModules()
     {
-        Collection<RulesModule> modules = new Stack<RulesModule>();
+        final Collection<RulesModule> modules = new Stack<RulesModule>();
         modules.add( new AbstractRulesModule()
         {
 

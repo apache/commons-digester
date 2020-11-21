@@ -23,7 +23,7 @@ public final class BeanWithFakeHandler
     @FakeRule
     private String something;
 
-    public void setSomething( String something )
+    public void setSomething( final String something )
     {
         this.something = something;
     }

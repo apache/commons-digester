@@ -30,8 +30,8 @@ public final class SetTopBuilder
     extends AbstractParamTypeBuilder<SetTopRule>
 {
 
-    SetTopBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                           LinkedRuleBuilder mainBuilder, String methodName, ClassLoader classLoader )
+    SetTopBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                           final LinkedRuleBuilder mainBuilder, final String methodName, final ClassLoader classLoader )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder, methodName, classLoader );
     }

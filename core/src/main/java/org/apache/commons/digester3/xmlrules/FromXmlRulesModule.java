@@ -87,22 +87,22 @@ public abstract class FromXmlRulesModule
      *
      * @param inputSource The {@code org.xml.sax.InputSource} where reading the XML rules from.
      */
-    protected final void loadXMLRules( InputSource inputSource )
+    protected final void loadXMLRules( final InputSource inputSource )
     {
         if ( inputSource == null )
         {
             throw new IllegalArgumentException( "Argument 'inputSource' must be not null" );
         }
 
-        String systemId = inputSource.getSystemId();
+        final String systemId = inputSource.getSystemId();
         if ( systemId != null && !systemIds.add( systemId ) )
         {
             addError( "XML rules file '%s' already bound", systemId );
         }
 
-        XmlRulesModule xmlRulesModule = new XmlRulesModule( new NameSpaceURIRulesBinder( rulesBinder() ),
+        final XmlRulesModule xmlRulesModule = new XmlRulesModule( new NameSpaceURIRulesBinder( rulesBinder() ),
                                                             getSystemIds(), rootPath );
-        Digester digester = newLoader( xmlRulesModule )
+        final Digester digester = newLoader( xmlRulesModule )
                 .register( DIGESTER_PUBLIC_ID, xmlRulesDtdUrl.toString() )
                 .setXIncludeAware( true )
                 .setValidating( true )
@@ -112,7 +112,7 @@ public abstract class FromXmlRulesModule
         {
             digester.parse( inputSource );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             addError( "Impossible to load XML defined in the InputSource '%s': %s", inputSource.getSystemId(),
                       e.getMessage() );
@@ -124,7 +124,7 @@ public abstract class FromXmlRulesModule
      *
      * @param input The {@code java.io.InputStream} where reading the XML rules from.
      */
-    protected final void loadXMLRules( InputStream input )
+    protected final void loadXMLRules( final InputStream input )
     {
         if ( input == null )
         {
@@ -139,7 +139,7 @@ public abstract class FromXmlRulesModule
      *
      * @param reader The {@code java.io.Reader} where reading the XML rules from.
      */
-    protected final void loadXMLRules( Reader reader )
+    protected final void loadXMLRules( final Reader reader )
     {
         if ( reader == null )
         {
@@ -154,7 +154,7 @@ public abstract class FromXmlRulesModule
      *
      * @param file The {@code java.io.File} where reading the XML rules from.
      */
-    protected final void loadXMLRules( File file )
+    protected final void loadXMLRules( final File file )
     {
         if ( file == null )
         {
@@ -165,7 +165,7 @@ public abstract class FromXmlRulesModule
         {
             loadXMLRules( file.toURI().toURL() );
         }
-        catch ( MalformedURLException e )
+        catch ( final MalformedURLException e )
         {
             rulesBinder().addError( e );
         }
@@ -176,7 +176,7 @@ public abstract class FromXmlRulesModule
      *
      * @param uri The URI in String representation where reading the XML rules from.
      */
-    protected final void loadXMLRules( String uri )
+    protected final void loadXMLRules( final String uri )
     {
         if ( uri == null )
         {
@@ -187,7 +187,7 @@ public abstract class FromXmlRulesModule
         {
             loadXMLRules( new URL( uri ) );
         }
-        catch ( MalformedURLException e )
+        catch ( final MalformedURLException e )
         {
             rulesBinder().addError( e );
         }
@@ -198,7 +198,7 @@ public abstract class FromXmlRulesModule
      *
      * @param url The {@code java.net.URL} where reading the XML rules from.
      */
-    protected final void loadXMLRules( URL url )
+    protected final void loadXMLRules( final URL url )
     {
         if ( url == null )
         {
@@ -207,15 +207,15 @@ public abstract class FromXmlRulesModule
 
         try
         {
-            URLConnection connection = url.openConnection();
+            final URLConnection connection = url.openConnection();
             connection.setUseCaches( false );
-            InputStream stream = connection.getInputStream();
-            InputSource source = new InputSource( stream );
+            final InputStream stream = connection.getInputStream();
+            final InputSource source = new InputSource( stream );
             source.setSystemId( url.toExternalForm() );
 
             loadXMLRules( source );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             rulesBinder().addError( e );
         }
@@ -226,7 +226,7 @@ public abstract class FromXmlRulesModule
      *
      * @param xmlText The XML document in textual form where reading the XML rules from.
      */
-    protected final void loadXMLRulesFromText( String xmlText )
+    protected final void loadXMLRulesFromText( final String xmlText )
     {
         if ( xmlText == null )
         {
@@ -241,7 +241,7 @@ public abstract class FromXmlRulesModule
      *
      * @param rootPath The root path
      */
-    protected final void useRootPath( String rootPath )
+    protected final void useRootPath( final String rootPath )
     {
         this.rootPath = rootPath;
     }

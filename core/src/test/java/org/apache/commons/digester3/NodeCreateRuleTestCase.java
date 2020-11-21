@@ -73,101 +73,101 @@ public class NodeCreateRuleTestCase
 
         try
         {
-            Rule rule = new NodeCreateRule( Node.ATTRIBUTE_NODE );
+            final Rule rule = new NodeCreateRule( Node.ATTRIBUTE_NODE );
             fail( "IllegalArgumentException expected for type ATTRIBUTE_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.CDATA_SECTION_NODE );
+            final Rule rule = new NodeCreateRule( Node.CDATA_SECTION_NODE );
             fail( "IllegalArgumentException expected for type " + "CDATA_SECTION_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.COMMENT_NODE );
+            final Rule rule = new NodeCreateRule( Node.COMMENT_NODE );
             fail( "IllegalArgumentException expected for type COMMENT_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.DOCUMENT_NODE );
+            final Rule rule = new NodeCreateRule( Node.DOCUMENT_NODE );
             fail( "IllegalArgumentException expected for type DOCUMENT_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.DOCUMENT_TYPE_NODE );
+            final Rule rule = new NodeCreateRule( Node.DOCUMENT_TYPE_NODE );
             fail( "IllegalArgumentException expected for type " + "DOCUMENT_TYPE_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.ENTITY_NODE );
+            final Rule rule = new NodeCreateRule( Node.ENTITY_NODE );
             fail( "IllegalArgumentException expected for type ENTITY_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.ENTITY_REFERENCE_NODE );
+            final Rule rule = new NodeCreateRule( Node.ENTITY_REFERENCE_NODE );
             fail( "IllegalArgumentException expected for type " + "ENTITY_REFERENCE_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.NOTATION_NODE );
+            final Rule rule = new NodeCreateRule( Node.NOTATION_NODE );
             fail( "IllegalArgumentException expected for type NOTATION_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE );
+            final Rule rule = new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE );
             fail( "IllegalArgumentException expected for type " + "PROCESSING_INSTRUCTION_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
         try
         {
-            Rule rule = new NodeCreateRule( Node.TEXT_NODE );
+            final Rule rule = new NodeCreateRule( Node.TEXT_NODE );
             fail( "IllegalArgumentException expected for type TEXT_NODE" );
             assertNotNull( rule ); // just to prevent compiler warning on unused var
         }
-        catch ( IllegalArgumentException iae )
+        catch ( final IllegalArgumentException iae )
         {
             // expected
         }
@@ -181,7 +181,7 @@ public class NodeCreateRuleTestCase
     public void testElement()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -192,7 +192,7 @@ public class NodeCreateRuleTestCase
 
         }).newDigester();
 
-        Element element = digester.parse( new StringReader( TEST_XML ) );
+        final Element element = digester.parse( new StringReader( TEST_XML ) );
 
         assertNotNull( element );
         assertEquals( "alpha", element.getNodeName() );
@@ -210,7 +210,7 @@ public class NodeCreateRuleTestCase
     public void testDocumentFragment()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -221,16 +221,16 @@ public class NodeCreateRuleTestCase
 
         }).newDigester();
 
-        DocumentFragment fragment = digester.parse( new StringReader( TEST_XML ) );
+        final DocumentFragment fragment = digester.parse( new StringReader( TEST_XML ) );
 
         assertNotNull( fragment );
         assertEquals( 4, fragment.getChildNodes().getLength() );
 
-        Node rootBody = fragment.getFirstChild();
+        final Node rootBody = fragment.getFirstChild();
         assertEquals( Node.TEXT_NODE, rootBody.getNodeType() );
         assertEquals( "ROOT BODY", rootBody.getNodeValue() );
 
-        Node alpha = fragment.getChildNodes().item( 1 );
+        final Node alpha = fragment.getChildNodes().item( 1 );
         assertEquals( Node.ELEMENT_NODE, alpha.getNodeType() );
         assertEquals( "alpha", alpha.getNodeName() );
         assertNull( ( (Element) alpha ).getLocalName() );
@@ -238,7 +238,7 @@ public class NodeCreateRuleTestCase
         assertEquals( 1, alpha.getChildNodes().getLength() );
         assertEquals( "ALPHA BODY", alpha.getFirstChild().getNodeValue() );
 
-        Node beta = fragment.getChildNodes().item( 2 );
+        final Node beta = fragment.getChildNodes().item( 2 );
         assertEquals( Node.ELEMENT_NODE, beta.getNodeType() );
         assertEquals( "beta", beta.getNodeName() );
         assertNull( ( (Element) beta ).getLocalName() );
@@ -246,7 +246,7 @@ public class NodeCreateRuleTestCase
         assertEquals( 1, beta.getChildNodes().getLength() );
         assertEquals( "BETA BODY", beta.getFirstChild().getNodeValue() );
 
-        Node gamma = fragment.getChildNodes().item( 3 );
+        final Node gamma = fragment.getChildNodes().item( 3 );
         assertEquals( Node.ELEMENT_NODE, gamma.getNodeType() );
         assertEquals( "gamma", gamma.getNodeName() );
         assertNull( ( (Element) gamma ).getLocalName() );
@@ -263,7 +263,7 @@ public class NodeCreateRuleTestCase
     public void testNested()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -280,16 +280,16 @@ public class NodeCreateRuleTestCase
 
         }).newDigester();
 
-        List<?> list = digester.parse( getInputStream( "Test4.xml" ) );
+        final List<?> list = digester.parse( getInputStream( "Test4.xml" ) );
 
         assertNotNull( list );
         assertEquals( 2, list.size() );
 
         assertTrue( list.get( 0 ) instanceof DocumentFragment );
-        DocumentFragment fragment = (DocumentFragment) list.get( 0 );
+        final DocumentFragment fragment = (DocumentFragment) list.get( 0 );
 
         assertEquals( Node.ELEMENT_NODE, fragment.getFirstChild().getNodeType() );
-        Element a = (Element) fragment.getFirstChild();
+        final Element a = (Element) fragment.getFirstChild();
         assertEquals( "a", a.getNodeName() );
         assertEquals( 1, a.getAttributes().getLength() );
         assertEquals( "THREE", a.getAttribute( "name" ) );
@@ -305,7 +305,7 @@ public class NodeCreateRuleTestCase
     public void testAttributes()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -316,13 +316,13 @@ public class NodeCreateRuleTestCase
 
         }).newDigester();
 
-        DocumentFragment fragment = digester.parse( getInputStream( "Test1.xml" ) );
+        final DocumentFragment fragment = digester.parse( getInputStream( "Test1.xml" ) );
 
         assertNotNull( fragment );
         assertEquals( 2, fragment.getChildNodes().getLength() );
 
         assertEquals( Node.ELEMENT_NODE, fragment.getFirstChild().getNodeType() );
-        Element address1 = (Element) fragment.getFirstChild();
+        final Element address1 = (Element) fragment.getFirstChild();
         assertEquals( "address", address1.getNodeName() );
         assertEquals( 5, address1.getAttributes().getLength() );
         assertEquals( "home", address1.getAttribute( "type" ) );
@@ -332,7 +332,7 @@ public class NodeCreateRuleTestCase
         assertEquals( "HmZip", address1.getAttribute( "zipCode" ) );
 
         assertEquals( Node.ELEMENT_NODE, fragment.getLastChild().getNodeType() );
-        Element address2 = (Element) fragment.getLastChild();
+        final Element address2 = (Element) fragment.getLastChild();
         assertEquals( "address", address2.getNodeName() );
         assertEquals( 5, address2.getAttributes().getLength() );
         assertEquals( "office", address2.getAttribute( "type" ) );
@@ -350,7 +350,7 @@ public class NodeCreateRuleTestCase
     public void testNamespaces()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -363,13 +363,13 @@ public class NodeCreateRuleTestCase
         .setNamespaceAware( true )
         .newDigester();
 
-        DocumentFragment fragment = digester.parse( getInputStream( "Test3.xml" ) );
+        final DocumentFragment fragment = digester.parse( getInputStream( "Test3.xml" ) );
 
         assertNotNull( fragment );
         assertEquals( 2, fragment.getChildNodes().getLength() );
 
         assertEquals( Node.ELEMENT_NODE, fragment.getFirstChild().getNodeType() );
-        Element address1 = (Element) fragment.getFirstChild();
+        final Element address1 = (Element) fragment.getFirstChild();
         assertEquals( "address", address1.getNodeName() );
         assertEquals( "http://commons.apache.org/digester/Bar", address1.getNamespaceURI() );
         assertEquals( "address", address1.getLocalName() );
@@ -381,7 +381,7 @@ public class NodeCreateRuleTestCase
         assertEquals( "HmZip", address1.getAttribute( "zipCode" ) );
 
         assertEquals( Node.ELEMENT_NODE, fragment.getLastChild().getNodeType() );
-        Element address2 = (Element) fragment.getLastChild();
+        final Element address2 = (Element) fragment.getLastChild();
         assertEquals( "address", address2.getNodeName() );
         assertEquals( "http://commons.apache.org/digester/Bar", address2.getNamespaceURI() );
         assertEquals( "address", address2.getLocalName() );
@@ -401,7 +401,7 @@ public class NodeCreateRuleTestCase
     public void testNamespacedAttribute()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -414,7 +414,7 @@ public class NodeCreateRuleTestCase
         .setNamespaceAware( true )
         .newDigester();
 
-        Element element = digester.parse( getInputStream( "Test10.xml" ) );
+        final Element element = digester.parse( getInputStream( "Test10.xml" ) );
 
         assertNotNull( element );
 
@@ -436,7 +436,7 @@ public class NodeCreateRuleTestCase
     public void testNonNamespacedAttribute()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -449,7 +449,7 @@ public class NodeCreateRuleTestCase
         .setNamespaceAware( true )
         .newDigester();
 
-        Element element = digester.parse( getInputStream( "Test10.xml" ) );
+        final Element element = digester.parse( getInputStream( "Test10.xml" ) );
 
         assertNotNull( element );
 
@@ -468,7 +468,7 @@ public class NodeCreateRuleTestCase
     public void testImport()
         throws SAXException, ParserConfigurationException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -480,12 +480,12 @@ public class NodeCreateRuleTestCase
         })
         .newDigester();
 
-        DocumentFragment fragment = digester.parse( new StringReader( TEST_XML ) );
+        final DocumentFragment fragment = digester.parse( new StringReader( TEST_XML ) );
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.newDocument();
-        Node importedFragment = doc.importNode( fragment, true );
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        final Document doc = builder.newDocument();
+        final Node importedFragment = doc.importNode( fragment, true );
         doc.appendChild( doc.createElement( "root" ) );
         doc.getFirstChild().appendChild( importedFragment );
 
@@ -500,9 +500,9 @@ public class NodeCreateRuleTestCase
     public void testEntityText()
         throws Exception
     {
-        String TEST_XML2 = "<?xml version='1.0'?><root><alpha>&#65; &#65;</alpha></root>";
+        final String TEST_XML2 = "<?xml version='1.0'?><root><alpha>&#65; &#65;</alpha></root>";
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -514,7 +514,7 @@ public class NodeCreateRuleTestCase
         })
         .newDigester();
 
-        Element element = digester.parse( new StringReader( TEST_XML2 ) );
+        final Element element = digester.parse( new StringReader( TEST_XML2 ) );
 
         assertNotNull( element );
         assertEquals( "alpha", element.getNodeName() );
@@ -532,7 +532,7 @@ public class NodeCreateRuleTestCase
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs
      */
-    protected InputStream getInputStream( String name )
+    protected InputStream getInputStream( final String name )
         throws IOException
     {
 

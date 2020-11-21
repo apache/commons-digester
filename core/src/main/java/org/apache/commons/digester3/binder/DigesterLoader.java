@@ -68,7 +68,7 @@ public final class DigesterLoader
      * @param rulesModules The modules containing the {@code Rule} binding
      * @return A new {@link DigesterLoader} instance
      */
-    public static DigesterLoader newLoader( RulesModule... rulesModules )
+    public static DigesterLoader newLoader( final RulesModule... rulesModules )
     {
         if ( rulesModules == null || rulesModules.length == 0 )
         {
@@ -83,7 +83,7 @@ public final class DigesterLoader
      * @param rulesModules The modules containing the {@code Rule} binding
      * @return A new {@link DigesterLoader} instance
      */
-    public static DigesterLoader newLoader( Iterable<RulesModule> rulesModules )
+    public static DigesterLoader newLoader( final Iterable<RulesModule> rulesModules )
     {
         if ( rulesModules == null )
         {
@@ -158,7 +158,7 @@ public final class DigesterLoader
      *
      * @param rulesModules The modules containing the {@code Rule} binding
      */
-    private DigesterLoader( Iterable<RulesModule> rulesModules )
+    private DigesterLoader( final Iterable<RulesModule> rulesModules )
     {
         this.rulesModules = rulesModules;
         setUseContextClassLoader( true );
@@ -174,7 +174,7 @@ public final class DigesterLoader
      * @param useContextClassLoader determines whether to use Context ClassLoader.
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setUseContextClassLoader( boolean useContextClassLoader )
+    public DigesterLoader setUseContextClassLoader( final boolean useContextClassLoader )
     {
         if ( useContextClassLoader )
         {
@@ -193,7 +193,7 @@ public final class DigesterLoader
      * @param classLoader the class loader to be used for instantiating application objects when required.
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setClassLoader( ClassLoader classLoader )
+    public DigesterLoader setClassLoader( final ClassLoader classLoader )
     {
         if ( classLoader == null )
         {
@@ -203,7 +203,7 @@ public final class DigesterLoader
         this.classLoader = createBinderClassLoader( classLoader );
 
         rulesBinder.initialize( this.classLoader );
-        for ( RulesModule rulesModule : rulesModules )
+        for ( final RulesModule rulesModule : rulesModules )
         {
             rulesModule.configure( rulesBinder );
         }
@@ -218,7 +218,7 @@ public final class DigesterLoader
      *        or null if not substitution of these values is to be performed.
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setSubstitutor( Substitutor substitutor )
+    public DigesterLoader setSubstitutor( final Substitutor substitutor )
     {
         this.substitutor = substitutor;
         return this;
@@ -230,7 +230,7 @@ public final class DigesterLoader
      * @param namespaceAware The new "namespace aware" flag
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setNamespaceAware( boolean namespaceAware )
+    public DigesterLoader setNamespaceAware( final boolean namespaceAware )
     {
         factory.setNamespaceAware( namespaceAware );
         return this;
@@ -254,7 +254,7 @@ public final class DigesterLoader
      * @return This loader instance, useful to chain methods.
      * @see #setNamespaceAware(boolean)
      */
-    public DigesterLoader setXIncludeAware( boolean xIncludeAware )
+    public DigesterLoader setXIncludeAware( final boolean xIncludeAware )
     {
         factory.setXIncludeAware( xIncludeAware );
         return this;
@@ -278,7 +278,7 @@ public final class DigesterLoader
      * @return This loader instance, useful to chain methods.
      * @see javax.xml.parsers.SAXParserFactory#setValidating(boolean)
      */
-    public DigesterLoader setValidating( boolean validating )
+    public DigesterLoader setValidating( final boolean validating )
     {
         factory.setValidating( validating );
         return this;
@@ -300,7 +300,7 @@ public final class DigesterLoader
      * @param schema The {@link Schema} instance to use.
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setSchema( Schema schema )
+    public DigesterLoader setSchema( final Schema schema )
     {
         factory.setSchema( schema );
         return this;
@@ -319,7 +319,7 @@ public final class DigesterLoader
      * @throws SAXNotSupportedException if the property name is recognized but not supported
      * @since 3.3
      */
-    public DigesterLoader setFeature( String feature, boolean value )
+    public DigesterLoader setFeature( final String feature, final boolean value )
         throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException
     {
         factory.setFeature(feature, value);
@@ -348,7 +348,7 @@ public final class DigesterLoader
      * @param entityURL The URL to use for reading this DTD
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader register( String publicId, URL entityURL )
+    public DigesterLoader register( final String publicId, final URL entityURL )
     {
         entityValidator.put( publicId, entityURL );
         return this;
@@ -362,13 +362,13 @@ public final class DigesterLoader
      * @param entityURL The URL to use for reading this entity
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader register( String publicId, String entityURL )
+    public DigesterLoader register( final String publicId, final String entityURL )
     {
         try
         {
             return register( publicId, new URL( entityURL ) );
         }
-        catch ( MalformedURLException e )
+        catch ( final MalformedURLException e )
         {
             throw new IllegalArgumentException( "Malformed URL '" + entityURL + "' : " + e.getMessage() );
         }
@@ -391,7 +391,7 @@ public final class DigesterLoader
      * @param entityResolver a class that implement the <code>EntityResolver</code> interface.
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setEntityResolver( EntityResolver entityResolver )
+    public DigesterLoader setEntityResolver( final EntityResolver entityResolver )
     {
         this.entityResolver = entityResolver;
         return this;
@@ -404,7 +404,7 @@ public final class DigesterLoader
      *        or named stacks.
      * @return This loader instance, useful to chain methods.
      */
-    public DigesterLoader setStackAction( StackAction stackAction )
+    public DigesterLoader setStackAction( final StackAction stackAction )
     {
         this.stackAction = stackAction;
         return this;
@@ -428,7 +428,7 @@ public final class DigesterLoader
      * @return This loader instance, useful to chain methods.
      * @since 3.1
      */
-    public DigesterLoader setExecutorService( ExecutorService executorService )
+    public DigesterLoader setExecutorService( final ExecutorService executorService )
     {
         this.executorService = executorService;
         return this;
@@ -452,7 +452,7 @@ public final class DigesterLoader
      * @return This loader instance, useful to chain methods.
      * @since 3.2
      */
-    public DigesterLoader setErrorHandler( ErrorHandler errorHandler )
+    public DigesterLoader setErrorHandler( final ErrorHandler errorHandler )
     {
         this.errorHandler = errorHandler;
         return this;
@@ -476,7 +476,7 @@ public final class DigesterLoader
      * @return This loader instance, useful to chain methods.
      * @since 3.2
      */
-    public DigesterLoader setDocumentLocator( Locator locator )
+    public DigesterLoader setDocumentLocator( final Locator locator )
     {
         this.locator = locator;
         return this;
@@ -498,17 +498,17 @@ public final class DigesterLoader
      * @param rules The custom user define {@link Rules} implementation
      * @return a new {@link Digester} instance
      */
-    public Digester newDigester( Rules rules )
+    public Digester newDigester( final Rules rules )
     {
         try
         {
             return this.newDigester( this.factory.newSAXParser(), rules );
         }
-        catch ( ParserConfigurationException e )
+        catch ( final ParserConfigurationException e )
         {
             throw new DigesterLoadingException( "SAX Parser misconfigured", e );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             throw new DigesterLoadingException( "An error occurred while initializing the SAX Parser", e );
         }
@@ -521,7 +521,7 @@ public final class DigesterLoader
      * @param parser the user defined {@code SAXParser}
      * @return a new {@link Digester} instance
      */
-    public Digester newDigester( SAXParser parser )
+    public Digester newDigester( final SAXParser parser )
     {
         return newDigester( parser, new RulesBase() );
     }
@@ -534,7 +534,7 @@ public final class DigesterLoader
      * @param rules The custom user define {@link Rules} implementation
      * @return a new {@link Digester} instance
      */
-    public Digester newDigester( SAXParser parser, Rules rules )
+    public Digester newDigester( final SAXParser parser, final Rules rules )
     {
         if ( parser == null )
         {
@@ -545,7 +545,7 @@ public final class DigesterLoader
         {
             return this.newDigester( parser.getXMLReader(), rules );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             throw new DigesterLoadingException( "An error occurred while creating the XML Reader", e );
         }
@@ -561,7 +561,7 @@ public final class DigesterLoader
      * @param reader The user defined {@code XMLReader}
      * @return a new {@link Digester} instance
      */
-    public Digester newDigester( XMLReader reader )
+    public Digester newDigester( final XMLReader reader )
     {
         return this.newDigester( reader, new RulesBase() );
     }
@@ -577,7 +577,7 @@ public final class DigesterLoader
      * @param rules The custom user define {@link Rules} implementation
      * @return a new {@link Digester} instance
      */
-    public Digester newDigester( XMLReader reader, Rules rules )
+    public Digester newDigester( final XMLReader reader, final Rules rules )
     {
         if ( reader == null )
         {
@@ -588,7 +588,7 @@ public final class DigesterLoader
             throw new DigesterLoadingException( "Impossible to create a new Digester with null Rules" );
         }
 
-        Digester digester = new Digester( reader );
+        final Digester digester = new Digester( reader );
         // the ClassLoader adapter is no needed anymore
         digester.setClassLoader( classLoader.getAdaptedClassLoader() );
         digester.setRules( rules );
@@ -613,7 +613,7 @@ public final class DigesterLoader
      */
     public void addRules( final Digester digester )
     {
-        RuleSet ruleSet = createRuleSet();
+        final RuleSet ruleSet = createRuleSet();
         ruleSet.addRuleInstances( digester );
     }
 
@@ -626,17 +626,17 @@ public final class DigesterLoader
     {
         if ( rulesBinder.hasError() )
         {
-            Formatter fmt = new Formatter().format( HEADING );
+            final Formatter fmt = new Formatter().format( HEADING );
             int index = 1;
 
-            for ( ErrorMessage errorMessage : rulesBinder.getErrors() )
+            for ( final ErrorMessage errorMessage : rulesBinder.getErrors() )
             {
                 fmt.format( "%s) %s%n", index++, errorMessage.getMessage() );
 
-                Throwable cause = errorMessage.getCause();
+                final Throwable cause = errorMessage.getCause();
                 if ( cause != null )
                 {
-                    StringWriter writer = new StringWriter();
+                    final StringWriter writer = new StringWriter();
                     cause.printStackTrace( new PrintWriter( writer ) );
                     fmt.format( "Caused by: %s", writer.getBuffer() );
                 }

@@ -45,7 +45,7 @@ public class SetPropertyRule
      * @param name Name of the attribute that will contain the name of the property to be set
      * @param value Name of the attribute that will contain the value to which the property should be set
      */
-    public SetPropertyRule( String name, String value )
+    public SetPropertyRule( final String name, final String value )
     {
         this.name = name;
         this.value = value;
@@ -69,7 +69,7 @@ public class SetPropertyRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         if ( attributes.getLength() == 0 )
@@ -87,7 +87,7 @@ public class SetPropertyRule
             {
                 attributeName = attributes.getQName( i );
             }
-            String value = attributes.getValue( i );
+            final String value = attributes.getValue( i );
             if ( attributeName.equals( this.name ) )
             {
                 actualName = value;
@@ -99,7 +99,7 @@ public class SetPropertyRule
         }
 
         // Get a reference to the top object
-        Object top = getDigester().peek();
+        final Object top = getDigester().peek();
 
         // Log some debugging information
         if ( getDigester().getLogger().isDebugEnabled() )
@@ -118,7 +118,7 @@ public class SetPropertyRule
         // like SetPropertiesRule does.
         if ( top instanceof DynaBean )
         {
-            DynaProperty desc = ( (DynaBean) top ).getDynaClass().getDynaProperty( actualName );
+            final DynaProperty desc = ( (DynaBean) top ).getDynaClass().getDynaProperty( actualName );
             if ( desc == null )
             {
                 throw new NoSuchMethodException( "Bean has no property named " + actualName );
@@ -127,7 +127,7 @@ public class SetPropertyRule
         else
         /* this is a standard JavaBean */
         {
-            PropertyDescriptor desc = getPropertyDescriptor( top, actualName );
+            final PropertyDescriptor desc = getPropertyDescriptor( top, actualName );
             if ( desc == null )
             {
                 throw new NoSuchMethodException( "Bean has no property named " + actualName );

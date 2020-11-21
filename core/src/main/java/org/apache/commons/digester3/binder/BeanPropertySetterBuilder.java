@@ -32,8 +32,8 @@ public final class BeanPropertySetterBuilder
 
     private String attribute;
 
-    BeanPropertySetterBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                               LinkedRuleBuilder mainBuilder )
+    BeanPropertySetterBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                               final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -44,7 +44,7 @@ public final class BeanPropertySetterBuilder
      * @param propertyName The name of property to set
      * @return this builder instance
      */
-    public BeanPropertySetterBuilder withName( /* @Nullable */String propertyName )
+    public BeanPropertySetterBuilder withName( /* @Nullable */final String propertyName )
     {
         this.propertyName = propertyName;
         return this;
@@ -56,7 +56,7 @@ public final class BeanPropertySetterBuilder
      * @param attribute The attribute name from which extracting the name of property to set
      * @return this builder instance
      */
-    public BeanPropertySetterBuilder extractPropertyNameFromAttribute( String attribute )
+    public BeanPropertySetterBuilder extractPropertyNameFromAttribute( final String attribute )
     {
         if ( attribute == null )
         {
@@ -73,7 +73,7 @@ public final class BeanPropertySetterBuilder
     @Override
     protected BeanPropertySetterRule createRule()
     {
-        BeanPropertySetterRule rule = new BeanPropertySetterRule( propertyName );
+        final BeanPropertySetterRule rule = new BeanPropertySetterRule( propertyName );
         rule.setPropertyNameFromAttribute( attribute );
         return rule;
     }

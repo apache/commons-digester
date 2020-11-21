@@ -32,7 +32,7 @@ public class ThrowExceptionCreationFactory
 {
 
     @Override
-    public Object createObject( Attributes attributes )
+    public Object createObject( final Attributes attributes )
         throws Exception
     {
         throw new RuntimeException();

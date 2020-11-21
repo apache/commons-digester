@@ -30,8 +30,8 @@ public final class SetNextBuilder
     extends AbstractParamTypeBuilder<SetNextRule>
 {
 
-    SetNextBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                           LinkedRuleBuilder mainBuilder, String methodName, ClassLoader classLoader )
+    SetNextBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                           final LinkedRuleBuilder mainBuilder, final String methodName, final ClassLoader classLoader )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder, methodName, classLoader );
     }

@@ -48,7 +48,7 @@ public class SetNextRule
      * 
      * @param methodName Method name of the parent method to call
      */
-    public SetNextRule( String methodName )
+    public SetNextRule( final String methodName )
     {
         super( methodName );
     }
@@ -61,7 +61,7 @@ public class SetNextRule
      *                  specify the corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code>
      *                  for a <code>boolean</code> parameter)
      */
-    public SetNextRule( String methodName, String paramType )
+    public SetNextRule( final String methodName, final String paramType )
     {
         super( methodName, paramType );
     }
@@ -74,7 +74,7 @@ public class SetNextRule
      *                  corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *                  <code>boolean</code> parameter)
      */
-    public SetNextRule( String methodName, Class<?> paramType )
+    public SetNextRule( final String methodName, final Class<?> paramType )
     {
         super( methodName, paramType );
     }

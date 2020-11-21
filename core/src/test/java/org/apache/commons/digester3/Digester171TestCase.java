@@ -54,7 +54,7 @@ public class Digester171TestCase
     public void testDefaultThrowingErrorHandler()
         throws Exception
     {
-        ErrorHandler customErrorHandler = new DefaultThrowingErrorHandler();
+        final ErrorHandler customErrorHandler = new DefaultThrowingErrorHandler();
 
         newLoader( new AbstractRulesModule()
         {

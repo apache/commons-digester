@@ -46,7 +46,7 @@ public class XIncludeTestCase
     public void testXInclude()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -70,7 +70,7 @@ public class XIncludeTestCase
         .newDigester();
 
         // Parse our test input
-        Employee employee = digester.parse( getInputStream( "Test12.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test12.xml" ) );
         assertNotNull( "failed to parsed an employee", employee );
 
         // Test basics
@@ -78,11 +78,11 @@ public class XIncludeTestCase
         assertEquals( "Last Name", employee.getLastName() );
 
         // Test includes have been processed
-        Address ha = employee.getAddress( "home" );
+        final Address ha = employee.getAddress( "home" );
         assertNotNull( ha );
         assertEquals( "Home City", ha.getCity() );
         assertEquals( "HS", ha.getState() );
-        Address oa = employee.getAddress( "office" );
+        final Address oa = employee.getAddress( "office" );
         assertNotNull( oa );
         assertEquals( "Office City", oa.getCity() );
         assertEquals( "OS", oa.getState() );
@@ -97,7 +97,7 @@ public class XIncludeTestCase
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs
      */
-    protected InputStream getInputStream( String name )
+    protected InputStream getInputStream( final String name )
         throws IOException
     {
 

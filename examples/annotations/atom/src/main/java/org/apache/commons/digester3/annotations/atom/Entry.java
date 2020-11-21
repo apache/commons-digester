@@ -50,7 +50,7 @@ public final class Entry
         return title;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -60,7 +60,7 @@ public final class Entry
         return link;
     }
 
-    public void setLink( URL link )
+    public void setLink( final URL link )
     {
         this.link = link;
     }
@@ -70,7 +70,7 @@ public final class Entry
         return updated;
     }
 
-    public void setUpdated( Date updated )
+    public void setUpdated( final Date updated )
     {
         this.updated = updated;
     }
@@ -80,7 +80,7 @@ public final class Entry
         return id;
     }
 
-    public void setId( String id )
+    public void setId( final String id )
     {
         this.id = id;
     }
@@ -90,7 +90,7 @@ public final class Entry
         return content;
     }
 
-    public void setContent( String content )
+    public void setContent( final String content )
     {
         this.content = content;
     }

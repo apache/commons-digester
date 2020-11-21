@@ -164,7 +164,7 @@ public class ExtendedBaseRules
      * {@inheritDoc}
      */
     @Override
-    protected void registerRule( String pattern, Rule rule )
+    protected void registerRule( final String pattern, final Rule rule )
     {
         super.registerRule( pattern, rule );
         counter++;
@@ -175,12 +175,12 @@ public class ExtendedBaseRules
      * {@inheritDoc}
      */
     @Override
-    public List<Rule> match( String namespaceURI, String pattern, String name, Attributes attributes )
+    public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
         // calculate the pattern of the parent
         // (if the element has one)
         String parentPattern = "";
-        int lastIndex = pattern.lastIndexOf( '/' );
+        final int lastIndex = pattern.lastIndexOf( '/' );
 
         boolean hasParent = true;
         if ( lastIndex == -1 )
@@ -195,7 +195,7 @@ public class ExtendedBaseRules
         }
 
         // we keep the list of universal matches separate
-        List<Rule> universalList = new ArrayList<Rule>( counter );
+        final List<Rule> universalList = new ArrayList<Rule>( counter );
 
         // Universal wildcards ('*') in the middle of the pattern-string
         List<Rule> recList = null;
@@ -299,7 +299,7 @@ public class ExtendedBaseRules
 
             // find out if it's a univeral pattern
             // set a flag
-            boolean isUniversal = key.startsWith( "!" );
+            final boolean isUniversal = key.startsWith( "!" );
             if ( isUniversal )
             {
                 // and find the underlying key
@@ -307,8 +307,8 @@ public class ExtendedBaseRules
             }
 
             // don't need to check exact matches
-            boolean wildcardMatchStart = key.startsWith( "*/" );
-            boolean wildcardMatchEnd = key.endsWith( "/*" );
+            final boolean wildcardMatchStart = key.startsWith( "*/" );
+            final boolean wildcardMatchEnd = key.endsWith( "/*" );
             if ( wildcardMatchStart || ( isUniversal && wildcardMatchEnd ) )
             {
 
@@ -316,7 +316,7 @@ public class ExtendedBaseRules
                 boolean basicMatched = false;
                 boolean ancesterMatched = false;
 
-                boolean parentMatchEnd = key.endsWith( "/?" );
+                final boolean parentMatchEnd = key.endsWith( "/?" );
                 if ( parentMatchEnd )
                 {
                     // try for a parent match
@@ -328,7 +328,7 @@ public class ExtendedBaseRules
                     // check for ancester match
                     if ( wildcardMatchStart )
                     {
-                        String patternBody = key.substring( 2, key.length() - 2 );
+                        final String patternBody = key.substring( 2, key.length() - 2 );
                         if ( pattern.endsWith( patternBody ) )
                         {
                             ancesterMatched = true;
@@ -340,7 +340,7 @@ public class ExtendedBaseRules
                     }
                     else
                     {
-                        String bodyPattern = key.substring( 0, key.length() - 2 );
+                        final String bodyPattern = key.substring( 0, key.length() - 2 );
                         if ( pattern.startsWith( bodyPattern ) )
                         {
                             if ( pattern.length() == bodyPattern.length() )
@@ -430,11 +430,11 @@ public class ExtendedBaseRules
         if ( namespaceURI != null )
         {
             // remove invalid namespaces
-            Iterator<Rule> it = universalList.iterator();
+            final Iterator<Rule> it = universalList.iterator();
             while ( it.hasNext() )
             {
-                Rule rule = it.next();
-                String nsUri = rule.getNamespaceURI();
+                final Rule rule = it.next();
+                final String nsUri = rule.getNamespaceURI();
                 if ( nsUri != null && !nsUri.equals( namespaceURI ) )
                 {
                     it.remove();
@@ -447,11 +447,11 @@ public class ExtendedBaseRules
         Collections.sort( universalList, new Comparator<Rule>()
         {
 
-            public int compare( Rule r1, Rule r2 )
+            public int compare( final Rule r1, final Rule r2 )
             {
                 // Get the entry order from the map
-                Integer i1 = order.get( r1 );
-                Integer i2 = order.get( r2 );
+                final Integer i1 = order.get( r1 );
+                final Integer i2 = order.get( r2 );
 
                 // and use that to perform the comparison
                 if ( i1 == null )
@@ -483,7 +483,7 @@ public class ExtendedBaseRules
      * @param parentPattern The pattern where looking for the key
      * @return true, if {@code key} is found inside {@code parentPattern}, false otherwise
      */
-    private boolean parentMatch( String key, String parentPattern )
+    private boolean parentMatch( final String key, final String parentPattern )
     {
         return parentPattern.endsWith( key.substring( 1, key.length() - 2 ) );
     }
@@ -495,7 +495,7 @@ public class ExtendedBaseRules
      * @param pattern The pattern where looking for the key
      * @return true, if {@code key} is found inside {@code pattern}, false otherwise
      */
-    private boolean basicMatch( String key, String pattern )
+    private boolean basicMatch( final String key, final String pattern )
     {
         return ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) ) );
     }
@@ -506,7 +506,7 @@ public class ExtendedBaseRules
      * @param parentPattern The input pattern
      * @return A list of {@code Rule} related to the input pattern
      */
-    private List<Rule> findExactAncesterMatch( String parentPattern )
+    private List<Rule> findExactAncesterMatch( final String parentPattern )
     {
         List<Rule> matchingRules = null;
         int lastIndex = parentPattern.length();

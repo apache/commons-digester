@@ -34,7 +34,7 @@ final class DefaultAnnotationHandlerFactory
     /**
      * {@inheritDoc}
      */
-    public <L extends AnnotationHandler<? extends Annotation, ? extends AnnotatedElement>> L newInstance( Class<L> type )
+    public <L extends AnnotationHandler<? extends Annotation, ? extends AnnotatedElement>> L newInstance( final Class<L> type )
         throws Exception
     {
         return type.newInstance();

@@ -41,8 +41,8 @@ public final class ServletBean
     private String servletClass;
 
     @CallMethod( pattern = "web-app/servlet/init-param" )
-    public void addInitParam( @CallParam( pattern = "web-app/servlet/init-param/param-name" ) String name,
-                              @CallParam( pattern = "web-app/servlet/init-param/param-value" ) String value )
+    public void addInitParam( @CallParam( pattern = "web-app/servlet/init-param/param-name" ) final String name,
+                              @CallParam( pattern = "web-app/servlet/init-param/param-value" ) final String value )
     {
         this.initParams.put( name, value );
     }
@@ -52,7 +52,7 @@ public final class ServletBean
         return servletName;
     }
 
-    public void setServletName( String servletName )
+    public void setServletName( final String servletName )
     {
         this.servletName = servletName;
     }
@@ -62,7 +62,7 @@ public final class ServletBean
         return servletClass;
     }
 
-    public void setServletClass( String servletClass )
+    public void setServletClass( final String servletClass )
     {
         this.servletClass = servletClass;
     }
@@ -73,7 +73,7 @@ public final class ServletBean
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -84,7 +84,7 @@ public final class ServletBean
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        ServletBean other = (ServletBean) obj;
+        final ServletBean other = (ServletBean) obj;
         if ( initParams == null )
         {
             if ( other.initParams != null ) {

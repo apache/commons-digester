@@ -41,10 +41,10 @@ public class RegexRulesTestCase
     public void testMatchAll()
     {
         // set up which should match every rule
-        RegexRules rules = new RegexRules( new RegexMatcher()
+        final RegexRules rules = new RegexRules( new RegexMatcher()
         {
             @Override
-            public boolean match( String pathPattern, String rulePattern )
+            public boolean match( final String pathPattern, final String rulePattern )
             {
                 return true;
             }
@@ -74,10 +74,10 @@ public class RegexRulesTestCase
     public void testMatchNothing()
     {
         // set up which should match every rule
-        RegexRules rules = new RegexRules( new RegexMatcher()
+        final RegexRules rules = new RegexRules( new RegexMatcher()
         {
             @Override
-            public boolean match( String pathPattern, String rulePattern )
+            public boolean match( final String pathPattern, final String rulePattern )
             {
                 return false;
             }
@@ -101,10 +101,10 @@ public class RegexRulesTestCase
     public void testMatchMixed()
     {
         // set up which should match every rule
-        RegexRules rules = new RegexRules( new RegexMatcher()
+        final RegexRules rules = new RegexRules( new RegexMatcher()
         {
             @Override
-            public boolean match( String pathPattern, String rulePattern )
+            public boolean match( final String pathPattern, final String rulePattern )
             {
                 return ( rulePattern.equals( "/match/me" ) );
             }
@@ -129,10 +129,10 @@ public class RegexRulesTestCase
     public void testClear()
     {
         // set up which should match every rule
-        RegexRules rules = new RegexRules( new RegexMatcher()
+        final RegexRules rules = new RegexRules( new RegexMatcher()
         {
             @Override
-            public boolean match( String pathPattern, String rulePattern )
+            public boolean match( final String pathPattern, final String rulePattern )
             {
                 return true;
             }
@@ -167,7 +167,7 @@ public class RegexRulesTestCase
     public void testSimpleRegexMatch()
     {
 
-        SimpleRegexMatcher matcher = new SimpleRegexMatcher();
+        final SimpleRegexMatcher matcher = new SimpleRegexMatcher();
 
         // SimpleLog log = new SimpleLog("{testSimpleRegexMatch:SimpleRegexMatcher]");
         // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);

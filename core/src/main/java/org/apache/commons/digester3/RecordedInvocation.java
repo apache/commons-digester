@@ -48,7 +48,7 @@ final class RecordedInvocation
      * @param invokedMethod
      * @param arguments
      */
-    public RecordedInvocation( Method invokedMethod, Object[] arguments )
+    public RecordedInvocation( final Method invokedMethod, final Object[] arguments )
     {
         this.invokedMethod = invokedMethod;
         this.arguments = arguments;
@@ -84,15 +84,15 @@ final class RecordedInvocation
     @Override
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append( invokedMethod.getDeclaringClass().getName() );
         buffer.append( "." );
         buffer.append( invokedMethod.getName() );
         buffer.append( "(" );
-        int count = arguments.length;
+        final int count = arguments.length;
         for ( int i = 0; i < count; i++ )
         {
-            Object arg = arguments[i];
+            final Object arg = arguments[i];
             if ( i > 0 )
             {
                 buffer.append( ", " );
@@ -109,7 +109,7 @@ final class RecordedInvocation
      * @param buffer the buffer to append the string representation of the input object.
      * @param input the input object has to be serialized to string.
      */
-    protected void convert( StringBuilder buffer, Object input )
+    protected void convert( final StringBuilder buffer, final Object input )
     {
         if ( input == null )
         {
@@ -128,8 +128,8 @@ final class RecordedInvocation
             buffer.append( "(" );
             buffer.append( input.getClass().getSimpleName() );
             buffer.append( "){" );
-            Object[] array = (Object[]) input;
-            int count = array.length;
+            final Object[] array = (Object[]) input;
+            final int count = array.length;
             for ( int i = 0; i < count; i++ )
             {
                 if ( i > 0 )

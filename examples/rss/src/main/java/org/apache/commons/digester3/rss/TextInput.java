@@ -46,7 +46,7 @@ public class TextInput implements Serializable {
         return ( this.description );
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -61,7 +61,7 @@ public class TextInput implements Serializable {
         return ( this.link );
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -76,7 +76,7 @@ public class TextInput implements Serializable {
         return ( this.name );
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -91,7 +91,7 @@ public class TextInput implements Serializable {
         return ( this.title );
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -104,7 +104,7 @@ public class TextInput implements Serializable {
      *
      * @param writer The writer to render output to
      */
-    void render( PrintWriter writer )
+    void render( final PrintWriter writer )
     {
         writer.println( "    <textinput>" );
 

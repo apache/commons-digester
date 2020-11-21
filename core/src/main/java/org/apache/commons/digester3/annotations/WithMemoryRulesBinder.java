@@ -59,7 +59,7 @@ final class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( String messagePattern, Object... arguments )
+    public void addError( final String messagePattern, final Object... arguments )
     {
         wrappedRulesBinder.addError( messagePattern, arguments );
     }
@@ -67,7 +67,7 @@ final class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( Throwable t )
+    public void addError( final Throwable t )
     {
         wrappedRulesBinder.addError( t );
     }
@@ -75,7 +75,7 @@ final class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void install( RulesModule rulesModule )
+    public void install( final RulesModule rulesModule )
     {
         wrappedRulesBinder.install( rulesModule );
     }
@@ -83,7 +83,7 @@ final class WithMemoryRulesBinder
     /**
      * {@inheritDoc}
      */
-    public LinkedRuleBuilder forPattern( String pattern )
+    public LinkedRuleBuilder forPattern( final String pattern )
     {
         return wrappedRulesBinder.forPattern( pattern );
     }
@@ -94,7 +94,7 @@ final class WithMemoryRulesBinder
      * @param bindingClass
      * @return true if the specified element has not yet been marked
      */
-    public boolean markAsBound( Class<?> bindingClass )
+    public boolean markAsBound( final Class<?> bindingClass )
     {
         return boundClasses.add( bindingClass );
     }
@@ -105,7 +105,7 @@ final class WithMemoryRulesBinder
      * @param bindingClass
      * @return true if the specified element has been marked
      */
-    public boolean isAlreadyBound( Class<?> bindingClass )
+    public boolean isAlreadyBound( final Class<?> bindingClass )
     {
         return boundClasses.contains( bindingClass );
     }

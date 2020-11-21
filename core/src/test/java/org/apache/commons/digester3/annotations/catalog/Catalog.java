@@ -33,7 +33,7 @@ public final class Catalog
     private final List<Item> items = new ArrayList<Item>();
 
     @SetNext( { AudioVisual.class, Book.class } )
-    public void addItem( Item item )
+    public void addItem( final Item item )
     {
         this.items.add( item );
     }
@@ -44,7 +44,7 @@ public final class Catalog
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -55,7 +55,7 @@ public final class Catalog
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Catalog other = (Catalog) obj;
+        final Catalog other = (Catalog) obj;
         if ( this.items == null )
         {
             if ( other.getItems() != null ) {
@@ -78,7 +78,7 @@ public final class Catalog
     {
         System.out.println( "This catalog has " + this.items.size() + " items" );
 
-        for ( Item item : this.items )
+        for ( final Item item : this.items )
         {
             item.print();
         }

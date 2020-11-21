@@ -42,7 +42,7 @@ public class SetRootRule
      * 
      * @param methodName Method name of the parent method to call
      */
-    public SetRootRule( String methodName )
+    public SetRootRule( final String methodName )
     {
         super( methodName );
     }
@@ -55,7 +55,7 @@ public class SetRootRule
      *                  specify the corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code>
      *                  for a <code>boolean</code> parameter)
      */
-    public SetRootRule( String methodName, String paramType )
+    public SetRootRule( final String methodName, final String paramType )
     {
         super( methodName, paramType );
     }
@@ -68,7 +68,7 @@ public class SetRootRule
      *                  corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *                  <code>boolean</code> parameter)
      */
-    public SetRootRule( String methodName, Class<?> paramType )
+    public SetRootRule( final String methodName, final Class<?> paramType )
     {
         super( methodName, paramType );
     }

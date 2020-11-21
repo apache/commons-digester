@@ -31,7 +31,7 @@ public class SetTextSegmentRule
 
     // ----------------------------------------------------------- Constructors
 
-    public SetTextSegmentRule( String methodName )
+    public SetTextSegmentRule( final String methodName )
     {
         this.methodName = methodName;
     }
@@ -49,13 +49,13 @@ public class SetTextSegmentRule
      * Process the end of this element.
      */
     @Override
-    public void textSegment( String text )
+    public void textSegment( final String text )
         throws Exception
     {
-        Object target = getDigester().peek( 0 );
+        final Object target = getDigester().peek( 0 );
 
         // Call the specified method
-        Class<?> paramTypes[] = new Class[] { String.class };
+        final Class<?> paramTypes[] = new Class[] { String.class };
         MethodUtils.invokeMethod( target, methodName, new Object[] { text }, paramTypes );
     }
 

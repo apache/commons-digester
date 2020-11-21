@@ -67,7 +67,7 @@ public abstract class AbstractMethodRule
      * 
      * @param methodName Method name of the parent method to call
      */
-    public AbstractMethodRule( String methodName )
+    public AbstractMethodRule( final String methodName )
     {
         this( methodName, (String) null );
     }
@@ -80,7 +80,7 @@ public abstract class AbstractMethodRule
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public AbstractMethodRule( String methodName, Class<?> paramType )
+    public AbstractMethodRule( final String methodName, final Class<?> paramType )
     {
         this( methodName, paramType.getName() );
         this.paramType = paramType;
@@ -94,7 +94,7 @@ public abstract class AbstractMethodRule
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
      *            <code>boolean</code> parameter)
      */
-    public AbstractMethodRule( String methodName, String paramTypeName )
+    public AbstractMethodRule( final String methodName, final String paramTypeName )
     {
         this.methodName = methodName;
         this.paramTypeName = paramTypeName;
@@ -134,7 +134,7 @@ public abstract class AbstractMethodRule
      * @param fireOnBegin flag to mark this rule be invoked when {@link #begin(String, String, Attributes)} (true)
      *                    or {@link #end(String, String)} (false) methods are invoked, false by default.
      */
-    public void setFireOnBegin( boolean fireOnBegin )
+    public void setFireOnBegin( final boolean fireOnBegin )
     {
         this.fireOnBegin = fireOnBegin;
     }
@@ -162,7 +162,7 @@ public abstract class AbstractMethodRule
      * @param useExactMatch should this rule use exact method matching
      * @since Digester Release 1.1.1
      */
-    public void setExactMatch( boolean useExactMatch )
+    public void setExactMatch( final boolean useExactMatch )
     {
         this.useExactMatch = useExactMatch;
     }
@@ -171,7 +171,7 @@ public abstract class AbstractMethodRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         if ( fireOnBegin )
@@ -184,7 +184,7 @@ public abstract class AbstractMethodRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         if ( !fireOnBegin )
@@ -202,8 +202,8 @@ public abstract class AbstractMethodRule
         throws Exception
     {
         // Identify the objects to be used
-        Object child = getChild();
-        Object parent = getParent();
+        final Object child = getChild();
+        final Object parent = getParent();
         if ( getDigester().getLogger().isDebugEnabled() )
         {
             if ( parent == null )
@@ -226,7 +226,7 @@ public abstract class AbstractMethodRule
         }
 
         // Call the specified method
-        Class<?> paramTypes[] = new Class<?>[1];
+        final Class<?> paramTypes[] = new Class<?>[1];
         if ( paramType != null )
         {
             paramTypes[0] = getDigester().getClassLoader().loadClass( paramTypeName );

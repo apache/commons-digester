@@ -32,8 +32,8 @@ public final class ByRuleBuilder<R extends Rule>
 
     private final R rule;
 
-    ByRuleBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
-                   R rule )
+    ByRuleBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder,
+                   final R rule )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.rule = rule;

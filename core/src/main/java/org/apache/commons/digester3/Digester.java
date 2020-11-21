@@ -112,7 +112,7 @@ public class Digester
      *
      * @param parser The SAXParser used to parse XML streams
      */
-    public Digester( SAXParser parser )
+    public Digester( final SAXParser parser )
     {
         this.parser = parser;
     }
@@ -124,7 +124,7 @@ public class Digester
      *
      * @param reader The XMLReader used to parse XML streams
      */
-    public Digester( XMLReader reader )
+    public Digester( final XMLReader reader )
     {
         this.reader = reader;
     }
@@ -320,9 +320,9 @@ public class Digester
      * @param prefix Prefix to look up
      * @return the currently mapped namespace URI for the specified prefix
      */
-    public String findNamespaceURI( String prefix )
+    public String findNamespaceURI( final String prefix )
     {
-        Stack<String> nsStack = namespaces.get( prefix );
+        final Stack<String> nsStack = namespaces.get( prefix );
         if ( nsStack == null )
         {
             return null;
@@ -331,7 +331,7 @@ public class Digester
         {
             return ( nsStack.peek() );
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             return null;
         }
@@ -357,7 +357,7 @@ public class Digester
         }
         if ( this.useContextClassLoader )
         {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             if ( classLoader != null )
             {
                 return ( classLoader );
@@ -371,7 +371,7 @@ public class Digester
      *
      * @param classLoader The new class loader to use, or <code>null</code> to revert to the standard rules
      */
-    public void setClassLoader( ClassLoader classLoader )
+    public void setClassLoader( final ClassLoader classLoader )
     {
         this.classLoader = classLoader;
     }
@@ -394,7 +394,7 @@ public class Digester
     public String getCurrentElementName()
     {
         String elementName = match;
-        int lastSlash = elementName.lastIndexOf( '/' );
+        final int lastSlash = elementName.lastIndexOf( '/' );
         if ( lastSlash >= 0 )
         {
             elementName = elementName.substring( lastSlash + 1 );
@@ -417,7 +417,7 @@ public class Digester
      *
      * @param errorHandler The new error handler
      */
-    public void setErrorHandler( ErrorHandler errorHandler )
+    public void setErrorHandler( final ErrorHandler errorHandler )
     {
         this.errorHandler = errorHandler;
     }
@@ -452,7 +452,7 @@ public class Digester
      * @throws SAXNotRecognizedException if the property name is not recognized
      * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
-    public boolean getFeature( String feature )
+    public boolean getFeature( final String feature )
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException
     {
         return ( getFactory().getFeature( feature ) );
@@ -471,7 +471,7 @@ public class Digester
      * @throws SAXNotRecognizedException if the property name is not recognized
      * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
-    public void setFeature( String feature, boolean value )
+    public void setFeature( final String feature, final boolean value )
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException
     {
         getFactory().setFeature( feature, value );
@@ -492,7 +492,7 @@ public class Digester
      *
      * @param log the current logger for this Digester.
      */
-    public void setLogger( Log log )
+    public void setLogger( final Log log )
     {
         this.log = log;
     }
@@ -514,7 +514,7 @@ public class Digester
      * @param saxLog the logger used for logging SAX-related information, not null
      * @since 1.6
      */
-    public void setSAXLogger( Log saxLog )
+    public void setSAXLogger( final Log saxLog )
     {
         this.saxLog = saxLog;
     }
@@ -557,7 +557,7 @@ public class Digester
      *
      * @param namespaceAware The new "namespace aware" flag
      */
-    public void setNamespaceAware( boolean namespaceAware )
+    public void setNamespaceAware( final boolean namespaceAware )
     {
         this.namespaceAware = namespaceAware;
     }
@@ -582,7 +582,7 @@ public class Digester
      * @see #setNamespaceAware(boolean)
      * @since 2.0
      */
-    public void setXIncludeAware( boolean xincludeAware )
+    public void setXIncludeAware( final boolean xincludeAware )
     {
         this.xincludeAware = xincludeAware;
     }
@@ -592,7 +592,7 @@ public class Digester
      *
      * @param publicId the DTD/Schema public's id.
      */
-    public void setPublicId( String publicId )
+    public void setPublicId( final String publicId )
     {
         this.publicId = publicId;
     }
@@ -623,7 +623,7 @@ public class Digester
      * @param ruleNamespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
      *            matching regardless of the current namespace URI
      */
-    public void setRuleNamespaceURI( String ruleNamespaceURI )
+    public void setRuleNamespaceURI( final String ruleNamespaceURI )
     {
         getRules().setNamespaceURI( ruleNamespaceURI );
     }
@@ -648,7 +648,7 @@ public class Digester
         {
             parser = getFactory().newSAXParser();
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             log.error( "Digester.getParser: ", e );
             return ( null );
@@ -668,7 +668,7 @@ public class Digester
      * @throws SAXNotRecognizedException if the property name is not recognized
      * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
-    public Object getProperty( String property )
+    public Object getProperty( final String property )
         throws SAXNotRecognizedException, SAXNotSupportedException
     {
         return ( getParser().getProperty( property ) );
@@ -683,7 +683,7 @@ public class Digester
      * @throws SAXNotRecognizedException if the property name is not recognized
      * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
-    public void setProperty( String property, Object value )
+    public void setProperty( final String property, final Object value )
         throws SAXNotRecognizedException, SAXNotSupportedException
     {
         getParser().setProperty( property, value );
@@ -710,7 +710,7 @@ public class Digester
      *
      * @param rules New Rules implementation
      */
-    public void setRules( Rules rules )
+    public void setRules( final Rules rules )
     {
         this.rules = rules;
         this.rules.setDigester( this );
@@ -733,7 +733,7 @@ public class Digester
      * @param schema The {@link Schema} instance to use.
      * @since 2.0
      */
-    public void setXMLSchema( Schema schema )
+    public void setXMLSchema( final Schema schema )
     {
         this.schema = schema;
     }
@@ -755,7 +755,7 @@ public class Digester
      *
      * @param use determines whether to use Context ClassLoader.
      */
-    public void setUseContextClassLoader( boolean use )
+    public void setUseContextClassLoader( final boolean use )
     {
         useContextClassLoader = use;
     }
@@ -780,7 +780,7 @@ public class Digester
      * @param validating The new validating parser flag.
      * @see javax.xml.parsers.SAXParserFactory#setValidating(boolean) for more detail.
      */
-    public void setValidating( boolean validating )
+    public void setValidating( final boolean validating )
     {
         this.validating = validating;
     }
@@ -842,7 +842,7 @@ public class Digester
      * @param substitutor the Substitutor to be used to convert attributes and body text or null if not substitution of
      *            these values is to be performed.
      */
-    public void setSubstitutor( Substitutor substitutor )
+    public void setSubstitutor( final Substitutor substitutor )
     {
         this.substitutor = substitutor;
     }
@@ -890,7 +890,7 @@ public class Digester
      * @param handler the custom SAX ContentHandler where events are redirected.
      * @since 1.7
      */
-    public void setCustomContentHandler( ContentHandler handler )
+    public void setCustomContentHandler( final ContentHandler handler )
     {
         customContentHandler = handler;
     }
@@ -903,7 +903,7 @@ public class Digester
      *        object stack, or popped off one.
      * @since 1.8
      */
-    public void setStackAction( StackAction stackAction )
+    public void setStackAction( final StackAction stackAction )
     {
         this.stackAction = stackAction;
     }
@@ -935,14 +935,14 @@ public class Digester
         {
             log.warn( "Digester is not namespace aware" );
         }
-        Map<String, String> currentNamespaces = new HashMap<String, String>();
-        for ( Map.Entry<String, Stack<String>> nsEntry : namespaces.entrySet() )
+        final Map<String, String> currentNamespaces = new HashMap<String, String>();
+        for ( final Map.Entry<String, Stack<String>> nsEntry : namespaces.entrySet() )
         {
             try
             {
                 currentNamespaces.put( nsEntry.getKey(), nsEntry.getValue().peek() );
             }
-            catch ( RuntimeException e )
+            catch ( final RuntimeException e )
             {
                 // rethrow, after logging
                 log.error( e.getMessage(), e );
@@ -969,7 +969,7 @@ public class Digester
      * @param executorService the executor service to run asynchronous parse method
      * @since 3.1
      */
-    public void setExecutorService( ExecutorService executorService )
+    public void setExecutorService( final ExecutorService executorService )
     {
         this.executorService = executorService;
     }
@@ -980,7 +980,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void characters( char buffer[], int start, int length )
+    public void characters( final char buffer[], final int start, final int length )
         throws SAXException
     {
         if ( customContentHandler != null )
@@ -1018,18 +1018,18 @@ public class Digester
         }
 
         // Fire "finish" events for all defined rules
-        for ( Rule rule : getRules().rules() )
+        for ( final Rule rule : getRules().rules() )
         {
             try
             {
                 rule.finish();
             }
-            catch ( Exception e )
+            catch ( final Exception e )
             {
                 log.error( "Finish event threw exception", e );
                 throw createSAXException( e );
             }
-            catch ( Error e )
+            catch ( final Error e )
             {
                 log.error( "Finish event threw error", e );
                 throw e;
@@ -1044,7 +1044,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void endElement( String namespaceURI, String localName, String qName )
+    public void endElement( final String namespaceURI, final String localName, final String qName )
         throws SAXException
     {
         if ( customContentHandler != null )
@@ -1054,7 +1054,7 @@ public class Digester
             return;
         }
 
-        boolean debug = log.isDebugEnabled();
+        final boolean debug = log.isDebugEnabled();
 
         if ( debug )
         {
@@ -1075,16 +1075,16 @@ public class Digester
         }
 
         // Fire "body" events for all relevant rules
-        List<Rule> rules = matches.pop();
+        final List<Rule> rules = matches.pop();
         if ( ( rules != null ) && ( rules.size() > 0 ) )
         {
             String bodyText = this.bodyText.toString();
-            Substitutor substitutor = getSubstitutor();
+            final Substitutor substitutor = getSubstitutor();
             if ( substitutor != null )
             {
                 bodyText = substitutor.substitute( bodyText );
             }
-            for (Rule rule : rules) {
+            for (final Rule rule : rules) {
                 try
                 {
                     if ( debug )
@@ -1093,12 +1093,12 @@ public class Digester
                     }
                     rule.body( namespaceURI, name, bodyText );
                 }
-                catch ( Exception e )
+                catch ( final Exception e )
                 {
                     log.error( "Body event threw exception", e );
                     throw createSAXException( e );
                 }
-                catch ( Error e )
+                catch ( final Error e )
                 {
                     log.error( "Body event threw error", e );
                     throw e;
@@ -1125,22 +1125,22 @@ public class Digester
         {
             for ( int i = 0; i < rules.size(); i++ )
             {
-                int j = ( rules.size() - i ) - 1;
+                final int j = ( rules.size() - i ) - 1;
                 try
                 {
-                    Rule rule = rules.get( j );
+                    final Rule rule = rules.get( j );
                     if ( debug )
                     {
                         log.debug( "  Fire end() for " + rule );
                     }
                     rule.end( namespaceURI, name );
                 }
-                catch ( Exception e )
+                catch ( final Exception e )
                 {
                     log.error( "End event threw exception", e );
                     throw createSAXException( e );
                 }
-                catch ( Error e )
+                catch ( final Error e )
                 {
                     log.error( "End event threw error", e );
                     throw e;
@@ -1149,7 +1149,7 @@ public class Digester
         }
 
         // Recover the previous match expression
-        int slash = match.lastIndexOf( '/' );
+        final int slash = match.lastIndexOf( '/' );
         if ( slash >= 0 )
         {
             match = match.substring( 0, slash );
@@ -1164,7 +1164,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void endPrefixMapping( String prefix )
+    public void endPrefixMapping( final String prefix )
         throws SAXException
     {
         if ( saxLog.isDebugEnabled() )
@@ -1173,7 +1173,7 @@ public class Digester
         }
 
         // Deregister this prefix mapping
-        Stack<String> stack = namespaces.get( prefix );
+        final Stack<String> stack = namespaces.get( prefix );
         if ( stack == null )
         {
             return;
@@ -1186,7 +1186,7 @@ public class Digester
                 namespaces.remove( prefix );
             }
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             throw createSAXException( "endPrefixMapping popped too many times" );
         }
@@ -1196,7 +1196,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void ignorableWhitespace( char buffer[], int start, int len )
+    public void ignorableWhitespace( final char buffer[], final int start, final int len )
         throws SAXException
     {
         if ( saxLog.isDebugEnabled() )
@@ -1211,7 +1211,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void processingInstruction( String target, String data )
+    public void processingInstruction( final String target, final String data )
         throws SAXException
     {
         if ( customContentHandler != null )
@@ -1243,7 +1243,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void setDocumentLocator( Locator locator )
+    public void setDocumentLocator( final Locator locator )
     {
         if ( saxLog.isDebugEnabled() )
         {
@@ -1257,7 +1257,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void skippedEntity( String name )
+    public void skippedEntity( final String name )
         throws SAXException
     {
         if ( saxLog.isDebugEnabled() )
@@ -1290,10 +1290,10 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void startElement( String namespaceURI, String localName, String qName, Attributes list )
+    public void startElement( final String namespaceURI, final String localName, final String qName, Attributes list )
         throws SAXException
     {
-        boolean debug = log.isDebugEnabled();
+        final boolean debug = log.isDebugEnabled();
 
         if ( customContentHandler != null )
         {
@@ -1324,7 +1324,7 @@ public class Digester
         }
 
         // Compute the current matching rule
-        StringBuilder sb = new StringBuilder( match );
+        final StringBuilder sb = new StringBuilder( match );
         if ( match.length() > 0 )
         {
             sb.append( '/' );
@@ -1337,16 +1337,16 @@ public class Digester
         }
 
         // Fire "begin" events for all relevant rules
-        List<Rule> rules = getRules().match( namespaceURI, match, localName, list );
+        final List<Rule> rules = getRules().match( namespaceURI, match, localName, list );
         matches.push( rules );
         if ( ( rules != null ) && ( rules.size() > 0 ) )
         {
-            Substitutor substitutor = getSubstitutor();
+            final Substitutor substitutor = getSubstitutor();
             if ( substitutor != null )
             {
                 list = substitutor.substitute( list );
             }
-            for (Rule rule : rules) {
+            for (final Rule rule : rules) {
                 try
                 {
                     if ( debug )
@@ -1355,12 +1355,12 @@ public class Digester
                     }
                     rule.begin( namespaceURI, name, list );
                 }
-                catch ( Exception e )
+                catch ( final Exception e )
                 {
                     log.error( "Begin event threw exception", e );
                     throw createSAXException( e );
                 }
-                catch ( Error e )
+                catch ( final Error e )
                 {
                     log.error( "Begin event threw error", e );
                     throw e;
@@ -1380,7 +1380,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void startPrefixMapping( String prefix, String namespaceURI )
+    public void startPrefixMapping( final String prefix, final String namespaceURI )
         throws SAXException
     {
         if ( saxLog.isDebugEnabled() )
@@ -1404,7 +1404,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void notationDecl( String name, String publicId, String systemId )
+    public void notationDecl( final String name, final String publicId, final String systemId )
     {
         if ( saxLog.isDebugEnabled() )
         {
@@ -1416,7 +1416,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void unparsedEntityDecl( String name, String publicId, String systemId, String notation )
+    public void unparsedEntityDecl( final String name, final String publicId, final String systemId, final String notation )
     {
         if ( saxLog.isDebugEnabled() )
         {
@@ -1432,7 +1432,7 @@ public class Digester
      *
      * @param entityResolver a class that implement the <code>EntityResolver</code> interface.
      */
-    public void setEntityResolver( EntityResolver entityResolver )
+    public void setEntityResolver( final EntityResolver entityResolver )
     {
         this.entityResolver = entityResolver;
     }
@@ -1451,7 +1451,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public InputSource resolveEntity( String publicId, String systemId )
+    public InputSource resolveEntity( final String publicId, final String systemId )
         throws SAXException
     {
         if ( saxLog.isDebugEnabled() )
@@ -1498,7 +1498,7 @@ public class Digester
             {
                 entityURL = new URL( systemId );
             }
-            catch ( MalformedURLException e )
+            catch ( final MalformedURLException e )
             {
                 throw new IllegalArgumentException( "Malformed URL '" + systemId + "' : " + e.getMessage() );
             }
@@ -1514,7 +1514,7 @@ public class Digester
         {
             return createInputSourceFromURL( entityURL );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw createSAXException( e );
         }
@@ -1526,7 +1526,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void error( SAXParseException exception )
+    public void error( final SAXParseException exception )
         throws SAXException
     {
     	log.error( "Parse Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
@@ -1537,7 +1537,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void fatalError( SAXParseException exception )
+    public void fatalError( final SAXParseException exception )
         throws SAXException
     {
         log.error( "Parse Fatal Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber()
@@ -1548,7 +1548,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void warning( SAXParseException exception )
+    public void warning( final SAXParseException exception )
         throws SAXException
     {
         log.warn( "Parse Warning Error at line " + exception.getLineNumber() + " column "
@@ -1567,7 +1567,7 @@ public class Digester
      * @throws IOException if an input/output error occurs
      * @throws SAXException if a parsing exception occurs
      */
-    public <T> T parse( File file )
+    public <T> T parse( final File file )
         throws IOException, SAXException
     {
         if ( file == null )
@@ -1575,7 +1575,7 @@ public class Digester
             throw new IllegalArgumentException( "File to parse is null" );
         }
 
-        InputSource input = new InputSource( new FileInputStream( file ) );
+        final InputSource input = new InputSource( new FileInputStream( file ) );
         input.setSystemId( file.toURI().toURL().toString() );
 
         return ( this.<T> parse( input ) );
@@ -1614,7 +1614,7 @@ public class Digester
      * @throws IOException if an input/output error occurs
      * @throws SAXException if a parsing exception occurs
      */
-    public <T> T parse( InputSource input )
+    public <T> T parse( final InputSource input )
         throws IOException, SAXException
     {
         if ( input == null )
@@ -1634,7 +1634,7 @@ public class Digester
         {
             getXMLReader().parse( input );
         }
-        catch ( IOException e )
+        catch ( final IOException e )
         {
             log.error( format( "An error occurred while reading stream from '%s', see nested exceptions", systemId ),
                        e );
@@ -1677,7 +1677,7 @@ public class Digester
      * @throws IOException if an input/output error occurs
      * @throws SAXException if a parsing exception occurs
      */
-    public <T> T parse( InputStream input )
+    public <T> T parse( final InputStream input )
         throws IOException, SAXException
     {
         if ( input == null )
@@ -1721,7 +1721,7 @@ public class Digester
      * @throws IOException if an input/output error occurs
      * @throws SAXException if a parsing exception occurs
      */
-    public <T> T parse( Reader reader )
+    public <T> T parse( final Reader reader )
         throws IOException, SAXException
     {
         if ( reader == null )
@@ -1765,7 +1765,7 @@ public class Digester
      * @throws IOException if an input/output error occurs
      * @throws SAXException if a parsing exception occurs
      */
-    public <T> T parse( String uri )
+    public <T> T parse( final String uri )
         throws IOException, SAXException
     {
         if ( uri == null )
@@ -1810,7 +1810,7 @@ public class Digester
      * @throws SAXException if a parsing exception occurs
      * @since 1.8
      */
-    public <T> T parse( URL url )
+    public <T> T parse( final URL url )
         throws IOException, SAXException
     {
         if ( url == null )
@@ -1852,7 +1852,7 @@ public class Digester
      * @return a Future that can be used to track when the parse has been fully processed.
      * @since 3.1
      */
-    private <T> Future<T> asyncParse( Callable<T> callable )
+    private <T> Future<T> asyncParse( final Callable<T> callable )
     {
         if ( executorService == null )
         {
@@ -1884,7 +1884,7 @@ public class Digester
      * @param entityURL The URL to use for reading this DTD
      * @since 1.8
      */
-    public void register( String publicId, URL entityURL )
+    public void register( final String publicId, final URL entityURL )
     {
         if ( log.isDebugEnabled() )
         {
@@ -1901,7 +1901,7 @@ public class Digester
      * @param publicId Public identifier of the entity to be resolved
      * @param entityURL The URL to use for reading this entity
      */
-    public void register( String publicId, String entityURL )
+    public void register( final String publicId, final String entityURL )
     {
         if ( log.isDebugEnabled() )
         {
@@ -1911,7 +1911,7 @@ public class Digester
         {
             entityValidator.put( publicId, new URL( entityURL ) );
         }
-        catch ( MalformedURLException e )
+        catch ( final MalformedURLException e )
         {
             throw new IllegalArgumentException( "Malformed URL '" + entityURL + "' : " + e.getMessage() );
         }
@@ -1924,7 +1924,7 @@ public class Digester
      *                        identifier that corresponds.
      * @since 3.0
      */
-    public void registerAll( Map<String, URL> entityValidator )
+    public void registerAll( final Map<String, URL> entityValidator )
     {
         this.entityValidator.putAll( entityValidator );
     }
@@ -1971,13 +1971,13 @@ public class Digester
      * @throws IOException if any error occurs while reading the input URL
      * @since 1.8
      */
-    public InputSource createInputSourceFromURL( URL url )
+    public InputSource createInputSourceFromURL( final URL url )
         throws IOException
     {
-        URLConnection connection = url.openConnection();
+        final URLConnection connection = url.openConnection();
         connection.setUseCaches( false );
-        InputStream stream = connection.getInputStream();
-        InputSource source = new InputSource( stream );
+        final InputStream stream = connection.getInputStream();
+        final InputSource source = new InputSource( stream );
         source.setSystemId( url.toExternalForm() );
         inputSources.add( source );
         return source;
@@ -1993,7 +1993,7 @@ public class Digester
      * @throws IOException if any error occurs while reading the input URL
      * @since 1.8
      */
-    public InputSource createInputSourceFromURL( String url )
+    public InputSource createInputSourceFromURL( final String url )
         throws IOException
     {
         return createInputSourceFromURL( new URL( url ) );
@@ -2010,7 +2010,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @param rule Rule to be registered
      */
-    public void addRule( String pattern, Rule rule )
+    public void addRule( final String pattern, final Rule rule )
     {
         rule.setDigester( this );
         getRules().add( pattern, rule );
@@ -2021,10 +2021,10 @@ public class Digester
      *
      * @param ruleSet The RuleSet instance to configure from
      */
-    public void addRuleSet( RuleSet ruleSet )
+    public void addRuleSet( final RuleSet ruleSet )
     {
-        String oldNamespaceURI = getRuleNamespaceURI();
-        String newNamespaceURI = ruleSet.getNamespaceURI();
+        final String oldNamespaceURI = getRuleNamespaceURI();
+        final String newNamespaceURI = ruleSet.getNamespaceURI();
         if ( log.isDebugEnabled() )
         {
             if ( newNamespaceURI == null )
@@ -2047,7 +2047,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @see BeanPropertySetterRule
      */
-    public void addBeanPropertySetter( String pattern )
+    public void addBeanPropertySetter( final String pattern )
     {
         addRule( pattern, new BeanPropertySetterRule() );
     }
@@ -2059,7 +2059,7 @@ public class Digester
      * @param propertyName Name of property to set
      * @see BeanPropertySetterRule
      */
-    public void addBeanPropertySetter( String pattern, String propertyName )
+    public void addBeanPropertySetter( final String pattern, final String propertyName )
     {
         addRule( pattern, new BeanPropertySetterRule( propertyName ) );
     }
@@ -2071,7 +2071,7 @@ public class Digester
      * @param methodName Method name to be called
      * @see CallMethodRule
      */
-    public void addCallMethod( String pattern, String methodName )
+    public void addCallMethod( final String pattern, final String methodName )
     {
         addRule( pattern, new CallMethodRule( methodName ) );
     }
@@ -2084,7 +2084,7 @@ public class Digester
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @see CallMethodRule
      */
-    public void addCallMethod( String pattern, String methodName, int paramCount )
+    public void addCallMethod( final String pattern, final String methodName, final int paramCount )
     {
         addRule( pattern, new CallMethodRule( methodName, paramCount ) );
     }
@@ -2102,7 +2102,7 @@ public class Digester
      *            <code>java.lang.Boolean</code> for a <code>boolean</code> parameter)
      * @see CallMethodRule
      */
-    public void addCallMethod( String pattern, String methodName, int paramCount, String paramTypes[] )
+    public void addCallMethod( final String pattern, final String methodName, final int paramCount, final String paramTypes[] )
     {
         addRule( pattern, new CallMethodRule( methodName, paramCount, paramTypes ) );
     }
@@ -2120,7 +2120,7 @@ public class Digester
      *            <code>boolean</code> parameter)
      * @see CallMethodRule
      */
-    public void addCallMethod( String pattern, String methodName, int paramCount, Class<?> paramTypes[] )
+    public void addCallMethod( final String pattern, final String methodName, final int paramCount, final Class<?> paramTypes[] )
     {
         addRule( pattern, new CallMethodRule( methodName, paramCount, paramTypes ) );
     }
@@ -2132,7 +2132,7 @@ public class Digester
      * @param paramIndex Zero-relative parameter index to set (from the body of this element)
      * @see CallParamRule
      */
-    public void addCallParam( String pattern, int paramIndex )
+    public void addCallParam( final String pattern, final int paramIndex )
     {
         addRule( pattern, new CallParamRule( paramIndex ) );
     }
@@ -2145,7 +2145,7 @@ public class Digester
      * @param attributeName Attribute whose value is used as the parameter value
      * @see CallParamRule
      */
-    public void addCallParam( String pattern, int paramIndex, String attributeName )
+    public void addCallParam( final String pattern, final int paramIndex, final String attributeName )
     {
         addRule( pattern, new CallParamRule( paramIndex, attributeName ) );
     }
@@ -2159,7 +2159,7 @@ public class Digester
      * @param fromStack Should the call parameter be taken from the top of the stack?
      * @see CallParamRule
      */
-    public void addCallParam( String pattern, int paramIndex, boolean fromStack )
+    public void addCallParam( final String pattern, final int paramIndex, final boolean fromStack )
     {
         addRule( pattern, new CallParamRule( paramIndex, fromStack ) );
     }
@@ -2174,7 +2174,7 @@ public class Digester
      *            stack, 1 the next element down and so on
      * @see CallMethodRule
      */
-    public void addCallParam( String pattern, int paramIndex, int stackIndex )
+    public void addCallParam( final String pattern, final int paramIndex, final int stackIndex )
     {
         addRule( pattern, new CallParamRule( paramIndex, stackIndex ) );
     }
@@ -2187,7 +2187,7 @@ public class Digester
      * @param paramIndex The zero-relative parameter number
      * @see CallMethodRule
      */
-    public void addCallParamPath( String pattern, int paramIndex )
+    public void addCallParamPath( final String pattern, final int paramIndex )
     {
         addRule( pattern, new PathCallParamRule( paramIndex ) );
     }
@@ -2207,7 +2207,7 @@ public class Digester
      * @see CallMethodRule
      * @since 1.6
      */
-    public void addObjectParam( String pattern, int paramIndex, Object paramObj )
+    public void addObjectParam( final String pattern, final int paramIndex, final Object paramObj )
     {
         addRule( pattern, new ObjectParamRule( paramIndex, paramObj ) );
     }
@@ -2220,7 +2220,7 @@ public class Digester
      * @param className Java class name of the object creation factory class
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, String className )
+    public void addFactoryCreate( final String pattern, final String className )
     {
         addFactoryCreate( pattern, className, false );
     }
@@ -2233,7 +2233,7 @@ public class Digester
      * @param clazz Java class of the object creation factory class
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, Class<? extends ObjectCreationFactory<?>> clazz )
+    public void addFactoryCreate( final String pattern, final Class<? extends ObjectCreationFactory<?>> clazz )
     {
         addFactoryCreate( pattern, clazz, false );
     }
@@ -2247,7 +2247,7 @@ public class Digester
      * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, String className, String attributeName )
+    public void addFactoryCreate( final String pattern, final String className, final String attributeName )
     {
         addFactoryCreate( pattern, className, attributeName, false );
     }
@@ -2261,8 +2261,8 @@ public class Digester
      * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, Class<? extends ObjectCreationFactory<?>> clazz,
-                                  String attributeName )
+    public void addFactoryCreate( final String pattern, final Class<? extends ObjectCreationFactory<?>> clazz,
+                                  final String attributeName )
     {
         addFactoryCreate( pattern, clazz, attributeName, false );
     }
@@ -2275,7 +2275,7 @@ public class Digester
      * @param creationFactory Previously instantiated ObjectCreationFactory to be utilized
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, ObjectCreationFactory<?> creationFactory )
+    public void addFactoryCreate( final String pattern, final ObjectCreationFactory<?> creationFactory )
     {
         addFactoryCreate( pattern, creationFactory, false );
     }
@@ -2289,7 +2289,7 @@ public class Digester
      *            ignored.
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, String className, boolean ignoreCreateExceptions )
+    public void addFactoryCreate( final String pattern, final String className, final boolean ignoreCreateExceptions )
     {
         addRule( pattern, new FactoryCreateRule( className, ignoreCreateExceptions ) );
     }
@@ -2303,8 +2303,8 @@ public class Digester
      *            ignored.
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, Class<? extends ObjectCreationFactory<?>> clazz,
-                                  boolean ignoreCreateExceptions )
+    public void addFactoryCreate( final String pattern, final Class<? extends ObjectCreationFactory<?>> clazz,
+                                  final boolean ignoreCreateExceptions )
     {
         addRule( pattern, new FactoryCreateRule( clazz, ignoreCreateExceptions ) );
     }
@@ -2319,8 +2319,8 @@ public class Digester
      *            ignored.
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, String className, String attributeName,
-                                  boolean ignoreCreateExceptions )
+    public void addFactoryCreate( final String pattern, final String className, final String attributeName,
+                                  final boolean ignoreCreateExceptions )
     {
         addRule( pattern, new FactoryCreateRule( className, attributeName, ignoreCreateExceptions ) );
     }
@@ -2335,8 +2335,8 @@ public class Digester
      *            ignored.
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, Class<? extends ObjectCreationFactory<?>> clazz,
-                                  String attributeName, boolean ignoreCreateExceptions )
+    public void addFactoryCreate( final String pattern, final Class<? extends ObjectCreationFactory<?>> clazz,
+                                  final String attributeName, final boolean ignoreCreateExceptions )
     {
         addRule( pattern, new FactoryCreateRule( clazz, attributeName, ignoreCreateExceptions ) );
     }
@@ -2350,8 +2350,8 @@ public class Digester
      *            ignored.
      * @see FactoryCreateRule
      */
-    public void addFactoryCreate( String pattern, ObjectCreationFactory<?> creationFactory,
-                                  boolean ignoreCreateExceptions )
+    public void addFactoryCreate( final String pattern, final ObjectCreationFactory<?> creationFactory,
+                                  final boolean ignoreCreateExceptions )
     {
         creationFactory.setDigester( this );
         addRule( pattern, new FactoryCreateRule( creationFactory, ignoreCreateExceptions ) );
@@ -2364,7 +2364,7 @@ public class Digester
      * @param className Java class name to be created
      * @see ObjectCreateRule
      */
-    public void addObjectCreate( String pattern, String className )
+    public void addObjectCreate( final String pattern, final String className )
     {
         addRule( pattern, new ObjectCreateRule( className ) );
     }
@@ -2376,7 +2376,7 @@ public class Digester
      * @param clazz Java class to be created
      * @see ObjectCreateRule
      */
-    public void addObjectCreate( String pattern, Class<?> clazz )
+    public void addObjectCreate( final String pattern, final Class<?> clazz )
     {
         addRule( pattern, new ObjectCreateRule( clazz ) );
     }
@@ -2389,7 +2389,7 @@ public class Digester
      * @param attributeName Attribute name that optionally overrides the default Java class name to be created
      * @see ObjectCreateRule
      */
-    public void addObjectCreate( String pattern, String className, String attributeName )
+    public void addObjectCreate( final String pattern, final String className, final String attributeName )
     {
         addRule( pattern, new ObjectCreateRule( className, attributeName ) );
     }
@@ -2402,7 +2402,7 @@ public class Digester
      * @param clazz Default Java class to be created the default Java class name to be created
      * @see ObjectCreateRule
      */
-    public void addObjectCreate( String pattern, String attributeName, Class<?> clazz )
+    public void addObjectCreate( final String pattern, final String attributeName, final Class<?> clazz )
     {
         addRule( pattern, new ObjectCreateRule( attributeName, clazz ) );
     }
@@ -2413,7 +2413,7 @@ public class Digester
      * @param pattern register the rule with this pattern
      * @since 1.6
      */
-    public void addSetNestedProperties( String pattern )
+    public void addSetNestedProperties( final String pattern )
     {
         addRule( pattern, new SetNestedPropertiesRule() );
     }
@@ -2426,7 +2426,7 @@ public class Digester
      * @param propertyName property name of the element mapped from
      * @since 1.6
      */
-    public void addSetNestedProperties( String pattern, String elementName, String propertyName )
+    public void addSetNestedProperties( final String pattern, final String elementName, final String propertyName )
     {
         addRule( pattern, new SetNestedPropertiesRule( elementName, propertyName ) );
     }
@@ -2439,7 +2439,7 @@ public class Digester
      * @param propertyNames property names that (in order) elements are mapped to
      * @since 1.6
      */
-    public void addSetNestedProperties( String pattern, String[] elementNames, String[] propertyNames )
+    public void addSetNestedProperties( final String pattern, final String[] elementNames, final String[] propertyNames )
     {
         addRule( pattern, new SetNestedPropertiesRule( elementNames, propertyNames ) );
     }
@@ -2451,7 +2451,7 @@ public class Digester
      * @param methodName Method name to call on the parent element
      * @see SetNextRule
      */
-    public void addSetNext( String pattern, String methodName )
+    public void addSetNext( final String pattern, final String methodName )
     {
         addRule( pattern, new SetNextRule( methodName ) );
     }
@@ -2466,7 +2466,7 @@ public class Digester
      *            <code>boolean</code> parameter)
      * @see SetNextRule
      */
-    public void addSetNext( String pattern, String methodName, String paramType )
+    public void addSetNext( final String pattern, final String methodName, final String paramType )
     {
         addRule( pattern, new SetNextRule( methodName, paramType ) );
     }
@@ -2478,7 +2478,7 @@ public class Digester
      * @param methodName Method name to call on the root object
      * @see SetRootRule
      */
-    public void addSetRoot( String pattern, String methodName )
+    public void addSetRoot( final String pattern, final String methodName )
     {
         addRule( pattern, new SetRootRule( methodName ) );
     }
@@ -2491,7 +2491,7 @@ public class Digester
      * @param paramType Java class name of the expected parameter type
      * @see SetRootRule
      */
-    public void addSetRoot( String pattern, String methodName, String paramType )
+    public void addSetRoot( final String pattern, final String methodName, final String paramType )
     {
         addRule( pattern, new SetRootRule( methodName, paramType ) );
     }
@@ -2502,7 +2502,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @see SetPropertiesRule
      */
-    public void addSetProperties( String pattern )
+    public void addSetProperties( final String pattern )
     {
         addRule( pattern, new SetPropertiesRule() );
     }
@@ -2516,7 +2516,7 @@ public class Digester
      * @param propertyName to this property
      * @see SetPropertiesRule
      */
-    public void addSetProperties( String pattern, String attributeName, String propertyName )
+    public void addSetProperties( final String pattern, final String attributeName, final String propertyName )
     {
         addRule( pattern, new SetPropertiesRule( attributeName, propertyName ) );
     }
@@ -2530,7 +2530,7 @@ public class Digester
      * @param propertyNames property names these attributes map to
      * @see SetPropertiesRule
      */
-    public void addSetProperties( String pattern, String[] attributeNames, String[] propertyNames )
+    public void addSetProperties( final String pattern, final String[] attributeNames, final String[] propertyNames )
     {
         addRule( pattern, new SetPropertiesRule( attributeNames, propertyNames ) );
     }
@@ -2543,7 +2543,7 @@ public class Digester
      * @param value Attribute name containing the property value to set
      * @see SetPropertyRule
      */
-    public void addSetProperty( String pattern, String name, String value )
+    public void addSetProperty( final String pattern, final String name, final String value )
     {
         addRule( pattern, new SetPropertyRule( name, value ) );
     }
@@ -2555,7 +2555,7 @@ public class Digester
      * @param methodName Method name to call on the parent element
      * @see SetTopRule
      */
-    public void addSetTop( String pattern, String methodName )
+    public void addSetTop( final String pattern, final String methodName )
     {
         addRule( pattern, new SetTopRule( methodName ) );
     }
@@ -2570,7 +2570,7 @@ public class Digester
      *            <code>boolean</code> parameter)
      * @see SetTopRule
      */
-    public void addSetTop( String pattern, String methodName, String paramType )
+    public void addSetTop( final String pattern, final String methodName, final String paramType )
     {
         addRule( pattern, new SetTopRule( methodName, paramType ) );
     }
@@ -2614,7 +2614,7 @@ public class Digester
         {
             return this.<T> npeSafeCast( stack.peek() );
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
             return ( null );
@@ -2629,9 +2629,9 @@ public class Digester
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
      * @return the n'th object down the stack
      */
-    public <T> T peek( int n )
+    public <T> T peek( final int n )
     {
-        int index = ( stack.size() - 1 ) - n;
+        final int index = ( stack.size() - 1 ) - n;
         if ( index < 0 )
         {
             log.warn( "Empty stack (returning null)" );
@@ -2641,7 +2641,7 @@ public class Digester
         {
             return this.<T> npeSafeCast( stack.get( index ) );
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
             return ( null );
@@ -2666,7 +2666,7 @@ public class Digester
             }
             return popped;
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
             return ( null );
@@ -2702,7 +2702,7 @@ public class Digester
      * @param value the Object to be pushed onto the named stack.
      * @since 1.6
      */
-    public <T> void push( String stackName, T value )
+    public <T> void push( final String stackName, T value )
     {
         if ( stackAction != null )
         {
@@ -2732,9 +2732,9 @@ public class Digester
      *         if the stack is either empty or has not been created yet
      * @since 1.6
      */
-    public <T> T pop( String stackName )
+    public <T> T pop( final String stackName )
     {
-        Stack<Object> namedStack = stacksByName.get( stackName );
+        final Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack == null )
         {
             if ( log.isDebugEnabled() )
@@ -2767,7 +2767,7 @@ public class Digester
      * @return the top <code>Object</code> on the stack or null if the stack is either empty or has not been created yet
      * @since 1.6
      */
-    public <T> T peek( String stackName )
+    public <T> T peek( final String stackName )
     {
         return this.<T> npeSafeCast( peek( stackName, 0 ) );
     }
@@ -2786,10 +2786,10 @@ public class Digester
      * @return the specified <code>Object</code> on the stack.
      * @since 1.6
      */
-    public <T> T peek( String stackName, int n )
+    public <T> T peek( final String stackName, final int n )
     {
         T result;
-        Stack<Object> namedStack = stacksByName.get( stackName );
+        final Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack == null )
         {
             if ( log.isDebugEnabled() )
@@ -2799,7 +2799,7 @@ public class Digester
             throw new EmptyStackException();
         }
 
-        int index = ( namedStack.size() - 1 ) - n;
+        final int index = ( namedStack.size() - 1 ) - n;
         if ( index < 0 )
         {
             throw new EmptyStackException();
@@ -2821,10 +2821,10 @@ public class Digester
      * @return true if the given stack if empty
      * @since 1.6
      */
-    public boolean isEmpty( String stackName )
+    public boolean isEmpty( final String stackName )
     {
         boolean result = true;
-        Stack<Object> namedStack = stacksByName.get( stackName );
+        final Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack != null )
         {
             result = namedStack.isEmpty();
@@ -2888,13 +2888,13 @@ public class Digester
     {
         // If we created any InputSource objects in this instance,
         // they each have an input stream that should be closed
-        for ( InputSource source : inputSources )
+        for ( final InputSource source : inputSources )
         {
             try
             {
                 source.getByteStream().close();
             }
-            catch ( IOException e )
+            catch ( final IOException e )
             {
                 // Fall through so we get them all
                 if ( log.isWarnEnabled() )
@@ -2993,7 +2993,7 @@ public class Digester
         {
             return ( params.peek() );
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
             return ( null );
@@ -3012,9 +3012,9 @@ public class Digester
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
      * @return the n'th object down the parameters stack
      */
-    public Object[] peekParams( int n )
+    public Object[] peekParams( final int n )
     {
-        int index = ( params.size() - 1 ) - n;
+        final int index = ( params.size() - 1 ) - n;
         if ( index < 0 )
         {
             log.warn( "Empty stack (returning null)" );
@@ -3024,7 +3024,7 @@ public class Digester
         {
             return ( params.get( index ) );
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
             return ( null );
@@ -3052,7 +3052,7 @@ public class Digester
             }
             return ( params.pop() );
         }
-        catch ( EmptyStackException e )
+        catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
             return ( null );
@@ -3069,7 +3069,7 @@ public class Digester
      *
      * @param object The new object
      */
-    public void pushParams( Object... object )
+    public void pushParams( final Object... object )
     {
         if ( log.isTraceEnabled() )
         {
@@ -3085,11 +3085,11 @@ public class Digester
      * @param e the exception cause
      * @return the new SAX exception
      */
-    public SAXException createSAXException( String message, Exception e )
+    public SAXException createSAXException( final String message, Exception e )
     {
         if ( ( e != null ) && ( e instanceof InvocationTargetException ) )
         {
-            Throwable t = ( (InvocationTargetException) e ).getTargetException();
+            final Throwable t = ( (InvocationTargetException) e ).getTargetException();
             if ( ( t != null ) && ( t instanceof Exception ) )
             {
                 e = (Exception) t;
@@ -3097,7 +3097,7 @@ public class Digester
         }
         if ( locator != null )
         {
-            String error =
+            final String error =
                 "Error at line " + locator.getLineNumber() + " char " + locator.getColumnNumber() + ": " + message;
             if ( e != null )
             {
@@ -3123,7 +3123,7 @@ public class Digester
     {
         if ( e instanceof InvocationTargetException )
         {
-            Throwable t = ( (InvocationTargetException) e ).getTargetException();
+            final Throwable t = ( (InvocationTargetException) e ).getTargetException();
             if ( ( t != null ) && ( t instanceof Exception ) )
             {
                 e = (Exception) t;
@@ -3138,7 +3138,7 @@ public class Digester
      * @param message the custom SAX exception message
      * @return the new SAX exception
      */
-    public SAXException createSAXException( String message )
+    public SAXException createSAXException( final String message )
     {
         return createSAXException( message, null );
     }
@@ -3151,7 +3151,7 @@ public class Digester
      * @param obj the object has to be cast.
      * @return the casted object, if input object is not null, null otherwise.
      */
-    private <T> T npeSafeCast( Object obj )
+    private <T> T npeSafeCast( final Object obj )
     {
         if ( obj == null )
         {
@@ -3159,6 +3159,7 @@ public class Digester
         }
 
         @SuppressWarnings( "unchecked" )
+        final
         T result = (T) obj;
         return result;
     }

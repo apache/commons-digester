@@ -36,7 +36,7 @@ public final class PathCallParamHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( PathCallParam annotation, MethodArgument element, RulesBinder rulesBinder )
+    public void handle( final PathCallParam annotation, final MethodArgument element, final RulesBinder rulesBinder )
     {
         rulesBinder
             .forPattern( annotation.pattern() )

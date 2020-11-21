@@ -44,23 +44,23 @@ public class TestConfigurablePluginAttributes
         // tests that by default the attributes used are
         // named "plugin-class" and "plugin-id"
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.setNamespaceAware( true );
-        PluginRules rc = new PluginRules();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule widgetPluginRule = new PluginCreateRule( Widget.class );
+        final PluginCreateRule widgetPluginRule = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", widgetPluginRule );
         digester.addSetNext( "root/widget", "addWidget" );
 
-        PluginCreateRule gadgetPluginRule = new PluginCreateRule( Widget.class );
+        final PluginCreateRule gadgetPluginRule = new PluginCreateRule( Widget.class );
         digester.addRule( "root/gadget", gadgetPluginRule );
         digester.addSetNext( "root/gadget", "addGadget" );
 
-        MultiContainer root = new MultiContainer();
+        final MultiContainer root = new MultiContainer();
         digester.push( root );
 
         try
@@ -68,12 +68,12 @@ public class TestConfigurablePluginAttributes
             digester.parse( Utils.getInputStream( this, "test7.xml" ) );
 
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        List<Widget> widgets = root.getWidgets();
+        final List<Widget> widgets = root.getWidgets();
         assertNotNull( widgets );
         assertEquals( 4, widgets.size() );
 
@@ -82,7 +82,7 @@ public class TestConfigurablePluginAttributes
         assertEquals( TextLabel.class, widgets.get( 2 ).getClass() );
         assertEquals( TextLabel.class, widgets.get( 3 ).getClass() );
 
-        List<Widget> gadgets = root.getGadgets();
+        final List<Widget> gadgets = root.getGadgets();
         assertNotNull( gadgets );
         assertEquals( 4, gadgets.size() );
 
@@ -103,26 +103,26 @@ public class TestConfigurablePluginAttributes
         // note that in order not to screw up all other tests, we need
         // to reset the global names after we finish here!
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.setNamespaceAware( true );
-        PluginRules rc = new PluginRules();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
         rc.setPluginIdAttribute( null, "id" );
         rc.setPluginClassAttribute( null, "class" );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule widgetPluginRule = new PluginCreateRule( Widget.class );
+        final PluginCreateRule widgetPluginRule = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", widgetPluginRule );
         digester.addSetNext( "root/widget", "addWidget" );
 
-        PluginCreateRule gadgetPluginRule = new PluginCreateRule( Widget.class );
+        final PluginCreateRule gadgetPluginRule = new PluginCreateRule( Widget.class );
         digester.addRule( "root/gadget", gadgetPluginRule );
         digester.addSetNext( "root/gadget", "addGadget" );
 
-        MultiContainer root = new MultiContainer();
+        final MultiContainer root = new MultiContainer();
         digester.push( root );
 
         try
@@ -130,12 +130,12 @@ public class TestConfigurablePluginAttributes
             digester.parse( Utils.getInputStream( this, "test7.xml" ) );
 
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        List<Widget> widgets = root.getWidgets();
+        final List<Widget> widgets = root.getWidgets();
         assertNotNull( widgets );
         assertEquals( 4, widgets.size() );
 
@@ -144,7 +144,7 @@ public class TestConfigurablePluginAttributes
         assertEquals( Slider.class, widgets.get( 2 ).getClass() );
         assertEquals( Slider.class, widgets.get( 3 ).getClass() );
 
-        List<Widget> gadgets = root.getGadgets();
+        final List<Widget> gadgets = root.getGadgets();
         assertNotNull( gadgets );
         assertEquals( 4, gadgets.size() );
 
@@ -162,41 +162,41 @@ public class TestConfigurablePluginAttributes
         // that particular PluginCreateRule instance. Also tests that
         // attributes can be in namespaces.
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.setNamespaceAware( true );
-        PluginRules rc = new PluginRules();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
         // for plugins at pattern "root/widget", use xml attributes "id" and
         // "class" in the custom namespace as the values for plugin id and
         // class, not the default (and non-namespaced) values of
         // "plugin-id" and "plugin-class".
-        PluginCreateRule widgetPluginRule = new PluginCreateRule( Widget.class );
+        final PluginCreateRule widgetPluginRule = new PluginCreateRule( Widget.class );
         widgetPluginRule.setPluginIdAttribute( "http://commons.apache.org/digester/plugins", "id" );
         widgetPluginRule.setPluginClassAttribute( "http://commons.apache.org/digester/plugins", "class" );
         digester.addRule( "root/widget", widgetPluginRule );
         digester.addSetNext( "root/widget", "addWidget" );
 
-        PluginCreateRule gadgetPluginRule = new PluginCreateRule( Widget.class );
+        final PluginCreateRule gadgetPluginRule = new PluginCreateRule( Widget.class );
         digester.addRule( "root/gadget", gadgetPluginRule );
         digester.addSetNext( "root/gadget", "addGadget" );
 
-        MultiContainer root = new MultiContainer();
+        final MultiContainer root = new MultiContainer();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test7.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        List<Widget> widgets = root.getWidgets();
+        final List<Widget> widgets = root.getWidgets();
         assertNotNull( widgets );
         assertEquals( 4, widgets.size() );
 
@@ -205,7 +205,7 @@ public class TestConfigurablePluginAttributes
         assertEquals( TextLabel2.class, widgets.get( 2 ).getClass() );
         assertEquals( TextLabel2.class, widgets.get( 3 ).getClass() );
 
-        List<Widget> gadgets = root.getGadgets();
+        final List<Widget> gadgets = root.getGadgets();
         assertNotNull( gadgets );
         assertEquals( 4, gadgets.size() );
 
@@ -227,7 +227,7 @@ public class TestConfigurablePluginAttributes
         {
         }
 
-        public void addWidget( Widget child )
+        public void addWidget( final Widget child )
         {
             widgets.add( child );
         }
@@ -237,7 +237,7 @@ public class TestConfigurablePluginAttributes
             return widgets;
         }
 
-        public void addGadget( Widget child )
+        public void addGadget( final Widget child )
         {
             gadgets.add( child );
         }

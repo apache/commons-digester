@@ -38,9 +38,9 @@ public final class SetPropertiesHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( SetProperty annotation, Field element, RulesBinder rulesBinder )
+    public void handle( final SetProperty annotation, final Field element, final RulesBinder rulesBinder )
     {
-        SetPropertiesBuilder builder = rulesBinder
+        final SetPropertiesBuilder builder = rulesBinder
             .forPattern( annotation.pattern() )
             .withNamespaceURI( annotation.namespaceURI() )
             .setProperties();

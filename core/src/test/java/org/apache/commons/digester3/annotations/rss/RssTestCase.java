@@ -31,13 +31,13 @@ public final class RssTestCase
     public void testRss()
         throws Exception
     {
-        Channel channel = new Channel();
+        final Channel channel = new Channel();
         channel.setTitle( "Apache" );
         channel.setLink( "http://www.apache.org" );
         channel.setDescription( "The Apache Software Foundation" );
         channel.setLanguage( "en-US" );
 
-        Image image = new Image();
+        final Image image = new Image();
         image.setTitle( "Apache" );
         image.setUrl( "http://jakarta.apache.org/images/jakarta-logo.gif" );
         image.setLink( "http://jakarta.apache.org" );

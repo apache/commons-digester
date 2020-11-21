@@ -31,7 +31,7 @@ final class CallParamRule
     extends AbstractXmlRule
 {
 
-    public CallParamRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public CallParamRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -40,15 +40,15 @@ final class CallParamRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        int paramIndex = Integer.parseInt( attributes.getValue( "paramnumber" ) );
-        CallParamBuilder builder = linkedRuleBuilder.callParam().ofIndex( paramIndex );
+        final int paramIndex = Integer.parseInt( attributes.getValue( "paramnumber" ) );
+        final CallParamBuilder builder = linkedRuleBuilder.callParam().ofIndex( paramIndex );
 
-        String attributeName = attributes.getValue( "attrname" );
-        String fromStack = attributes.getValue( "from-stack" );
-        String stackIndex = attributes.getValue( "stack-index" );
+        final String attributeName = attributes.getValue( "attrname" );
+        final String fromStack = attributes.getValue( "from-stack" );
+        final String stackIndex = attributes.getValue( "stack-index" );
 
         if ( attributeName == null )
         {

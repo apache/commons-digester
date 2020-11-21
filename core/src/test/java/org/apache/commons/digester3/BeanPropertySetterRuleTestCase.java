@@ -64,7 +64,7 @@ public class BeanPropertySetterRuleTestCase
 
         final List<Rule> callOrder = new ArrayList<Rule>();
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -123,7 +123,7 @@ public class BeanPropertySetterRuleTestCase
     {
         final List<Rule> callOrder = new ArrayList<Rule>();
 
-        Digester digester = newLoader(new AbstractRulesModule()
+        final Digester digester = newLoader(new AbstractRulesModule()
         {
 
             @Override
@@ -156,7 +156,7 @@ public class BeanPropertySetterRuleTestCase
     public void testSetGivenProperty()
         throws SAXException, IOException
     {
-        Digester digester = newLoader(new AbstractRulesModule()
+        final Digester digester = newLoader(new AbstractRulesModule()
         {
 
             @Override
@@ -175,7 +175,7 @@ public class BeanPropertySetterRuleTestCase
 
         }).newDigester();
 
-        SimpleTestBean bean = digester.parse( xmlTestReader() );
+        final SimpleTestBean bean = digester.parse( xmlTestReader() );
 
         // check properties are set correctly
         assertEquals( "Property alpha not set correctly", "ROOT BODY", bean.getAlpha() );
@@ -194,7 +194,7 @@ public class BeanPropertySetterRuleTestCase
     @Test
     public void testSetUnknownProperty()
     {
-        Digester digester = newLoader(new AbstractRulesModule()
+        final Digester digester = newLoader(new AbstractRulesModule()
         {
 
             @Override
@@ -212,15 +212,15 @@ public class BeanPropertySetterRuleTestCase
         // Attempt to parse the input
         try
         {
-            SimpleTestBean bean = digester.parse( xmlTestReader() );
+            final SimpleTestBean bean = digester.parse( xmlTestReader() );
             fail( "Should have thrown NoSuchMethodException" );
             assertNotNull( bean ); // just to avoid compiler warning on unused variable
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             if ( e instanceof InvocationTargetException )
             {
-                Throwable t = ( (InvocationTargetException) e ).getTargetException();
+                final Throwable t = ( (InvocationTargetException) e ).getTargetException();
                 if ( t instanceof NoSuchMethodException )
                 {
                     // Expected result
@@ -241,7 +241,7 @@ public class BeanPropertySetterRuleTestCase
     public void testAutomaticallySetProperties()
         throws SAXException, IOException
     {
-        Digester digester = newLoader(new AbstractRulesModule()
+        final Digester digester = newLoader(new AbstractRulesModule()
         {
 
             @Override
@@ -253,7 +253,7 @@ public class BeanPropertySetterRuleTestCase
 
         }).newDigester( new ExtendedBaseRules() );
 
-        SimpleTestBean bean = digester.parse( xmlTestReader() );
+        final SimpleTestBean bean = digester.parse( xmlTestReader() );
 
         // check properties are set correctly
         assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
@@ -267,9 +267,9 @@ public class BeanPropertySetterRuleTestCase
     @Test
     public void extractPropertyNameFromAttribute() throws Exception
     {
-        Employee expected = new Employee( "John", "Doe" );
+        final Employee expected = new Employee( "John", "Doe" );
 
-        Employee actual = newLoader( new AbstractRulesModule()
+        final Employee actual = newLoader( new AbstractRulesModule()
         {
 
             @Override

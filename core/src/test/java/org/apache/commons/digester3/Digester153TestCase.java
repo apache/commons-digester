@@ -41,10 +41,10 @@ public final class Digester153TestCase
     public void basicConstructor()
         throws Exception
     {
-        ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
+        final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
         createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
         digester.addCallParam( "toplevel/bean", 0, "boolean" );
         digester.addCallParam( "toplevel/bean", 1, "double" );
@@ -65,10 +65,10 @@ public final class Digester153TestCase
     public void constructorWithAttributeAndElement()
         throws Exception
     {
-        ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
+        final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
         createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
         digester.addCallParam( "toplevel/bean", 0, "boolean" );
         digester.addCallParam( "toplevel/bean/double", 1 );
@@ -141,10 +141,10 @@ public final class Digester153TestCase
         } );
     }
 
-    private void succesfullConstructor( RulesModule rulesModule )
+    private void succesfullConstructor( final RulesModule rulesModule )
         throws Exception
     {
-        TestBean bean = newLoader( rulesModule )
+        final TestBean bean = newLoader( rulesModule )
                             .newDigester()
                             .parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
 
@@ -156,15 +156,15 @@ public final class Digester153TestCase
     public void basicConstructorWithValuesNotFound()
         throws Exception
     {
-        ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
+        final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
         createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
         digester.addCallParam( "toplevel/bean", 0, "notFound1" );
         digester.addCallParam( "toplevel/bean", 1, "notFound2" );
 
-        TestBean bean = digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
+        final TestBean bean = digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
 
         assertFalse( bean.getBooleanProperty() );
         assertEquals( 0D, bean.getDoubleProperty(), 0 );
@@ -174,10 +174,10 @@ public final class Digester153TestCase
     public void basicConstructorWithWrongParameters()
         throws Exception
     {
-        ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
+        final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
         createRule.setConstructorArgumentTypes( boolean.class );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
 
         digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
@@ -187,15 +187,15 @@ public final class Digester153TestCase
     public void constructorWithClassDefinedInAttribute()
         throws Exception
     {
-        ObjectCreateRule createRule = new ObjectCreateRule( null, "type" );
+        final ObjectCreateRule createRule = new ObjectCreateRule( null, "type" );
         createRule.setConstructorArgumentTypes( boolean.class, double.class );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
         digester.addCallParam( "toplevel/bean", 0, "boolean" );
         digester.addCallParam( "toplevel/bean", 1, "double" );
 
-        TestBean bean = digester.parse( getClass().getResourceAsStream( "AttributeDefinedConstructor.xml" ) );
+        final TestBean bean = digester.parse( getClass().getResourceAsStream( "AttributeDefinedConstructor.xml" ) );
 
         assertTrue( bean.getBooleanProperty() );
         assertEquals( 9.99D, bean.getDoubleProperty(), 0 );

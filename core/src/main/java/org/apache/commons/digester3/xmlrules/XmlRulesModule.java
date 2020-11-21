@@ -40,8 +40,8 @@ final class XmlRulesModule
 
     private WithMemoryRulesBinder memoryRulesBinder;
 
-    public XmlRulesModule( final NameSpaceURIRulesBinder targetRulesBinder, Set<String> rootSystemIds,
-    /* @Nullable */String rootPath )
+    public XmlRulesModule( final NameSpaceURIRulesBinder targetRulesBinder, final Set<String> rootSystemIds,
+    /* @Nullable */final String rootPath )
     {
         this.targetRulesBinder = targetRulesBinder;
         this.rootSystemIds = rootSystemIds;
@@ -51,7 +51,7 @@ final class XmlRulesModule
     /**
      * {@inheritDoc}
      */
-    public void configure( RulesBinder rulesBinder )
+    public void configure( final RulesBinder rulesBinder )
     {
         if ( rulesBinder instanceof WithMemoryRulesBinder )
         {
@@ -66,7 +66,7 @@ final class XmlRulesModule
             }
         }
 
-        PatternStack patternStack = memoryRulesBinder.getPatternStack();
+        final PatternStack patternStack = memoryRulesBinder.getPatternStack();
 
         if ( rootPath != null )
         {
@@ -120,7 +120,7 @@ final class XmlRulesModule
      * @param pattern
      * @return
      */
-    protected LinkedRuleBuilder forPattern( String pattern )
+    protected LinkedRuleBuilder forPattern( final String pattern )
     {
         return memoryRulesBinder.forPattern( pattern );
     }

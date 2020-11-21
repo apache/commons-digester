@@ -27,7 +27,7 @@ public class Catalog
 
     private final LinkedList<Item> items = new LinkedList<Item>();
 
-    public void addItem( Item item )
+    public void addItem( final Item item )
     {
         items.addLast( item );
     }
@@ -36,7 +36,7 @@ public class Catalog
     {
         System.out.println( "This catalog has " + items.size() + " items" );
 
-        for (Item item : items) {
+        for (final Item item : items) {
             item.print();
         }
     }

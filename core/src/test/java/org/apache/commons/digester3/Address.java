@@ -30,7 +30,7 @@ public class Address
         this( "My Street", "My City", "US", "MyZip" );
     }
 
-    public Address( String street, String city, String state, String zipCode )
+    public Address( final String street, final String city, final String state, final String zipCode )
     {
         setStreet( street );
         setCity( city );
@@ -45,7 +45,7 @@ public class Address
         return ( this.city );
     }
 
-    public void setCity( String city )
+    public void setCity( final String city )
     {
         this.city = city;
     }
@@ -57,7 +57,7 @@ public class Address
         return ( this.state );
     }
 
-    public void setState( String state )
+    public void setState( final String state )
     {
         this.state = state;
     }
@@ -69,7 +69,7 @@ public class Address
         return ( this.street );
     }
 
-    public void setStreet( String street )
+    public void setStreet( final String street )
     {
         this.street = street;
     }
@@ -81,7 +81,7 @@ public class Address
         return ( this.type );
     }
 
-    public void setType( String type )
+    public void setType( final String type )
     {
         this.type = type;
     }
@@ -93,12 +93,12 @@ public class Address
         return ( this.zipCode );
     }
 
-    public void setZipCode( String zipCode )
+    public void setZipCode( final String zipCode )
     {
         this.zipCode = zipCode;
     }
 
-    public void setEmployee( Employee employee )
+    public void setEmployee( final Employee employee )
     {
         employee.addAddress( this );
     }
@@ -106,7 +106,7 @@ public class Address
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder( "Address[" );
+        final StringBuilder sb = new StringBuilder( "Address[" );
         sb.append( "street=" );
         sb.append( street );
         sb.append( ", city=" );

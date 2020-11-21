@@ -38,7 +38,7 @@ public class Employee
     @SetProperty( pattern = "employee", attributeName = "surname" )
     private String lastName;
 
-    public void addAddress( Address address )
+    public void addAddress( final Address address )
     {
         this.addresses.add( address );
     }
@@ -48,7 +48,7 @@ public class Employee
         return this.firstName;
     }
 
-    public void setFirstName( String firstName )
+    public void setFirstName( final String firstName )
     {
         this.firstName = firstName;
     }
@@ -58,7 +58,7 @@ public class Employee
         return this.lastName;
     }
 
-    public void setLastName( String lastName )
+    public void setLastName( final String lastName )
     {
         this.lastName = lastName;
     }
@@ -69,7 +69,7 @@ public class Employee
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -80,7 +80,7 @@ public class Employee
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Employee other = (Employee) obj;
+        final Employee other = (Employee) obj;
         if ( this.addresses == null )
         {
             if ( other.getAddresses() != null ) {

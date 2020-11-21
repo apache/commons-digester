@@ -42,12 +42,12 @@ public class OverlappingCallMethodRuleTestCase
 
     String itemName;
 
-    public void setItemId( String id )
+    public void setItemId( final String id )
     {
         itemId = id;
     }
 
-    public void setItemName( String name )
+    public void setItemName( final String name )
     {
         itemName = name;
     }
@@ -58,12 +58,12 @@ public class OverlappingCallMethodRuleTestCase
     public void testItem1()
         throws SAXException, IOException
     {
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <item id='1'>anitem</item>" );
         input.append( "</root>" );
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -93,12 +93,12 @@ public class OverlappingCallMethodRuleTestCase
     public void testItem2()
         throws SAXException, IOException
     {
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <item id='1'>anitem</item>" );
         input.append( "</root>" );
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -128,12 +128,12 @@ public class OverlappingCallMethodRuleTestCase
     public void testItem3()
         throws SAXException, IOException
     {
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <item>1</item>" );
         input.append( "</root>" );
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -186,7 +186,7 @@ public class OverlappingCallMethodRuleTestCase
     public void testItem4()
         throws SAXException, IOException
     {
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <item>" );
         input.append( "  <id value='1'/>" );
@@ -194,7 +194,7 @@ public class OverlappingCallMethodRuleTestCase
         input.append( " </item>" );
         input.append( "</root>" );
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -232,7 +232,7 @@ public class OverlappingCallMethodRuleTestCase
     public void testWildcard1()
         throws SAXException, IOException
     {
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<box id='A1'>" );
         input.append( " <box id='B1'>" );
         input.append( "  <box id='C1'/>" );
@@ -240,7 +240,7 @@ public class OverlappingCallMethodRuleTestCase
         input.append( " </box>" );
         input.append( "</box>" );
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -257,13 +257,13 @@ public class OverlappingCallMethodRuleTestCase
 
         }).newDigester();
 
-        Box root = new Box();
+        final Box root = new Box();
         root.setId( "root" );
         digester.push( root );
         digester.parse( new StringReader( input.toString() ) );
 
         // walk the object tree, concatenating the id strings
-        String ids = root.getIds();
+        final String ids = root.getIds();
         assertEquals( "root A1 B1 C1 C2", ids );
     }
 
@@ -276,7 +276,7 @@ public class OverlappingCallMethodRuleTestCase
     public void testWildcard2()
         throws SAXException, IOException
     {
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<box>A1" );
         input.append( " <box>B1" );
         input.append( "  <box>C1</box>" );
@@ -284,7 +284,7 @@ public class OverlappingCallMethodRuleTestCase
         input.append( " </box>" );
         input.append( "</box>" );
 
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -301,13 +301,13 @@ public class OverlappingCallMethodRuleTestCase
 
         }).newDigester();
 
-        Box root = new Box();
+        final Box root = new Box();
         root.setId( "root" );
         digester.push( root );
         digester.parse( new StringReader( input.toString() ) );
 
         // walk the object tree, concatenating the id strings
-        String ids = root.getIds();
+        final String ids = root.getIds();
         assertEquals( "root A1 B1 C1 C2", ids );
     }
 }

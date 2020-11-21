@@ -44,7 +44,7 @@ public final class AudioVisual
         return yearMade;
     }
 
-    public void setYearMade( int yearMade )
+    public void setYearMade( final int yearMade )
     {
         this.yearMade = yearMade;
     }
@@ -54,7 +54,7 @@ public final class AudioVisual
         return this.category;
     }
 
-    public void setCategory( String category )
+    public void setCategory( final String category )
     {
         this.category = category;
     }
@@ -64,7 +64,7 @@ public final class AudioVisual
         return this.name;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -74,7 +74,7 @@ public final class AudioVisual
         return this.desc;
     }
 
-    public void setDesc( String desc )
+    public void setDesc( final String desc )
     {
         this.desc = desc;
     }
@@ -84,13 +84,13 @@ public final class AudioVisual
         return this.runtime;
     }
 
-    public void setRuntime( int runtime )
+    public void setRuntime( final int runtime )
     {
         this.runtime = runtime;
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -101,7 +101,7 @@ public final class AudioVisual
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        AudioVisual other = (AudioVisual) obj;
+        final AudioVisual other = (AudioVisual) obj;
         if ( this.category == null )
         {
             if ( other.getCategory() != null ) {

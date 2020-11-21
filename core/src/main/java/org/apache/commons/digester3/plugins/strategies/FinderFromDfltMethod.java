@@ -51,7 +51,7 @@ public class FinderFromDfltMethod
      * 
      * @param methodName must be non-null.
      */
-    public FinderFromDfltMethod( String methodName )
+    public FinderFromDfltMethod( final String methodName )
     {
         this.methodName = methodName;
     }
@@ -75,11 +75,11 @@ public class FinderFromDfltMethod
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester d, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester d, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
 
-        Method rulesMethod = LoaderFromClass.locateMethod( pluginClass, methodName );
+        final Method rulesMethod = LoaderFromClass.locateMethod( pluginClass, methodName );
         if ( rulesMethod == null )
         {
             return null;

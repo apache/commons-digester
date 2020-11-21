@@ -88,7 +88,7 @@ public class NodeCreateRule
          * @throws ParserConfigurationException if the DocumentBuilderFactory could not be instantiated
          * @throws SAXException if the XMLReader could not be instantiated by Digester (should not happen)
          */
-        public NodeBuilder( Document doc, Node root )
+        public NodeBuilder( final Document doc, final Node root )
             throws ParserConfigurationException, SAXException
         {
             this.doc = doc;
@@ -141,7 +141,7 @@ public class NodeCreateRule
         {
             if ( topText.length() > 0 )
             {
-                String str = topText.toString();
+                final String str = topText.toString();
                 topText.setLength( 0 );
 
                 if ( str.trim().length() > 0 )
@@ -153,7 +153,7 @@ public class NodeCreateRule
                     {
                         top.appendChild( doc.createTextNode( str ) );
                     }
-                    catch ( DOMException e )
+                    catch ( final DOMException e )
                     {
                         throw new SAXException( e.getMessage() );
                     }
@@ -184,7 +184,7 @@ public class NodeCreateRule
          * @throws SAXException if the DOM implementation throws an exception
          */
         @Override
-        public void characters( char[] ch, int start, int length )
+        public void characters( final char[] ch, final int start, final int length )
             throws SAXException
         {
             topText.append( ch, start, length );
@@ -199,7 +199,7 @@ public class NodeCreateRule
          * @throws SAXException if the DOM implementation throws an exception
          */
         @Override
-        public void endElement( String namespaceURI, String localName, String qName )
+        public void endElement( final String namespaceURI, final String localName, final String qName )
             throws SAXException
         {
             addTextIfPresent();
@@ -216,7 +216,7 @@ public class NodeCreateRule
                 top = top.getParentNode();
                 depth--;
             }
-            catch ( DOMException e )
+            catch ( final DOMException e )
             {
                 throw new SAXException( e.getMessage() );
             }
@@ -230,14 +230,14 @@ public class NodeCreateRule
          * @throws SAXException if the DOM implementation throws an exception
          */
         @Override
-        public void processingInstruction( String target, String data )
+        public void processingInstruction( final String target, final String data )
             throws SAXException
         {
             try
             {
                 top.appendChild( doc.createProcessingInstruction( target, data ) );
             }
-            catch ( DOMException e )
+            catch ( final DOMException e )
             {
                 throw new SAXException( e.getMessage() );
             }
@@ -253,14 +253,14 @@ public class NodeCreateRule
          * @throws SAXException if the DOM implementation throws an exception
          */
         @Override
-        public void startElement( String namespaceURI, String localName, String qName, Attributes atts )
+        public void startElement( final String namespaceURI, final String localName, final String qName, final Attributes atts )
             throws SAXException
         {
             addTextIfPresent();
 
             try
             {
-                Node previousTop = top;
+                final Node previousTop = top;
                 if ( ( localName == null ) || ( localName.length() == 0 ) )
                 {
                     top = doc.createElement( qName );
@@ -288,7 +288,7 @@ public class NodeCreateRule
                 previousTop.appendChild( top );
                 depth++;
             }
-            catch ( DOMException e )
+            catch ( final DOMException e )
             {
                 throw new SAXException( e.getMessage() );
             }
@@ -316,7 +316,7 @@ public class NodeCreateRule
      * 
      * @param documentBuilder the JAXP <code>DocumentBuilder</code> to use
      */
-    public NodeCreateRule( DocumentBuilder documentBuilder )
+    public NodeCreateRule( final DocumentBuilder documentBuilder )
     {
         this( Node.ELEMENT_NODE, documentBuilder );
     }
@@ -332,7 +332,7 @@ public class NodeCreateRule
      *         configuration requested.
      * @see DocumentBuilderFactory#newDocumentBuilder()
      */
-    public NodeCreateRule( int nodeType )
+    public NodeCreateRule( final int nodeType )
         throws ParserConfigurationException
     {
         this( nodeType, DocumentBuilderFactory.newInstance().newDocumentBuilder() );
@@ -348,7 +348,7 @@ public class NodeCreateRule
      *            Node.ELEMENT_NODE} or {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE}
      * @param documentBuilder the JAXP <code>DocumentBuilder</code> to use
      */
-    public NodeCreateRule( int nodeType, DocumentBuilder documentBuilder )
+    public NodeCreateRule( final int nodeType, final DocumentBuilder documentBuilder )
     {
         if ( !( ( nodeType == Node.DOCUMENT_FRAGMENT_NODE ) || ( nodeType == Node.ELEMENT_NODE ) ) )
         {
@@ -387,10 +387,10 @@ public class NodeCreateRule
      * @throws Exception indicates a JAXP configuration problem
      */
     @Override
-    public void begin( String namespaceURI, String name, Attributes attributes )
+    public void begin( final String namespaceURI, final String name, final Attributes attributes )
         throws Exception
     {
-        Document doc = documentBuilder.newDocument();
+        final Document doc = documentBuilder.newDocument();
         NodeBuilder builder = null;
         if ( nodeType == Node.ELEMENT_NODE )
         {
@@ -429,7 +429,7 @@ public class NodeCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         getDigester().pop();

@@ -44,13 +44,13 @@ public class MarkupDigester
     }
 
     /** See equivalent constructor in Digester class. */
-    public MarkupDigester( SAXParser parser )
+    public MarkupDigester( final SAXParser parser )
     {
         super( parser );
     }
 
     /** See equivalent constructor in Digester class. */
-    public MarkupDigester( XMLReader reader )
+    public MarkupDigester( final XMLReader reader )
     {
         super( reader );
     }
@@ -73,7 +73,7 @@ public class MarkupDigester
      * @throws SAXException if a parsing error is to be reported
      */
     @Override
-    public void characters( char buffer[], int start, int length )
+    public void characters( final char buffer[], final int start, final int length )
         throws SAXException
     {
         super.characters( buffer, start, length );
@@ -94,7 +94,7 @@ public class MarkupDigester
      * @throws SAXException if a parsing error is to be reported
      */
     @Override
-    public void startElement( String namespaceURI, String localName, String qName, Attributes list )
+    public void startElement( final String namespaceURI, final String localName, final String qName, final Attributes list )
         throws SAXException
     {
         handleTextSegments();
@@ -120,7 +120,7 @@ public class MarkupDigester
      * @throws SAXException if a parsing error is to be reported
      */
     @Override
-    public void endElement( String namespaceURI, String localName, String qName )
+    public void endElement( final String namespaceURI, final String localName, final String qName )
         throws SAXException
     {
         handleTextSegments();
@@ -139,20 +139,20 @@ public class MarkupDigester
     {
         if ( currTextSegment.length() > 0 )
         {
-            String segment = currTextSegment.toString();
-            List<Rule> parentMatches = getMatches().peek();
-            int len = parentMatches.size();
+            final String segment = currTextSegment.toString();
+            final List<Rule> parentMatches = getMatches().peek();
+            final int len = parentMatches.size();
             for ( int i = 0; i < len; ++i )
             {
-                Rule r = parentMatches.get( i );
+                final Rule r = parentMatches.get( i );
                 if ( r instanceof TextSegmentHandler )
                 {
-                    TextSegmentHandler h = (TextSegmentHandler) r;
+                    final TextSegmentHandler h = (TextSegmentHandler) r;
                     try
                     {
                         h.textSegment( segment );
                     }
-                    catch ( Exception e )
+                    catch ( final Exception e )
                     {
                         throw createSAXException( e );
                     }

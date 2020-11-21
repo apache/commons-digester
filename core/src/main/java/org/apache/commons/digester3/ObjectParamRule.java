@@ -49,7 +49,7 @@ public class ObjectParamRule
      * @param paramIndex The zero-relative parameter number
      * @param param the parameter to pass along
      */
-    public ObjectParamRule( int paramIndex, Object param )
+    public ObjectParamRule( final int paramIndex, final Object param )
     {
         this( paramIndex, null, param );
     }
@@ -62,7 +62,7 @@ public class ObjectParamRule
      * @param attributeName The name of the attribute to match
      * @param param the parameter to pass along
      */
-    public ObjectParamRule( int paramIndex, String attributeName, Object param )
+    public ObjectParamRule( final int paramIndex, final String attributeName, final Object param )
     {
         this.paramIndex = paramIndex;
         this.attributeName = attributeName;
@@ -92,11 +92,11 @@ public class ObjectParamRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         Object anAttribute = null;
-        Object parameters[] = getDigester().peekParams();
+        final Object parameters[] = getDigester().peekParams();
 
         if ( attributeName != null )
         {

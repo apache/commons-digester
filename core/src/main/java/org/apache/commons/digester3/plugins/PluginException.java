@@ -35,7 +35,7 @@ public class PluginException
     /**
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginException( Throwable cause )
+    public PluginException( final Throwable cause )
     {
         this( cause.getMessage() );
         this.cause = cause;
@@ -44,7 +44,7 @@ public class PluginException
     /**
      * @param msg describes the reason this exception is being thrown.
      */
-    public PluginException( String msg )
+    public PluginException( final String msg )
     {
         super( msg );
     }
@@ -53,7 +53,7 @@ public class PluginException
      * @param msg describes the reason this exception is being thrown.
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginException( String msg, Throwable cause )
+    public PluginException( final String msg, final Throwable cause )
     {
         this( msg );
         this.cause = cause;

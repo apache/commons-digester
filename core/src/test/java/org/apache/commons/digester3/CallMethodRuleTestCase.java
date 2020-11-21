@@ -54,7 +54,7 @@ public class CallMethodRuleTestCase
     public void testBasic()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -77,7 +77,7 @@ public class CallMethodRuleTestCase
 
         // Parse our test input.
         // An exception will be thrown if the method can't be found
-        Employee root1 = digester.parse( getInputStream( "Test5.xml" ) );
+        final Employee root1 = digester.parse( getInputStream( "Test5.xml" ) );
         assertNotNull( root1 );
     }
 
@@ -88,7 +88,7 @@ public class CallMethodRuleTestCase
     public void testCallMethodOnly()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -102,7 +102,7 @@ public class CallMethodRuleTestCase
         }).newDigester();
 
         // Parse our test input
-        Employee employee = digester.parse( getInputStream( "Test9.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test9.xml" ) );
         assertNotNull( "parsed an employee", employee );
 
         // Validate that the property setters were called
@@ -203,7 +203,7 @@ public class CallMethodRuleTestCase
     public void testParamsFromStack()
         throws SAXException, IOException
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -226,10 +226,10 @@ public class CallMethodRuleTestCase
 
         }).newDigester();
 
-        StringBuilder xml =
+        final StringBuilder xml =
             new StringBuilder().append( "<?xml version='1.0'?>" ).append( "<map>" ).append( "  <key name='The key'/>" ).append( "  <value name='The value'/>" ).append( "</map>" );
 
-        HashMap<AlphaBean, BetaBean> map = digester.parse( new StringReader( xml.toString() ) );
+        final HashMap<AlphaBean, BetaBean> map = digester.parse( new StringReader( xml.toString() ) );
 
         assertNotNull( map );
         assertEquals( 1, map.size() );
@@ -248,7 +248,7 @@ public class CallMethodRuleTestCase
     public void testOrderNestedPartA()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -270,7 +270,7 @@ public class CallMethodRuleTestCase
 
        // Parse our test input
        // an exception will be thrown if the method can't be found
-        NamedBean root1 = digester.parse( getInputStream( "Test8.xml" ) );
+        final NamedBean root1 = digester.parse( getInputStream( "Test8.xml" ) );
 
 
         // if the CallMethodRule were to incorrectly invoke the method call
@@ -294,7 +294,7 @@ public class CallMethodRuleTestCase
     public void testOrderNestedPartB()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -308,7 +308,7 @@ public class CallMethodRuleTestCase
         }).newDigester();
 
         // Configure the digester as required
-        StringBuilder word = new StringBuilder();
+        final StringBuilder word = new StringBuilder();
         digester.push( word );
 
         // Parse our test input
@@ -319,7 +319,7 @@ public class CallMethodRuleTestCase
             root1 = digester.parse( getInputStream( "Test8.xml" ) );
             assertNotNull( root1 );
         }
-        catch ( Throwable t )
+        catch ( final Throwable t )
         {
             // this means that the method can't be found and so the test fails
             fail( "Digester threw Exception:  " + t );
@@ -332,12 +332,12 @@ public class CallMethodRuleTestCase
     public void testPrimitiveReading()
         throws Exception
     {
-        StringReader reader =
+        final StringReader reader =
             new StringReader( "<?xml version='1.0' ?><root><bean good='true'/><bean good='false'/><bean/>"
                 + "<beanie bad='Fee Fie Foe Fum' good='true'/><beanie bad='Fee Fie Foe Fum' good='false'/>"
                 + "<beanie bad='Fee Fie Foe Fum'/></root>" );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
 
         // SimpleLog log = new SimpleLog("[testPrimitiveReading:Digester]");
         // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
@@ -345,18 +345,18 @@ public class CallMethodRuleTestCase
 
         digester.addObjectCreate( "root/bean", PrimitiveBean.class );
         digester.addSetNext( "root/bean", "add" );
-        Class<?>[] params = { Boolean.TYPE };
+        final Class<?>[] params = { Boolean.TYPE };
         digester.addCallMethod( "root/bean", "setBoolean", 1, params );
         digester.addCallParam( "root/bean", 0, "good" );
 
         digester.addObjectCreate( "root/beanie", PrimitiveBean.class );
         digester.addSetNext( "root/beanie", "add" );
-        Class<?>[] beanieParams = { String.class, Boolean.TYPE };
+        final Class<?>[] beanieParams = { String.class, Boolean.TYPE };
         digester.addCallMethod( "root/beanie", "testSetBoolean", 2, beanieParams );
         digester.addCallParam( "root/beanie", 0, "bad" );
         digester.addCallParam( "root/beanie", 1, "good" );
 
-        ArrayList<PrimitiveBean> list = new ArrayList<PrimitiveBean>();
+        final ArrayList<PrimitiveBean> list = new ArrayList<PrimitiveBean>();
         digester.push( list );
         digester.parse( reader );
 
@@ -386,12 +386,12 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        StringReader reader =
+        final StringReader reader =
             new StringReader( "<?xml version='1.0' ?><root><one/><two/><three/><four/><five/></root>" );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
 
-        Class<?>[] params = { String.class };
+        final Class<?>[] params = { String.class };
 
         digester.addObjectCreate( "root/one", NamedBean.class );
         digester.addSetNext( "root/one", "add" );
@@ -415,7 +415,7 @@ public class CallMethodRuleTestCase
 
         digester.addObjectCreate( "root/five", NamedBean.class );
         digester.addSetNext( "root/five", "add" );
-        Class<?>[] newParams = { String.class, String.class };
+        final Class<?>[] newParams = { String.class, String.class };
         digester.addCallMethod( "root/five", "test", 2, newParams );
         digester.addCallParam( "root/five", 0, 10 );
         digester.addCallParam( "root/five", 1, 3 );
@@ -426,7 +426,7 @@ public class CallMethodRuleTestCase
         digester.push( "It's fleece was white as snow." );
         digester.push( "Mary had a little lamb," );
 
-        ArrayList<NamedBean> list = new ArrayList<NamedBean>();
+        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
         digester.push( list );
         digester.parse( reader );
 
@@ -448,11 +448,11 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        StringReader reader =
+        final StringReader reader =
             new StringReader( "<?xml version='1.0' ?><root>" + "<param class='int' coolness='true'>25</param>"
                 + "<param class='long'>50</param>" + "<param class='float' coolness='false'>90</param></root>" );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         // SimpleLog log = new SimpleLog("{testTwoCalls:Digester]");
         // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
         // digester.setLogger(log);
@@ -465,7 +465,7 @@ public class CallMethodRuleTestCase
         digester.addCallMethod( "root/param", "setCool", 1, new Class[] { boolean.class } );
         digester.addCallParam( "root/param", 0, "coolness" );
 
-        ArrayList<ParamBean> list = new ArrayList<ParamBean>();
+        final ArrayList<ParamBean> list = new ArrayList<ParamBean>();
         digester.push( list );
         digester.parse( reader );
 
@@ -489,11 +489,11 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        StringReader reader =
+        final StringReader reader =
             new StringReader( "<?xml version='1.0' ?><root>" + "<spam>Simple</spam>"
                 + "<spam>Complex<spam>Deep<spam>Deeper<spam>Deepest</spam></spam></spam></spam>" + "</root>" );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
 
         // SimpleLog log = new SimpleLog("[testPrimitiveReading:Digester]");
         // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
@@ -519,7 +519,7 @@ public class CallMethodRuleTestCase
         digester.addCallMethod( "root/spam/spam/spam/spam", "setName", 1 );
         digester.addCallParam( "root/spam/spam/spam/spam", 0 );
 
-        ArrayList<NamedBean> list = new ArrayList<NamedBean>();
+        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
         digester.push( list );
         digester.parse( reader );
 
@@ -546,35 +546,35 @@ public class CallMethodRuleTestCase
         {
             Object result;
 
-            TestCallMethodRule( String methodName, int paramCount )
+            TestCallMethodRule( final String methodName, final int paramCount )
             {
                 super( methodName, paramCount );
             }
 
             @Override
-            protected void processMethodCallResult( Object result )
+            protected void processMethodCallResult( final Object result )
             {
                 this.result = result;
             }
         }
 
-        StringReader reader =
+        final StringReader reader =
             new StringReader( "<?xml version='1.0' ?><root>"
                 + "<param class='float' coolness='false'>90</param></root>" );
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         // SimpleLog log = new SimpleLog("{testTwoCalls:Digester]");
         // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
         // digester.setLogger(log);
 
         digester.addObjectCreate( "root/param", ParamBean.class );
         digester.addSetNext( "root/param", "add" );
-        TestCallMethodRule rule = new TestCallMethodRule( "setThisAndThat", 2 );
+        final TestCallMethodRule rule = new TestCallMethodRule( "setThisAndThat", 2 );
         digester.addRule( "root/param", rule );
         digester.addCallParam( "root/param", 0, "class" );
         digester.addCallParam( "root/param", 1, "coolness" );
 
-        ArrayList<ParamBean> list = new ArrayList<ParamBean>();
+        final ArrayList<ParamBean> list = new ArrayList<ParamBean>();
         digester.push( list );
         digester.parse( reader );
 
@@ -587,15 +587,15 @@ public class CallMethodRuleTestCase
     public void testPathCallParam()
         throws Exception
     {
-        String xml =
+        final String xml =
             "<?xml version='1.0'?><main>" + "<alpha><beta>Ignore this</beta></alpha>"
                 + "<beta><epsilon><gamma>Ignore that</gamma></epsilon></beta>" + "</main>";
 
-        SimpleTestBean bean = new SimpleTestBean();
+        final SimpleTestBean bean = new SimpleTestBean();
         bean.setAlphaBeta( "[UNSET]", "[UNSET]" );
 
-        StringReader in = new StringReader( xml );
-        Digester digester = new Digester();
+        final StringReader in = new StringReader( xml );
+        final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
         digester.addCallParamPath( "*/alpha/?", 0 );
         digester.addCallParamPath( "*/epsilon/?", 1 );
@@ -617,13 +617,13 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addObjectCreate( "employee", HashMap.class );
 
         // there should be only one object on the stack (index zero),
         // so selecting a target object with index 1 on the object stack
         // should result in an exception.
-        CallMethodRule r = new CallMethodRule( 1, "put", 0 );
+        final CallMethodRule r = new CallMethodRule( 1, "put", 0 );
         digester.addRule( "employee", r );
 
         try
@@ -631,7 +631,7 @@ public class CallMethodRuleTestCase
             digester.parse( getInputStream( "Test5.xml" ) );
             fail( "Exception should be thrown for invalid target offset" );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             // ok, exception expected
         }
@@ -645,25 +645,25 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addObjectCreate( "employee", HashMap.class );
 
         digester.addObjectCreate( "employee/address", Address.class );
         digester.addSetNestedProperties( "employee/address" );
-        CallMethodRule r = new CallMethodRule( 1, "put", 2 );
+        final CallMethodRule r = new CallMethodRule( 1, "put", 2 );
         digester.addRule( "employee/address", r );
         digester.addCallParam( "employee/address/type", 0 );
         digester.addCallParam( "employee/address", 1, 0 );
 
-        HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
+        final HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
 
         assertNotNull( map );
-        Set<String> keys = map.keySet();
+        final Set<String> keys = map.keySet();
         assertEquals( 2, keys.size() );
-        Address home = map.get( "home" );
+        final Address home = map.get( "home" );
         assertNotNull( home );
         assertEquals( "HmZip", home.getZipCode() );
-        Address office = map.get( "office" );
+        final Address office = map.get( "office" );
         assertNotNull( office );
         assertEquals( "OfZip", office.getZipCode() );
     }
@@ -676,25 +676,25 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addObjectCreate( "employee", HashMap.class );
 
         digester.addObjectCreate( "employee/address", Address.class );
         digester.addSetNestedProperties( "employee/address" );
-        CallMethodRule r = new CallMethodRule( -1, "put", 2 );
+        final CallMethodRule r = new CallMethodRule( -1, "put", 2 );
         digester.addRule( "employee/address", r );
         digester.addCallParam( "employee/address/type", 0 );
         digester.addCallParam( "employee/address", 1, 0 );
 
-        HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
+        final HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
 
         assertNotNull( map );
-        Set<String> keys = map.keySet();
+        final Set<String> keys = map.keySet();
         assertEquals( 2, keys.size() );
-        Address home = map.get( "home" );
+        final Address home = map.get( "home" );
         assertNotNull( home );
         assertEquals( "HmZip", home.getZipCode() );
-        Address office = map.get( "office" );
+        final Address office = map.get( "office" );
         assertNotNull( office );
         assertEquals( "OfZip", office.getZipCode() );
     }
@@ -707,7 +707,7 @@ public class CallMethodRuleTestCase
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs
      */
-    protected InputStream getInputStream( String name )
+    protected InputStream getInputStream( final String name )
         throws IOException
     {
 

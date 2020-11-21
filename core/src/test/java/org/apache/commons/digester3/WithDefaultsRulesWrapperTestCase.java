@@ -40,7 +40,7 @@ public class WithDefaultsRulesWrapperTestCase
     public void testClear()
     {
         // test clear wrapped
-        WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
+        final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
         rules.add( "alpha", new TestRule( "Tom" ) );
         rules.add( "alpha", new TestRule( "Dick" ) );
         rules.add( "alpha", new TestRule( "Harry" ) );
@@ -69,7 +69,7 @@ public class WithDefaultsRulesWrapperTestCase
     public void testRules()
     {
         // test rules
-        WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
+        final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
         rules.add( "alpha", new TestRule( "Tom" ) );
         rules.add( "alpha", new TestRule( "Dick" ) );
         rules.addDefault( new TestRule( "Roger" ) );
@@ -86,7 +86,7 @@ public class WithDefaultsRulesWrapperTestCase
     public void testMatch()
     {
         // test no defaults
-        WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
+        final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
         rules.add( "alpha", new TestRule( "Tom" ) );
         rules.add( "alpha", new TestRule( "Dick" ) );
         rules.add( "alpha", new TestRule( "Harry" ) );

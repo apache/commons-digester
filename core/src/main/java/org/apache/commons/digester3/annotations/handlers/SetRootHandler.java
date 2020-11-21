@@ -37,8 +37,8 @@ public final class SetRootHandler
      * {@inheritDoc}
      */
     @Override
-    protected void doBind( String pattern, String namespaceURI, Method method, Class<?> type, boolean fireOnBegin,
-                           RulesBinder rulesBinder )
+    protected void doBind( final String pattern, final String namespaceURI, final Method method, final Class<?> type, final boolean fireOnBegin,
+                           final RulesBinder rulesBinder )
     {
         rulesBinder.forPattern( pattern )
                    .withNamespaceURI( namespaceURI )

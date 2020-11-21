@@ -38,14 +38,14 @@ public final class SetNamespaceURITestCase
         throws Exception
     {
         // Drive commons-beanutils how to convert dates
-        DateConverter dateConverter = new DateConverter();
+        final DateConverter dateConverter = new DateConverter();
         dateConverter.setPatterns( new String[] { "yyyy-MM-dd'T'HH:mm" } );
         ConvertUtils.register( dateConverter, Date.class );
 
         final URL rules = getClass().getResource( "atom-rules.xml" );
         final URL input = getClass().getResource( "atom-content.xml" );
 
-        Digester digester = newLoader( new FromXmlRulesModule()
+        final Digester digester = newLoader( new FromXmlRulesModule()
         {
 
             @Override
@@ -57,7 +57,7 @@ public final class SetNamespaceURITestCase
         } )
         .setNamespaceAware( true )
         .newDigester();
-        Feed feed = digester.parse( input.openStream() );
+        final Feed feed = digester.parse( input.openStream() );
         assertNotNull( feed );
     }
 

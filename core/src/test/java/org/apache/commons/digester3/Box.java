@@ -39,12 +39,12 @@ public class Box
         return id;
     }
 
-    public void setId( String id )
+    public void setId( final String id )
     {
         this.id = id;
     }
 
-    public void addChild( Box child )
+    public void addChild( final Box child )
     {
         this.children.add( child );
     }
@@ -57,13 +57,13 @@ public class Box
     @Override
     public String toString()
     {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         buf.append( "[Box] id=" );
         buf.append( id );
         buf.append( " nchildren=" );
         buf.append( children.size() );
 
-        for ( Box child : children )
+        for ( final Box child : children )
         {
             buf.append( "  " );
             buf.append( child.toString() );
@@ -77,9 +77,9 @@ public class Box
      */
     public String getIds()
     {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         buf.append( this.id );
-        for ( Box child : children )
+        for ( final Box child : children )
         {
             buf.append( " " );
             buf.append( child.getIds() );

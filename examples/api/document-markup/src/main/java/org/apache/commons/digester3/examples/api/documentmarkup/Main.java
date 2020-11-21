@@ -33,19 +33,19 @@ public class Main
     String in = "<p>Hi, this is an <i>example</i> of some <b>bold</b> text.</p>";
 
     /** Invoked when a text segment is present in the parsed input. */
-    public void addSegment( String text )
+    public void addSegment( final String text )
     {
         System.out.println( "Text segment: [" + text + "]" );
     }
 
     /** Invoked when an &lt;i&gt; node is found in the parsed input. */
-    public void addItalic( String text )
+    public void addItalic( final String text )
     {
         System.out.println( "Italic: [" + text + "]" );
     }
 
     /** Invoked when an &lt;b&gt; node is found in the parsed input. */
-    public void addBold( String text )
+    public void addBold( final String text )
     {
         System.out.println( "Bold: [" + text + "]" );
     }
@@ -56,7 +56,7 @@ public class Main
      * the default behaviour of Digester (which is not suitable for
      * processing markup-style xml). 
      */
-    public void addAllText( String text )
+    public void addAllText( final String text )
     {
         System.out.println( "And the merged text for the p element is [" + text + "]" );
     }
@@ -72,11 +72,11 @@ public class Main
         throws Exception
     {
         System.out.println( "Started." );
-        MarkupDigester d = new MarkupDigester();
+        final MarkupDigester d = new MarkupDigester();
 
         d.push( this );
 
-        SetTextSegmentRule r = new SetTextSegmentRule( "addSegment" );
+        final SetTextSegmentRule r = new SetTextSegmentRule( "addSegment" );
         d.addRule( "p", r );
         d.addCallMethod( "p", "addAllText", 0 );
 
@@ -89,7 +89,7 @@ public class Main
     }
 
     /** See the run method. */
-    public static void main( String[] args )
+    public static void main( final String[] args )
         throws Exception
     {
         new Main().run();

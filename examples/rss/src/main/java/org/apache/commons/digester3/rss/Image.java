@@ -46,7 +46,7 @@ public class Image
         return ( this.description );
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -61,7 +61,7 @@ public class Image
         return ( this.height );
     }
 
-    public void setHeight( int height )
+    public void setHeight( final int height )
     {
         this.height = height;
     }
@@ -76,7 +76,7 @@ public class Image
         return ( this.link );
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -91,7 +91,7 @@ public class Image
         return ( this.title );
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -106,7 +106,7 @@ public class Image
         return ( this.url );
     }
 
-    public void setURL( String url )
+    public void setURL( final String url )
     {
         this.url = url;
     }
@@ -121,7 +121,7 @@ public class Image
         return ( this.width );
     }
 
-    public void setWidth( int width )
+    public void setWidth( final int width )
     {
         this.width = width;
     }
@@ -134,7 +134,7 @@ public class Image
      *
      * @param writer The writer to render output to
      */
-    void render( PrintWriter writer )
+    void render( final PrintWriter writer )
     {
         writer.println( "    <image>" );
 

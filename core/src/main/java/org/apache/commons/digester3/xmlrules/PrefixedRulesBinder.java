@@ -31,7 +31,7 @@ final class PrefixedRulesBinder
 
     private final String prefix;
 
-    public PrefixedRulesBinder( RulesBinder wrappedRulesBinder, String prefix )
+    public PrefixedRulesBinder( final RulesBinder wrappedRulesBinder, final String prefix )
     {
         this.wrappedRulesBinder = wrappedRulesBinder;
         this.prefix = prefix;
@@ -48,7 +48,7 @@ final class PrefixedRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( String messagePattern, Object... arguments )
+    public void addError( final String messagePattern, final Object... arguments )
     {
         this.wrappedRulesBinder.addError( messagePattern, arguments );
     }
@@ -56,7 +56,7 @@ final class PrefixedRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void addError( Throwable t )
+    public void addError( final Throwable t )
     {
         this.wrappedRulesBinder.addError( t );
     }
@@ -64,7 +64,7 @@ final class PrefixedRulesBinder
     /**
      * {@inheritDoc}
      */
-    public void install( RulesModule rulesModule )
+    public void install( final RulesModule rulesModule )
     {
         this.wrappedRulesBinder.install( rulesModule );
     }

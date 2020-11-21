@@ -34,7 +34,7 @@ final class SetTopRule
      * @param targetRulesBinder
      * @param patternStack
      */
-    public SetTopRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public SetTopRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -43,10 +43,10 @@ final class SetTopRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, String methodName, String paramType,
-                             boolean exactMatch, boolean fireOnBegin )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final String methodName, final String paramType,
+                             final boolean exactMatch, final boolean fireOnBegin )
     {
-        SetTopBuilder builder = linkedRuleBuilder.setTop( methodName );
+        final SetTopBuilder builder = linkedRuleBuilder.setTop( methodName );
 
         if ( paramType != null && paramType.length() > 0 )
         {

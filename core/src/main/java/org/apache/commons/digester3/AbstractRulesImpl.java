@@ -59,7 +59,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         this.digester = digester;
     }
@@ -75,7 +75,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
-    public void setNamespaceURI( String namespaceURI )
+    public void setNamespaceURI( final String namespaceURI )
     {
         this.namespaceURI = namespaceURI;
     }
@@ -85,7 +85,7 @@ public abstract class AbstractRulesImpl
     /**
      * {@inheritDoc}
      */
-    public final void add( String pattern, Rule rule )
+    public final void add( final String pattern, final Rule rule )
     {
         // set up rule
         if ( this.digester != null )

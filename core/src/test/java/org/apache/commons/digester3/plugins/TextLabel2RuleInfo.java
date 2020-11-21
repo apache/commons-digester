@@ -23,14 +23,14 @@ import org.apache.commons.digester3.Digester;
 public class TextLabel2RuleInfo
 {
     // define default rules
-    public static void addRules( Digester digester, String pattern )
+    public static void addRules( final Digester digester, final String pattern )
     {
         digester.addCallMethod( pattern + "/id", "setId", 0 );
         digester.addCallMethod( pattern + "/label", "setLabel", 0 );
     }
 
     // define different rules on this class
-    public static void addAltRules( Digester digester, String pattern )
+    public static void addAltRules( final Digester digester, final String pattern )
     {
         digester.addCallMethod( pattern + "/alt-id", "setId", 0 );
         digester.addCallMethod( pattern + "/alt-label", "setLabel", 0 );

@@ -38,9 +38,9 @@ public class CallMethodHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( CallMethod annotation, Method element, RulesBinder rulesBinder )
+    public void handle( final CallMethod annotation, final Method element, final RulesBinder rulesBinder )
     {
-        CallMethodBuilder callMethodBuilder = rulesBinder
+        final CallMethodBuilder callMethodBuilder = rulesBinder
             .forPattern( annotation.pattern() )
             .withNamespaceURI( annotation.namespaceURI() )
             .callMethod( element.getName() )

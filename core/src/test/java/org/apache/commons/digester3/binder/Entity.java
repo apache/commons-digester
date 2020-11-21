@@ -38,7 +38,7 @@ public class Entity
     /**
      * @param author The author to set.
      */
-    public void setAuthor( String author )
+    public void setAuthor( final String author )
     {
         this.author = author;
     }

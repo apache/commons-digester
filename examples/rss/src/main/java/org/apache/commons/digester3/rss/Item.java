@@ -44,7 +44,7 @@ public class Item implements Serializable {
         return ( this.description );
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -59,7 +59,7 @@ public class Item implements Serializable {
         return ( this.link );
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -74,7 +74,7 @@ public class Item implements Serializable {
         return ( this.title );
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -87,7 +87,7 @@ public class Item implements Serializable {
      *
      * @param writer The writer to render output to
      */
-    void render( PrintWriter writer )
+    void render( final PrintWriter writer )
     {
         writer.println( "    <item>" );
 

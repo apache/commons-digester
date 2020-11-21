@@ -54,7 +54,7 @@ public class Person
         return id;
     }
 
-    public void setId( int id )
+    public void setId( final int id )
     {
         this.id = id;
     }
@@ -64,7 +64,7 @@ public class Person
         return category;
     }
 
-    public void setCategory( String category )
+    public void setCategory( final String category )
     {
         this.category = category;
     }
@@ -74,7 +74,7 @@ public class Person
         return name;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -90,20 +90,20 @@ public class Person
     }
 
     @CallMethod( pattern = "address-book/person/email" )
-    public void addEmail( @CallParam( pattern = "address-book/person/email", attributeName = "type" ) String type,
-                          @CallParam( pattern = "address-book/person/email" ) String address )
+    public void addEmail( @CallParam( pattern = "address-book/person/email", attributeName = "type" ) final String type,
+                          @CallParam( pattern = "address-book/person/email" ) final String address )
     {
         this.emails.put( type, address );
     }
 
     @SetNext( fireOnBegin = true )
-    public void addAddress( Address addr )
+    public void addAddress( final Address addr )
     {
         this.addresses.add( addr );
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -114,7 +114,7 @@ public class Person
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Person other = (Person) obj;
+        final Person other = (Person) obj;
         if ( addresses == null )
         {
             if ( other.addresses != null ) {

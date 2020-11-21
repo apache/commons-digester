@@ -39,8 +39,8 @@ public final class NestedPropertiesBuilder
 
     private boolean allowUnknownChildElements = false;
 
-    NestedPropertiesBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                                    LinkedRuleBuilder mainBuilder )
+    NestedPropertiesBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                                    final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -51,7 +51,7 @@ public final class NestedPropertiesBuilder
      * @param elementName The child xml element to be ignored
      * @return this builder instance
      */
-    public NestedPropertiesBuilder ignoreElement( String elementName )
+    public NestedPropertiesBuilder ignoreElement( final String elementName )
     {
         if ( elementName == null )
         {
@@ -69,7 +69,7 @@ public final class NestedPropertiesBuilder
      * @deprecated
      */
     @Deprecated
-    public NestedPropertiesBuilder addAlias( String elementName, String propertyName )
+    public NestedPropertiesBuilder addAlias( final String elementName, final String propertyName )
     {
         return addAlias( elementName ).forProperty( propertyName );
     }
@@ -81,7 +81,7 @@ public final class NestedPropertiesBuilder
      * @return the property alias builder
      * @since 3.2
      */
-    public AddAliasBuilder<NestedPropertiesBuilder> addAlias( String elementName )
+    public AddAliasBuilder<NestedPropertiesBuilder> addAlias( final String elementName )
     {
         if ( elementName == null )
         {
@@ -99,7 +99,7 @@ public final class NestedPropertiesBuilder
      *                 and trailing whitespace removed
      * @return this builder instance
      */
-    public NestedPropertiesBuilder trimData( boolean trimData )
+    public NestedPropertiesBuilder trimData( final boolean trimData )
     {
         this.trimData = trimData;
         return this;
@@ -113,7 +113,7 @@ public final class NestedPropertiesBuilder
      *        object property
      * @return this builder instance
      */
-    public NestedPropertiesBuilder allowUnknownChildElements( boolean allowUnknownChildElements )
+    public NestedPropertiesBuilder allowUnknownChildElements( final boolean allowUnknownChildElements )
     {
         this.allowUnknownChildElements = allowUnknownChildElements;
         return this;
@@ -125,7 +125,7 @@ public final class NestedPropertiesBuilder
     @Override
     protected SetNestedPropertiesRule createRule()
     {
-        SetNestedPropertiesRule rule = new SetNestedPropertiesRule( elementNames );
+        final SetNestedPropertiesRule rule = new SetNestedPropertiesRule( elementNames );
         rule.setTrimData( trimData );
         rule.setAllowUnknownChildElements( allowUnknownChildElements );
         return rule;

@@ -50,8 +50,8 @@ public final class NodeCreateRuleProvider
 
     private DocumentBuilder documentBuilder;
 
-    NodeCreateRuleProvider( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                            LinkedRuleBuilder mainBuilder )
+    NodeCreateRuleProvider( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                            final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -66,7 +66,7 @@ public final class NodeCreateRuleProvider
      *                 {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE}
      * @return this builder instance
      */
-    public NodeCreateRuleProvider ofType( NodeType nodeType )
+    public NodeCreateRuleProvider ofType( final NodeType nodeType )
     {
         if ( nodeType == null )
         {
@@ -84,7 +84,7 @@ public final class NodeCreateRuleProvider
      * @param documentBuilder the JAXP <code>DocumentBuilder</code> to use
      * @return this builder instance
      */
-    public NodeCreateRuleProvider usingDocumentBuilder( DocumentBuilder documentBuilder )
+    public NodeCreateRuleProvider usingDocumentBuilder( final DocumentBuilder documentBuilder )
     {
         this.documentBuilder = documentBuilder;
         return this;
@@ -102,7 +102,7 @@ public final class NodeCreateRuleProvider
             {
                 return new NodeCreateRule( nodeType.getDocumentType() );
             }
-            catch ( ParserConfigurationException e )
+            catch ( final ParserConfigurationException e )
             {
                 throw new RuntimeException( e );
             }

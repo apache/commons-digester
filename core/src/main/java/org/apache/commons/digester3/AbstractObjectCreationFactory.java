@@ -60,7 +60,7 @@ public abstract class AbstractObjectCreationFactory<T>
     /**
      * {@inheritDoc}
      */
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         this.digester = digester;
     }

@@ -38,7 +38,7 @@ public class Address
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append( " address (type " + type + ")\n" );
         sb.append( "       " + street + "\n" );
         sb.append( "       " + city + " " + state + " " + zip + "\n" );
@@ -46,9 +46,9 @@ public class Address
         return sb.toString();
     }
 
-    public void print( java.io.PrintStream out, int indentAmount )
+    public void print( final java.io.PrintStream out, int indentAmount )
     {
-        StringBuilder indentStr = new StringBuilder( indentAmount );
+        final StringBuilder indentStr = new StringBuilder( indentAmount );
         for ( ; indentAmount > 0; --indentAmount )
         {
             indentStr.append( ' ' );
@@ -81,7 +81,7 @@ public class Address
      * 
      * @param street The value to assign to street.
      */
-    public void setStreet( String street )
+    public void setStreet( final String street )
     {
         this.street = street;
     }
@@ -99,7 +99,7 @@ public class Address
      * 
      * @param city The value to assign to city.
      */
-    public void setCity( String city )
+    public void setCity( final String city )
     {
         this.city = city;
     }
@@ -117,7 +117,7 @@ public class Address
      * 
      * @param state The value to assign to state.
      */
-    public void setState( String state )
+    public void setState( final String state )
     {
         this.state = state;
     }
@@ -135,7 +135,7 @@ public class Address
      * 
      * @param zip The value to assign to zip.
      */
-    public void setZip( String zip )
+    public void setZip( final String zip )
     {
         this.zip = zip;
     }
@@ -153,7 +153,7 @@ public class Address
      * 
      * @param country The value to assign to country.
      */
-    public void setCountry( String country )
+    public void setCountry( final String country )
     {
         this.country = country;
     }
@@ -171,7 +171,7 @@ public class Address
      * 
      * @param type The value to assign to type.
      */
-    public void setType( String type )
+    public void setType( final String type )
     {
         this.type = type;
     }

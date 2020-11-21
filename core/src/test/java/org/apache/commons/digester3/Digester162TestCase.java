@@ -33,7 +33,7 @@ public final class Digester162TestCase
     public void allowCreateObjectsWichTypesAreSpecifiedInAttributeNameOnly()
         throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
+        final Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -45,7 +45,7 @@ public final class Digester162TestCase
         })
         .newDigester();
 
-        Object object = digester.parse( getClass().getResource( "digester-162.xml" ) );
+        final Object object = digester.parse( getClass().getResource( "digester-162.xml" ) );
 
         assertTrue( BetaBean.class.isInstance( object ) );
     }

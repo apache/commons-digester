@@ -30,10 +30,10 @@ public final class BookFactory
     private final static String ISBN = "isbn";
 
     @Override
-    public Book createObject( Attributes attributes )
+    public Book createObject( final Attributes attributes )
         throws Exception
     {
-        String isbn = attributes.getValue( ISBN );
+        final String isbn = attributes.getValue( ISBN );
 
         if ( isbn == null )
         {

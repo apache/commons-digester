@@ -52,11 +52,11 @@ public class ErrorHandlerTest
             } ).newDigester().parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
             fail( "Expected SAXException" );
         }
-        catch ( IOException e )
+        catch ( final IOException e )
         {
             fail( "Expected SAXException" );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             // expected
         }
@@ -67,23 +67,23 @@ public class ErrorHandlerTest
     public void customErrorHandlerWithStack()
     {
 
-        ErrorHandler customErrorHandler = new ErrorHandler()
+        final ErrorHandler customErrorHandler = new ErrorHandler()
         {
             Log log = LogFactory.getLog( this.getClass() );
 
-            public void warning( SAXParseException arg0 )
+            public void warning( final SAXParseException arg0 )
                 throws SAXException
             {
                 log.warn( "Custom Warn Handler" );
             }
 
-            public void fatalError( SAXParseException e )
+            public void fatalError( final SAXParseException e )
                 throws SAXException
             {
                 log.fatal( "Custom Fatal Error Handler", e );
             }
 
-            public void error( SAXParseException e )
+            public void error( final SAXParseException e )
                 throws SAXException
             {
                 log.error( "Custom Error Handler", e );
@@ -92,7 +92,7 @@ public class ErrorHandlerTest
 
         try
         {
-            Digester digester = newLoader( new AbstractRulesModule()
+            final Digester digester = newLoader( new AbstractRulesModule()
             {
                 @Override
                 protected void configure()
@@ -105,11 +105,11 @@ public class ErrorHandlerTest
             digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
             fail( "Expected SAXException" );
         }
-        catch ( IOException e )
+        catch ( final IOException e )
         {
             fail( "Expected SAXException" );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             // expected
         }
@@ -119,23 +119,23 @@ public class ErrorHandlerTest
     public void customErrorHandler()
     {
 
-        ErrorHandler customErrorHandler = new ErrorHandler()
+        final ErrorHandler customErrorHandler = new ErrorHandler()
         {
             Log log = LogFactory.getLog( this.getClass() );
 
-            public void warning( SAXParseException arg0 )
+            public void warning( final SAXParseException arg0 )
                 throws SAXException
             {
                 log.warn( "Custom Warn Handler" );
             }
 
-            public void fatalError( SAXParseException e )
+            public void fatalError( final SAXParseException e )
                 throws SAXException
             {
                 log.fatal( "Custom Fatal Error Handler" );
             }
 
-            public void error( SAXParseException e )
+            public void error( final SAXParseException e )
                 throws SAXException
             {
                 log.error( "Custom Error Handler" );
@@ -144,7 +144,7 @@ public class ErrorHandlerTest
 
         try
         {
-            Digester digester = newLoader( new AbstractRulesModule()
+            final Digester digester = newLoader( new AbstractRulesModule()
             {
                 @Override
                 protected void configure()
@@ -158,11 +158,11 @@ public class ErrorHandlerTest
             fail( "No Expected SAXException" );
 
         }
-        catch ( IOException e )
+        catch ( final IOException e )
         {
             fail( "Expected SAXException" );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             // expected
         }

@@ -395,7 +395,7 @@ public class ExtendedBaseRulesTestCase
         digester.addRule( "!instructors/*", new TestRule( "instructors" ) );
         digester.addRule( "!instructor/*", new TestRule( "instructor" ) );
 
-        List<Rule> list = digester.getRules().match( null, "instructors", null, null );
+        final List<Rule> list = digester.getRules().match( null, "instructors", null, null );
         assertEquals( "Only expect to match instructors", 1, list.size() );
         assertEquals( "Instructors expected", "instructors", ( (TestRule) list.get( 0 ) ).getIdentifier() );
 
@@ -408,7 +408,7 @@ public class ExtendedBaseRulesTestCase
 
         digester.addRule( "!instructors/*", new TestRule( "instructors" ) );
 
-        List<Rule> list = digester.getRules().match( null, "/tosh/instructors/fiddlesticks", null, null );
+        final List<Rule> list = digester.getRules().match( null, "/tosh/instructors/fiddlesticks", null, null );
         assertEquals( "No matches expected", 0, list.size() );
 
     }

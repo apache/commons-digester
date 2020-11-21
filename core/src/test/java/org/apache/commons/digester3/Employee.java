@@ -32,7 +32,7 @@ public class Employee
         this( "My First Name", "My Last Name" );
     }
 
-    public Employee( String firstName, String lastName )
+    public Employee( final String firstName, final String lastName )
     {
         setFirstName( firstName );
         setLastName( lastName );
@@ -40,14 +40,14 @@ public class Employee
 
     private final ArrayList<Address> addresses = new ArrayList<Address>();
 
-    public void addAddress( Address address )
+    public void addAddress( final Address address )
     {
         addresses.add( address );
     }
 
-    public Address getAddress( String type )
+    public Address getAddress( final String type )
     {
-        for ( Address address : addresses )
+        for ( final Address address : addresses )
         {
             if ( type.equals( address.getType() ) ) {
                 return ( address );
@@ -56,7 +56,7 @@ public class Employee
         return ( null );
     }
 
-    public void removeAddress( Address address )
+    public void removeAddress( final Address address )
     {
         addresses.remove( address );
     }
@@ -68,7 +68,7 @@ public class Employee
         return ( this.firstName );
     }
 
-    public void setFirstName( String firstName )
+    public void setFirstName( final String firstName )
     {
         this.firstName = firstName;
     }
@@ -80,7 +80,7 @@ public class Employee
         return ( this.lastName );
     }
 
-    public void setLastName( String lastName )
+    public void setLastName( final String lastName )
     {
         this.lastName = lastName;
     }
@@ -97,7 +97,7 @@ public class Employee
         return age;
     }
 
-    public void setAge( int age )
+    public void setAge( final int age )
     {
         this.age = age;
     }
@@ -107,7 +107,7 @@ public class Employee
         return active;
     }
 
-    public void setActive( boolean active )
+    public void setActive( final boolean active )
     {
         this.active = active;
     }
@@ -117,7 +117,7 @@ public class Employee
         return salary;
     }
 
-    public void setSalary( float salary )
+    public void setSalary( final float salary )
     {
         this.salary = salary;
     }
@@ -125,7 +125,7 @@ public class Employee
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder( "Employee[" );
+        final StringBuilder sb = new StringBuilder( "Employee[" );
         sb.append( "firstName=" );
         sb.append( firstName );
         sb.append( ", lastName=" );

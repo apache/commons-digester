@@ -107,21 +107,21 @@ public final class BinderClassLoaderTestCase
         typeFound( "double", double.class );
     }
 
-    private void typeFound( String name, Class<?> expected )
+    private void typeFound( final String name, final Class<?> expected )
         throws Exception
     {
-        Class<?> actual = classLoader.loadClass( name );
+        final Class<?> actual = classLoader.loadClass( name );
         assertSame( expected, actual );
     }
 
     @Test
     public void testGetResource()
     {
-        ClassLoader clToAdapt = new ClassLoader()
+        final ClassLoader clToAdapt = new ClassLoader()
         {
 
             @Override
-            public URL getResource( String name )
+            public URL getResource( final String name )
             {
                 if ( "xxx".equals( name ) )
                 {
@@ -131,7 +131,7 @@ public final class BinderClassLoaderTestCase
             }
 
         };
-        ClassLoader binderCl = createBinderClassLoader( clToAdapt );
+        final ClassLoader binderCl = createBinderClassLoader( clToAdapt );
         assertNotNull( binderCl.getResource( "xxx" ) );
     }
 
@@ -139,8 +139,8 @@ public final class BinderClassLoaderTestCase
     public void testLoadClass()
         throws Exception
     {
-        Class<?> dummyClass1 = Dummy.class;
-        Class<?> dummyClass2 = classLoader.loadClass( dummyClass1.getName() );
+        final Class<?> dummyClass1 = Dummy.class;
+        final Class<?> dummyClass2 = classLoader.loadClass( dummyClass1.getName() );
 
         assertEquals( dummyClass1.getName(), dummyClass2.getName() );
         assertFalse( dummyClass2.getDeclaredConstructor().newInstance() instanceof Dummy );
@@ -153,13 +153,13 @@ public final class BinderClassLoaderTestCase
     public void testGetPrefixedResource()
         throws Exception
     {
-        URL resource = classLoader.getResource( "inmemory:dummyResource" );
+        final URL resource = classLoader.getResource( "inmemory:dummyResource" );
         assertNotNull( resource );
         assertEquals( resource.getPath(), "dummyResource" );
-        InputStream input = resource.openStream();
+        final InputStream input = resource.openStream();
         try
         {
-            byte[] bytes = toByteArray( input );
+            final byte[] bytes = toByteArray( input );
             assertArrayEquals( bytes, IN_MEMORY_RESOURCES.get( "dummyResource" ) );
         }
         finally
@@ -168,10 +168,10 @@ public final class BinderClassLoaderTestCase
         }
     }
 
-    private static byte[] toByteArray( InputStream input )
+    private static byte[] toByteArray( final InputStream input )
         throws IOException
     {
-        ByteArrayOutputStream result = new ByteArrayOutputStream( 512 );
+        final ByteArrayOutputStream result = new ByteArrayOutputStream( 512 );
         int n;
         while ( ( n = input.read() ) != -1 )
         {
@@ -189,9 +189,9 @@ public final class BinderClassLoaderTestCase
             IN_MEMORY_RESOURCES.put( "dummyResource", "Resource data".getBytes( "UTF-8" ) );
 
             // put bytes of Dummy class
-            String dummyClassName = Dummy.class.getName();
-            String resourceName = dummyClassName.replace( '.', '/' ) + ".class";
-            InputStream input = Dummy.class.getClassLoader().getResourceAsStream( resourceName );
+            final String dummyClassName = Dummy.class.getName();
+            final String resourceName = dummyClassName.replace( '.', '/' ) + ".class";
+            final InputStream input = Dummy.class.getClassLoader().getResourceAsStream( resourceName );
             try
             {
                 IN_MEMORY_RESOURCES.put( resourceName, toByteArray( input ) );
@@ -201,11 +201,11 @@ public final class BinderClassLoaderTestCase
                 input.close();
             }
         }
-        catch ( UnsupportedEncodingException e )
+        catch ( final UnsupportedEncodingException e )
         {
             throw new ExceptionInInitializerError( e );
         }
-        catch ( IOException e )
+        catch ( final IOException e )
         {
             throw new ExceptionInInitializerError( e );
         }
@@ -218,15 +218,15 @@ public final class BinderClassLoaderTestCase
         private final InMemoryURLStreamHandlerFactory streamHandlerFactory = new InMemoryURLStreamHandlerFactory();
 
         @Override
-        protected Class<?> loadClass( String name, boolean resolve )
+        protected Class<?> loadClass( final String name, final boolean resolve )
             throws ClassNotFoundException
         {
-            String dummyClassName = Dummy.class.getName();
+            final String dummyClassName = Dummy.class.getName();
             if ( dummyClassName.equals( name ) ) {
                 Class<?> result = findLoadedClass( name );
                 if ( result == null )
                 {
-                    byte[] byteCode = IN_MEMORY_RESOURCES.get( dummyClassName.replace( '.', '/' ) + ".class" );
+                    final byte[] byteCode = IN_MEMORY_RESOURCES.get( dummyClassName.replace( '.', '/' ) + ".class" );
                     result = defineClass( name, byteCode, 0, byteCode.length );
                     resolveClass( result );
                 }
@@ -236,7 +236,7 @@ public final class BinderClassLoaderTestCase
         }
 
         @Override
-        public URL getResource( String name )
+        public URL getResource( final String name )
         {
             if ( name.startsWith( "inmemory:" ) )
             {
@@ -244,7 +244,7 @@ public final class BinderClassLoaderTestCase
                 {
                     return new URL( null, name, streamHandlerFactory.createURLStreamHandler( "inmemory" ) );
                 }
-                catch ( MalformedURLException e )
+                catch ( final MalformedURLException e )
                 {
                     throw new RuntimeException( e );
                 }
@@ -255,12 +255,12 @@ public final class BinderClassLoaderTestCase
         private static class InMemoryURLStreamHandlerFactory
             implements URLStreamHandlerFactory
         {
-            public URLStreamHandler createURLStreamHandler( String protocol )
+            public URLStreamHandler createURLStreamHandler( final String protocol )
             {
                 return new URLStreamHandler()
                 {
                     @Override
-                    protected URLConnection openConnection( URL u )
+                    protected URLConnection openConnection( final URL u )
                         throws IOException
                     {
                         return new URLConnection( u )
@@ -272,7 +272,7 @@ public final class BinderClassLoaderTestCase
                                 throws IOException
                             {
                                 if ( !connected ) {
-                                    byte[] data = IN_MEMORY_RESOURCES.get( url.getPath() );
+                                    final byte[] data = IN_MEMORY_RESOURCES.get( url.getPath() );
                                     if ( data != null )
                                     {
                                         inputStream = new ByteArrayInputStream( data );

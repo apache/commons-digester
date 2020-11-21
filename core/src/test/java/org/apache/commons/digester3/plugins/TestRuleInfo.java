@@ -43,38 +43,38 @@ public class TestRuleInfo
         // * tests that custom rules can be declared on a
         // separate class by explicitly declaring the rule class.
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test5a.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 1, children.size() );
 
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( TextLabel2.class, child.getClass() );
-        TextLabel2 label = (TextLabel2) child;
+        final TextLabel2 label = (TextLabel2) child;
 
         // id should not be mapped, label should
         assertEquals( "anonymous", label.getId() );
@@ -89,38 +89,38 @@ public class TestRuleInfo
         // separate class by explicitly declaring the rule class.
         // and explicitly declaring the rule method name.
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test5b.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 1, children.size() );
 
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( TextLabel2.class, child.getClass() );
-        TextLabel2 label = (TextLabel2) child;
+        final TextLabel2 label = (TextLabel2) child;
 
         // id should not be mapped, altlabel should
         assertEquals( "anonymous", label.getId() );
@@ -135,38 +135,38 @@ public class TestRuleInfo
         // separate class with name {plugin-class}RuleInfo,
         // and they are automatically detected and loaded.
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test5c.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 1, children.size() );
 
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( TextLabel2.class, child.getClass() );
-        TextLabel2 label = (TextLabel2) child;
+        final TextLabel2 label = (TextLabel2) child;
 
         // id should not be mapped, label should
         assertEquals( "anonymous", label.getId() );

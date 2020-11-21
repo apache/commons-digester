@@ -46,8 +46,8 @@ public final class CallMethodBuilder
 
     private boolean useExactMatch = false;
 
-    CallMethodBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
-                       String methodName, ClassLoader classLoader )
+    CallMethodBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder,
+                       final String methodName, final ClassLoader classLoader )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.methodName = methodName;
@@ -63,7 +63,7 @@ public final class CallMethodBuilder
      * @param targetOffset location of the target object.
      * @return this builder instance
      */
-    public CallMethodBuilder withTargetOffset( int targetOffset )
+    public CallMethodBuilder withTargetOffset( final int targetOffset )
     {
         this.targetOffset = targetOffset;
         return this;
@@ -78,7 +78,7 @@ public final class CallMethodBuilder
      * @param paramTypeNames The Java classes names that represent the parameter types of the method arguments
      * @return this builder instance
      */
-    public CallMethodBuilder withParamTypes( String... paramTypeNames )
+    public CallMethodBuilder withParamTypes( final String... paramTypeNames )
     {
         Class<?>[] paramTypes = null;
         if ( paramTypeNames != null )
@@ -90,7 +90,7 @@ public final class CallMethodBuilder
                 {
                     paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
                 }
-                catch ( ClassNotFoundException e )
+                catch ( final ClassNotFoundException e )
                 {
                     this.reportError( format( "callMethod( \"%s\" ).withParamTypes( %s )", this.methodName,
                                                      Arrays.toString( paramTypeNames ) ),
@@ -111,7 +111,7 @@ public final class CallMethodBuilder
      * @param paramTypes The Java classes that represent the parameter types of the method arguments
      * @return this builder instance
      */
-    public CallMethodBuilder withParamTypes( Class<?>... paramTypes )
+    public CallMethodBuilder withParamTypes( final Class<?>... paramTypes )
     {
         this.paramTypes = paramTypes;
 
@@ -133,7 +133,7 @@ public final class CallMethodBuilder
      * @param useExactMatch Flag to mark exact matching or not
      * @return this builder instance
      */
-    public CallMethodBuilder useExactMatch( boolean useExactMatch )
+    public CallMethodBuilder useExactMatch( final boolean useExactMatch )
     {
         this.useExactMatch = useExactMatch;
         return this;
@@ -146,7 +146,7 @@ public final class CallMethodBuilder
      *        from the body of this element.
      * @return this builder instance
      */
-    public CallMethodBuilder withParamCount( int paramCount )
+    public CallMethodBuilder withParamCount( final int paramCount )
     {
         if ( paramCount < 0 )
         {
@@ -190,7 +190,7 @@ public final class CallMethodBuilder
     @Override
     protected CallMethodRule createRule()
     {
-        CallMethodRule callMethodRule = new CallMethodRule( targetOffset, methodName, paramCount, paramTypes );
+        final CallMethodRule callMethodRule = new CallMethodRule( targetOffset, methodName, paramCount, paramTypes );
         callMethodRule.setUseExactMatch( useExactMatch );
         return callMethodRule;
     }

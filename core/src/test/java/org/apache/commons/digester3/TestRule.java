@@ -55,7 +55,7 @@ public class TestRule
      * 
      * @param identifier Used to tell which TestRule is which
      */
-    public TestRule( String identifier )
+    public TestRule( final String identifier )
     {
 
         this.identifier = identifier;
@@ -67,7 +67,7 @@ public class TestRule
      * @param identifier Used to tell which TestRule is which
      * @param namespaceURI Set rule namespace
      */
-    public TestRule( String identifier, String namespaceURI )
+    public TestRule( final String identifier, final String namespaceURI )
     {
 
         this.identifier = identifier;
@@ -81,7 +81,7 @@ public class TestRule
      * 'Begin' call.
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         appendCall();
@@ -91,7 +91,7 @@ public class TestRule
      * 'Body' call.
      */
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
         this.bodyText = text;
@@ -102,7 +102,7 @@ public class TestRule
      * 'End' call.
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         appendCall();
@@ -147,7 +147,7 @@ public class TestRule
     /**
      * Set call order list
      */
-    public void setOrder( List<Rule> order )
+    public void setOrder( final List<Rule> order )
     {
         this.order = order;
     }
@@ -168,12 +168,12 @@ public class TestRule
 
         private final List<Rule> callOrder;
 
-        public TestRuleProvider( String identifier )
+        public TestRuleProvider( final String identifier )
         {
             this( identifier, null );
         }
 
-        public TestRuleProvider( String identifier, List<Rule> callOrder )
+        public TestRuleProvider( final String identifier, final List<Rule> callOrder )
         {
             this.identifier = identifier;
             this.callOrder = callOrder;
@@ -181,7 +181,7 @@ public class TestRule
 
         public TestRule get()
         {
-            TestRule testRule = new TestRule( identifier );
+            final TestRule testRule = new TestRule( identifier );
             testRule.setOrder( callOrder );
             return testRule;
         }

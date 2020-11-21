@@ -58,11 +58,11 @@ final class FromBinderRuleSet
      * @param <RB> The Digester rule builder type
      * @param ruleBuilder The input rule builder instance.
      */
-    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> void registerProvider( RB ruleBuilder )
+    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> void registerProvider( final RB ruleBuilder )
     {
         this.providers.add( ruleBuilder );
 
-        Key key = new Key( ruleBuilder.getPattern(), ruleBuilder.getNamespaceURI() );
+        final Key key = new Key( ruleBuilder.getPattern(), ruleBuilder.getNamespaceURI() );
 
         // O(1)
         Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
@@ -88,13 +88,13 @@ final class FromBinderRuleSet
      * @param type the rule builder type the client is looking for
      * @return the rule builder of input type, if any
      */
-    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB getProvider( String keyPattern,
-    /* @Nullable */String namespaceURI, Class<RB> type )
+    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB getProvider( final String keyPattern,
+    /* @Nullable */final String namespaceURI, final Class<RB> type )
     {
-        Key key = new Key( keyPattern, namespaceURI );
+        final Key key = new Key( keyPattern, namespaceURI );
 
         // O(1)
-        Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
+        final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
 
         if ( indexedProviders == null || indexedProviders.isEmpty() )
         {
@@ -102,7 +102,7 @@ final class FromBinderRuleSet
         }
 
         // FIXME O(n) not so good
-        for ( AbstractBackToLinkedRuleBuilder<? extends Rule> ruleProvider : indexedProviders )
+        for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> ruleProvider : indexedProviders )
         {
             if ( type.isInstance( ruleProvider ) )
             {
@@ -125,9 +125,9 @@ final class FromBinderRuleSet
     /**
      * {@inheritDoc}
      */
-    public void addRuleInstances( Digester digester )
+    public void addRuleInstances( final Digester digester )
     {
-        for ( AbstractBackToLinkedRuleBuilder<? extends Rule> provider : providers )
+        for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> provider : providers )
         {
             digester.addRule( provider.getPattern(), provider.get() );
         }
@@ -151,7 +151,7 @@ final class FromBinderRuleSet
 
         private final String namespaceURI;
 
-        public Key( String pattern, String namespaceURI )
+        public Key( final String pattern, final String namespaceURI )
         {
             this.pattern = pattern;
             this.namespaceURI = namespaceURI;
@@ -184,7 +184,7 @@ final class FromBinderRuleSet
          * {@inheritDoc}
          */
         @Override
-        public boolean equals( Object obj )
+        public boolean equals( final Object obj )
         {
             if ( this == obj )
             {
@@ -201,7 +201,7 @@ final class FromBinderRuleSet
                 return false;
             }
 
-            Key other = (Key) obj;
+            final Key other = (Key) obj;
             if ( namespaceURI == null )
             {
                 if ( other.getNamespaceURI() != null )

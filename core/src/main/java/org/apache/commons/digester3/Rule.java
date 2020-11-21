@@ -81,7 +81,7 @@ import org.xml.sax.Attributes;
      *
      * @param digester the <code>Digester</code> with which this <code>Rule</code> is associated
      */
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         this.digester = digester;
     }
@@ -102,7 +102,7 @@ import org.xml.sax.Attributes;
      * @param namespaceURI Namespace URI for which this Rule is relevant, or <code>null</code> to match independent of
      *            namespace.
      */
-    public void setNamespaceURI( String namespaceURI )
+    public void setNamespaceURI( final String namespaceURI )
     {
         this.namespaceURI = namespaceURI;
     }
@@ -119,7 +119,7 @@ import org.xml.sax.Attributes;
      * @throws Exception if any error occurs
      * @since Digester 1.4
      */
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         // The default implementation does nothing
@@ -136,7 +136,7 @@ import org.xml.sax.Attributes;
      * @throws Exception if any error occurs
      * @since Digester 1.4
      */
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
         // The default implementation does nothing
@@ -151,7 +151,7 @@ import org.xml.sax.Attributes;
      * @throws Exception if any error occurs
      * @since Digester 1.4
      */
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         // The default implementation does nothing

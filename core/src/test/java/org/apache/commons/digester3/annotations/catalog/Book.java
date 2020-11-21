@@ -39,7 +39,7 @@ public final class Book
     @BeanPropertySetter( pattern = "catalog/book/desc" )
     private String desc;
 
-    public Book( String isbn )
+    public Book( final String isbn )
     {
         this.isbn = isbn;
     }
@@ -49,7 +49,7 @@ public final class Book
         return this.title;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -59,7 +59,7 @@ public final class Book
         return this.author;
     }
 
-    public void setAuthor( String author )
+    public void setAuthor( final String author )
     {
         this.author = author;
     }
@@ -69,7 +69,7 @@ public final class Book
         return this.desc;
     }
 
-    public void setDesc( String desc )
+    public void setDesc( final String desc )
     {
         this.desc = desc;
     }
@@ -80,7 +80,7 @@ public final class Book
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -91,7 +91,7 @@ public final class Book
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Book other = (Book) obj;
+        final Book other = (Book) obj;
         if ( this.author == null )
         {
             if ( other.getAuthor() != null ) {

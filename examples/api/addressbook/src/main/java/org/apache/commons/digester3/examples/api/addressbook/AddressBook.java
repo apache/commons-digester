@@ -27,7 +27,7 @@ public class AddressBook
 
     private final LinkedList<Person> people = new LinkedList<Person>();
 
-    public void addPerson( Person p )
+    public void addPerson( final Person p )
     {
         people.addLast( p );
     }
@@ -36,7 +36,7 @@ public class AddressBook
     {
         System.out.println( "Address book has " + people.size() + " entries" );
 
-        for (Person p : people) {
+        for (final Person p : people) {
             p.print();
         }
     }

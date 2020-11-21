@@ -37,7 +37,7 @@ public class PluginConfigurationException
      *
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginConfigurationException( Throwable cause )
+    public PluginConfigurationException( final Throwable cause )
     {
         super( cause );
     }
@@ -47,7 +47,7 @@ public class PluginConfigurationException
      *
      * @param msg describes the reason this exception is being thrown.
      */
-    public PluginConfigurationException( String msg )
+    public PluginConfigurationException( final String msg )
     {
         super( msg );
     }
@@ -58,7 +58,7 @@ public class PluginConfigurationException
      * @param msg describes the reason this exception is being thrown.
      * @param cause underlying exception that caused this to be thrown
      */
-    public PluginConfigurationException( String msg, Throwable cause )
+    public PluginConfigurationException( final String msg, final Throwable cause )
     {
         super( msg, cause );
     }

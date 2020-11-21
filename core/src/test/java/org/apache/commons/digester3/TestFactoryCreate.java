@@ -45,7 +45,7 @@ public class TestFactoryCreate
 
     private final boolean ignoreCreateExceptions;
 
-    public TestFactoryCreate( boolean ignoreCreateExceptions )
+    public TestFactoryCreate( final boolean ignoreCreateExceptions )
     {
         this.ignoreCreateExceptions = ignoreCreateExceptions;
     }
@@ -53,7 +53,7 @@ public class TestFactoryCreate
     @Parameters
     public static Collection<Object[]> data()
     {
-        Collection<Object[]> data = new ArrayList<Object[]>(2);
+        final Collection<Object[]> data = new ArrayList<Object[]>(2);
 
         data.add( new Object[] { true } );
         data.add( new Object[] { false } );
@@ -73,7 +73,7 @@ public class TestFactoryCreate
             extends AbstractObjectCreationFactory<Object>
         {
             @Override
-            public Object createObject( Attributes attributes )
+            public Object createObject( final Attributes attributes )
                 throws Exception
             {
                 throw new RuntimeException();
@@ -81,10 +81,10 @@ public class TestFactoryCreate
         }
 
         // now for the tests
-        String xml = "<?xml version='1.0' ?><root><element/></root>";
+        final String xml = "<?xml version='1.0' ?><root><element/></root>";
 
         // test default - which is to propagate the exception
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
         digester.addFactoryCreate( "root", new ThrowExceptionCreateRule(), ignoreCreateExceptions );
         try
         {
@@ -96,7 +96,7 @@ public class TestFactoryCreate
             }
 
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             if ( ignoreCreateExceptions )
             {

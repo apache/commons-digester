@@ -44,42 +44,42 @@ public class TestInline
         // * tests that autosetproperties works
         // * tests that multiple different classes can be loaded via the
         // same plugin rule (ie at the same pattern).
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test1.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 2, children.size() );
 
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( TextLabel.class, child.getClass() );
-        TextLabel label1 = (TextLabel) child;
+        final TextLabel label1 = (TextLabel) child;
         assertEquals( "anonymous", label1.getId() );
         assertEquals( "1", label1.getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
         assertEquals( TextLabel.class, child.getClass() );
-        TextLabel label2 = (TextLabel) child;
+        final TextLabel label2 = (TextLabel) child;
         assertEquals( "L1", label2.getId() );
         assertEquals( "2", label2.getLabel() );
     }
@@ -94,42 +94,42 @@ public class TestInline
         // case class is created for PluginRules, then this method should be
         // moved there.
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "/root/widget", pcr );
         digester.addSetNext( "/root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         try
         {
             digester.parse( Utils.getInputStream( this, "test1.xml" ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 2, children.size() );
 
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( TextLabel.class, child.getClass() );
-        TextLabel label1 = (TextLabel) child;
+        final TextLabel label1 = (TextLabel) child;
         assertEquals( "anonymous", label1.getId() );
         assertEquals( "1", label1.getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
         assertEquals( TextLabel.class, child.getClass() );
-        TextLabel label2 = (TextLabel) child;
+        final TextLabel label2 = (TextLabel) child;
         assertEquals( "L1", label2.getId() );
         assertEquals( "2", label2.getLabel() );
     }

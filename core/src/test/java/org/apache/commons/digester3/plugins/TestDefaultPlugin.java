@@ -43,40 +43,40 @@ public class TestDefaultPlugin
         // * tests that when a PluginCreateRule is defined with a default
         // class, that the default class is instantiated when no class
         // or id is specified in the xml file.
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class, TextLabel.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class, TextLabel.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
         digester.parse( Utils.getInputStream( this, "test2.xml" ) );
 
         Object child;
-        List<Widget> children = root.getChildren();
+        final List<Widget> children = root.getChildren();
         assertNotNull( children );
         assertEquals( 3, children.size() );
 
         child = children.get( 0 );
         assertNotNull( child );
         assertEquals( TextLabel.class, child.getClass() );
-        TextLabel label1 = (TextLabel) child;
+        final TextLabel label1 = (TextLabel) child;
         assertEquals( "label1", label1.getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
         assertEquals( TextLabel.class, child.getClass() );
-        TextLabel label2 = (TextLabel) child;
+        final TextLabel label2 = (TextLabel) child;
         assertEquals( "label2", label2.getLabel() );
 
         child = children.get( 2 );
         assertNotNull( child );
         assertEquals( Slider.class, child.getClass() );
-        Slider slider1 = (Slider) child;
+        final Slider slider1 = (Slider) child;
         assertEquals( "slider1", slider1.getLabel() );
     }
 
@@ -85,25 +85,25 @@ public class TestDefaultPlugin
     {
         // * tests that when there is no default plugin, it is an error
         // not to have one of plugin-class or plugin-id specified
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
-        Log oldLog = digester.getLogger();
+        final Log oldLog = digester.getLogger();
         try
         {
             digester.setLogger( new NoOpLog() );
             digester.parse( Utils.getInputStream( this, "test2.xml" ) );
             fail("Expected SAXParseException");
         }
-        catch ( SAXParseException e )
+        catch ( final SAXParseException e )
         {
             assertEquals( PluginInvalidInputException.class, e.getException().getClass() );
         }
@@ -119,25 +119,25 @@ public class TestDefaultPlugin
     {
         // * tests that the default plugin must implement or extend the
         // plugin base class.
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginCreateRule pcr = new PluginCreateRule( Widget.class, Object.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class, Object.class );
         digester.addRule( "root/widget", pcr );
         digester.addSetNext( "root/widget", "addChild" );
 
-        Container root = new Container();
+        final Container root = new Container();
         digester.push( root );
 
-        Log oldLog = digester.getLogger();
+        final Log oldLog = digester.getLogger();
         try
         {
             digester.setLogger( new NoOpLog() );
             digester.parse( Utils.getInputStream( this, "test2.xml" ) );
             fail("Expected SAXParseException");
         }
-        catch ( SAXParseException e )
+        catch ( final SAXParseException e )
         {
             assertEquals( PluginConfigurationException.class, e.getException().getClass() );
         }

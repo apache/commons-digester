@@ -52,16 +52,16 @@ public class ObjectCreateRule
         ArrayList<RecordedInvocation> invocations = new ArrayList<RecordedInvocation>();
         Object delegate;
 
-        DeferredConstructionCallback( Constructor<?> constructor, Object[] constructorArgs )
+        DeferredConstructionCallback( final Constructor<?> constructor, final Object[] constructorArgs )
         {
             this.constructor = constructor;
             this.constructorArgs = constructorArgs;
         }
 
-        public Object intercept( Object obj, Method method, Object[] args, MethodProxy proxy )
+        public Object intercept( final Object obj, final Method method, final Object[] args, final MethodProxy proxy )
             throws Throwable
         {
-            boolean hasDelegate = delegate != null;
+            final boolean hasDelegate = delegate != null;
             if ( !hasDelegate )
             {
                 invocations.add( new RecordedInvocation( method, args ) );
@@ -78,7 +78,7 @@ public class ObjectCreateRule
         {
             convertTo( constructor.getParameterTypes(), constructorArgs );
             delegate = constructor.newInstance( constructorArgs );
-            for ( RecordedInvocation invocation : invocations )
+            for ( final RecordedInvocation invocation : invocations )
             {
                 invocation.getInvokedMethod().invoke( delegate, invocation.getArguments() );
             }
@@ -97,12 +97,12 @@ public class ObjectCreateRule
         private final boolean hasDefaultConstructor;
         private Factory factory;
 
-        ProxyManager( Class<?> clazz, Constructor<?> constructor, Object[] constructorArguments, Digester digester )
+        ProxyManager( final Class<?> clazz, final Constructor<?> constructor, final Object[] constructorArguments, final Digester digester )
         {
             this.clazz = clazz;
             hasDefaultConstructor = getAccessibleConstructor( clazz, new Class[0] ) != null;
             this.constructor = constructor;
-            Class<?>[] argTypes = constructor.getParameterTypes();
+            final Class<?>[] argTypes = constructor.getParameterTypes();
             templateConstructorArguments = new Object[argTypes.length];
             if ( constructorArguments == null )
             {
@@ -137,18 +137,18 @@ public class ObjectCreateRule
 
         Object createProxy()
         {
-            Object[] constructorArguments = new Object[templateConstructorArguments.length];
+            final Object[] constructorArguments = new Object[templateConstructorArguments.length];
             arraycopy( templateConstructorArguments, 0, constructorArguments, 0, constructorArguments.length );
             digester.pushParams( constructorArguments );
 
-            DeferredConstructionCallback callback =
+            final DeferredConstructionCallback callback =
                 new DeferredConstructionCallback( constructor, constructorArguments );
 
             Object result;
 
             if ( factory == null )
             {
-                Enhancer enhancer = new Enhancer();
+                final Enhancer enhancer = new Enhancer();
                 enhancer.setSuperclass( clazz );
                 enhancer.setCallback( callback );
                 enhancer.setClassLoader( digester.getClassLoader() );
@@ -177,7 +177,7 @@ public class ObjectCreateRule
             return result;
         }
 
-        void finalize( Object proxy )
+        void finalize( final Object proxy )
             throws Exception
         {
             digester.popParams();
@@ -192,7 +192,7 @@ public class ObjectCreateRule
      *
      * @param className Java class name of the object to be created
      */
-    public ObjectCreateRule( String className )
+    public ObjectCreateRule( final String className )
     {
         this( className, (String) null );
     }
@@ -202,7 +202,7 @@ public class ObjectCreateRule
      *
      * @param clazz Java class name of the object to be created
      */
-    public ObjectCreateRule( Class<?> clazz )
+    public ObjectCreateRule( final Class<?> clazz )
     {
         this( clazz.getName(), (String) null );
         this.clazz = clazz;
@@ -215,7 +215,7 @@ public class ObjectCreateRule
      * @param className Java class name of the object to be created
      * @param attributeName Attribute name which, if present, contains an override of the class name to create
      */
-    public ObjectCreateRule( String className, String attributeName )
+    public ObjectCreateRule( final String className, final String attributeName )
     {
         this.className = className;
         this.attributeName = attributeName;
@@ -227,7 +227,7 @@ public class ObjectCreateRule
      * @param attributeName Attribute name which, if present, contains an
      * @param clazz Java class name of the object to be created override of the class name to create
      */
-    public ObjectCreateRule( String attributeName, Class<?> clazz )
+    public ObjectCreateRule( final String attributeName, final Class<?> clazz )
     {
         this( clazz != null ? clazz.getName() : null, attributeName );
         this.clazz = clazz;
@@ -279,7 +279,7 @@ public class ObjectCreateRule
      * @param constructorArgumentTypes the constructor argument types
      * @since 3.2
      */
-    public void setConstructorArgumentTypes( Class<?>... constructorArgumentTypes )
+    public void setConstructorArgumentTypes( final Class<?>... constructorArgumentTypes )
     {
         if ( constructorArgumentTypes == null )
         {
@@ -298,7 +298,7 @@ public class ObjectCreateRule
      * @param constructorArguments the default constructor arguments.
      * @since 3.2
      */
-    public void setDefaultConstructorArguments( Object... constructorArguments )
+    public void setDefaultConstructorArguments( final Object... constructorArguments )
     {
         if ( constructorArguments == null )
         {
@@ -312,7 +312,7 @@ public class ObjectCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         Class<?> clazz = this.clazz;
@@ -323,7 +323,7 @@ public class ObjectCreateRule
             String realClassName = className;
             if ( attributeName != null )
             {
-                String value = attributes.getValue( attributeName );
+                final String value = attributes.getValue( attributeName );
                 if ( value != null )
                 {
                     realClassName = value;
@@ -357,7 +357,7 @@ public class ObjectCreateRule
         {
             if ( proxyManager == null )
             {
-                Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentTypes );
+                final Constructor<?> constructor = getAccessibleConstructor( clazz, constructorArgumentTypes );
 
                 if ( constructor == null )
                 {
@@ -378,10 +378,10 @@ public class ObjectCreateRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
-        Object top = getDigester().pop();
+        final Object top = getDigester().pop();
 
         if ( proxyManager != null )
         {
@@ -405,7 +405,7 @@ public class ObjectCreateRule
         return format( "ObjectCreateRule[className=%s, attributeName=%s]", className, attributeName );
     }
 
-    private static void convertTo( Class<?>[] types, Object[] array )
+    private static void convertTo( final Class<?>[] types, final Object[] array )
     {
         if ( array.length != types.length )
         {

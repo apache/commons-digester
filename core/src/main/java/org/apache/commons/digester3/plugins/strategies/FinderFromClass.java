@@ -62,7 +62,7 @@ public class FinderFromClass
      * @param methodAttr may be null.
      * @param dfltMethodName may be null.
      */
-    public FinderFromClass( String ruleClassAttr, String methodAttr, String dfltMethodName )
+    public FinderFromClass( final String ruleClassAttr, final String methodAttr, final String dfltMethodName )
     {
         this.ruleClassAttr = ruleClassAttr;
         this.methodAttr = methodAttr;
@@ -98,10 +98,10 @@ public class FinderFromClass
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester digester, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester digester, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
-        String ruleClassName = p.getProperty( ruleClassAttr );
+        final String ruleClassName = p.getProperty( ruleClassAttr );
         if ( ruleClassName == null )
         {
             // nope, user hasn't requested dynamic rules to be loaded
@@ -130,7 +130,7 @@ public class FinderFromClass
             // load the plugin class object
             ruleClass = digester.getClassLoader().loadClass( ruleClassName );
         }
-        catch ( ClassNotFoundException cnfe )
+        catch ( final ClassNotFoundException cnfe )
         {
             throw new PluginException( "Unable to load class " + ruleClassName, cnfe );
         }

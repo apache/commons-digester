@@ -35,12 +35,12 @@ class PatternRule
 
     private String pattern;
 
-    public PatternRule( PatternStack patternStack )
+    public PatternRule( final PatternStack patternStack )
     {
         this( "value", patternStack );
     }
 
-    public PatternRule( String attributeName, PatternStack patternStack )
+    public PatternRule( final String attributeName, final PatternStack patternStack )
     {
         this.attributeName = attributeName;
         this.patternStack = patternStack;
@@ -50,7 +50,7 @@ class PatternRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         this.pattern = attributes.getValue( this.attributeName );
@@ -64,7 +64,7 @@ class PatternRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
         throws Exception
     {
         if ( this.pattern != null )

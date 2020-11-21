@@ -27,7 +27,7 @@ public final class FakeHandler
     implements AnnotationHandler<Annotation, AnnotatedElement>
 {
 
-    public void handle( Annotation annotation, AnnotatedElement element, RulesBinder rulesBinder )
+    public void handle( final Annotation annotation, final AnnotatedElement element, final RulesBinder rulesBinder )
     {
         // do nothing
     }

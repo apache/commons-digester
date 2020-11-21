@@ -41,7 +41,7 @@ public final class Item
         return description;
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -51,7 +51,7 @@ public final class Item
         return link;
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -61,13 +61,13 @@ public final class Item
         return title;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -78,7 +78,7 @@ public final class Item
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Item other = (Item) obj;
+        final Item other = (Item) obj;
         if ( description == null )
         {
             if ( other.description != null ) {

@@ -40,28 +40,28 @@ public class Person
     /**
      * A unique id for this person. Note that the Digester automatically converts the id to an integer.
      */
-    public void setId( int id )
+    public void setId( final int id )
     {
         this.id = id;
     }
 
-    public void setCategory( String category )
+    public void setCategory( final String category )
     {
         this.category = category;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
 
     /** we assume only one email of each type... */
-    public void addEmail( String type, String address )
+    public void addEmail( final String type, final String address )
     {
         emails.put( type, address );
     }
 
-    public void addAddress( Address addr )
+    public void addAddress( final Address addr )
     {
         addresses.add( addr );
     }
@@ -72,13 +72,13 @@ public class Person
         System.out.println( "  category=" + category );
         System.out.println( "  name=" + name );
 
-        for (String type : emails.keySet()) {
-            String address = emails.get( type );
+        for (final String type : emails.keySet()) {
+            final String address = emails.get( type );
 
             System.out.println( "  email (type " + type + ") : " + address );
         }
 
-        for (Address addr : addresses) {
+        for (final Address addr : addresses) {
             addr.print( System.out, 2 );
         }
     }

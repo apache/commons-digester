@@ -67,7 +67,7 @@ public class XMLSchemaTestCase
 
         // Use the test schema
         digester.setNamespaceAware( true );
-        Schema test13schema =
+        final Schema test13schema =
             SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI ).newSchema( this.getClass().getClassLoader().getResource( "org/apache/commons/digester3/Test13.xsd" ) );
         digester.setXMLSchema( test13schema );
 
@@ -106,16 +106,16 @@ public class XMLSchemaTestCase
     {
 
         // Listen to validation errors
-        TestErrorHandler teh = new TestErrorHandler();
+        final TestErrorHandler teh = new TestErrorHandler();
         digester.setErrorHandler( teh );
 
         // Parse our test input
-        Employee employee = digester.parse( getInputStream( "Test13-01.xml" ) );
+        final Employee employee = digester.parse( getInputStream( "Test13-01.xml" ) );
         assertNotNull( "failed to parsed an employee", employee );
         assertTrue( "Test13-01 should not generate errors in Schema validation", teh.clean );
 
         // Test document has been processed
-        Address ha = employee.getAddress( "home" );
+        final Address ha = employee.getAddress( "home" );
         assertNotNull( ha );
         assertEquals( "Home City", ha.getCity() );
         assertEquals( "HS", ha.getState() );
@@ -128,7 +128,7 @@ public class XMLSchemaTestCase
     {
 
         // Listen to validation errors
-        TestErrorHandler teh = new TestErrorHandler();
+        final TestErrorHandler teh = new TestErrorHandler();
         digester.setErrorHandler( teh );
 
         // Parse our test input
@@ -145,7 +145,7 @@ public class XMLSchemaTestCase
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs
      */
-    protected InputStream getInputStream( String name )
+    protected InputStream getInputStream( final String name )
         throws IOException
     {
 
@@ -162,17 +162,17 @@ public class XMLSchemaTestCase
         {
         }
 
-        public void error( SAXParseException exception )
+        public void error( final SAXParseException exception )
         {
             clean = false;
         }
 
-        public void fatalError( SAXParseException exception )
+        public void fatalError( final SAXParseException exception )
         {
             clean = false;
         }
 
-        public void warning( SAXParseException exception )
+        public void warning( final SAXParseException exception )
         {
             clean = false;
         }

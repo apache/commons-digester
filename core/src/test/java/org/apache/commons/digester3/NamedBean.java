@@ -32,7 +32,7 @@ public class NamedBean
     {
     }
 
-    public NamedBean( String name )
+    public NamedBean( final String name )
     {
     }
 
@@ -41,12 +41,12 @@ public class NamedBean
         return name;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
 
-    public void test( String name, String ignored )
+    public void test( final String name, final String ignored )
     {
         setName( name );
     }

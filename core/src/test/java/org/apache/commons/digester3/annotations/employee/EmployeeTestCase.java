@@ -36,7 +36,7 @@ public final class EmployeeTestCase
     public void testEmployee()
         throws Exception
     {
-        Employee employee = new Employee();
+        final Employee employee = new Employee();
         employee.setFirstName( "First Name" );
         employee.setLastName( "Last Name" );
 
@@ -62,7 +62,7 @@ public final class EmployeeTestCase
     @Override
     protected Collection<RulesModule> getAuxModules()
     {
-        Collection<RulesModule> modules = new Stack<RulesModule>();
+        final Collection<RulesModule> modules = new Stack<RulesModule>();
         modules.add( new FromAnnotationsRuleModule()
         {
 

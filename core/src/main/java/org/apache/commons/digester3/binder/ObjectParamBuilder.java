@@ -37,8 +37,8 @@ public final class ObjectParamBuilder<T>
 
     private String attributeName;
 
-    ObjectParamBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
-                        /* @Nullable */T paramObj )
+    ObjectParamBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder,
+                        /* @Nullable */final T paramObj )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.paramObj = paramObj;
@@ -50,7 +50,7 @@ public final class ObjectParamBuilder<T>
      * @param paramIndex The zero-relative index of the parameter we are saving
      * @return this builder instance
      */
-    public ObjectParamBuilder<T> ofIndex( int paramIndex )
+    public ObjectParamBuilder<T> ofIndex( final int paramIndex )
     {
         if ( paramIndex < 0 )
         {
@@ -67,7 +67,7 @@ public final class ObjectParamBuilder<T>
      * @param attributeName The attribute which we are attempting to match
      * @return this builder instance
      */
-    public ObjectParamBuilder<T> matchingAttribute( /* @Nullable */String attributeName )
+    public ObjectParamBuilder<T> matchingAttribute( /* @Nullable */final String attributeName )
     {
         this.attributeName = attributeName;
         return this;

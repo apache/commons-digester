@@ -34,8 +34,8 @@ public final class ByRuleProviderBuilder<R extends Rule>
 
     private final RuleProvider<R> provider;
 
-    ByRuleProviderBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                           LinkedRuleBuilder mainBuilder, RuleProvider<R> provider )
+    ByRuleProviderBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                           final LinkedRuleBuilder mainBuilder, final RuleProvider<R> provider )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.provider = provider;

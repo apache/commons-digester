@@ -36,12 +36,12 @@ public class BetaBean
         return name;
     }
 
-    public void setName( String name )
+    public void setName( final String name )
     {
         this.name = name;
     }
 
-    public void setParent( Nameable parent )
+    public void setParent( final Nameable parent )
     {
         this.parent = parent;
     }
@@ -51,7 +51,7 @@ public class BetaBean
         return parent;
     }
 
-    public void setChild( Nameable child )
+    public void setChild( final Nameable child )
     {
         this.child = child;
     }

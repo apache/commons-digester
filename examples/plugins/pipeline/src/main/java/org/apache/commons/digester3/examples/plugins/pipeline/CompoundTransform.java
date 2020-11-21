@@ -36,7 +36,7 @@ public class CompoundTransform
 
     private final LinkedList<Transform> transforms = new LinkedList<Transform>();
 
-    public void addTransform( Transform transform )
+    public void addTransform( final Transform transform )
     {
         transforms.add( transform );
     }
@@ -44,15 +44,15 @@ public class CompoundTransform
     @Override
     public String transform( String s )
     {
-        for (Transform t : transforms) {
+        for (final Transform t : transforms) {
             s = t.transform( s );
         }
         return s;
     }
 
-    public static void addRules( Digester d, String patternPrefix )
+    public static void addRules( final Digester d, final String patternPrefix )
     {
-        PluginCreateRule pcr = new PluginCreateRule( Transform.class );
+        final PluginCreateRule pcr = new PluginCreateRule( Transform.class );
         d.addRule( patternPrefix + "/subtransform", pcr );
         d.addSetNext( patternPrefix + "/subtransform", "addTransform" );
     }

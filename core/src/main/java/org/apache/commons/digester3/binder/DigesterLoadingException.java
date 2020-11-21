@@ -39,7 +39,7 @@ public final class DigesterLoadingException
      * @param message the detail message.
      * @param cause the cause.
      */
-    public DigesterLoadingException( String message, Throwable cause )
+    public DigesterLoadingException( final String message, final Throwable cause )
     {
         super( message, cause );
     }
@@ -49,7 +49,7 @@ public final class DigesterLoadingException
      *
      * @param message the detail message.
      */
-    public DigesterLoadingException( String message )
+    public DigesterLoadingException( final String message )
     {
         super( message );
     }
@@ -59,7 +59,7 @@ public final class DigesterLoadingException
      *
      * @param cause the cause.
      */
-    public DigesterLoadingException( Throwable cause )
+    public DigesterLoadingException( final Throwable cause )
     {
         super( cause );
     }

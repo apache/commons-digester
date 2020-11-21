@@ -55,7 +55,7 @@ public class FinderFromDfltResource
      * 
      * @param resourceSuffix must be non-null.
      */
-    public FinderFromDfltResource( String resourceSuffix )
+    public FinderFromDfltResource( final String resourceSuffix )
     {
         this.resourceSuffix = resourceSuffix;
     }
@@ -79,13 +79,13 @@ public class FinderFromDfltResource
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester d, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester d, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
 
-        String resourceName = pluginClass.getName().replace( '.', '/' ) + resourceSuffix;
+        final String resourceName = pluginClass.getName().replace( '.', '/' ) + resourceSuffix;
 
-        InputStream is = pluginClass.getClassLoader().getResourceAsStream( resourceName );
+        final InputStream is = pluginClass.getClassLoader().getResourceAsStream( resourceName );
 
         if ( is == null )
         {

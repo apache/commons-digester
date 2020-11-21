@@ -34,12 +34,12 @@ final class PatternRuleMatcher
 
     private final String namespaceURI;
 
-    public PatternRuleMatcher( String pattern )
+    public PatternRuleMatcher( final String pattern )
     {
         this( pattern, null );
     }
 
-    public PatternRuleMatcher( String pattern, /* @Nullable */String namespaceURI )
+    public PatternRuleMatcher( final String pattern, /* @Nullable */final String namespaceURI )
     {
         if ( pattern == null )
         {
@@ -53,7 +53,7 @@ final class PatternRuleMatcher
     /**
      * {@inheritDoc}
      */
-    public boolean match( String namespace, String pattern, String name, Attributes attributes )
+    public boolean match( final String namespace, final String pattern, final String name, final Attributes attributes )
     {
         if ( namespaceURI != null && !namespace.equals( namespaceURI ) )
         {
@@ -86,7 +86,7 @@ final class PatternRuleMatcher
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj )
         {
@@ -103,7 +103,7 @@ final class PatternRuleMatcher
             return false;
         }
 
-        PatternRuleMatcher other = (PatternRuleMatcher) obj;
+        final PatternRuleMatcher other = (PatternRuleMatcher) obj;
         if ( namespaceURI == null )
         {
             if ( other.getNamespaceURI() != null )

@@ -47,7 +47,7 @@ public class VariableExpansionTestCase
     // method used in tests4
     private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<SimpleTestBean>();
 
-    public void addSimpleTestBean( SimpleTestBean bean )
+    public void addSimpleTestBean( final SimpleTestBean bean )
     {
         simpleTestBeans.add( bean );
     }
@@ -60,7 +60,7 @@ public class VariableExpansionTestCase
      * Used in test case "testExpansionWithMutableSource", where the set of variables available to be substituted into
      * the xml is updated as the xml is parsed.
      */
-    public void addProperty( String key, String value )
+    public void addProperty( final String key, final String value )
     {
         mutableSource.put( key, value );
     }
@@ -72,15 +72,15 @@ public class VariableExpansionTestCase
      */
     private Digester createDigesterThatCanDoAnt()
     {
-        Digester digester = new Digester();
+        final Digester digester = new Digester();
 
-        MultiVariableExpander expander = new MultiVariableExpander();
+        final MultiVariableExpander expander = new MultiVariableExpander();
         expander.addSource( "$", mutableSource );
         digester.setSubstitutor( new VariableSubstitutor( expander ) );
 
-        int useRootObj = -1;
-        Class<?>[] callerArgTypes = new Class[] { String.class, String.class };
-        CallMethodRule caller = new CallMethodRule( useRootObj, "addProperty", callerArgTypes.length, callerArgTypes );
+        final int useRootObj = -1;
+        final Class<?>[] callerArgTypes = new Class[] { String.class, String.class };
+        final CallMethodRule caller = new CallMethodRule( useRootObj, "addProperty", callerArgTypes.length, callerArgTypes );
         digester.addRule( "root/property", caller );
         digester.addCallParam( "root/property", 0, "name" );
         digester.addCallParam( "root/property", 1, "value" );
@@ -101,16 +101,16 @@ public class VariableExpansionTestCase
         throws SAXException, IOException
     {
 
-        String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
-        StringReader input = new StringReader( xml );
-        Digester digester = new Digester();
+        final String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
 
         // Configure the digester as required
         digester.addObjectCreate( "root", SimpleTestBean.class );
         digester.addSetProperties( "root" );
 
         // Parse our test input.
-        SimpleTestBean root = digester.parse( input );
+        final SimpleTestBean root = digester.parse( input );
 
         assertNotNull( "Digester returned no object", root );
 
@@ -126,18 +126,18 @@ public class VariableExpansionTestCase
         throws SAXException, IOException
     {
 
-        String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
-        StringReader input = new StringReader( xml );
-        Digester digester = new Digester();
+        final String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
 
         // Configure the digester as required
-        MultiVariableExpander expander = new MultiVariableExpander();
+        final MultiVariableExpander expander = new MultiVariableExpander();
         digester.setSubstitutor( new VariableSubstitutor( expander ) );
         digester.addObjectCreate( "root", SimpleTestBean.class );
         digester.addSetProperties( "root" );
 
         // Parse our test input.
-        SimpleTestBean root = digester.parse( input );
+        final SimpleTestBean root = digester.parse( input );
 
         assertNotNull( "Digester returned no object", root );
 
@@ -154,23 +154,23 @@ public class VariableExpansionTestCase
         throws SAXException, IOException
     {
 
-        String xml =
+        final String xml =
             "<root>" + "<bean alpha='${attr1}' beta='var{attr1}'/>" + "<bean alpha='${attr2}' beta='var{attr2}'/>"
                 + "</root>";
 
-        StringReader input = new StringReader( xml );
-        Digester digester = new Digester();
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
 
         // Configure the digester as required
-        HashMap<String, Object> source1 = new HashMap<String, Object>();
+        final HashMap<String, Object> source1 = new HashMap<String, Object>();
         source1.put( "attr1", "source1.attr1" );
         source1.put( "attr2", "source1.attr2" ); // should not be used
 
-        HashMap<String, Object> source2 = new HashMap<String, Object>();
+        final HashMap<String, Object> source2 = new HashMap<String, Object>();
         source2.put( "attr1", "source2.attr1" ); // should not be used
         source2.put( "attr2", "source2.attr2" );
 
-        MultiVariableExpander expander = new MultiVariableExpander();
+        final MultiVariableExpander expander = new MultiVariableExpander();
         expander.addSource( "$", source1 );
         expander.addSource( "var", source2 );
 
@@ -187,13 +187,13 @@ public class VariableExpansionTestCase
         assertEquals( 2, this.simpleTestBeans.size() );
 
         {
-            SimpleTestBean bean = this.simpleTestBeans.get( 0 );
+            final SimpleTestBean bean = this.simpleTestBeans.get( 0 );
             assertEquals( "source1.attr1", bean.getAlpha() );
             assertEquals( "source2.attr1", bean.getBeta() );
         }
 
         {
-            SimpleTestBean bean = this.simpleTestBeans.get( 1 );
+            final SimpleTestBean bean = this.simpleTestBeans.get( 1 );
             assertEquals( "source1.attr2", bean.getAlpha() );
             assertEquals( "source2.attr2", bean.getBeta() );
         }
@@ -207,22 +207,22 @@ public class VariableExpansionTestCase
         throws SAXException, IOException
     {
 
-        String xml = "<root>" + "Twas noun{1} and the noun{2}" + " did verb{1} and verb{2} in the noun{3}" + "</root>";
+        final String xml = "<root>" + "Twas noun{1} and the noun{2}" + " did verb{1} and verb{2} in the noun{3}" + "</root>";
 
-        StringReader input = new StringReader( xml );
-        Digester digester = new Digester();
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
 
         // Configure the digester as required
-        HashMap<String, Object> nouns = new HashMap<String, Object>();
+        final HashMap<String, Object> nouns = new HashMap<String, Object>();
         nouns.put( "1", "brillig" );
         nouns.put( "2", "slithy toves" );
         nouns.put( "3", "wabe" );
 
-        HashMap<String, Object> verbs = new HashMap<String, Object>();
+        final HashMap<String, Object> verbs = new HashMap<String, Object>();
         verbs.put( "1", "gyre" );
         verbs.put( "2", "gimble" );
 
-        MultiVariableExpander expander = new MultiVariableExpander();
+        final MultiVariableExpander expander = new MultiVariableExpander();
         expander.addSource( "noun", nouns );
         expander.addSource( "verb", verbs );
         digester.setSubstitutor( new VariableSubstitutor( expander ) );
@@ -231,7 +231,7 @@ public class VariableExpansionTestCase
         digester.addCallMethod( "root", "setAlpha", 0 );
 
         // Parse our test input.
-        SimpleTestBean root = digester.parse( input );
+        final SimpleTestBean root = digester.parse( input );
 
         assertNotNull( "Digester returned no object", root );
 
@@ -246,12 +246,12 @@ public class VariableExpansionTestCase
         throws IOException
     {
 
-        String xml = "<root alpha='${attr1}'/>";
-        StringReader input = new StringReader( xml );
-        Digester digester = new Digester();
+        final String xml = "<root alpha='${attr1}'/>";
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
 
         // Configure the digester as required
-        MultiVariableExpander expander = new MultiVariableExpander();
+        final MultiVariableExpander expander = new MultiVariableExpander();
         expander.addSource( "$", new HashMap<String, Object>() );
         digester.setSubstitutor( new VariableSubstitutor( expander ) );
 
@@ -264,7 +264,7 @@ public class VariableExpansionTestCase
             digester.parse( input );
             fail( "Exception expected due to unknown variable." );
         }
-        catch ( SAXException e )
+        catch ( final SAXException e )
         {
             // expected, due to reference to undefined variable
         }
@@ -284,16 +284,16 @@ public class VariableExpansionTestCase
     public void testExpansionWithMutableSource()
         throws SAXException, IOException
     {
-        String xml = "<root>" + "<property name='attr' value='prop.value'/>" + "<bean alpha='${attr}'/>" + "</root>";
-        StringReader input = new StringReader( xml );
-        Digester digester = createDigesterThatCanDoAnt();
+        final String xml = "<root>" + "<property name='attr' value='prop.value'/>" + "<bean alpha='${attr}'/>" + "</root>";
+        final StringReader input = new StringReader( xml );
+        final Digester digester = createDigesterThatCanDoAnt();
 
         simpleTestBeans.clear();
         digester.push( this );
         digester.parse( input );
 
         assertEquals( 1, simpleTestBeans.size() );
-        SimpleTestBean bean = simpleTestBeans.get( 0 );
+        final SimpleTestBean bean = simpleTestBeans.get( 0 );
         assertEquals( "prop.value", bean.getAlpha() );
     }
 
@@ -311,18 +311,18 @@ public class VariableExpansionTestCase
     public void testExpansionOfPropertyInProperty()
         throws SAXException, IOException
     {
-        String xml =
+        final String xml =
             "<root>" + "<property name='attr1' value='prop.value1'/>"
                 + "<property name='attr2' value='substituted-${attr1}'/>" + "<bean alpha='${attr2}'/>" + "</root>";
-        StringReader input = new StringReader( xml );
-        Digester digester = createDigesterThatCanDoAnt();
+        final StringReader input = new StringReader( xml );
+        final Digester digester = createDigesterThatCanDoAnt();
 
         simpleTestBeans.clear();
         digester.push( this );
         digester.parse( input );
 
         assertEquals( 1, simpleTestBeans.size() );
-        SimpleTestBean bean = simpleTestBeans.get( 0 );
+        final SimpleTestBean bean = simpleTestBeans.get( 0 );
         assertEquals( "substituted-prop.value1", bean.getAlpha() );
     }
 

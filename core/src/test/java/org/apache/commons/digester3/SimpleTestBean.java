@@ -38,7 +38,7 @@ public class SimpleTestBean
         return alpha;
     }
 
-    public void setAlpha( String alpha )
+    public void setAlpha( final String alpha )
     {
         this.alpha = alpha;
     }
@@ -48,7 +48,7 @@ public class SimpleTestBean
         return beta;
     }
 
-    public void setBeta( String beta )
+    public void setBeta( final String beta )
     {
         this.beta = beta;
     }
@@ -58,7 +58,7 @@ public class SimpleTestBean
         return gamma;
     }
 
-    public void setGamma( String gamma )
+    public void setGamma( final String gamma )
     {
         this.gamma = gamma;
     }
@@ -68,12 +68,12 @@ public class SimpleTestBean
         return delta;
     }
 
-    public void setDelta( String delta )
+    public void setDelta( final String delta )
     { // "delta" is a write-only property
         this.delta = delta;
     }
 
-    public void setAlphaBeta( String alpha, String beta )
+    public void setAlphaBeta( final String alpha, final String beta )
     {
         setAlpha( alpha );
         setBeta( beta );
@@ -82,7 +82,7 @@ public class SimpleTestBean
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder( "[SimpleTestBean]" );
+        final StringBuilder sb = new StringBuilder( "[SimpleTestBean]" );
         sb.append( " alpha=" );
         sb.append( alpha );
         sb.append( " beta=" );

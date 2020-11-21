@@ -110,13 +110,13 @@ public class URLTestCase
     {
 
         // Register the Digester Rules DTD
-        URL dtd = URLTestCase.class.getResource( DIGESTER_RULES_SYSTEM_ID );
+        final URL dtd = URLTestCase.class.getResource( DIGESTER_RULES_SYSTEM_ID );
         assertNotNull( dtd );
         digester.register( DIGESTER_RULES_PUBLIC_ID, dtd );
 
         // Parse one of the existing test resources twice with
         // the same Digester instance
-        URL xml = URLTestCase.class.getResource( TEST_INPUT_SYSTEM_ID );
+        final URL xml = URLTestCase.class.getResource( TEST_INPUT_SYSTEM_ID );
         assertNotNull( xml );
         digester.parse( xml );
         digester.parse( xml );

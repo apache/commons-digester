@@ -32,8 +32,8 @@ public final class PathCallParamBuilder
 
     private int paramIndex = 0;
 
-    PathCallParamBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder,
-                          LinkedRuleBuilder mainBuilder )
+    PathCallParamBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                          final LinkedRuleBuilder mainBuilder )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
@@ -44,7 +44,7 @@ public final class PathCallParamBuilder
      * @param paramIndex The zero-relative parameter number
      * @return this builder instance
      */
-    public PathCallParamBuilder ofIndex( int paramIndex )
+    public PathCallParamBuilder ofIndex( final int paramIndex )
     {
         if ( paramIndex < 0 )
         {

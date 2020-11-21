@@ -32,7 +32,7 @@ abstract class AbstractXmlRule
 
     private final RulesBinder targetRulesBinder;
 
-    public AbstractXmlRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public AbstractXmlRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( "pattern", patternStack );
         this.targetRulesBinder = targetRulesBinder;
@@ -42,7 +42,7 @@ abstract class AbstractXmlRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         super.begin( namespace, name, attributes );

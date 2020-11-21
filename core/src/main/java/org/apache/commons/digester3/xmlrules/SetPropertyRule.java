@@ -30,7 +30,7 @@ final class SetPropertyRule
     extends AbstractXmlRule
 {
 
-    public SetPropertyRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public SetPropertyRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -39,11 +39,11 @@ final class SetPropertyRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        String name = attributes.getValue( "name" );
-        String value = attributes.getValue( "value" );
+        final String name = attributes.getValue( "name" );
+        final String value = attributes.getValue( "value" );
         linkedRuleBuilder.setProperty( name ).extractingValueFromAttribute( value );
     }
 

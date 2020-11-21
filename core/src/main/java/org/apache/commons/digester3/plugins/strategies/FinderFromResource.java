@@ -59,7 +59,7 @@ public class FinderFromResource
      * @param resourceAttr Name of xml attribute on the plugin declaration which is used to configure rule-loading
      *        for that declaration
      */
-    public FinderFromResource( String resourceAttr )
+    public FinderFromResource( final String resourceAttr )
     {
         this.resourceAttr = resourceAttr;
     }
@@ -82,10 +82,10 @@ public class FinderFromResource
      *         about that source.
      */
     @Override
-    public RuleLoader findLoader( Digester d, Class<?> pluginClass, Properties p )
+    public RuleLoader findLoader( final Digester d, final Class<?> pluginClass, final Properties p )
         throws PluginException
     {
-        String resourceName = p.getProperty( resourceAttr );
+        final String resourceName = p.getProperty( resourceAttr );
         if ( resourceName == null )
         {
             // nope, user hasn't requested dynamic rules to be loaded
@@ -93,7 +93,7 @@ public class FinderFromResource
             return null;
         }
 
-        InputStream is = pluginClass.getClassLoader().getResourceAsStream( resourceName );
+        final InputStream is = pluginClass.getClassLoader().getResourceAsStream( resourceName );
 
         if ( is == null )
         {
@@ -114,15 +114,15 @@ public class FinderFromResource
      * @return a source of digester rules for the specified plugin class.
      * @throws PluginException if any error occurs
      */
-    public static RuleLoader loadRules( Digester d, Class<?> pluginClass, InputStream is, String resourceName )
+    public static RuleLoader loadRules( final Digester d, final Class<?> pluginClass, final InputStream is, final String resourceName )
         throws PluginException
     {
         try
         {
-            RuleLoader loader = new LoaderFromStream( is );
+            final RuleLoader loader = new LoaderFromStream( is );
             return loader;
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw new PluginException( "Unable to load xmlrules from resource [" + resourceName + "]", e );
         }
@@ -132,7 +132,7 @@ public class FinderFromResource
             {
                 is.close();
             }
-            catch ( IOException ioe )
+            catch ( final IOException ioe )
             {
                 throw new PluginException( "Unable to close stream for resource [" + resourceName + "]", ioe );
             }

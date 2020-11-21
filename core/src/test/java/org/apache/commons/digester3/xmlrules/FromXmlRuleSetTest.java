@@ -79,12 +79,12 @@ public class FromXmlRuleSetTest
     public void testCreateDigester()
         throws Exception
     {
-        URL rules = getClass().getResource( "testrules.xml" );
-        URL input = getClass().getResource( "test.xml" );
+        final URL rules = getClass().getResource( "testrules.xml" );
+        final URL input = getClass().getResource( "test.xml" );
 
-        Digester digester = newLoader( createRules( rules ) ).newDigester();
+        final Digester digester = newLoader( createRules( rules ) ).newDigester();
         digester.push( new ArrayList<Object>() );
-        Object root = digester.parse( input.openStream() );
+        final Object root = digester.parse( input.openStream() );
         assertEquals( "[foo1 baz1 foo2, foo3 foo4]", root.toString() );
     }
 
@@ -97,14 +97,14 @@ public class FromXmlRuleSetTest
     public void testLoad1()
         throws Exception
     {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL rules = getClass().getResource( "testrules.xml" );
-        URL input = getClass().getResource( "test.xml" );
+        final ClassLoader classLoader = getClass().getClassLoader();
+        final URL rules = getClass().getResource( "testrules.xml" );
+        final URL input = getClass().getResource( "test.xml" );
 
-        Digester digester = newLoader( createRules( rules ) ).setClassLoader( classLoader ).newDigester();
+        final Digester digester = newLoader( createRules( rules ) ).setClassLoader( classLoader ).newDigester();
         digester.push( new ArrayList<Object>() );
 
-        Object root = digester.parse( input );
+        final Object root = digester.parse( input );
         if ( !( root instanceof ArrayList<?> ) )
         {
             fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got "
@@ -113,15 +113,16 @@ public class FromXmlRuleSetTest
         assertEquals( "[foo1 baz1 foo2, foo3 foo4]", root.toString() );
 
         @SuppressWarnings( "unchecked" )
+        final
         // root is an ArrayList
         ArrayList<Object> al = (ArrayList<Object>) root;
-        Object obj = al.get( 0 );
+        final Object obj = al.get( 0 );
         if ( !( obj instanceof ObjectTestImpl ) )
         {
             fail( "Unexpected object returned from DigesterLoader. Expected TestObject; got "
                 + obj.getClass().getName() );
         }
-        ObjectTestImpl to = (ObjectTestImpl) obj;
+        final ObjectTestImpl to = (ObjectTestImpl) obj;
         assertEquals( new Long( 555 ), to.getLongValue() );
         assertEquals( "foo", to.getMapValue( "test1" ) );
         assertEquals( "bar", to.getMapValue( "test2" ) );
@@ -135,13 +136,13 @@ public class FromXmlRuleSetTest
     public void testLoad2()
         throws Exception
     {
-        URL rules = getClass().getResource( "testrules.xml" );
-        InputStream input = getClass().getResourceAsStream( "test.xml" );
-        Digester digester =
+        final URL rules = getClass().getResource( "testrules.xml" );
+        final InputStream input = getClass().getResourceAsStream( "test.xml" );
+        final Digester digester =
             newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
         digester.push( new ArrayList<Object>() );
 
-        ArrayList<Object> list = digester.parse( input );
+        final ArrayList<Object> list = digester.parse( input );
 
         assertEquals( list.toString(), "[foo1 baz1 foo2, foo3 foo4]" );
         assertEquals( "Wrong number of classes created", 2, list.size() );
@@ -157,15 +158,15 @@ public class FromXmlRuleSetTest
     public void testSetCustomProperties()
         throws Exception
     {
-        URL rules = this.getClass().getResource( "testPropertyAliasRules.xml" );
-        InputStream input =
+        final URL rules = this.getClass().getResource( "testPropertyAliasRules.xml" );
+        final InputStream input =
             getClass().getClassLoader().getResource( "org/apache/commons/digester3/Test7.xml" ).openStream();
 
-        Digester digester =
+        final Digester digester =
             newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
         digester.push( new ArrayList<Object>() );
 
-        Object obj = digester.parse( input );
+        final Object obj = digester.parse( input );
 
         if ( !( obj instanceof ArrayList<?> ) )
         {
@@ -173,6 +174,7 @@ public class FromXmlRuleSetTest
         }
 
         @SuppressWarnings("unchecked") // root is an ArrayList of Address
+        final
         ArrayList<Address> root = (ArrayList<Address>) obj;
 
         assertEquals( "Wrong array size", 4, root.size() );
@@ -180,25 +182,25 @@ public class FromXmlRuleSetTest
         // note that the array is in popped order (rather than pushed)
 
         Address add = root.get( 0 );
-        Address addressOne = add;
+        final Address addressOne = add;
         assertEquals( "(1) Street attribute", "New Street", addressOne.getStreet() );
         assertEquals( "(1) City attribute", "Las Vegas", addressOne.getCity() );
         assertEquals( "(1) State attribute", "Nevada", addressOne.getState() );
 
         add = root.get( 1 );
-        Address addressTwo = add;
+        final Address addressTwo = add;
         assertEquals( "(2) Street attribute", "Old Street", addressTwo.getStreet() );
         assertEquals( "(2) City attribute", "Portland", addressTwo.getCity() );
         assertEquals( "(2) State attribute", "Oregon", addressTwo.getState() );
 
         add = root.get( 2 );
-        Address addressThree = add;
+        final Address addressThree = add;
         assertEquals( "(3) Street attribute", "4th Street", addressThree.getStreet() );
         assertEquals( "(3) City attribute", "Dayton", addressThree.getCity() );
         assertEquals( "(3) State attribute", "US", addressThree.getState() );
 
         add = root.get( 3 );
-        Address addressFour = add;
+        final Address addressFour = add;
         assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
         assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
         assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
@@ -208,24 +210,25 @@ public class FromXmlRuleSetTest
     public void testFactoryCreateRule()
         throws Exception
     {
-        URL rules = getClass().getResource( "testfactory.xml" );
-        String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
+        final URL rules = getClass().getResource( "testfactory.xml" );
+        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
 
-        Digester digester =
+        final Digester digester =
             newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
         digester.push( new ArrayList<ObjectCreationFactoryTestImpl>() );
 
-        Object obj = digester.parse( new StringReader( xml ) );
+        final Object obj = digester.parse( new StringReader( xml ) );
         if ( !( obj instanceof ArrayList<?> ) )
         {
             fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got " + obj.getClass().getName() );
         }
 
         @SuppressWarnings("unchecked") // root is an ArrayList of TestObjectCreationFactory
+        final
         ArrayList<ObjectCreationFactoryTestImpl> list = (ArrayList<ObjectCreationFactoryTestImpl>) obj;
 
         assertEquals( "List should contain only the factory object", list.size(), 1 );
-        ObjectCreationFactoryTestImpl factory = list.get( 0 );
+        final ObjectCreationFactoryTestImpl factory = list.get( 0 );
         assertEquals( "Object create not called(1)", factory.called, true );
         assertEquals( "Attribute not passed (1)", factory.attributes.getValue( "one" ), "good" );
         assertEquals( "Attribute not passed (2)", factory.attributes.getValue( "two" ), "bad" );
@@ -236,12 +239,12 @@ public class FromXmlRuleSetTest
     public void testFactoryIgnoreCreateRule()
         throws Exception
     {
-        URL rules = getClass().getResource( "testfactoryignore.xml" );
+        final URL rules = getClass().getResource( "testfactoryignore.xml" );
 
-        String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
+        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
         try {
             newLoader(createRules(rules)).newDigester().parse(new StringReader(xml));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("This exception should have been ignored: " + e.getClass().getName());
         }
     }
@@ -250,15 +253,15 @@ public class FromXmlRuleSetTest
     public void testFactoryNotIgnoreCreateRule()
         throws Exception
     {
-        URL rules = getClass().getResource( "testfactorynoignore.xml" );
+        final URL rules = getClass().getResource( "testfactorynoignore.xml" );
 
-        String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
+        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
         try
         {
             newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
             fail( "Exception should have been propagated from create method." );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             /* What we expected */
             assertEquals( org.xml.sax.SAXParseException.class, e.getClass() );
@@ -269,14 +272,14 @@ public class FromXmlRuleSetTest
     public void testCallParamRule()
         throws Exception
     {
-        URL rules = getClass().getResource( "test-call-param-rules.xml" );
+        final URL rules = getClass().getResource( "test-call-param-rules.xml" );
 
-         String xml = "<?xml version='1.0' ?>"
+         final String xml = "<?xml version='1.0' ?>"
                       + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
 
-        CallParamTestObject testObject = new CallParamTestObject();
+        final CallParamTestObject testObject = new CallParamTestObject();
 
-        Digester digester =
+        final Digester digester =
             newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
         digester.push( testObject );
         digester.parse( new StringReader( xml ) );
@@ -288,7 +291,7 @@ public class FromXmlRuleSetTest
 
     @Test
     public void testInputSourceLoader() throws Exception {
-        String rulesXml = "<?xml version='1.0'?>"
+        final String rulesXml = "<?xml version='1.0'?>"
                 + "<digester-rules>"
                 + " <pattern value='root'>"
                 + "   <pattern value='foo'>"
@@ -308,12 +311,12 @@ public class FromXmlRuleSetTest
                 + " </pattern>"
                 + "</digester-rules>";
                 
-        String xml = "<?xml version='1.0' ?>"
+        final String xml = "<?xml version='1.0' ?>"
                      + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
 
-        CallParamTestObject testObject = new CallParamTestObject();
+        final CallParamTestObject testObject = new CallParamTestObject();
 
-        Digester digester = newLoader( createRules( rulesXml ) ).newDigester();
+        final Digester digester = newLoader( createRules( rulesXml ) ).newDigester();
         digester.push( testObject );
         digester.parse( new StringReader( xml ) );
 
@@ -330,7 +333,7 @@ public class FromXmlRuleSetTest
     public void testBasePath()
         throws Exception
     {
-        String xmlRules =
+        final String xmlRules =
             "<?xml version='1.0'?>"
             + "<digester-rules>"
             + "   <pattern value='root/foo'>"
@@ -338,14 +341,14 @@ public class FromXmlRuleSetTest
             + "   </pattern>"
             + "</digester-rules>";
 
-        String xml =
+        final String xml =
             "<?xml version='1.0'?>"
             + "<root>"
             + "  <foo>success</foo>"
             + "</root>";
 
-        ObjectTestImpl testObject = new ObjectTestImpl();
-        Digester digester = newLoader( createRules( xmlRules ) ).newDigester();
+        final ObjectTestImpl testObject = new ObjectTestImpl();
+        final Digester digester = newLoader( createRules( xmlRules ) ).newDigester();
 
         digester.push( testObject );
         digester.parse( new InputSource( new StringReader( xml ) ) );

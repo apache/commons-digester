@@ -55,7 +55,7 @@ public class RegexRules
      * 
      * @param matcher the regex strategy to be used, not null
      */
-    public RegexRules( RegexMatcher matcher )
+    public RegexRules( final RegexMatcher matcher )
     {
         setRegexMatcher( matcher );
     }
@@ -77,7 +77,7 @@ public class RegexRules
      * 
      * @param matcher use this RegexMatcher, not null
      */
-    public void setRegexMatcher( RegexMatcher matcher )
+    public void setRegexMatcher( final RegexMatcher matcher )
     {
         if ( matcher == null )
         {
@@ -92,7 +92,7 @@ public class RegexRules
      * {@inheritDoc}
      */
     @Override
-    protected void registerRule( String pattern, Rule rule )
+    protected void registerRule( final String pattern, final Rule rule )
     {
         registeredRules.add( new RegisteredRule( pattern, rule ) );
     }
@@ -108,7 +108,7 @@ public class RegexRules
     /**
      * {@inheritDoc}
      */
-    public List<Rule> match( String namespaceURI, String pattern, String name, Attributes attributes )
+    public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
         //
         // not a particularly quick implementation
@@ -118,8 +118,8 @@ public class RegexRules
         //
         // XXX FIX ME - Time And Optimize
         //
-        ArrayList<Rule> rules = new ArrayList<Rule>( registeredRules.size() );
-        for ( RegisteredRule rr : registeredRules )
+        final ArrayList<Rule> rules = new ArrayList<Rule>( registeredRules.size() );
+        for ( final RegisteredRule rr : registeredRules )
         {
             if ( matcher.match( pattern, rr.pattern ) )
             {
@@ -134,8 +134,8 @@ public class RegexRules
      */
     public List<Rule> rules()
     {
-        ArrayList<Rule> rules = new ArrayList<Rule>( registeredRules.size() );
-        for ( RegisteredRule rr : registeredRules )
+        final ArrayList<Rule> rules = new ArrayList<Rule>( registeredRules.size() );
+        for ( final RegisteredRule rr : registeredRules )
         {
             rules.add( rr.rule );
         }
@@ -149,7 +149,7 @@ public class RegexRules
 
         Rule rule;
 
-        RegisteredRule( String pattern, Rule rule )
+        RegisteredRule( final String pattern, final Rule rule )
         {
             this.pattern = pattern;
             this.rule = rule;

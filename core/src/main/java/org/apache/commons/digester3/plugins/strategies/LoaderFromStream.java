@@ -54,16 +54,16 @@ public class LoaderFromStream
      * @param s the input stream has to be loaded into memory
      * @throws Exception if any error occurs while reading the input stream
      */
-    public LoaderFromStream( InputStream s )
+    public LoaderFromStream( final InputStream s )
         throws Exception
     {
         try
         {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buf = new byte[256];
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            final byte[] buf = new byte[256];
             for ( ;; )
             {
-                int i = s.read( buf );
+                final int i = s.read( buf );
                 if ( i == -1 )
                 {
                     break;
@@ -81,7 +81,7 @@ public class LoaderFromStream
                     s.close();
                 }
             }
-            catch ( IOException e )
+            catch ( final IOException e )
             {
                 // close quietly
             }
@@ -95,8 +95,8 @@ public class LoaderFromStream
     public void addRules( final Digester d, final String path )
         throws PluginException
     {
-        Log log = d.getLogger();
-        boolean debug = log.isDebugEnabled();
+        final Log log = d.getLogger();
+        final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
             log.debug( "LoaderFromStream: loading rules for plugin at path [" + path + "]" );

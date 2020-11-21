@@ -34,7 +34,7 @@ public class TextLabel2
         return id;
     }
 
-    public void setId( String id )
+    public void setId( final String id )
     {
         this.id = id;
     }
@@ -44,7 +44,7 @@ public class TextLabel2
         return label;
     }
 
-    public void setLabel( String label )
+    public void setLabel( final String label )
     {
         this.label = label;
     }

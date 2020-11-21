@@ -65,7 +65,7 @@ public class SetPropertiesRule
      * @param attributeName map this attribute
      * @param propertyName to a property with this name
      */
-    public SetPropertiesRule( String attributeName, String propertyName )
+    public SetPropertiesRule( final String attributeName, final String propertyName )
     {
         aliases.put( attributeName, propertyName );
     }
@@ -105,7 +105,7 @@ public class SetPropertiesRule
      * @param attributeNames names of attributes to map
      * @param propertyNames names of properties mapped to
      */
-    public SetPropertiesRule( String[] attributeNames, String[] propertyNames )
+    public SetPropertiesRule( final String[] attributeNames, final String[] propertyNames )
     {
         for ( int i = 0, size = attributeNames.length; i < size; i++ )
         {
@@ -125,7 +125,7 @@ public class SetPropertiesRule
      * @param aliases attribute->property mapping
      * @since 3.0
      */
-    public SetPropertiesRule( Map<String, String> aliases )
+    public SetPropertiesRule( final Map<String, String> aliases )
     {
         if ( aliases != null && !aliases.isEmpty() )
         {
@@ -149,11 +149,11 @@ public class SetPropertiesRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         // Build a set of attribute names and corresponding values
-        Map<String, String> values = new HashMap<String, String>();
+        final Map<String, String> values = new HashMap<String, String>();
 
         for ( int i = 0; i < attributes.getLength(); i++ )
         {
@@ -162,7 +162,7 @@ public class SetPropertiesRule
             {
                 attributeName = attributes.getQName( i );
             }
-            String value = attributes.getValue( i );
+            final String value = attributes.getValue( i );
 
             // alias lookup has complexity O(1)
             if ( aliases.containsKey( attributeName ) )
@@ -199,8 +199,8 @@ public class SetPropertiesRule
                 // compared and the PropertyUtils functionality does appear
                 // compatible so we'll accept the risk here.
 
-                Object top = getDigester().peek();
-                boolean test = isWriteable( top, attributeName );
+                final Object top = getDigester().peek();
+                final boolean test = isWriteable( top, attributeName );
                 if ( !test )
                 {
                     throw new NoSuchMethodException( "Property " + attributeName + " can't be set" );
@@ -214,7 +214,7 @@ public class SetPropertiesRule
         }
 
         // Populate the corresponding properties of the top object
-        Object top = getDigester().peek();
+        final Object top = getDigester().peek();
         if ( getDigester().getLogger().isDebugEnabled() )
         {
             if ( top != null )
@@ -238,7 +238,7 @@ public class SetPropertiesRule
      * @param attributeName the attribute name has to be mapped
      * @param propertyName the target property name
      */
-    public void addAlias( String attributeName, String propertyName )
+    public void addAlias( final String attributeName, final String propertyName )
     {
         aliases.put( attributeName, propertyName );
     }
@@ -275,7 +275,7 @@ public class SetPropertiesRule
      *
      * @param ignoreMissingProperty false to stop the parsing on unmatched attributes.
      */
-    public void setIgnoreMissingProperty( boolean ignoreMissingProperty )
+    public void setIgnoreMissingProperty( final boolean ignoreMissingProperty )
     {
         this.ignoreMissingProperty = ignoreMissingProperty;
     }

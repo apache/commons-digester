@@ -50,7 +50,7 @@ public final class Image
         return description;
     }
 
-    public void setDescription( String description )
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -60,7 +60,7 @@ public final class Image
         return width;
     }
 
-    public void setWidth( int width )
+    public void setWidth( final int width )
     {
         this.width = width;
     }
@@ -70,7 +70,7 @@ public final class Image
         return height;
     }
 
-    public void setHeight( int height )
+    public void setHeight( final int height )
     {
         this.height = height;
     }
@@ -80,7 +80,7 @@ public final class Image
         return link;
     }
 
-    public void setLink( String link )
+    public void setLink( final String link )
     {
         this.link = link;
     }
@@ -90,7 +90,7 @@ public final class Image
         return title;
     }
 
-    public void setTitle( String title )
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -100,13 +100,13 @@ public final class Image
         return url;
     }
 
-    public void setUrl( String url )
+    public void setUrl( final String url )
     {
         this.url = url;
     }
 
     @Override
-    public boolean equals( Object obj )
+    public boolean equals( final Object obj )
     {
         if ( this == obj ) {
             return true;
@@ -117,7 +117,7 @@ public final class Image
         if ( getClass() != obj.getClass() ) {
             return false;
         }
-        Image other = (Image) obj;
+        final Image other = (Image) obj;
         if ( description == null )
         {
             if ( other.description != null ) {

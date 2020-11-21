@@ -30,7 +30,7 @@ final class FactoryCreateRule
     extends AbstractXmlRule
 {
 
-    public FactoryCreateRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public FactoryCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -39,7 +39,7 @@ final class FactoryCreateRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
         linkedRuleBuilder.factoryCreate()

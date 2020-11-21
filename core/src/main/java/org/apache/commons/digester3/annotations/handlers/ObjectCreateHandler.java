@@ -39,7 +39,7 @@ public final class ObjectCreateHandler
     /**
      * {@inheritDoc}
      */
-    public void handle( ObjectCreate annotation, AnnotatedElement element, RulesBinder rulesBinder )
+    public void handle( final ObjectCreate annotation, final AnnotatedElement element, final RulesBinder rulesBinder )
     {
         Class<?> type = null;
         if ( element instanceof Class<?> )
@@ -57,7 +57,7 @@ public final class ObjectCreateHandler
             return;
         }
 
-        ObjectCreateBuilder builder = rulesBinder
+        final ObjectCreateBuilder builder = rulesBinder
                 .forPattern( annotation.pattern() )
                 .withNamespaceURI( annotation.namespaceURI() )
                 .createObject()
@@ -66,7 +66,7 @@ public final class ObjectCreateHandler
 
         if ( element instanceof Constructor<?> )
         {
-            Constructor<?> method = (Constructor<?>) element;
+            final Constructor<?> method = (Constructor<?>) element;
             builder.usingConstructor( method.getParameterTypes() );
         }
     }

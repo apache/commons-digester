@@ -38,7 +38,7 @@ public abstract class AbstractNamespaceURIBasedRulesModule
      * @param namespaceURI Namespace URI for which this Rule is relevant, or <code>null</code> to match
      *        independent of namespace.
      */
-    public AbstractNamespaceURIBasedRulesModule( /* @Nullable */String namespaceURI )
+    public AbstractNamespaceURIBasedRulesModule( /* @Nullable */final String namespaceURI )
     {
         this.namespaceURI = namespaceURI;
     }
@@ -47,7 +47,7 @@ public abstract class AbstractNamespaceURIBasedRulesModule
      * {@inheritDoc}
      */
     @Override
-    protected LinkedRuleBuilder forPattern( String pattern )
+    protected LinkedRuleBuilder forPattern( final String pattern )
     {
         return super.forPattern( pattern ).withNamespaceURI( namespaceURI );
     }

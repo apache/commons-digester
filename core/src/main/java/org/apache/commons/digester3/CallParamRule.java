@@ -54,7 +54,7 @@ public class CallParamRule
      * 
      * @param paramIndex The zero-relative parameter number
      */
-    public CallParamRule( int paramIndex )
+    public CallParamRule( final int paramIndex )
     {
         this( paramIndex, null );
     }
@@ -65,7 +65,7 @@ public class CallParamRule
      * @param paramIndex The zero-relative parameter number
      * @param attributeName The name of the attribute to save
      */
-    public CallParamRule( int paramIndex, String attributeName )
+    public CallParamRule( final int paramIndex, final String attributeName )
     {
         this.paramIndex = paramIndex;
         this.attributeName = attributeName;
@@ -77,7 +77,7 @@ public class CallParamRule
      * @param paramIndex The zero-relative parameter number
      * @param fromStack should this parameter be taken from the top of the stack?
      */
-    public CallParamRule( int paramIndex, boolean fromStack )
+    public CallParamRule( final int paramIndex, final boolean fromStack )
     {
         this.paramIndex = paramIndex;
         this.fromStack = fromStack;
@@ -91,7 +91,7 @@ public class CallParamRule
      * @param stackIndex the index of the object which will be passed as a parameter. The zeroth object is the top of
      *            the stack, 1 is the next object down and so on.
      */
-    public CallParamRule( int paramIndex, int stackIndex )
+    public CallParamRule( final int paramIndex, final int stackIndex )
     {
         this.paramIndex = paramIndex;
         this.fromStack = true;
@@ -133,7 +133,7 @@ public class CallParamRule
      * @param attributeName The attribute from which to save the parameter value
      * @since 3.0
      */
-    public void setAttributeName( String attributeName )
+    public void setAttributeName( final String attributeName )
     {
         this.attributeName = attributeName;
     }
@@ -142,7 +142,7 @@ public class CallParamRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         Object param = null;
@@ -174,7 +174,7 @@ public class CallParamRule
 
         if ( param != null )
         {
-            Object parameters[] = getDigester().peekParams();
+            final Object parameters[] = getDigester().peekParams();
             parameters[paramIndex] = param;
         }
     }
@@ -183,7 +183,7 @@ public class CallParamRule
      * {@inheritDoc}
      */
     @Override
-    public void body( String namespace, String name, String text )
+    public void body( final String namespace, final String name, final String text )
         throws Exception
     {
         if ( attributeName == null && !fromStack )
@@ -203,12 +203,12 @@ public class CallParamRule
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
+    public void end( final String namespace, final String name )
     {
         if ( bodyTextStack != null && !bodyTextStack.empty() )
         {
             // what we do now is push one parameter onto the top set of parameters
-            Object parameters[] = getDigester().peekParams();
+            final Object parameters[] = getDigester().peekParams();
             parameters[paramIndex] = bodyTextStack.pop();
         }
     }

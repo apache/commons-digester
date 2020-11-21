@@ -54,8 +54,8 @@ public final class ObjectCreateBuilder
      */
     private Object[] defaultConstructorArguments;
 
-    ObjectCreateBuilder( String keyPattern, String namespaceURI, RulesBinder mainBinder, LinkedRuleBuilder mainBuilder,
-                         ClassLoader classLoader )
+    ObjectCreateBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder,
+                         final ClassLoader classLoader )
     {
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
         this.classLoader = classLoader;
@@ -67,7 +67,7 @@ public final class ObjectCreateBuilder
      * @param className Java class name of the object to be created
      * @return this builder instance
      */
-    public ObjectCreateBuilder ofType( String className )
+    public ObjectCreateBuilder ofType( final String className )
     {
         if ( className == null )
         {
@@ -79,7 +79,7 @@ public final class ObjectCreateBuilder
         {
             return ofType( this.classLoader.loadClass( className ) );
         }
-        catch ( ClassNotFoundException e )
+        catch ( final ClassNotFoundException e )
         {
             reportError( "createObject().ofType( String )", String.format( "class '%s' cannot be load", className ) );
             return this;
@@ -93,7 +93,7 @@ public final class ObjectCreateBuilder
      * @param type Java class of the object to be created
      * @return this builder instance
      */
-    public <T> ObjectCreateBuilder ofType( Class<T> type )
+    public <T> ObjectCreateBuilder ofType( final Class<T> type )
     {
         if ( type == null )
         {
@@ -112,7 +112,7 @@ public final class ObjectCreateBuilder
      * @param attributeName The attribute containing an override class name if it is present
      * @return this builder instance
      */
-    public ObjectCreateBuilder ofTypeSpecifiedByAttribute( /* @Nullable */String attributeName )
+    public ObjectCreateBuilder ofTypeSpecifiedByAttribute( /* @Nullable */final String attributeName )
     {
         this.attributeName = attributeName;
         return this;
@@ -125,7 +125,7 @@ public final class ObjectCreateBuilder
      * @return this builder instance
      * @since 3.2
      */
-    public ObjectCreateBuilder usingConstructor( String...paramTypeNames )
+    public ObjectCreateBuilder usingConstructor( final String...paramTypeNames )
     {
         if ( paramTypeNames == null )
         {
@@ -133,14 +133,14 @@ public final class ObjectCreateBuilder
             return this;
         }
 
-        Class<?>[] paramTypes = new Class<?>[paramTypeNames.length];
+        final Class<?>[] paramTypes = new Class<?>[paramTypeNames.length];
         for ( int i = 0; i < paramTypeNames.length; i++ )
         {
             try
             {
                 paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
             }
-            catch ( ClassNotFoundException e )
+            catch ( final ClassNotFoundException e )
             {
                 this.reportError( format( "createObject().usingConstructor( %s )",
                                           Arrays.toString( paramTypeNames ) ),
@@ -158,7 +158,7 @@ public final class ObjectCreateBuilder
      * @return this builder instance
      * @since 3.2
      */
-    public ObjectCreateBuilder usingConstructor( Class<?>... constructorArgumentTypes )
+    public ObjectCreateBuilder usingConstructor( final Class<?>... constructorArgumentTypes )
     {
         if ( constructorArgumentTypes == null )
         {
@@ -179,7 +179,7 @@ public final class ObjectCreateBuilder
      * @return this builder instance
      * @since 3.2
      */
-    public ObjectCreateBuilder usingDefaultConstructorArguments( Object... defaultConstructorArguments )
+    public ObjectCreateBuilder usingDefaultConstructorArguments( final Object... defaultConstructorArguments )
     {
         if ( defaultConstructorArguments == null )
         {
@@ -200,7 +200,7 @@ public final class ObjectCreateBuilder
     @Override
     protected ObjectCreateRule createRule()
     {
-        ObjectCreateRule objectCreateRule = new ObjectCreateRule( attributeName, type );
+        final ObjectCreateRule objectCreateRule = new ObjectCreateRule( attributeName, type );
 
         if ( constructorArgumentsType != null )
         {

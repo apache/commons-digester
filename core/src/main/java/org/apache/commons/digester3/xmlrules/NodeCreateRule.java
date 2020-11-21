@@ -34,7 +34,7 @@ final class NodeCreateRule
     extends AbstractXmlRule
 {
 
-    public NodeCreateRule( RulesBinder targetRulesBinder, PatternStack patternStack )
+    public NodeCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }
@@ -43,12 +43,12 @@ final class NodeCreateRule
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
+    protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
     {
-        NodeCreateRuleProvider nodeProvider = linkedRuleBuilder.createNode();
+        final NodeCreateRuleProvider nodeProvider = linkedRuleBuilder.createNode();
 
-        String nodeType = attributes.getValue( "type" );
+        final String nodeType = attributes.getValue( "type" );
         if ( nodeType != null && nodeType.length() > 0 )
         {
             if ( "element".equals( nodeType ) )

@@ -77,7 +77,7 @@ public class WithDefaultsRulesWrapper
      *
      * @param wrappedRules the wrapped <code>Rules</code> implementation, not null
      */
-    public WithDefaultsRulesWrapper( Rules wrappedRules )
+    public WithDefaultsRulesWrapper( final Rules wrappedRules )
     {
         if ( wrappedRules == null )
         {
@@ -99,10 +99,10 @@ public class WithDefaultsRulesWrapper
     /**
      * {@inheritDoc}
      */
-    public void setDigester( Digester digester )
+    public void setDigester( final Digester digester )
     {
         wrappedRules.setDigester( digester );
-        for ( Rule rule : defaultRules )
+        for ( final Rule rule : defaultRules )
         {
             rule.setDigester( digester );
         }
@@ -119,7 +119,7 @@ public class WithDefaultsRulesWrapper
     /**
      * {@inheritDoc}
      */
-    public void setNamespaceURI( String namespaceURI )
+    public void setNamespaceURI( final String namespaceURI )
     {
         wrappedRules.setNamespaceURI( namespaceURI );
     }
@@ -139,9 +139,9 @@ public class WithDefaultsRulesWrapper
     /**
      * {@inheritDoc}
      */
-    public List<Rule> match( String namespaceURI, String pattern, String name, Attributes attributes )
+    public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
-        List<Rule> matches = wrappedRules.match( namespaceURI, pattern, name, attributes );
+        final List<Rule> matches = wrappedRules.match( namespaceURI, pattern, name, attributes );
         if ( matches == null || matches.isEmpty() )
         {
             // a little bit of defensive programming
@@ -156,7 +156,7 @@ public class WithDefaultsRulesWrapper
      *
      * @param rule a Rule to be fired when wrapped implementation returns no matches
      **/
-    public void addDefault( Rule rule )
+    public void addDefault( final Rule rule )
     {
         // set up rule
         if ( wrappedRules.getDigester() != null )
@@ -194,7 +194,7 @@ public class WithDefaultsRulesWrapper
     /**
      * {@inheritDoc}
      */
-    public void add( String pattern, Rule rule )
+    public void add( final String pattern, final Rule rule )
     {
         wrappedRules.add( pattern, rule );
         allRules.add( rule );

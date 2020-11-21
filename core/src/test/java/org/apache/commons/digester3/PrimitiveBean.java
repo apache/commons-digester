@@ -44,13 +44,13 @@ public class PrimitiveBean
         return setBooleanCalled;
     }
 
-    public void setBoolean( boolean booleanValue )
+    public void setBoolean( final boolean booleanValue )
     {
         this.booleanValue = booleanValue;
         setBooleanCalled = true;
     }
 
-    public void testSetBoolean( String ignored, boolean booleanValue )
+    public void testSetBoolean( final String ignored, final boolean booleanValue )
     {
         setBoolean( booleanValue );
     }

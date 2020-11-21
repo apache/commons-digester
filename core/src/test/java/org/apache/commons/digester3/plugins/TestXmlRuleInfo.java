@@ -44,7 +44,7 @@ public class TestXmlRuleInfo
         // separate class by explicitly declaring a file containing
         // the rules, using a relative or absolute path name.
 
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <plugin" );
         input.append( "  id='testobject'" );
@@ -54,28 +54,28 @@ public class TestXmlRuleInfo
         input.append( "  <object plugin-id='testobject'/>" );
         input.append( "</root>" );
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
+        final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
         digester.addRule( "root/object", pcr );
 
         try
         {
             digester.parse( new StringReader( input.toString() ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        Object root = digester.getRoot();
+        final Object root = digester.getRoot();
         assertEquals( ObjectTestImpl.class, root.getClass() );
-        ObjectTestImpl testObject = (ObjectTestImpl) root;
+        final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules1", testObject.getValue() );
     }
 
@@ -88,7 +88,7 @@ public class TestXmlRuleInfo
         // and explicitly declaring a file which is somewhere in the
         // classpath.
 
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <plugin" );
         input.append( "  id='testobject'" );
@@ -98,28 +98,28 @@ public class TestXmlRuleInfo
         input.append( "  <object plugin-id='testobject'/>" );
         input.append( "</root>" );
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
+        final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
         digester.addRule( "root/object", pcr );
 
         try
         {
             digester.parse( new StringReader( input.toString() ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        Object root = digester.getRoot();
+        final Object root = digester.getRoot();
         assertEquals( ObjectTestImpl.class, root.getClass() );
-        ObjectTestImpl testObject = (ObjectTestImpl) root;
+        final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules2", testObject.getValue() );
     }
 
@@ -132,7 +132,7 @@ public class TestXmlRuleInfo
         // and explicitly declaring a file which is somewhere in the
         // classpath.
 
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
         input.append( " <plugin" );
         input.append( "  id='testobject'" );
@@ -141,28 +141,28 @@ public class TestXmlRuleInfo
         input.append( "  <object plugin-id='testobject'/>" );
         input.append( "</root>" );
 
-        Digester digester = new Digester();
-        PluginRules rc = new PluginRules();
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
         digester.setRules( rc );
 
-        PluginDeclarationRule pdr = new PluginDeclarationRule();
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
+        final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
         digester.addRule( "root/object", pcr );
 
         try
         {
             digester.parse( new StringReader( input.toString() ) );
         }
-        catch ( Exception e )
+        catch ( final Exception e )
         {
             throw e;
         }
 
-        Object root = digester.getRoot();
+        final Object root = digester.getRoot();
         assertEquals( ObjectTestImpl.class, root.getClass() );
-        ObjectTestImpl testObject = (ObjectTestImpl) root;
+        final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules-ruleinfo", testObject.getValue() );
     }
 }
