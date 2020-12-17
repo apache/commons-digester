@@ -29,7 +29,7 @@ import org.apache.commons.digester3.plugins.PluginRules;
 import org.junit.Test;
 
 /**
- * Test cases for basic PluginDeclarationRule behaviour.
+ * Test cases for basic PluginDeclarationRule behavior.
  */
 
 public class TestDeclaration

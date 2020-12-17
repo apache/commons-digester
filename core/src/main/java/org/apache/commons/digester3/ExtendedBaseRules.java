@@ -243,7 +243,7 @@ public class ExtendedBaseRules
             universalList.addAll( tempList );
         }
 
-        // base behaviour means that if we certain matches, we don't continue
+        // base behavior means that if we certain matches, we don't continue
         // but we just have a single combined loop and so we have to set
         // a variable
         boolean ignoreBasicMatches = false;

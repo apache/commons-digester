@@ -180,7 +180,7 @@ public class PluginContext
      *    &lt;some-plugin id="widget"&gt; ......
      * </pre>
      * 
-     * rather than the default behaviour:
+     * rather than the default behavior:
      * 
      * <pre>
      *  &lt;root&gt;

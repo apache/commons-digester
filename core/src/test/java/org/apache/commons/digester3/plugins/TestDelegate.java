@@ -23,7 +23,7 @@ import org.apache.commons.digester3.plugins.PluginRules;
 import org.junit.Test;
 
 /**
- * Test cases for Delegate behaviour.
+ * Test cases for Delegate behavior.
  */
 
 public class TestDelegate

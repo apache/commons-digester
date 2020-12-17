@@ -53,7 +53,7 @@ public class Main
     /** 
      * Invoked via a standard Digester CallMethodRule, passing the 
      * "body text" of the top-level xml element. This demonstrates
-     * the default behaviour of Digester (which is not suitable for
+     * the default behavior of Digester (which is not suitable for
      * processing markup-style xml). 
      */
     public void addAllText( final String text )

@@ -110,7 +110,7 @@ public class Main
         // the enclosing tablename was.
         //
         // Note that the object is popped off the stack at the end of the
-        // "table" tag (normal behaviour for ObjectCreateRule). Because we
+        // "table" tag (normal behavior for ObjectCreateRule). Because we
         // never added the table object to some parent object, when it is
         // popped off the digester stack it becomes garbage-collected. That
         // is fine in this situation; we've done all the necessary work and

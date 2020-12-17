@@ -107,7 +107,7 @@ public abstract class AbstractMethodRule
      * <p>
      * This rule uses <code>org.apache.commons.beanutils.MethodUtils</code> to introspect the relevent objects so that
      * the right method can be called. Originally, <code>MethodUtils.invokeExactMethod</code> was used. This matches
-     * methods very strictly and so may not find a matching method when one exists. This is still the behaviour when
+     * methods very strictly and so may not find a matching method when one exists. This is still the behavior when
      * exact matching is enabled.
      * </p>
      * <p>

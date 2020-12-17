@@ -158,7 +158,7 @@ public class Main
         // a dvd; we can use the ObjectParamRule to pass a string to any
         // method. This usage is a little artificial - normally in this
         // situation there would be separate Dvd and Video classes.
-        // Note also that equivalent behaviour could be implemented by
+        // Note also that equivalent behavior could be implemented by
         // using factory objects to create & initialise the AudioVisual
         // objects with their type rather than using ObjectCreateRule.
 

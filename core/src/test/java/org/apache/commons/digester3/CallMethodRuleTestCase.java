@@ -286,9 +286,9 @@ public class CallMethodRuleTestCase
      * Test nested CallMethod rules.
      * <p>
      * The current implementation of CallMethodRule, in which the method is invoked in its end() method, causes
-     * behaviour which some users find non-intuitive. In this test it can be seen to "reverse" the order of data
+     * behavior which some users find non-intuitive. In this test it can be seen to "reverse" the order of data
      * processed. However this is the way CallMethodRule has always behaved, and it is expected that apps out there rely
-     * on this call order so this test is present to ensure that no-one changes this behaviour.
+     * on this call order so this test is present to ensure that no-one changes this behavior.
      */
     @Test
     public void testOrderNestedPartB()

@@ -21,7 +21,7 @@ import org.xml.sax.Attributes;
 import org.apache.commons.digester3.Rule;
 
 /**
- * Demonstrates the behaviour of the Delegate interface.
+ * Demonstrates the behavior of the Delegate interface.
  */
 public class DumperRule
     extends Rule

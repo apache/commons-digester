@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * <p>
  * Test Case for the RulesBase matching rules. Most of this material was original contained in the digester test case
- * but was moved into this class so that extensions of the basic matching rules behaviour can extend this test case.
+ * but was moved into this class so that extensions of the basic matching rules behavior can extend this test case.
  * </p>
  *
  * @author Craig R. McClanahan
@@ -249,7 +249,7 @@ public class RulesBaseTestCase
 
     }
 
-    /** Tests the behaviour when a rule is added with a trailing slash */
+    /** Tests the behavior when a rule is added with a trailing slash */
     @Test
     public void testTrailingSlash()
     {

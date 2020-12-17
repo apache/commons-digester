@@ -96,7 +96,7 @@ public class TestConfigurablePluginAttributes
     public void testGlobalOverride()
         throws Exception
     {
-        // Tests that using setDefaultPluginXXXX overrides behaviour for all
+        // Tests that using setDefaultPluginXXXX overrides behavior for all
         // PluginCreateRule instances. Also tests specifying attributes
         // with "null" for namespace (ie attributes not in any namespace).
         //
@@ -158,7 +158,7 @@ public class TestConfigurablePluginAttributes
     public void testInstanceOverride()
         throws Exception
     {
-        // Tests that using setPluginXXXX overrides behaviour for only
+        // Tests that using setPluginXXXX overrides behavior for only
         // that particular PluginCreateRule instance. Also tests that
         // attributes can be in namespaces.
 

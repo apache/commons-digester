@@ -1969,7 +1969,7 @@ public class Digester
      * stream = connect.getInputStream();
      * </pre>
      *
-     * This method pretty much duplicates the standard behaviour, except that it calls URLConnection.setUseCaches(false)
+     * This method pretty much duplicates the standard behavior, except that it calls URLConnection.setUseCaches(false)
      * before opening the connection.
      *
      * @param url The URL has to be read
