@@ -186,7 +186,7 @@ public class RulesBase
         {
             return ( null );
         }
-        if ( ( namespaceURI == null ) || ( namespaceURI.length() == 0 ) )
+        if ( ( namespaceURI == null ) || ( namespaceURI.isEmpty() ) )
         {
             return ( list );
         }

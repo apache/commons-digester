@@ -158,7 +158,7 @@ final class DefaultRulesBinder
     {
         final String keyPattern;
 
-        if ( pattern == null || pattern.length() == 0 )
+        if ( pattern == null || pattern.isEmpty() )
         {
             addError( "Null or empty pattern is not valid" );
             keyPattern = null;

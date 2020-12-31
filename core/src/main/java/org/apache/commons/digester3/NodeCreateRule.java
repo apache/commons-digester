@@ -261,7 +261,7 @@ public class NodeCreateRule
             try
             {
                 final Node previousTop = top;
-                if ( ( localName == null ) || ( localName.length() == 0 ) )
+                if ( ( localName == null ) || ( localName.isEmpty() ) )
                 {
                     top = doc.createElement( qName );
                 }
@@ -272,7 +272,7 @@ public class NodeCreateRule
                 for ( int i = 0; i < atts.getLength(); i++ )
                 {
                     Attr attr = null;
-                    if ( ( atts.getLocalName( i ) == null ) || ( atts.getLocalName( i ).length() == 0 ) )
+                    if ( ( atts.getLocalName( i ) == null ) || ( atts.getLocalName( i ).isEmpty() ) )
                     {
                         attr = doc.createAttribute( atts.getQName( i ) );
                         attr.setNodeValue( atts.getValue( i ) );

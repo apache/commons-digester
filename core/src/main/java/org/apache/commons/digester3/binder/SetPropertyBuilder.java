@@ -51,7 +51,7 @@ public final class SetPropertyBuilder
      */
     public SetPropertyBuilder extractingValueFromAttribute( final String valueAttributeName )
     {
-        if ( attributePropertyName == null || attributePropertyName.length() == 0 )
+        if ( attributePropertyName == null || attributePropertyName.isEmpty() )
         {
             reportError( format( "setProperty(\"%s\").extractingValueFromAttribute(String)}", attributePropertyName ),
                          "empty 'valueAttributeName' not allowed" );

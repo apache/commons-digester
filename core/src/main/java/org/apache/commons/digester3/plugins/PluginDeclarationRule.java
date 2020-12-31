@@ -68,7 +68,7 @@ public class PluginDeclarationRule
         for ( int i = 0; i < nAttrs; ++i )
         {
             String key = attributes.getLocalName( i );
-            if ( ( key == null ) || ( key.length() == 0 ) )
+            if ( ( key == null ) || ( key.isEmpty() ) )
             {
                 key = attributes.getQName( i );
             }

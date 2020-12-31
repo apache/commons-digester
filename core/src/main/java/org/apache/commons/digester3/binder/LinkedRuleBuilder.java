@@ -68,7 +68,7 @@ public final class LinkedRuleBuilder
      */
     public CallMethodBuilder callMethod( final String methodName )
     {
-        if ( methodName == null || methodName.length() == 0 )
+        if ( methodName == null || methodName.isEmpty() )
         {
             mainBinder.addError( "{ forPattern( \"%s\" ).callMethod( String ) } empty 'methodName' not allowed",
                                  keyPattern );
@@ -161,7 +161,7 @@ public final class LinkedRuleBuilder
      */
     public SetNextBuilder setNext( final String methodName )
     {
-        if ( methodName == null || methodName.length() == 0 )
+        if ( methodName == null || methodName.isEmpty() )
         {
             mainBinder.addError( "{ forPattern( \"%s\" ).setNext( String ) } empty 'methodName' not allowed",
                                  keyPattern );
@@ -196,7 +196,7 @@ public final class LinkedRuleBuilder
      */
     public SetPropertyBuilder setProperty( final String attributePropertyName )
     {
-        if ( attributePropertyName == null || attributePropertyName.length() == 0 )
+        if ( attributePropertyName == null || attributePropertyName.isEmpty() )
         {
             mainBinder
                 .addError( "{ forPattern( \"%s\" ).setProperty( String ) } empty 'attributePropertyName' not allowed",
@@ -218,7 +218,7 @@ public final class LinkedRuleBuilder
      */
     public SetRootBuilder setRoot( final String methodName )
     {
-        if ( methodName == null || methodName.length() == 0 )
+        if ( methodName == null || methodName.isEmpty() )
         {
             mainBinder.addError( "{ forPattern( \"%s\" ).setRoot( String ) } empty 'methodName' not allowed",
                                  keyPattern );
@@ -235,7 +235,7 @@ public final class LinkedRuleBuilder
      */
     public SetTopBuilder setTop( final String methodName )
     {
-        if ( methodName == null || methodName.length() == 0 )
+        if ( methodName == null || methodName.isEmpty() )
         {
             mainBinder.addError( "{ forPattern( \"%s\" ).setTop( String ) } empty 'methodName' not allowed",
                                  keyPattern );
