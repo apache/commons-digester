@@ -138,8 +138,7 @@ public class ObjectCreateRule
 
         Object createProxy()
         {
-            final Object[] constructorArguments = new Object[templateConstructorArguments.length];
-            arraycopy( templateConstructorArguments, 0, constructorArguments, 0, constructorArguments.length );
+            final Object[] constructorArguments = templateConstructorArguments.clone();
             digester.pushParams( constructorArguments );
 
             final DeferredConstructionCallback callback =

@@ -196,8 +196,7 @@ public class CallMethodRule
         {
             // copy the parameter class names into an array
             // the classes will be loaded when the digester is set
-            this.paramClassNames = new String[paramTypes.length];
-            arraycopy( paramTypes, 0, this.paramClassNames, 0, paramTypes.length );
+            this.paramClassNames = paramTypes.clone();
         }
     }
 
@@ -243,8 +242,7 @@ public class CallMethodRule
         }
         else
         {
-            this.paramTypes = new Class<?>[paramTypes.length];
-            arraycopy( paramTypes, 0, this.paramTypes, 0, paramTypes.length );
+            this.paramTypes = paramTypes.clone();
         }
     }
 

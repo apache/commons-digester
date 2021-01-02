@@ -68,9 +68,7 @@ public final class MethodArgument
 
         this.index = index;
         this.parameterType = parameterType;
-        this.annotations = new Annotation[annotations.length];
-
-        arraycopy( annotations, 0, this.annotations, 0, annotations.length );
+        this.annotations = annotations.clone();
     }
 
     /**
@@ -134,9 +132,7 @@ public final class MethodArgument
      */
     private Annotation[] getAnnotationsArrayCopy()
     {
-        final Annotation[] annotations = new Annotation[this.annotations.length];
-        System.arraycopy( this.annotations, 0, annotations, 0, annotations.length );
-        return annotations;
+        return this.annotations.clone();
     }
 
     /**
