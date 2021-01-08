@@ -201,10 +201,6 @@ public final class BinderClassLoaderTestCase
                 input.close();
             }
         }
-        catch ( final UnsupportedEncodingException e )
-        {
-            throw new ExceptionInInitializerError( e );
-        }
         catch ( final IOException e )
         {
             throw new ExceptionInInitializerError( e );
