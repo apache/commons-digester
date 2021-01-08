@@ -23,10 +23,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.plugins.PluginConfigurationException;
-import org.apache.commons.digester3.plugins.PluginCreateRule;
-import org.apache.commons.digester3.plugins.PluginInvalidInputException;
-import org.apache.commons.digester3.plugins.PluginRules;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
 import org.junit.Test;

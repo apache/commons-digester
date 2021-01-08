@@ -19,8 +19,6 @@
 package org.apache.commons.digester3.plugins;
 
 import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.plugins.PluginCreateRule;
-import org.apache.commons.digester3.plugins.PluginDeclarationRule;
 
 public class ContainerCustomRules
 {

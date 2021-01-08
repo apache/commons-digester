@@ -23,9 +23,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.digester3.ExtendedBaseRules;
-import org.apache.commons.digester3.Rule;
-import org.apache.commons.digester3.Rules;
 import org.junit.Test;
 
 /**

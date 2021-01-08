@@ -23,9 +23,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.apache.commons.digester3.Rule;
-import org.apache.commons.digester3.RulesBase;
-import org.apache.commons.digester3.WithDefaultsRulesWrapper;
 import org.junit.Test;
 
 /**

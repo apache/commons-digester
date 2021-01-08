@@ -20,7 +20,6 @@ package org.apache.commons.digester3;
 
 import java.util.List;
 
-import org.apache.commons.digester3.Rule;
 import org.apache.commons.digester3.binder.RuleProvider;
 import org.xml.sax.Attributes;
 

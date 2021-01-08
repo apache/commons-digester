@@ -22,10 +22,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.commons.digester3.RegexMatcher;
-import org.apache.commons.digester3.RegexRules;
-import org.apache.commons.digester3.Rule;
-import org.apache.commons.digester3.SimpleRegexMatcher;
 import org.junit.Test;
 
 /**

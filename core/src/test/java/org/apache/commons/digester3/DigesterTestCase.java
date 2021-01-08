@@ -37,12 +37,6 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Map;
 
-import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.ObjectCreateRule;
-import org.apache.commons.digester3.Rule;
-import org.apache.commons.digester3.RulesBase;
-import org.apache.commons.digester3.StackAction;
-import org.apache.commons.digester3.Substitutor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

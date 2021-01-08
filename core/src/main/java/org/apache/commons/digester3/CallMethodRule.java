@@ -19,7 +19,6 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
-import static java.lang.System.arraycopy;
 import static java.lang.String.format;
 import static java.util.Arrays.fill;
 import static org.apache.commons.beanutils.ConvertUtils.convert;

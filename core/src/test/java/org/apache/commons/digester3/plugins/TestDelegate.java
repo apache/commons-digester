@@ -19,7 +19,6 @@
 package org.apache.commons.digester3.plugins;
 
 import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.plugins.PluginRules;
 import org.junit.Test;
 
 /**

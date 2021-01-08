@@ -19,8 +19,6 @@ package org.apache.commons.digester3.annotations.reflect;
  * under the License.
  */
 
-import static java.lang.System.arraycopy;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 

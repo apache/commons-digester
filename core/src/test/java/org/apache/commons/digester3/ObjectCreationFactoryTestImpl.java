@@ -18,7 +18,6 @@
 
 package org.apache.commons.digester3;
 
-import org.apache.commons.digester3.AbstractObjectCreationFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
 

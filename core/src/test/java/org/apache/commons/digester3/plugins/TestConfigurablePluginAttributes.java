@@ -24,9 +24,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.plugins.PluginCreateRule;
-import org.apache.commons.digester3.plugins.PluginDeclarationRule;
-import org.apache.commons.digester3.plugins.PluginRules;
 import org.junit.Test;
 
 /**

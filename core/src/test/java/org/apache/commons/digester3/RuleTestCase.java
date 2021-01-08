@@ -28,9 +28,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.ExtendedBaseRules;
-import org.apache.commons.digester3.RuleSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -28,8 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.StackAction;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
 import org.xml.sax.Locator;

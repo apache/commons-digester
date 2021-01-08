@@ -28,8 +28,6 @@ import java.util.LinkedList;
 import org.apache.commons.digester3.CallMethodRule;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.SimpleTestBean;
-import org.apache.commons.digester3.substitution.MultiVariableExpander;
-import org.apache.commons.digester3.substitution.VariableSubstitutor;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 

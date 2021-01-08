@@ -22,7 +22,6 @@ import static org.junit.Assert.*;
 
 import java.net.URL;
 
-import org.apache.commons.digester3.Digester;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

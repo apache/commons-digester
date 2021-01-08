@@ -18,9 +18,6 @@
 
 package org.apache.commons.digester3;
 
-import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.RuleSetBase;
-
 /**
  * RuleSet that mimics the rules set used for Employee and Address creation, optionally associated with a particular
  * namespace URI.

@@ -22,7 +22,6 @@ import java.io.File;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.apache.commons.digester3.Digester;
 import org.junit.Test;
 import org.xml.sax.helpers.DefaultHandler;
 
