@@ -389,7 +389,7 @@ public class SetNestedPropertiesRule
                 // the rule passed to this object's constructor is included
                 // in the returned list of matching rules.
 
-                if ( ( match == null || match.size() == 0 ) )
+                if ( ( match == null || match.isEmpty() ) )
                 {
                     // The "real" rules class doesn't have any matches for
                     // the specified path, so we return a list containing

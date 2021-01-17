@@ -2692,7 +2692,7 @@ public class Digester
             object = stackAction.onPush( this, null, object );
         }
 
-        if ( stack.size() == 0 )
+        if ( stack.isEmpty() )
         {
             root = object;
         }
