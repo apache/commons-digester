@@ -138,7 +138,7 @@ public class AnnotationUtils
     /**
      * Invokes an annotation method.
      * 
-     * @param annotationn the annotation has to be introspected.
+     * @param annotation the annotation has to be introspected.
      * @param method the method name to execute.
      * @return the annotation method value, null if any error occurs.
      */

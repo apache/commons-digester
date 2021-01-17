@@ -40,11 +40,11 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
 
     private final ClassLoader classLoader;
 
-    private boolean useExactMatch = false;
+    private boolean useExactMatch;
 
     private Class<?> paramType;
 
-    private boolean fireOnBegin = false;
+    private boolean fireOnBegin;
 
     AbstractParamTypeBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
                               final LinkedRuleBuilder mainBuilder, final String methodName, final ClassLoader classLoader )

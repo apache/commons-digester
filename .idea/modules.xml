@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/core/commons-digester3.iml" filepath="$PROJECT_DIR$/core/commons-digester3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dist/commons-digester3-dist.iml" filepath="$PROJECT_DIR$/dist/commons-digester3-dist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons-digester3-parent.iml" filepath="$PROJECT_DIR$/commons-digester3-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/api/addressbook/commons-digester3-samples-addressbook.iml" filepath="$PROJECT_DIR$/examples/api/addressbook/commons-digester3-samples-addressbook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/annotations/atom/commons-digester3-samples-annotations-atom.iml" filepath="$PROJECT_DIR$/examples/annotations/atom/commons-digester3-samples-annotations-atom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/api/catalog/commons-digester3-samples-catalog.iml" filepath="$PROJECT_DIR$/examples/api/catalog/commons-digester3-samples-catalog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/api/dbinsert/commons-digester3-samples-dbinsert.iml" filepath="$PROJECT_DIR$/examples/api/dbinsert/commons-digester3-samples-dbinsert.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/api/document-markup/commons-digester3-samples-document-markup.iml" filepath="$PROJECT_DIR$/examples/api/document-markup/commons-digester3-samples-document-markup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/edsl/atom/commons-digester3-samples-edsl-atom.iml" filepath="$PROJECT_DIR$/examples/edsl/atom/commons-digester3-samples-edsl-atom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/commons-digester3-samples-parent.iml" filepath="$PROJECT_DIR$/examples/commons-digester3-samples-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/plugins/pipeline/commons-digester3-samples-plugins-pipeline.iml" filepath="$PROJECT_DIR$/examples/plugins/pipeline/commons-digester3-samples-plugins-pipeline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/rss/commons-digester3-samples-rss.iml" filepath="$PROJECT_DIR$/examples/rss/commons-digester3-samples-rss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/xmlrules/addressbook/commons-digester3-samples-xmlrules-addressbook.iml" filepath="$PROJECT_DIR$/examples/xmlrules/addressbook/commons-digester3-samples-xmlrules-addressbook.iml" />
+    </modules>
+  </component>
+</project>

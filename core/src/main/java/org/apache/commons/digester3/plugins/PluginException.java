@@ -30,7 +30,7 @@ public class PluginException
 
     private static final long serialVersionUID = 1L;
 
-    private Throwable cause = null;
+    private Throwable cause;
 
     /**
      * @param cause underlying exception that caused this to be thrown

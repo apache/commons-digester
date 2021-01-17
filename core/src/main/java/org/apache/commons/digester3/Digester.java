@@ -156,12 +156,12 @@ public class Digester
      * class loader used to load Digester itself, is used, based on the value of the <code>useContextClassLoader</code>
      * variable.
      */
-    private ClassLoader classLoader = null;
+    private ClassLoader classLoader;
 
     /**
      * Has this Digester been configured yet.
      */
-    private boolean configured = false;
+    private boolean configured;
 
     /**
      * The EntityResolver used by the SAX parser. By default it use this class
@@ -176,17 +176,17 @@ public class Digester
     /**
      * The application-supplied error handler that is notified when parsing warnings, errors, or fatal errors occur.
      */
-    private ErrorHandler errorHandler = null;
+    private ErrorHandler errorHandler;
 
     /**
      * The SAXParserFactory that is created the first time we need it.
      */
-    private SAXParserFactory factory = null;
+    private SAXParserFactory factory;
 
     /**
      * The Locator associated with our parser.
      */
-    private Locator locator = null;
+    private Locator locator;
 
     /**
      * The current match pattern for nested element processing.
@@ -196,7 +196,7 @@ public class Digester
     /**
      * Do we want a "namespace aware" parser.
      */
-    private boolean namespaceAware = false;
+    private boolean namespaceAware;
 
     /**
      * The executor service to run asynchronous parse method.
@@ -215,7 +215,7 @@ public class Digester
     /**
      * Do we want a "XInclude aware" parser.
      */
-    private boolean xincludeAware = false;
+    private boolean xincludeAware;
 
     /**
      * The parameters stack being utilized by CallMethodRule and CallParamRule rules.
@@ -227,35 +227,35 @@ public class Digester
     /**
      * The SAXParser we will use to parse the input stream.
      */
-    private SAXParser parser = null;
+    private SAXParser parser;
 
     /**
      * The public identifier of the DTD we are currently parsing under (if any).
      */
-    private String publicId = null;
+    private String publicId;
 
     /**
      * The XMLReader used to parse digester rules.
      */
-    private XMLReader reader = null;
+    private XMLReader reader;
 
     /**
      * The "root" element of the stack (in other words, the last object that was popped.
      */
-    private Object root = null;
+    private Object root;
 
     /**
      * The <code>Rules</code> implementation containing our collection of <code>Rule</code> instances and associated
      * matching policy. If not established before the first rule is added, a default implementation will be provided.
      */
-    private Rules rules = null;
+    private Rules rules;
 
     /**
      * The XML schema to use for validating an XML instance.
      *
      * @since 2.0
      */
-    private Schema schema = null;
+    private Schema schema;
 
     /**
      * The object stack being constructed.
@@ -271,7 +271,7 @@ public class Digester
     /**
      * Do we want to use a validating parser.
      */
-    private boolean validating = false;
+    private boolean validating;
 
     /**
      * The Log to which most logging calls will be made.
@@ -304,12 +304,12 @@ public class Digester
      * <p>
      * See setCustomContentHandler.
      */
-    private ContentHandler customContentHandler = null;
+    private ContentHandler customContentHandler;
 
     /**
      * Object which will receive callbacks for every pop/push action on the default stack or named stacks.
      */
-    private StackAction stackAction = null;
+    private StackAction stackAction;
 
     // ------------------------------------------------------------- Properties
 

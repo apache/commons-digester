@@ -148,9 +148,9 @@ public class RegexRules
     /** Used to associate rules with paths in the rules list */
     private static class RegisteredRule
     {
-        String pattern;
+        final String pattern;
 
-        Rule rule;
+        final Rule rule;
 
         RegisteredRule( final String pattern, final Rule rule )
         {

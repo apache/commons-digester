@@ -57,12 +57,12 @@ import org.xml.sax.Attributes;
     /**
      * The Digester with which this Rule is associated.
      */
-    private Digester digester = null;
+    private Digester digester;
 
     /**
      * The namespace URI for which this Rule is relevant, if any.
      */
-    private String namespaceURI = null;
+    private String namespaceURI;
 
     // ------------------------------------------------------------- Properties
 

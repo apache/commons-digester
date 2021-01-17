@@ -145,13 +145,13 @@ public final class DigesterLoader
      * The application-supplied error handler that is notified when parsing warnings, errors, or fatal errors occur.
      * @since 3.2
      */
-    private ErrorHandler errorHandler = null;
+    private ErrorHandler errorHandler;
 
     /**
      * The Locator associated with our parser.
      * @since 3.2
      */
-    private Locator locator = null;
+    private Locator locator;
 
     /**
      * Creates a new {@link DigesterLoader} instance given a collection of {@link RulesModule} instance.

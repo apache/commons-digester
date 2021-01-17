@@ -102,11 +102,11 @@ public class SetNestedPropertiesRule
     extends Rule
 {
 
-    private Log log = null;
+    private Log log;
 
     private boolean trimData = true;
 
-    private boolean allowUnknownChildElements = false;
+    private boolean allowUnknownChildElements;
 
     private final HashMap<String, String> elementNames = new HashMap<String, String>();
 
@@ -330,9 +330,9 @@ public class SetNestedPropertiesRule
     private class AnyChildRules
         implements Rules
     {
-        private String matchPrefix = null;
+        private String matchPrefix;
 
-        private Rules decoratedRules = null;
+        private Rules decoratedRules;
 
         private final ArrayList<Rule> rules = new ArrayList<Rule>( 1 );
 
@@ -447,7 +447,7 @@ public class SetNestedPropertiesRule
         extends Rule
     {
 
-        private String currChildElementName = null;
+        private String currChildElementName;
 
         @Override
         public void begin( final String namespaceURI, final String name, final Attributes attributes )

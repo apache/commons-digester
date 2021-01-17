@@ -39,7 +39,7 @@ public class Image
     /**
      * The image description (1-100 characters).
      */
-    protected String description = null;
+    protected String description;
 
     public String getDescription()
     {
@@ -69,7 +69,7 @@ public class Image
     /**
      * The image link (1-500 characters).
      */
-    protected String link = null;
+    protected String link;
 
     public String getLink()
     {
@@ -84,7 +84,7 @@ public class Image
     /**
      * The image alternate text (1-100 characters).
      */
-    protected String title = null;
+    protected String title;
 
     public String getTitle()
     {
@@ -99,7 +99,7 @@ public class Image
     /**
      * The image location URL (1-500 characters).
      */
-    protected String url = null;
+    protected String url;
 
     public String getURL()
     {

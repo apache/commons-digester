@@ -56,12 +56,12 @@ public class SetPropertyRule
     /**
      * The attribute that will contain the property name.
      */
-    protected String name = null;
+    protected String name;
 
     /**
      * The attribute that will contain the property value.
      */
-    protected String value = null;
+    protected String value;
 
     // --------------------------------------------------------- Public Methods
 
