@@ -32,20 +32,20 @@ final class PatternStack
     @Override
     public String toString()
     {
-        final StringBuilder str = new StringBuilder();
+        final StringBuilder strBuilder = new StringBuilder();
         for ( int i = 0; i < size(); i++ )
         {
             final String elem = get( i );
             if ( !elem.isEmpty() )
             {
-                if ( str.length() > 0 )
+                if ( strBuilder.length() > 0 )
                 {
-                    str.append( '/' );
+                    strBuilder.append( '/' );
                 }
-                str.append( elem );
+                strBuilder.append( elem );
             }
         }
-        return str.toString();
+        return strBuilder.toString();
     }
 
 }
