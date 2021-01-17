@@ -60,7 +60,7 @@ final class IncludeRule
     {
         // The path attribute gives the URI to another digester rules xml file
         final String fileName = attributes.getValue( "url" );
-        if ( fileName != null && fileName.length() > 0 )
+        if ( fileName != null && !fileName.isEmpty() )
         {
             final URL xmlRulesResource;
 
@@ -124,7 +124,7 @@ final class IncludeRule
         // The class attribute gives the name of a class that implements
         // the DigesterRulesSource interface
         final String className = attributes.getValue( "class" );
-        if ( className != null && className.length() > 0 )
+        if ( className != null && !className.isEmpty() )
         {
             try
             {

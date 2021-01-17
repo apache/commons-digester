@@ -68,7 +68,7 @@ final class CallMethodRule
         }
 
         final String paramTypesStr = attributes.getValue( "paramtypes" );
-        if ( paramTypesStr != null && paramTypesStr.length() > 0 )
+        if ( paramTypesStr != null && !paramTypesStr.isEmpty() )
         {
             final StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
             final String[] paramTypeNames = new String[tokens.countTokens()];

@@ -79,7 +79,7 @@ final class PrefixedRulesBinder
     @Override
     public LinkedRuleBuilder forPattern( String pattern )
     {
-        if ( this.prefix != null && this.prefix.length() > 0 )
+        if ( this.prefix != null && !this.prefix.isEmpty() )
         {
             pattern = this.prefix + '/' + pattern;
         }

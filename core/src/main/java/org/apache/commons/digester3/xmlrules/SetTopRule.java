@@ -48,7 +48,7 @@ final class SetTopRule
     {
         final SetTopBuilder builder = linkedRuleBuilder.setTop( methodName );
 
-        if ( paramType != null && paramType.length() > 0 )
+        if ( paramType != null && !paramType.isEmpty() )
         {
             builder.withParameterType( paramType );
         }

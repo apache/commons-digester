@@ -50,7 +50,7 @@ final class ObjectCreateRule
             .ofTypeSpecifiedByAttribute( attributes.getValue( "attrname" ) );
 
         final String paramTypesStr = attributes.getValue( "paramtypes" );
-        if ( paramTypesStr != null && paramTypesStr.length() > 0 )
+        if ( paramTypesStr != null && !paramTypesStr.isEmpty() )
         {
             final StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
             final String[] paramTypeNames = new String[tokens.countTokens()];
@@ -62,7 +62,7 @@ final class ObjectCreateRule
             builder.usingConstructor( paramTypeNames );
         }
         final String paramsStr = attributes.getValue( "params" );
-        if ( paramsStr != null && paramsStr.length() > 0 )
+        if ( paramsStr != null && !paramsStr.isEmpty() )
         {
             final StringTokenizer tokens = new StringTokenizer( paramTypesStr, " \t\n\r," );
             final Object[] params = new Object[tokens.countTokens()];

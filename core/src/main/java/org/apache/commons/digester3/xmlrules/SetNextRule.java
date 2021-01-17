@@ -48,7 +48,7 @@ final class SetNextRule
     {
         final SetNextBuilder builder = linkedRuleBuilder.setNext( methodName );
 
-        if ( paramType != null && paramType.length() > 0 )
+        if ( paramType != null && !paramType.isEmpty() )
         {
             builder.withParameterType( paramType );
         }

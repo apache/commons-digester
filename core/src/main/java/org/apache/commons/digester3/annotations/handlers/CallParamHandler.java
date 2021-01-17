@@ -45,7 +45,7 @@ public final class CallParamHandler
             .withNamespaceURI( annotation.namespaceURI() )
             .callParam()
             .ofIndex( element.getIndex() )
-            .fromAttribute( annotation.attributeName().length() > 0 ? annotation.attributeName() : null );
+            .fromAttribute( annotation.attributeName().isEmpty() ? null : annotation.attributeName() );
 
         if ( annotation.fromStack() )
         {

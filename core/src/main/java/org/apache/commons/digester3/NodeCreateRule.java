@@ -144,7 +144,7 @@ public class NodeCreateRule
                 final String str = topText.toString();
                 topText.setLength( 0 );
 
-                if ( str.trim().length() > 0 )
+                if ( !str.trim().isEmpty() )
                 {
                     // The contained text is not *pure* whitespace, so create
                     // a text node to hold it. Note that the "untrimmed" text

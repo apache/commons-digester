@@ -330,7 +330,7 @@ public final class LinkedRuleBuilder
      */
     public LinkedRuleBuilder withNamespaceURI( /* @Nullable */final String namespaceURI )
     {
-        if ( namespaceURI == null || namespaceURI.length() > 0 )
+        if ( namespaceURI == null || !namespaceURI.isEmpty() )
         {
             this.namespaceURI = namespaceURI;
         }

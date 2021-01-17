@@ -1325,7 +1325,7 @@ public class Digester
 
         // Compute the current matching rule
         final StringBuilder sb = new StringBuilder( match );
-        if ( match.length() > 0 )
+        if ( !match.isEmpty() )
         {
             sb.append( '/' );
         }

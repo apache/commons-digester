@@ -48,7 +48,7 @@ final class SetRootRule
     {
         final SetRootBuilder builder = linkedRuleBuilder.setRoot( methodName );
 
-        if ( paramType != null && paramType.length() > 0 )
+        if ( paramType != null && !paramType.isEmpty() )
         {
             builder.withParameterType( paramType );
         }

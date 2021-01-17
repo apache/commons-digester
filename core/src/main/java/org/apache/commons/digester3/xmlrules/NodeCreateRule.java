@@ -49,7 +49,7 @@ final class NodeCreateRule
         final NodeCreateRuleProvider nodeProvider = linkedRuleBuilder.createNode();
 
         final String nodeType = attributes.getValue( "type" );
-        if ( nodeType != null && nodeType.length() > 0 )
+        if ( nodeType != null && !nodeType.isEmpty() )
         {
             if ( "element".equals( nodeType ) )
             {

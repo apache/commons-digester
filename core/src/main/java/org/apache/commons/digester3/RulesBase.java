@@ -146,7 +146,7 @@ public class RulesBase
                     longKey = key;
                 }
             }
-            if ( longKey.length() > 0 )
+            if ( !longKey.isEmpty() )
             {
                 rulesList = lookup( namespaceURI, "*" + longKey );
             }

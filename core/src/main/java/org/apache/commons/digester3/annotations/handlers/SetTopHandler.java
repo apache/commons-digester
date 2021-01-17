@@ -49,7 +49,7 @@ public final class SetTopHandler
 
         rulesBinder
             .forPattern( annotation.pattern() )
-            .withNamespaceURI( annotation.namespaceURI().length() > 0 ? annotation.namespaceURI() : null )
+            .withNamespaceURI( !annotation.namespaceURI().isEmpty() ? annotation.namespaceURI() : null )
             .setTop( element.getName() )
             .withParameterType( element.getParameterTypes()[0] )
             .fireOnBegin( annotation.fireOnBegin() );

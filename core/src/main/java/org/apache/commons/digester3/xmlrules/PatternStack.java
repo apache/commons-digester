@@ -36,7 +36,7 @@ final class PatternStack
         for ( int i = 0; i < size(); i++ )
         {
             final String elem = get( i );
-            if ( elem.length() > 0 )
+            if ( !elem.isEmpty() )
             {
                 if ( str.length() > 0 )
                 {

@@ -42,7 +42,7 @@ public final class FactoryCreateHandler
         final FactoryCreateBuilder builder = rulesBinder.forPattern( annotation.pattern() )
             .withNamespaceURI( annotation.namespaceURI() )
             .factoryCreate()
-            .overriddenByAttribute( annotation.attributeName().length() > 0 ? annotation.attributeName() : null )
+            .overriddenByAttribute( annotation.attributeName().isEmpty() ? null : annotation.attributeName() )
             .ignoreCreateExceptions( annotation.ignoreCreateExceptions() );
 
         if ( FactoryCreate.DefaultObjectCreationFactory.class != annotation.factoryClass() )
