@@ -1076,7 +1076,7 @@ public class Digester
 
         // Fire "body" events for all relevant rules
         final List<Rule> rules = matches.pop();
-        if ( ( rules != null ) && ( rules.size() > 0 ) )
+        if ( ( rules != null ) && ( !rules.isEmpty() ) )
         {
             String bodyText = this.bodyText.toString();
             final Substitutor substitutor = getSubstitutor();
@@ -1339,7 +1339,7 @@ public class Digester
         // Fire "begin" events for all relevant rules
         final List<Rule> rules = getRules().match( namespaceURI, match, localName, list );
         matches.push( rules );
-        if ( ( rules != null ) && ( rules.size() > 0 ) )
+        if ( ( rules != null ) && ( !rules.isEmpty() ) )
         {
             final Substitutor substitutor = getSubstitutor();
             if ( substitutor != null )
