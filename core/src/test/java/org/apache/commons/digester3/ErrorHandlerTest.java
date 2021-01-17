@@ -69,7 +69,7 @@ public class ErrorHandlerTest
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
         {
-            Log log = LogFactory.getLog( this.getClass() );
+            final Log log = LogFactory.getLog( this.getClass() );
 
             @Override
             public void warning( final SAXParseException arg0 )
@@ -124,7 +124,7 @@ public class ErrorHandlerTest
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
         {
-            Log log = LogFactory.getLog( this.getClass() );
+            final Log log = LogFactory.getLog( this.getClass() );
 
             @Override
             public void warning( final SAXParseException arg0 )

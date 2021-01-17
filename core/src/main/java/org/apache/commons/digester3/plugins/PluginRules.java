@@ -62,7 +62,7 @@ public class PluginRules
     /**
      * The rules implementation that we are "enhancing" with plugins functionality, as per the Decorator pattern.
      */
-    private Rules decoratedRules;
+    private final Rules decoratedRules;
 
     /** Object which contains information about all known plugins. */
     private final PluginManager pluginManager;
