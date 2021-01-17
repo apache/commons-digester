@@ -37,14 +37,14 @@ public class PluginCreateRule
 {
 
     // see setPluginClassAttribute
-    private String pluginClassAttrNs = null;
+    private String pluginClassAttrNs;
 
-    private String pluginClassAttr = null;
+    private String pluginClassAttr;
 
     // see setPluginIdAttribute
-    private String pluginIdAttrNs = null;
+    private String pluginIdAttrNs;
 
-    private String pluginIdAttr = null;
+    private String pluginIdAttr;
 
     /**
      * In order to invoke the addRules method on the plugin class correctly, we need to know the pattern which this rule
@@ -53,7 +53,7 @@ public class PluginCreateRule
     private String pattern;
 
     /** A base class that any plugin must derive from. */
-    private Class<?> baseClass = null;
+    private Class<?> baseClass;
 
     /**
      * Info about optional default plugin to be used if no plugin-id is specified in the input data. This can simplify
@@ -552,7 +552,7 @@ public class PluginCreateRule
      * It would be really nice if the Digester class provided a way for this functionality to just be invoked directly.
      *
      * @param rules The rules which {@link Rule#body(String, String, String)} method has to be fired
-     * @param namespace the namespace URI of the matching element, or an empty string if the parser is not namespace
+     * @param namespaceURI the namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
      * @param text The text of the body of this element

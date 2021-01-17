@@ -33,7 +33,7 @@ public final class ObjectParamBuilder<T>
 
     private final T paramObj;
 
-    private int paramIndex = 0;
+    private int paramIndex;
 
     private String attributeName;
 

@@ -30,7 +30,7 @@ public final class PathCallParamBuilder
     extends AbstractBackToLinkedRuleBuilder<PathCallParamRule>
 {
 
-    private int paramIndex = 0;
+    private int paramIndex;
 
     PathCallParamBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
                           final LinkedRuleBuilder mainBuilder )

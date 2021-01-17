@@ -52,7 +52,7 @@ public class PluginRules
     /**
      * The Digester instance with which this Rules instance is associated.
      */
-    protected Digester digester = null;
+    protected Digester digester;
 
     /**
      * The (optional) object which generates new rules instances.
@@ -62,7 +62,7 @@ public class PluginRules
     /**
      * The rules implementation that we are "enhancing" with plugins functionality, as per the Decorator pattern.
      */
-    private Rules decoratedRules;
+    private final Rules decoratedRules;
 
     /** Object which contains information about all known plugins. */
     private final PluginManager pluginManager;
@@ -71,17 +71,17 @@ public class PluginRules
      * The path below which this rules object has responsibility. For paths shorter than or equal the mountpoint, the
      * parent's match is called.
      */
-    private String mountPoint = null;
+    private String mountPoint;
 
     /**
      * The Rules object that holds rules applying "above" the mountpoint, ie the next Rules object down in the stack.
      */
-    private PluginRules parent = null;
+    private PluginRules parent;
 
     /**
      * A reference to the object that holds all data which should only exist once per digester instance.
      */
-    private PluginContext pluginContext = null;
+    private PluginContext pluginContext;
 
     // ------------------------------------------------------------- Constructor
 

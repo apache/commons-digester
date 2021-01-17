@@ -103,27 +103,27 @@ public class NodeCreateRule
         /**
          * The content handler used by Digester before it was set to this content handler.
          */
-        protected ContentHandler oldContentHandler = null;
+        protected ContentHandler oldContentHandler;
 
         /**
          * Depth of the current node, relative to the element where the content handler was put into action.
          */
-        protected int depth = 0;
+        protected int depth;
 
         /**
          * A DOM Document used to create the various Node instances.
          */
-        protected Document doc = null;
+        protected Document doc;
 
         /**
          * The DOM node that will be pushed on Digester's stack.
          */
-        protected Node root = null;
+        protected Node root;
 
         /**
          * The current top DOM mode.
          */
-        protected Node top = null;
+        protected Node top;
 
         /**
          * The text content of the current top DOM node.
@@ -363,7 +363,7 @@ public class NodeCreateRule
     /**
      * The JAXP <code>DocumentBuilder</code> to use.
      */
-    private DocumentBuilder documentBuilder = null;
+    private DocumentBuilder documentBuilder;
 
     /**
      * The type of the node that should be created. Must be one of the constants defined in {@link org.w3c.dom.Node

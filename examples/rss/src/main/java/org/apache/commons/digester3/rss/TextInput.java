@@ -39,7 +39,7 @@ public class TextInput implements Serializable {
     /**
      * The text input description (1-100 characters).
      */
-    protected String description = null;
+    protected String description;
 
     public String getDescription()
     {
@@ -54,7 +54,7 @@ public class TextInput implements Serializable {
     /**
      * The text input link (1-500 characters).
      */
-    protected String link = null;
+    protected String link;
 
     public String getLink()
     {
@@ -69,7 +69,7 @@ public class TextInput implements Serializable {
     /**
      * The text input field name (1-100 characters).
      */
-    protected String name = null;
+    protected String name;
 
     public String getName()
     {
@@ -84,7 +84,7 @@ public class TextInput implements Serializable {
     /**
      * The text input submit button label (1-100 characters).
      */
-    protected String title = null;
+    protected String title;
 
     public String getTitle()
     {
