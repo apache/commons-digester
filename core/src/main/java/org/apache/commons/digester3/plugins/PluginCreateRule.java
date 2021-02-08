@@ -62,7 +62,7 @@ public class PluginCreateRule
     private Declaration defaultPlugin;
 
     /**
-     * Currently, none of the Rules methods allow exceptions to be thrown. Therefore if this class cannot initialise
+     * Currently, none of the Rules methods allow exceptions to be thrown. Therefore if this class cannot initialize
      * itself properly, it cannot cause the digester to stop. Instead, we cache the exception and throw it the first
      * time the begin() method is called.
      */

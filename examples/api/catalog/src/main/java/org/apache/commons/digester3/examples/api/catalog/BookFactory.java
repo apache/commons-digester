@@ -52,7 +52,7 @@ import org.xml.sax.Attributes;
  * Book instance has been created.
  * <p>
  * Note that even if the class to be created does have a default constructor,
- * you may wish to use a factory class, in order to initialise the created
+ * you may wish to use a factory class, in order to initialize the created
  * object in specific ways, or insert created objects into a central
  * register, etc.
  * <p>

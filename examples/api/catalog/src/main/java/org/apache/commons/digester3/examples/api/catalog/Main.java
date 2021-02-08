@@ -159,7 +159,7 @@ public class Main
         // method. This usage is a little artificial - normally in this
         // situation there would be separate Dvd and Video classes.
         // Note also that equivalent behavior could be implemented by
-        // using factory objects to create & initialise the AudioVisual
+        // using factory objects to create & initialize the AudioVisual
         // objects with their type rather than using ObjectCreateRule.
 
         d.addCallMethod( "catalog/dvd", "setType", 1 );
