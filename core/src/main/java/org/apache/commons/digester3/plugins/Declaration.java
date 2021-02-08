@@ -81,7 +81,7 @@ public class Declaration
     }
 
     /**
-     * Create an instance where a fully-initialised ruleLoader instance is provided by the caller instead of having the
+     * Create an instance where a fully-initialized ruleLoader instance is provided by the caller instead of having the
      * PluginManager "discover" an appropriate one.
      *
      * @param pluginClass The class of the object to be instantiated (will be load in the init method)

@@ -70,7 +70,7 @@ public class Main
         final String rulesfileName = args[0];
         final String datafileName = args[1];
 
-        // Create a Digester instance which has been initialised with
+        // Create a Digester instance which has been initialized with
         // rules loaded from the specified file.
         final Digester d = newLoader( new FromXmlRulesModule()
         {

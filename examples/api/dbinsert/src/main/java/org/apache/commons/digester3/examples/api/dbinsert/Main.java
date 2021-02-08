@@ -135,7 +135,7 @@ public class Main
         // object from the stack, and also do an actual database insert.
         //
         // Note that the rule instance we are passing to the digester has
-        // been initialised with some useful data (the SQL connection).
+        // been initialized with some useful data (the SQL connection).
         //
         // Note also that in this case we are not using the digester's
         // factory methods to create the rule instance; that's just a
