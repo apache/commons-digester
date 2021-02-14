@@ -89,7 +89,7 @@ public class BeanPropertySetterRule
     /**
      * The body text used to set the property.
      */
-    private String bodyText = null;
+    private String bodyText;
 
     // --------------------------------------------------------- Public Methods
 

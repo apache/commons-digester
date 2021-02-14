@@ -52,7 +52,7 @@ public class RSSDigester
     /**
      * Have we been configured yet?
      */
-    protected boolean configured = false;
+    protected boolean configured;
 
     // ------------------------------------------------------------- Properties
 

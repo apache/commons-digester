@@ -38,12 +38,12 @@ public abstract class AbstractMethodRule
     /**
      * The method name to call on the parent object.
      */
-    protected String methodName = null;
+    protected String methodName;
 
     /**
      * The Java class name of the parameter type expected by the method.
      */
-    protected String paramTypeName = null;
+    protected String paramTypeName;
 
     /**
      * The Java class name of the parameter type expected by the method.
@@ -53,13 +53,13 @@ public abstract class AbstractMethodRule
     /**
      * Should we use exact matching. Default is no.
      */
-    protected boolean useExactMatch = false;
+    protected boolean useExactMatch;
 
     /**
      * Should this rule be invoked when {@link #begin(String, String, Attributes)} (true)
      * or {@link #end(String, String)} (false) methods are invoked, false by default.
      */
-    protected boolean fireOnBegin = false;
+    protected boolean fireOnBegin;
 
     /**
      * Construct a "set next" rule with the specified method name. The method's argument type is assumed to be the class

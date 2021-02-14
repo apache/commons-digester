@@ -30,7 +30,7 @@ public class Main
 {
 
     /** The input xml to be parsed by this example. */
-    String in = "<p>Hi, this is an <i>example</i> of some <b>bold</b> text.</p>";
+    final String in = "<p>Hi, this is an <i>example</i> of some <b>bold</b> text.</p>";
 
     /** Invoked when a text segment is present in the parsed input. */
     public void addSegment( final String text )

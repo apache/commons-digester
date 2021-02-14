@@ -40,11 +40,11 @@ public final class CallMethodBuilder
 
     private int targetOffset;
 
-    private int paramCount = 0;
+    private int paramCount;
 
     private Class<?>[] paramTypes = new Class<?>[]{};
 
-    private boolean useExactMatch = false;
+    private boolean useExactMatch;
 
     CallMethodBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder, final LinkedRuleBuilder mainBuilder,
                        final String methodName, final ClassLoader classLoader )

@@ -92,7 +92,7 @@ public @interface FactoryCreate
     /**
      * Dummy ObjectCreationFactory type - only for annotation value type purposes.
      */
-    public static final class DefaultObjectCreationFactory
+    final class DefaultObjectCreationFactory
         extends AbstractObjectCreationFactory<Object>
     {
 

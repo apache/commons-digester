@@ -37,7 +37,7 @@ public final class NestedPropertiesBuilder
 
     private boolean trimData = true;
 
-    private boolean allowUnknownChildElements = false;
+    private boolean allowUnknownChildElements;
 
     NestedPropertiesBuilder( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
                                     final LinkedRuleBuilder mainBuilder )

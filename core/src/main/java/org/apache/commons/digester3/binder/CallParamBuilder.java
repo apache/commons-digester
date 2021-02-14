@@ -30,11 +30,11 @@ public final class CallParamBuilder
     extends AbstractBackToLinkedRuleBuilder<CallParamRule>
 {
 
-    private int paramIndex = 0;
+    private int paramIndex;
 
-    private int stackIndex = 0;
+    private int stackIndex;
 
-    private boolean fromStack = false;
+    private boolean fromStack;
 
     private String attributeName;
 
