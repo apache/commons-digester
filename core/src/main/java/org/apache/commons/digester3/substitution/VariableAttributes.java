@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * Wrapper for an {@link Attributes} object which expands any "variables" referenced in the attribute value via
  * ${foo} or similar. This is only done when something actually asks for the attribute value, thereby imposing no
  * performance penalty if the attribute is not used.
- * 
+ *
  * @since 1.6
  */
 public class VariableAttributes

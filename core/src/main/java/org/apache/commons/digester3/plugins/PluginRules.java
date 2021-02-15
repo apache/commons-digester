@@ -42,7 +42,7 @@ import org.xml.sax.Attributes;
  * <p>
  * When the end of the xml element is encountered (and therefore the PluginCreateRule end method fires), the stack of
  * Rules objects is popped, so that Digester.getRules returns the previous Rules object.
- * 
+ *
  * @since 1.6
  */
 public class PluginRules
@@ -113,7 +113,7 @@ public class PluginRules
      * <p>
      * One of these is created each time a PluginCreateRule's begin method fires, in order to manage the custom rules
      * associated with whatever concrete plugin class the user has specified.
-     * 
+     *
      * @param digester is the object this rules will be associated with.
      * @param mountPoint is the digester match path for the element matching a PluginCreateRule which caused this
      *            "nested parsing scope" to begin. This is expected to be equal to digester.getMatch().
@@ -171,7 +171,7 @@ public class PluginRules
 
     /**
      * Set the Digester instance with which this Rules instance is associated.
-     * 
+     *
      * @param digester The newly associated Digester instance
      */
     @Override
@@ -194,7 +194,7 @@ public class PluginRules
 
     /**
      * Set the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
-     * 
+     *
      * @param namespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
      *            matching regardless of the current namespace URI
      */
@@ -206,7 +206,7 @@ public class PluginRules
 
     /**
      * Return the object which "knows" about all declared plugins.
-     * 
+     *
      * @return The pluginManager value
      */
     public PluginManager getPluginManager()
@@ -272,7 +272,7 @@ public class PluginRules
      * Return the list of rules registered with this object, in the order they were registered with this object.
      * <p>
      * Note that Rule objects stored in parent Rules objects are not returned by this method.
-     * 
+     *
      * @return list of all Rule objects known to this Rules instance.
      */
     @Override
@@ -283,7 +283,7 @@ public class PluginRules
 
     /**
      * Register a new Rule instance matching the specified pattern.
-     * 
+     *
      * @param pattern Nesting pattern to be matched for this Rule. This parameter treats equally patterns that begin
      *            with and without a leading slash ('/').
      * @param rule Rule instance to be registered
@@ -416,7 +416,7 @@ public class PluginRules
 
     /**
      * See {@link PluginContext#setPluginIdAttribute}.
-     * 
+     *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
      *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,

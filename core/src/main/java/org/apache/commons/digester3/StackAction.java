@@ -36,7 +36,7 @@ package org.apache.commons.digester3;
  * from the callback methods. This allows multiple actions to be "chained" together.
  * <p>
  * See also Digester.setStackAction.
- * 
+ *
  * @since 1.8
  */
 public interface StackAction

@@ -31,7 +31,7 @@ import org.xml.sax.Attributes;
  * <p>
  * Normally, a PluginDeclarationRule is added to a Digester instance with the pattern "{root}/plugin" or "* /plugin"
  * where {root} is the name of the root tag in the input document.
- * 
+ *
  * @since 1.6
  */
 public class PluginDeclarationRule
@@ -53,7 +53,7 @@ public class PluginDeclarationRule
      * <li>id</li>
      * <li>class</li>
      * </ul>
-     * 
+     *
      * @param namespace The xml namespace in which the xml element which triggered this rule resides.
      * @param name The name of the xml element which triggered this rule.
      * @param attributes The set of attributes on the xml element which triggered this rule.

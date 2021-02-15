@@ -55,7 +55,7 @@ public class BeanPropertySetterRule
      * <p>
      * Construct rule that sets the given property from the body text.
      * </p>
-     * 
+     *
      * @param propertyName name of property to set
      */
     public BeanPropertySetterRule( final String propertyName )

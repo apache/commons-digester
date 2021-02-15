@@ -27,7 +27,7 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.apache.commons.digester3.binder.RulesModule;
 
 /**
- * 
+ *
  */
 class WithMemoryRulesBinder
     implements RulesBinder

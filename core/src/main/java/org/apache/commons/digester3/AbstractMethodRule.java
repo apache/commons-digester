@@ -64,7 +64,7 @@ public abstract class AbstractMethodRule
     /**
      * Construct a "set next" rule with the specified method name. The method's argument type is assumed to be the class
      * of the child object.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      */
     public AbstractMethodRule( final String methodName )
@@ -74,7 +74,7 @@ public abstract class AbstractMethodRule
 
     /**
      * Construct a "set next" rule with the specified method name.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
@@ -88,7 +88,7 @@ public abstract class AbstractMethodRule
 
     /**
      * Construct a "set next" rule with the specified method name.
-     * 
+     *
      * @param methodName Method name of the parent method to call
      * @param paramTypeName Java class of the parent method's argument (if you wish to use a primitive type, specify the
      *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
@@ -118,7 +118,7 @@ public abstract class AbstractMethodRule
      * <p>
      * The default setting is to disable exact matches.
      * </p>
-     * 
+     *
      * @return true if exact matching is enabled
      * @since Digester Release 1.1.1
      */
@@ -158,7 +158,7 @@ public abstract class AbstractMethodRule
      * <p>
      * See {@link #isExactMatch()}.
      * </p>
-     * 
+     *
      * @param useExactMatch should this rule use exact method matching
      * @since Digester Release 1.1.1
      */

@@ -36,7 +36,7 @@ import org.xml.sax.Attributes;
  * matched. See {@link #ObjectParamRule(int paramIndex, String attributeName, Object param)}.
  * </ul>
  * </p>
- * 
+ *
  * @since 1.4
  */
 public class ObjectParamRule
@@ -45,7 +45,7 @@ public class ObjectParamRule
     // ----------------------------------------------------------- Constructors
     /**
      * Construct a "call parameter" rule that will save the given Object as the parameter value.
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      * @param param the parameter to pass along
      */
@@ -57,7 +57,7 @@ public class ObjectParamRule
     /**
      * Construct a "call parameter" rule that will save the given Object as the parameter value, provided that the
      * specified attribute exists.
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      * @param attributeName The name of the attribute to match
      * @param param the parameter to pass along

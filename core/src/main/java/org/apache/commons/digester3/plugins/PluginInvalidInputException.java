@@ -21,7 +21,7 @@ package org.apache.commons.digester3.plugins;
 
 /**
  * Thrown when an error occurs due to bad data in the file being parsed.
- * 
+ *
  * @since 1.6
  */
 public class PluginInvalidInputException

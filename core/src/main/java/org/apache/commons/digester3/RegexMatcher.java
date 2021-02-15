@@ -21,7 +21,7 @@ package org.apache.commons.digester3;
 
 /**
  * Regular expression matching strategy for RegexRules.
- * 
+ *
  * @since 1.5
  */
 public abstract class RegexMatcher
@@ -30,7 +30,7 @@ public abstract class RegexMatcher
     /**
      * Returns true if the given pattern matches the given path according to the regex algorithm that this strategy
      * applies.
-     * 
+     *
      * @param pathPattern the standard digester path representing the element
      * @param rulePattern the regex pattern the path will be tested against
      * @return true if the given pattern matches the given path

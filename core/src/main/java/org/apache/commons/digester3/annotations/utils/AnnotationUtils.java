@@ -25,7 +25,7 @@ import java.lang.annotation.Annotation;
 
 /**
  * Simple utility class to introspect annotations.
- * 
+ *
  * @since 2.1
  */
 public class AnnotationUtils
@@ -61,7 +61,7 @@ public class AnnotationUtils
 
     /**
      * Extract the {@code value()} from annotation.
-     * 
+     *
      * @param annotation the annotation has to be introspected.
      * @return the annotation {@code value()}.
      */
@@ -72,7 +72,7 @@ public class AnnotationUtils
 
     /**
      * Extract the {@code pattern()} from annotation.
-     * 
+     *
      * @param annotation the annotation has to be introspected.
      * @return the annotation {@code pattern()}.
      */
@@ -120,7 +120,7 @@ public class AnnotationUtils
 
     /**
      * Extract the Annotations array {@code value()} from annotation if present, nul otherwise.
-     * 
+     *
      * @param annotation the annotation has to be introspected.
      * @return the annotation {@code value()} as Annotations array.
      */
@@ -137,7 +137,7 @@ public class AnnotationUtils
 
     /**
      * Invokes an annotation method.
-     * 
+     *
      * @param annotationn the annotation has to be introspected.
      * @param method the method name to execute.
      * @return the annotation method value, null if any error occurs.

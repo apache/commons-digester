@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Meta-annotation that marks an annotation as a list of commons-digester annotations.
- * 
+ *
  * @since 2.1
  */
 @Documented

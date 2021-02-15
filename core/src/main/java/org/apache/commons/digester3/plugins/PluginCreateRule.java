@@ -28,7 +28,7 @@ import org.xml.sax.Attributes;
 /**
  * Allows the original rules for parsing the configuration file to define points at which plugins are allowed, by
  * configuring a PluginCreateRule with the appropriate pattern.
- * 
+ *
  * @since 1.6
  */
 public class PluginCreateRule
@@ -72,7 +72,7 @@ public class PluginCreateRule
 
     /**
      * Create a plugin rule where the user <i>must</i> specify a plugin-class or plugin-id.
-     * 
+     *
      * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
      */
     public PluginCreateRule( final Class<?> baseClass )
@@ -83,7 +83,7 @@ public class PluginCreateRule
     /**
      * Create a plugin rule where the user <i>may</i> specify a plugin. If the user doesn't specify a plugin, then the
      * default class specified in this constructor is used.
-     * 
+     *
      * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
      * @param dfltPluginClass is the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *            This class will have custom rules installed for it just like a declared plugin.
@@ -100,7 +100,7 @@ public class PluginCreateRule
     /**
      * Create a plugin rule where the user <i>may</i> specify a plugin. If the user doesn't specify a plugin, then the
      * default class specified in this constructor is used.
-     * 
+     *
      * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
      * @param dfltPluginClass is the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *            This class will have custom rules installed for it just like a declared plugin.
@@ -141,7 +141,7 @@ public class PluginCreateRule
      * being referenced.
      * <p>
      * See {@link PluginRules#setPluginIdAttribute} for more info.
-     * 
+     *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
      *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
@@ -302,7 +302,7 @@ public class PluginCreateRule
      * then created and set as the digester's default Rules object. Any custom rules associated with the plugin class
      * are then loaded into that new Rules object. Finally, any custom rules that are associated with the current
      * pattern (such as SetPropertiesRules) have their begin methods executed.
-     * 
+     *
      * @param namespace the namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
@@ -496,7 +496,7 @@ public class PluginCreateRule
      * only function correctly when associated with a single pattern. It is possible to fix this, but I can't be
      * bothered just now because this feature is unlikely to be used.
      * </p>
-     * 
+     *
      * @return The pattern value
      */
     public String getPattern()

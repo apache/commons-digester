@@ -7,15 +7,15 @@ package org.apache.commons.digester3.examples.api.addressbook;
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 /**
  * See Main.java.
@@ -78,7 +78,7 @@ public class Address
 
     /**
      * Sets the value of street.
-     * 
+     *
      * @param street The value to assign to street.
      */
     public void setStreet( final String street )
@@ -96,7 +96,7 @@ public class Address
 
     /**
      * Sets the value of city.
-     * 
+     *
      * @param city The value to assign to city.
      */
     public void setCity( final String city )
@@ -114,7 +114,7 @@ public class Address
 
     /**
      * Sets the value of state.
-     * 
+     *
      * @param state The value to assign to state.
      */
     public void setState( final String state )
@@ -132,7 +132,7 @@ public class Address
 
     /**
      * Sets the value of zip.
-     * 
+     *
      * @param zip The value to assign to zip.
      */
     public void setZip( final String zip )
@@ -150,7 +150,7 @@ public class Address
 
     /**
      * Sets the value of country.
-     * 
+     *
      * @param country The value to assign to country.
      */
     public void setCountry( final String country )
@@ -168,7 +168,7 @@ public class Address
 
     /**
      * Sets the value of type.
-     * 
+     *
      * @param type The value to assign to type.
      */
     public void setType( final String type )

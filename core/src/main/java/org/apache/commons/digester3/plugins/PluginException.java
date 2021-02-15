@@ -21,7 +21,7 @@ package org.apache.commons.digester3.plugins;
 
 /**
  * Thrown when some plugin-related error has occurred, and none of the other exception types are appropriate.
- * 
+ *
  * @since 1.6
  */
 public class PluginException

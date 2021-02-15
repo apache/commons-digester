@@ -34,7 +34,7 @@ import org.xml.sax.Attributes;
 
 /**
  * Classes annotated with {@code FactoryCreate} will be bound with {@code FactoryCreateRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addFactoryCreate(String,org.apache.commons.digester3.ObjectCreationFactory,boolean)
  * @since 2.1
  */
@@ -77,7 +77,7 @@ public @interface FactoryCreate
 
     /**
      * Defines several {@code @FactoryCreate} annotations on the same element.
-     * 
+     *
      * @see FactoryCreate
      */
     @Documented

@@ -33,7 +33,7 @@ import org.xml.sax.Attributes;
  * does not vary. All patterns are tested to see if they match the path using the regex matcher. All those that do are
  * return in the order which the rules were added.
  * </p>
- * 
+ *
  * @since 1.5
  */
 public class RegexRules
@@ -52,7 +52,7 @@ public class RegexRules
 
     /**
      * Construct sets the Regex matching strategy.
-     * 
+     *
      * @param matcher the regex strategy to be used, not null
      */
     public RegexRules( final RegexMatcher matcher )
@@ -74,7 +74,7 @@ public class RegexRules
 
     /**
      * Sets the current regex matching strategy.
-     * 
+     *
      * @param matcher use this RegexMatcher, not null
      */
     public void setRegexMatcher( final RegexMatcher matcher )

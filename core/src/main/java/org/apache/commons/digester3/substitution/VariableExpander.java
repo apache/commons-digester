@@ -25,7 +25,7 @@ package org.apache.commons.digester3.substitution;
  * of the "reference", and the mechanism for determining the corresponding value to be used is up to the concrete
  * implementation.
  * </p>
- * 
+ *
  * @since 1.6
  */
 public interface VariableExpander

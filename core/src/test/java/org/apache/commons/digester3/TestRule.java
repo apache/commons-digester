@@ -28,7 +28,7 @@ import org.xml.sax.Attributes;
  * This rule implementation is intended to help test digester. The idea is that you can test which rule matches by
  * looking at the identifier.
  * </p>
- * 
+ *
  * @author Robert Burrell Donkin
  */
 
@@ -51,7 +51,7 @@ public class TestRule
 
     /**
      * Base constructor.
-     * 
+     *
      * @param identifier Used to tell which TestRule is which
      */
     public TestRule( final String identifier )
@@ -62,7 +62,7 @@ public class TestRule
 
     /**
      * Constructor sets namespace URI.
-     * 
+     *
      * @param identifier Used to tell which TestRule is which
      * @param namespaceURI Set rule namespace
      */

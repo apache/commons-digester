@@ -20,7 +20,7 @@ package org.apache.commons.digester3;
 
 /**
  * A simple bean with primitive properties. At the moment only need a boolean property. Feel free to add others later.
- * 
+ *
  * @author robert burrell donkin
  */
 public class PrimitiveBean

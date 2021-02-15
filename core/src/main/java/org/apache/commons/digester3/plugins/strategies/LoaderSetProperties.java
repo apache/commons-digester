@@ -29,7 +29,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * <p>
  * This loader ensures that any xml attributes on the plugin tag get mapped to equivalent properties on a javabean. This
  * allows JavaBean classes to be used as plugins without any requirement to create custom plugin rules.
- * 
+ *
  * @since 1.6
  */
 public class LoaderSetProperties

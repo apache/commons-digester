@@ -44,7 +44,7 @@ import org.xml.sax.Attributes;
  * <p>
  * Example input that can be processed by this rule:
  * </p>
- * 
+ *
  * <pre>
  *   [widget]
  *    [height]7[/height]
@@ -95,7 +95,7 @@ import org.xml.sax.Attributes;
  * created. It should be possible to cache these in normal use (though watch out for when a rule instance is invoked
  * re-entrantly!).
  * </p>
- * 
+ *
  * @since 1.6
  */
 public class SetNestedPropertiesRule
@@ -132,7 +132,7 @@ public class SetNestedPropertiesRule
      * For details about how this works, see
      * {@link #SetNestedPropertiesRule(String[] elementNames, String[] propertyNames)}.
      * </p>
-     * 
+     *
      * @param elementName is the child xml element to match
      * @param propertyName is the java bean property to be assigned the value of the specified xml element. This may be
      *            null, in which case the specified xml element will be ignored.
@@ -161,7 +161,7 @@ public class SetNestedPropertiesRule
      * the <code>alt-state</code> to the <code>state</code> property. All other child elements are mapped as usual using
      * exact name matching. <code><pre>
      *      SetNestedPropertiesRule(
-     *                new String[] {"alt-city", "alt-state"}, 
+     *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
      * </pre></code>
      * </p>
@@ -171,11 +171,11 @@ public class SetNestedPropertiesRule
      * property. The xml element <code>ignore-me</code> is not mapped, ie is ignored. All other elements are mapped as
      * usual using exact name matching. <code><pre>
      *      SetPropertiesRule(
-     *                new String[] {"class", "ignore-me"}, 
+     *                new String[] {"class", "ignore-me"},
      *                new String[] {"className"});
      * </pre></code>
      * </p>
-     * 
+     *
      * @param elementNames names of elements to map
      * @param propertyNames names of properties mapped to
      */

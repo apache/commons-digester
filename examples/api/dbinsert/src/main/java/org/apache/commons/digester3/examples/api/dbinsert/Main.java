@@ -7,15 +7,15 @@ package org.apache.commons.digester3.examples.api.dbinsert;
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 import java.io.File;
 import java.io.IOException;
@@ -30,13 +30,13 @@ import org.xml.sax.SAXException;
  * up in-memory representations of the parsed data. This example also shows
  * how to write a custom Rule class.
  * <p>
- * This code will parse the provided "example.xml" file, and immediately 
+ * This code will parse the provided "example.xml" file, and immediately
  * insert the processed data into a database as each row tag is parsed,
- * instead of building up an in-memory representation. Actually, in order 
- * to keep this example simple and easy to run, sql insert statements are 
- * printed out rather than actually performing database inserts, but the 
+ * instead of building up an in-memory representation. Actually, in order
+ * to keep this example simple and easy to run, sql insert statements are
+ * printed out rather than actually performing database inserts, but the
  * principle remains.
- * <p> 
+ * <p>
  * Very verbose comments are included here, as this class is intended
  * as a tutorial; if you look closely at method "addRules", you will
  * see that the amount of code required to use the Digester is actually

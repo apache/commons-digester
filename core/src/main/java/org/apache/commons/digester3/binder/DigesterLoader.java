@@ -309,7 +309,7 @@ public final class DigesterLoader
     /**
      * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
      * <code>org.xml.sax.XMLReader</code>.
-     * 
+     *
      * @see org.apache.commons.digester3.Digester#setFeature(String, boolean)
      * @param feature Name of the feature to set the status for
      * @param value The new value for this feature

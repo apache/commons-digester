@@ -28,7 +28,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
 
 /**
  * A rule-finding algorithm which expects the caller to specify a classname and methodname as plugin properties.
- * 
+ *
  * @since 1.6
  */
 public class FinderFromClass
@@ -57,7 +57,7 @@ public class FinderFromClass
     /**
      * Create a rule-finder which invokes a user-specified method on a user-specified class whenever dynamic rules for a
      * plugin need to be loaded. See the findRules method for more info.
-     * 
+     *
      * @param ruleClassAttr must be non-null.
      * @param methodAttr may be null.
      * @param dfltMethodName may be null.

@@ -22,7 +22,7 @@ package org.apache.commons.digester3.plugins;
 /**
  * Defines an interface that a Rule class can implement if it wishes to get an initialisation callback after the rule
  * has been added to the set of Rules within a PluginRules instance.
- * 
+ *
  * @since 1.6
  */
 public interface InitializableRule
@@ -31,7 +31,7 @@ public interface InitializableRule
     /**
      * Called after this Rule object has been added to the list of all Rules. Note that if a single InitializableRule
      * instance is associated with more than one pattern, then this method will be called more than once.
-     * 
+     *
      * @param pattern is the digester match pattern that will trigger this rule.
      */
     void postRegisterInit( String pattern );

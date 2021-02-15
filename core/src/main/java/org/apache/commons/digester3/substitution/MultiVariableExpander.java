@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * <p>
  * Expands variable references from multiple sources.
  * </p>
- * 
+ *
  * @since 1.6
  */
 public class MultiVariableExpander

@@ -310,7 +310,7 @@ public class FromXmlRuleSetTest
                 + "   </pattern>"
                 + " </pattern>"
                 + "</digester-rules>";
-                
+
         final String xml = "<?xml version='1.0' ?>"
                      + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
 
@@ -325,7 +325,7 @@ public class FromXmlRuleSetTest
         assertEquals( "Incorrect right value", "", testObject.getRight() );
     }
 
-    /** 
+    /**
      * Test the FromXmlRules.addRuleInstances(digester, path) method, ie
      * test loading rules at a base position other than the root.
      */

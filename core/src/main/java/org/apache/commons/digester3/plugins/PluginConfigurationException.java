@@ -23,7 +23,7 @@ package org.apache.commons.digester3.plugins;
  * Thrown when an error occurs due to the way the calling application uses the plugins module. Because the pre-existing
  * Digester API doesn't provide any option for throwing checked exceptions at some points where Plugins can potentially
  * fail, this exception extends RuntimeException so that it can "tunnel" through these points.
- * 
+ *
  * @since 1.6
  */
 public class PluginConfigurationException

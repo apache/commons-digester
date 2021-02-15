@@ -94,7 +94,7 @@ final class WithMemoryRulesBinder
     }
 
     /**
-     * 
+     *
      *
      * @param bindingClass
      * @return true if the specified element has not yet been marked
@@ -105,7 +105,7 @@ final class WithMemoryRulesBinder
     }
 
     /**
-     * 
+     *
      *
      * @param bindingClass
      * @return true if the specified element has been marked

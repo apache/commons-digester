@@ -32,7 +32,7 @@ import org.apache.commons.logging.Log;
  * instances of these rules.
  * <p>
  * One instance of this class exists per PluginRules instance.
- * 
+ *
  * @since 1.6
  */
 public class PluginManager
@@ -70,7 +70,7 @@ public class PluginManager
      * "child" to retrieve a declaration, it delegates the search to its parent if it does not hold a matching entry
      * itself.
      * <p>
-     * 
+     *
      * @param parent must be non-null.
      */
     public PluginManager( final PluginManager parent )
@@ -86,7 +86,7 @@ public class PluginManager
      * <p>
      * TODO: somehow get a reference to a Digester object so that we can really log here. Currently, all logging is
      * disabled from this method.
-     * 
+     *
      * @param decl an object representing a plugin class.
      */
     public void addDeclaration( final Declaration decl )
@@ -129,7 +129,7 @@ public class PluginManager
 
     /**
      * Return the declaration object with the specified id. If no such plugin is known, null is returned.
-     * 
+     *
      * @param id Description of the Parameter
      * @return The declaration value
      */

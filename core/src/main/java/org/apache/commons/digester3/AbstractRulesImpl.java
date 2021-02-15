@@ -31,7 +31,7 @@ package org.apache.commons.digester3;
  * <code>namespaceURI</code> of the <code>Rule</code> will be set correctly before it is passed to
  * <code>registerRule</code>. The subclass can then perform whatever it needs to do to register the rule.
  * </p>
- * 
+ *
  * @since 1.5
  */
 public abstract class AbstractRulesImpl
@@ -109,7 +109,7 @@ public abstract class AbstractRulesImpl
     /**
      * Register rule at given pattern. The the Digester and namespaceURI properties of the given <code>Rule</code> can
      * be assumed to have been set properly before this method is called.
-     * 
+     *
      * @param pattern Nesting pattern to be matched for this Rule
      * @param rule Rule instance to be registered
      */

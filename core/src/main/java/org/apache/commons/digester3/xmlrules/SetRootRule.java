@@ -24,7 +24,7 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.apache.commons.digester3.binder.SetRootBuilder;
 
 /**
- * 
+ *
  */
 final class SetRootRule
     extends AbstractXmlMethodRule

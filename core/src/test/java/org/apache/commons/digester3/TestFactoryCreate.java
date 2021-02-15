@@ -34,7 +34,7 @@ import org.xml.sax.Attributes;
 
 /**
  * Test case for factory create rules.
- * 
+ *
  * @author Robert Burrell Donkin
  */
 @RunWith(value = Parameterized.class)

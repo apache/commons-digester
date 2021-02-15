@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Marks a Digester rule as a creation rule, that's crucial for the {@code setNext} rule.
- * 
+ *
  * @since 2.1
  */
 @Documented

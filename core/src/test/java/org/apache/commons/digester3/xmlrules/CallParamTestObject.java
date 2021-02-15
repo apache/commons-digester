@@ -20,7 +20,7 @@ package org.apache.commons.digester3.xmlrules;
 
 /**
  * Object for use with testing call param rules.
- * 
+ *
  * @author Robert Burrell Donkin
  */
 public class CallParamTestObject

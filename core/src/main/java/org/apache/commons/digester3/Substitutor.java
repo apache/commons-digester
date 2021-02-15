@@ -34,7 +34,7 @@ import org.xml.sax.Attributes;
  * <p>
  * Different strategies are supported for attributes and body text.
  * </p>
- * 
+ *
  * @since 1.6
  */
 public abstract class Substitutor
@@ -49,7 +49,7 @@ public abstract class Substitutor
      * can be safely reused. The implementation is therefore free to reuse the same <code>Attributes</code> instance for
      * all calls.
      * </p>
-     * 
+     *
      * @param attributes the <code>Attributes</code> passed into <code>Digester</code> by the SAX parser, not null (but
      *            may be empty)
      * @return <code>Attributes</code> to be passed to the <code>Rule</code> implementations. This method may pass back
@@ -60,7 +60,7 @@ public abstract class Substitutor
     /**
      * Substitutes for the body text. This method may substitute values into the body text of the elements that Digester
      * parses.
-     * 
+     *
      * @param bodyText the body text (as passed to <code>Digester</code>)
      * @return the body text to be passed to the <code>Rule</code> implementations
      */

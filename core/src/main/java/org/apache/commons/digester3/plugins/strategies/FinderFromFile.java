@@ -33,7 +33,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * A rule-finding algorithm which expects the user to specify an absolute or relative path in the plugin declaration.
  * <p>
  * The file is expected to contain Digester rules in xmlrules format.
- * 
+ *
  * @since 1.6
  */
 public class FinderFromFile

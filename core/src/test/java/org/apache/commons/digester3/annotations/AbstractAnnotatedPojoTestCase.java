@@ -29,7 +29,7 @@ import org.apache.commons.digester3.binder.RulesModule;
 
 /**
  * Abstract implementation of Class-&gt;Digester Rules-&gt;parse & confronting.
- * 
+ *
  * @since 2.1
  */
 public abstract class AbstractAnnotatedPojoTestCase

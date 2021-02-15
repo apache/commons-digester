@@ -771,10 +771,10 @@ public class Digester
     }
 
     /**
-     * Set the validating parser flag. This must be called before <code>parse()</code> is called the first time. 
+     * Set the validating parser flag. This must be called before <code>parse()</code> is called the first time.
      * By default the value of this is set to false.
-     * 
-     * It essentially just controls the DTD validation. To use modern schema languages use the 
+     *
+     * It essentially just controls the DTD validation. To use modern schema languages use the
      * {@link #setXMLSchema(Schema)} method to associate a schema to a parser.
      *
      * @param validating The new validating parser flag.

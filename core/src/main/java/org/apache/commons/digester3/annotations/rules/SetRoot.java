@@ -31,7 +31,7 @@ import org.apache.commons.digester3.annotations.handlers.SetRootHandler;
 
 /**
  * Methods annotated with {@code SetRoot} will be bound with {@code SetRootRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addSetRoot(String,String,String)
  * @since 2.1
  */

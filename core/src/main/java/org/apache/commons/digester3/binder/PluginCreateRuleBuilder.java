@@ -138,7 +138,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a 
+     * Sets the xml attribute which the input xml uses to indicate to a
      * PluginCreateRule which plugin declaration is being referenced.
      *
      * @param attrName The attribute name
@@ -156,7 +156,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a 
+     * Sets the xml attribute which the input xml uses to indicate to a
      * PluginCreateRule which plugin declaration is being referenced.
      *
      * @param namespaceUri The attribute NameSpace

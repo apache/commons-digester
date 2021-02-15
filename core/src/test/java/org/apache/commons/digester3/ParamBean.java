@@ -20,7 +20,7 @@ package org.apache.commons.digester3;
 
 /**
  * This bean is used to replicate a reasonably complex use case whose behavior has changed from Digester 1.3 to 1.4.
- * 
+ *
  * @author robert burrell donkin
  */
 public class ParamBean

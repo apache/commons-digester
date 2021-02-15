@@ -42,7 +42,7 @@ public interface Rules
 
     /**
      * Set the Digester instance with which this Rules instance is associated.
-     * 
+     *
      * @param digester The newly associated Digester instance
      */
     void setDigester( Digester digester );
@@ -56,7 +56,7 @@ public interface Rules
 
     /**
      * Set the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
-     * 
+     *
      * @param namespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
      *            matching regardless of the current namespace URI
      */
@@ -66,7 +66,7 @@ public interface Rules
 
     /**
      * Register a new Rule instance matching the specified pattern.
-     * 
+     *
      * @param pattern Nesting pattern to be matched for this Rule
      * @param rule Rule instance to be registered
      */
@@ -81,7 +81,7 @@ public interface Rules
      * Return a List of all registered Rule instances that match the specified nesting pattern, or a zero-length List if
      * there are no matches. If more than one Rule instance matches, they <strong>must</strong> be returned in the order
      * originally registered through the <code>add()</code> method.
-     * 
+     *
      * @param namespaceURI Namespace URI for which to select matching rules, or <code>null</code> to match regardless of
      *            namespace URI
      * @param pattern Nesting pattern to be matched

@@ -27,7 +27,7 @@ import org.apache.commons.digester3.Digester;
 /**
  * Represents a Class that can be instantiated by a PluginCreateRule, plus info on how to load custom digester rules for
  * mapping xml into that plugged-in class.
- * 
+ *
  * @since 1.6
  */
 public class Declaration
@@ -111,7 +111,7 @@ public class Declaration
 
     /**
      * Return the id associated with this declaration. For plugins declared "inline", null will be returned.
-     * 
+     *
      * @return The id value. May be null.
      */
     public String getId()
@@ -138,7 +138,7 @@ public class Declaration
 
     /**
      * Return plugin class associated with this declaration.
-     * 
+     *
      * @return The pluginClass.
      */
     public Class<?> getPluginClass()

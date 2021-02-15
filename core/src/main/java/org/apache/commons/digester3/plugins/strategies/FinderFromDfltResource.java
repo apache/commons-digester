@@ -32,7 +32,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * name plus a specified suffix.
  * <p>
  * If the resource-file is found, then it is expected to define a set of Digester rules in xmlrules format.
- * 
+ *
  * @since 1.6
  */
 public class FinderFromDfltResource
@@ -52,7 +52,7 @@ public class FinderFromDfltResource
     /**
      * Create a rule-finder which can load an xmlrules file, cache the rules away, and later add them as a plugin's
      * custom rules when that plugin is referenced.
-     * 
+     *
      * @param resourceSuffix must be non-null.
      */
     public FinderFromDfltResource( final String resourceSuffix )

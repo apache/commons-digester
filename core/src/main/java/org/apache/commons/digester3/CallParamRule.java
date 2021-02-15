@@ -51,7 +51,7 @@ public class CallParamRule
      * automatic type conversion is being applied (ie if the target function takes something other than a string as a
      * parameter) then the conversion will fail if the converter class does not accept an empty string as valid input.
      * </p>
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      */
     public CallParamRule( final int paramIndex )
@@ -61,7 +61,7 @@ public class CallParamRule
 
     /**
      * Construct a "call parameter" rule that will save the value of the specified attribute as the parameter value.
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      * @param attributeName The name of the attribute to save
      */
@@ -73,7 +73,7 @@ public class CallParamRule
 
     /**
      * Construct a "call parameter" rule.
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      * @param fromStack should this parameter be taken from the top of the stack?
      */
@@ -86,7 +86,7 @@ public class CallParamRule
     /**
      * Constructs a "call parameter" rule which sets a parameter from the stack. If the stack contains too few objects,
      * then the parameter will be set to null.
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      * @param stackIndex the index of the object which will be passed as a parameter. The zeroth object is the top of
      *            the stack, 1 is the next object down and so on.

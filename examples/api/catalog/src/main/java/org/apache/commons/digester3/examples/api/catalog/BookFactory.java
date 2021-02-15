@@ -7,15 +7,15 @@ package org.apache.commons.digester3.examples.api.catalog;
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 import org.apache.commons.digester3.AbstractObjectCreationFactory;
 import org.xml.sax.Attributes;
@@ -25,7 +25,7 @@ import org.xml.sax.Attributes;
  * standard digester ObjectCreateRule can't be used to create instances
  * of it.
  * <p>
- * To resolve this issue, the FactoryCreateRule can be used in 
+ * To resolve this issue, the FactoryCreateRule can be used in
  * conjunction with an appropriate factory class, like this one.
  * The "createObject" method of the factory is invoked to generate
  * object instances when required.
@@ -58,7 +58,7 @@ import org.xml.sax.Attributes;
  * <p>
  * And don't forget, either, that factories may be implemented as
  * inner classes or anonymous classes if appropriate, reducing the
- * overhead of using this functionality in many cases. 
+ * overhead of using this functionality in many cases.
  */
 public class BookFactory
     extends AbstractObjectCreationFactory<Book>

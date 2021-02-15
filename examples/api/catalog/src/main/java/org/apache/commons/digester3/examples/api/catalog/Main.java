@@ -7,15 +7,15 @@ package org.apache.commons.digester3.examples.api.catalog;
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 import org.apache.commons.digester3.Digester;
 
@@ -30,7 +30,7 @@ import org.apache.commons.digester3.Digester;
  * <p>
  * As with all code, there are many ways of achieving the same goal;
  * the solution here is only one possible implementation.
-* <p> 
+* <p>
  * Very verbose comments are included here, as this class is intended
  * as a tutorial; if you look closely at method "addRules", you will
  * see that the amount of code required to use the Digester is actually

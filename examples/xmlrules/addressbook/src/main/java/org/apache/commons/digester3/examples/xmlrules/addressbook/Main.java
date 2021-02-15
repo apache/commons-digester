@@ -7,15 +7,15 @@ package org.apache.commons.digester3.examples.xmlrules.addressbook;
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 
@@ -37,7 +37,7 @@ import org.xml.sax.SAXException;
  * Unlike the "addressbook" example in the "api" section, this implementation
  * has no parsing rules hard-wired into the code in this class. Instead, the
  * parsing rules are loaded from an external file at runtime. This allows
- * the parsing rules to be modified without compiling the code, and 
+ * the parsing rules to be modified without compiling the code, and
  * potentially makes it somewhat easier to review the parsing rules.
  * <p>
  * Note, however, that there is tyically quite a tight coupling between
@@ -45,7 +45,7 @@ import org.xml.sax.SAXException;
  * that it may not be all that common for parsing rules to be altered
  * without the application code also being altered, so only in some cases
  * will this prove of benefit. As with all software, it must be determined
- * whether this feature provides a true benefit in the context of the 
+ * whether this feature provides a true benefit in the context of the
  * application it is being applied to.
  * <p>
  * Usage: java Main xmlrules.xml example.xml

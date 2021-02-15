@@ -36,7 +36,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * <p>
  * This RuleFinder is typically used as the <i>last</i> RuleFinder, so that automatic property setting only occurs if
  * there is no other source of custom rules available.
- * 
+ *
  * @since 1.6
  */
 public class FinderSetProperties
@@ -62,7 +62,7 @@ public class FinderSetProperties
      * that xml attributes map to bean properties.
      * <p>
      * Param falseval will commonly be the string "false" for config files written in English.
-     * 
+     *
      * @param propsAttr must be non-null.
      * @param falseval must be non-null.
      */

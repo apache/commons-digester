@@ -29,7 +29,7 @@ import org.xml.sax.Attributes;
  * surrounding <code>CallMethodRule</code>. This Rule is most useful when making extensive use of wildcards in rule
  * patterns.
  * </p>
- * 
+ *
  * @since 1.6
  */
 public class PathCallParamRule
@@ -40,7 +40,7 @@ public class PathCallParamRule
 
     /**
      * Construct a "call parameter" rule that will save the body text of this element as the parameter value.
-     * 
+     *
      * @param paramIndex The zero-relative parameter number
      */
     public PathCallParamRule( final int paramIndex )

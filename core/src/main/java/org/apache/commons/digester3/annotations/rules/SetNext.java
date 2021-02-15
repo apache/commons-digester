@@ -31,7 +31,7 @@ import org.apache.commons.digester3.annotations.handlers.SetNextHandler;
 
 /**
  * Methods annotated with {@code SetNext} will be bound with {@code SetNextRule} digester rule.
- * 
+ *
  * @see org.apache.commons.digester3.Digester#addSetNext(String,String,String)
  * @since 2.1
  */

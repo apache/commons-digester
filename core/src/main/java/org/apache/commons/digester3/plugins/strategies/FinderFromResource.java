@@ -31,7 +31,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
 /**
  * A rule-finding algorithm which expects the user to specify a resource name (ie a file in the classpath). The file is
  * expected to contain Digester rules in xmlrules format.
- * 
+ *
  * @since 1.6
  */
 public class FinderFromResource
@@ -106,7 +106,7 @@ public class FinderFromResource
     /**
      * Open the specified resource file (ie a file in the classpath, including being within a jar in the classpath), run
      * it through the xmlrules module and return an object encapsulating those rules.
-     * 
+     *
      * @param d is the digester into which rules will eventually be loaded.
      * @param pluginClass is the class whose xml params the rules are parsing.
      * @param is is where the xmlrules will be read from, and must be non-null.

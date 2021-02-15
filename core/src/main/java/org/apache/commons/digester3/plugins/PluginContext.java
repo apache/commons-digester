@@ -42,7 +42,7 @@ import org.apache.commons.digester3.plugins.strategies.FinderSetProperties;
  * ServletContext object provides access to the container's services such as obtaining global configuration parameters
  * for the container, or getting access to logging services. For plugins, a Digester instance can be regarded as
  * "the container".
- * 
+ *
  * @since 1.6
  */
 public class PluginContext
@@ -128,29 +128,29 @@ public class PluginContext
      * instantiated.
      * <p>
      * Example:
-     * 
+     *
      * <pre>
      * setPluginClassAttribute( null, &quot;class&quot; );
      * </pre>
-     * 
+     *
      * will allow this in the input xml:
-     * 
+     *
      * <pre>
      *  &lt;root&gt;
      *    &lt;some-plugin class="com.acme.widget"&gt; ......
      * </pre>
-     * 
+     *
      * instead of the default syntax:
-     * 
+     *
      * <pre>
      *  &lt;root&gt;
      *    &lt;some-plugin plugin-class="com.acme.widget"&gt; ......
      * </pre>
-     * 
+     *
      * This is particularly useful if the input xml document is not in English.
      * <p>
      * Note that the xml attributes used by PluginDeclarationRules are not affected by this method.
-     * 
+     *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
      *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
@@ -168,29 +168,29 @@ public class PluginContext
      * being referenced.
      * <p>
      * Example:
-     * 
+     *
      * <pre>
      * setPluginIdAttribute( null, &quot;id&quot; );
      * </pre>
-     * 
+     *
      * will allow this in the input xml:
-     * 
+     *
      * <pre>
      *  &lt;root&gt;
      *    &lt;some-plugin id="widget"&gt; ......
      * </pre>
-     * 
+     *
      * rather than the default behavior:
-     * 
+     *
      * <pre>
      *  &lt;root&gt;
      *    &lt;some-plugin plugin-id="widget"&gt; ......
      * </pre>
-     * 
+     *
      * This is particularly useful if the input xml document is not in English.
      * <p>
      * Note that the xml attributes used by PluginDeclarationRules are not affected by this method.
-     * 
+     *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
      *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,

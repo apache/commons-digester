@@ -55,7 +55,7 @@ public interface ObjectCreationFactory<T>
     /**
      * Set the {@link Digester} to allow the implementation to do logging, classloading based on the digester's
      * classloader, etc.
-     * 
+     *
      * @param digester parent Digester object
      */
     void setDigester( Digester digester );

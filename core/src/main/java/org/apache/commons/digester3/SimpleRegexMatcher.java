@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
  * </ul>
  * Escaping these wildcards is not supported .
  * </p>
- * 
+ *
  * @since 1.5
  */
 public class SimpleRegexMatcher

@@ -29,7 +29,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
 
 /**
  * A rule-finding algorithm which looks for a method with a specific name on the plugin class.
- * 
+ *
  * @since 1.6
  */
 public class FinderFromDfltMethod
@@ -48,7 +48,7 @@ public class FinderFromDfltMethod
     /**
      * Create a rule-finder which invokes a specific method on the plugin class whenever dynamic rules for a plugin need
      * to be loaded. See the findRules method for more info.
-     * 
+     *
      * @param methodName must be non-null.
      */
     public FinderFromDfltMethod( final String methodName )

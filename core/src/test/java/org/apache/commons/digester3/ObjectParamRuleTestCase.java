@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Tests for the <code>ObjectParamRuleTestCase</code>
- * 
+ *
  * @author Mark Huisman
  */
 public class ObjectParamRuleTestCase

@@ -29,7 +29,7 @@ package org.apache.commons.digester3.plugins;
  * This difference in design is because throwing Error objects is not good in a container-based architecture.
  * <p>
  * Example:
- * 
+ *
  * <pre>
  * if ( impossibleCondition )
  * {
@@ -40,7 +40,7 @@ package org.apache.commons.digester3.plugins;
  * Note that PluginAssertionFailure should <i>not</i> be thrown when user input is bad, or when code external to the
  * Digester module passes invalid parameters to a plugins method. It should be used only in checks for problems which
  * indicate internal bugs within the plugins module.
- * 
+ *
  * @since 1.6
  */
 public class PluginAssertionFailure

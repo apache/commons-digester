@@ -70,7 +70,7 @@ final class ErrorMessage
 
     /**
      * Gets the error message text.
-     * 
+     *
      * @return The error message text
      */
     public String getMessage()

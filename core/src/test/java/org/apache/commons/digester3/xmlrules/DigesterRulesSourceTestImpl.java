@@ -23,7 +23,7 @@ import org.apache.commons.digester3.binder.AbstractRulesModule;
 /**
  * A test class, for validating FromXmlRuleSet's ability to 'include' programmatically-created rules from within an XML
  * rules file.
- * 
+ *
  * @author David H. Martin - Initial Contribution
  * @author Scott Sanders - Added ASL, removed external dependencies
  */

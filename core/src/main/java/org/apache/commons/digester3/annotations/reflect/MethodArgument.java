@@ -24,7 +24,7 @@ import java.lang.reflect.AnnotatedElement;
 
 /**
  * Class to supply the missing Java {@code AnnotatedElement} for method arguments.
- * 
+ *
  * @since 2.1
  */
 public final class MethodArgument
@@ -48,7 +48,7 @@ public final class MethodArgument
 
     /**
      * Creates a new method argument as {@code AnnotatedElement}.
-     * 
+     *
      * @param index the method argument index.
      * @param parameterType the method argument type.
      * @param annotations the method argument annotations.
@@ -71,7 +71,7 @@ public final class MethodArgument
 
     /**
      * Returns the method argument index.
-     * 
+     *
      * @return the method argument index.
      */
     public int getIndex()
@@ -81,7 +81,7 @@ public final class MethodArgument
 
     /**
      * Returns the method argument type.
-     * 
+     *
      * @return the method argument type.
      */
     public Class<?> getParameterType()
@@ -125,7 +125,7 @@ public final class MethodArgument
 
     /**
      * Returns an annotations array, copy of the declared annotations in this method argument.
-     * 
+     *
      * @return an annotations array, copy of the declared annotations in this method argument.
      */
     private Annotation[] getAnnotationsArrayCopy()

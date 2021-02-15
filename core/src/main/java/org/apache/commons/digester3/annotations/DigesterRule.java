@@ -31,7 +31,7 @@ import org.apache.commons.digester3.Rule;
 
 /**
  * Meta-annotation that marks an annotation as part of commons-digester.
- * 
+ *
  * @since 2.1
  */
 @Documented

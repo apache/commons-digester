@@ -43,7 +43,7 @@ final class NameSpaceURIRulesBinder
     }
 
     /**
-     * 
+     *
      * @param namespaceURI
      */
     public void addNamespaceURI( final String namespaceURI )
@@ -52,7 +52,7 @@ final class NameSpaceURIRulesBinder
     }
 
     /**
-     * 
+     *
      */
     public void removeNamespaceURI()
     {

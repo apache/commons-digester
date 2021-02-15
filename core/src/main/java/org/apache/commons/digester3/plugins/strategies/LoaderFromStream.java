@@ -37,7 +37,7 @@ import org.xml.sax.InputSource;
  * A rule-finding algorithm which loads an xmlplugins-format file.
  * <p>
  * Note that the "include" feature of xmlrules is not supported.
- * 
+ *
  * @since 1.6
  */
 public class LoaderFromStream

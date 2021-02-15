@@ -28,7 +28,7 @@ import org.apache.commons.digester3.Rules;
  * <p>
  * Users of the plugins module can specify a subclass of this one to control the creation of that Rules object. In
  * particular, it can set up default rules within the returned instance which are applicable to all plugged-in classes.
- * 
+ *
  * @since 1.6
  */
 public abstract class RulesFactory
@@ -38,7 +38,7 @@ public abstract class RulesFactory
      * Return an instance of some Rules implementation that the plugged-in class shall use to match its private parsing
      * rules.
      * <p>
-     * 
+     *
      * @param d is the digester that the returned rules object will be associated with.
      * @param pluginClass is the class that is to be configured using rules added to the returned object.
      * @return an instance of some Rules implementation that the plugged-in class shall use to match its private parsing
