@@ -303,7 +303,7 @@ public class ExtendedBaseRules
             if ( isUniversal )
             {
                 // and find the underlying key
-                key = key.substring( 1, key.length() );
+                key = key.substring( 1 );
             }
 
             // don't need to check exact matches
