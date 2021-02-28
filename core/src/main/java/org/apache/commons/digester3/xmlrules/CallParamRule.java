@@ -58,7 +58,7 @@ final class CallParamRule
             }
             else if ( fromStack != null )
             {
-                builder.fromStack( Boolean.valueOf( fromStack ).booleanValue() );
+                builder.fromStack( Boolean.parseBoolean(fromStack) );
             }
         }
         else
