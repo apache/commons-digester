@@ -465,7 +465,7 @@ public class ExtendedBaseRules
                     }
                     return -1;
                 }
-                else if ( i2 == null )
+                if ( i2 == null )
                 {
                     return 1;
                 }

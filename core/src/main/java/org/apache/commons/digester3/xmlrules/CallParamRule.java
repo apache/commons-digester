@@ -63,15 +63,11 @@ final class CallParamRule
         }
         else
         {
-            if ( fromStack == null )
-            {
-                builder.fromAttribute( attributeName );
-            }
-            else
-            {
+            if ( fromStack != null ) {
                 // specifying both from-stack and attribute name is not allowed
                 throw new RuntimeException( "Attributes from-stack and attrname cannot both be present." );
             }
+            builder.fromAttribute( attributeName );
         }
     }
 
