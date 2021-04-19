@@ -60,7 +60,7 @@
       ObjectCreateRule doesn't allow create objects which type is specified in attributeName only
     </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-161" due-to="Eduard Papa">
-      Document thread-safety in javadoc of Rule class
+      Document thread-safety in Javadoc of Rule class
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-185">
       Update Apache Commons Logging from 1.1.1 to 1.2.
@@ -79,6 +79,9 @@
     </action>
     <action dev="ggregory" type="update">
       Update JUnit from 4.10 to 4.13.
+    </action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">
+      Bump build actions/setup-java from v1.4.0 to v2.
     </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
