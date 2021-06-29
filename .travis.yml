@@ -15,7 +15,10 @@
 
 language: java
 sudo: false
-
+dist: precise
+cache:
+  directories:
+    - $HOME/.m2
 jdk:
   - openjdk8
   - openjdk11
