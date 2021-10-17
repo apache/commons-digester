@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
 
 /**
  * <p>
- * Test case for <code>SetPropertiesRule</code>.
+ * Test case for {@code SetPropertiesRule}.
  * </p>
  */
 public class SetPropertiesRuleTestCase

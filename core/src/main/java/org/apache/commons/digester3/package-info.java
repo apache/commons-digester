@@ -1,7 +1,7 @@
 /**
- * The <code>xmlrules</code> package provides for XML-based definition of
- * rules for <code>Digester</code>. This improves maintainability of Java code,
- * as rules are now defined in XML and read into <code>Digester</code>
+ * The {@code xmlrules} package provides for XML-based definition of
+ * rules for {@code Digester}. This improves maintainability of Java code,
+ * as rules are now defined in XML and read into {@code Digester}
  * at run-time.
  */
 package org.apache.commons.digester3;

@@ -432,7 +432,7 @@ public class Channel
      * to the specified output stream, with the specified character encoding.
      *
      * @param stream The output stream to write to
-     * @param encoding The character encoding to declare, or <code>null</code>
+     * @param encoding The character encoding to declare, or {@code null}
      *  for no declaration
      *
      * @throws UnsupportedEncodingException if the named encoding
@@ -470,7 +470,7 @@ public class Channel
      * to the specified writer, indicating the specified character encoding.
      *
      * @param writer The writer to render output to
-     * @param encoding The character encoding to declare, or <code>null</code>
+     * @param encoding The character encoding to declare, or {@code null}
      *  for no declaration
      */
     public void render( final Writer writer, final String encoding )
@@ -496,7 +496,7 @@ public class Channel
      * to the specified writer, indicating the specified character encoding.
      *
      * @param writer The writer to render output to
-     * @param encoding The character encoding to declare, or <code>null</code>
+     * @param encoding The character encoding to declare, or {@code null}
      *  for no declaration
      */
     public void render( final PrintWriter writer, final String encoding )

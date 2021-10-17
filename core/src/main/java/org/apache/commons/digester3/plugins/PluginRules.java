@@ -182,9 +182,9 @@ public class PluginRules
     }
 
     /**
-     * Return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
-     * @return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
     @Override
     public String getNamespaceURI()
@@ -193,9 +193,9 @@ public class PluginRules
     }
 
     /**
-     * Set the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * Set the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
-     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
+     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
      *            matching regardless of the current namespace URI
      */
     @Override

@@ -29,8 +29,8 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * This uses just two wildcards:
  * <ul>
- * <li><code>*</code> matches any sequence of none, one or more characters
- * <li><code>?</code> matches any one character
+ * <li>{@code *} matches any sequence of none, one or more characters
+ * <li>{@code ?} matches any one character
  * </ul>
  * Escaping these wildcards is not supported .
  * </p>
@@ -52,9 +52,9 @@ public class SimpleRegexMatcher
     // --------------------------------------------------------- Properties
 
     /**
-     * Gets the <code>Log</code> implementation.
+     * Gets the {@code Log} implementation.
      *
-     * @return the <code>Log</code> implementation.
+     * @return the {@code Log} implementation.
      */
     public Log getLog()
     {
@@ -62,9 +62,9 @@ public class SimpleRegexMatcher
     }
 
     /**
-     * Sets the current <code>Log</code> implementation used by this class.
+     * Sets the current {@code Log} implementation used by this class.
      *
-     * @param log the current <code>Log</code> implementation used by this class.
+     * @param log the current {@code Log} implementation used by this class.
      */
     public void setLog( final Log log )
     {

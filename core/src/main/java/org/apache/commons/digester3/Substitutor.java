@@ -27,7 +27,7 @@ import org.xml.sax.Attributes;
  * future additions to be made without breaking backwards compatibility.)
  * </p>
  * <p>
- * Usage: When {@link Digester#setSubstitutor} is set, <code>Digester</code> calls the methods in this interface to
+ * Usage: When {@link Digester#setSubstitutor} is set, {@code Digester} calls the methods in this interface to
  * create substitute values which will be passed into the Rule implementations. Of course, it is perfectly acceptable
  * for implementations not to make substitutions and simply return the inputs.
  * </p>
@@ -42,17 +42,17 @@ public abstract class Substitutor
 
     /**
      * <p>
-     * Substitutes the attributes (before they are passed to the <code>Rule</code> implementations's).
+     * Substitutes the attributes (before they are passed to the {@code Rule} implementations's).
      * </p>
      * <p>
-     * <code>Digester</code> will only call this method a second time once the original <code>Attributes</code> instance
-     * can be safely reused. The implementation is therefore free to reuse the same <code>Attributes</code> instance for
+     * {@code Digester} will only call this method a second time once the original {@code Attributes} instance
+     * can be safely reused. The implementation is therefore free to reuse the same {@code Attributes} instance for
      * all calls.
      * </p>
      *
-     * @param attributes the <code>Attributes</code> passed into <code>Digester</code> by the SAX parser, not null (but
+     * @param attributes the {@code Attributes} passed into {@code Digester} by the SAX parser, not null (but
      *            may be empty)
-     * @return <code>Attributes</code> to be passed to the <code>Rule</code> implementations. This method may pass back
+     * @return {@code Attributes} to be passed to the {@code Rule} implementations. This method may pass back
      *         the Attributes passed in. Not null but possibly empty.
      */
     public abstract Attributes substitute( Attributes attributes );
@@ -61,8 +61,8 @@ public abstract class Substitutor
      * Substitutes for the body text. This method may substitute values into the body text of the elements that Digester
      * parses.
      *
-     * @param bodyText the body text (as passed to <code>Digester</code>)
-     * @return the body text to be passed to the <code>Rule</code> implementations
+     * @param bodyText the body text (as passed to {@code Digester})
+     * @return the body text to be passed to the {@code Rule} implementations
      */
     public abstract String substitute( String bodyText );
 

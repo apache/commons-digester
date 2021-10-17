@@ -37,7 +37,7 @@ import org.xml.sax.SAXException;
 
 /**
  * <p>
- * Test case for <code>SetPropertyRule</code>.
+ * Test case for {@code SetPropertyRule}.
  * </p>
  */
 public class SetPropertyRuleTestCase

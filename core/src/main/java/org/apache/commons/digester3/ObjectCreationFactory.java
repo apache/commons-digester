@@ -24,11 +24,11 @@ import org.xml.sax.Attributes;
 /**
  * <p>
  * Interface for use with {@link FactoryCreateRule}. The rule calls {@link #createObject} to create an object to be
- * pushed onto the <code>Digester</code> stack whenever it is matched.
+ * pushed onto the {@code Digester} stack whenever it is matched.
  * </p>
  * <p>
  * {@link AbstractObjectCreationFactory} is an abstract implementation suitable for creating anonymous
- * <code>ObjectCreationFactory</code> implementations.
+ * {@code ObjectCreationFactory} implementations.
  *
  * @param <T> The object type created byt the factory.
  */
@@ -39,7 +39,7 @@ public interface ObjectCreationFactory<T>
      * Factory method called by {@link FactoryCreateRule} to supply an object based on the element's attributes.
      *
      * @param attributes the element's attributes
-     * @return the object to be pushed onto the <code>Digester</code> stack
+     * @return the object to be pushed onto the {@code Digester} stack
      * @throws Exception any exception thrown will be propagated upwards
      */
     T createObject( Attributes attributes )

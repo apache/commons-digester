@@ -106,7 +106,7 @@ public class LoaderFromClass
 
     /**
      * Find a method on the specified class whose name matches methodName, and whose signature is:
-     * <code> public static void foo(Digester d, String patternPrefix);</code>.
+     * {@code  public static void foo(Digester d, String patternPrefix);}.
      *
      * @param rulesClass The target class
      * @param methodName The method name has to be invoked

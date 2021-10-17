@@ -26,12 +26,12 @@ import org.xml.sax.Attributes;
 
 /**
  * <p>
- * <code>Rules</code> <em>Decorator</em> that returns default rules when no matches are returned by the wrapped
+ * {@code Rules} <em>Decorator</em> that returns default rules when no matches are returned by the wrapped
  * implementation.
  * </p>
  * <p>
- * This allows default <code>Rule</code> instances to be added to any existing <code>Rules</code> implementation. These
- * default <code>Rule</code> instances will be returned for any match for which the wrapped implementation does not
+ * This allows default {@code Rule} instances to be added to any existing {@code Rules} implementation. These
+ * default {@code Rule} instances will be returned for any match for which the wrapped implementation does not
  * return any matches.
  * </p>
  * <p>
@@ -50,7 +50,7 @@ import org.xml.sax.Attributes;
  * when a pattern does not match any other rule, then rule alpha will be called.
  * </p>
  * <p>
- * <code>WithDefaultsRulesWrapper</code> follows the <em>Decorator</em> pattern.
+ * {@code WithDefaultsRulesWrapper} follows the <em>Decorator</em> pattern.
  * </p>
  *
  * @since 1.6
@@ -75,7 +75,7 @@ public class WithDefaultsRulesWrapper
     /**
      * Base constructor.
      *
-     * @param wrappedRules the wrapped <code>Rules</code> implementation, not null
+     * @param wrappedRules the wrapped {@code Rules} implementation, not null
      */
     public WithDefaultsRulesWrapper( final Rules wrappedRules )
     {

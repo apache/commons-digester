@@ -22,7 +22,7 @@ package org.apache.commons.digester3;
 /**
  * <p>
  * Convenience base class that implements the {@link RuleSet} interface. Concrete implementations should list all of
- * their actual rule creation logic in the <code>addRuleSet()</code> implementation.
+ * their actual rule creation logic in the {@code addRuleSet()} implementation.
  * </p>
  */
 public abstract class RuleSetBase

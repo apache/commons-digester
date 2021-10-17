@@ -98,7 +98,7 @@ public class DigesterTestCase
     // ------------------------------------------------ Individual Test Methods
 
     /**
-     * Test <code>null</code> parsing. (should lead to <code>IllegalArgumentException</code>s)
+     * Test {@code null} parsing. (should lead to {@code IllegalArgumentException}s)
      */
     @Test
     public void testNullFileParse()

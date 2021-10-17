@@ -1,5 +1,5 @@
 /**
- * The <code>handlers</code> package contains
+ * The {@code handlers} package contains
  * {@link org.apache.commons.digester3.annotations.AnnotationHandler}
  * implementations.
  */

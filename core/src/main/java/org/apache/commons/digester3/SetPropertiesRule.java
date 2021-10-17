@@ -85,8 +85,8 @@ public class SetPropertiesRule
      * </p>
      * <h5>Example One</h5>
      * <p>
-     * The following constructs a rule that maps the <code>alt-city</code> attribute to the <code>city</code> property
-     * and the <code>alt-state</code> to the <code>state</code> property. All other attributes are mapped as usual using
+     * The following constructs a rule that maps the {@code alt-city} attribute to the {@code city} property
+     * and the {@code alt-state} to the {@code state} property. All other attributes are mapped as usual using
      * exact name matching. <code><pre>
      *      SetPropertiesRule(
      *                new String[] {"alt-city", "alt-state"},
@@ -94,8 +94,8 @@ public class SetPropertiesRule
      * </pre></code>
      * <h5>Example Two</h5>
      * <p>
-     * The following constructs a rule that maps the <code>class</code> attribute to the <code>className</code>
-     * property. The attribute <code>ignore-me</code> is not mapped. All other attributes are mapped as usual using
+     * The following constructs a rule that maps the {@code class} attribute to the {@code className}
+     * property. The attribute {@code ignore-me} is not mapped. All other attributes are mapped as usual using
      * exact name matching. <code><pre>
      *      SetPropertiesRule(
      *                new String[] {"class", "ignore-me"},
@@ -257,7 +257,7 @@ public class SetPropertiesRule
      * Are attributes found in the xml without matching properties to be ignored?
      * </p>
      * <p>
-     * If false, the parsing will interrupt with an <code>NoSuchMethodException</code> if a property specified in the
+     * If false, the parsing will interrupt with an {@code NoSuchMethodException} if a property specified in the
      * XML is not found. The default is true.
      * </p>
      *
@@ -270,7 +270,7 @@ public class SetPropertiesRule
 
     /**
      * Sets whether attributes found in the xml without matching properties should be ignored. If set to false, the
-     * parsing will throw an <code>NoSuchMethodException</code> if an unmatched attribute is found. This allows to trap
+     * parsing will throw an {@code NoSuchMethodException} if an unmatched attribute is found. This allows to trap
      * misspellings in the XML file.
      *
      * @param ignoreMissingProperty false to stop the parsing on unmatched attributes.

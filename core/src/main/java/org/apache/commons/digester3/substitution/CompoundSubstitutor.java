@@ -23,9 +23,9 @@ import org.apache.commons.digester3.Substitutor;
 import org.xml.sax.Attributes;
 
 /**
- * This Substitutor chains two Substitutors <code>a</code> and <code>b</code>.
- * All values to substitute are first handled by <code>a</code> and passed to
- * <code>b</code> afterwards.
+ * This Substitutor chains two Substitutors {@code a} and {@code b}.
+ * All values to substitute are first handled by {@code a} and passed to
+ * {@code b} afterwards.
  */
 public class CompoundSubstitutor
     extends Substitutor
@@ -42,8 +42,8 @@ public class CompoundSubstitutor
     private final Substitutor b;
 
     /**
-     * Creates a new CompoundSubstitutor instance. All values overgiven to <code>substitute()</code>
-     * are first handled by <code>a</code> and passed to <code>b</code> afterwards.
+     * Creates a new CompoundSubstitutor instance. All values overgiven to {@code substitute()}
+     * are first handled by {@code a} and passed to {@code b} afterwards.
      * Both Substitutor have to be not null.
      *
      * @param a Substitutor a

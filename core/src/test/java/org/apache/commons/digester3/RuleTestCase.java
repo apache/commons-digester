@@ -266,7 +266,7 @@ public class RuleTestCase
     }
 
     /**
-     * Same as <code>testRuleSet1</code> except using a single namespace.
+     * Same as {@code testRuleSet1} except using a single namespace.
      */
     @Test
     public void testRuleSet2()
@@ -290,7 +290,7 @@ public class RuleTestCase
     }
 
     /**
-     * Same as <code>testRuleSet2</code> except using a namespace for employee that we should recognize, and a namespace
+     * Same as {@code testRuleSet2} except using a namespace for employee that we should recognize, and a namespace
      * for address that we should skip.
      */
     @Test
@@ -319,7 +319,7 @@ public class RuleTestCase
      * in the same tree of objects. Instead of using the SetNextRule rule which results in a method invocation on the
      * (top-1) (parent) object with the top object (child) as an argument, this test uses the SetTopRule rule which
      * results in a method invocation on the top object (child) with the top-1 (parent) object as an argument. The three
-     * argument form is tested in <code>testSetTopRule2</code>.
+     * argument form is tested in {@code testSetTopRule2}.
      */
     @Test
     public void testSetTopRule1()
@@ -341,7 +341,7 @@ public class RuleTestCase
     }
 
     /**
-     * Same as <code>testSetTopRule1</code> except using the three argument form of the SetTopRule rule.
+     * Same as {@code testSetTopRule1} except using the three argument form of the SetTopRule rule.
      */
     @Test
     public void testSetTopRule2()
@@ -536,7 +536,7 @@ public class RuleTestCase
     /**
      * Validate the assertions for ObjectCreateRule3.
      *
-     * @param root Root object returned by <code>digester.parse()</code>
+     * @param root Root object returned by {@code digester.parse()}
      */
     protected void validateObjectCreate3( final Object root )
     {

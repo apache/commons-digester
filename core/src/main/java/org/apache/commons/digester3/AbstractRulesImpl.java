@@ -22,14 +22,14 @@ package org.apache.commons.digester3;
 
 /**
  * <p>
- * <code>AbstractRuleImpl</code> provides basic services for <code>Rules</code> implementations. Extending this class
- * should make it easier to create a <code>Rules</code> implementation.
+ * {@code AbstractRuleImpl} provides basic services for {@code Rules} implementations. Extending this class
+ * should make it easier to create a {@code Rules} implementation.
  * </p>
  * <p>
- * <code>AbstractRuleImpl</code> manages the <code>Digester</code> and <code>namespaceUri</code> properties. If the
- * subclass overrides {@link #registerRule} (rather than {@link #add}), then the <code>Digester</code> and
- * <code>namespaceURI</code> of the <code>Rule</code> will be set correctly before it is passed to
- * <code>registerRule</code>. The subclass can then perform whatever it needs to do to register the rule.
+ * {@code AbstractRuleImpl} manages the {@code Digester} and {@code namespaceUri} properties. If the
+ * subclass overrides {@link #registerRule} (rather than {@link #add}), then the {@code Digester} and
+ * {@code namespaceURI} of the {@code Rule} will be set correctly before it is passed to
+ * {@code registerRule}. The subclass can then perform whatever it needs to do to register the rule.
  * </p>
  *
  * @since 1.5
@@ -40,10 +40,10 @@ public abstract class AbstractRulesImpl
 
     // ------------------------------------------------------------- Fields
 
-    /** Digester using this <code>Rules</code> implementation */
+    /** Digester using this {@code Rules} implementation */
     private Digester digester;
 
-    /** Namespace uri to assoicate with subsequent <code>Rule</code>'s */
+    /** Namespace uri to assoicate with subsequent {@code Rule}'s */
     private String namespaceURI;
 
     // ------------------------------------------------------------- Properties
@@ -107,7 +107,7 @@ public abstract class AbstractRulesImpl
     }
 
     /**
-     * Register rule at given pattern. The the Digester and namespaceURI properties of the given <code>Rule</code> can
+     * Register rule at given pattern. The the Digester and namespaceURI properties of the given {@code Rule} can
      * be assumed to have been set properly before this method is called.
      *
      * @param pattern Nesting pattern to be matched for this Rule

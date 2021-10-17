@@ -37,7 +37,7 @@ import org.xml.sax.SAXException;
 
 /**
  * <p>
- * Test case for <code>BeanPropertySetterRule</code>. This contains tests for the main applications of the rule and two
+ * Test case for {@code BeanPropertySetterRule}. This contains tests for the main applications of the rule and two
  * more general tests of digester functionality used by this rule.
  */
 public class BeanPropertySetterRuleTestCase

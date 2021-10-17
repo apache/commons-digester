@@ -25,7 +25,7 @@ import java.io.*;
 /**
  * This is the "main" class for this example.
  * <p>
- * It can be run via <code>java Pipeline config-file-name</code>.
+ * It can be run via {@code java Pipeline config-file-name}.
  * <p>
  * The specified config file is parsed using the Apache Commons Digester.
  * This config file specifies an input file to be read, a number of

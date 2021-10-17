@@ -33,20 +33,20 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Rule implementation that calls a method on an object on the stack (normally the top/parent object), passing arguments
- * collected from subsequent <code>CallParamRule</code> rules or from the body of this element.
+ * collected from subsequent {@code CallParamRule} rules or from the body of this element.
  * </p>
  * <p>
  * By using {@link #CallMethodRule(String methodName)} a method call can be made to a method which accepts no arguments.
  * </p>
  * <p>
- * Incompatible method parameter types are converted using <code>org.apache.commons.beanutils.ConvertUtils</code>.
+ * Incompatible method parameter types are converted using {@code org.apache.commons.beanutils.ConvertUtils}.
  * </p>
  * <p>
  * This rule now uses {@link org.apache.commons.beanutils.MethodUtils#invokeMethod} by default.
  * This increases the kinds of methods successfully and allows primitives to be matched by passing in wrapper classes.
  * There are rare cases when {@link org.apache.commons.beanutils.MethodUtils#invokeExactMethod} (the old default) is
  * required. This method is much stricter in it's reflection.
- * Setting the <code>UseExactMatch</code> to true reverts to the use of this method.
+ * Setting the {@code UseExactMatch} to true reverts to the use of this method.
  * </p>
  * <p>
  * Note that the target method is invoked when the <i>end</i> of the tag the CallMethodRule fired on is encountered,
@@ -152,15 +152,15 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
+     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
-     * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
+     * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of ths element
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      */
     public CallMethodRule( final String methodName, final int paramCount, final String[] paramTypes )
     {
@@ -168,9 +168,9 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
+     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
-     * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
+     * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
@@ -178,8 +178,8 @@ public class CallMethodRule
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
-     *            corresponding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresponding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      */
     public CallMethodRule( final int targetOffset, final String methodName, final int paramCount, final String[] paramTypes )
     {
@@ -200,15 +200,15 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
+     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
-     * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
+     * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java classes that represent the parameter types of the method arguments (if you wish to use
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
-     *            <code>java.lang.Boolean.TYPE</code> for a <code>boolean</code> parameter)
+     *            {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter)
      */
     public CallMethodRule( final String methodName, final int paramCount, final Class<?> paramTypes[] )
     {
@@ -216,9 +216,9 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If <code>paramCount</code> is
+     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
-     * <code>paramTypes</code> is null or empty, in this case the rule will call the specified method with no arguments.
+     * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
@@ -227,7 +227,7 @@ public class CallMethodRule
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java classes that represent the parameter types of the method arguments (if you wish to use
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
-     *            <code>java.lang.Boolean.TYPE</code> for a <code>boolean</code> parameter)
+     *            {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter)
      */
     public CallMethodRule( final int targetOffset, final String methodName, final int paramCount, final Class<?>[] paramTypes )
     {
@@ -264,7 +264,7 @@ public class CallMethodRule
     protected String methodName = null;
 
     /**
-     * The number of parameters to collect from <code>MethodParam</code> rules. If this value is zero, a single
+     * The number of parameters to collect from {@code MethodParam} rules. If this value is zero, a single
      * parameter will be collected from the body of this element.
      */
     protected int paramCount = 0;
@@ -281,16 +281,16 @@ public class CallMethodRule
     private String[] paramClassNames = null;
 
     /**
-     * Should <code>MethodUtils.invokeExactMethod</code> be used for reflection.
+     * Should {@code MethodUtils.invokeExactMethod} be used for reflection.
      */
     private boolean useExactMatch = false;
 
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Should <code>MethodUtils.invokeExactMethod</code> be used for the reflection.
+     * Should {@code MethodUtils.invokeExactMethod} be used for the reflection.
      *
-     * @return true, if <code>MethodUtils.invokeExactMethod</code> Should be used for the reflection,
+     * @return true, if {@code MethodUtils.invokeExactMethod} Should be used for the reflection,
      *         false otherwise
      */
     public boolean getUseExactMatch()
@@ -299,9 +299,9 @@ public class CallMethodRule
     }
 
     /**
-     * Set whether <code>MethodUtils.invokeExactMethod</code> should be used for the reflection.
+     * Set whether {@code MethodUtils.invokeExactMethod} should be used for the reflection.
      *
-     * @param useExactMatch The <code>MethodUtils.invokeExactMethod</code> flag
+     * @param useExactMatch The {@code MethodUtils.invokeExactMethod} flag
      */
     public void setUseExactMatch( final boolean useExactMatch )
     {

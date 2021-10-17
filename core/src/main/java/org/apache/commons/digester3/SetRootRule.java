@@ -23,7 +23,7 @@ package org.apache.commons.digester3;
 /**
  * <p>
  * Rule implementation that calls a method on the root object on the stack, passing the top object (child) as an
- * argument. It is important to remember that this rule acts on <code>end</code>.
+ * argument. It is important to remember that this rule acts on {@code end}.
  * </p>
  * <p>
  * This rule now supports more flexible method matching by default. It is possible that this may break (some) code
@@ -52,8 +52,8 @@ public class SetRootRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class name of the parent method's argument (if you wish to use a primitive type,
-     *                  specify the corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code>
-     *                  for a <code>boolean</code> parameter)
+     *                  specify the corresonding Java wrapper class instead, such as {@code java.lang.Boolean}
+     *                  for a {@code boolean} parameter)
      */
     public SetRootRule( final String methodName, final String paramType )
     {
@@ -65,8 +65,8 @@ public class SetRootRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *                  corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *                  <code>boolean</code> parameter)
+     *                  corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *                  {@code boolean} parameter)
      */
     public SetRootRule( final String methodName, final Class<?> paramType )
     {

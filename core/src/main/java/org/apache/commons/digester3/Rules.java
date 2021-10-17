@@ -48,16 +48,16 @@ public interface Rules
     void setDigester( Digester digester );
 
     /**
-     * Return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
-     * @return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
     String getNamespaceURI();
 
     /**
-     * Set the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * Set the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
-     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
+     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
      *            matching regardless of the current namespace URI
      */
     void setNamespaceURI( String namespaceURI );
@@ -80,9 +80,9 @@ public interface Rules
     /**
      * Return a List of all registered Rule instances that match the specified nesting pattern, or a zero-length List if
      * there are no matches. If more than one Rule instance matches, they <strong>must</strong> be returned in the order
-     * originally registered through the <code>add()</code> method.
+     * originally registered through the {@code add()} method.
      *
-     * @param namespaceURI Namespace URI for which to select matching rules, or <code>null</code> to match regardless of
+     * @param namespaceURI Namespace URI for which to select matching rules, or {@code null} to match regardless of
      *            namespace URI
      * @param pattern Nesting pattern to be matched
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
@@ -94,7 +94,7 @@ public interface Rules
     /**
      * Return a List of all registered Rule instances, or a zero-length List if there are no registered Rule instances.
      * If more than one Rule instance has been registered, they <strong>must</strong> be returned in the order
-     * originally registered through the <code>add()</code> method.
+     * originally registered through the {@code add()} method.
      *
      * @return a List of all registered Rule instances
      */
