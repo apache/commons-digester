@@ -59,7 +59,7 @@ public final class NodeCreateRuleProvider
     /**
      * {@link NodeCreateRule} instance will be created either a DOM {@link org.w3c.dom.Element Element}
      * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
-     * <code>nodeType</code> parameter.
+     * {@code nodeType} parameter.
      *
      * @param nodeType the type of node to create, which can be either
      *                 {@link org.w3c.dom.Node#ELEMENT_NODE Node.ELEMENT_NODE} or
@@ -79,9 +79,9 @@ public final class NodeCreateRuleProvider
 
     /**
      * {@link NodeCreateRule} instance will be created a DOM {@link org.w3c.dom.Element Element}, but
-     * lets users specify the JAXP <code>DocumentBuilder</code> that should be used when constructing the node tree.
+     * lets users specify the JAXP {@code DocumentBuilder} that should be used when constructing the node tree.
      *
-     * @param documentBuilder the JAXP <code>DocumentBuilder</code> to use
+     * @param documentBuilder the JAXP {@code DocumentBuilder} to use
      * @return this builder instance
      */
     public NodeCreateRuleProvider usingDocumentBuilder( final DocumentBuilder documentBuilder )

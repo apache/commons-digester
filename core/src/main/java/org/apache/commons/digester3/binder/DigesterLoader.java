@@ -115,7 +115,7 @@ public final class DigesterLoader
      * The class loader to use for instantiating application objects.
      * If not specified, the context class loader, or the class loader
      * used to load Digester itself, is used, based on the value of the
-     * <code>useContextClassLoader</code> variable.
+     * {@code useContextClassLoader} variable.
      */
     private BinderClassLoader classLoader;
 
@@ -166,7 +166,7 @@ public final class DigesterLoader
 
     /**
      * Determine whether to use the Context ClassLoader (the one found by
-     * calling <code>Thread.currentThread().getContextClassLoader()</code>)
+     * calling {@code Thread.currentThread().getContextClassLoader()})
      * to resolve/load classes that are defined in various rules.  If not
      * using Context ClassLoader, then the class-loading defaults to
      * using the calling-class' ClassLoader.
@@ -212,7 +212,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Sets the <code>Substitutor</code> to be used to convert attributes and body text.
+     * Sets the {@code Substitutor} to be used to convert attributes and body text.
      *
      * @param substitutor the Substitutor to be used to convert attributes and body text
      *        or null if not substitution of these values is to be performed.
@@ -308,7 +308,7 @@ public final class DigesterLoader
 
     /**
      * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
-     * <code>org.xml.sax.XMLReader</code>.
+     * {@code org.xml.sax.XMLReader}.
      *
      * @see org.apache.commons.digester3.Digester#setFeature(String, boolean)
      * @param feature Name of the feature to set the status for
@@ -328,21 +328,21 @@ public final class DigesterLoader
 
     /**
      * <p>Register the specified DTD URL for the specified public identifier.
-     * This must be called before the first call to <code>parse()</code>.
+     * This must be called before the first call to {@code parse()}.
      * </p><p>
-     * <code>Digester</code> contains an internal <code>EntityResolver</code>
-     * implementation. This maps <code>PUBLICID</code>'s to URLs
+     * {@code Digester} contains an internal {@code EntityResolver}
+     * implementation. This maps {@code PUBLICID}'s to URLs
      * (from which the resource will be loaded). A common use case for this
      * method is to register local URLs (possibly computed at runtime by a
      * classloader) for DTDs. This allows the performance advantage of using
-     * a local version without having to ensure every <code>SYSTEM</code>
+     * a local version without having to ensure every {@code SYSTEM}
      * URI on every processed xml document is local. This implementation provides
      * only basic functionality. If more sophisticated features are required,
      * using {@link #setEntityResolver(EntityResolver)} to set a custom resolver is recommended.
      * </p><p>
      * <strong>Note:</strong> This method will have no effect when a custom
-     * <code>EntityResolver</code> has been set. (Setting a custom
-     * <code>EntityResolver</code> overrides the internal implementation.)
+     * {@code EntityResolver} has been set. (Setting a custom
+     * {@code EntityResolver} overrides the internal implementation.)
      * </p>
      * @param publicId Public identifier of the DTD to be resolved
      * @param entityURL The URL to use for reading this DTD
@@ -385,10 +385,10 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the <code>EntityResolver</code> used by SAX when resolving public id and system id. This must be called
-     * before the first call to <code>parse()</code>.
+     * Set the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
+     * before the first call to {@code parse()}.
      *
-     * @param entityResolver a class that implement the <code>EntityResolver</code> interface.
+     * @param entityResolver a class that implement the {@code EntityResolver} interface.
      * @return This loader instance, useful to chain methods.
      */
     public DigesterLoader setEntityResolver( final EntityResolver entityResolver )

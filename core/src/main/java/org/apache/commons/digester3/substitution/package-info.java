@@ -1,5 +1,5 @@
 /**
- * The <code>substitution</code> provides for manipulation of xml attributes and
+ * The {@code substitution} provides for manipulation of xml attributes and
  * element body text before the data is processed by any Rule objects.
  */
 package org.apache.commons.digester3.substitution;

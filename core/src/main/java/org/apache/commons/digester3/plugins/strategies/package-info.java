@@ -1,5 +1,5 @@
 /**
- * The <code>plugins.strategies</code> package contains "rule-finding" strategy
+ * The {@code plugins.strategies} package contains "rule-finding" strategy
  * classes, and their associated "helper" loader classes.
  */
 package org.apache.commons.digester3.plugins.strategies;

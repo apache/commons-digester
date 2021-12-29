@@ -22,7 +22,7 @@ package org.apache.commons.digester3;
 import org.xml.sax.Attributes;
 
 /**
- * Abstract base class for <code>ObjectCreationFactory</code> implementations.
+ * Abstract base class for {@code ObjectCreationFactory} implementations.
  *
  * @param <T> The object type will be instantiate by this factory.
  */
@@ -33,7 +33,7 @@ public abstract class AbstractObjectCreationFactory<T>
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * The associated <code>Digester</code> instance that was set up by {@link FactoryCreateRule} upon initialization.
+     * The associated {@code Digester} instance that was set up by {@link FactoryCreateRule} upon initialization.
      */
     private Digester digester = null;
 

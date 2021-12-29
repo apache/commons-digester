@@ -128,7 +128,7 @@ public final class CallMethodBuilder
     }
 
     /**
-     * Should <code>MethodUtils.invokeExactMethod</code> be used for the reflection.
+     * Should {@code MethodUtils.invokeExactMethod} be used for the reflection.
      *
      * @param useExactMatch Flag to mark exact matching or not
      * @return this builder instance

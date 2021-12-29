@@ -28,17 +28,17 @@ import org.xml.sax.Attributes;
 
 /**
  * <p>
- * Default implementation of the <code>Rules</code> interface that supports the standard rule matching behavior. This
- * class can also be used as a base class for specialized <code>Rules</code> implementations.
+ * Default implementation of the {@code Rules} interface that supports the standard rule matching behavior. This
+ * class can also be used as a base class for specialized {@code Rules} implementations.
  * </p>
  * <p>
  * The matching policies implemented by this class support two different types of pattern matching rules:
  * </p>
  * <ul>
- * <li><em>Exact Match</em> - A pattern "a/b/c" exactly matches a <code>&lt;c&gt;</code> element, nested inside a
- * <code>&lt;b&gt;</code> element, which is nested inside an <code>&lt;a&gt;</code> element.</li>
- * <li><em>Tail Match</em> - A pattern "&#42;/a/b" matches a <code>&lt;b&gt;</code> element, nested inside an
- * <code>&lt;a&gt;</code> element, no matter how deeply the pair is nested.</li>
+ * <li><em>Exact Match</em> - A pattern "a/b/c" exactly matches a {@code &lt;c&gt;} element, nested inside a
+ * {@code &lt;b&gt;} element, which is nested inside an {@code &lt;a&gt;} element.</li>
+ * <li><em>Tail Match</em> - A pattern "&#42;/a/b" matches a {@code &lt;b&gt;} element, nested inside an
+ * {@code &lt;a&gt;} element, no matter how deeply the pair is nested.</li>
  * </ul>
  * <p>
  * Note that wildcard patterns are ignored if an explicit match can be found (and when multiple wildcard patterns match,
@@ -171,9 +171,9 @@ public class RulesBase
 
     /**
      * Return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any).
-     * If there are no such rules, return <code>null</code>.
+     * If there are no such rules, return {@code null}.
      *
-     * @param namespaceURI Namespace URI to match, or <code>null</code> to select matching rules regardless of namespace
+     * @param namespaceURI Namespace URI to match, or {@code null} to select matching rules regardless of namespace
      *            URI
      * @param pattern Pattern to be matched
      * @return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any)

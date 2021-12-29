@@ -1,5 +1,5 @@
 /**
- * The <code>plugins</code> package provides an easy mechanism whereby new
+ * The {@code plugins} package provides an easy mechanism whereby new
  * digestion rules can be added dynamically during a digestion.
  */
 package org.apache.commons.digester3.plugins;

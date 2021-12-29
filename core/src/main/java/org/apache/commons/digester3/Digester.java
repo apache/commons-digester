@@ -71,7 +71,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * </p>
  * <p>
  * <strong>IMPLEMENTATION NOTE</strong> - A single Digester instance may only be used within the context of a single
- * thread at a time, and a call to <code>parse()</code> must be completed before another can be initiated even from the
+ * thread at a time, and a call to {@code parse()} must be completed before another can be initiated even from the
  * same thread.
  * </p>
  * <p>
@@ -88,7 +88,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * make this class work with the legacy XML schema support.
  * </p>
  * <p>
- * This package was inspired by the <code>XmlMapper</code> class that was part of Tomcat 3.0 and 3.1, but is organized
+ * This package was inspired by the {@code XmlMapper} class that was part of Tomcat 3.0 and 3.1, but is organized
  * somewhat differently.
  * </p>
  */
@@ -153,7 +153,7 @@ public class Digester
 
     /**
      * The class loader to use for instantiating application objects. If not specified, the context class loader, or the
-     * class loader used to load Digester itself, is used, based on the value of the <code>useContextClassLoader</code>
+     * class loader used to load Digester itself, is used, based on the value of the {@code useContextClassLoader}
      * variable.
      */
     private ClassLoader classLoader = null;
@@ -245,7 +245,7 @@ public class Digester
     private Object root = null;
 
     /**
-     * The <code>Rules</code> implementation containing our collection of <code>Rule</code> instances and associated
+     * The {@code Rules} implementation containing our collection of {@code Rule} instances and associated
      * matching policy. If not established before the first rule is added, a default implementation will be provided.
      */
     private Rules rules = null;
@@ -264,7 +264,7 @@ public class Digester
 
     /**
      * Do we want to use the Context ClassLoader when loading classes for instantiating new objects. Default is
-     * <code>true</code>.
+     * {@code true}.
      */
     private boolean useContextClassLoader = true;
 
@@ -314,7 +314,7 @@ public class Digester
     // ------------------------------------------------------------- Properties
 
     /**
-     * Return the currently mapped namespace URI for the specified prefix, if any; otherwise return <code>null</code>.
+     * Return the currently mapped namespace URI for the specified prefix, if any; otherwise return {@code null}.
      * These mappings come and go dynamically as the document is parsed.
      *
      * @param prefix Prefix to look up
@@ -341,8 +341,8 @@ public class Digester
      * Return the class loader to be used for instantiating application objects when required. This is determined based
      * upon the following rules:
      * <ul>
-     * <li>The class loader set by <code>setClassLoader()</code>, if any</li>
-     * <li>The thread context class loader, if it exists and the <code>useContextClassLoader</code> property is set to
+     * <li>The class loader set by {@code setClassLoader()}, if any</li>
+     * <li>The thread context class loader, if it exists and the {@code useContextClassLoader} property is set to
      * true</li>
      * <li>The class loader used to load the Digester class itself.
      * </ul>
@@ -369,7 +369,7 @@ public class Digester
     /**
      * Set the class loader to be used for instantiating application objects when required.
      *
-     * @param classLoader The new class loader to use, or <code>null</code> to revert to the standard rules
+     * @param classLoader The new class loader to use, or {@code null} to revert to the standard rules
      */
     public void setClassLoader( final ClassLoader classLoader )
     {
@@ -442,12 +442,12 @@ public class Digester
 
     /**
      * Returns a flag indicating whether the requested feature is supported by the underlying implementation of
-     * <code>org.xml.sax.XMLReader</code>. See <a href="http://www.saxproject.org">the saxproject website</a> for
+     * {@code org.xml.sax.XMLReader}. See <a href="http://www.saxproject.org">the saxproject website</a> for
      * information about the standard SAX2 feature flags.
      *
      * @param feature Name of the feature to inquire about
      * @return true, if the requested feature is supported by the underlying implementation of
-     *         <code>org.xml.sax.XMLReader</code>, false otherwise
+     *         {@code org.xml.sax.XMLReader}, false otherwise
      * @throws ParserConfigurationException if a parser configuration error occurs
      * @throws SAXNotRecognizedException if the property name is not recognized
      * @throws SAXNotSupportedException if the property name is recognized but not supported
@@ -460,9 +460,9 @@ public class Digester
 
     /**
      * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
-     * <code>org.xml.sax.XMLReader</code>. See <a href="http://www.saxproject.org">the saxproject website</a> for
+     * {@code org.xml.sax.XMLReader}. See <a href="http://www.saxproject.org">the saxproject website</a> for
      * information about the standard SAX2 feature flags. In order to be effective, this method must be called
-     * <strong>before</strong> the <code>getParser()</code> method is called for the first time, either directly or
+     * <strong>before</strong> the {@code getParser()} method is called for the first time, either directly or
      * indirectly.
      *
      * @param feature Name of the feature to set the status for
@@ -608,9 +608,9 @@ public class Digester
     }
 
     /**
-     * Return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
-     * @return the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
     public String getRuleNamespaceURI()
     {
@@ -618,9 +618,9 @@ public class Digester
     }
 
     /**
-     * Set the namespace URI that will be applied to all subsequently added <code>Rule</code> objects.
+     * Set the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
-     * @param ruleNamespaceURI Namespace URI that must match on all subsequently added rules, or <code>null</code> for
+     * @param ruleNamespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
      *            matching regardless of the current namespace URI
      */
     public void setRuleNamespaceURI( final String ruleNamespaceURI )
@@ -631,7 +631,7 @@ public class Digester
     /**
      * Return the SAXParser we will use to parse the input stream.
      *
-     * If there is a problem creating the parser, return <code>null</code>.
+     * If there is a problem creating the parser, return {@code null}.
      *
      * @return the SAXParser we will use to parse the input stream
      */
@@ -658,13 +658,13 @@ public class Digester
     }
 
     /**
-     * Return the current value of the specified property for the underlying <code>XMLReader</code> implementation.
+     * Return the current value of the specified property for the underlying {@code XMLReader} implementation.
      *
      * See <a href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2
      * properties.
      *
      * @param property Property name to be retrieved
-     * @return the current value of the specified property for the underlying <code>XMLReader</code> implementation.
+     * @return the current value of the specified property for the underlying {@code XMLReader} implementation.
      * @throws SAXNotRecognizedException if the property name is not recognized
      * @throws SAXNotSupportedException if the property name is recognized but not supported
      */
@@ -675,7 +675,7 @@ public class Digester
     }
 
     /**
-     * Set the current value of the specified property for the underlying <code>XMLReader</code> implementation. See <a
+     * Set the current value of the specified property for the underlying {@code XMLReader} implementation. See <a
      * href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2 properties.
      *
      * @param property Property name to be set
@@ -690,10 +690,10 @@ public class Digester
     }
 
     /**
-     * Return the <code>Rules</code> implementation object containing our rules collection and associated matching
+     * Return the {@code Rules} implementation object containing our rules collection and associated matching
      * policy. If none has been established, a default implementation will be created and returned.
      *
-     * @return the <code>Rules</code> implementation object.
+     * @return the {@code Rules} implementation object.
      */
     public Rules getRules()
     {
@@ -706,7 +706,7 @@ public class Digester
     }
 
     /**
-     * Set the <code>Rules</code> implementation object containing our rules collection and associated matching policy.
+     * Set the {@code Rules} implementation object containing our rules collection and associated matching policy.
      *
      * @param rules New Rules implementation
      */
@@ -750,7 +750,7 @@ public class Digester
 
     /**
      * Determine whether to use the Context ClassLoader (the one found by calling
-     * <code>Thread.currentThread().getContextClassLoader()</code>) to resolve/load classes that are defined in various
+     * {@code Thread.currentThread().getContextClassLoader()}) to resolve/load classes that are defined in various
      * rules. If not using Context ClassLoader, then the class-loading defaults to using the calling-class' ClassLoader.
      *
      * @param use determines whether to use Context ClassLoader.
@@ -771,7 +771,7 @@ public class Digester
     }
 
     /**
-     * Set the validating parser flag. This must be called before <code>parse()</code> is called the first time.
+     * Set the validating parser flag. This must be called before {@code parse()} is called the first time.
      * By default the value of this is set to false.
      *
      * It essentially just controls the DTD validation. To use modern schema languages use the
@@ -826,9 +826,9 @@ public class Digester
     }
 
     /**
-     * Gets the <code>Substitutor</code> used to convert attributes and body text.
+     * Gets the {@code Substitutor} used to convert attributes and body text.
      *
-     * @return the <code>Substitutor</code> used to convert attributes and body text,
+     * @return the {@code Substitutor} used to convert attributes and body text,
      *         null if not substitutions are to be performed.
      */
     public Substitutor getSubstitutor()
@@ -837,7 +837,7 @@ public class Digester
     }
 
     /**
-     * Sets the <code>Substitutor</code> to be used to convert attributes and body text.
+     * Sets the {@code Substitutor} to be used to convert attributes and body text.
      *
      * @param substitutor the Substitutor to be used to convert attributes and body text or null if not substitution of
      *            these values is to be performed.
@@ -1427,10 +1427,10 @@ public class Digester
     // ----------------------------------------------- EntityResolver Methods
 
     /**
-     * Set the <code>EntityResolver</code> used by SAX when resolving public id and system id. This must be called
-     * before the first call to <code>parse()</code>.
+     * Set the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
+     * before the first call to {@code parse()}.
      *
-     * @param entityResolver a class that implement the <code>EntityResolver</code> interface.
+     * @param entityResolver a class that implement the {@code EntityResolver} interface.
      */
     public void setEntityResolver( final EntityResolver entityResolver )
     {
@@ -1871,19 +1871,19 @@ public class Digester
     /**
      * <p>
      * Register the specified DTD URL for the specified public identifier. This must be called before the first call to
-     * <code>parse()</code>.
+     * {@code parse()}.
      * </p>
      * <p>
-     * <code>Digester</code> contains an internal <code>EntityResolver</code> implementation. This maps
-     * <code>PUBLICID</code>'s to URLs (from which the resource will be loaded). A common use case for this method is to
+     * {@code Digester} contains an internal {@code EntityResolver} implementation. This maps
+     * {@code PUBLICID}'s to URLs (from which the resource will be loaded). A common use case for this method is to
      * register local URLs (possibly computed at runtime by a classloader) for DTDs. This allows the performance
-     * advantage of using a local version without having to ensure every <code>SYSTEM</code> URI on every processed xml
+     * advantage of using a local version without having to ensure every {@code SYSTEM} URI on every processed xml
      * document is local. This implementation provides only basic functionality. If more sophisticated features are
      * required, using {@link #setEntityResolver} to set a custom resolver is recommended.
      * </p>
      * <p>
-     * <strong>Note:</strong> This method will have no effect when a custom <code>EntityResolver</code> has been set.
-     * (Setting a custom <code>EntityResolver</code> overrides the internal implementation.)
+     * <strong>Note:</strong> This method will have no effect when a custom {@code EntityResolver} has been set.
+     * (Setting a custom {@code EntityResolver} overrides the internal implementation.)
      * </p>
      *
      * @param publicId Public identifier of the DTD to be resolved
@@ -1937,7 +1937,7 @@ public class Digester
 
     /**
      * <p>
-     * <code>List</code> of <code>InputSource</code> instances created by a <code>createInputSourceFromURL()</code>
+     * {@code List} of {@code InputSource} instances created by a {@code createInputSourceFromURL()}
      * method call. These represent open input streams that need to be closed to avoid resource leaks, as well as
      * potentially locked JAR files on Windows.
      * </p>
@@ -1947,7 +1947,7 @@ public class Digester
     /**
      * Given a URL, return an InputSource that reads from that URL.
      * <p>
-     * Ideally this function would not be needed and code could just use <code>new InputSource(entityURL)</code>.
+     * Ideally this function would not be needed and code could just use {@code new InputSource(entityURL)}.
      * Unfortunately it appears that when the entityURL points to a file within a jar archive a caching mechanism inside
      * the InputSource implementation causes a file-handle to the jar file to remain open. On Windows systems this then
      * causes the jar archive file to be locked on disk ("in use") which makes it impossible to delete the jar file -
@@ -1991,10 +1991,10 @@ public class Digester
 
     /**
      * <p>
-     * Convenience method that creates an <code>InputSource</code> from the string version of a URL.
+     * Convenience method that creates an {@code InputSource} from the string version of a URL.
      * </p>
      *
-     * @param url URL for which to create an <code>InputSource</code>
+     * @param url URL for which to create an {@code InputSource}
      * @return The InputSource that reads from the input URL
      * @throws IOException if any error occurs while reading the input URL
      * @since 1.8
@@ -2009,7 +2009,7 @@ public class Digester
 
     /**
      * <p>
-     * Register a new Rule matching the specified pattern. This method sets the <code>Digester</code> property on the
+     * Register a new Rule matching the specified pattern. This method sets the {@code Digester} property on the
      * rule.
      * </p>
      *
@@ -2096,8 +2096,8 @@ public class Digester
     }
 
     /**
-     * Add an "call method" rule for the specified parameters. If <code>paramCount</code> is set to zero the rule will
-     * use the body of the matched element as the single argument of the method, unless <code>paramTypes</code> is null
+     * Add an "call method" rule for the specified parameters. If {@code paramCount} is set to zero the rule will
+     * use the body of the matched element as the single argument of the method, unless {@code paramTypes} is null
      * or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param pattern Element matching pattern
@@ -2105,7 +2105,7 @@ public class Digester
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @param paramTypes Set of Java class names for the types of the expected parameters (if you wish to use a
      *            primitive type, specify the corresonding Java wrapper class instead, such as
-     *            <code>java.lang.Boolean</code> for a <code>boolean</code> parameter)
+     *            {@code java.lang.Boolean} for a {@code boolean} parameter)
      * @see CallMethodRule
      */
     public void addCallMethod( final String pattern, final String methodName, final int paramCount, final String paramTypes[] )
@@ -2114,16 +2114,16 @@ public class Digester
     }
 
     /**
-     * Add an "call method" rule for the specified parameters. If <code>paramCount</code> is set to zero the rule will
-     * use the body of the matched element as the single argument of the method, unless <code>paramTypes</code> is null
+     * Add an "call method" rule for the specified parameters. If {@code paramCount} is set to zero the rule will
+     * use the body of the matched element as the single argument of the method, unless {@code paramTypes} is null
      * or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param pattern Element matching pattern
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      * @see CallMethodRule
      */
     public void addCallMethod( final String pattern, final String methodName, final int paramCount, final Class<?> paramTypes[] )
@@ -2186,7 +2186,7 @@ public class Digester
     }
 
     /**
-     * Add a "call parameter" rule that sets a parameter from the current <code>Digester</code> matching path. This is
+     * Add a "call parameter" rule that sets a parameter from the current {@code Digester} matching path. This is
      * sometimes useful when using rules that support wildcards.
      *
      * @param pattern the pattern that this rule should match
@@ -2250,7 +2250,7 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
-     * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
+     * @param attributeName Attribute name which, if present, overrides the value specified by {@code className}
      * @see FactoryCreateRule
      */
     public void addFactoryCreate( final String pattern, final String className, final String attributeName )
@@ -2264,7 +2264,7 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
-     * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
+     * @param attributeName Attribute name which, if present, overrides the value specified by {@code className}
      * @see FactoryCreateRule
      */
     public void addFactoryCreate( final String pattern, final Class<? extends ObjectCreationFactory<?>> clazz,
@@ -2291,7 +2291,7 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
-     * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
+     * @param ignoreCreateExceptions when {@code true} any exceptions thrown during object creation will be
      *            ignored.
      * @see FactoryCreateRule
      */
@@ -2305,7 +2305,7 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
-     * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
+     * @param ignoreCreateExceptions when {@code true} any exceptions thrown during object creation will be
      *            ignored.
      * @see FactoryCreateRule
      */
@@ -2320,8 +2320,8 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param className Java class name of the object creation factory class
-     * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
-     * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
+     * @param attributeName Attribute name which, if present, overrides the value specified by {@code className}
+     * @param ignoreCreateExceptions when {@code true} any exceptions thrown during object creation will be
      *            ignored.
      * @see FactoryCreateRule
      */
@@ -2336,8 +2336,8 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param clazz Java class of the object creation factory class
-     * @param attributeName Attribute name which, if present, overrides the value specified by <code>className</code>
-     * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
+     * @param attributeName Attribute name which, if present, overrides the value specified by {@code className}
+     * @param ignoreCreateExceptions when {@code true} any exceptions thrown during object creation will be
      *            ignored.
      * @see FactoryCreateRule
      */
@@ -2352,7 +2352,7 @@ public class Digester
      *
      * @param pattern Element matching pattern
      * @param creationFactory Previously instantiated ObjectCreationFactory to be utilized
-     * @param ignoreCreateExceptions when <code>true</code> any exceptions thrown during object creation will be
+     * @param ignoreCreateExceptions when {@code true} any exceptions thrown during object creation will be
      *            ignored.
      * @see FactoryCreateRule
      */
@@ -2468,8 +2468,8 @@ public class Digester
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      * @see SetNextRule
      */
     public void addSetNext( final String pattern, final String methodName, final String paramType )
@@ -2572,8 +2572,8 @@ public class Digester
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      * @see SetTopRule
      */
     public void addSetTop( final String pattern, final String methodName, final String paramType )
@@ -2609,7 +2609,7 @@ public class Digester
     /**
      * Return the top object on the stack without removing it.
      *
-     * If there are no objects on the stack, return <code>null</code>.
+     * If there are no objects on the stack, return {@code null}.
      *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @return the top object on the stack without removing it.
@@ -2629,7 +2629,7 @@ public class Digester
 
     /**
      * Return the n'th object down the stack, where 0 is the top element and [getCount()-1] is the bottom element. If
-     * the specified index is out of range, return <code>null</code>.
+     * the specified index is out of range, return {@code null}.
      *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
@@ -2656,7 +2656,7 @@ public class Digester
 
     /**
      * Pop the top object off of the stack, and return it. If there are no objects on the stack, return
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @return the top object popped off of the stack
@@ -2734,7 +2734,7 @@ public class Digester
      *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack from which the top value is to be popped.
-     * @return the top <code>Object</code> on the stack or throws {@code EmptyStackException}
+     * @return the top {@code Object} on the stack or throws {@code EmptyStackException}
      *         if the stack is either empty or has not been created yet
      * @since 1.6
      */
@@ -2770,7 +2770,7 @@ public class Digester
      *
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack to be peeked
-     * @return the top <code>Object</code> on the stack or null if the stack is either empty or has not been created yet
+     * @return the top {@code Object} on the stack or null if the stack is either empty or has not been created yet
      * @since 1.6
      */
     public <T> T peek( final String stackName )
@@ -2789,7 +2789,7 @@ public class Digester
      * @param <T> the type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack to be peeked
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
-     * @return the specified <code>Object</code> on the stack.
+     * @return the specified {@code Object} on the stack.
      * @since 1.6
      */
     public <T> T peek( final String stackName, final int n )
@@ -2885,7 +2885,7 @@ public class Digester
      * <p>
      * Clean up allocated resources after parsing is complete. The default method closes input streams that have been
      * created by Digester itself. If you override this method in a subclass, be sure to call
-     * <code>super.cleanup()</code> to invoke this logic.
+     * {@code super.cleanup()} to invoke this logic.
      * </p>
      *
      * @since 1.8
@@ -2916,7 +2916,7 @@ public class Digester
 
     /**
      * <p>
-     * Provide a hook for lazy configuration of this <code>Digester</code> instance. The default implementation does
+     * Provide a hook for lazy configuration of this {@code Digester} instance. The default implementation does
      * nothing, but subclasses can override as needed.
      * </p>
      * <p>
@@ -2953,12 +2953,12 @@ public class Digester
 
     /**
      * <p>
-     * Provides a hook for lazy initialization of this <code>Digester</code> instance. The default implementation does
+     * Provides a hook for lazy initialization of this {@code Digester} instance. The default implementation does
      * nothing, but subclasses can override as needed. Digester (by default) only calls this method once.
      * </p>
      * <p>
      * <strong>Note</strong> This method will be called by {@link #configure} only when the {@link #configured} flag is
-     * false. Subclasses that override <code>configure</code> or who set <code>configured</code> may find that this
+     * false. Subclasses that override {@code configure} or who set {@code configured} may find that this
      * method may be called more than once.
      * </p>
      *
@@ -2985,10 +2985,10 @@ public class Digester
     /**
      * <p>
      * Return the top object on the parameters stack without removing it. If there are no objects on the stack, return
-     * <code>null</code>.
+     * {@code null}.
      * </p>
      * <p>
-     * The parameters stack is used to store <code>CallMethodRule</code> parameters. See {@link #params}.
+     * The parameters stack is used to store {@code CallMethodRule} parameters. See {@link #params}.
      * </p>
      *
      * @return the top object on the parameters stack without removing it.
@@ -3009,10 +3009,10 @@ public class Digester
     /**
      * <p>
      * Return the n'th object down the parameters stack, where 0 is the top element and [getCount()-1] is the bottom
-     * element. If the specified index is out of range, return <code>null</code>.
+     * element. If the specified index is out of range, return {@code null}.
      * </p>
      * <p>
-     * The parameters stack is used to store <code>CallMethodRule</code> parameters. See {@link #params}.
+     * The parameters stack is used to store {@code CallMethodRule} parameters. See {@link #params}.
      * </p>
      *
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
@@ -3040,10 +3040,10 @@ public class Digester
     /**
      * <p>
      * Pop the top object off of the parameters stack, and return it. If there are no objects on the stack, return
-     * <code>null</code>.
+     * {@code null}.
      * </p>
      * <p>
-     * The parameters stack is used to store <code>CallMethodRule</code> parameters. See {@link #params}.
+     * The parameters stack is used to store {@code CallMethodRule} parameters. See {@link #params}.
      * </p>
      *
      * @return the top object popped off of the parameters stack
@@ -3070,7 +3070,7 @@ public class Digester
      * Push a new object onto the top of the parameters stack.
      * </p>
      * <p>
-     * The parameters stack is used to store <code>CallMethodRule</code> parameters. See {@link #params}.
+     * The parameters stack is used to store {@code CallMethodRule} parameters. See {@link #params}.
      * </p>
      *
      * @param object The new object

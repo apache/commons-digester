@@ -71,14 +71,14 @@ import org.xml.sax.Attributes;
  * so their associated Rule objects will be included in the set of rules to be executed in the normal manner.
  * </p>
  * <ul>
- * <li>Pattern <code>"!*&#47;a/b"</code> matches whenever an 'b' element is inside an 'a'.</li>
- * <li>Pattern <code>"!a/b/?"</code> matches any child of a parent matching <code>"a/b"</code> (see
+ * <li>Pattern {@code "!*&#47;a/b"} matches whenever an 'b' element is inside an 'a'.</li>
+ * <li>Pattern {@code "!a/b/?"} matches any child of a parent matching {@code "a/b"} (see
  * "Parent Match Patterns").</li>
- * <li>Pattern <code>"!*&#47;a/b/?"</code> matches any child of a parent matching <code>"!*&#47;a/b"</code> (see
+ * <li>Pattern {@code "!*&#47;a/b/?"} matches any child of a parent matching {@code "!*&#47;a/b"} (see
  * "Parent Match Patterns").</li>
- * <li>Pattern <code>"!a/b/*"</code> matches any element whose path starts with "a" then "b" (see
+ * <li>Pattern {@code "!a/b/*"} matches any element whose path starts with "a" then "b" (see
  * "Ancestor Match Patterns").</li>
- * <li>Pattern <code>"!*&#47;a/b/*"</code> matches any elements whose path contains 'a/b' (see
+ * <li>Pattern {@code "!*&#47;a/b/*"} matches any elements whose path contains 'a/b' (see
  * "Ancestor Match Patterns").</li>
  * </ul>
  * <h4>Parent Match Patterns</h4>
@@ -86,10 +86,10 @@ import org.xml.sax.Attributes;
  * These will match direct child elements of a particular parent element.
  * <ul>
  * <li>
- *  <code>"a/b/c/?"</code> matches any child whose parent matches <code>"a/b/c"</code>. Exact parent rules take
+ *  {@code "a/b/c/?"} matches any child whose parent matches {@code "a/b/c"}. Exact parent rules take
  * precedence over Ancestor Match patterns.</li>
  * <li>
- *  <code>"*&#47;a/b/c/?"</code> matches any child whose parent matches <code>"*&#47;a/b/c"</code>. The longest
+ *  {@code "*&#47;a/b/c/?"} matches any child whose parent matches {@code "*&#47;a/b/c"}. The longest
  * matching still applies to parent matches but the length excludes the '?', which effectively means that standard
  * wildcard matches with the same level of depth are chosen in preference.</li>
  * </ul>
@@ -99,19 +99,19 @@ import org.xml.sax.Attributes;
  * These will match elements whose parentage includes a particular sequence of elements.
  * <ul>
  * <li>
- *  <code>"a/b/*"</code> matches any element whose path starts with 'a' then 'b'. Exact parent and parent match rules
+ *  {@code "a/b/*"} matches any element whose path starts with 'a' then 'b'. Exact parent and parent match rules
  * take precedence. The longest ancestor match will take precedence.</li>
  * <li>
- *  <code>"*&#47;a/b/*"</code> matches any elements whose path contains an element 'a' followed by an element 'b'.
+ *  {@code "*&#47;a/b/*"} matches any elements whose path contains an element 'a' followed by an element 'b'.
  * The longest matching still applies but the length excludes the '*' at the end.</li>
  * </ul>
  * </p>
  * <h4>Completely Wild Patterns</h4>
  * <p>
- * Pattern <code>"*"</code> matches every pattern that isn't matched by any other basic rule.
+ * Pattern {@code "*"} matches every pattern that isn't matched by any other basic rule.
  * </p>
  * <p>
- * Pattern <code>"!*"</code> matches every pattern.
+ * Pattern {@code "!*"} matches every pattern.
  * </p>
  * <h4>Using The Extended Rules</h4>
  * <p>

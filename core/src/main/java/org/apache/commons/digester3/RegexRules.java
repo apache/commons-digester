@@ -42,7 +42,7 @@ public class RegexRules
 
     // --------------------------------------------------------- Fields
 
-    /** All registered <code>Rule</code>'s */
+    /** All registered {@code Rule}'s */
     private final ArrayList<RegisteredRule> registeredRules = new ArrayList<RegisteredRule>();
 
     /** The regex strategy used by this RegexRules */

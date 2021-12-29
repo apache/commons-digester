@@ -34,10 +34,10 @@ import org.xml.sax.SAXException;
  * see the <a href="http://my.netscape.com/publish/">My Netscape</a> site.</p>
  *
  * <p>The default implementation object returned by calling
- * <code>parse()</code> (an instance of
- * <code>org.apache.commons.digester3.rss.Channel</code>)
- * knows how to render itself in XML format via the <code>render()</code>
- * method.  See the test <code>main()</code> method below for an
+ * {@code parse()} (an instance of
+ * {@code org.apache.commons.digester3.rss.Channel})
+ * knows how to render itself in XML format via the {@code render()}
+ * method.  See the test {@code main()} method below for an
  * example of using these classes.</p>
  */
 
@@ -57,7 +57,7 @@ public class RSSDigester
     // ------------------------------------------------------------- Properties
 
     /**
-     * The fully qualified class name of the <code>Channel</code>
+     * The fully qualified class name of the {@code Channel}
      * implementation class.
      */
     protected String channelClass = "org.apache.commons.digester3.rss.Channel";
@@ -73,7 +73,7 @@ public class RSSDigester
     }
 
     /**
-     * The fully qualified class name of the <code>Image</code>
+     * The fully qualified class name of the {@code Image}
      * implementation class.
      */
     protected String imageClass = "org.apache.commons.digester3.rss.Image";
@@ -89,7 +89,7 @@ public class RSSDigester
     }
 
     /**
-     * The fully qualified class name of the <code>Item</code>
+     * The fully qualified class name of the {@code Item}
      * implementation class.
      */
     protected String itemClass = "org.apache.commons.digester3.rss.Item";
@@ -105,7 +105,7 @@ public class RSSDigester
     }
 
     /**
-     * The fully qualified class name of the <code>TextInput</code>
+     * The fully qualified class name of the {@code TextInput}
      * implementation class.
      */
     protected String textInputClass = "org.apache.commons.digester3.rss.TextInput";

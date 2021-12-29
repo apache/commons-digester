@@ -1,6 +1,6 @@
 /**
- * The <code>annotations</code> package provides for Java5 Annotations
- * meta data-based definition of rules for <code>Digester</code>.
+ * The {@code annotations} package provides for Java5 Annotations
+ * meta data-based definition of rules for {@code Digester}.
  */
 package org.apache.commons.digester3.annotations;
 

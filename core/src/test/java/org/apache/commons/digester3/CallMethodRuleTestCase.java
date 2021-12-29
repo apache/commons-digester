@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
 
 /**
  * <p>
- * Tests for the <code>CallMethodRule</code> and associated <code>CallParamRule</code>.
+ * Tests for the {@code CallMethodRule} and associated {@code CallParamRule}.
  *
  * @author Christopher Lenz
  */

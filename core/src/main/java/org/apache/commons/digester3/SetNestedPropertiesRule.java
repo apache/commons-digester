@@ -64,9 +64,9 @@ import org.xml.sax.Attributes;
  * ignored.
  * </p>
  * <p>
- * A very similar effect can be achieved using a combination of the <code>BeanPropertySetterRule</code> and the
- * <code>ExtendedBaseRules</code> rules manager; this <code>Rule</code>, however, works fine with the default
- * <code>RulesBase</code> rules manager.
+ * A very similar effect can be achieved using a combination of the {@code BeanPropertySetterRule} and the
+ * {@code ExtendedBaseRules} rules manager; this {@code Rule}, however, works fine with the default
+ * {@code RulesBase} rules manager.
  * </p>
  * <p>
  * Note that this rule is designed to be used to set only "primitive" bean properties, eg String, int, boolean. If some
@@ -157,8 +157,8 @@ public class SetNestedPropertiesRule
      * </p>
      * <h5>Example One</h5>
      * <p>
-     * The following constructs a rule that maps the <code>alt-city</code> element to the <code>city</code> property and
-     * the <code>alt-state</code> to the <code>state</code> property. All other child elements are mapped as usual using
+     * The following constructs a rule that maps the {@code alt-city} element to the {@code city} property and
+     * the {@code alt-state} to the {@code state} property. All other child elements are mapped as usual using
      * exact name matching. <code><pre>
      *      SetNestedPropertiesRule(
      *                new String[] {"alt-city", "alt-state"},
@@ -167,8 +167,8 @@ public class SetNestedPropertiesRule
      * </p>
      * <h5>Example Two</h5>
      * <p>
-     * The following constructs a rule that maps the <code>class</code> xml element to the <code>className</code>
-     * property. The xml element <code>ignore-me</code> is not mapped, ie is ignored. All other elements are mapped as
+     * The following constructs a rule that maps the {@code class} xml element to the {@code className}
+     * property. The xml element {@code ignore-me} is not mapped, ie is ignored. All other elements are mapped as
      * usual using exact name matching. <code><pre>
      *      SetPropertiesRule(
      *                new String[] {"class", "ignore-me"},

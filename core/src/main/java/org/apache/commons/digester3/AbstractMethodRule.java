@@ -77,8 +77,8 @@ public abstract class AbstractMethodRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      */
     public AbstractMethodRule( final String methodName, final Class<?> paramType )
     {
@@ -91,8 +91,8 @@ public abstract class AbstractMethodRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramTypeName Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as <code>java.lang.Boolean</code> for a
-     *            <code>boolean</code> parameter)
+     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            {@code boolean} parameter)
      */
     public AbstractMethodRule( final String methodName, final String paramTypeName )
     {
@@ -105,13 +105,13 @@ public abstract class AbstractMethodRule
      * Is exact matching being used.
      * </p>
      * <p>
-     * This rule uses <code>org.apache.commons.beanutils.MethodUtils</code> to introspect the relevent objects so that
-     * the right method can be called. Originally, <code>MethodUtils.invokeExactMethod</code> was used. This matches
+     * This rule uses {@code org.apache.commons.beanutils.MethodUtils} to introspect the relevent objects so that
+     * the right method can be called. Originally, {@code MethodUtils.invokeExactMethod} was used. This matches
      * methods very strictly and so may not find a matching method when one exists. This is still the behavior when
      * exact matching is enabled.
      * </p>
      * <p>
-     * When exact matching is disabled, <code>MethodUtils.invokeMethod</code> is used. This method finds more methods
+     * When exact matching is disabled, {@code MethodUtils.invokeMethod} is used. This method finds more methods
      * but is less precise when there are several methods with correct signatures. So, if you want to choose an exact
      * signature you might need to enable this property.
      * </p>

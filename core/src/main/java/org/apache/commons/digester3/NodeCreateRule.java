@@ -44,14 +44,14 @@ import org.xml.sax.helpers.DefaultHandler;
  * </ul>
  * The created node will be normalized, meaning it will not contain text nodes that only contain white space characters.
  * <p>
- * The created <code>Node</code> will be pushed on Digester's object stack when done. To use it in the context of
+ * The created {@code Node} will be pushed on Digester's object stack when done. To use it in the context of
  * another DOM {@link org.w3c.dom.Document Document}, it must be imported first, using the Document method
  * {@link org.w3c.dom.Document#importNode(org.w3c.dom.Node, boolean) importNode()}.
  * </p>
  * <p>
  * <strong>Important Note:</strong> This is implemented by replacing the SAX {@link org.xml.sax.ContentHandler
  * ContentHandler} in the parser used by Digester, and resetting it when the matched element is closed. As a side
- * effect, rules that would match XML nodes under the element that matches a <code>NodeCreateRule</code> will never be
+ * effect, rules that would match XML nodes under the element that matches a {@code NodeCreateRule} will never be
  * triggered by Digester, which usually is the behavior one would expect.
  * </p>
  * <p>
@@ -312,9 +312,9 @@ public class NodeCreateRule
 
     /**
      * Constructor. Creates an instance of this rule that will create a DOM {@link org.w3c.dom.Element Element}, but
-     * lets you specify the JAXP <code>DocumentBuilder</code> that should be used when constructing the node tree.
+     * lets you specify the JAXP {@code DocumentBuilder} that should be used when constructing the node tree.
      *
-     * @param documentBuilder the JAXP <code>DocumentBuilder</code> to use
+     * @param documentBuilder the JAXP {@code DocumentBuilder} to use
      */
     public NodeCreateRule( final DocumentBuilder documentBuilder )
     {
@@ -324,7 +324,7 @@ public class NodeCreateRule
     /**
      * Constructor. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
      * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
-     * <code>nodeType</code> parameter.
+     * {@code nodeType} parameter.
      *
      * @param nodeType the type of node to create, which can be either {@link org.w3c.dom.Node#ELEMENT_NODE
      *            Node.ELEMENT_NODE} or {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE}
@@ -341,12 +341,12 @@ public class NodeCreateRule
     /**
      * Constructor. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
      * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
-     * <code>nodeType</code> parameter. This constructor lets you specify the JAXP <code>DocumentBuilder</code> that
+     * {@code nodeType} parameter. This constructor lets you specify the JAXP {@code DocumentBuilder} that
      * should be used when constructing the node tree.
      *
      * @param nodeType the type of node to create, which can be either {@link org.w3c.dom.Node#ELEMENT_NODE
      *            Node.ELEMENT_NODE} or {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE}
-     * @param documentBuilder the JAXP <code>DocumentBuilder</code> to use
+     * @param documentBuilder the JAXP {@code DocumentBuilder} to use
      */
     public NodeCreateRule( final int nodeType, final DocumentBuilder documentBuilder )
     {
@@ -361,7 +361,7 @@ public class NodeCreateRule
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * The JAXP <code>DocumentBuilder</code> to use.
+     * The JAXP {@code DocumentBuilder} to use.
      */
     private DocumentBuilder documentBuilder = null;
 

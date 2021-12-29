@@ -25,8 +25,8 @@ import org.xml.sax.Attributes;
 
 /**
  * <p>
- * Rule implementation that saves a parameter containing the <code>Digester</code> matching path for use by a
- * surrounding <code>CallMethodRule</code>. This Rule is most useful when making extensive use of wildcards in rule
+ * Rule implementation that saves a parameter containing the {@code Digester} matching path for use by a
+ * surrounding {@code CallMethodRule}. This Rule is most useful when making extensive use of wildcards in rule
  * patterns.
  * </p>
  *

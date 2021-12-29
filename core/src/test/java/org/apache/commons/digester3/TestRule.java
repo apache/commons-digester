@@ -38,7 +38,7 @@ public class TestRule
 
     // ----------------------------------------------------- Instance Variables
 
-    /** String identifing this particular <code>TestRule</code> */
+    /** String identifing this particular {@code TestRule} */
     private final String identifier;
 
     /** Used when testing body text */

@@ -28,7 +28,7 @@ import org.junit.Test;
 
 /**
  * <p>
- * Unit tests that exercise the new (in 1.8) methods for passing in <code>URL</code> arguments instead of strings.
+ * Unit tests that exercise the new (in 1.8) methods for passing in {@code URL} arguments instead of strings.
  * </p>
  */
 public class URLTestCase
@@ -86,7 +86,7 @@ public class URLTestCase
 
     /**
      * <p>
-     * The <code>Digester</code> instance under test.
+     * The {@code Digester} instance under test.
      * </p>
      */
     private Digester digester = null;

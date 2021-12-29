@@ -77,9 +77,9 @@ import org.xml.sax.Attributes;
     }
 
     /**
-     * Set the <code>Digester</code> with which this <code>Rule</code> is associated.
+     * Set the {@code Digester} with which this {@code Rule} is associated.
      *
-     * @param digester the <code>Digester</code> with which this <code>Rule</code> is associated
+     * @param digester the {@code Digester} with which this {@code Rule} is associated
      */
     public void setDigester( final Digester digester )
     {
@@ -99,7 +99,7 @@ import org.xml.sax.Attributes;
     /**
      * Set the namespace URI for which this Rule is relevant, if any.
      *
-     * @param namespaceURI Namespace URI for which this Rule is relevant, or <code>null</code> to match independent of
+     * @param namespaceURI Namespace URI for which this Rule is relevant, or {@code null} to match independent of
      *            namespace.
      */
     public void setNamespaceURI( final String namespaceURI )
