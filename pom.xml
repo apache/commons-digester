@@ -207,10 +207,11 @@
   </properties>
 
   <build>
+    <defaultGoal>clean verify</defaultGoal>
     <plugins>
       <plugin>
         <!--
-          - A number of the pre-maven test case "suport" classes have names starting with Test.
+          - A number of the pre-maven test case "support" classes have names starting with Test.
           - This confuses the maven surefire "auto-detect test case" functionality, so we
           - need to manually exclude them.
           -->
