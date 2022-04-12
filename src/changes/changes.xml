@@ -83,6 +83,9 @@
     <action type="update" dev="ggregory" due-to="Gary Gregory">
       Bump build actions/setup-java from v1.4.0 to v2.
     </action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">
+      Bump build actions/cache from 2 to 3.0.2.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
