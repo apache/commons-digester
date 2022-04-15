@@ -65,6 +65,12 @@
       Document thread-safety in Javadoc of Rule class
     </action>
     <!-- UPDATE -->
+    <action type="update" dev="ggregory" due-to="Gary Gregory">
+      Bump build actions/setup-java from 1.4.0 to 3.
+    </action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">
+      Bump build actions/cache from 2 to 3.0.2.
+    </action>
     <action dev="ggregory" type="update" issue="DIGESTER-185">
       Bump Apache Commons Logging from 1.1.1 to 1.2.
     </action>
@@ -82,12 +88,6 @@
     </action>
     <action dev="ggregory" type="update">
       Bump JUnit from 4.10 to 4.13.
-    </action>
-    <action type="update" dev="ggregory" due-to="Gary Gregory">
-      Bump build actions/setup-java from v1.4.0 to v2.
-    </action>
-    <action type="update" dev="ggregory" due-to="Gary Gregory">
-      Bump build actions/cache from 2 to 3.0.2.
     </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
