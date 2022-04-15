@@ -23,6 +23,11 @@
   </properties>
   <body>
   <release version="3.3" date="201?-??-??" description="Maintenance release.">
+    <!-- ADD -->
+    <action dev="simonetripodi" type="fix" issue="DIGESTER-171" due-to="Nick Williams">
+      Add DefaultThrowingErrorHandler to Digester API - patch provided by Ivan Diana
+    </action>
+    <!--  FIX -->
     <action dev="simonetripodi" type="fix" issue="DIGESTER-175">
       Regression: DigesterTestCase#testPopNamedStackNotPushed expects EmptyStackException
     </action>
@@ -34,9 +39,6 @@
     </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-172" due-to="Nick Williams">
       Even with custom ErrorHandler, SAX errors are still written to stderr - patch provided by Ivan Diana
-    </action>
-    <action dev="simonetripodi" type="fix" issue="DIGESTER-171" due-to="Nick Williams">
-      Add DefaultThrowingErrorHandler to Digester API - patch provided by Ivan Diana
     </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-170" due-to="Dale Wijnand">
       Digester.pop(String) throws EmptyStackException where API doc says it returns null
@@ -62,23 +64,24 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-161" due-to="Eduard Papa">
       Document thread-safety in Javadoc of Rule class
     </action>
+    <!-- UPDATE -->
     <action dev="ggregory" type="update" issue="DIGESTER-185">
-      Update Apache Commons Logging from 1.1.1 to 1.2.
+      Bump Apache Commons Logging from 1.1.1 to 1.2.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-186">
-      Update Java requirement from version 5 to 6.
+      Bump Java requirement from version 5 to 6.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-194">
-      Update Java requirement from version 6 to 7
+      Bump Java requirement from version 6 to 7
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-187">
-      Update Apache Commons Bean Utils from 1.8.3 to 1.9.4.
+      Bump Apache Commons Bean Utils from 1.8.3 to 1.9.4.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-188">
-      Update cglib from 2.2.2 to 3.2.5.
+      Bump cglib from 2.2.2 to 3.2.5.
     </action>
     <action dev="ggregory" type="update">
-      Update JUnit from 4.10 to 4.13.
+      Bump JUnit from 4.10 to 4.13.
     </action>
     <action type="update" dev="ggregory" due-to="Gary Gregory">
       Bump build actions/setup-java from v1.4.0 to v2.
