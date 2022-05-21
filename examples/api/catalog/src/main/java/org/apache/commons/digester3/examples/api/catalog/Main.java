@@ -1,5 +1,7 @@
 package org.apache.commons.digester3.examples.api.catalog;
 
+import java.io.IOException;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -202,7 +204,7 @@ public class Main
      * takes a File object would be more sensible (see AddressBook example).
      */
     private static java.io.Reader getInputData( final String filename )
-        throws java.io.IOException
+        throws IOException
     {
         final java.io.File srcfile = new java.io.File( filename );
 
