@@ -66,10 +66,13 @@
     </action>
     <!-- UPDATE -->
     <action type="update" dev="ggregory" due-to="Gary Gregory">
-      Bump build actions/setup-java from 1.4.0 to 3.
+      Bump build actions/cache from 2 to 3.0.3.
     </action>
     <action type="update" dev="ggregory" due-to="Gary Gregory">
-      Bump build actions/cache from 2 to 3.0.3.
+      Bump actions/checkout 2.3.4 to 3
+    </action>    
+    <action type="update" dev="ggregory" due-to="Gary Gregory">
+      Bump build actions/setup-java from 1.4.0 to 3.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-185">
       Bump Apache Commons Logging from 1.1.1 to 1.2.
