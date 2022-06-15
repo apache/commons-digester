@@ -323,7 +323,7 @@ public class PluginCreateRule
 
         if ( initException != null )
         {
-            // we had a problem during initialisation that we could
+            // we had a problem during initialization that we could
             // not report then; report it now.
             throw initException;
         }
