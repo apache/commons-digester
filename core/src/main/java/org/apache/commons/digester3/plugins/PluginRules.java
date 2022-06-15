@@ -338,7 +338,7 @@ public class PluginRules
                 // called for the first time.
                 if ( debug )
                 {
-                    log.debug( "Rule initialisation failed", e );
+                    log.debug( "Rule initialization failed", e );
                 }
                 // throw e; -- alas, can't do this
                 return;
