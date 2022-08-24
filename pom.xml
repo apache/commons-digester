@@ -207,7 +207,7 @@
   </properties>
 
   <build>
-    <defaultGoal>clean verify</defaultGoal>
+    <defaultGoal>clean verify pmd:cpd-check</defaultGoal>
     <plugins>
       <plugin>
         <!--
