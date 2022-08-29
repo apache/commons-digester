@@ -68,7 +68,7 @@ public final class CompoundSubstitutorTestCase
         }
 
         /**
-         * @see org.apache.commons.digester3.Substitutor#substitute(java.lang.String)
+         * @see org.apache.commons.digester3.Substitutor#substitute(String)
          */
         @Override
         public String substitute( final String bodyText )
