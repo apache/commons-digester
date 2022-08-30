@@ -27,8 +27,6 @@ import org.junit.Test;
 
 /**
  * Test case for WithDefaultsRulesWrapper
- *
- * @author Robert Burrell Donkin
  */
 public class WithDefaultsRulesWrapperTestCase
 {

@@ -47,8 +47,6 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Test case for the {@code NodeCreateRule}.
- *
- * @author Christopher Lenz
  */
 public class NodeCreateRuleTestCase
 {

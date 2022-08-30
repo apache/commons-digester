@@ -28,8 +28,6 @@ import org.xml.sax.SAXParseException;
 
 /**
  * Tests for entity resolution and dtd validation
- *
- * @author <a href='http://commons.apache.org/'>Apache Commons Team</a>
  */
 public class DTDValidationTestCase
 {

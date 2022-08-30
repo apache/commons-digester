@@ -37,9 +37,6 @@ import org.xml.sax.SAXException;
  * <p>
  * Test Case for the Digester class. These tests perform parsing of XML documents to exercise the built-in rules.
  * </p>
- *
- * @author Craig R. McClanahan
- * @author Janek Bogucki
  */
 public class RuleTestCase
 {

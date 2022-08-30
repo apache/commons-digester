@@ -49,8 +49,6 @@ import org.xml.sax.helpers.AttributesImpl;
  * Test Case for the Digester class. These tests exercise the individual methods of a Digester, but do not attempt to
  * process complete documents.
  * </p>
- *
- * @author Craig R. McClanahan
  */
 public class DigesterTestCase
 {

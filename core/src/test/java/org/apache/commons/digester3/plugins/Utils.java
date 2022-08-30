@@ -22,8 +22,6 @@ import java.io.InputStream;
 
 /**
  * Entry point for all plugins package tests.
- *
- * @author Simon Kitching
  */
 public class Utils
 {

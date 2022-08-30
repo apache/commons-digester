@@ -21,8 +21,6 @@ package org.apache.commons.digester3;
 /**
  * RuleSet that mimics the rules set used for Employee and Address creation, optionally associated with a particular
  * namespace URI.
- *
- * @author Craig R. McClanahan
  */
 public class TestRuleSet
     extends RuleSetBase

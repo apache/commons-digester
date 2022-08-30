@@ -28,8 +28,6 @@ import org.junit.Test;
 /**
  * <p>
  * Runs standard tests for RulesBase as well as tests of extensions.
- *
- * @author Robert Burrell Donkin <robertdonkin@mac.com>
  */
 public class ExtendedBaseRulesTestCase
     extends RulesBaseTestCase

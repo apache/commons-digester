@@ -23,10 +23,6 @@ import java.util.HashMap;
 
 /**
  * Test harness object for holding results of digestion.
- *
- * @author David H. Martin - Initial Contribution
- * @author Scott Sanders - Added ASL, removed external dependencies
- * @author Tim O'Brien - Added bean property to test bean property setter rule
  */
 public class ObjectTestImpl
 {

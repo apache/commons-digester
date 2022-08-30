@@ -23,8 +23,6 @@ import org.xml.sax.Attributes;
 
 /**
  * Object creation factory used for testing exception propagation.
- *
- * @author Robert Burrell Donkin
  */
 
 public class ThrowExceptionCreationFactory

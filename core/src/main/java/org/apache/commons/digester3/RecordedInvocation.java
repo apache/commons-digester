@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 /**
  * Detached representation of a method invocation.
  * From Commons [proxy] v2 branch.
- * @author James Carman
+ *
  * @since 3.2
  */
 final class RecordedInvocation

@@ -34,8 +34,6 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Test Case for the variable expansion facility in Digester.
- *
- * @author Simon Kitching
  */
 public class VariableExpansionTestCase
 {

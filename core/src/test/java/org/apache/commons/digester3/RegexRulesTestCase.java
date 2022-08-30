@@ -26,8 +26,6 @@ import org.junit.Test;
 
 /**
  * Test case for RegexRules
- *
- * @author Robert Burrell Donkin
  */
 public class RegexRulesTestCase
 {

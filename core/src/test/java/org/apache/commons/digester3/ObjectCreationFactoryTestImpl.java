@@ -23,8 +23,6 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Object creation factory used for testing.
- *
- * @author Robert Burrell Donkin
  */
 
 public class ObjectCreationFactoryTestImpl

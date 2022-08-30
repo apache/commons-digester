@@ -40,8 +40,6 @@ import org.xml.sax.SAXException;
 /**
  * <p>
  * Tests for the {@code CallMethodRule} and associated {@code CallParamRule}.
- *
- * @author Christopher Lenz
  */
 public class CallMethodRuleTestCase
 {

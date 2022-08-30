@@ -27,8 +27,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Tests for entity resolution.
- *
- * @author <a href='http://commons.apache.org/'>Apache Commons Team</a>
  */
 public class TestEntityResolution
 {

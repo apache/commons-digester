@@ -32,8 +32,6 @@ import org.junit.Test;
  * Test Case for the RulesBase matching rules. Most of this material was original contained in the digester test case
  * but was moved into this class so that extensions of the basic matching rules behavior can extend this test case.
  * </p>
- *
- * @author Craig R. McClanahan
  */
 public class RulesBaseTestCase
 {

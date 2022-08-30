@@ -20,8 +20,6 @@ package org.apache.commons.digester3;
 
 /**
  * Very simple test bean
- *
- * @author Robert Burrell Donkin
  */
 public class NamedBean
 {
