@@ -120,7 +120,7 @@ public abstract class AbstractMethodRule
      * </p>
      *
      * @return true if exact matching is enabled
-     * @since Digester Release 1.1.1
+     * @since 1.1.1
      */
     public boolean isExactMatch()
     {
@@ -160,7 +160,7 @@ public abstract class AbstractMethodRule
      * </p>
      *
      * @param useExactMatch should this rule use exact method matching
-     * @since Digester Release 1.1.1
+     * @since 1.1.1
      */
     public void setExactMatch( final boolean useExactMatch )
     {

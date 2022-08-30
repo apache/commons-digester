@@ -117,7 +117,7 @@ import org.xml.sax.Attributes;
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
      * @param attributes The attribute list of this element
      * @throws Exception if any error occurs
-     * @since Digester 1.4
+     * @since 1.4
      */
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -134,7 +134,7 @@ import org.xml.sax.Attributes;
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
      * @param text The text of the body of this element
      * @throws Exception if any error occurs
-     * @since Digester 1.4
+     * @since 1.4
      */
     public void body( final String namespace, final String name, final String text )
         throws Exception
@@ -149,7 +149,7 @@ import org.xml.sax.Attributes;
      *            aware or the element has no namespace
      * @param name the local name if the parser is namespace aware, or just the element name otherwise
      * @throws Exception if any error occurs
-     * @since Digester 1.4
+     * @since 1.4
      */
     public void end( final String namespace, final String name )
         throws Exception

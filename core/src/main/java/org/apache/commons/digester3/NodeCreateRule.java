@@ -59,7 +59,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * (usually more important) namespace URIs are set, of course.
  * </p>
  *
- * @since Digester 1.4
+ * @since 1.4
  */
 public class NodeCreateRule
     extends Rule
