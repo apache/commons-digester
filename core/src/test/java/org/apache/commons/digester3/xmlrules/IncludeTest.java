@@ -20,6 +20,7 @@ package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.StringReader;
 import java.net.URL;
@@ -130,21 +131,17 @@ public class IncludeTest
     /**
      * Validates that circular includes are detected and result in an exception
      */
-    @Test( expected = org.apache.commons.digester3.binder.DigesterLoadingException.class )
-    public void testCircularInclude()
-        throws Exception
-    {
+    @Test
+    public void testCircularInclude() {
         final URL url = ClassLoader.getSystemResource( "org/apache/commons/digester3/xmlrules/testCircularRules.xml" );
-        newLoader( new FromXmlRulesModule()
-        {
 
-            @Override
-            protected void loadRules()
-            {
-                loadXMLRules( url );
-            }
-
-        }).newDigester();
+        assertThrows(org.apache.commons.digester3.binder.DigesterLoadingException.class, () ->
+                newLoader(new FromXmlRulesModule() {
+                    @Override
+                    protected void loadRules() {
+                        loadXMLRules(url);
+                    }
+                }).newDigester());
     }
 
 }
