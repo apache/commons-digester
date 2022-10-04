@@ -17,6 +17,7 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 
@@ -29,50 +30,44 @@ import org.xml.sax.SAXParseException;
 /**
  * Tests for entity resolution and dtd validation
  */
-public class DTDValidationTestCase
-{
+public class DTDValidationTestCase {
 
-    @Test( expected = SAXParseException.class )
-    public void testDigesterDTDError()
-        throws Exception
-    {
-        newLoader( new AbstractRulesModule() {
+    @Test
+    public void testDigesterDTDError() {
 
-            @Override
-            protected void configure()
-            {
-                // do nothing
-            }
+        assertThrows(SAXParseException.class, () ->
+                newLoader(new AbstractRulesModule() {
 
-        } )
-        .setValidating( true )
-        .setErrorHandler( new ErrorHandler()
-        {
+                    @Override
+                    protected void configure() {
+                        // do nothing
+                    }
 
-            @Override
-            public void warning( final SAXParseException e )
-                throws SAXException
-            {
-                throw e;
-            }
+                })
+                        .setValidating(true)
+                        .setErrorHandler(new ErrorHandler() {
 
-            @Override
-            public void fatalError( final SAXParseException e )
-                throws SAXException
-            {
-                throw e;
-            }
+                            @Override
+                            public void warning(final SAXParseException e)
+                                    throws SAXException {
+                                throw e;
+                            }
 
-            @Override
-            public void error( final SAXParseException e )
-                throws SAXException
-            {
-                throw e;
-            }
+                            @Override
+                            public void fatalError(final SAXParseException e)
+                                    throws SAXException {
+                                throw e;
+                            }
 
-        } )
-        .newDigester()
-        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
+                            @Override
+                            public void error(final SAXParseException e)
+                                    throws SAXException {
+                                throw e;
+                            }
+
+                        })
+                        .newDigester()
+                        .parse(new File("src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml")));
     }
 
     @Test
