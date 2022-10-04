@@ -20,6 +20,7 @@ package org.apache.commons.digester3;
  */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 
@@ -50,26 +51,23 @@ public class Digester171TestCase
         .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
     }
 
-    @Test( expected = SAXParseException.class )
-    public void testDefaultThrowingErrorHandler()
-        throws Exception
-    {
+    @Test
+    public void testDefaultThrowingErrorHandler() {
         final ErrorHandler customErrorHandler = new DefaultThrowingErrorHandler();
 
-        newLoader( new AbstractRulesModule()
-        {
+        assertThrows(SAXParseException.class, () ->
+                newLoader(new AbstractRulesModule() {
 
-            @Override
-            protected void configure()
-            {
-                // do nothing
-            }
+                    @Override
+                    protected void configure() {
+                        // do nothing
+                    }
 
-        } )
-        .setFeature( "http://xml.org/sax/features/validation", true )
-        .setErrorHandler( customErrorHandler )
-        .newDigester()
-        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
+                })
+                        .setFeature("http://xml.org/sax/features/validation", true)
+                        .setErrorHandler(customErrorHandler)
+                        .newDigester()
+                        .parse(new File("src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml")));
     }
 
 }
