@@ -19,10 +19,15 @@
 package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.net.URL;
@@ -34,6 +39,8 @@ import org.apache.commons.digester3.ObjectCreationFactoryTestImpl;
 import org.apache.commons.digester3.binder.RulesModule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Tests loading Digester rules from an XML file.
@@ -250,22 +257,17 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testFactoryNotIgnoreCreateRule()
-        throws Exception
-    {
+    public void testFactoryNotIgnoreCreateRule() {
         final URL rules = getClass().getResource( "testfactorynoignore.xml" );
 
         final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-        try
-        {
-            newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
-            fail( "Exception should have been propagated from create method." );
-        }
-        catch ( final Exception e )
-        {
-            /* What we expected */
-            assertEquals( org.xml.sax.SAXParseException.class, e.getClass() );
-        }
+
+        final org.xml.sax.SAXParseException thrown = assertThrows("Exception should have been propagated from create method.",
+                org.xml.sax.SAXParseException.class, () ->
+                        newLoader(createRules(rules))
+                                .newDigester()
+                                .parse(new StringReader(xml)));
+        assertThat(thrown.getMessage(), is(equalTo("Error at line 1 char 63: null")));
     }
 
     @Test
@@ -355,4 +357,5 @@ public class FromXmlRuleSetTest
 
         assertEquals( "success", testObject.getProperty() );
     }
+
 }
