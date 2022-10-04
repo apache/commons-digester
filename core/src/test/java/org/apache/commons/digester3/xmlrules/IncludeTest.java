@@ -20,6 +20,7 @@ package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.StringReader;
 import java.net.URL;
@@ -30,6 +31,7 @@ import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.Rule;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 
 /**
  * Test for the include class functionality
@@ -130,21 +132,25 @@ public class IncludeTest
     /**
      * Validates that circular includes are detected and result in an exception
      */
-    @Test( expected = org.apache.commons.digester3.binder.DigesterLoadingException.class )
-    public void testCircularInclude()
-        throws Exception
-    {
+    @Test
+    public void testCircularInclude() {
         final URL url = ClassLoader.getSystemResource( "org/apache/commons/digester3/xmlrules/testCircularRules.xml" );
-        newLoader( new FromXmlRulesModule()
-        {
 
+        // FIXME Simplification once upgraded to Java 1.8 and use lambda
+        final Executable testMethod = new Executable() {
             @Override
-            protected void loadRules()
-            {
-                loadXMLRules( url );
-            }
+            public void execute() throws Throwable {
+                newLoader(new FromXmlRulesModule() {
 
-        }).newDigester();
+                    @Override
+                    protected void loadRules() {
+                        loadXMLRules(url);
+                    }
+
+                }).newDigester();
+            }
+        };
+        assertThrows(org.apache.commons.digester3.binder.DigesterLoadingException.class, testMethod);
     }
 
 }
