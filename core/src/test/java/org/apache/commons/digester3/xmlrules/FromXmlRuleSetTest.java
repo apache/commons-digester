@@ -19,10 +19,15 @@
 package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.net.URL;
@@ -33,7 +38,10 @@ import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.ObjectCreationFactoryTestImpl;
 import org.apache.commons.digester3.binder.RulesModule;
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Tests loading Digester rules from an XML file.
@@ -250,22 +258,24 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testFactoryNotIgnoreCreateRule()
-        throws Exception
-    {
+    public void testFactoryNotIgnoreCreateRule() {
         final URL rules = getClass().getResource( "testfactorynoignore.xml" );
 
         final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-        try
-        {
-            newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
-            fail( "Exception should have been propagated from create method." );
-        }
-        catch ( final Exception e )
-        {
-            /* What we expected */
-            assertEquals( org.xml.sax.SAXParseException.class, e.getClass() );
-        }
+
+        // FIXME Simplification once upgraded to Java 1.8
+        final ThrowingRunnable testMethod = new ThrowingRunnable() {
+            public void run()
+                    throws IOException,
+                    SAXException {
+                newLoader( createRules( rules ) )
+                        .newDigester()
+                        .parse( new StringReader( xml ) );
+            }
+        };
+        final org.xml.sax.SAXParseException thrown = assertThrows("Exception should have been propagated from create method.",
+                org.xml.sax.SAXParseException.class, testMethod);
+        assertThat(thrown.getMessage(), is(equalTo("Error at line 1 char 63: null")));
     }
 
     @Test
