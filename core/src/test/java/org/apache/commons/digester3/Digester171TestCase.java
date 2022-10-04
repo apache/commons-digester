@@ -20,11 +20,13 @@ package org.apache.commons.digester3;
  */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
@@ -50,26 +52,29 @@ public class Digester171TestCase
         .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
     }
 
-    @Test( expected = SAXParseException.class )
-    public void testDefaultThrowingErrorHandler()
-        throws Exception
-    {
+    @Test
+    public void testDefaultThrowingErrorHandler() {
         final ErrorHandler customErrorHandler = new DefaultThrowingErrorHandler();
 
-        newLoader( new AbstractRulesModule()
-        {
-
+        // FIXME Simplification once upgraded to Java 1.8 and use lambda
+        final Executable testMethod = new Executable() {
             @Override
-            protected void configure()
-            {
-                // do nothing
-            }
+            public void execute() throws Throwable {
+                newLoader(new AbstractRulesModule() {
 
-        } )
-        .setFeature( "http://xml.org/sax/features/validation", true )
-        .setErrorHandler( customErrorHandler )
-        .newDigester()
-        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
+                    @Override
+                    protected void configure() {
+                        // do nothing
+                    }
+
+                })
+                        .setFeature("http://xml.org/sax/features/validation", true)
+                        .setErrorHandler(customErrorHandler)
+                        .newDigester()
+                        .parse(new File("src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml"));
+            }
+        };
+        assertThrows(SAXParseException.class, testMethod);
     }
 
 }
