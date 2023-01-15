@@ -163,7 +163,7 @@ File rules2.xml:
   &lt;/pattern&gt;
 &lt;/digester-rules&gt;
 </source>
-<p>Note that the <i>url</i> attribute accepts any valid <code>URL</code>, plus the the meta <code>classpath</code> URL,
+<p>Note that the <i>url</i> attribute accepts any valid <code>URL</code>, plus the meta <code>classpath</code> URL,
 that points to a any valid resource present in the ClassPath; the <code>ClassLoader</code> used to load the resources
 is the same users set to resolve classes during the parse-time.</p>
 
