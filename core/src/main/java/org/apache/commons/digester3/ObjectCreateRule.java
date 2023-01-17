@@ -258,7 +258,7 @@ public class ObjectCreateRule
     private Class<?>[] constructorArgumentTypes;
 
     /**
-     * The explictly specified default constructor arguments which may be overridden by CallParamRules.
+     * The explicitly specified default constructor arguments which may be overridden by CallParamRules.
      *
      * @since 3.2
      */
