@@ -1,9 +1,3 @@
-/**
- * The {@code annotations} package provides for Java5 Annotations
- * meta data-based definition of rules for {@code Digester}.
- */
-package org.apache.commons.digester3.annotations;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,3 +16,9 @@ package org.apache.commons.digester3.annotations;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/**
+ * The {@code annotations} package provides for Java5 Annotations
+ * meta data-based definition of rules for {@code Digester}.
+ */
+package org.apache.commons.digester3.annotations;

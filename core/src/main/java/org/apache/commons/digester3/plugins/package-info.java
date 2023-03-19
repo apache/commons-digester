@@ -1,9 +1,3 @@
-/**
- * The {@code plugins} package provides an easy mechanism whereby new
- * digestion rules can be added dynamically during a digestion.
- */
-package org.apache.commons.digester3.plugins;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,3 +16,9 @@ package org.apache.commons.digester3.plugins;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/**
+ * The {@code plugins} package provides an easy mechanism whereby new
+ * digestion rules can be added dynamically during a digestion.
+ */
+package org.apache.commons.digester3.plugins;

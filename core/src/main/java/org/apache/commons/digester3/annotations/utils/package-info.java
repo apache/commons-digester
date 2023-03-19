@@ -1,8 +1,3 @@
-/**
- * Contains commons utilities classes for Java5 Annotations manipulation.
- */
-package org.apache.commons.digester3.annotations.utils;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -21,3 +16,8 @@ package org.apache.commons.digester3.annotations.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/**
+ * Contains commons utilities classes for Java5 Annotations manipulation.
+ */
+package org.apache.commons.digester3.annotations.utils;

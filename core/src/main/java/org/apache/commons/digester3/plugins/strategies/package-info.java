@@ -1,9 +1,3 @@
-/**
- * The {@code plugins.strategies} package contains "rule-finding" strategy
- * classes, and their associated "helper" loader classes.
- */
-package org.apache.commons.digester3.plugins.strategies;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,3 +16,9 @@ package org.apache.commons.digester3.plugins.strategies;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/**
+ * The {@code plugins.strategies} package contains "rule-finding" strategy
+ * classes, and their associated "helper" loader classes.
+ */
+package org.apache.commons.digester3.plugins.strategies;

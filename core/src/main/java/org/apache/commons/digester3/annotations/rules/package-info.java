@@ -1,8 +1,3 @@
-/**
- * Classes contained in this package are annotations that reflect Digester rules.
- */
-package org.apache.commons.digester3.annotations.rules;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -21,3 +16,8 @@ package org.apache.commons.digester3.annotations.rules;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/**
+ * Classes contained in this package are annotations that reflect Digester rules.
+ */
+package org.apache.commons.digester3.annotations.rules;

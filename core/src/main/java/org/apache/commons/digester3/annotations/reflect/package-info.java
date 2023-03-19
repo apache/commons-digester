@@ -1,9 +1,3 @@
-/**
- * The {@code reflect} package supply missing JVM classes to alow user
- * manipulate entities as {@link java.lang.reflect.AnnotatedElement}.
- */
-package org.apache.commons.digester3.annotations.reflect;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,3 +16,9 @@ package org.apache.commons.digester3.annotations.reflect;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/**
+ * The {@code reflect} package supply missing JVM classes to alow user
+ * manipulate entities as {@link java.lang.reflect.AnnotatedElement}.
+ */
+package org.apache.commons.digester3.annotations.reflect;
