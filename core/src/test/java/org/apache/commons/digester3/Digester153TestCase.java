@@ -23,6 +23,7 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
@@ -170,17 +171,15 @@ public final class Digester153TestCase
         assertEquals( 0D, bean.getDoubleProperty(), 0 );
     }
 
-    @Test( expected = SAXParseException.class )
-    public void basicConstructorWithWrongParameters()
-        throws Exception
-    {
+    @Test
+    public void basicConstructorWithWrongParameters() {
         final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
         createRule.setConstructorArgumentTypes( boolean.class );
 
         final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
 
-        digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
+        assertThrows(SAXParseException.class, () -> digester.parse(getClass().getResourceAsStream("BasicConstructor.xml")));
     }
 
     @Test
