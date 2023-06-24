@@ -518,7 +518,7 @@ public final class DigesterLoader
      * Creates a new {@link Digester} instance that relies on the given {@code SAXParser}
      * and the default {@link Rules} implementation.
      *
-     * @param parser the user defined {@code SAXParser}
+     * @param parser the user-defined {@code SAXParser}
      * @return a new {@link Digester} instance
      */
     public Digester newDigester( final SAXParser parser )
@@ -530,7 +530,7 @@ public final class DigesterLoader
      * Creates a new {@link Digester} instance that relies on the given {@code SAXParser}
      * and custom user define {@link Rules} implementation.
      *
-     * @param parser The user defined {@code SAXParser}
+     * @param parser The user-defined {@code SAXParser}
      * @param rules The custom user define {@link Rules} implementation
      * @return a new {@link Digester} instance
      */
@@ -558,7 +558,7 @@ public final class DigesterLoader
      * <b>WARNING</b> Input {@link XMLReader} will be linked to built Digester instance so it is recommended
      * to <b>NOT</b> share same {@link XMLReader} instance to produce the Digester.
      *
-     * @param reader The user defined {@code XMLReader}
+     * @param reader The user-defined {@code XMLReader}
      * @return a new {@link Digester} instance
      */
     public Digester newDigester( final XMLReader reader )
@@ -573,7 +573,7 @@ public final class DigesterLoader
      * <b>WARNING</b> Input {@link XMLReader} and {@link Rules} will be linked to built Digester instance,
      * so it is recommended to <b>NOT</b> share same {@link XMLReader} and {@link Rules} instance to produce the Digester.
      *
-     * @param reader The user defined {@code XMLReader}
+     * @param reader The user-defined {@code XMLReader}
      * @param rules The custom user define {@link Rules} implementation
      * @return a new {@link Digester} instance
      */
