@@ -328,7 +328,7 @@ public class CallMethodRule
                 }
                 catch ( final ClassNotFoundException e )
                 {
-                    throw new RuntimeException( format( "[CallMethodRule] Cannot load class %s at position %s",
+                    throw new IllegalArgumentException( format( "[CallMethodRule] Cannot load class %s at position %s",
                                                         this.paramClassNames[i], i ), e );
                 }
             }

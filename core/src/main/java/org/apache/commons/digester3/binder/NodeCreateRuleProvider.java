@@ -104,7 +104,7 @@ public final class NodeCreateRuleProvider
             }
             catch ( final ParserConfigurationException e )
             {
-                throw new RuntimeException( e );
+                throw new IllegalStateException( e );
             }
         }
 

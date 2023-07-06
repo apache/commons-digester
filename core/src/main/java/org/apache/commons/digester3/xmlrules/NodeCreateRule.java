@@ -61,7 +61,7 @@ final class NodeCreateRule
             }
             else
             {
-                throw new RuntimeException( format(
+                throw new IllegalArgumentException( format(
                     "Unrecognized node type: %s. This attribute is optional or can have a value of element|fragment.",
                     nodeType ) );
             }
