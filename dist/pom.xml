@@ -45,11 +45,6 @@
       <version>${project.parent.version}</version>
       <classifier>with-deps</classifier>
     </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>commons-digester3-api</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
   </dependencies>
 
   <build>
