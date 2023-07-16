@@ -37,6 +37,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
 import java.net.URLStreamHandlerFactory;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -185,7 +186,7 @@ public final class BinderClassLoaderTestCase
     {
         try
         {
-            IN_MEMORY_RESOURCES.put( "dummyResource", "Resource data".getBytes( "UTF-8" ) );
+            IN_MEMORY_RESOURCES.put( "dummyResource", "Resource data".getBytes(StandardCharsets.UTF_8) );
 
             // put bytes of Dummy class
             final String dummyClassName = Dummy.class.getName();
