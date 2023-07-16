@@ -89,8 +89,8 @@
     <action dev="ggregory" type="update" issue="DIGESTER-188">
       Bump cglib from 2.2.2 to 3.2.5.
     </action>
-    <action dev="ggregory" type="update">
-      Bump JUnit from 4.10 to 4.13.
+    <action dev="ggregory" type="update" due-to="Dependabot">
+      Bump JUnit from 4.10 to 4.13.1 in #77.
     </action>
     <action dev="ggregory" type="update">
       Bump commons-parent from 28 to 58.
