@@ -95,6 +95,9 @@
     <action dev="ggregory" type="update">
       Bump commons-parent from 28 to 58.
     </action>
+    <action dev="ggregory" type="update" due-to="Dependabot">
+      Bump findbugs-maven-plugin from 2.3.2 to 3.0.5 #80.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
