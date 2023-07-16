@@ -160,7 +160,7 @@
             <configuration>
               <target>
                 <copy todir="${project.build.directory}/classes-shaded/META-INF/" overwrite="true">
-                  <fileset dir="${basedir}/../dist/src/main/assembly/">
+                  <fileset dir="${basedir}/../commons-digester3-dist/src/main/assembly/">
                     <include name="*.txt" />
                   </fileset>
                   <mapper type="regexp" from="^(.*)-with-deps\.txt" to="\1.txt" />

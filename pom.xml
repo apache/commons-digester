@@ -181,10 +181,10 @@
   </distributionManagement>
 
   <modules>
-    <module>core</module>
+    <module>commons-digester3-core</module>
     <!-- >module>annotations-processor</module -->
-    <module>examples</module>
-    <module>dist</module>
+    <module>commons-digester3-examples</module>
+    <module>commons-digester3-dist</module>
   </modules>
 
   <properties>
