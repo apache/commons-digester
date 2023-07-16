@@ -86,8 +86,8 @@
     <action dev="ggregory" type="update" issue="DIGESTER-187">
       Bump Apache Commons Bean Utils from 1.8.3 to 1.9.4.
     </action>
-    <action dev="ggregory" type="update" issue="DIGESTER-188">
-      Bump cglib from 2.2.2 to 3.2.5.
+    <action dev="ggregory" type="update" issue="DIGESTER-188" due-to="Dependabot">
+      Bump cglib from 2.2.2 to 3.3.0 #9.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump JUnit from 4.10 to 4.13.1 in #77.
