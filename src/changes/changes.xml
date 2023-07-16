@@ -65,12 +65,9 @@
       Document thread-safety in Javadoc of Rule class
     </action>
     <!-- UPDATE -->
-    <action type="update" dev="ggregory" due-to="Gary Gregory">
-      Bump build actions/cache from 2 to 3.0.8.
+    <action type="update" dev="ggregory" due-to="Gary Gregory" due-to="Dependabot">
+      Bump GitHub action versions.
     </action>
-    <action type="update" dev="ggregory" due-to="Gary Gregory">
-      Bump actions/checkout 2.3.4 to 3.0.2.
-    </action>    
     <action type="update" dev="ggregory" due-to="Gary Gregory">
       Bump build actions/setup-java from 1.4.0 to 3.5.1.
     </action>
@@ -86,14 +83,23 @@
     <action dev="ggregory" type="update" issue="DIGESTER-187">
       Bump Apache Commons Bean Utils from 1.8.3 to 1.9.4.
     </action>
-    <action dev="ggregory" type="update" issue="DIGESTER-188">
-      Bump cglib from 2.2.2 to 3.2.5.
+    <action dev="ggregory" type="update" issue="DIGESTER-188" due-to="Dependabot">
+      Bump cglib from 2.2.2 to 3.3.0 #9.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
-      Bump JUnit from 4.10 to 4.13.1 in #77.
+      Bump JUnit from 4.10 to 4.13.2 in #77, #78.
     </action>
     <action dev="ggregory" type="update">
       Bump commons-parent from 28 to 58.
+    </action>
+    <action dev="ggregory" type="update" due-to="Dependabot">
+      Bump findbugs-maven-plugin from 2.3.2 to 3.0.5 #80.
+    </action>
+    <action dev="ggregory" type="update" due-to="Dependabot">
+      Bump jarjar-maven-plugin from 1.5 to 1.9 #79.
+    </action>
+    <action dev="ggregory" type="update" due-to="Dependabot">
+      Bump exec-maven-plugin from 1.1 to 3.1.0 #32.
     </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">

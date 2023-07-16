@@ -37,7 +37,7 @@
     <dependency>
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
-      <version>3.2.5</version>
+      <version>3.3.0</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -99,7 +99,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>jarjar-maven-plugin</artifactId>
-        <version>1.5</version>
+        <version>1.9</version>
         <configuration>
           <input>{classes}</input>
           <output>${project.build.directory}/classes-shaded</output>
