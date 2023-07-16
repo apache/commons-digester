@@ -92,6 +92,9 @@
     <action dev="ggregory" type="update">
       Bump JUnit from 4.10 to 4.13.
     </action>
+    <action dev="ggregory" type="update">
+      Bump commons-parent from 28 to 58.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
