@@ -22,7 +22,7 @@
     <title>Apache Commons Digester Changes</title>
   </properties>
   <body>
-  <release version="3.3" date="201?-??-??" description="Maintenance release.">
+  <release version="3.3" date="202?-??-??" description="Maintenance release.">
     <!-- ADD -->
     <action dev="simonetripodi" type="fix" issue="DIGESTER-171" due-to="Nick Williams">
       Add DefaultThrowingErrorHandler to Digester API - patch provided by Ivan Diana
@@ -90,7 +90,7 @@
       Bump JUnit from 4.10 to 4.13.2 in #77, #78.
     </action>
     <action dev="ggregory" type="update">
-      Bump commons-parent from 28 to 58.
+      Bump commons-parent from 28 to 59.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump findbugs-maven-plugin from 2.3.2 to 3.0.5 #80.
