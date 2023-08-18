@@ -182,7 +182,7 @@ public class BeanPropertySetterRuleTestCase
 
         assertEquals( "Property beta not set correctly", "ALPHA BODY", bean.getBeta() );
 
-        assertTrue( "Property gamma not set correctly", bean.getGamma() == null );
+        assertNull( "Property gamma not set correctly", bean.getGamma() );
 
         assertEquals( "Property delta not set correctly", "DELTA BODY", bean.getDeltaValue() );
 
