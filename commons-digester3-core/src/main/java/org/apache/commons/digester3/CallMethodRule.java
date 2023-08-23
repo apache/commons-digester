@@ -345,7 +345,7 @@ public class CallMethodRule
         // Push an array to capture the parameter values if necessary
         if ( paramCount > 0 )
         {
-            final Object parameters[] = new Object[paramCount];
+            final Object[] parameters = new Object[paramCount];
             fill( parameters, null );
             getDigester().pushParams( parameters );
         }

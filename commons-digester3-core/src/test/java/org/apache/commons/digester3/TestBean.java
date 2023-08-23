@@ -116,7 +116,7 @@ public class TestBean
     /**
      * Integer arrays that are accessed as an array as well as indexed.
      */
-    private int intArray[] = { 0, 10, 20, 30, 40 };
+    private int[] intArray = { 0, 10, 20, 30, 40 };
 
     public int[] getIntArray()
     {
@@ -128,7 +128,7 @@ public class TestBean
         this.intArray = intArray;
     }
 
-    private final int intIndexed[] = { 0, 10, 20, 30, 40 };
+    private final int[] intIndexed = { 0, 10, 20, 30, 40 };
 
     public int getIntIndexed( final int index )
     {
@@ -140,7 +140,7 @@ public class TestBean
         intIndexed[index] = value;
     }
 
-    private int intMultibox[] = new int[0];
+    private int[] intMultibox = new int[0];
 
     public int[] getIntMultibox()
     {
@@ -258,7 +258,7 @@ public class TestBean
     /**
      * String arrays that are accessed as an array as well as indexed.
      */
-    private String stringArray[] = { "String 0", "String 1", "String 2", "String 3", "String 4" };
+    private String[] stringArray = { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String[] getStringArray()
     {
@@ -270,7 +270,7 @@ public class TestBean
         this.stringArray = stringArray;
     }
 
-    private final String stringIndexed[] = { "String 0", "String 1", "String 2", "String 3", "String 4" };
+    private final String[] stringIndexed = { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String getStringIndexed( final int index )
     {

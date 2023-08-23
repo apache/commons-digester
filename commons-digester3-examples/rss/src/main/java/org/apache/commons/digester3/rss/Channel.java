@@ -316,7 +316,7 @@ public class Channel
     {
         synchronized ( items )
         {
-            final Item items[] = new Item[this.items.size()];
+            final Item[] items = new Item[this.items.size()];
             return this.items.toArray( items );
         }
     }
@@ -336,7 +336,7 @@ public class Channel
     {
         synchronized ( skipDays )
         {
-            final String skipDays[] = new String[this.skipDays.size()];
+            final String[] skipDays = new String[this.skipDays.size()];
             return this.skipDays.toArray( skipDays );
         }
     }
@@ -356,7 +356,7 @@ public class Channel
     {
         synchronized ( skipHours )
         {
-            final String skipHours[] = new String[this.skipHours.size()];
+            final String[] skipHours = new String[this.skipHours.size()];
             return this.skipHours.toArray( skipHours );
         }
     }
@@ -596,7 +596,7 @@ public class Channel
             writer.println();
         }
 
-        final String skipDays[] = findSkipDays();
+        final String[] skipDays = findSkipDays();
         if ( skipDays.length > 0 )
         {
             writer.println( "    <skipDays>" );
@@ -608,7 +608,7 @@ public class Channel
             writer.println( "    </skipDays>" );
         }
 
-        final String skipHours[] = findSkipHours();
+        final String[] skipHours = findSkipHours();
         if ( skipHours.length > 0 )
         {
             writer.println( "    <skipHours>" );
@@ -621,7 +621,7 @@ public class Channel
             writer.println();
         }
 
-        final Item items[] = findItems();
+        final Item[] items = findItems();
         for (final Item item : items) {
             item.render( writer );
             writer.println();

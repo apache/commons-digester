@@ -174,7 +174,7 @@ public class CallParamRule
 
         if ( param != null )
         {
-            final Object parameters[] = getDigester().peekParams();
+            final Object[] parameters = getDigester().peekParams();
             parameters[paramIndex] = param;
         }
     }
@@ -208,7 +208,7 @@ public class CallParamRule
         if ( bodyTextStack != null && !bodyTextStack.empty() )
         {
             // what we do now is push one parameter onto the top set of parameters
-            final Object parameters[] = getDigester().peekParams();
+            final Object[] parameters = getDigester().peekParams();
             parameters[paramIndex] = bodyTextStack.pop();
         }
     }

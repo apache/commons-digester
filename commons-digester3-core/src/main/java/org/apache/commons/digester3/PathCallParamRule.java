@@ -68,7 +68,7 @@ public class PathCallParamRule
 
         if ( param != null )
         {
-            final Object parameters[] = getDigester().peekParams();
+            final Object[] parameters = getDigester().peekParams();
             parameters[paramIndex] = param;
         }
     }

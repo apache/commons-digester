@@ -64,7 +64,7 @@ public class DigesterTestCase
      * The set of public identifiers, and corresponding resource names, for the versions of the DTDs that we know about.
      * There <strong>MUST</strong> be an even number of Strings in this array.
      */
-    protected static final String registrations[] = { "-//Netscape Communications//DTD RSS 0.9//EN",
+    protected static final String[] registrations = { "-//Netscape Communications//DTD RSS 0.9//EN",
         "/org/apache/commons/digester3/rss/rss-0.9.dtd", "-//Netscape Communications//DTD RSS 0.91//EN",
         "/org/apache/commons/digester3/rss/rss-0.91.dtd", };
 
@@ -249,7 +249,7 @@ public class DigesterTestCase
         map = digester.getRegistrations();
         assertEquals( "Registered two URLs", n, map.size() );
 
-        final int count[] = new int[n];
+        final int[] count = new int[n];
         for ( int i = 0; i < n; i++ ) {
             count[i] = 0;
         }

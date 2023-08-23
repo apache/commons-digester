@@ -96,7 +96,7 @@ public class ObjectParamRule
         throws Exception
     {
         Object anAttribute = null;
-        final Object parameters[] = getDigester().peekParams();
+        final Object[] parameters = getDigester().peekParams();
 
         if ( attributeName != null )
         {
