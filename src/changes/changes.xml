@@ -65,7 +65,7 @@
       Document thread-safety in Javadoc of Rule class
     </action>
     <!-- UPDATE -->
-    <action type="update" dev="ggregory" due-to="Gary Gregory" due-to="Dependabot">
+    <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">
       Bump GitHub action versions.
     </action>
     <action type="update" dev="ggregory" due-to="Gary Gregory">
@@ -90,7 +90,7 @@
       Bump JUnit from 4.10 to 4.13.2 in #77, #78.
     </action>
     <action dev="ggregory" type="update">
-      Bump commons-parent from 28 to 59.
+      Bump commons-parent from 28 to 61.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump findbugs-maven-plugin from 2.3.2 to 3.0.5 #80.
