@@ -39,7 +39,7 @@ import org.xml.sax.Locator;
 public class LocationTrackerTestCase
 {
 
-    private static class LocationTracker
+    private static final class LocationTracker
         implements StackAction
     {
         public Map<Object, String> locations = new HashMap<Object, String>();

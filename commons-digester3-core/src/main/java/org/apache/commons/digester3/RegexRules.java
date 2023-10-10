@@ -146,7 +146,7 @@ public class RegexRules
     }
 
     /** Used to associate rules with paths in the rules list */
-    private static class RegisteredRule
+    private static final class RegisteredRule
     {
         String pattern;
 

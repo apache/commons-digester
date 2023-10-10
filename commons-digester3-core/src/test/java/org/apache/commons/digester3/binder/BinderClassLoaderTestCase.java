@@ -207,7 +207,7 @@ public final class BinderClassLoaderTestCase
         }
     }
 
-    private static class ExtendedClassLoader
+    private static final class ExtendedClassLoader
         extends ClassLoader
     {
 
@@ -248,7 +248,7 @@ public final class BinderClassLoaderTestCase
             return super.getResource( name );
         }
 
-        private static class InMemoryURLStreamHandlerFactory
+        private static final class InMemoryURLStreamHandlerFactory
             implements URLStreamHandlerFactory
         {
             @Override

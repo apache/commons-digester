@@ -33,7 +33,7 @@ public final class CompoundSubstitutorTestCase
 {
 
 
-    private static class SubstitutorStub
+    private static final class SubstitutorStub
         extends Substitutor
     {
 

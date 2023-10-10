@@ -45,7 +45,7 @@ import org.xml.sax.SAXException;
 public class ObjectCreateRule
     extends Rule
 {
-    private static class DeferredConstructionCallback implements MethodInterceptor
+    private static final class DeferredConstructionCallback implements MethodInterceptor
     {
         Constructor<?> constructor;
         Object[] constructorArgs;
@@ -89,7 +89,7 @@ public class ObjectCreateRule
         }
     }
 
-    private static class ProxyManager
+    private static final class ProxyManager
     {
         private final Class<?> clazz;
         private final Constructor<?> constructor;

@@ -605,7 +605,7 @@ public class DigesterTestCase
     }
 
     /** Utility class for method testStackAction */
-    private static class TrackingStackAction
+    private static final class TrackingStackAction
         implements StackAction
     {
         public ArrayList<String> events = new ArrayList<String>();
