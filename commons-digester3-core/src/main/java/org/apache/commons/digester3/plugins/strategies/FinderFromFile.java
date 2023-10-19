@@ -47,7 +47,7 @@ public class FinderFromFile
     private static final String DFLT_FILENAME_ATTR = "file";
 
     /** See {@link #findLoader}. */
-    private final String filenameAttr;
+    private final String fileNameAttr;
 
     /** See {@link #findLoader}. */
     public FinderFromFile()
@@ -58,12 +58,12 @@ public class FinderFromFile
     /**
      * See {@link #findLoader}.
      *
-     * @param filenameAttr the XML attribute that needs to be present on a plugin declaration in order to specify the
+     * @param fileNameAttr the XML attribute that needs to be present on a plugin declaration in order to specify the
      *        file to load rules from.
      */
-    public FinderFromFile( final String filenameAttr )
+    public FinderFromFile( final String fileNameAttr )
     {
-        this.filenameAttr = filenameAttr;
+        this.fileNameAttr = fileNameAttr;
     }
 
     /**
@@ -88,7 +88,7 @@ public class FinderFromFile
         throws PluginException
     {
 
-        final String rulesFileName = p.getProperty( filenameAttr );
+        final String rulesFileName = p.getProperty( fileNameAttr );
         if ( rulesFileName == null )
         {
             // nope, user hasn't requested dynamic rules to be loaded

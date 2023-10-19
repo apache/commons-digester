@@ -101,9 +101,9 @@ public class VariableAttributes
      * {@inheritDoc}
      */
     @Override
-    public String getValue( final String qname )
+    public String getValue( final String qName )
     {
-        final int index = attrs.getIndex( qname );
+        final int index = attrs.getIndex( qName );
         if ( index == -1 )
         {
             return null;
@@ -115,9 +115,9 @@ public class VariableAttributes
      * {@inheritDoc}
      */
     @Override
-    public String getValue( final String uri, final String localname )
+    public String getValue( final String uri, final String localName )
     {
-        final int index = attrs.getIndex( uri, localname );
+        final int index = attrs.getIndex( uri, localName );
         if ( index == -1 )
         {
             return null;
@@ -130,18 +130,18 @@ public class VariableAttributes
      * {@inheritDoc}
      */
     @Override
-    public int getIndex( final String qname )
+    public int getIndex( final String qName )
     {
-        return attrs.getIndex( qname );
+        return attrs.getIndex( qName );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getIndex( final String uri, final String localpart )
+    public int getIndex( final String uri, final String localPart )
     {
-        return attrs.getIndex( uri, localpart );
+        return attrs.getIndex( uri, localPart );
     }
 
     /**
@@ -184,18 +184,18 @@ public class VariableAttributes
      * {@inheritDoc}
      */
     @Override
-    public String getType( final String qname )
+    public String getType( final String qName )
     {
-        return attrs.getType( qname );
+        return attrs.getType( qName );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getType( final String uri, final String localname )
+    public String getType( final String uri, final String localName )
     {
-        return attrs.getType( uri, localname );
+        return attrs.getType( uri, localName );
     }
 
     /**

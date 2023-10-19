@@ -27,7 +27,7 @@ import org.apache.commons.digester3.plugins.RuleFinder;
 import org.apache.commons.digester3.plugins.RuleLoader;
 
 /**
- * A rule-finding algorithm which expects the caller to specify a methodname as a plugin property, where the method
+ * A rule-finding algorithm which expects the caller to specify a method name as a plugin property, where the method
  * exists on the plugin class.
  *
  * @since 1.6
