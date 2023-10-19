@@ -38,7 +38,7 @@ import org.apache.commons.logging.Log;
 public class PluginManager
 {
 
-    /** Map of classname->Declaration */
+    /** Map of class name->Declaration */
     private final HashMap<String, Declaration> declarationsByClass = new HashMap<String, Declaration>();
 
     /** Map of id->Declaration */
