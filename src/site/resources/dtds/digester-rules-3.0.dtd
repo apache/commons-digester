@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id$
+<!--
   
  Licensed to the Apache Software Foundation (ASF) under one or more
  contributor license agreements.  See the NOTICE file distributed with
@@ -21,7 +21,6 @@
 <!--
         "Digester" component of the Commons Subproject
         DTD for the definition of Digester rules in XML.
-        $Id$
 
         Applications wishing to reference this DTD in their own documents
         should use the following DOCTYPE declaration:
