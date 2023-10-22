@@ -20,7 +20,6 @@
 <!--
         "Digester" component of the Commons Subproject
         DTD for the definition of Digester rules in XML.
-        $Id$
 -->
 
 <!-- This document type defines an XML format for defining Digester rules.
