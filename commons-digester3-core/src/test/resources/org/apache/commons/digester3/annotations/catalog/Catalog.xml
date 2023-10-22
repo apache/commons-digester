@@ -16,9 +16,6 @@
  limitations under the License.
 -->
 
-<!--
- version: $Id$
--->
 <catalog>
   <book isbn="0-596-00184-3">
     <title>Ant, The Definitive Guide</title>

@@ -16,9 +16,6 @@
  limitations under the License.
 -->
 
-<!--
- version: $Id$
--->
 <employee name="First Name" surname="Last Name">
   <address place="home">
     <street>Home Street</street>

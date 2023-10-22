@@ -16,9 +16,6 @@
  limitations under the License.
 -->
 
-<!--
- version: $Id$
--->
 <address-book>
   <person id="1" category="acquaintance">
     <name>Gonzo</name>
