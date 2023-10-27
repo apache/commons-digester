@@ -86,7 +86,7 @@ public class TestBean
     /**
      * A boolean property whose initial value is false
      */
-    private boolean falseProperty = false;
+    private boolean falseProperty;
 
     public boolean getFalseProperty()
     {
@@ -200,7 +200,7 @@ public class TestBean
     /**
      * A nested reference to another test bean (populated as needed).
      */
-    private TestBean nested = null;
+    private TestBean nested;
 
     public TestBean getNested()
     {
@@ -213,7 +213,7 @@ public class TestBean
     /**
      * A String property with an initial value of null.
      */
-    private String nullProperty = null;
+    private String nullProperty;
 
     public String getNullProperty()
     {

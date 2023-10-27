@@ -28,7 +28,7 @@ import org.xml.sax.helpers.AttributesImpl;
 public class ObjectCreationFactoryTestImpl
     extends AbstractObjectCreationFactory<Object>
 {
-    public boolean called = false;
+    public boolean called;
 
     public Attributes attributes;
 

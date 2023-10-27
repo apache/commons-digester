@@ -33,7 +33,7 @@ public class MultiVariableExpander
     implements VariableExpander
 {
 
-    private int nEntries = 0;
+    private int nEntries;
 
     private final ArrayList<String> markers = new ArrayList<String>( 2 );
 

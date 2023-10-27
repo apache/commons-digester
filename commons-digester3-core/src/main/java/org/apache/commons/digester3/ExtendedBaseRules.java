@@ -150,7 +150,7 @@ public class ExtendedBaseRules
     /**
      * Counts the entry number for the rules.
      */
-    private int counter = 0;
+    private int counter;
 
     /**
      * The decision algorithm used (unfortunately) doesn't preserve the entry order. This map is used by a comparator

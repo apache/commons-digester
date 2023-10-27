@@ -53,7 +53,7 @@ public class PathCallParamRule
     /**
      * The zero-relative index of the parameter we are saving.
      */
-    protected int paramIndex = 0;
+    protected int paramIndex;
 
     // --------------------------------------------------------- Public Methods
 

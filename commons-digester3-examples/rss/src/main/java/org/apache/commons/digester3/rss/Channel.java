@@ -61,7 +61,7 @@ public class Channel
     /**
      * The channel copyright (1-100 characters).
      */
-    protected String copyright = null;
+    protected String copyright;
 
     public String getCopyright()
     {
@@ -76,7 +76,7 @@ public class Channel
     /**
      * The channel description (1-500 characters).
      */
-    protected String description = null;
+    protected String description;
 
     public String getDescription()
     {
@@ -91,7 +91,7 @@ public class Channel
     /**
      * The channel description file URL (1-500 characters).
      */
-    protected String docs = null;
+    protected String docs;
 
     public String getDocs()
     {
@@ -106,7 +106,7 @@ public class Channel
     /**
      * The image describing this channel.
      */
-    protected Image image = null;
+    protected Image image;
 
     public Image getImage()
     {
@@ -121,7 +121,7 @@ public class Channel
     /**
      * The channel language (2-5 characters).
      */
-    protected String language = null;
+    protected String language;
 
     public String getLanguage()
     {
@@ -136,7 +136,7 @@ public class Channel
     /**
      * The channel last build date (1-100 characters).
      */
-    protected String lastBuildDate = null;
+    protected String lastBuildDate;
 
     public String getLastBuildDate()
     {
@@ -151,7 +151,7 @@ public class Channel
     /**
      * The channel link (1-500 characters).
      */
-    protected String link = null;
+    protected String link;
 
     public String getLink()
     {
@@ -166,7 +166,7 @@ public class Channel
     /**
      * The managing editor (1-100 characters).
      */
-    protected String managingEditor = null;
+    protected String managingEditor;
 
     public String getManagingEditor()
     {
@@ -181,7 +181,7 @@ public class Channel
     /**
      * The channel publication date (1-100 characters).
      */
-    protected String pubDate = null;
+    protected String pubDate;
 
     public String getPubDate()
     {
@@ -196,7 +196,7 @@ public class Channel
     /**
      * The channel rating (20-500 characters).
      */
-    protected String rating = null;
+    protected String rating;
 
     public String getRating()
     {
@@ -211,7 +211,7 @@ public class Channel
     /**
      * The text input description for this channel.
      */
-    protected TextInput textInput = null;
+    protected TextInput textInput;
 
     public TextInput getTextInput()
     {
@@ -226,7 +226,7 @@ public class Channel
     /**
      * The channel title (1-100 characters).
      */
-    protected String title = null;
+    protected String title;
 
     public String getTitle()
     {
@@ -256,7 +256,7 @@ public class Channel
     /**
      * The webmaster email address (1-100 characters).
      */
-    protected String webMaster = null;
+    protected String webMaster;
 
     public String getWebMaster()
     {

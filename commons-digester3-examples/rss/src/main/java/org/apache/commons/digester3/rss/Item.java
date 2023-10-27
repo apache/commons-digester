@@ -37,7 +37,7 @@ public class Item implements Serializable {
     /**
      * The item description (1-500 characters).
      */
-    protected String description = null;
+    protected String description;
 
     public String getDescription()
     {
@@ -52,7 +52,7 @@ public class Item implements Serializable {
     /**
      * The item link (1-500 characters).
      */
-    protected String link = null;
+    protected String link;
 
     public String getLink()
     {
@@ -67,7 +67,7 @@ public class Item implements Serializable {
     /**
      * The item title (1-100 characters).
      */
-    protected String title = null;
+    protected String title;
 
     public String getTitle()
     {

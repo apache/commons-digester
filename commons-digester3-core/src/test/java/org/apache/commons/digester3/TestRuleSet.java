@@ -76,7 +76,7 @@ public class TestRuleSet
     /**
      * The prefix for each matching pattern added to the Digester instance, or an empty String for no prefix.
      */
-    protected String prefix = null;
+    protected String prefix;
 
     // --------------------------------------------------------- Public Methods
 

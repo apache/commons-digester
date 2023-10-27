@@ -250,24 +250,24 @@ public class CallMethodRule
     /**
      * The body text collected from this element.
      */
-    protected String bodyText = null;
+    protected String bodyText;
 
     /**
      * location of the target object for the call, relative to the top of the digester object stack. The default value
      * of zero means the target object is the one on top of the stack.
      */
-    protected int targetOffset = 0;
+    protected int targetOffset;
 
     /**
      * The method name to call on the parent object.
      */
-    protected String methodName = null;
+    protected String methodName;
 
     /**
      * The number of parameters to collect from {@code MethodParam} rules. If this value is zero, a single
      * parameter will be collected from the body of this element.
      */
-    protected int paramCount = 0;
+    protected int paramCount;
 
     /**
      * The parameter types of the parameters to be collected.
@@ -283,7 +283,7 @@ public class CallMethodRule
     /**
      * Should {@code MethodUtils.invokeExactMethod} be used for reflection.
      */
-    private boolean useExactMatch = false;
+    private boolean useExactMatch;
 
     // --------------------------------------------------------- Public Methods
 

@@ -37,7 +37,7 @@ public class ObjectTestImpl
 
     private final HashMap<String, String> mapValue = new HashMap<String, String>();
 
-    private boolean pushed = false;
+    private boolean pushed;
 
     public ObjectTestImpl()
     {

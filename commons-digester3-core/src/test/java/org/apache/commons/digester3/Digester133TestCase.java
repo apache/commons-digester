@@ -45,7 +45,7 @@ public final class Digester133TestCase
     {
         private static final long serialVersionUID = 723339335374093719L;
 
-        private boolean flag = false;
+        private boolean flag;
 
         public boolean isFlag()
 

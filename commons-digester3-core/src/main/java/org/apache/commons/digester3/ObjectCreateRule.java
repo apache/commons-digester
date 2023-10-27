@@ -238,17 +238,17 @@ public class ObjectCreateRule
     /**
      * The attribute containing an override class name if it is present.
      */
-    protected String attributeName = null;
+    protected String attributeName;
 
     /**
      * The Java class of the object to be created.
      */
-    protected Class<?> clazz = null;
+    protected Class<?> clazz;
 
     /**
      * The Java class name of the object to be created.
      */
-    protected String className = null;
+    protected String className;
 
     /**
      * The constructor argument types.

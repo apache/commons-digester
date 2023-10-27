@@ -41,7 +41,7 @@ public class SetTextSegmentRule
     /**
      * The method name to call on the parent object.
      */
-    protected String methodName = null;
+    protected String methodName;
 
     // --------------------------------------------------------- Public Methods
 

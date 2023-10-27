@@ -58,7 +58,7 @@ public class DigesterTestCase
     /**
      * The digester instance we will be processing.
      */
-    protected Digester digester = null;
+    protected Digester digester;
 
     /**
      * The set of public identifiers, and corresponding resource names, for the versions of the DTDs that we know about.
@@ -387,7 +387,7 @@ public class DigesterTestCase
         class TestConfigureDigester
             extends Digester
         {
-            public int called = 0;
+            public int called;
 
             public TestConfigureDigester()
             {

@@ -25,9 +25,9 @@ public class Slider
 {
     private String label = "nolabel";
 
-    private int min = 0;
+    private int min;
 
-    private int max = 0;
+    private int max;
 
     // define rules on this class
     public static void addRules( final Digester digester, final String pattern )

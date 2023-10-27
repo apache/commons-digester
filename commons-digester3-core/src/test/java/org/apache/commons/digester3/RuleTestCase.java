@@ -46,7 +46,7 @@ public class RuleTestCase
     /**
      * The digester instance we will be processing.
      */
-    protected Digester digester = null;
+    protected Digester digester;
 
     // --------------------------------------------------- Overall Test Methods
 

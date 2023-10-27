@@ -46,12 +46,12 @@ public class Declaration
     private final Properties properties = new Properties();
 
     /** See {@link #init}. */
-    private boolean initialized = false;
+    private boolean initialized;
 
     /**
      * Class which is responsible for dynamically loading this plugin's rules on demand.
      */
-    private RuleLoader ruleLoader = null;
+    private RuleLoader ruleLoader;
 
     // ---------------------- constructors ----------------------------------
 

@@ -43,7 +43,7 @@ public class Digester163TestCase
 
     public static final int MAX_THREADS = 4;
 
-    private DigesterLoader loader = null;
+    private DigesterLoader loader;
 
     @Before
     public void before()

@@ -89,7 +89,7 @@ public class URLTestCase
      * The {@code Digester} instance under test.
      * </p>
      */
-    private Digester digester = null;
+    private Digester digester;
 
     // ------------------------------------------------------------ Test Methods
 

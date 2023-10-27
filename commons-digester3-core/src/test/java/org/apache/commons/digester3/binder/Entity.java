@@ -25,7 +25,7 @@ package org.apache.commons.digester3.binder;
 public class Entity
 {
 
-    private String author = null;
+    private String author;
 
     /**
      * @return Returns the author.

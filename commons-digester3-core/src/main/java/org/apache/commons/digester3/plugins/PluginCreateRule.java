@@ -37,14 +37,14 @@ public class PluginCreateRule
 {
 
     // see setPluginClassAttribute
-    private String pluginClassAttrNs = null;
+    private String pluginClassAttrNs;
 
-    private String pluginClassAttr = null;
+    private String pluginClassAttr;
 
     // see setPluginIdAttribute
-    private String pluginIdAttrNs = null;
+    private String pluginIdAttrNs;
 
-    private String pluginIdAttr = null;
+    private String pluginIdAttr;
 
     /**
      * In order to invoke the addRules method on the plugin class correctly, we need to know the pattern which this rule
@@ -53,7 +53,7 @@ public class PluginCreateRule
     private String pattern;
 
     /** A base class that any plugin must derive from. */
-    private Class<?> baseClass = null;
+    private Class<?> baseClass;
 
     /**
      * Info about optional default plugin to be used if no plugin-id is specified in the input data. This can simplify

@@ -38,7 +38,7 @@ public class Address
         setZipCode( zipCode );
     }
 
-    private String city = null;
+    private String city;
 
     public String getCity()
     {
@@ -50,7 +50,7 @@ public class Address
         this.city = city;
     }
 
-    private String state = null;
+    private String state;
 
     public String getState()
     {
@@ -62,7 +62,7 @@ public class Address
         this.state = state;
     }
 
-    private String street = null;
+    private String street;
 
     public String getStreet()
     {
@@ -74,7 +74,7 @@ public class Address
         this.street = street;
     }
 
-    private String type = null;
+    private String type;
 
     public String getType()
     {
@@ -86,7 +86,7 @@ public class Address
         this.type = type;
     }
 
-    private String zipCode = null;
+    private String zipCode;
 
     public String getZipCode()
     {

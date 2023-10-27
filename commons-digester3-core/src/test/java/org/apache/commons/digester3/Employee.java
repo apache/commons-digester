@@ -61,7 +61,7 @@ public class Employee
         addresses.remove( address );
     }
 
-    private String firstName = null;
+    private String firstName;
 
     public String getFirstName()
     {
@@ -73,7 +73,7 @@ public class Employee
         this.firstName = firstName;
     }
 
-    private String lastName = null;
+    private String lastName;
 
     public String getLastName()
     {
