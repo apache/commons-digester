@@ -237,7 +237,7 @@ public abstract class FromXmlRulesModule
     }
 
     /**
-     * Set the root path (will be used when composing modules).
+     * Sets the root path (will be used when composing modules).
      *
      * @param rootPath The root path
      */

@@ -109,7 +109,7 @@ public class PluginContext
     }
 
     /**
-     * Set the list of RuleFinder objects. This may be useful if working in a non-english language, allowing the
+     * Sets the list of RuleFinder objects. This may be useful if working in a non-english language, allowing the
      * application developer to replace the standard list with a list of objects which look for xml attributes in the
      * local language.
      * <p>

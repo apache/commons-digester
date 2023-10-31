@@ -367,7 +367,7 @@ public class Digester
     }
 
     /**
-     * Set the class loader to be used for instantiating application objects when required.
+     * Sets the class loader to be used for instantiating application objects when required.
      *
      * @param classLoader The new class loader to use, or {@code null} to revert to the standard rules
      */
@@ -413,7 +413,7 @@ public class Digester
     }
 
     /**
-     * Set the error handler for this Digester.
+     * Sets the error handler for this Digester.
      *
      * @param errorHandler The new error handler
      */
@@ -488,7 +488,7 @@ public class Digester
     }
 
     /**
-     * Set the current logger for this Digester.
+     * Sets the current logger for this Digester.
      *
      * @param log the current logger for this Digester.
      */
@@ -553,7 +553,7 @@ public class Digester
     }
 
     /**
-     * Set the "namespace aware" flag for parsers we create.
+     * Sets the "namespace aware" flag for parsers we create.
      *
      * @param namespaceAware The new "namespace aware" flag
      */
@@ -576,7 +576,7 @@ public class Digester
     }
 
     /**
-     * Set the XInclude-aware flag for parsers we create. This additionally requires namespace-awareness.
+     * Sets the XInclude-aware flag for parsers we create. This additionally requires namespace-awareness.
      *
      * @param xincludeAware The new XInclude-aware flag
      * @see #setNamespaceAware(boolean)
@@ -588,7 +588,7 @@ public class Digester
     }
 
     /**
-     * Set the public id of the current file being parse.
+     * Sets the public id of the current file being parse.
      *
      * @param publicId the DTD/Schema public's id.
      */
@@ -618,7 +618,7 @@ public class Digester
     }
 
     /**
-     * Set the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
      * @param ruleNamespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
      *            matching regardless of the current namespace URI
@@ -675,7 +675,7 @@ public class Digester
     }
 
     /**
-     * Set the current value of the specified property for the underlying {@code XMLReader} implementation. See <a
+     * Sets the current value of the specified property for the underlying {@code XMLReader} implementation. See <a
      * href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2 properties.
      *
      * @param property Property name to be set
@@ -706,7 +706,7 @@ public class Digester
     }
 
     /**
-     * Set the {@code Rules} implementation object containing our rules collection and associated matching policy.
+     * Sets the {@code Rules} implementation object containing our rules collection and associated matching policy.
      *
      * @param rules New Rules implementation
      */
@@ -728,7 +728,7 @@ public class Digester
     }
 
     /**
-     * Set the XML Schema to be used when parsing.
+     * Sets the XML Schema to be used when parsing.
      *
      * @param schema The {@link Schema} instance to use.
      * @since 2.0
@@ -771,7 +771,7 @@ public class Digester
     }
 
     /**
-     * Set the validating parser flag. This must be called before {@code parse()} is called the first time.
+     * Sets the validating parser flag. This must be called before {@code parse()} is called the first time.
      * By default the value of this is set to false.
      *
      * It essentially just controls the DTD validation. To use modern schema languages use the
@@ -1427,7 +1427,7 @@ public class Digester
     // ----------------------------------------------- EntityResolver Methods
 
     /**
-     * Set the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
+     * Sets the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
      * before the first call to {@code parse()}.
      *
      * @param entityResolver a class that implement the {@code EntityResolver} interface.

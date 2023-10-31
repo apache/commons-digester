@@ -142,7 +142,7 @@ public class TestRule
     }
 
     /**
-     * Set call order list
+     * Sets call order list
      */
     public void setOrder( final List<Rule> order )
     {

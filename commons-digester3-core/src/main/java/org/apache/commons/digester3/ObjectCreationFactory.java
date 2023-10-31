@@ -53,7 +53,7 @@ public interface ObjectCreationFactory<T>
     Digester getDigester();
 
     /**
-     * Set the {@link Digester} to allow the implementation to do logging, classloading based on the digester's
+     * Sets the {@link Digester} to allow the implementation to do logging, classloading based on the digester's
      * classloader, etc.
      *
      * @param digester parent Digester object

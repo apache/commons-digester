@@ -128,7 +128,7 @@ public class CallParamRule
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Set the attribute from which to save the parameter value.
+     * Sets the attribute from which to save the parameter value.
      *
      * @param attributeName The attribute from which to save the parameter value
      * @since 3.0

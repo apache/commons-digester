@@ -44,7 +44,7 @@ public final class SetPropertyBuilder
     }
 
     /**
-     * Set the name of the attribute that will contain the value to which the property should be set.
+     * Sets the name of the attribute that will contain the value to which the property should be set.
      *
      * @param valueAttributeName Name of the attribute that will contain the value to which the property should be set.
      * @return this builder instance

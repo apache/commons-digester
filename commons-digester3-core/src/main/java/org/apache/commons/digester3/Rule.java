@@ -77,7 +77,7 @@ import org.xml.sax.Attributes;
     }
 
     /**
-     * Set the {@code Digester} with which this {@code Rule} is associated.
+     * Sets the {@code Digester} with which this {@code Rule} is associated.
      *
      * @param digester the {@code Digester} with which this {@code Rule} is associated
      */
@@ -97,7 +97,7 @@ import org.xml.sax.Attributes;
     }
 
     /**
-     * Set the namespace URI for which this Rule is relevant, if any.
+     * Sets the namespace URI for which this Rule is relevant, if any.
      *
      * @param namespaceURI Namespace URI for which this Rule is relevant, or {@code null} to match independent of
      *            namespace.

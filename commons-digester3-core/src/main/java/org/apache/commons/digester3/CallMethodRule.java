@@ -299,7 +299,7 @@ public class CallMethodRule
     }
 
     /**
-     * Set whether {@code MethodUtils.invokeExactMethod} should be used for the reflection.
+     * Sets whether {@code MethodUtils.invokeExactMethod} should be used for the reflection.
      *
      * @param useExactMatch The {@code MethodUtils.invokeExactMethod} flag
      */

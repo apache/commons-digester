@@ -153,7 +153,7 @@ public abstract class AbstractMethodRule
 
     /**
      * <p>
-     * Set whether exact matching is enabled.
+     * Sets whether exact matching is enabled.
      * </p>
      * <p>
      * See {@link #isExactMatch()}.

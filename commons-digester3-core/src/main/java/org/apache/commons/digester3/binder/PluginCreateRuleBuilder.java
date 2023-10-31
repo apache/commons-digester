@@ -52,7 +52,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Set the class which any specified plugin <i>must</i> be descended from.
+     * Sets the class which any specified plugin <i>must</i> be descended from.
      *
      * @param <T> Any Java type
      * @param type the class which any specified plugin <i>must</i> be descended from
@@ -72,7 +72,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Set the class which will be used if the user doesn't specify any plugin-class or plugin-id.
+     * Sets the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *
      * @param <T> Any Java type
      * @param type the class which will be used if the user doesn't specify any plugin-class or plugin-id.
@@ -85,7 +85,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Set RuleLoader instance which knows how to load the custom rules associated with the default plugin.
+     * Sets RuleLoader instance which knows how to load the custom rules associated with the default plugin.
      *
      * @param <RL> Any {@link RuleLoader} extension.
      * @param ruleLoader the RuleLoader instance which knows how to load the custom rules associated with

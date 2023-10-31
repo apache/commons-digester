@@ -41,7 +41,7 @@ public interface Rules
     Digester getDigester();
 
     /**
-     * Set the Digester instance with which this Rules instance is associated.
+     * Sets the Digester instance with which this Rules instance is associated.
      *
      * @param digester The newly associated Digester instance
      */
@@ -55,7 +55,7 @@ public interface Rules
     String getNamespaceURI();
 
     /**
-     * Set the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
      * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
      *            matching regardless of the current namespace URI

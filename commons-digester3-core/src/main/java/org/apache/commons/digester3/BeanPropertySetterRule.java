@@ -77,7 +77,7 @@ public class BeanPropertySetterRule
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * Set this property on the top object.
+     * Sets this property on the top object.
      */
     private String propertyName;
 

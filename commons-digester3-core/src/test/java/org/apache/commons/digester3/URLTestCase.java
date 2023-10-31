@@ -37,7 +37,7 @@ public class URLTestCase
     // ----------------------------------------------------- Overall Test Methods
 
     /**
-     * Set up instance variables required by this test case.
+     * Sets up instance variables required by this test case.
      */
     @Before
     public void setUp()

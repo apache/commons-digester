@@ -170,7 +170,7 @@ public class PluginRules
     }
 
     /**
-     * Set the Digester instance with which this Rules instance is associated.
+     * Sets the Digester instance with which this Rules instance is associated.
      *
      * @param digester The newly associated Digester instance
      */
@@ -193,7 +193,7 @@ public class PluginRules
     }
 
     /**
-     * Set the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
      * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
      *            matching regardless of the current namespace URI
@@ -245,7 +245,7 @@ public class PluginRules
     }
 
     /**
-     * Set the object which is used to generate the new Rules instances created to hold and process the rules associated
+     * Sets the object which is used to generate the new Rules instances created to hold and process the rules associated
      * with each plugged-in class.
      *
      * @param factory the rules factory object

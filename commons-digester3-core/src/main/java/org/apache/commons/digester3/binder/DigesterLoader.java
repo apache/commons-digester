@@ -188,7 +188,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the class loader to be used for instantiating application objects when required.
+     * Sets the class loader to be used for instantiating application objects when required.
      *
      * @param classLoader the class loader to be used for instantiating application objects when required.
      * @return This loader instance, useful to chain methods.
@@ -225,7 +225,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the "namespace aware" flag for parsers we create.
+     * Sets the "namespace aware" flag for parsers we create.
      *
      * @param namespaceAware The new "namespace aware" flag
      * @return This loader instance, useful to chain methods.
@@ -247,7 +247,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the XInclude-aware flag for parsers we create. This additionally
+     * Sets the XInclude-aware flag for parsers we create. This additionally
      * requires namespace-awareness.
      *
      * @param xIncludeAware The new XInclude-aware flag
@@ -272,7 +272,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the {@code DOCTYPE} validation parser flag and should not be used when using schemas.
+     * Sets the {@code DOCTYPE} validation parser flag and should not be used when using schemas.
      *
      * @param validating The new validating parser flag.
      * @return This loader instance, useful to chain methods.
@@ -295,7 +295,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the XML Schema to be used when parsing.
+     * Sets the XML Schema to be used when parsing.
      *
      * @param schema The {@link Schema} instance to use.
      * @return This loader instance, useful to chain methods.
@@ -385,7 +385,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
+     * Sets the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
      * before the first call to {@code parse()}.
      *
      * @param entityResolver a class that implement the {@code EntityResolver} interface.
@@ -446,7 +446,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Set the error handler for this Digester.
+     * Sets the error handler for this Digester.
      *
      * @param errorHandler The new error handler
      * @return This loader instance, useful to chain methods.
