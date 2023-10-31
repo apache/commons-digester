@@ -923,7 +923,7 @@ public class Digester
     }
 
     /**
-     * Get the most current namespaces for all prefixes.
+     * Gets the most current namespaces for all prefixes.
      *
      * @return Map A map with namespace prefixes as keys and most current namespace URIs for the corresponding prefixes
      *         as values

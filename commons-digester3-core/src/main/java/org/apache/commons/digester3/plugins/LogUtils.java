@@ -50,7 +50,7 @@ class LogUtils
 {
 
     /**
-     * Get the Log object associated with the specified Digester instance, or a "no-op" logging object if the digester
+     * Gets the Log object associated with the specified Digester instance, or a "no-op" logging object if the digester
      * reference is null.
      * <p>
      * You should use this method instead of digester.getLogger() in any situation where the digester might be null.

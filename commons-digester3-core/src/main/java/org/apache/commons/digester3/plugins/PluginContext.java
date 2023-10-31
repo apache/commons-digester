@@ -205,7 +205,7 @@ public class PluginContext
     }
 
     /**
-     * Get the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
      * <p>
      * May be null (in fact, normally will be).
      *
@@ -217,7 +217,7 @@ public class PluginContext
     }
 
     /**
-     * Get the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
      * <p>
      * The return value is never null.
      *
@@ -229,7 +229,7 @@ public class PluginContext
     }
 
     /**
-     * Get the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
      * should be used.
      * <p>
      * May be null (in fact, normally will be).
@@ -242,7 +242,7 @@ public class PluginContext
     }
 
     /**
-     * Get the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
      * should be used.
      * <p>
      * The return value is never null.

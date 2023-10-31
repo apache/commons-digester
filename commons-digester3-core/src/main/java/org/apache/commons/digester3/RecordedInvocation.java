@@ -59,7 +59,7 @@ final class RecordedInvocation
     //******************************************************************************************************************
 
     /**
-     * Get the invokedMethod.
+     * Gets the invokedMethod.
      *
      * @return Method
      */
@@ -69,7 +69,7 @@ final class RecordedInvocation
     }
 
     /**
-     * Get the arguments.
+     * Gets the arguments.
      *
      * @return Object[]
      */

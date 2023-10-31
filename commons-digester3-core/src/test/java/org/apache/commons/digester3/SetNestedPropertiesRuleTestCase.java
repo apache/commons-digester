@@ -407,7 +407,7 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
-     * Get input stream from {@link #TEST_XML}.
+     * Gets input stream from {@link #TEST_XML}.
      */
     private Reader xmlTestReader()
     {

@@ -178,7 +178,7 @@ public class SetPropertyRuleTestCase
     }
 
     /**
-     * Get input stream from specified String containing XML data.
+     * Gets input stream from specified String containing XML data.
      */
     private Reader xmlTestReader( final String xml )
     {

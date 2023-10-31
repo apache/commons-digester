@@ -118,7 +118,7 @@ public class TestRule
     }
 
     /**
-     * Get the body text that was set.
+     * Gets the body text that was set.
      */
     public String getBodyText()
     {
@@ -126,7 +126,7 @@ public class TestRule
     }
 
     /**
-     * Get the identifier associated with this test.
+     * Gets the identifier associated with this test.
      */
     public String getIdentifier()
     {
@@ -134,7 +134,7 @@ public class TestRule
     }
 
     /**
-     * Get call order list.
+     * Gets call order list.
      */
     public List<Rule> getOrder()
     {
