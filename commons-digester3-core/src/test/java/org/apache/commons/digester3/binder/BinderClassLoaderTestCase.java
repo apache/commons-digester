@@ -52,56 +52,56 @@ public final class BinderClassLoaderTestCase
     private final BinderClassLoader classLoader = createBinderClassLoader( new ExtendedClassLoader() );
 
     @Test
-    public void loadBoolean()
+    public void testLoadBoolean()
         throws Exception
     {
         typeFound( "boolean", boolean.class );
     }
 
     @Test
-    public void loadByte()
+    public void testLoadByte()
         throws Exception
     {
         typeFound( "byte", byte.class );
     }
 
     @Test
-    public void loadShort()
+    public void testLoadShort()
         throws Exception
     {
         typeFound( "short", short.class );
     }
 
     @Test
-    public void loadInt()
+    public void testLoadInt()
         throws Exception
     {
         typeFound( "int", int.class );
     }
 
     @Test
-    public void loadChar()
+    public void testLoadChar()
         throws Exception
     {
         typeFound( "char", char.class );
     }
 
     @Test
-    public void loadLong()
+    public void testLoadLong()
         throws Exception
     {
         typeFound( "long", long.class );
     }
 
     @Test
-    public void loadFloat()
+    public void testLoadFloat()
         throws Exception
     {
         typeFound( "float", float.class );
     }
 
     @Test
-    public void loadDouble()
+    public void testLoadDouble()
         throws Exception
     {
         typeFound( "double", double.class );

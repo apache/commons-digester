@@ -265,7 +265,7 @@ public class BeanPropertySetterRuleTestCase
     }
 
     @Test
-    public void extractPropertyNameFromAttribute() throws Exception
+    public void testExtractPropertyNameFromAttribute() throws Exception
     {
         final Employee expected = new Employee( "John", "Doe" );
 

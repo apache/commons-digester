@@ -36,7 +36,7 @@ public final class DigesterLoaderTestCase
      * DIGESTER-151
      */
     @Test
-    public void digester151()
+    public void testDigester151()
     {
         final ErrorHandler expected = new ErrorHandler()
         {
@@ -81,7 +81,7 @@ public final class DigesterLoaderTestCase
     }
 
     @Test
-    public void digeser152()
+    public void testDigeser152()
     {
         final Locator expected = new Locator()
         {
@@ -132,7 +132,7 @@ public final class DigesterLoaderTestCase
     }
 
     @Test
-    public void digester155()
+    public void testDigester155()
     {
         final ClassLoader expected = getClass().getClassLoader();
 

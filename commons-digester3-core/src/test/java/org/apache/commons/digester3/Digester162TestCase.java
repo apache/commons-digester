@@ -30,7 +30,7 @@ public final class Digester162TestCase
 {
 
     @Test
-    public void allowCreateObjectsWichTypesAreSpecifiedInAttributeNameOnly()
+    public void testAllowCreateObjectsWichTypesAreSpecifiedInAttributeNameOnly()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()

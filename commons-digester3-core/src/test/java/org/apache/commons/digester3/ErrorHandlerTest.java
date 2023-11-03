@@ -36,7 +36,7 @@ public class ErrorHandlerTest
 {
 
     @Test
-    public void noCustomErrorHandler()
+    public void testNoCustomErrorHandler()
     {
 
         try
@@ -64,7 +64,7 @@ public class ErrorHandlerTest
     }
 
     @Test
-    public void customErrorHandlerWithStack()
+    public void testCustomErrorHandlerWithStack()
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -119,7 +119,7 @@ public class ErrorHandlerTest
     }
 
     @Test
-    public void customErrorHandler()
+    public void testCustomErrorHandler()
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()

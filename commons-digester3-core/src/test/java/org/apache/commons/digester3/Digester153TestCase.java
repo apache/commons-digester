@@ -38,7 +38,7 @@ public final class Digester153TestCase
 {
 
     @Test
-    public void basicConstructor()
+    public void testBasicConstructor()
         throws Exception
     {
         final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
@@ -62,7 +62,7 @@ public final class Digester153TestCase
     }
 
     @Test
-    public void constructorWithAttributeAndElement()
+    public void testConstructorWithAttributeAndElement()
         throws Exception
     {
         final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
@@ -89,7 +89,7 @@ public final class Digester153TestCase
     }
 
     @Test
-    public void basicConstructorViaBinder()
+    public void testBasicConstructorViaBinder()
         throws Exception
     {
         succesfullConstructor( new AbstractRulesModule()
@@ -110,7 +110,7 @@ public final class Digester153TestCase
     }
 
     @Test
-    public void basicConstructorViaAnnotations()
+    public void testBasicConstructorViaAnnotations()
         throws Exception
     {
         succesfullConstructor( new FromAnnotationsRuleModule()
@@ -126,7 +126,7 @@ public final class Digester153TestCase
     }
 
     @Test
-    public void basicConstructorViaXML()
+    public void testBasicConstructorViaXML()
         throws Exception
     {
         succesfullConstructor( new FromXmlRulesModule()
@@ -153,7 +153,7 @@ public final class Digester153TestCase
     }
 
     @Test
-    public void basicConstructorWithValuesNotFound()
+    public void testBasicConstructorWithValuesNotFound()
         throws Exception
     {
         final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
@@ -184,7 +184,7 @@ public final class Digester153TestCase
     }
 
     @Test
-    public void constructorWithClassDefinedInAttribute()
+    public void testConstructorWithClassDefinedInAttribute()
         throws Exception
     {
         final ObjectCreateRule createRule = new ObjectCreateRule( null, "type" );

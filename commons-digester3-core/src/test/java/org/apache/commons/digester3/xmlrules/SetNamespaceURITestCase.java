@@ -34,7 +34,7 @@ public final class SetNamespaceURITestCase
 {
 
     @Test
-    public void atomWithNamespaceParse()
+    public void testAtomWithNamespaceParse()
         throws Exception
     {
         // Drive commons-beanutils how to convert dates
