@@ -52,41 +52,6 @@ public class AnnotationUtils
     private static final String FIRE_ON_BEGIN = "fireOnBegin";
 
     /**
-     * This class can't be instantiated.
-     */
-    private AnnotationUtils()
-    {
-        // this class can' be instantiated
-    }
-
-    /**
-     * Extract the {@code value()} from annotation.
-     *
-     * @param annotation the annotation has to be introspected.
-     * @return the annotation {@code value()}.
-     */
-    public static Object getAnnotationValue( final Annotation annotation )
-    {
-        return invokeAnnotationMethod( annotation, VALUE );
-    }
-
-    /**
-     * Extract the {@code pattern()} from annotation.
-     *
-     * @param annotation the annotation has to be introspected.
-     * @return the annotation {@code pattern()}.
-     */
-    public static String getAnnotationPattern( final Annotation annotation )
-    {
-        final Object ret = invokeAnnotationMethod( annotation, PATTERN );
-        if ( ret != null )
-        {
-            return (String) ret;
-        }
-        return null;
-    }
-
-    /**
      * Extract the {@code namespaceURI()} from annotation.
      *
      * @param annotation The annotation has to be introspected
@@ -103,19 +68,19 @@ public class AnnotationUtils
     }
 
     /**
-     * Extract the {@code fireOnBegin()} from annotation.
+     * Extract the {@code pattern()} from annotation.
      *
-     * @param annotation The annotation has to be introspected
-     * @return The annotation {@code fireOnBegin()}
+     * @param annotation the annotation has to be introspected.
+     * @return the annotation {@code pattern()}.
      */
-    public static boolean getFireOnBegin( final Annotation annotation )
+    public static String getAnnotationPattern( final Annotation annotation )
     {
-        final Object ret = invokeAnnotationMethod( annotation, FIRE_ON_BEGIN );
+        final Object ret = invokeAnnotationMethod( annotation, PATTERN );
         if ( ret != null )
         {
-            return (Boolean) ret;
+            return (String) ret;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -136,6 +101,33 @@ public class AnnotationUtils
     }
 
     /**
+     * Extract the {@code value()} from annotation.
+     *
+     * @param annotation the annotation has to be introspected.
+     * @return the annotation {@code value()}.
+     */
+    public static Object getAnnotationValue( final Annotation annotation )
+    {
+        return invokeAnnotationMethod( annotation, VALUE );
+    }
+
+    /**
+     * Extract the {@code fireOnBegin()} from annotation.
+     *
+     * @param annotation The annotation has to be introspected
+     * @return The annotation {@code fireOnBegin()}
+     */
+    public static boolean getFireOnBegin( final Annotation annotation )
+    {
+        final Object ret = invokeAnnotationMethod( annotation, FIRE_ON_BEGIN );
+        if ( ret != null )
+        {
+            return (Boolean) ret;
+        }
+        return false;
+    }
+
+    /**
      * Invokes an annotation method.
      *
      * @param annotationn the annotation has to be introspected.
@@ -152,6 +144,14 @@ public class AnnotationUtils
         {
             return null;
         }
+    }
+
+    /**
+     * This class can't be instantiated.
+     */
+    private AnnotationUtils()
+    {
+        // this class can' be instantiated
     }
 
 }

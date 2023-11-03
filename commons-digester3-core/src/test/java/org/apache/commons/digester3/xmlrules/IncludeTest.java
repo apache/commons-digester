@@ -93,6 +93,26 @@ public class IncludeTest
         assertEquals( "Entry value", "short", list.get( 0 ) );
     }
 
+    /**
+     * Validates that circular includes are detected and result in an exception
+     */
+    @Test( expected = org.apache.commons.digester3.binder.DigesterLoadingException.class )
+    public void testCircularInclude()
+        throws Exception
+    {
+        final URL url = ClassLoader.getSystemResource( "org/apache/commons/digester3/xmlrules/testCircularRules.xml" );
+        newLoader( new FromXmlRulesModule()
+        {
+
+            @Override
+            protected void loadRules()
+            {
+                loadXMLRules( url );
+            }
+
+        }).newDigester();
+    }
+
     @Test
     public void testUrlInclude()
         throws Exception
@@ -125,26 +145,6 @@ public class IncludeTest
         digester.push( list );
         digester.parse( new StringReader( xml ) );
         assertEquals( "[foo1, foo2]", list.toString() );
-    }
-
-    /**
-     * Validates that circular includes are detected and result in an exception
-     */
-    @Test( expected = org.apache.commons.digester3.binder.DigesterLoadingException.class )
-    public void testCircularInclude()
-        throws Exception
-    {
-        final URL url = ClassLoader.getSystemResource( "org/apache/commons/digester3/xmlrules/testCircularRules.xml" );
-        newLoader( new FromXmlRulesModule()
-        {
-
-            @Override
-            protected void loadRules()
-            {
-                loadXMLRules( url );
-            }
-
-        }).newDigester();
     }
 
 }

@@ -43,12 +43,6 @@ import java.io.*;
 public class Pipeline
 {
 
-    private String source;
-
-    private String dest;
-
-    private Transform transformer;
-
     public static void main( final String[] args )
     {
         if ( args.length != 1 )
@@ -98,20 +92,11 @@ public class Pipeline
         }
     }
 
-    public void setSource( final String source )
-    {
-        this.source = source;
-    }
+    private String source;
 
-    public void setDest( final String dest )
-    {
-        this.dest = dest;
-    }
+    private String dest;
 
-    public void setTransform( final Transform transformer )
-    {
-        this.transformer = transformer;
-    }
+    private Transform transformer;
 
     private void execute()
         throws IOException
@@ -138,6 +123,21 @@ public class Pipeline
 
         System.out.println( "Contents of file " + source + " have been transformed, and" + " written to file " + dest
             + "." );
+    }
+
+    public void setDest( final String dest )
+    {
+        this.dest = dest;
+    }
+
+    public void setSource( final String source )
+    {
+        this.source = source;
+    }
+
+    public void setTransform( final Transform transformer )
+    {
+        this.transformer = transformer;
     }
 
 }

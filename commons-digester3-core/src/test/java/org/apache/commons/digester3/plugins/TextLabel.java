@@ -33,14 +33,14 @@ public class TextLabel
         return id;
     }
 
-    public void setId( final String id )
-    {
-        this.id = id;
-    }
-
     public String getLabel()
     {
         return label;
+    }
+
+    public void setId( final String id )
+    {
+        this.id = id;
     }
 
     public void setLabel( final String label )

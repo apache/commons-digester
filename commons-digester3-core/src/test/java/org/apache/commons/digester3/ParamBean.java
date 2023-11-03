@@ -34,6 +34,16 @@ public class ParamBean
     {
     }
 
+    public String getThat()
+    {
+        return that;
+    }
+
+    public String getThis()
+    {
+        return _this;
+    }
+
     public boolean isCool()
     {
         return cool;
@@ -42,16 +52,6 @@ public class ParamBean
     public void setCool( final boolean cool )
     {
         this.cool = cool;
-    }
-
-    public String getThis()
-    {
-        return _this;
-    }
-
-    public String getThat()
-    {
-        return that;
     }
 
     public String setThisAndThat( final String _this, final String that )

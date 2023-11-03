@@ -57,11 +57,11 @@ public class SetNextRule
      * Construct a "set next" rule with the specified method name.
      *
      * @param methodName Method name of the parent method to call
-     * @param paramType Java class name of the parent method's argument (if you wish to use a primitive type,
-     *                  specify the corresonding Java wrapper class instead, such as {@code java.lang.Boolean}
-     *                  for a {@code boolean} parameter)
+     * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
+     *                  corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *                  {@code boolean} parameter)
      */
-    public SetNextRule( final String methodName, final String paramType )
+    public SetNextRule( final String methodName, final Class<?> paramType )
     {
         super( methodName, paramType );
     }
@@ -70,11 +70,11 @@ public class SetNextRule
      * Construct a "set next" rule with the specified method name.
      *
      * @param methodName Method name of the parent method to call
-     * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *                  corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
-     *                  {@code boolean} parameter)
+     * @param paramType Java class name of the parent method's argument (if you wish to use a primitive type,
+     *                  specify the corresonding Java wrapper class instead, such as {@code java.lang.Boolean}
+     *                  for a {@code boolean} parameter)
      */
-    public SetNextRule( final String methodName, final Class<?> paramType )
+    public SetNextRule( final String methodName, final String paramType )
     {
         super( methodName, paramType );
     }

@@ -43,13 +43,13 @@ public @interface SetNext
 {
 
     /**
-     * Defines the concrete implementation(s) of @SetNext annotated method argument.
-     */
-    Class<?>[] value() default { };
-
-    /**
      * Marks the rule be invoked when {@code begin} or {@code end} events match.
      */
     boolean fireOnBegin() default false;
+
+    /**
+     * Defines the concrete implementation(s) of @SetNext annotated method argument.
+     */
+    Class<?>[] value() default { };
 
 }

@@ -43,31 +43,6 @@ public class Employee
         this.addresses.add( address );
     }
 
-    public String getFirstName()
-    {
-        return this.firstName;
-    }
-
-    public void setFirstName( final String firstName )
-    {
-        this.firstName = firstName;
-    }
-
-    public String getLastName()
-    {
-        return this.lastName;
-    }
-
-    public void setLastName( final String lastName )
-    {
-        this.lastName = lastName;
-    }
-
-    public List<Address> getAddresses()
-    {
-        return this.addresses;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -109,6 +84,31 @@ public class Employee
             return false;
         }
         return true;
+    }
+
+    public List<Address> getAddresses()
+    {
+        return this.addresses;
+    }
+
+    public String getFirstName()
+    {
+        return this.firstName;
+    }
+
+    public String getLastName()
+    {
+        return this.lastName;
+    }
+
+    public void setFirstName( final String firstName )
+    {
+        this.firstName = firstName;
+    }
+
+    public void setLastName( final String lastName )
+    {
+        this.lastName = lastName;
     }
 
     @Override

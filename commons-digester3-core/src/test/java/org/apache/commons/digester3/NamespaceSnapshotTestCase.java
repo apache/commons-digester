@@ -44,17 +44,6 @@ public class NamespaceSnapshotTestCase
     static class NamespaceSnapshotRule
         extends Rule
     {
-        /**
-         * @see Rule#begin(String, String, Attributes)
-         */
-        @Override
-        public final void begin( final String namespace, final String name, final Attributes attributes )
-        {
-            final Digester d = getDigester();
-            final Map<String, String> namespaces = d.getCurrentNamespaces();
-            ( (NamespacedBox) d.peek() ).setNamespaces( namespaces );
-        }
-
         public static class Provider implements RuleProvider<NamespaceSnapshotRule>
         {
 
@@ -69,7 +58,34 @@ public class NamespaceSnapshotTestCase
 
         }
 
+        /**
+         * @see Rule#begin(String, String, Attributes)
+         */
+        @Override
+        public final void begin( final String namespace, final String name, final Attributes attributes )
+        {
+            final Digester d = getDigester();
+            final Map<String, String> namespaces = d.getCurrentNamespaces();
+            ( (NamespacedBox) d.peek() ).setNamespaces( namespaces );
+        }
+
     }
+
+    /**
+     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
+     *
+     * @param name Name of the test file we want
+     * @throws IOException if an input/output error occurs
+     */
+    protected InputStream getInputStream( final String name )
+        throws IOException
+    {
+
+        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+
+    }
+
+    // ------------------------------------------------ Utility Support Methods
 
     /**
      * Namespace snapshot test case.
@@ -135,22 +151,6 @@ public class NamespaceSnapshotTestCase
         assertEquals( "http://commons.apache.org/digester/Foo3", nsmap.get( "foo" ) );
         assertEquals( "http://commons.apache.org/digester/Alpha", nsmap.get( "alpha" ) );
         assertEquals( "http://commons.apache.org/digester/Bar", nsmap.get( "bar" ) );
-
-    }
-
-    // ------------------------------------------------ Utility Support Methods
-
-    /**
-     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
-     *
-     * @param name Name of the test file we want
-     * @throws IOException if an input/output error occurs
-     */
-    protected InputStream getInputStream( final String name )
-        throws IOException
-    {
-
-        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
 
     }
 

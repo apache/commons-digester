@@ -51,24 +51,14 @@ final class DefaultRulesBinder
     private ClassLoader classLoader;
 
     /**
+     * Records an error, the full details of which will be logged, and the message of which will be presented to the
+     * user at a later time.
      *
-     *
-     * @param classLoader
+     * @param errorMessage The error to record.
      */
-    void initialize( final ClassLoader classLoader )
+    private void addError( final ErrorMessage errorMessage )
     {
-        this.classLoader = classLoader;
-        fromBinderRuleSet.clear();
-        errors.clear();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ClassLoader getContextClassLoader()
-    {
-        return this.classLoader;
+        this.errors.add( errorMessage );
     }
 
     /**
@@ -131,23 +121,13 @@ final class DefaultRulesBinder
     }
 
     /**
-     * Records an error, the full details of which will be logged, and the message of which will be presented to the
-     * user at a later time.
      *
-     * @param errorMessage The error to record.
+     *
+     * @return
      */
-    private void addError( final ErrorMessage errorMessage )
+    int errorsSize()
     {
-        this.errors.add( errorMessage );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void install( final RulesModule rulesModule )
-    {
-        rulesModule.configure( this );
+        return errors.size();
     }
 
     /**
@@ -180,23 +160,12 @@ final class DefaultRulesBinder
     }
 
     /**
-     *
-     *
-     * @return
+     * {@inheritDoc}
      */
-    boolean hasError()
+    @Override
+    public ClassLoader getContextClassLoader()
     {
-        return !errors.isEmpty();
-    }
-
-    /**
-     *
-     *
-     * @return
-     */
-    int errorsSize()
-    {
-        return errors.size();
+        return this.classLoader;
     }
 
     /**
@@ -217,6 +186,37 @@ final class DefaultRulesBinder
     RuleSet getFromBinderRuleSet()
     {
         return fromBinderRuleSet;
+    }
+
+    /**
+     *
+     *
+     * @return
+     */
+    boolean hasError()
+    {
+        return !errors.isEmpty();
+    }
+
+    /**
+     *
+     *
+     * @param classLoader
+     */
+    void initialize( final ClassLoader classLoader )
+    {
+        this.classLoader = classLoader;
+        fromBinderRuleSet.clear();
+        errors.clear();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void install( final RulesModule rulesModule )
+    {
+        rulesModule.configure( this );
     }
 
 }

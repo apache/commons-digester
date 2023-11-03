@@ -45,25 +45,6 @@ public @interface ObjectCreate
 {
 
     /**
-     * The element matching pattern.
-     */
-    String pattern();
-
-    /**
-     * The namespace URI for which this Rule is relevant, if any.
-     *
-     * @since 3.0
-     */
-    String namespaceURI() default "";
-
-    /**
-     * Allows specify the attribute containing an override class name if it is present.
-     *
-     * @since 3.0
-     */
-    String attributeName() default "";
-
-    /**
      * Defines several {@code @ObjectCreate} annotations on the same element.
      *
      * @see ObjectCreate
@@ -76,5 +57,24 @@ public @interface ObjectCreate
     {
         ObjectCreate[] value();
     }
+
+    /**
+     * Allows specify the attribute containing an override class name if it is present.
+     *
+     * @since 3.0
+     */
+    String attributeName() default "";
+
+    /**
+     * The namespace URI for which this Rule is relevant, if any.
+     *
+     * @since 3.0
+     */
+    String namespaceURI() default "";
+
+    /**
+     * The element matching pattern.
+     */
+    String pattern();
 
 }

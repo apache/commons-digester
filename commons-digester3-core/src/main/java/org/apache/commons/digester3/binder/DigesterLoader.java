@@ -63,21 +63,6 @@ public final class DigesterLoader
     private static final String HEADING = "Digester creation errors:%n%n";
 
     /**
-     * Creates a new {@link DigesterLoader} instance given one or more {@link RulesModule} instance.
-     *
-     * @param rulesModules The modules containing the {@code Rule} binding
-     * @return A new {@link DigesterLoader} instance
-     */
-    public static DigesterLoader newLoader( final RulesModule... rulesModules )
-    {
-        if ( rulesModules == null || rulesModules.length == 0 )
-        {
-            throw new DigesterLoadingException( "At least one RulesModule has to be specified" );
-        }
-        return newLoader( Arrays.asList( rulesModules ) );
-    }
-
-    /**
      * Creates a new {@link DigesterLoader} instance given a collection of {@link RulesModule} instance.
      *
      * @param rulesModules The modules containing the {@code Rule} binding
@@ -91,6 +76,21 @@ public final class DigesterLoader
         }
 
         return new DigesterLoader( rulesModules );
+    }
+
+    /**
+     * Creates a new {@link DigesterLoader} instance given one or more {@link RulesModule} instance.
+     *
+     * @param rulesModules The modules containing the {@code Rule} binding
+     * @return A new {@link DigesterLoader} instance
+     */
+    public static DigesterLoader newLoader( final RulesModule... rulesModules )
+    {
+        if ( rulesModules == null || rulesModules.length == 0 )
+        {
+            throw new DigesterLoadingException( "At least one RulesModule has to be specified" );
+        }
+        return newLoader( Arrays.asList( rulesModules ) );
     }
 
     /**
@@ -165,297 +165,56 @@ public final class DigesterLoader
     }
 
     /**
-     * Determine whether to use the Context ClassLoader (the one found by
-     * calling {@code Thread.currentThread().getContextClassLoader()})
-     * to resolve/load classes that are defined in various rules.  If not
-     * using Context ClassLoader, then the class-loading defaults to
-     * using the calling-class' ClassLoader.
+     * Add rules to an already created Digester instance, analyzing the digester annotations in the target class.
      *
-     * @param useContextClassLoader determines whether to use Context ClassLoader.
-     * @return This loader instance, useful to chain methods.
+     * @param digester the Digester instance reference.
      */
-    public DigesterLoader setUseContextClassLoader( final boolean useContextClassLoader )
+    public void addRules( final Digester digester )
     {
-        if ( useContextClassLoader )
+        final RuleSet ruleSet = createRuleSet();
+        ruleSet.addRuleInstances( digester );
+    }
+
+    /**
+     * Creates a new {@link RuleSet} instance based on the current configuration.
+     *
+     * @return A new {@link RuleSet} instance based on the current configuration.
+     */
+    public RuleSet createRuleSet()
+    {
+        if ( rulesBinder.hasError() )
         {
-            setClassLoader( Thread.currentThread().getContextClassLoader() );
+            final Formatter fmt = new Formatter().format( HEADING );
+            int index = 1;
+
+            for ( final ErrorMessage errorMessage : rulesBinder.getErrors() )
+            {
+                fmt.format( "%s) %s%n", index++, errorMessage.getMessage() );
+
+                final Throwable cause = errorMessage.getCause();
+                if ( cause != null )
+                {
+                    final StringWriter writer = new StringWriter();
+                    cause.printStackTrace( new PrintWriter( writer ) );
+                    fmt.format( "Caused by: %s", writer.getBuffer() );
+                }
+
+                fmt.format( "%n" );
+            }
+
+            if ( rulesBinder.errorsSize() == 1 )
+            {
+                fmt.format( "1 error" );
+            }
+            else
+            {
+                fmt.format( "%s errors", rulesBinder.errorsSize() );
+            }
+
+            throw new DigesterLoadingException( fmt.toString() );
         }
-        else
-        {
-            setClassLoader( getClass().getClassLoader() );
-        }
-        return this;
-    }
 
-    /**
-     * Sets the class loader to be used for instantiating application objects when required.
-     *
-     * @param classLoader the class loader to be used for instantiating application objects when required.
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader setClassLoader( final ClassLoader classLoader )
-    {
-        if ( classLoader == null )
-        {
-            throw new IllegalArgumentException( "Parameter 'classLoader' cannot be null" );
-        }
-
-        this.classLoader = createBinderClassLoader( classLoader );
-
-        rulesBinder.initialize( this.classLoader );
-        for ( final RulesModule rulesModule : rulesModules )
-        {
-            rulesModule.configure( rulesBinder );
-        }
-
-        return this;
-    }
-
-    /**
-     * Sets the {@code Substitutor} to be used to convert attributes and body text.
-     *
-     * @param substitutor the Substitutor to be used to convert attributes and body text
-     *        or null if not substitution of these values is to be performed.
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader setSubstitutor( final Substitutor substitutor )
-    {
-        this.substitutor = substitutor;
-        return this;
-    }
-
-    /**
-     * Sets the "namespace aware" flag for parsers we create.
-     *
-     * @param namespaceAware The new "namespace aware" flag
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader setNamespaceAware( final boolean namespaceAware )
-    {
-        factory.setNamespaceAware( namespaceAware );
-        return this;
-    }
-
-    /**
-     * Return the "namespace aware" flag for parsers we create.
-     *
-     * @return true, if the "namespace aware" flag for parsers we create, false otherwise.
-     */
-    public boolean isNamespaceAware()
-    {
-        return factory.isNamespaceAware();
-    }
-
-    /**
-     * Sets the XInclude-aware flag for parsers we create. This additionally
-     * requires namespace-awareness.
-     *
-     * @param xIncludeAware The new XInclude-aware flag
-     * @return This loader instance, useful to chain methods.
-     * @see #setNamespaceAware(boolean)
-     */
-    public DigesterLoader setXIncludeAware( final boolean xIncludeAware )
-    {
-        factory.setXIncludeAware( xIncludeAware );
-        return this;
-    }
-
-    /**
-     * Return the XInclude-aware flag for parsers we create;
-     *
-     * @return true, if the XInclude-aware flag for parsers we create is set,
-     *         false otherwise
-     */
-    public boolean isXIncludeAware()
-    {
-        return factory.isXIncludeAware();
-    }
-
-    /**
-     * Sets the {@code DOCTYPE} validation parser flag and should not be used when using schemas.
-     *
-     * @param validating The new validating parser flag.
-     * @return This loader instance, useful to chain methods.
-     * @see javax.xml.parsers.SAXParserFactory#setValidating(boolean)
-     */
-    public DigesterLoader setValidating( final boolean validating )
-    {
-        factory.setValidating( validating );
-        return this;
-    }
-
-    /**
-     * Return the {@code DOCTYPE} validation parser flag.
-     *
-     * @return true, if the validating parser flag is set, false otherwise
-     */
-    public boolean isValidating()
-    {
-        return this.factory.isValidating();
-    }
-
-    /**
-     * Sets the XML Schema to be used when parsing.
-     *
-     * @param schema The {@link Schema} instance to use.
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader setSchema( final Schema schema )
-    {
-        factory.setSchema( schema );
-        return this;
-    }
-
-    /**
-     * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
-     * {@code org.xml.sax.XMLReader}.
-     *
-     * @see org.apache.commons.digester3.Digester#setFeature(String, boolean)
-     * @param feature Name of the feature to set the status for
-     * @param value The new value for this feature
-     * @return This loader instance, useful to chain methods.
-     * @throws ParserConfigurationException if a parser configuration error occurs
-     * @throws SAXNotRecognizedException if the property name is not recognized
-     * @throws SAXNotSupportedException if the property name is recognized but not supported
-     * @since 3.3
-     */
-    public DigesterLoader setFeature( final String feature, final boolean value )
-        throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException
-    {
-        factory.setFeature(feature, value);
-        return this;
-    }
-
-    /**
-     * <p>Register the specified DTD URL for the specified public identifier.
-     * This must be called before the first call to {@code parse()}.
-     * </p><p>
-     * {@code Digester} contains an internal {@code EntityResolver}
-     * implementation. This maps {@code PUBLICID}'s to URLs
-     * (from which the resource will be loaded). A common use case for this
-     * method is to register local URLs (possibly computed at runtime by a
-     * classloader) for DTDs. This allows the performance advantage of using
-     * a local version without having to ensure every {@code SYSTEM}
-     * URI on every processed xml document is local. This implementation provides
-     * only basic functionality. If more sophisticated features are required,
-     * using {@link #setEntityResolver(EntityResolver)} to set a custom resolver is recommended.
-     * </p><p>
-     * <strong>Note:</strong> This method will have no effect when a custom
-     * {@code EntityResolver} has been set. (Setting a custom
-     * {@code EntityResolver} overrides the internal implementation.)
-     * </p>
-     * @param publicId Public identifier of the DTD to be resolved
-     * @param entityURL The URL to use for reading this DTD
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader register( final String publicId, final URL entityURL )
-    {
-        entityValidator.put( publicId, entityURL );
-        return this;
-    }
-
-    /**
-     * <p>Convenience method that registers the string version of an entity URL
-     * instead of a URL version.</p>
-     *
-     * @param publicId Public identifier of the entity to be resolved
-     * @param entityURL The URL to use for reading this entity
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader register( final String publicId, final String entityURL )
-    {
-        try
-        {
-            return register( publicId, new URL( entityURL ) );
-        }
-        catch ( final MalformedURLException e )
-        {
-            throw new IllegalArgumentException( "Malformed URL '" + entityURL + "' : " + e.getMessage() );
-        }
-    }
-
-    /**
-     * Return the set of DTD URL registrations, keyed by public identifier.
-     *
-     * @return the set of DTD URL registrations.
-     */
-    public Map<String, URL> getRegistrations()
-    {
-        return Collections.unmodifiableMap( this.entityValidator );
-    }
-
-    /**
-     * Sets the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
-     * before the first call to {@code parse()}.
-     *
-     * @param entityResolver a class that implement the {@code EntityResolver} interface.
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader setEntityResolver( final EntityResolver entityResolver )
-    {
-        this.entityResolver = entityResolver;
-        return this;
-    }
-
-    /**
-     * Sets the Object which will receive callbacks for every pop/push action on the default stack or named stacks.
-     *
-     * @param stackAction the Object which will receive callbacks for every pop/push action on the default stack
-     *        or named stacks.
-     * @return This loader instance, useful to chain methods.
-     */
-    public DigesterLoader setStackAction( final StackAction stackAction )
-    {
-        this.stackAction = stackAction;
-        return this;
-    }
-
-    /**
-     * Returns the executor service used to run asynchronous parse method.
-     *
-     * @return the executor service used to run asynchronous parse method
-     * @since 3.1
-     */
-    public ExecutorService getExecutorService()
-    {
-        return executorService;
-    }
-
-    /**
-     * Sets the executor service to run asynchronous parse method.
-     *
-     * @param executorService the executor service to run asynchronous parse method
-     * @return This loader instance, useful to chain methods.
-     * @since 3.1
-     */
-    public DigesterLoader setExecutorService( final ExecutorService executorService )
-    {
-        this.executorService = executorService;
-        return this;
-    }
-
-    /**
-     * Return the error handler for this Digester.
-     *
-     * @return the error handler for this Digester.
-     * @since 3.2
-     */
-    public ErrorHandler getErrorHandler()
-    {
-        return ( this.errorHandler );
-    }
-
-    /**
-     * Sets the error handler for this Digester.
-     *
-     * @param errorHandler The new error handler
-     * @return This loader instance, useful to chain methods.
-     * @since 3.2
-     */
-    public DigesterLoader setErrorHandler( final ErrorHandler errorHandler )
-    {
-        this.errorHandler = errorHandler;
-        return this;
+        return rulesBinder.getFromBinderRuleSet();
     }
 
     /**
@@ -470,16 +229,66 @@ public final class DigesterLoader
     }
 
     /**
-     * Sets the document locator associated with our parser.
+     * Return the error handler for this Digester.
      *
-     * @param locator the document locator associated with our parser.
-     * @return This loader instance, useful to chain methods.
+     * @return the error handler for this Digester.
      * @since 3.2
      */
-    public DigesterLoader setDocumentLocator( final Locator locator )
+    public ErrorHandler getErrorHandler()
     {
-        this.locator = locator;
-        return this;
+        return ( this.errorHandler );
+    }
+
+    /**
+     * Returns the executor service used to run asynchronous parse method.
+     *
+     * @return the executor service used to run asynchronous parse method
+     * @since 3.1
+     */
+    public ExecutorService getExecutorService()
+    {
+        return executorService;
+    }
+
+    /**
+     * Return the set of DTD URL registrations, keyed by public identifier.
+     *
+     * @return the set of DTD URL registrations.
+     */
+    public Map<String, URL> getRegistrations()
+    {
+        return Collections.unmodifiableMap( this.entityValidator );
+    }
+
+    /**
+     * Return the "namespace aware" flag for parsers we create.
+     *
+     * @return true, if the "namespace aware" flag for parsers we create, false otherwise.
+     */
+    public boolean isNamespaceAware()
+    {
+        return factory.isNamespaceAware();
+    }
+
+    /**
+     * Return the {@code DOCTYPE} validation parser flag.
+     *
+     * @return true, if the validating parser flag is set, false otherwise
+     */
+    public boolean isValidating()
+    {
+        return this.factory.isValidating();
+    }
+
+    /**
+     * Return the XInclude-aware flag for parsers we create;
+     *
+     * @return true, if the XInclude-aware flag for parsers we create is set,
+     *         false otherwise
+     */
+    public boolean isXIncludeAware()
+    {
+        return factory.isXIncludeAware();
     }
 
     /**
@@ -607,56 +416,247 @@ public final class DigesterLoader
     }
 
     /**
-     * Add rules to an already created Digester instance, analyzing the digester annotations in the target class.
+     * <p>Convenience method that registers the string version of an entity URL
+     * instead of a URL version.</p>
      *
-     * @param digester the Digester instance reference.
+     * @param publicId Public identifier of the entity to be resolved
+     * @param entityURL The URL to use for reading this entity
+     * @return This loader instance, useful to chain methods.
      */
-    public void addRules( final Digester digester )
+    public DigesterLoader register( final String publicId, final String entityURL )
     {
-        final RuleSet ruleSet = createRuleSet();
-        ruleSet.addRuleInstances( digester );
+        try
+        {
+            return register( publicId, new URL( entityURL ) );
+        }
+        catch ( final MalformedURLException e )
+        {
+            throw new IllegalArgumentException( "Malformed URL '" + entityURL + "' : " + e.getMessage() );
+        }
     }
 
     /**
-     * Creates a new {@link RuleSet} instance based on the current configuration.
-     *
-     * @return A new {@link RuleSet} instance based on the current configuration.
+     * <p>Register the specified DTD URL for the specified public identifier.
+     * This must be called before the first call to {@code parse()}.
+     * </p><p>
+     * {@code Digester} contains an internal {@code EntityResolver}
+     * implementation. This maps {@code PUBLICID}'s to URLs
+     * (from which the resource will be loaded). A common use case for this
+     * method is to register local URLs (possibly computed at runtime by a
+     * classloader) for DTDs. This allows the performance advantage of using
+     * a local version without having to ensure every {@code SYSTEM}
+     * URI on every processed xml document is local. This implementation provides
+     * only basic functionality. If more sophisticated features are required,
+     * using {@link #setEntityResolver(EntityResolver)} to set a custom resolver is recommended.
+     * </p><p>
+     * <strong>Note:</strong> This method will have no effect when a custom
+     * {@code EntityResolver} has been set. (Setting a custom
+     * {@code EntityResolver} overrides the internal implementation.)
+     * </p>
+     * @param publicId Public identifier of the DTD to be resolved
+     * @param entityURL The URL to use for reading this DTD
+     * @return This loader instance, useful to chain methods.
      */
-    public RuleSet createRuleSet()
+    public DigesterLoader register( final String publicId, final URL entityURL )
     {
-        if ( rulesBinder.hasError() )
+        entityValidator.put( publicId, entityURL );
+        return this;
+    }
+
+    /**
+     * Sets the class loader to be used for instantiating application objects when required.
+     *
+     * @param classLoader the class loader to be used for instantiating application objects when required.
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setClassLoader( final ClassLoader classLoader )
+    {
+        if ( classLoader == null )
         {
-            final Formatter fmt = new Formatter().format( HEADING );
-            int index = 1;
-
-            for ( final ErrorMessage errorMessage : rulesBinder.getErrors() )
-            {
-                fmt.format( "%s) %s%n", index++, errorMessage.getMessage() );
-
-                final Throwable cause = errorMessage.getCause();
-                if ( cause != null )
-                {
-                    final StringWriter writer = new StringWriter();
-                    cause.printStackTrace( new PrintWriter( writer ) );
-                    fmt.format( "Caused by: %s", writer.getBuffer() );
-                }
-
-                fmt.format( "%n" );
-            }
-
-            if ( rulesBinder.errorsSize() == 1 )
-            {
-                fmt.format( "1 error" );
-            }
-            else
-            {
-                fmt.format( "%s errors", rulesBinder.errorsSize() );
-            }
-
-            throw new DigesterLoadingException( fmt.toString() );
+            throw new IllegalArgumentException( "Parameter 'classLoader' cannot be null" );
         }
 
-        return rulesBinder.getFromBinderRuleSet();
+        this.classLoader = createBinderClassLoader( classLoader );
+
+        rulesBinder.initialize( this.classLoader );
+        for ( final RulesModule rulesModule : rulesModules )
+        {
+            rulesModule.configure( rulesBinder );
+        }
+
+        return this;
+    }
+
+    /**
+     * Sets the document locator associated with our parser.
+     *
+     * @param locator the document locator associated with our parser.
+     * @return This loader instance, useful to chain methods.
+     * @since 3.2
+     */
+    public DigesterLoader setDocumentLocator( final Locator locator )
+    {
+        this.locator = locator;
+        return this;
+    }
+
+    /**
+     * Sets the {@code EntityResolver} used by SAX when resolving public id and system id. This must be called
+     * before the first call to {@code parse()}.
+     *
+     * @param entityResolver a class that implement the {@code EntityResolver} interface.
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setEntityResolver( final EntityResolver entityResolver )
+    {
+        this.entityResolver = entityResolver;
+        return this;
+    }
+
+    /**
+     * Sets the error handler for this Digester.
+     *
+     * @param errorHandler The new error handler
+     * @return This loader instance, useful to chain methods.
+     * @since 3.2
+     */
+    public DigesterLoader setErrorHandler( final ErrorHandler errorHandler )
+    {
+        this.errorHandler = errorHandler;
+        return this;
+    }
+
+    /**
+     * Sets the executor service to run asynchronous parse method.
+     *
+     * @param executorService the executor service to run asynchronous parse method
+     * @return This loader instance, useful to chain methods.
+     * @since 3.1
+     */
+    public DigesterLoader setExecutorService( final ExecutorService executorService )
+    {
+        this.executorService = executorService;
+        return this;
+    }
+
+    /**
+     * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
+     * {@code org.xml.sax.XMLReader}.
+     *
+     * @see org.apache.commons.digester3.Digester#setFeature(String, boolean)
+     * @param feature Name of the feature to set the status for
+     * @param value The new value for this feature
+     * @return This loader instance, useful to chain methods.
+     * @throws ParserConfigurationException if a parser configuration error occurs
+     * @throws SAXNotRecognizedException if the property name is not recognized
+     * @throws SAXNotSupportedException if the property name is recognized but not supported
+     * @since 3.3
+     */
+    public DigesterLoader setFeature( final String feature, final boolean value )
+        throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException
+    {
+        factory.setFeature(feature, value);
+        return this;
+    }
+
+    /**
+     * Sets the "namespace aware" flag for parsers we create.
+     *
+     * @param namespaceAware The new "namespace aware" flag
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setNamespaceAware( final boolean namespaceAware )
+    {
+        factory.setNamespaceAware( namespaceAware );
+        return this;
+    }
+
+    /**
+     * Sets the XML Schema to be used when parsing.
+     *
+     * @param schema The {@link Schema} instance to use.
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setSchema( final Schema schema )
+    {
+        factory.setSchema( schema );
+        return this;
+    }
+
+    /**
+     * Sets the Object which will receive callbacks for every pop/push action on the default stack or named stacks.
+     *
+     * @param stackAction the Object which will receive callbacks for every pop/push action on the default stack
+     *        or named stacks.
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setStackAction( final StackAction stackAction )
+    {
+        this.stackAction = stackAction;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Substitutor} to be used to convert attributes and body text.
+     *
+     * @param substitutor the Substitutor to be used to convert attributes and body text
+     *        or null if not substitution of these values is to be performed.
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setSubstitutor( final Substitutor substitutor )
+    {
+        this.substitutor = substitutor;
+        return this;
+    }
+
+    /**
+     * Determine whether to use the Context ClassLoader (the one found by
+     * calling {@code Thread.currentThread().getContextClassLoader()})
+     * to resolve/load classes that are defined in various rules.  If not
+     * using Context ClassLoader, then the class-loading defaults to
+     * using the calling-class' ClassLoader.
+     *
+     * @param useContextClassLoader determines whether to use Context ClassLoader.
+     * @return This loader instance, useful to chain methods.
+     */
+    public DigesterLoader setUseContextClassLoader( final boolean useContextClassLoader )
+    {
+        if ( useContextClassLoader )
+        {
+            setClassLoader( Thread.currentThread().getContextClassLoader() );
+        }
+        else
+        {
+            setClassLoader( getClass().getClassLoader() );
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code DOCTYPE} validation parser flag and should not be used when using schemas.
+     *
+     * @param validating The new validating parser flag.
+     * @return This loader instance, useful to chain methods.
+     * @see javax.xml.parsers.SAXParserFactory#setValidating(boolean)
+     */
+    public DigesterLoader setValidating( final boolean validating )
+    {
+        factory.setValidating( validating );
+        return this;
+    }
+
+    /**
+     * Sets the XInclude-aware flag for parsers we create. This additionally
+     * requires namespace-awareness.
+     *
+     * @param xIncludeAware The new XInclude-aware flag
+     * @return This loader instance, useful to chain methods.
+     * @see #setNamespaceAware(boolean)
+     */
+    public DigesterLoader setXIncludeAware( final boolean xIncludeAware )
+    {
+        factory.setXIncludeAware( xIncludeAware );
+        return this;
     }
 
 }

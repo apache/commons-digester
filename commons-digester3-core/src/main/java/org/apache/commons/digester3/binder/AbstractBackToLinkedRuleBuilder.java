@@ -48,24 +48,12 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
     }
 
     /**
-     * Come back to the main {@link LinkedRuleBuilder}.
+     * Provides an instance of {@link Rule}. Must never return null.
      *
-     * @return the main {@link LinkedRuleBuilder}
+     * @return an instance of {@link Rule}.
+     * @see #get()
      */
-    public final LinkedRuleBuilder then()
-    {
-        return this.mainBuilder;
-    }
-
-    /**
-     * Returns the namespace URI for which this Rule is relevant, if any.
-     *
-     * @return The namespace URI for which this Rule is relevant, if any
-     */
-    public final String getNamespaceURI()
-    {
-        return this.namespaceURI;
-    }
+    protected abstract R createRule();
 
     /**
      * {@inheritDoc}
@@ -81,9 +69,14 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
         return rule;
     }
 
-    protected final void reportError( final String methodChain, final String message )
+    /**
+     * Returns the namespace URI for which this Rule is relevant, if any.
+     *
+     * @return The namespace URI for which this Rule is relevant, if any
+     */
+    public final String getNamespaceURI()
     {
-        this.mainBinder.addError( "{ forPattern( \"%s\" ).%s } %s", this.keyPattern, methodChain, message );
+        return this.namespaceURI;
     }
 
     /**
@@ -96,12 +89,19 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
         return keyPattern;
     }
 
+    protected final void reportError( final String methodChain, final String message )
+    {
+        this.mainBinder.addError( "{ forPattern( \"%s\" ).%s } %s", this.keyPattern, methodChain, message );
+    }
+
     /**
-     * Provides an instance of {@link Rule}. Must never return null.
+     * Come back to the main {@link LinkedRuleBuilder}.
      *
-     * @return an instance of {@link Rule}.
-     * @see #get()
+     * @return the main {@link LinkedRuleBuilder}
      */
-    protected abstract R createRule();
+    public final LinkedRuleBuilder then()
+    {
+        return this.mainBuilder;
+    }
 
 }

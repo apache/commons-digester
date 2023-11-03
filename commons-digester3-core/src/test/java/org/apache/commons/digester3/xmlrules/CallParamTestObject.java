@@ -30,13 +30,6 @@ public class CallParamTestObject
 
     private String middle = "UNSET";
 
-    public void triple( final String left, final String middle, final String right )
-    {
-        this.left = left;
-        this.right = right;
-        this.middle = middle;
-    }
-
     public void duo( final String left, final String right )
     {
         this.left = left;
@@ -48,14 +41,14 @@ public class CallParamTestObject
         return left;
     }
 
-    public String getRight()
-    {
-        return right;
-    }
-
     public String getMiddle()
     {
         return middle;
+    }
+
+    public String getRight()
+    {
+        return right;
     }
 
     public void setLeft( final String left )
@@ -63,19 +56,26 @@ public class CallParamTestObject
         this.left = left;
     }
 
-    public void setRight( final String right )
-    {
-        this.right = right;
-    }
-
     public void setMiddle( final String middle )
     {
         this.middle = middle;
+    }
+
+    public void setRight( final String right )
+    {
+        this.right = right;
     }
 
     @Override
     public String toString()
     {
         return "LEFT: " + left + " MIDDLE:" + middle + " RIGHT:" + right;
+    }
+
+    public void triple( final String left, final String middle, final String right )
+    {
+        this.left = left;
+        this.right = right;
+        this.middle = middle;
     }
 }

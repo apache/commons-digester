@@ -44,18 +44,6 @@ public @interface PathCallParam
 {
 
     /**
-     * The element matching pattern.
-     */
-    String pattern();
-
-    /**
-     * The namespace URI for which this Rule is relevant, if any.
-     *
-     * @since 3.0
-     */
-    String namespaceURI() default "";
-
-    /**
      * Defines several {@code @PathCallParam} annotations on the same element.
      *
      * @see PathCallParam
@@ -68,5 +56,17 @@ public @interface PathCallParam
     {
         PathCallParam[] value();
     }
+
+    /**
+     * The namespace URI for which this Rule is relevant, if any.
+     *
+     * @since 3.0
+     */
+    String namespaceURI() default "";
+
+    /**
+     * The element matching pattern.
+     */
+    String pattern();
 
 }

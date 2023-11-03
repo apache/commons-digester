@@ -51,20 +51,20 @@ public class FactoryCreateRule
     // ----------------------------------------------------------- Constructors
 
     /**
-     * <p>
-     * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
-     * which will then be used to create an object and push it on the stack.
-     * </p>
-     * <p>
-     * Exceptions thrown during the object creation process will be propagated.
-     * </p>
-     *
-     * @param className Java class name of the object creation factory class
+     * The attribute containing an override class name if it is present.
      */
-    public FactoryCreateRule( final String className )
-    {
-        this( className, false );
-    }
+    protected String attributeName;
+
+    /**
+     * The Java class name of the ObjectCreationFactory to be created. This class must have a no-arguments constructor.
+     */
+    protected String className;
+
+    /**
+     * The object creation factory we will use to instantiate objects as required based on the attributes specified in
+     * the matched XML element.
+     */
+    protected ObjectCreationFactory<?> creationFactory;
 
     /**
      * <p>
@@ -83,22 +83,15 @@ public class FactoryCreateRule
     }
 
     /**
-     * <p>
-     * Construct a factory create rule that will use the specified class name (possibly overridden by the specified
-     * attribute if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an
-     * object instance and push it onto the stack.
-     * </p>
-     * <p>
-     * Exceptions thrown during the object creation process will be propagated.
-     * </p>
+     * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
+     * which will then be used to create an object and push it on the stack.
      *
-     * @param className Default Java class name of the factory class
-     * @param attributeName Attribute name which, if present, contains an override of the class name of the object
-     *            creation factory to create.
+     * @param clazz Java class name of the object creation factory class
+     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
      */
-    public FactoryCreateRule( final String className, final String attributeName )
+    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final boolean ignoreCreateExceptions )
     {
-        this( className, attributeName, false );
+        this( clazz, null, ignoreCreateExceptions );
     }
 
     /**
@@ -121,6 +114,22 @@ public class FactoryCreateRule
     }
 
     /**
+     * Construct a factory create rule that will use the specified class (possibly overridden by the specified attribute
+     * if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an object instance
+     * and push it onto the stack.
+     *
+     * @param clazz Default Java class name of the factory class
+     * @param attributeName Attribute name which, if present, contains an override of the class name of the object
+     *            creation factory to create.
+     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
+     */
+    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final String attributeName,
+                              final boolean ignoreCreateExceptions )
+    {
+        this( clazz.getName(), attributeName, ignoreCreateExceptions );
+    }
+
+    /**
      * <p>
      * Construct a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
      * </p>
@@ -136,6 +145,36 @@ public class FactoryCreateRule
     }
 
     /**
+     * Construct a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
+     *
+     * @param creationFactory called on to create the object.
+     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
+     */
+    public FactoryCreateRule( final ObjectCreationFactory<?> creationFactory, final boolean ignoreCreateExceptions )
+    {
+        this.creationFactory = creationFactory;
+        this.ignoreCreateExceptions = ignoreCreateExceptions;
+    }
+
+    /**
+     * <p>
+     * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
+     * which will then be used to create an object and push it on the stack.
+     * </p>
+     * <p>
+     * Exceptions thrown during the object creation process will be propagated.
+     * </p>
+     *
+     * @param className Java class name of the object creation factory class
+     */
+    public FactoryCreateRule( final String className )
+    {
+        this( className, false );
+    }
+
+    // ----------------------------------------------------- Instance Variables
+
+    /**
      * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
      *
@@ -148,15 +187,22 @@ public class FactoryCreateRule
     }
 
     /**
-     * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
-     * which will then be used to create an object and push it on the stack.
+     * <p>
+     * Construct a factory create rule that will use the specified class name (possibly overridden by the specified
+     * attribute if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an
+     * object instance and push it onto the stack.
+     * </p>
+     * <p>
+     * Exceptions thrown during the object creation process will be propagated.
+     * </p>
      *
-     * @param clazz Java class name of the object creation factory class
-     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
+     * @param className Default Java class name of the factory class
+     * @param attributeName Attribute name which, if present, contains an override of the class name of the object
+     *            creation factory to create.
      */
-    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final boolean ignoreCreateExceptions )
+    public FactoryCreateRule( final String className, final String attributeName )
     {
-        this( clazz, null, ignoreCreateExceptions );
+        this( className, attributeName, false );
     }
 
     /**
@@ -175,52 +221,6 @@ public class FactoryCreateRule
         this.attributeName = attributeName;
         this.ignoreCreateExceptions = ignoreCreateExceptions;
     }
-
-    /**
-     * Construct a factory create rule that will use the specified class (possibly overridden by the specified attribute
-     * if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an object instance
-     * and push it onto the stack.
-     *
-     * @param clazz Default Java class name of the factory class
-     * @param attributeName Attribute name which, if present, contains an override of the class name of the object
-     *            creation factory to create.
-     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
-     */
-    public FactoryCreateRule( final Class<? extends ObjectCreationFactory<?>> clazz, final String attributeName,
-                              final boolean ignoreCreateExceptions )
-    {
-        this( clazz.getName(), attributeName, ignoreCreateExceptions );
-    }
-
-    /**
-     * Construct a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
-     *
-     * @param creationFactory called on to create the object.
-     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
-     */
-    public FactoryCreateRule( final ObjectCreationFactory<?> creationFactory, final boolean ignoreCreateExceptions )
-    {
-        this.creationFactory = creationFactory;
-        this.ignoreCreateExceptions = ignoreCreateExceptions;
-    }
-
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The attribute containing an override class name if it is present.
-     */
-    protected String attributeName;
-
-    /**
-     * The Java class name of the ObjectCreationFactory to be created. This class must have a no-arguments constructor.
-     */
-    protected String className;
-
-    /**
-     * The object creation factory we will use to instantiate objects as required based on the attributes specified in
-     * the matched XML element.
-     */
-    protected ObjectCreationFactory<?> creationFactory;
 
     // --------------------------------------------------------- Public Methods
 
@@ -333,24 +333,6 @@ public class FactoryCreateRule
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        final Formatter formatter = new Formatter().format( "FactoryCreateRule[className=%s, attributeName=%s",
-                                                      className, attributeName );
-        if ( creationFactory != null )
-        {
-            formatter.format( ", creationFactory=%s", creationFactory );
-        }
-        formatter.format( "]" );
-        return ( formatter.toString() );
-    }
-
-    // ------------------------------------------------------ Protected Methods
-
-    /**
      * Return an instance of our associated object creation factory, creating one if necessary.
      *
      * @param attributes Attributes passed to our factory creation element
@@ -381,6 +363,24 @@ public class FactoryCreateRule
             creationFactory.setDigester( getDigester() );
         }
         return ( creationFactory );
+    }
+
+    // ------------------------------------------------------ Protected Methods
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        final Formatter formatter = new Formatter().format( "FactoryCreateRule[className=%s, attributeName=%s",
+                                                      className, attributeName );
+        if ( creationFactory != null )
+        {
+            formatter.format( ", creationFactory=%s", creationFactory );
+        }
+        formatter.format( "]" );
+        return ( formatter.toString() );
     }
 
 }

@@ -35,34 +35,9 @@ public final class Entry
 
     private String content;
 
-    public String getTitle()
+    public String getContent()
     {
-        return title;
-    }
-
-    public void setTitle( final String title )
-    {
-        this.title = title;
-    }
-
-    public URL getLink()
-    {
-        return link;
-    }
-
-    public void setLink( final URL link )
-    {
-        this.link = link;
-    }
-
-    public Date getUpdated()
-    {
-        return updated;
-    }
-
-    public void setUpdated( final Date updated )
-    {
-        this.updated = updated;
+        return content;
     }
 
     public String getId()
@@ -70,19 +45,44 @@ public final class Entry
         return id;
     }
 
-    public void setId( final String id )
+    public URL getLink()
     {
-        this.id = id;
+        return link;
     }
 
-    public String getContent()
+    public String getTitle()
     {
-        return content;
+        return title;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
     }
 
     public void setContent( final String content )
     {
         this.content = content;
+    }
+
+    public void setId( final String id )
+    {
+        this.id = id;
+    }
+
+    public void setLink( final URL link )
+    {
+        this.link = link;
+    }
+
+    public void setTitle( final String title )
+    {
+        this.title = title;
+    }
+
+    public void setUpdated( final Date updated )
+    {
+        this.updated = updated;
     }
 
     @Override

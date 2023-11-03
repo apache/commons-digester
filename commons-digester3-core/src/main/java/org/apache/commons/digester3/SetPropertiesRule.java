@@ -45,6 +45,14 @@ public class SetPropertiesRule
 
     // ----------------------------------------------------------- Constructors
 
+    private final Map<String, String> aliases = new HashMap<String, String>();
+
+    /**
+     * Used to determine whether the parsing should fail if an property specified in the XML is missing from the bean.
+     * Default is true for backward compatibility.
+     */
+    private boolean ignoreMissingProperty = true;
+
     /**
      * Base constructor.
      */
@@ -52,6 +60,22 @@ public class SetPropertiesRule
     {
         // nothing to set up
     }
+
+    /**
+     * Constructor allows attribute->property mapping to be overriden.
+     *
+     * @param aliases attribute->property mapping
+     * @since 3.0
+     */
+    public SetPropertiesRule( final Map<String, String> aliases )
+    {
+        if ( aliases != null && !aliases.isEmpty() )
+        {
+            this.aliases.putAll( aliases );
+        }
+    }
+
+    // ----------------------------------------------------- Instance Variables
 
     /**
      * <p>
@@ -119,31 +143,18 @@ public class SetPropertiesRule
         }
     }
 
-    /**
-     * Constructor allows attribute->property mapping to be overriden.
-     *
-     * @param aliases attribute->property mapping
-     * @since 3.0
-     */
-    public SetPropertiesRule( final Map<String, String> aliases )
-    {
-        if ( aliases != null && !aliases.isEmpty() )
-        {
-            this.aliases.putAll( aliases );
-        }
-    }
-
-    // ----------------------------------------------------- Instance Variables
-
-    private final Map<String, String> aliases = new HashMap<String, String>();
-
-    /**
-     * Used to determine whether the parsing should fail if an property specified in the XML is missing from the bean.
-     * Default is true for backward compatibility.
-     */
-    private boolean ignoreMissingProperty = true;
-
     // --------------------------------------------------------- Public Methods
+
+    /**
+     * Add an additional attribute name to property name mapping. This is intended to be used from the xml rules.
+     *
+     * @param attributeName the attribute name has to be mapped
+     * @param propertyName the target property name
+     */
+    public void addAlias( final String attributeName, final String propertyName )
+    {
+        aliases.put( attributeName, propertyName );
+    }
 
     /**
      * {@inheritDoc}
@@ -233,26 +244,6 @@ public class SetPropertiesRule
     }
 
     /**
-     * Add an additional attribute name to property name mapping. This is intended to be used from the xml rules.
-     *
-     * @param attributeName the attribute name has to be mapped
-     * @param propertyName the target property name
-     */
-    public void addAlias( final String attributeName, final String propertyName )
-    {
-        aliases.put( attributeName, propertyName );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        return format( "SetPropertiesRule[aliases=%s, ignoreMissingProperty=%s]", aliases, ignoreMissingProperty );
-    }
-
-    /**
      * <p>
      * Are attributes found in the xml without matching properties to be ignored?
      * </p>
@@ -278,6 +269,15 @@ public class SetPropertiesRule
     public void setIgnoreMissingProperty( final boolean ignoreMissingProperty )
     {
         this.ignoreMissingProperty = ignoreMissingProperty;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        return format( "SetPropertiesRule[aliases=%s, ignoreMissingProperty=%s]", aliases, ignoreMissingProperty );
     }
 
 }

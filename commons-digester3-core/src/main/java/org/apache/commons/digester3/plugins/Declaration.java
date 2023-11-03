@@ -58,20 +58,6 @@ public class Declaration
     /**
      * Constructor.
      *
-     * @param pluginClassName The name of the class of the object to be instantiated (will be load in the init method)
-     */
-    public Declaration( final String pluginClassName )
-    {
-        // We can't load the pluginClass at this time, because we don't
-        // have a digester instance yet to load it through. So just
-        // save the name away, and we'll load the Class object in the
-        // init method.
-        this.pluginClassName = pluginClassName;
-    }
-
-    /**
-     * Constructor.
-     *
      * @param pluginClass The class of the object to be instantiated (will be load in the init method)
      */
     public Declaration( final Class<?> pluginClass )
@@ -94,19 +80,51 @@ public class Declaration
         this.ruleLoader = ruleLoader;
     }
 
+    /**
+     * Constructor.
+     *
+     * @param pluginClassName The name of the class of the object to be instantiated (will be load in the init method)
+     */
+    public Declaration( final String pluginClassName )
+    {
+        // We can't load the pluginClass at this time, because we don't
+        // have a digester instance yet to load it through. So just
+        // save the name away, and we'll load the Class object in the
+        // init method.
+        this.pluginClassName = pluginClassName;
+    }
+
     // ---------------------- properties -----------------------------------
 
     /**
-     * The id that the user associated with a particular plugin declaration in the input xml. This id is later used in
-     * the input xml to refer back to the original declaration.
+     * Attempt to load custom rules for the target class at the specified pattern.
      * <p>
-     * For plugins declared "in-line", the id is null.
+     * On return, any custom rules associated with the plugin class have been loaded into the Rules object currently
+     * associated with the specified digester object.
      *
-     * @param id The id that the user associated with a particular plugin declaration in the input xml
+     * @param digester The Digester instance where plugin has to be plugged
+     * @param pattern The pattern the custom rules have to be bound
+     * @throws PluginException if any error occurs
      */
-    public void setId( final String id )
+    public void configure( final Digester digester, final String pattern )
+        throws PluginException
     {
-        this.id = id;
+        final Log log = digester.getLogger();
+        final boolean debug = log.isDebugEnabled();
+        if ( debug )
+        {
+            log.debug( "configure being called!" );
+        }
+
+        if ( !initialized )
+        {
+            throw new PluginAssertionFailure( "Not initialized." );
+        }
+
+        if ( ruleLoader != null )
+        {
+            ruleLoader.addRules( digester, pattern );
+        }
     }
 
     /**
@@ -120,23 +138,6 @@ public class Declaration
     }
 
     /**
-     * Copy all (key,value) pairs in the param into the properties member of this object.
-     * <p>
-     * The declaration properties cannot be explicit member variables, because the set of useful properties a user can
-     * provide on a declaration depends on what RuleFinder classes are available - and extra RuleFinders can be added by
-     * the user. So here we keep a map of the settings, and let the RuleFinder objects look for whatever properties they
-     * consider significant.
-     * <p>
-     * The "id" and "class" properties are treated differently.
-     *
-     * @param p The properties have to be copied into the properties member of this object
-     */
-    public void setProperties( final Properties p )
-    {
-        properties.putAll( p );
-    }
-
-    /**
      * Return plugin class associated with this declaration.
      *
      * @return The pluginClass.
@@ -145,8 +146,6 @@ public class Declaration
     {
         return pluginClass;
     }
-
-    // ---------------------- methods -----------------------------------
 
     /**
      * Must be called exactly once, and must be called before any call to the configure method.
@@ -213,35 +212,36 @@ public class Declaration
         initialized = true;
     }
 
+    // ---------------------- methods -----------------------------------
+
     /**
-     * Attempt to load custom rules for the target class at the specified pattern.
+     * The id that the user associated with a particular plugin declaration in the input xml. This id is later used in
+     * the input xml to refer back to the original declaration.
      * <p>
-     * On return, any custom rules associated with the plugin class have been loaded into the Rules object currently
-     * associated with the specified digester object.
+     * For plugins declared "in-line", the id is null.
      *
-     * @param digester The Digester instance where plugin has to be plugged
-     * @param pattern The pattern the custom rules have to be bound
-     * @throws PluginException if any error occurs
+     * @param id The id that the user associated with a particular plugin declaration in the input xml
      */
-    public void configure( final Digester digester, final String pattern )
-        throws PluginException
+    public void setId( final String id )
     {
-        final Log log = digester.getLogger();
-        final boolean debug = log.isDebugEnabled();
-        if ( debug )
-        {
-            log.debug( "configure being called!" );
-        }
+        this.id = id;
+    }
 
-        if ( !initialized )
-        {
-            throw new PluginAssertionFailure( "Not initialized." );
-        }
-
-        if ( ruleLoader != null )
-        {
-            ruleLoader.addRules( digester, pattern );
-        }
+    /**
+     * Copy all (key,value) pairs in the param into the properties member of this object.
+     * <p>
+     * The declaration properties cannot be explicit member variables, because the set of useful properties a user can
+     * provide on a declaration depends on what RuleFinder classes are available - and extra RuleFinders can be added by
+     * the user. So here we keep a map of the settings, and let the RuleFinder objects look for whatever properties they
+     * consider significant.
+     * <p>
+     * The "id" and "class" properties are treated differently.
+     *
+     * @param p The properties have to be copied into the properties member of this object
+     */
+    public void setProperties( final Properties p )
+    {
+        properties.putAll( p );
     }
 
 }

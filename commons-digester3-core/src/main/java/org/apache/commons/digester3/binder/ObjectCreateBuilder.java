@@ -62,6 +62,46 @@ public final class ObjectCreateBuilder
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected ObjectCreateRule createRule()
+    {
+        final ObjectCreateRule objectCreateRule = new ObjectCreateRule( attributeName, type );
+
+        if ( constructorArgumentsType != null )
+        {
+            objectCreateRule.setConstructorArgumentTypes( constructorArgumentsType );
+        }
+        if ( defaultConstructorArguments != null )
+        {
+            objectCreateRule.setDefaultConstructorArguments( defaultConstructorArguments );
+        }
+
+        return objectCreateRule;
+    }
+
+    /**
+     * Construct an object with the specified class.
+     *
+     * @param <T> any java type
+     * @param type Java class of the object to be created
+     * @return this builder instance
+     */
+    public <T> ObjectCreateBuilder ofType( final Class<T> type )
+    {
+        if ( type == null )
+        {
+            reportError( "createObject().ofType( Class<?> )", "NULL Java type not allowed" );
+            return this;
+        }
+
+        this.type = type;
+
+        return this;
+    }
+
+    /**
      * Construct an object with the specified class name.
      *
      * @param className Java class name of the object to be created
@@ -87,26 +127,6 @@ public final class ObjectCreateBuilder
     }
 
     /**
-     * Construct an object with the specified class.
-     *
-     * @param <T> any java type
-     * @param type Java class of the object to be created
-     * @return this builder instance
-     */
-    public <T> ObjectCreateBuilder ofType( final Class<T> type )
-    {
-        if ( type == null )
-        {
-            reportError( "createObject().ofType( Class<?> )", "NULL Java type not allowed" );
-            return this;
-        }
-
-        this.type = type;
-
-        return this;
-    }
-
-    /**
      * Allows specify the attribute containing an override class name if it is present.
      *
      * @param attributeName The attribute containing an override class name if it is present
@@ -115,6 +135,27 @@ public final class ObjectCreateBuilder
     public ObjectCreateBuilder ofTypeSpecifiedByAttribute( /* @Nullable */final String attributeName )
     {
         this.attributeName = attributeName;
+        return this;
+    }
+
+    /**
+     * Allows users to specify constructor argument types.
+     *
+     * @param constructorArgumentTypes the constructor argument types
+     * @return this builder instance
+     * @since 3.2
+     */
+    public ObjectCreateBuilder usingConstructor( final Class<?>... constructorArgumentTypes )
+    {
+        if ( constructorArgumentTypes == null )
+        {
+            reportError( "createObject().usingConstructor( Class<?>[] )",
+                         "NULL constructorArgumentTypes not allowed" );
+            return this;
+        }
+
+        this.constructorArgumentsType = constructorArgumentTypes;
+
         return this;
     }
 
@@ -152,27 +193,6 @@ public final class ObjectCreateBuilder
     }
 
     /**
-     * Allows users to specify constructor argument types.
-     *
-     * @param constructorArgumentTypes the constructor argument types
-     * @return this builder instance
-     * @since 3.2
-     */
-    public ObjectCreateBuilder usingConstructor( final Class<?>... constructorArgumentTypes )
-    {
-        if ( constructorArgumentTypes == null )
-        {
-            reportError( "createObject().usingConstructor( Class<?>[] )",
-                         "NULL constructorArgumentTypes not allowed" );
-            return this;
-        }
-
-        this.constructorArgumentsType = constructorArgumentTypes;
-
-        return this;
-    }
-
-    /**
      * Allows users to specify default constructor arguments.
      *
      * @param defaultConstructorArguments the default constructor arguments.
@@ -192,26 +212,6 @@ public final class ObjectCreateBuilder
 
         return this;
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected ObjectCreateRule createRule()
-    {
-        final ObjectCreateRule objectCreateRule = new ObjectCreateRule( attributeName, type );
-
-        if ( constructorArgumentsType != null )
-        {
-            objectCreateRule.setConstructorArgumentTypes( constructorArgumentsType );
-        }
-        if ( defaultConstructorArguments != null )
-        {
-            objectCreateRule.setDefaultConstructorArguments( defaultConstructorArguments );
-        }
-
-        return objectCreateRule;
     }
 
 }

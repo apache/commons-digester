@@ -33,6 +33,12 @@ public class SubstituteTransform
     implements Transform
 {
 
+    public static void addRules( final Digester d, final String patternPrefix )
+    {
+        d.addCallMethod( patternPrefix + "/from", "setFrom", 0 );
+        d.addCallMethod( patternPrefix + "/to", "setTo", 0 );
+    }
+
     private String from;
 
     private String to;
@@ -62,12 +68,6 @@ public class SubstituteTransform
             buf.replace( idx, idx + from.length(), to );
         }
         return buf.toString();
-    }
-
-    public static void addRules( final Digester d, final String patternPrefix )
-    {
-        d.addCallMethod( patternPrefix + "/from", "setFrom", 0 );
-        d.addCallMethod( patternPrefix + "/to", "setTo", 0 );
     }
 
 }

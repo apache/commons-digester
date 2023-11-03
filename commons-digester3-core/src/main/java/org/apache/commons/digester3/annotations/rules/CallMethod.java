@@ -44,23 +44,6 @@ public @interface CallMethod
 {
 
     /**
-     * The element matching pattern.
-     */
-    String pattern();
-
-    /**
-     * The namespace URI for which this Rule is relevant, if any.
-     *
-     * @since 3.0
-     */
-    String namespaceURI() default "";
-
-    /**
-     * Marks the {@link CallMethodRule} to be invoked using the matching element body as argument.
-     */
-    boolean usingElementBodyAsArgument() default false;
-
-    /**
      * Defines several {@code @CallMethod} annotations on the same element.
      *
      * @see CallMethod
@@ -73,5 +56,22 @@ public @interface CallMethod
     {
         CallMethod[] value();
     }
+
+    /**
+     * The namespace URI for which this Rule is relevant, if any.
+     *
+     * @since 3.0
+     */
+    String namespaceURI() default "";
+
+    /**
+     * The element matching pattern.
+     */
+    String pattern();
+
+    /**
+     * Marks the {@link CallMethodRule} to be invoked using the matching element body as argument.
+     */
+    boolean usingElementBodyAsArgument() default false;
 
 }

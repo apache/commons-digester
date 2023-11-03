@@ -39,6 +39,13 @@ public class PathCallParamRule
     // ----------------------------------------------------------- Constructors
 
     /**
+     * The zero-relative index of the parameter we are saving.
+     */
+    protected int paramIndex;
+
+    // ----------------------------------------------------- Instance Variables
+
+    /**
      * Construct a "call parameter" rule that will save the body text of this element as the parameter value.
      *
      * @param paramIndex The zero-relative parameter number
@@ -47,13 +54,6 @@ public class PathCallParamRule
     {
         this.paramIndex = paramIndex;
     }
-
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The zero-relative index of the parameter we are saving.
-     */
-    protected int paramIndex;
 
     // --------------------------------------------------------- Public Methods
 

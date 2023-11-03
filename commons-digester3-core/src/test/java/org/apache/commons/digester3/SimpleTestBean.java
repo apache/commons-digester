@@ -38,29 +38,9 @@ public class SimpleTestBean
         return alpha;
     }
 
-    public void setAlpha( final String alpha )
-    {
-        this.alpha = alpha;
-    }
-
     public String getBeta()
     {
         return beta;
-    }
-
-    public void setBeta( final String beta )
-    {
-        this.beta = beta;
-    }
-
-    public String getGamma()
-    {
-        return gamma;
-    }
-
-    public void setGamma( final String gamma )
-    {
-        this.gamma = gamma;
     }
 
     public String getDeltaValue()
@@ -68,15 +48,35 @@ public class SimpleTestBean
         return delta;
     }
 
-    public void setDelta( final String delta )
-    { // "delta" is a write-only property
-        this.delta = delta;
+    public String getGamma()
+    {
+        return gamma;
+    }
+
+    public void setAlpha( final String alpha )
+    {
+        this.alpha = alpha;
     }
 
     public void setAlphaBeta( final String alpha, final String beta )
     {
         setAlpha( alpha );
         setBeta( beta );
+    }
+
+    public void setBeta( final String beta )
+    {
+        this.beta = beta;
+    }
+
+    public void setDelta( final String delta )
+    { // "delta" is a write-only property
+        this.delta = delta;
+    }
+
+    public void setGamma( final String gamma )
+    {
+        this.gamma = gamma;
     }
 
     @Override

@@ -41,15 +41,6 @@ final class PrefixedRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public ClassLoader getContextClassLoader()
-    {
-        return this.wrappedRulesBinder.getContextClassLoader();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         this.wrappedRulesBinder.addError( messagePattern, arguments );
@@ -68,15 +59,6 @@ final class PrefixedRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public void install( final RulesModule rulesModule )
-    {
-        this.wrappedRulesBinder.install( rulesModule );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public LinkedRuleBuilder forPattern( String pattern )
     {
         if ( this.prefix != null && !this.prefix.isEmpty() )
@@ -84,6 +66,24 @@ final class PrefixedRulesBinder
             pattern = this.prefix + '/' + pattern;
         }
         return this.wrappedRulesBinder.forPattern( pattern );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ClassLoader getContextClassLoader()
+    {
+        return this.wrappedRulesBinder.getContextClassLoader();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void install( final RulesModule rulesModule )
+    {
+        this.wrappedRulesBinder.install( rulesModule );
     }
 
 }

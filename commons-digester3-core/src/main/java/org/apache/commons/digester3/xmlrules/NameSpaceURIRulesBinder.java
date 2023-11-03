@@ -43,32 +43,6 @@ final class NameSpaceURIRulesBinder
     }
 
     /**
-     *
-     * @param namespaceURI
-     */
-    public void addNamespaceURI( final String namespaceURI )
-    {
-        namespaceURIs.push( namespaceURI );
-    }
-
-    /**
-     *
-     */
-    public void removeNamespaceURI()
-    {
-        namespaceURIs.pop();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ClassLoader getContextClassLoader()
-    {
-        return wrappedBinder.getContextClassLoader();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -87,12 +61,12 @@ final class NameSpaceURIRulesBinder
     }
 
     /**
-     * {@inheritDoc}
+     *
+     * @param namespaceURI
      */
-    @Override
-    public void install( final RulesModule rulesModule )
+    public void addNamespaceURI( final String namespaceURI )
     {
-        wrappedBinder.install( rulesModule );
+        namespaceURIs.push( namespaceURI );
     }
 
     /**
@@ -102,6 +76,32 @@ final class NameSpaceURIRulesBinder
     public LinkedRuleBuilder forPattern( final String pattern )
     {
         return wrappedBinder.forPattern( pattern ).withNamespaceURI( namespaceURIs.peek() );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ClassLoader getContextClassLoader()
+    {
+        return wrappedBinder.getContextClassLoader();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void install( final RulesModule rulesModule )
+    {
+        wrappedBinder.install( rulesModule );
+    }
+
+    /**
+     *
+     */
+    public void removeNamespaceURI()
+    {
+        namespaceURIs.pop();
     }
 
 }

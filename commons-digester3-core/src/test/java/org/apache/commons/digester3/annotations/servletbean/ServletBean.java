@@ -47,31 +47,6 @@ public final class ServletBean
         this.initParams.put( name, value );
     }
 
-    public String getServletName()
-    {
-        return servletName;
-    }
-
-    public void setServletName( final String servletName )
-    {
-        this.servletName = servletName;
-    }
-
-    public String getServletClass()
-    {
-        return servletClass;
-    }
-
-    public void setServletClass( final String servletClass )
-    {
-        this.servletClass = servletClass;
-    }
-
-    public Map<String, String> getInitParams()
-    {
-        return initParams;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -113,6 +88,31 @@ public final class ServletBean
             return false;
         }
         return true;
+    }
+
+    public Map<String, String> getInitParams()
+    {
+        return initParams;
+    }
+
+    public String getServletClass()
+    {
+        return servletClass;
+    }
+
+    public String getServletName()
+    {
+        return servletName;
+    }
+
+    public void setServletClass( final String servletClass )
+    {
+        this.servletClass = servletClass;
+    }
+
+    public void setServletName( final String servletName )
+    {
+        this.servletName = servletName;
     }
 
     @Override

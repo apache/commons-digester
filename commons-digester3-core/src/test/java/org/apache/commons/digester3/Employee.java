@@ -27,6 +27,19 @@ import java.util.ArrayList;
 public class Employee
 {
 
+    private final ArrayList<Address> addresses = new ArrayList<Address>();
+
+    private String firstName;
+
+    private String lastName;
+
+    // this is to allow testing of primitive convertion
+    private int age;
+
+    private boolean active;
+
+    private float salary;
+
     public Employee()
     {
         this( "My First Name", "My Last Name" );
@@ -37,8 +50,6 @@ public class Employee
         setFirstName( firstName );
         setLastName( lastName );
     }
-
-    private final ArrayList<Address> addresses = new ArrayList<Address>();
 
     public void addAddress( final Address address )
     {
@@ -56,50 +67,24 @@ public class Employee
         return ( null );
     }
 
-    public void removeAddress( final Address address )
+    public int getAge()
     {
-        addresses.remove( address );
+        return age;
     }
-
-    private String firstName;
 
     public String getFirstName()
     {
         return ( this.firstName );
     }
 
-    public void setFirstName( final String firstName )
-    {
-        this.firstName = firstName;
-    }
-
-    private String lastName;
-
     public String getLastName()
     {
         return ( this.lastName );
     }
 
-    public void setLastName( final String lastName )
+    public float getSalary()
     {
-        this.lastName = lastName;
-    }
-
-    // this is to allow testing of primitive convertion
-    private int age;
-
-    private boolean active;
-
-    private float salary;
-
-    public int getAge()
-    {
-        return age;
-    }
-
-    public void setAge( final int age )
-    {
-        this.age = age;
+        return salary;
     }
 
     public boolean isActive()
@@ -107,14 +92,29 @@ public class Employee
         return active;
     }
 
+    public void removeAddress( final Address address )
+    {
+        addresses.remove( address );
+    }
+
     public void setActive( final boolean active )
     {
         this.active = active;
     }
 
-    public float getSalary()
+    public void setAge( final int age )
     {
-        return salary;
+        this.age = age;
+    }
+
+    public void setFirstName( final String firstName )
+    {
+        this.firstName = firstName;
+    }
+
+    public void setLastName( final String lastName )
+    {
+        this.lastName = lastName;
     }
 
     public void setSalary( final float salary )

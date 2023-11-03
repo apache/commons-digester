@@ -34,6 +34,16 @@ public final class DigesterLoadingException
     private static final long serialVersionUID = 1L;
 
     /**
+     * Constructs a new Digester exception with the specified detail message.
+     *
+     * @param message the detail message.
+     */
+    public DigesterLoadingException( final String message )
+    {
+        super( message );
+    }
+
+    /**
      * Constructs a new exception with the specified detail message and cause.
      *
      * @param message the detail message.
@@ -42,16 +52,6 @@ public final class DigesterLoadingException
     public DigesterLoadingException( final String message, final Throwable cause )
     {
         super( message, cause );
-    }
-
-    /**
-     * Constructs a new Digester exception with the specified detail message.
-     *
-     * @param message the detail message.
-     */
-    public DigesterLoadingException( final String message )
-    {
-        super( message );
     }
 
     /**

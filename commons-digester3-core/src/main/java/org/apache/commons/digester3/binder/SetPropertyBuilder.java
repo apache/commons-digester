@@ -44,6 +44,15 @@ public final class SetPropertyBuilder
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected SetPropertyRule createRule()
+    {
+        return new SetPropertyRule( attributePropertyName, valueAttributeName );
+    }
+
+    /**
      * Sets the name of the attribute that will contain the value to which the property should be set.
      *
      * @param valueAttributeName Name of the attribute that will contain the value to which the property should be set.
@@ -59,15 +68,6 @@ public final class SetPropertyBuilder
 
         this.valueAttributeName = valueAttributeName;
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected SetPropertyRule createRule()
-    {
-        return new SetPropertyRule( attributePropertyName, valueAttributeName );
     }
 
 }

@@ -92,68 +92,10 @@ public class WithDefaultsRulesWrapper
      * {@inheritDoc}
      */
     @Override
-    public Digester getDigester()
+    public void add( final String pattern, final Rule rule )
     {
-        return wrappedRules.getDigester();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDigester( final Digester digester )
-    {
-        wrappedRules.setDigester( digester );
-        for ( final Rule rule : defaultRules )
-        {
-            rule.setDigester( digester );
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getNamespaceURI()
-    {
-        return wrappedRules.getNamespaceURI();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setNamespaceURI( final String namespaceURI )
-    {
-        wrappedRules.setNamespaceURI( namespaceURI );
-    }
-
-    /**
-     * Gets Rule's which will be fired when the wrapped implementation returns no matches
-     *
-     * @return Rule's which will be fired when the wrapped implementation returns no matches
-     **/
-    public List<Rule> getDefaults()
-    {
-        return defaultRules;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
-    {
-        final List<Rule> matches = wrappedRules.match( namespaceURI, pattern, name, attributes );
-        if ( matches == null || matches.isEmpty() )
-        {
-            // a little bit of defensive programming
-            return new ArrayList<Rule>( defaultRules );
-        }
-        // otherwise
-        return matches;
+        wrappedRules.add( pattern, rule );
+        allRules.add( rule );
     }
 
     /**
@@ -182,6 +124,63 @@ public class WithDefaultsRulesWrapper
      * {@inheritDoc}
      */
     @Override
+    public void clear()
+    {
+        wrappedRules.clear();
+        allRules.clear();
+        defaultRules.clear();
+    }
+
+    /**
+     * Gets Rule's which will be fired when the wrapped implementation returns no matches
+     *
+     * @return Rule's which will be fired when the wrapped implementation returns no matches
+     **/
+    public List<Rule> getDefaults()
+    {
+        return defaultRules;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Digester getDigester()
+    {
+        return wrappedRules.getDigester();
+    }
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNamespaceURI()
+    {
+        return wrappedRules.getNamespaceURI();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
+    {
+        final List<Rule> matches = wrappedRules.match( namespaceURI, pattern, name, attributes );
+        if ( matches == null || matches.isEmpty() )
+        {
+            // a little bit of defensive programming
+            return new ArrayList<Rule>( defaultRules );
+        }
+        // otherwise
+        return matches;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Rule> rules()
     {
         return allRules;
@@ -191,21 +190,22 @@ public class WithDefaultsRulesWrapper
      * {@inheritDoc}
      */
     @Override
-    public void clear()
+    public void setDigester( final Digester digester )
     {
-        wrappedRules.clear();
-        allRules.clear();
-        defaultRules.clear();
+        wrappedRules.setDigester( digester );
+        for ( final Rule rule : defaultRules )
+        {
+            rule.setDigester( digester );
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void add( final String pattern, final Rule rule )
+    public void setNamespaceURI( final String namespaceURI )
     {
-        wrappedRules.add( pattern, rule );
-        allRules.add( rule );
+        wrappedRules.setNamespaceURI( namespaceURI );
     }
 
 }

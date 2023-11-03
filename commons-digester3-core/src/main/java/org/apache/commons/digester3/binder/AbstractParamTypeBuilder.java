@@ -55,6 +55,50 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
     }
 
     /**
+     * Marks the rule be invoked when {@code begin} or {@code end} events match.
+     *
+     * @param fireOnBegin true, to invoke the rule at {@code begin}, false for {@code end}
+     * @return this builder instance
+     */
+    public final AbstractParamTypeBuilder<R> fireOnBegin( final boolean fireOnBegin )
+    {
+        this.fireOnBegin = fireOnBegin;
+        return this;
+    }
+
+    final String getMethodName()
+    {
+        return methodName;
+    }
+
+    final Class<?> getParamType()
+    {
+        return paramType;
+    }
+
+    final boolean isFireOnBegin()
+    {
+        return fireOnBegin;
+    }
+
+    final boolean isUseExactMatch()
+    {
+        return useExactMatch;
+    }
+
+    /**
+     * Sets exact matching being used.
+     *
+     * @param useExactMatch The exact matching being used
+     * @return this builder instance
+     */
+    public final AbstractParamTypeBuilder<R> useExactMatch( final boolean useExactMatch )
+    {
+        this.useExactMatch = useExactMatch;
+        return this;
+    }
+
+    /**
      * Sets the Java class of the method's argument.
      *
      * If you wish to use a primitive type, specify the corresonding
@@ -106,50 +150,6 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
             }
         }
         return this;
-    }
-
-    /**
-     * Sets exact matching being used.
-     *
-     * @param useExactMatch The exact matching being used
-     * @return this builder instance
-     */
-    public final AbstractParamTypeBuilder<R> useExactMatch( final boolean useExactMatch )
-    {
-        this.useExactMatch = useExactMatch;
-        return this;
-    }
-
-    /**
-     * Marks the rule be invoked when {@code begin} or {@code end} events match.
-     *
-     * @param fireOnBegin true, to invoke the rule at {@code begin}, false for {@code end}
-     * @return this builder instance
-     */
-    public final AbstractParamTypeBuilder<R> fireOnBegin( final boolean fireOnBegin )
-    {
-        this.fireOnBegin = fireOnBegin;
-        return this;
-    }
-
-    final String getMethodName()
-    {
-        return methodName;
-    }
-
-    final Class<?> getParamType()
-    {
-        return paramType;
-    }
-
-    final boolean isUseExactMatch()
-    {
-        return useExactMatch;
-    }
-
-    final boolean isFireOnBegin()
-    {
-        return fireOnBegin;
     }
 
 }

@@ -44,6 +44,42 @@ public class FinderFromResource
      */
     private static final String DFLT_RESOURCE_ATTR = "resource";
 
+    /**
+     * Open the specified resource file (ie a file in the classpath, including being within a jar in the classpath), run
+     * it through the xmlrules module and return an object encapsulating those rules.
+     *
+     * @param d is the digester into which rules will eventually be loaded.
+     * @param pluginClass is the class whose xml params the rules are parsing.
+     * @param is is where the xmlrules will be read from, and must be non-null.
+     * @param resourceName is a string describing the source of the xmlrules, for use in generating error messages.
+     * @return a source of digester rules for the specified plugin class.
+     * @throws PluginException if any error occurs
+     */
+    public static RuleLoader loadRules( final Digester d, final Class<?> pluginClass, final InputStream is, final String resourceName )
+        throws PluginException
+    {
+        try
+        {
+            final RuleLoader loader = new LoaderFromStream( is );
+            return loader;
+        }
+        catch ( final Exception e )
+        {
+            throw new PluginException( "Unable to load xmlrules from resource [" + resourceName + "]", e );
+        }
+        finally
+        {
+            try
+            {
+                is.close();
+            }
+            catch ( final IOException ioe )
+            {
+                throw new PluginException( "Unable to close stream for resource [" + resourceName + "]", ioe );
+            }
+        }
+    }
+
     /** See {@link #findLoader}. */
     private final String resourceAttr;
 
@@ -101,42 +137,6 @@ public class FinderFromResource
         }
 
         return loadRules( d, pluginClass, is, resourceName );
-    }
-
-    /**
-     * Open the specified resource file (ie a file in the classpath, including being within a jar in the classpath), run
-     * it through the xmlrules module and return an object encapsulating those rules.
-     *
-     * @param d is the digester into which rules will eventually be loaded.
-     * @param pluginClass is the class whose xml params the rules are parsing.
-     * @param is is where the xmlrules will be read from, and must be non-null.
-     * @param resourceName is a string describing the source of the xmlrules, for use in generating error messages.
-     * @return a source of digester rules for the specified plugin class.
-     * @throws PluginException if any error occurs
-     */
-    public static RuleLoader loadRules( final Digester d, final Class<?> pluginClass, final InputStream is, final String resourceName )
-        throws PluginException
-    {
-        try
-        {
-            final RuleLoader loader = new LoaderFromStream( is );
-            return loader;
-        }
-        catch ( final Exception e )
-        {
-            throw new PluginException( "Unable to load xmlrules from resource [" + resourceName + "]", e );
-        }
-        finally
-        {
-            try
-            {
-                is.close();
-            }
-            catch ( final IOException ioe )
-            {
-                throw new PluginException( "Unable to close stream for resource [" + resourceName + "]", ioe );
-            }
-        }
     }
 
 }

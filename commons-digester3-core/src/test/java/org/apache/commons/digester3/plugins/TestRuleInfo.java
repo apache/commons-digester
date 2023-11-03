@@ -32,6 +32,52 @@ import org.junit.Test;
 public class TestRuleInfo
 {
 
+    @Test
+    public void testRuleInfoAutoDetect()
+        throws Exception
+    {
+        // * tests that custom rules can be declared on a
+        // separate class with name {plugin-class}RuleInfo,
+        // and they are automatically detected and loaded.
+
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
+        digester.setRules( rc );
+
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
+        digester.addRule( "root/plugin", pdr );
+
+        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
+        digester.addRule( "root/widget", pcr );
+        digester.addSetNext( "root/widget", "addChild" );
+
+        final Container root = new Container();
+        digester.push( root );
+
+        try
+        {
+            digester.parse( Utils.getInputStream( this, "test5c.xml" ) );
+        }
+        catch ( final Exception e )
+        {
+            throw e;
+        }
+
+        Object child;
+        final List<Widget> children = root.getChildren();
+        assertNotNull( children );
+        assertEquals( 1, children.size() );
+
+        child = children.get( 0 );
+        assertNotNull( child );
+        assertEquals( TextLabel2.class, child.getClass() );
+        final TextLabel2 label = (TextLabel2) child;
+
+        // id should not be mapped, label should
+        assertEquals( "anonymous", label.getId() );
+        assertEquals( "std label", label.getLabel() );
+    }
+
     // --------------------------------------------------------------- Test cases
     @Test
     public void testRuleInfoExplicitClass()
@@ -122,51 +168,5 @@ public class TestRuleInfo
         // id should not be mapped, altlabel should
         assertEquals( "anonymous", label.getId() );
         assertEquals( "alt label", label.getLabel() );
-    }
-
-    @Test
-    public void testRuleInfoAutoDetect()
-        throws Exception
-    {
-        // * tests that custom rules can be declared on a
-        // separate class with name {plugin-class}RuleInfo,
-        // and they are automatically detected and loaded.
-
-        final Digester digester = new Digester();
-        final PluginRules rc = new PluginRules();
-        digester.setRules( rc );
-
-        final PluginDeclarationRule pdr = new PluginDeclarationRule();
-        digester.addRule( "root/plugin", pdr );
-
-        final PluginCreateRule pcr = new PluginCreateRule( Widget.class );
-        digester.addRule( "root/widget", pcr );
-        digester.addSetNext( "root/widget", "addChild" );
-
-        final Container root = new Container();
-        digester.push( root );
-
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test5c.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
-
-        Object child;
-        final List<Widget> children = root.getChildren();
-        assertNotNull( children );
-        assertEquals( 1, children.size() );
-
-        child = children.get( 0 );
-        assertNotNull( child );
-        assertEquals( TextLabel2.class, child.getClass() );
-        final TextLabel2 label = (TextLabel2) child;
-
-        // id should not be mapped, label should
-        assertEquals( "anonymous", label.getId() );
-        assertEquals( "std label", label.getLabel() );
     }
 }

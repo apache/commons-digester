@@ -32,6 +32,49 @@ import org.junit.Test;
 public class TestXmlRuleInfo
 {
 
+    @Test
+    public void testXmlRuleImplicitResource()
+        throws Exception
+    {
+        // * tests that custom rules can be declared on a
+        // separate class by explicitly declaring the rule class.
+        // and explicitly declaring a file which is somewhere in the
+        // classpath.
+
+        final StringBuilder input = new StringBuilder();
+        input.append( "<root>" );
+        input.append( " <plugin" );
+        input.append( "  id='testobject'" );
+        input.append( "  class='org.apache.commons.digester3.plugins.ObjectTestImpl'" );
+        input.append( "  />" );
+        input.append( "  <object plugin-id='testobject'/>" );
+        input.append( "</root>" );
+
+        final Digester digester = new Digester();
+        final PluginRules rc = new PluginRules();
+        digester.setRules( rc );
+
+        final PluginDeclarationRule pdr = new PluginDeclarationRule();
+        digester.addRule( "root/plugin", pdr );
+
+        final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
+        digester.addRule( "root/object", pcr );
+
+        try
+        {
+            digester.parse( new StringReader( input.toString() ) );
+        }
+        catch ( final Exception e )
+        {
+            throw e;
+        }
+
+        final Object root = digester.getRoot();
+        assertEquals( ObjectTestImpl.class, root.getClass() );
+        final ObjectTestImpl testObject = (ObjectTestImpl) root;
+        assertEquals( "xmlrules-ruleinfo", testObject.getValue() );
+    }
+
     // --------------------------------------------------------------- Test cases
     @Test
     public void testXmlRuleInfoExplicitFile()
@@ -118,48 +161,5 @@ public class TestXmlRuleInfo
         assertEquals( ObjectTestImpl.class, root.getClass() );
         final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules2", testObject.getValue() );
-    }
-
-    @Test
-    public void testXmlRuleImplicitResource()
-        throws Exception
-    {
-        // * tests that custom rules can be declared on a
-        // separate class by explicitly declaring the rule class.
-        // and explicitly declaring a file which is somewhere in the
-        // classpath.
-
-        final StringBuilder input = new StringBuilder();
-        input.append( "<root>" );
-        input.append( " <plugin" );
-        input.append( "  id='testobject'" );
-        input.append( "  class='org.apache.commons.digester3.plugins.ObjectTestImpl'" );
-        input.append( "  />" );
-        input.append( "  <object plugin-id='testobject'/>" );
-        input.append( "</root>" );
-
-        final Digester digester = new Digester();
-        final PluginRules rc = new PluginRules();
-        digester.setRules( rc );
-
-        final PluginDeclarationRule pdr = new PluginDeclarationRule();
-        digester.addRule( "root/plugin", pdr );
-
-        final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
-        digester.addRule( "root/object", pcr );
-
-        try
-        {
-            digester.parse( new StringReader( input.toString() ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
-
-        final Object root = digester.getRoot();
-        assertEquals( ObjectTestImpl.class, root.getClass() );
-        final ObjectTestImpl testObject = (ObjectTestImpl) root;
-        assertEquals( "xmlrules-ruleinfo", testObject.getValue() );
     }
 }

@@ -49,44 +49,10 @@ public class Person
     @BeanPropertySetter( pattern = "address-book/person/name" )
     private String name;
 
-    public int getId()
+    @SetNext( fireOnBegin = true )
+    public void addAddress( final Address addr )
     {
-        return id;
-    }
-
-    public void setId( final int id )
-    {
-        this.id = id;
-    }
-
-    public String getCategory()
-    {
-        return category;
-    }
-
-    public void setCategory( final String category )
-    {
-        this.category = category;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName( final String name )
-    {
-        this.name = name;
-    }
-
-    public Map<String, String> getEmails()
-    {
-        return emails;
-    }
-
-    public List<Address> getAddresses()
-    {
-        return addresses;
+        this.addresses.add( addr );
     }
 
     @CallMethod( pattern = "address-book/person/email" )
@@ -94,12 +60,6 @@ public class Person
                           @CallParam( pattern = "address-book/person/email" ) final String address )
     {
         this.emails.put( type, address );
-    }
-
-    @SetNext( fireOnBegin = true )
-    public void addAddress( final Address addr )
-    {
-        this.addresses.add( addr );
     }
 
     @Override
@@ -155,6 +115,46 @@ public class Person
             return false;
         }
         return true;
+    }
+
+    public List<Address> getAddresses()
+    {
+        return addresses;
+    }
+
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public Map<String, String> getEmails()
+    {
+        return emails;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setCategory( final String category )
+    {
+        this.category = category;
+    }
+
+    public void setId( final int id )
+    {
+        this.id = id;
+    }
+
+    public void setName( final String name )
+    {
+        this.name = name;
     }
 
     @Override

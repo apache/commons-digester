@@ -38,6 +38,24 @@ public class LoaderFromClass
     extends RuleLoader
 {
 
+    /**
+     * Find a method on the specified class whose name matches methodName, and whose signature is:
+     * {@code  public static void foo(Digester d, String patternPrefix);}.
+     *
+     * @param rulesClass The target class
+     * @param methodName The method name has to be invoked
+     * @return The method name has to be invoked, or null if no such method exists.
+     * @throws PluginException if any error occurs while discovering the method
+     */
+    public static Method locateMethod( final Class<?> rulesClass, final String methodName )
+        throws PluginException
+    {
+        final Class<?>[] paramSpec = { Digester.class, String.class };
+        final Method rulesMethod = getAccessibleMethod( rulesClass, methodName, paramSpec );
+
+        return rulesMethod;
+    }
+
     private final Class<?> rulesClass;
 
     private final Method rulesMethod;
@@ -102,24 +120,6 @@ public class LoaderFromClass
                                        "Unable to invoke rules method " + rulesMethod + " on rules class " + rulesClass,
                                        e );
         }
-    }
-
-    /**
-     * Find a method on the specified class whose name matches methodName, and whose signature is:
-     * {@code  public static void foo(Digester d, String patternPrefix);}.
-     *
-     * @param rulesClass The target class
-     * @param methodName The method name has to be invoked
-     * @return The method name has to be invoked, or null if no such method exists.
-     * @throws PluginException if any error occurs while discovering the method
-     */
-    public static Method locateMethod( final Class<?> rulesClass, final String methodName )
-        throws PluginException
-    {
-        final Class<?>[] paramSpec = { Digester.class, String.class };
-        final Method rulesMethod = getAccessibleMethod( rulesClass, methodName, paramSpec );
-
-        return rulesMethod;
     }
 
 }

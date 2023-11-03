@@ -51,6 +51,20 @@ public class RuleTestCase
     // --------------------------------------------------- Overall Test Methods
 
     /**
+     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
+     *
+     * @param name Name of the test file we want
+     * @throws IOException if an input/output error occurs
+     */
+    protected InputStream getInputStream( final String name )
+        throws IOException
+    {
+
+        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+
+    }
+
+    /**
      * Sets up instance variables required by this test case.
      */
     @Before
@@ -60,6 +74,8 @@ public class RuleTestCase
         digester = new Digester();
 
     }
+
+    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Tear down instance variables required by this test case.
@@ -72,7 +88,19 @@ public class RuleTestCase
 
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    /**
+     * Test rule addition - this boils down to making sure that digester is set properly on rule addition.
+     */
+    @Test
+    public void testAddRule()
+    {
+        final Digester digester = new Digester();
+        final TestRule rule = new TestRule( "Test" );
+        digester.addRule( "/root", rule );
+
+        assertEquals( "Digester is not properly on rule addition.", digester, rule.getDigester() );
+
+    }
 
     /**
      * Test object creation (and associated property setting) with nothing on the stack, which should cause an
@@ -312,65 +340,64 @@ public class RuleTestCase
     }
 
     /**
-     * Test the two argument version of the SetTopRule rule. This test is based on testObjectCreate3 and should result
-     * in the same tree of objects. Instead of using the SetNextRule rule which results in a method invocation on the
-     * (top-1) (parent) object with the top object (child) as an argument, this test uses the SetTopRule rule which
-     * results in a method invocation on the top object (child) with the top-1 (parent) object as an argument. The three
-     * argument form is tested in {@code testSetTopRule2}.
      */
     @Test
-    public void testSetTopRule1()
+    public void testSetCustomProperties()
         throws SAXException, IOException
     {
 
-        // Configure the digester as required
-        digester.addObjectCreate( "employee", "org.apache.commons.digester3.Employee" );
-        digester.addSetProperties( "employee" );
-        digester.addObjectCreate( "employee/address", "org.apache.commons.digester3.Address" );
-        digester.addSetProperties( "employee/address" );
-        digester.addSetTop( "employee/address", "setEmployee" );
-
-        // Parse our test input.
-        Object root;
-        root = digester.parse( getInputStream( "Test1.xml" ) );
-        validateObjectCreate3( root );
-
-    }
-
-    /**
-     * Same as {@code testSetTopRule1} except using the three argument form of the SetTopRule rule.
-     */
-    @Test
-    public void testSetTopRule2()
-        throws SAXException, IOException
-    {
-
-        // Configure the digester as required
-        digester.addObjectCreate( "employee", "org.apache.commons.digester3.Employee" );
-        digester.addSetProperties( "employee" );
-        digester.addObjectCreate( "employee/address", "org.apache.commons.digester3.Address" );
-        digester.addSetProperties( "employee/address" );
-        digester.addSetTop( "employee/address", "setEmployee", "org.apache.commons.digester3.Employee" );
-
-        // Parse our test input.
-        Object root;
-        root = digester.parse( getInputStream( "Test1.xml" ) );
-
-        validateObjectCreate3( root );
-
-    }
-
-    /**
-     * Test rule addition - this boils down to making sure that digester is set properly on rule addition.
-     */
-    @Test
-    public void testAddRule()
-    {
         final Digester digester = new Digester();
-        final TestRule rule = new TestRule( "Test" );
-        digester.addRule( "/root", rule );
 
-        assertEquals( "Digester is not properly on rule addition.", digester, rule.getDigester() );
+        digester.setValidating( false );
+
+        digester.addObjectCreate( "toplevel", ArrayList.class );
+        digester.addObjectCreate( "toplevel/one", Address.class );
+        digester.addSetNext( "toplevel/one", "add" );
+        digester.addObjectCreate( "toplevel/two", Address.class );
+        digester.addSetNext( "toplevel/two", "add" );
+        digester.addObjectCreate( "toplevel/three", Address.class );
+        digester.addSetNext( "toplevel/three", "add" );
+        digester.addObjectCreate( "toplevel/four", Address.class );
+        digester.addSetNext( "toplevel/four", "add" );
+        digester.addSetProperties( "toplevel/one" );
+        digester.addSetProperties( "toplevel/two", new String[] { "alt-street", "alt-city", "alt-state" },
+                                   new String[] { "street", "city", "state" } );
+        digester.addSetProperties( "toplevel/three", new String[] { "aCity", "state" }, new String[] { "city" } );
+        digester.addSetProperties( "toplevel/four", "alt-city", "city" );
+
+        final ArrayList<?> root = digester.parse( getInputStream( "Test7.xml" ) );
+
+        assertEquals( "Wrong array size", 4, root.size() );
+
+        // note that the array is in popped order (rather than pushed)
+
+        Object obj = root.get( 0 );
+        assertTrue( "(1) Should be an Address ", obj instanceof Address );
+        final Address addressOne = (Address) obj;
+        assertEquals( "(1) Street attribute", "New Street", addressOne.getStreet() );
+        assertEquals( "(1) City attribute", "Las Vegas", addressOne.getCity() );
+        assertEquals( "(1) State attribute", "Nevada", addressOne.getState() );
+
+        obj = root.get( 1 );
+        assertTrue( "(2) Should be an Address ", obj instanceof Address );
+        final Address addressTwo = (Address) obj;
+        assertEquals( "(2) Street attribute", "Old Street", addressTwo.getStreet() );
+        assertEquals( "(2) City attribute", "Portland", addressTwo.getCity() );
+        assertEquals( "(2) State attribute", "Oregon", addressTwo.getState() );
+
+        obj = root.get( 2 );
+        assertTrue( "(3) Should be an Address ", obj instanceof Address );
+        final Address addressThree = (Address) obj;
+        assertEquals( "(3) Street attribute", "4th Street", addressThree.getStreet() );
+        assertEquals( "(3) City attribute", "Dayton", addressThree.getCity() );
+        assertEquals( "(3) State attribute", "US", addressThree.getState() );
+
+        obj = root.get( 3 );
+        assertTrue( "(4) Should be an Address ", obj instanceof Address );
+        final Address addressFour = (Address) obj;
+        assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
+        assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
+        assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
 
     }
 
@@ -453,80 +480,53 @@ public class RuleTestCase
     }
 
     /**
+     * Test the two argument version of the SetTopRule rule. This test is based on testObjectCreate3 and should result
+     * in the same tree of objects. Instead of using the SetNextRule rule which results in a method invocation on the
+     * (top-1) (parent) object with the top object (child) as an argument, this test uses the SetTopRule rule which
+     * results in a method invocation on the top object (child) with the top-1 (parent) object as an argument. The three
+     * argument form is tested in {@code testSetTopRule2}.
      */
     @Test
-    public void testSetCustomProperties()
+    public void testSetTopRule1()
         throws SAXException, IOException
     {
 
-        final Digester digester = new Digester();
+        // Configure the digester as required
+        digester.addObjectCreate( "employee", "org.apache.commons.digester3.Employee" );
+        digester.addSetProperties( "employee" );
+        digester.addObjectCreate( "employee/address", "org.apache.commons.digester3.Address" );
+        digester.addSetProperties( "employee/address" );
+        digester.addSetTop( "employee/address", "setEmployee" );
 
-        digester.setValidating( false );
-
-        digester.addObjectCreate( "toplevel", ArrayList.class );
-        digester.addObjectCreate( "toplevel/one", Address.class );
-        digester.addSetNext( "toplevel/one", "add" );
-        digester.addObjectCreate( "toplevel/two", Address.class );
-        digester.addSetNext( "toplevel/two", "add" );
-        digester.addObjectCreate( "toplevel/three", Address.class );
-        digester.addSetNext( "toplevel/three", "add" );
-        digester.addObjectCreate( "toplevel/four", Address.class );
-        digester.addSetNext( "toplevel/four", "add" );
-        digester.addSetProperties( "toplevel/one" );
-        digester.addSetProperties( "toplevel/two", new String[] { "alt-street", "alt-city", "alt-state" },
-                                   new String[] { "street", "city", "state" } );
-        digester.addSetProperties( "toplevel/three", new String[] { "aCity", "state" }, new String[] { "city" } );
-        digester.addSetProperties( "toplevel/four", "alt-city", "city" );
-
-        final ArrayList<?> root = digester.parse( getInputStream( "Test7.xml" ) );
-
-        assertEquals( "Wrong array size", 4, root.size() );
-
-        // note that the array is in popped order (rather than pushed)
-
-        Object obj = root.get( 0 );
-        assertTrue( "(1) Should be an Address ", obj instanceof Address );
-        final Address addressOne = (Address) obj;
-        assertEquals( "(1) Street attribute", "New Street", addressOne.getStreet() );
-        assertEquals( "(1) City attribute", "Las Vegas", addressOne.getCity() );
-        assertEquals( "(1) State attribute", "Nevada", addressOne.getState() );
-
-        obj = root.get( 1 );
-        assertTrue( "(2) Should be an Address ", obj instanceof Address );
-        final Address addressTwo = (Address) obj;
-        assertEquals( "(2) Street attribute", "Old Street", addressTwo.getStreet() );
-        assertEquals( "(2) City attribute", "Portland", addressTwo.getCity() );
-        assertEquals( "(2) State attribute", "Oregon", addressTwo.getState() );
-
-        obj = root.get( 2 );
-        assertTrue( "(3) Should be an Address ", obj instanceof Address );
-        final Address addressThree = (Address) obj;
-        assertEquals( "(3) Street attribute", "4th Street", addressThree.getStreet() );
-        assertEquals( "(3) City attribute", "Dayton", addressThree.getCity() );
-        assertEquals( "(3) State attribute", "US", addressThree.getState() );
-
-        obj = root.get( 3 );
-        assertTrue( "(4) Should be an Address ", obj instanceof Address );
-        final Address addressFour = (Address) obj;
-        assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
-        assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
-        assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
+        // Parse our test input.
+        Object root;
+        root = digester.parse( getInputStream( "Test1.xml" ) );
+        validateObjectCreate3( root );
 
     }
 
     // ------------------------------------------------ Utility Support Methods
 
     /**
-     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
-     *
-     * @param name Name of the test file we want
-     * @throws IOException if an input/output error occurs
+     * Same as {@code testSetTopRule1} except using the three argument form of the SetTopRule rule.
      */
-    protected InputStream getInputStream( final String name )
-        throws IOException
+    @Test
+    public void testSetTopRule2()
+        throws SAXException, IOException
     {
 
-        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+        // Configure the digester as required
+        digester.addObjectCreate( "employee", "org.apache.commons.digester3.Employee" );
+        digester.addSetProperties( "employee" );
+        digester.addObjectCreate( "employee/address", "org.apache.commons.digester3.Address" );
+        digester.addSetProperties( "employee/address" );
+        digester.addSetTop( "employee/address", "setEmployee", "org.apache.commons.digester3.Employee" );
+
+        // Parse our test input.
+        Object root;
+        root = digester.parse( getInputStream( "Test1.xml" ) );
+
+        validateObjectCreate3( root );
 
     }
 

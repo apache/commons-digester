@@ -161,14 +161,40 @@ public class ExtendedBaseRules
     // --------------------------------------------------------- Public Methods
 
     /**
-     * {@inheritDoc}
+     * Standard match. Matches the end of the pattern to the key.
+     *
+     * @param key The key to be found
+     * @param pattern The pattern where looking for the key
+     * @return true, if {@code key} is found inside {@code pattern}, false otherwise
      */
-    @Override
-    protected void registerRule( final String pattern, final Rule rule )
+    private boolean basicMatch( final String key, final String pattern )
     {
-        super.registerRule( pattern, rule );
-        counter++;
-        order.put( rule, counter );
+        return ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) ) );
+    }
+
+    /**
+     * Finds an exact ancester match for given pattern
+     *
+     * @param parentPattern The input pattern
+     * @return A list of {@code Rule} related to the input pattern
+     */
+    private List<Rule> findExactAncesterMatch( final String parentPattern )
+    {
+        List<Rule> matchingRules = null;
+        int lastIndex = parentPattern.length();
+        while ( lastIndex-- > 0 )
+        {
+            lastIndex = parentPattern.lastIndexOf( '/', lastIndex );
+            if ( lastIndex > 0 )
+            {
+                matchingRules = this.cache.get( parentPattern.substring( 0, lastIndex ) + "/*" );
+                if ( matchingRules != null )
+                {
+                    return matchingRules;
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -490,40 +516,14 @@ public class ExtendedBaseRules
     }
 
     /**
-     * Standard match. Matches the end of the pattern to the key.
-     *
-     * @param key The key to be found
-     * @param pattern The pattern where looking for the key
-     * @return true, if {@code key} is found inside {@code pattern}, false otherwise
+     * {@inheritDoc}
      */
-    private boolean basicMatch( final String key, final String pattern )
+    @Override
+    protected void registerRule( final String pattern, final Rule rule )
     {
-        return ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) ) );
-    }
-
-    /**
-     * Finds an exact ancester match for given pattern
-     *
-     * @param parentPattern The input pattern
-     * @return A list of {@code Rule} related to the input pattern
-     */
-    private List<Rule> findExactAncesterMatch( final String parentPattern )
-    {
-        List<Rule> matchingRules = null;
-        int lastIndex = parentPattern.length();
-        while ( lastIndex-- > 0 )
-        {
-            lastIndex = parentPattern.lastIndexOf( '/', lastIndex );
-            if ( lastIndex > 0 )
-            {
-                matchingRules = this.cache.get( parentPattern.substring( 0, lastIndex ) + "/*" );
-                if ( matchingRules != null )
-                {
-                    return matchingRules;
-                }
-            }
-        }
-        return null;
+        super.registerRule( pattern, rule );
+        counter++;
+        order.put( rule, counter );
     }
 
 }

@@ -40,6 +40,18 @@ public class SetPropertyRule
     // ----------------------------------------------------------- Constructors
 
     /**
+     * The attribute that will contain the property name.
+     */
+    protected String name;
+
+    // ----------------------------------------------------- Instance Variables
+
+    /**
+     * The attribute that will contain the property value.
+     */
+    protected String value;
+
+    /**
      * Construct a "set property" rule with the specified name and value attributes.
      *
      * @param name Name of the attribute that will contain the name of the property to be set
@@ -50,18 +62,6 @@ public class SetPropertyRule
         this.name = name;
         this.value = value;
     }
-
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The attribute that will contain the property name.
-     */
-    protected String name;
-
-    /**
-     * The attribute that will contain the property value.
-     */
-    protected String value;
 
     // --------------------------------------------------------- Public Methods
 

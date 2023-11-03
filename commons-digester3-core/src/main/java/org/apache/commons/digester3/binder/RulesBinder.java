@@ -28,13 +28,6 @@ public interface RulesBinder
 {
 
     /**
-     * Returns the context {@code ClassLoader}.
-     *
-     * @return The context {@code ClassLoader}
-     */
-    ClassLoader getContextClassLoader();
-
-    /**
      * Records an error message which will be presented to the user at a later time. Unlike throwing an exception, this
      * enable us to continue configuring the Digester and discover more errors. Uses
      * {@link String#format(String, Object[])} to insert the arguments into the message.
@@ -54,18 +47,25 @@ public interface RulesBinder
     void addError( Throwable t );
 
     /**
-     * Allows sub-modules inclusion while binding rules.
-     *
-     * @param rulesModule the sub-module has to be included.
-     */
-    void install( RulesModule rulesModule );
-
-    /**
      * Allows to associate the given pattern to one or more Digester rules.
      *
      * @param pattern The pattern that this rule should match
      * @return The Digester rules builder
      */
     LinkedRuleBuilder forPattern( String pattern );
+
+    /**
+     * Returns the context {@code ClassLoader}.
+     *
+     * @return The context {@code ClassLoader}
+     */
+    ClassLoader getContextClassLoader();
+
+    /**
+     * Allows sub-modules inclusion while binding rules.
+     *
+     * @param rulesModule the sub-module has to be included.
+     */
+    void install( RulesModule rulesModule );
 
 }

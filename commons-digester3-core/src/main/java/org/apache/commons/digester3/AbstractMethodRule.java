@@ -101,73 +101,6 @@ public abstract class AbstractMethodRule
     }
 
     /**
-     * <p>
-     * Is exact matching being used.
-     * </p>
-     * <p>
-     * This rule uses {@code org.apache.commons.beanutils.MethodUtils} to introspect the relevent objects so that
-     * the right method can be called. Originally, {@code MethodUtils.invokeExactMethod} was used. This matches
-     * methods very strictly and so may not find a matching method when one exists. This is still the behavior when
-     * exact matching is enabled.
-     * </p>
-     * <p>
-     * When exact matching is disabled, {@code MethodUtils.invokeMethod} is used. This method finds more methods
-     * but is less precise when there are several methods with correct signatures. So, if you want to choose an exact
-     * signature you might need to enable this property.
-     * </p>
-     * <p>
-     * The default setting is to disable exact matches.
-     * </p>
-     *
-     * @return true if exact matching is enabled
-     * @since 1.1.1
-     */
-    public boolean isExactMatch()
-    {
-        return useExactMatch;
-    }
-
-    /**
-     * Sets this rule be invoked when {@link #begin(String, String, Attributes)} (true)
-     * or {@link #end(String, String)} (false) methods are invoked, false by default.
-     *
-     * @param fireOnBegin flag to mark this rule be invoked when {@link #begin(String, String, Attributes)} (true)
-     *                    or {@link #end(String, String)} (false) methods are invoked, false by default.
-     */
-    public void setFireOnBegin( final boolean fireOnBegin )
-    {
-        this.fireOnBegin = fireOnBegin;
-    }
-
-    /**
-     * Returns the flag this rule be invoked when {@link #begin(String, String, Attributes)} (true)
-     * or {@link #end(String, String)} (false) methods are invoked, false by default.
-     *
-     * @return the flag this rule be invoked when {@link #begin(String, String, Attributes)} (true)
-     * or {@link #end(String, String)} (false) methods are invoked, false by default.
-     */
-    public boolean isFireOnBegin()
-    {
-        return fireOnBegin;
-    }
-
-    /**
-     * <p>
-     * Sets whether exact matching is enabled.
-     * </p>
-     * <p>
-     * See {@link #isExactMatch()}.
-     * </p>
-     *
-     * @param useExactMatch should this rule use exact method matching
-     * @since 1.1.1
-     */
-    public void setExactMatch( final boolean useExactMatch )
-    {
-        this.useExactMatch = useExactMatch;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -192,6 +125,20 @@ public abstract class AbstractMethodRule
             invoke();
         }
     }
+
+    /**
+     * Returns the argument object of method has to be invoked.
+     *
+     * @return the argument object of method has to be invoked.
+     */
+    protected abstract Object getChild();
+
+    /**
+     * Returns the target object of method has to be invoked.
+     *
+     * @return the target object of method has to be invoked.
+     */
+    protected abstract Object getParent();
 
     /**
      * Just performs the method execution.
@@ -247,18 +194,71 @@ public abstract class AbstractMethodRule
     }
 
     /**
-     * Returns the argument object of method has to be invoked.
+     * <p>
+     * Is exact matching being used.
+     * </p>
+     * <p>
+     * This rule uses {@code org.apache.commons.beanutils.MethodUtils} to introspect the relevent objects so that
+     * the right method can be called. Originally, {@code MethodUtils.invokeExactMethod} was used. This matches
+     * methods very strictly and so may not find a matching method when one exists. This is still the behavior when
+     * exact matching is enabled.
+     * </p>
+     * <p>
+     * When exact matching is disabled, {@code MethodUtils.invokeMethod} is used. This method finds more methods
+     * but is less precise when there are several methods with correct signatures. So, if you want to choose an exact
+     * signature you might need to enable this property.
+     * </p>
+     * <p>
+     * The default setting is to disable exact matches.
+     * </p>
      *
-     * @return the argument object of method has to be invoked.
+     * @return true if exact matching is enabled
+     * @since 1.1.1
      */
-    protected abstract Object getChild();
+    public boolean isExactMatch()
+    {
+        return useExactMatch;
+    }
 
     /**
-     * Returns the target object of method has to be invoked.
+     * Returns the flag this rule be invoked when {@link #begin(String, String, Attributes)} (true)
+     * or {@link #end(String, String)} (false) methods are invoked, false by default.
      *
-     * @return the target object of method has to be invoked.
+     * @return the flag this rule be invoked when {@link #begin(String, String, Attributes)} (true)
+     * or {@link #end(String, String)} (false) methods are invoked, false by default.
      */
-    protected abstract Object getParent();
+    public boolean isFireOnBegin()
+    {
+        return fireOnBegin;
+    }
+
+    /**
+     * <p>
+     * Sets whether exact matching is enabled.
+     * </p>
+     * <p>
+     * See {@link #isExactMatch()}.
+     * </p>
+     *
+     * @param useExactMatch should this rule use exact method matching
+     * @since 1.1.1
+     */
+    public void setExactMatch( final boolean useExactMatch )
+    {
+        this.useExactMatch = useExactMatch;
+    }
+
+    /**
+     * Sets this rule be invoked when {@link #begin(String, String, Attributes)} (true)
+     * or {@link #end(String, String)} (false) methods are invoked, false by default.
+     *
+     * @param fireOnBegin flag to mark this rule be invoked when {@link #begin(String, String, Attributes)} (true)
+     *                    or {@link #end(String, String)} (false) methods are invoked, false by default.
+     */
+    public void setFireOnBegin( final boolean fireOnBegin )
+    {
+        this.fireOnBegin = fireOnBegin;
+    }
 
     /**
      * {@inheritDoc}

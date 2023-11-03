@@ -79,6 +79,56 @@ public class PluginContext
     // ------------------- methods ---------------------------------------
 
     /**
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * <p>
+     * The return value is never null.
+     *
+     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     */
+    public String getPluginClassAttr()
+    {
+        return pluginClassAttr;
+    }
+
+    /**
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * <p>
+     * May be null (in fact, normally will be).
+     *
+     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     */
+    public String getPluginClassAttrNs()
+    {
+        return pluginClassAttrNs;
+    }
+
+    /**
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
+     * should be used.
+     * <p>
+     * The return value is never null.
+     *
+     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     */
+    public String getPluginIdAttr()
+    {
+        return pluginIdAttr;
+    }
+
+    /**
+     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
+     * should be used.
+     * <p>
+     * May be null (in fact, normally will be).
+     *
+     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     */
+    public String getPluginIdAttrNs()
+    {
+        return pluginIdAttrNs;
+    }
+
+    /**
      * Return the list of RuleFinder objects. Under normal circumstances this method creates a default list of these
      * objects when first called (ie "on-demand" or "lazy initialization"). However if setRuleFinders has been called
      * first, then the list specified there is returned.
@@ -106,21 +156,6 @@ public class PluginContext
             ruleFinders.add( new FinderSetProperties() );
         }
         return ruleFinders;
-    }
-
-    /**
-     * Sets the list of RuleFinder objects. This may be useful if working in a non-english language, allowing the
-     * application developer to replace the standard list with a list of objects which look for xml attributes in the
-     * local language.
-     * <p>
-     * If the intent is just to add an additional rule-finding algorithm, then it may be better to call #getRuleFinders,
-     * and insert a new object into the start of the list.
-     *
-     * @param ruleFinders the list of RuleFinder objects
-     */
-    public void setRuleFinders( final List<RuleFinder> ruleFinders )
-    {
-        this.ruleFinders = ruleFinders;
     }
 
     /**
@@ -205,53 +240,18 @@ public class PluginContext
     }
 
     /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * Sets the list of RuleFinder objects. This may be useful if working in a non-english language, allowing the
+     * application developer to replace the standard list with a list of objects which look for xml attributes in the
+     * local language.
      * <p>
-     * May be null (in fact, normally will be).
+     * If the intent is just to add an additional rule-finding algorithm, then it may be better to call #getRuleFinders,
+     * and insert a new object into the start of the list.
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @param ruleFinders the list of RuleFinder objects
      */
-    public String getPluginClassAttrNs()
+    public void setRuleFinders( final List<RuleFinder> ruleFinders )
     {
-        return pluginClassAttrNs;
-    }
-
-    /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
-     * <p>
-     * The return value is never null.
-     *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
-     */
-    public String getPluginClassAttr()
-    {
-        return pluginClassAttr;
-    }
-
-    /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
-     * should be used.
-     * <p>
-     * May be null (in fact, normally will be).
-     *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
-     */
-    public String getPluginIdAttrNs()
-    {
-        return pluginIdAttrNs;
-    }
-
-    /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
-     * should be used.
-     * <p>
-     * The return value is never null.
-     *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
-     */
-    public String getPluginIdAttr()
-    {
-        return pluginIdAttr;
+        this.ruleFinders = ruleFinders;
     }
 
 }

@@ -81,6 +81,15 @@ final class BinderClassLoader
      * {@inheritDoc}
      */
     @Override
+    public URL getResource( final String name )
+    {
+        return getAdaptedClassLoader().getResource( name );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected synchronized Class<?> loadClass( final String name, final boolean resolve )
         throws ClassNotFoundException
     {
@@ -89,15 +98,6 @@ final class BinderClassLoader
             return PRIMITIVE_TYPES.get( name );
         }
         return getParent().loadClass( name );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public URL getResource( final String name )
-    {
-        return getAdaptedClassLoader().getResource( name );
     }
 
 }

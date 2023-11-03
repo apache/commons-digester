@@ -31,17 +31,17 @@ public class SetTextSegmentRule
 
     // ----------------------------------------------------------- Constructors
 
-    public SetTextSegmentRule( final String methodName )
-    {
-        this.methodName = methodName;
-    }
-
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The method name to call on the parent object.
      */
     protected String methodName;
+
+    // ----------------------------------------------------- Instance Variables
+
+    public SetTextSegmentRule( final String methodName )
+    {
+        this.methodName = methodName;
+    }
 
     // --------------------------------------------------------- Public Methods
 

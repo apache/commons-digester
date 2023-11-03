@@ -50,7 +50,7 @@ public class DTDValidationTestCase
         {
 
             @Override
-            public void warning( final SAXParseException e )
+            public void error( final SAXParseException e )
                 throws SAXException
             {
                 throw e;
@@ -64,13 +64,35 @@ public class DTDValidationTestCase
             }
 
             @Override
-            public void error( final SAXParseException e )
+            public void warning( final SAXParseException e )
                 throws SAXException
             {
                 throw e;
             }
 
         } )
+        .newDigester()
+        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
+    }
+
+    @Test
+    public void testDigesterLoaderFeatureDisabled()
+        throws Exception
+    {
+       newLoader( new AbstractRulesModule()
+        {
+
+           @Override
+            protected void configure()
+            {
+                // do nothing
+            }
+
+        } )
+        .setFeature("http://xml.org/sax/features/validation", false)
+        .setFeature("http://xml.org/sax/features/external-parameter-entities", false)
+        .setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false)
+        .setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
         .newDigester()
         .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
     }
@@ -109,28 +131,6 @@ public class DTDValidationTestCase
         .setValidating( true )
         .newDigester()
         .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ) );
-    }
-
-    @Test
-    public void testDigesterLoaderFeatureDisabled()
-        throws Exception
-    {
-       newLoader( new AbstractRulesModule()
-        {
-
-           @Override
-            protected void configure()
-            {
-                // do nothing
-            }
-
-        } )
-        .setFeature("http://xml.org/sax/features/validation", false)
-        .setFeature("http://xml.org/sax/features/external-parameter-entities", false)
-        .setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false)
-        .setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-        .newDigester()
-        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
     }
 
 }

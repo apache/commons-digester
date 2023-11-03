@@ -50,42 +50,6 @@ final class PatternRuleMatcher
         this.namespaceURI = namespaceURI;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean match( final String namespace, final String pattern, final String name, final Attributes attributes )
-    {
-        if ( namespaceURI != null && !namespace.equals( namespaceURI ) )
-        {
-            return false;
-        }
-        return this.pattern.equals( pattern );
-    }
-
-    public String getPattern()
-    {
-        return pattern;
-    }
-
-    public String getNamespaceURI()
-    {
-        return namespaceURI;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ( ( namespaceURI == null ) ? 0 : namespaceURI.hashCode() );
-        result = prime * result + pattern.hashCode();
-        return result;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -123,6 +87,42 @@ final class PatternRuleMatcher
         }
 
         return true;
+    }
+
+    public String getNamespaceURI()
+    {
+        return namespaceURI;
+    }
+
+    public String getPattern()
+    {
+        return pattern;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ( ( namespaceURI == null ) ? 0 : namespaceURI.hashCode() );
+        result = prime * result + pattern.hashCode();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean match( final String namespace, final String pattern, final String name, final Attributes attributes )
+    {
+        if ( namespaceURI != null && !namespace.equals( namespaceURI ) )
+        {
+            return false;
+        }
+        return this.pattern.equals( pattern );
     }
 
     /**

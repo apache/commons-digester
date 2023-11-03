@@ -55,10 +55,39 @@ public class DigesterTestCase
 
     // ----------------------------------------------------- Instance Variables
 
-    /**
-     * The digester instance we will be processing.
-     */
-    protected Digester digester;
+    /** Utility class for method testStackAction */
+    private static final class TrackingStackAction
+        implements StackAction
+    {
+        public ArrayList<String> events = new ArrayList<String>();
+
+        @Override
+        public Object onPop( final Digester d, final String stackName, final Object o )
+        {
+            final String msg = "pop:" + stackName + ":" + o.toString();
+            events.add( msg );
+            final String str = o.toString();
+            if ( str.startsWith( "replpop" ) )
+            {
+                return new String( str );
+            }
+            return o;
+        }
+
+        @Override
+        public Object onPush( final Digester d, final String stackName, final Object o )
+        {
+            final String msg = "push:" + stackName + ":" + o.toString();
+            events.add( msg );
+
+            final String str = o.toString();
+            if ( str.startsWith( "replpush" ) )
+            {
+                return new String( str );
+            }
+            return o;
+        }
+    }
 
     /**
      * The set of public identifiers, and corresponding resource names, for the versions of the DTDs that we know about.
@@ -69,6 +98,11 @@ public class DigesterTestCase
         "/org/apache/commons/digester3/rss/rss-0.91.dtd", };
 
     // -------------------------------------------------- Overall Test Methods
+
+    /**
+     * The digester instance we will be processing.
+     */
+    protected Digester digester;
 
     /**
      * Sets up instance variables required by this test case.
@@ -82,6 +116,8 @@ public class DigesterTestCase
 
     }
 
+    // ------------------------------------------------ Individual Test Methods
+
     /**
      * Tear down instance variables required by this test case.
      */
@@ -93,7 +129,170 @@ public class DigesterTestCase
 
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    @Test
+    public void testBasicSubstitution()
+        throws Exception
+    {
+        class TestSubRule
+            extends Rule
+        {
+            public String body;
+
+            public Attributes attributes;
+
+            @Override
+            public void begin( final String namespace, final String name, final Attributes attributes )
+            {
+                this.attributes = new AttributesImpl( attributes );
+            }
+
+            @Override
+            public void body( final String namespace, final String name, final String text )
+            {
+                this.body = text;
+            }
+        }
+
+        final TestSubRule tsr = new TestSubRule();
+        final Digester digester = new Digester();
+        digester.addRule( "alpha/beta", tsr );
+
+        // it's not easy to transform dirty harry into the mighty circus - but let's give it a try
+        final String xml =
+            "<?xml version='1.0'?><alpha><beta forname='Dirty' surname='Harry'>Do you feel luck punk?</beta></alpha>";
+        InputSource in = new InputSource( new StringReader( xml ) );
+
+        digester.parse( in );
+
+        assertEquals( "Unsubstituted body text", "Do you feel luck punk?", tsr.body );
+        assertEquals( "Unsubstituted number of attributes", 2, tsr.attributes.getLength() );
+        assertEquals( "Unsubstituted forname attribute value", "Dirty", tsr.attributes.getValue( "forname" ) );
+        assertEquals( "Unsubstituted surname attribute value", "Harry", tsr.attributes.getValue( "surname" ) );
+
+        digester.setSubstitutor( new Substitutor()
+        {
+            @Override
+            public Attributes substitute( final Attributes attributes )
+            {
+                final AttributesImpl results = new AttributesImpl();
+                results.addAttribute( "", "python", "python", "CDATA", "Cleese" );
+                return results;
+            }
+
+            @Override
+            public String substitute( final String bodyText )
+            {
+                return "And now for something completely different...";
+            }
+        } );
+
+        // now transform into the full monty
+        in = new InputSource( new StringReader( xml ) );
+        digester.parse( in );
+
+        assertEquals( "Substituted body text", "And now for something completely different...", tsr.body );
+        assertEquals( "Substituted number of attributes", 1, tsr.attributes.getLength() );
+        assertEquals( "Substituted python attribute value", "Cleese", tsr.attributes.getValue( "", "python" ) );
+    }
+
+    /**
+     * Test the Digester.getRoot method.
+     */
+    @Test
+    public void testGetRoot()
+        throws Exception
+    {
+        final Digester digester = new Digester();
+        digester.addRule( "root", new ObjectCreateRule( TestBean.class ) );
+
+        final String xml = "<root/>";
+        final InputSource in = new InputSource( new StringReader( xml ) );
+
+        digester.parse( in );
+
+        final Object root = digester.getRoot();
+        assertNotNull( "root object not retrieved", root );
+        assertTrue( "root object not a TestRule instance", ( root instanceof TestBean ) );
+    }
+
+    /** Tests that values are stored independently */
+    @Test
+    public void testNamedIndependence()
+    {
+        final String testStackOneName = "org.apache.commons.digester3.tests.testNamedIndependenceOne";
+        final String testStackTwoName = "org.apache.commons.digester3.tests.testNamedIndependenceTwo";
+        final Digester digester = new Digester();
+        digester.push( testStackOneName, "Tweedledum" );
+        digester.push( testStackTwoName, "Tweedledee" );
+        assertEquals( "Popped value one:", "Tweedledum", digester.pop( testStackOneName ) );
+        assertEquals( "Popped value two:", "Tweedledee", digester.pop( testStackTwoName ) );
+    }
+
+    /** Tests for isEmpty */
+    @Test
+    public void testNamedStackIsEmpty()
+    {
+        final String testStackName = "org.apache.commons.digester3.tests.testNamedStackIsEmpty";
+        final Digester digester = new Digester();
+        assertTrue( "A named stack that has no object pushed onto it yet should be empty",
+                    digester.isEmpty( testStackName ) );
+
+        digester.push( testStackName, "Some test value" );
+        assertFalse( "A named stack that has an object pushed onto it should be not empty",
+                     digester.isEmpty( testStackName ) );
+
+        digester.peek( testStackName );
+        assertFalse( "Peek should not effect whether the stack is empty", digester.isEmpty( testStackName ) );
+
+        digester.pop( testStackName );
+        assertTrue( "A named stack that has it's last object popped is empty", digester.isEmpty( testStackName ) );
+    }
+
+    /** Tests the push-peek-pop cycle for a named stack */
+    @Test
+    public void testNamedStackPushPeekPop()
+        throws Exception
+    {
+        final BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
+        final String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";
+        final Digester digester = new Digester();
+        assertTrue( "Stack starts empty:", digester.isEmpty( testStackName ) );
+        digester.push( testStackName, archimedesAveragePi );
+        assertEquals( "Peeked value:", archimedesAveragePi, digester.peek( testStackName ) );
+        assertEquals( "Popped value:", archimedesAveragePi, digester.pop( testStackName ) );
+        assertTrue( "Stack ends empty:", digester.isEmpty( testStackName ) );
+
+        digester.push( testStackName, "1" );
+        digester.push( testStackName, "2" );
+        digester.push( testStackName, "3" );
+
+        assertEquals( "Peek#1", "1", digester.peek( testStackName, 2 ) );
+        assertEquals( "Peek#2", "2", digester.peek( testStackName, 1 ) );
+        assertEquals( "Peek#3", "3", digester.peek( testStackName, 0 ) );
+        assertEquals( "Peek#3a", "3", digester.peek( testStackName ) );
+
+        try
+        {
+            // peek beyond stack
+            digester.peek( testStackName, 3 );
+            fail( "Peek#4 failed to throw an exception." );
+        }
+        catch ( final EmptyStackException ex )
+        {
+            // ok, expected
+        }
+
+        try
+        {
+            // peek a nonexistent named stack
+            digester.peek( "no.such.stack", 0 );
+            fail( "Peeking a non-existent stack failed to throw an exception." );
+        }
+        catch ( final EmptyStackException ex )
+        {
+            // ok, expected
+        }
+    }
 
     /**
      * Test {@code null} parsing. (should lead to {@code IllegalArgumentException}s)
@@ -198,6 +397,66 @@ public class DigesterTestCase
             // expected
         }
 
+    }
+
+    @Test
+    public void testOnceAndOnceOnly()
+        throws Exception
+    {
+
+        class TestConfigureDigester
+            extends Digester
+        {
+            public int called;
+
+            public TestConfigureDigester()
+            {
+            }
+
+            @Override
+            protected void initialize()
+            {
+                called++;
+            }
+        }
+
+        final TestConfigureDigester digester = new TestConfigureDigester();
+
+        final String xml = "<?xml version='1.0'?><document/>";
+        digester.parse( new StringReader( xml ) );
+
+        assertEquals( "Initialize should be called once and only once", 1, digester.called );
+    }
+
+    /** Tests popping named stack not yet pushed */
+    @Test
+    public void testPopNamedStackNotPushed()
+    {
+        final String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
+        final Digester digester = new Digester();
+        try
+        {
+
+            digester.pop( testStackName );
+            fail( "Expected an EmptyStackException" );
+
+        }
+        catch ( final EmptyStackException e )
+        {
+            // expected
+        }
+
+        try
+        {
+
+            digester.peek( testStackName );
+            fail( "Expected an EmptyStackException" );
+
+        }
+        catch ( final EmptyStackException e )
+        {
+            // expected
+        }
     }
 
     /**
@@ -331,314 +590,6 @@ public class DigesterTestCase
     }
 
     /**
-     * Test the basic stack mechanisms.
-     */
-    @Test
-    public void testStackMethods()
-    {
-
-        Object value;
-
-        // New stack must be empty
-        assertEquals( "New stack is empty", 0, digester.getCount() );
-        value = digester.peek();
-        assertNull( "New stack peek() returns null", value );
-        value = digester.pop();
-        assertNull( "New stack pop() returns null", value );
-
-        // Test pushing and popping activities
-        digester.push( "First Item" );
-        assertEquals( "Pushed one item size", 1, digester.getCount() );
-        value = digester.peek();
-        assertNotNull( "Peeked first item is not null", value );
-        assertEquals( "Peeked first item value", "First Item", value );
-
-        digester.push( "Second Item" );
-        assertEquals( "Pushed two items size", 2, digester.getCount() );
-        value = digester.peek();
-        assertNotNull( "Peeked second item is not null", value );
-        assertEquals( "Peeked second item value", "Second Item", value );
-
-        value = digester.pop();
-        assertEquals( "Popped stack size", 1, digester.getCount() );
-        assertNotNull( "Popped second item is not null", value );
-        assertEquals( "Popped second item value", "Second Item", value );
-        value = digester.peek();
-        assertNotNull( "Remaining item is not null", value );
-        assertEquals( "Remaining item value", "First Item", value );
-        assertEquals( "Remaining stack size", 1, digester.getCount() );
-
-        // Cleared stack is empty
-        digester.push( "Dummy Item" );
-        digester.clear();
-        assertEquals( "Cleared stack is empty", 0, digester.getCount() );
-        value = digester.peek();
-        assertNull( "Cleared stack peek() returns null", value );
-        value = digester.pop();
-        assertNull( "Cleared stack pop() returns null", value );
-
-    }
-
-    @Test
-    public void testOnceAndOnceOnly()
-        throws Exception
-    {
-
-        class TestConfigureDigester
-            extends Digester
-        {
-            public int called;
-
-            public TestConfigureDigester()
-            {
-            }
-
-            @Override
-            protected void initialize()
-            {
-                called++;
-            }
-        }
-
-        final TestConfigureDigester digester = new TestConfigureDigester();
-
-        final String xml = "<?xml version='1.0'?><document/>";
-        digester.parse( new StringReader( xml ) );
-
-        assertEquals( "Initialize should be called once and only once", 1, digester.called );
-    }
-
-    @Test
-    public void testBasicSubstitution()
-        throws Exception
-    {
-        class TestSubRule
-            extends Rule
-        {
-            public String body;
-
-            public Attributes attributes;
-
-            @Override
-            public void begin( final String namespace, final String name, final Attributes attributes )
-            {
-                this.attributes = new AttributesImpl( attributes );
-            }
-
-            @Override
-            public void body( final String namespace, final String name, final String text )
-            {
-                this.body = text;
-            }
-        }
-
-        final TestSubRule tsr = new TestSubRule();
-        final Digester digester = new Digester();
-        digester.addRule( "alpha/beta", tsr );
-
-        // it's not easy to transform dirty harry into the mighty circus - but let's give it a try
-        final String xml =
-            "<?xml version='1.0'?><alpha><beta forname='Dirty' surname='Harry'>Do you feel luck punk?</beta></alpha>";
-        InputSource in = new InputSource( new StringReader( xml ) );
-
-        digester.parse( in );
-
-        assertEquals( "Unsubstituted body text", "Do you feel luck punk?", tsr.body );
-        assertEquals( "Unsubstituted number of attributes", 2, tsr.attributes.getLength() );
-        assertEquals( "Unsubstituted forname attribute value", "Dirty", tsr.attributes.getValue( "forname" ) );
-        assertEquals( "Unsubstituted surname attribute value", "Harry", tsr.attributes.getValue( "surname" ) );
-
-        digester.setSubstitutor( new Substitutor()
-        {
-            @Override
-            public Attributes substitute( final Attributes attributes )
-            {
-                final AttributesImpl results = new AttributesImpl();
-                results.addAttribute( "", "python", "python", "CDATA", "Cleese" );
-                return results;
-            }
-
-            @Override
-            public String substitute( final String bodyText )
-            {
-                return "And now for something completely different...";
-            }
-        } );
-
-        // now transform into the full monty
-        in = new InputSource( new StringReader( xml ) );
-        digester.parse( in );
-
-        assertEquals( "Substituted body text", "And now for something completely different...", tsr.body );
-        assertEquals( "Substituted number of attributes", 1, tsr.attributes.getLength() );
-        assertEquals( "Substituted python attribute value", "Cleese", tsr.attributes.getValue( "", "python" ) );
-    }
-
-    /** Tests the push-peek-pop cycle for a named stack */
-    @Test
-    public void testNamedStackPushPeekPop()
-        throws Exception
-    {
-        final BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
-        final String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";
-        final Digester digester = new Digester();
-        assertTrue( "Stack starts empty:", digester.isEmpty( testStackName ) );
-        digester.push( testStackName, archimedesAveragePi );
-        assertEquals( "Peeked value:", archimedesAveragePi, digester.peek( testStackName ) );
-        assertEquals( "Popped value:", archimedesAveragePi, digester.pop( testStackName ) );
-        assertTrue( "Stack ends empty:", digester.isEmpty( testStackName ) );
-
-        digester.push( testStackName, "1" );
-        digester.push( testStackName, "2" );
-        digester.push( testStackName, "3" );
-
-        assertEquals( "Peek#1", "1", digester.peek( testStackName, 2 ) );
-        assertEquals( "Peek#2", "2", digester.peek( testStackName, 1 ) );
-        assertEquals( "Peek#3", "3", digester.peek( testStackName, 0 ) );
-        assertEquals( "Peek#3a", "3", digester.peek( testStackName ) );
-
-        try
-        {
-            // peek beyond stack
-            digester.peek( testStackName, 3 );
-            fail( "Peek#4 failed to throw an exception." );
-        }
-        catch ( final EmptyStackException ex )
-        {
-            // ok, expected
-        }
-
-        try
-        {
-            // peek a nonexistent named stack
-            digester.peek( "no.such.stack", 0 );
-            fail( "Peeking a non-existent stack failed to throw an exception." );
-        }
-        catch ( final EmptyStackException ex )
-        {
-            // ok, expected
-        }
-    }
-
-    /** Tests that values are stored independently */
-    @Test
-    public void testNamedIndependence()
-    {
-        final String testStackOneName = "org.apache.commons.digester3.tests.testNamedIndependenceOne";
-        final String testStackTwoName = "org.apache.commons.digester3.tests.testNamedIndependenceTwo";
-        final Digester digester = new Digester();
-        digester.push( testStackOneName, "Tweedledum" );
-        digester.push( testStackTwoName, "Tweedledee" );
-        assertEquals( "Popped value one:", "Tweedledum", digester.pop( testStackOneName ) );
-        assertEquals( "Popped value two:", "Tweedledee", digester.pop( testStackTwoName ) );
-    }
-
-    /** Tests popping named stack not yet pushed */
-    @Test
-    public void testPopNamedStackNotPushed()
-    {
-        final String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
-        final Digester digester = new Digester();
-        try
-        {
-
-            digester.pop( testStackName );
-            fail( "Expected an EmptyStackException" );
-
-        }
-        catch ( final EmptyStackException e )
-        {
-            // expected
-        }
-
-        try
-        {
-
-            digester.peek( testStackName );
-            fail( "Expected an EmptyStackException" );
-
-        }
-        catch ( final EmptyStackException e )
-        {
-            // expected
-        }
-    }
-
-    /** Tests for isEmpty */
-    @Test
-    public void testNamedStackIsEmpty()
-    {
-        final String testStackName = "org.apache.commons.digester3.tests.testNamedStackIsEmpty";
-        final Digester digester = new Digester();
-        assertTrue( "A named stack that has no object pushed onto it yet should be empty",
-                    digester.isEmpty( testStackName ) );
-
-        digester.push( testStackName, "Some test value" );
-        assertFalse( "A named stack that has an object pushed onto it should be not empty",
-                     digester.isEmpty( testStackName ) );
-
-        digester.peek( testStackName );
-        assertFalse( "Peek should not effect whether the stack is empty", digester.isEmpty( testStackName ) );
-
-        digester.pop( testStackName );
-        assertTrue( "A named stack that has it's last object popped is empty", digester.isEmpty( testStackName ) );
-    }
-
-    /**
-     * Test the Digester.getRoot method.
-     */
-    @Test
-    public void testGetRoot()
-        throws Exception
-    {
-        final Digester digester = new Digester();
-        digester.addRule( "root", new ObjectCreateRule( TestBean.class ) );
-
-        final String xml = "<root/>";
-        final InputSource in = new InputSource( new StringReader( xml ) );
-
-        digester.parse( in );
-
-        final Object root = digester.getRoot();
-        assertNotNull( "root object not retrieved", root );
-        assertTrue( "root object not a TestRule instance", ( root instanceof TestBean ) );
-    }
-
-    /** Utility class for method testStackAction */
-    private static final class TrackingStackAction
-        implements StackAction
-    {
-        public ArrayList<String> events = new ArrayList<String>();
-
-        @Override
-        public Object onPush( final Digester d, final String stackName, final Object o )
-        {
-            final String msg = "push:" + stackName + ":" + o.toString();
-            events.add( msg );
-
-            final String str = o.toString();
-            if ( str.startsWith( "replpush" ) )
-            {
-                return new String( str );
-            }
-            return o;
-        }
-
-        @Override
-        public Object onPop( final Digester d, final String stackName, final Object o )
-        {
-            final String msg = "pop:" + stackName + ":" + o.toString();
-            events.add( msg );
-            final String str = o.toString();
-            if ( str.startsWith( "replpop" ) )
-            {
-                return new String( str );
-            }
-            return o;
-        }
-    }
-
-    /**
      * Test custom StackAction subclasses.
      */
     @Test
@@ -706,5 +657,54 @@ public class DigesterTestCase
         assertEquals( "push:stack1:obj9", action.events.get( 9 ) );
         assertEquals( "pop:stack1:obj9", action.events.get( 10 ) );
         assertEquals( "pop:stack1:obj8", action.events.get( 11 ) );
+    }
+
+    /**
+     * Test the basic stack mechanisms.
+     */
+    @Test
+    public void testStackMethods()
+    {
+
+        Object value;
+
+        // New stack must be empty
+        assertEquals( "New stack is empty", 0, digester.getCount() );
+        value = digester.peek();
+        assertNull( "New stack peek() returns null", value );
+        value = digester.pop();
+        assertNull( "New stack pop() returns null", value );
+
+        // Test pushing and popping activities
+        digester.push( "First Item" );
+        assertEquals( "Pushed one item size", 1, digester.getCount() );
+        value = digester.peek();
+        assertNotNull( "Peeked first item is not null", value );
+        assertEquals( "Peeked first item value", "First Item", value );
+
+        digester.push( "Second Item" );
+        assertEquals( "Pushed two items size", 2, digester.getCount() );
+        value = digester.peek();
+        assertNotNull( "Peeked second item is not null", value );
+        assertEquals( "Peeked second item value", "Second Item", value );
+
+        value = digester.pop();
+        assertEquals( "Popped stack size", 1, digester.getCount() );
+        assertNotNull( "Popped second item is not null", value );
+        assertEquals( "Popped second item value", "Second Item", value );
+        value = digester.peek();
+        assertNotNull( "Remaining item is not null", value );
+        assertEquals( "Remaining item value", "First Item", value );
+        assertEquals( "Remaining stack size", 1, digester.getCount() );
+
+        // Cleared stack is empty
+        digester.push( "Dummy Item" );
+        digester.clear();
+        assertEquals( "Cleared stack is empty", 0, digester.getCount() );
+        value = digester.peek();
+        assertNull( "Cleared stack peek() returns null", value );
+        value = digester.pop();
+        assertNull( "Cleared stack pop() returns null", value );
+
     }
 }

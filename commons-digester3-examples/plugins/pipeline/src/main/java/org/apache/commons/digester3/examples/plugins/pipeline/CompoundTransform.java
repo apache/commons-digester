@@ -34,6 +34,13 @@ public class CompoundTransform
     implements Transform
 {
 
+    public static void addRules( final Digester d, final String patternPrefix )
+    {
+        final PluginCreateRule pcr = new PluginCreateRule( Transform.class );
+        d.addRule( patternPrefix + "/subtransform", pcr );
+        d.addSetNext( patternPrefix + "/subtransform", "addTransform" );
+    }
+
     private final LinkedList<Transform> transforms = new LinkedList<Transform>();
 
     public void addTransform( final Transform transform )
@@ -48,13 +55,6 @@ public class CompoundTransform
             s = t.transform( s );
         }
         return s;
-    }
-
-    public static void addRules( final Digester d, final String patternPrefix )
-    {
-        final PluginCreateRule pcr = new PluginCreateRule( Transform.class );
-        d.addRule( patternPrefix + "/subtransform", pcr );
-        d.addSetNext( patternPrefix + "/subtransform", "addTransform" );
     }
 
 }

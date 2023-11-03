@@ -50,44 +50,16 @@ public final class Feed
 
     private final List<Entry> entries = new ArrayList<Entry>();
 
-    public String getTitle()
+    @CallMethod( pattern = "feed/author/name", usingElementBodyAsArgument = true )
+    public void addAuthor( final String author )
     {
-        return title;
+        authors.add( author );
     }
 
-    public void setTitle( final String title )
+    @SetNext
+    public void addEntry( final Entry entry )
     {
-        this.title = title;
-    }
-
-    public URL getLink()
-    {
-        return link;
-    }
-
-    public void setLink( final URL link )
-    {
-        this.link = link;
-    }
-
-    public Date getUpdated()
-    {
-        return updated;
-    }
-
-    public void setUpdated( final Date updated )
-    {
-        this.updated = updated;
-    }
-
-    public String getId()
-    {
-        return id;
-    }
-
-    public void setId( final String id )
-    {
-        this.id = id;
+        entries.add( entry );
     }
 
     public List<String> getAuthors()
@@ -95,21 +67,49 @@ public final class Feed
         return authors;
     }
 
-    @CallMethod( pattern = "feed/author/name", usingElementBodyAsArgument = true )
-    public void addAuthor( final String author )
-    {
-        authors.add( author );
-    }
-
     public List<Entry> getEntries()
     {
         return entries;
     }
 
-    @SetNext
-    public void addEntry( final Entry entry )
+    public String getId()
     {
-        entries.add( entry );
+        return id;
+    }
+
+    public URL getLink()
+    {
+        return link;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
+
+    public void setId( final String id )
+    {
+        this.id = id;
+    }
+
+    public void setLink( final URL link )
+    {
+        this.link = link;
+    }
+
+    public void setTitle( final String title )
+    {
+        this.title = title;
+    }
+
+    public void setUpdated( final Date updated )
+    {
+        this.updated = updated;
     }
 
     @Override

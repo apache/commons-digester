@@ -39,47 +39,30 @@ public class Item implements Serializable {
      */
     protected String description;
 
-    public String getDescription()
-    {
-        return ( this.description );
-    }
-
-    public void setDescription( final String description )
-    {
-        this.description = description;
-    }
-
     /**
      * The item link (1-500 characters).
      */
     protected String link;
-
-    public String getLink()
-    {
-        return ( this.link );
-    }
-
-    public void setLink( final String link )
-    {
-        this.link = link;
-    }
 
     /**
      * The item title (1-100 characters).
      */
     protected String title;
 
+    public String getDescription()
+    {
+        return ( this.description );
+    }
+
+    public String getLink()
+    {
+        return ( this.link );
+    }
+
     public String getTitle()
     {
         return ( this.title );
     }
-
-    public void setTitle( final String title )
-    {
-        this.title = title;
-    }
-
-    // -------------------------------------------------------- Package Methods
 
     /**
      * Render this channel as XML conforming to the RSS 0.91 specification,
@@ -107,6 +90,23 @@ public class Item implements Serializable {
         }
 
         writer.println( "    </item>" );
+    }
+
+    public void setDescription( final String description )
+    {
+        this.description = description;
+    }
+
+    public void setLink( final String link )
+    {
+        this.link = link;
+    }
+
+    // -------------------------------------------------------- Package Methods
+
+    public void setTitle( final String title )
+    {
+        this.title = title;
     }
 
 }

@@ -39,56 +39,6 @@ public final class AudioVisual
 
     private int runtime;
 
-    public int getYearMade()
-    {
-        return yearMade;
-    }
-
-    public void setYearMade( final int yearMade )
-    {
-        this.yearMade = yearMade;
-    }
-
-    public String getCategory()
-    {
-        return this.category;
-    }
-
-    public void setCategory( final String category )
-    {
-        this.category = category;
-    }
-
-    public String getName()
-    {
-        return this.name;
-    }
-
-    public void setName( final String name )
-    {
-        this.name = name;
-    }
-
-    public String getDesc()
-    {
-        return this.desc;
-    }
-
-    public void setDesc( final String desc )
-    {
-        this.desc = desc;
-    }
-
-    public int getRuntime()
-    {
-        return this.runtime;
-    }
-
-    public void setRuntime( final int runtime )
-    {
-        this.runtime = runtime;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -138,10 +88,60 @@ public final class AudioVisual
         return true;
     }
 
+    public String getCategory()
+    {
+        return this.category;
+    }
+
+    public String getDesc()
+    {
+        return this.desc;
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public int getRuntime()
+    {
+        return this.runtime;
+    }
+
+    public int getYearMade()
+    {
+        return yearMade;
+    }
+
     @Override
     public void print()
     {
         System.out.println( this.toString() );
+    }
+
+    public void setCategory( final String category )
+    {
+        this.category = category;
+    }
+
+    public void setDesc( final String desc )
+    {
+        this.desc = desc;
+    }
+
+    public void setName( final String name )
+    {
+        this.name = name;
+    }
+
+    public void setRuntime( final int runtime )
+    {
+        this.runtime = runtime;
+    }
+
+    public void setYearMade( final int yearMade )
+    {
+        this.yearMade = yearMade;
     }
 
 }

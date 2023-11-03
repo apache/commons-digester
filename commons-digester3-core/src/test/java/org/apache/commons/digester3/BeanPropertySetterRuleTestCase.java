@@ -54,6 +54,72 @@ public class BeanPropertySetterRuleTestCase
     // ------------------------------------------------ Individual Test Methods
 
     /**
+     * Test that you can successfully automatically set properties.
+     */
+    @Test
+    public void testAutomaticallySetProperties()
+        throws SAXException, IOException
+    {
+        final Digester digester = newLoader(new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" );
+                forPattern( "root/?" ).setBeanProperty();
+            }
+
+        }).newDigester( new ExtendedBaseRules() );
+
+        final SimpleTestBean bean = digester.parse( xmlTestReader() );
+
+        // check properties are set correctly
+        assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
+
+        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+
+        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+
+    }
+
+    /**
+     * This is a general digester test but it fits into here pretty well. This tests that the body text stack is
+     * functioning correctly.
+     */
+    @Test
+    public void testDigesterBodyTextStack()
+        throws SAXException, IOException
+    {
+        final List<Rule> callOrder = new ArrayList<Rule>();
+
+        final Digester digester = newLoader(new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "root" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root", callOrder ) );
+                forPattern( "root/alpha" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root/alpha", callOrder ) );
+                forPattern( "root/beta" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root/beta", callOrder ) );
+                forPattern( "root/gamma" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root/gamma", callOrder ) );
+            }
+
+        }).newDigester();
+
+        digester.parse( xmlTestReader() );
+
+        assertEquals( "Root body text not set correct.", "ROOT BODY", ( (TestRule) callOrder.get( 0 ) ).getBodyText() );
+
+        assertEquals( "Alpha body text not set correct.", "ALPHA BODY", ( (TestRule) callOrder.get( 1 ) ).getBodyText() );
+
+        assertEquals( "Beta body text not set correct.", "BETA BODY", ( (TestRule) callOrder.get( 4 ) ).getBodyText() );
+
+        assertEquals( "Gamma body text not set correct.", "GAMMA BODY", ( (TestRule) callOrder.get( 7 ) ).getBodyText() );
+
+    }
+
+    /**
      * This is a general digester test but it fits into here pretty well. This tests that the rule calling order is
      * properly enforced.
      */
@@ -113,40 +179,27 @@ public class BeanPropertySetterRuleTestCase
 
     }
 
-    /**
-     * This is a general digester test but it fits into here pretty well. This tests that the body text stack is
-     * functioning correctly.
-     */
     @Test
-    public void testDigesterBodyTextStack()
-        throws SAXException, IOException
+    public void testExtractPropertyNameFromAttribute() throws Exception
     {
-        final List<Rule> callOrder = new ArrayList<Rule>();
+        final Employee expected = new Employee( "John", "Doe" );
 
-        final Digester digester = newLoader(new AbstractRulesModule()
+        final Employee actual = newLoader( new AbstractRulesModule()
         {
 
             @Override
             protected void configure()
             {
-                forPattern( "root" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root", callOrder ) );
-                forPattern( "root/alpha" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root/alpha", callOrder ) );
-                forPattern( "root/beta" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root/beta", callOrder ) );
-                forPattern( "root/gamma" ).addRuleCreatedBy( new TestRule.TestRuleProvider( "root/gamma", callOrder ) );
+                forPattern( "employee" ).createObject().ofType( Employee.class );
+                forPattern( "employee/property" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
             }
 
-        }).newDigester();
+        } )
+        .newDigester()
+        .parse( getClass().getResource( "extractPropertyNameFromAttribute.xml" ) );
 
-        digester.parse( xmlTestReader() );
-
-        assertEquals( "Root body text not set correct.", "ROOT BODY", ( (TestRule) callOrder.get( 0 ) ).getBodyText() );
-
-        assertEquals( "Alpha body text not set correct.", "ALPHA BODY", ( (TestRule) callOrder.get( 1 ) ).getBodyText() );
-
-        assertEquals( "Beta body text not set correct.", "BETA BODY", ( (TestRule) callOrder.get( 4 ) ).getBodyText() );
-
-        assertEquals( "Gamma body text not set correct.", "GAMMA BODY", ( (TestRule) callOrder.get( 7 ) ).getBodyText() );
-
+        assertEquals( expected.getFirstName(), actual.getFirstName() );
+        assertEquals( expected.getLastName(), actual.getLastName() );
     }
 
     /**
@@ -232,59 +285,6 @@ public class BeanPropertySetterRuleTestCase
             }
         }
 
-    }
-
-    /**
-     * Test that you can successfully automatically set properties.
-     */
-    @Test
-    public void testAutomaticallySetProperties()
-        throws SAXException, IOException
-    {
-        final Digester digester = newLoader(new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" );
-                forPattern( "root/?" ).setBeanProperty();
-            }
-
-        }).newDigester( new ExtendedBaseRules() );
-
-        final SimpleTestBean bean = digester.parse( xmlTestReader() );
-
-        // check properties are set correctly
-        assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
-
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
-
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
-
-    }
-
-    @Test
-    public void testExtractPropertyNameFromAttribute() throws Exception
-    {
-        final Employee expected = new Employee( "John", "Doe" );
-
-        final Employee actual = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "employee" ).createObject().ofType( Employee.class );
-                forPattern( "employee/property" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
-            }
-
-        } )
-        .newDigester()
-        .parse( getClass().getResource( "extractPropertyNameFromAttribute.xml" ) );
-
-        assertEquals( expected.getFirstName(), actual.getFirstName() );
-        assertEquals( expected.getLastName(), actual.getLastName() );
     }
 
     /**

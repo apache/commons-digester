@@ -31,33 +31,6 @@ public abstract class AbstractRulesModule
     private RulesBinder rulesBinder;
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void configure( final RulesBinder rulesBinder )
-    {
-        if ( this.rulesBinder != null )
-        {
-            throw new IllegalStateException( "Re-entry is not allowed." );
-        }
-
-        this.rulesBinder = rulesBinder;
-        try
-        {
-            configure();
-        }
-        finally
-        {
-            this.rulesBinder = null;
-        }
-    }
-
-    /**
-     * Configures a {@link RulesBinder} via the exposed methods.
-     */
-    protected abstract void configure();
-
-    /**
      * Records an error message which will be presented to the user at a later time.
      *
      * Uses {@link java.lang.String#format(String, Object...)} to insert the arguments into the message.
@@ -85,14 +58,30 @@ public abstract class AbstractRulesModule
     }
 
     /**
-     * Uses the given module to configure more bindings.
-     *
-     * @param rulesModule The module used to configure more bindings
-     * @see RulesBinder#install(RulesModule)
+     * Configures a {@link RulesBinder} via the exposed methods.
      */
-    protected void install( final RulesModule rulesModule )
+    protected abstract void configure();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void configure( final RulesBinder rulesBinder )
     {
-        rulesBinder.install( rulesModule );
+        if ( this.rulesBinder != null )
+        {
+            throw new IllegalStateException( "Re-entry is not allowed." );
+        }
+
+        this.rulesBinder = rulesBinder;
+        try
+        {
+            configure();
+        }
+        finally
+        {
+            this.rulesBinder = null;
+        }
     }
 
     /**
@@ -105,6 +94,17 @@ public abstract class AbstractRulesModule
     protected LinkedRuleBuilder forPattern( final String pattern )
     {
         return rulesBinder.forPattern( pattern );
+    }
+
+    /**
+     * Uses the given module to configure more bindings.
+     *
+     * @param rulesModule The module used to configure more bindings
+     * @see RulesBinder#install(RulesModule)
+     */
+    protected void install( final RulesModule rulesModule )
+    {
+        rulesBinder.install( rulesModule );
     }
 
     /**

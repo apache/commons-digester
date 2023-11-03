@@ -31,25 +31,6 @@ import org.xml.sax.SAXParseException;
 public class Digester171TestCase
 {
 
-    @Test
-    public void testNoErrorHandler()
-        throws Exception
-    {
-        newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                // do nothing
-            }
-
-        } )
-        .setFeature( "http://xml.org/sax/features/validation", true )
-        .newDigester()
-        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
-    }
-
     @Test( expected = SAXParseException.class )
     public void testDefaultThrowingErrorHandler()
         throws Exception
@@ -68,6 +49,25 @@ public class Digester171TestCase
         } )
         .setFeature( "http://xml.org/sax/features/validation", true )
         .setErrorHandler( customErrorHandler )
+        .newDigester()
+        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
+    }
+
+    @Test
+    public void testNoErrorHandler()
+        throws Exception
+    {
+        newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                // do nothing
+            }
+
+        } )
+        .setFeature( "http://xml.org/sax/features/validation", true )
         .newDigester()
         .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
     }

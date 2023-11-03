@@ -33,16 +33,6 @@ public class PluginConfigurationException
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructs a new exception with the specified cause.
-     *
-     * @param cause underlying exception that caused this to be thrown
-     */
-    public PluginConfigurationException( final Throwable cause )
-    {
-        super( cause );
-    }
-
-    /**
      * Constructs a new exception with the specified detail message.
      *
      * @param msg describes the reason this exception is being thrown.
@@ -61,6 +51,16 @@ public class PluginConfigurationException
     public PluginConfigurationException( final String msg, final Throwable cause )
     {
         super( msg, cause );
+    }
+
+    /**
+     * Constructs a new exception with the specified cause.
+     *
+     * @param cause underlying exception that caused this to be thrown
+     */
+    public PluginConfigurationException( final Throwable cause )
+    {
+        super( cause );
     }
 
 }

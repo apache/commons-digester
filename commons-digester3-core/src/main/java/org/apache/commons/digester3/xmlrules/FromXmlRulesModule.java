@@ -78,9 +78,41 @@ public abstract class FromXmlRulesModule
     }
 
     /**
+     * Returns the XML source SystemIds load by this module.
+     *
+     * @return The XML source SystemIds load by this module
+     */
+    public final Set<String> getSystemIds()
+    {
+        return unmodifiableSet( systemIds );
+    }
+
+    /**
      *
      */
     protected abstract void loadRules();
+
+    /**
+     * Opens a new {@code org.xml.sax.InputSource} given a {@code java.io.File}.
+     *
+     * @param file The {@code java.io.File} where reading the XML rules from.
+     */
+    protected final void loadXMLRules( final File file )
+    {
+        if ( file == null )
+        {
+            throw new IllegalArgumentException( "Argument 'input' must be not null" );
+        }
+
+        try
+        {
+            loadXMLRules( file.toURI().toURL() );
+        }
+        catch ( final MalformedURLException e )
+        {
+            rulesBinder().addError( e );
+        }
+    }
 
     /**
      * Reads the XML rules from the given {@code org.xml.sax.InputSource}.
@@ -147,28 +179,6 @@ public abstract class FromXmlRulesModule
         }
 
         loadXMLRules( new InputSource( reader ) );
-    }
-
-    /**
-     * Opens a new {@code org.xml.sax.InputSource} given a {@code java.io.File}.
-     *
-     * @param file The {@code java.io.File} where reading the XML rules from.
-     */
-    protected final void loadXMLRules( final File file )
-    {
-        if ( file == null )
-        {
-            throw new IllegalArgumentException( "Argument 'input' must be not null" );
-        }
-
-        try
-        {
-            loadXMLRules( file.toURI().toURL() );
-        }
-        catch ( final MalformedURLException e )
-        {
-            rulesBinder().addError( e );
-        }
     }
 
     /**
@@ -244,16 +254,6 @@ public abstract class FromXmlRulesModule
     protected final void useRootPath( final String rootPath )
     {
         this.rootPath = rootPath;
-    }
-
-    /**
-     * Returns the XML source SystemIds load by this module.
-     *
-     * @return The XML source SystemIds load by this module
-     */
-    public final Set<String> getSystemIds()
-    {
-        return unmodifiableSet( systemIds );
     }
 
 }

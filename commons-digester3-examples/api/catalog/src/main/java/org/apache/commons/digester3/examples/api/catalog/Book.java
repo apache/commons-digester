@@ -37,9 +37,14 @@ public class Book
         this.isbn = isbn;
     }
 
-    public void setTitle( final String title )
+    @Override
+    public void print()
     {
-        this.title = title;
+        System.out.println( "Book:" );
+        System.out.println( "  isbn=" + isbn );
+        System.out.println( "  title=" + title );
+        System.out.println( "  author=" + author );
+        System.out.println( "  desc=" + desc );
     }
 
     public void setAuthor( final String author )
@@ -52,14 +57,9 @@ public class Book
         this.desc = desc;
     }
 
-    @Override
-    public void print()
+    public void setTitle( final String title )
     {
-        System.out.println( "Book:" );
-        System.out.println( "  isbn=" + isbn );
-        System.out.println( "  title=" + title );
-        System.out.println( "  author=" + author );
-        System.out.println( "  desc=" + desc );
+        this.title = title;
     }
 
 }

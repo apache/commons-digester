@@ -45,66 +45,6 @@ public final class Image
     @BeanPropertySetter( pattern = "rss/channel/image/url" )
     private String url;
 
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription( final String description )
-    {
-        this.description = description;
-    }
-
-    public int getWidth()
-    {
-        return width;
-    }
-
-    public void setWidth( final int width )
-    {
-        this.width = width;
-    }
-
-    public int getHeight()
-    {
-        return height;
-    }
-
-    public void setHeight( final int height )
-    {
-        this.height = height;
-    }
-
-    public String getLink()
-    {
-        return link;
-    }
-
-    public void setLink( final String link )
-    {
-        this.link = link;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle( final String title )
-    {
-        this.title = title;
-    }
-
-    public String getUrl()
-    {
-        return url;
-    }
-
-    public void setUrl( final String url )
-    {
-        this.url = url;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -161,6 +101,66 @@ public final class Image
             return false;
         }
         return true;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public String getLink()
+    {
+        return link;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public String getUrl()
+    {
+        return url;
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public void setDescription( final String description )
+    {
+        this.description = description;
+    }
+
+    public void setHeight( final int height )
+    {
+        this.height = height;
+    }
+
+    public void setLink( final String link )
+    {
+        this.link = link;
+    }
+
+    public void setTitle( final String title )
+    {
+        this.title = title;
+    }
+
+    public void setUrl( final String url )
+    {
+        this.url = url;
+    }
+
+    public void setWidth( final int width )
+    {
+        this.width = width;
     }
 
     @Override

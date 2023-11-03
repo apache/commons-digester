@@ -45,6 +45,22 @@ public final class SetPropertiesBuilder
      * Add an additional attribute name to property name mapping.
      *
      * @param attributeName The attribute to match
+     * @return the property alias builder
+     * @since 3.2
+     */
+    public AddAliasBuilder<SetPropertiesBuilder> addAlias( final String attributeName )
+    {
+        if ( attributeName == null )
+        {
+            reportError( "setProperties().addAlias( String )", "empty 'attributeName' not allowed" );
+        }
+        return new AddAliasBuilder<SetPropertiesBuilder>( this, aliases, attributeName );
+    }
+
+    /**
+     * Add an additional attribute name to property name mapping.
+     *
+     * @param attributeName The attribute to match
      * @param propertyName The java bean property to be assigned the value
      * @return this builder instance
      * @deprecated
@@ -56,19 +72,14 @@ public final class SetPropertiesBuilder
     }
 
     /**
-     * Add an additional attribute name to property name mapping.
-     *
-     * @param attributeName The attribute to match
-     * @return the property alias builder
-     * @since 3.2
+     * {@inheritDoc}
      */
-    public AddAliasBuilder<SetPropertiesBuilder> addAlias( final String attributeName )
+    @Override
+    protected SetPropertiesRule createRule()
     {
-        if ( attributeName == null )
-        {
-            reportError( "setProperties().addAlias( String )", "empty 'attributeName' not allowed" );
-        }
-        return new AddAliasBuilder<SetPropertiesBuilder>( this, aliases, attributeName );
+        final SetPropertiesRule rule = new SetPropertiesRule( aliases );
+        rule.setIgnoreMissingProperty( ignoreMissingProperty );
+        return rule;
     }
 
     /**
@@ -100,17 +111,6 @@ public final class SetPropertiesBuilder
     {
         this.ignoreMissingProperty = ignoreMissingProperty;
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected SetPropertiesRule createRule()
-    {
-        final SetPropertiesRule rule = new SetPropertiesRule( aliases );
-        rule.setIgnoreMissingProperty( ignoreMissingProperty );
-        return rule;
     }
 
 }

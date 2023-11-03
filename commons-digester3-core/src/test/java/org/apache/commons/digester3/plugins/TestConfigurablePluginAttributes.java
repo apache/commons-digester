@@ -33,6 +33,37 @@ import org.junit.Test;
 public class TestConfigurablePluginAttributes
 {
 
+    public static class MultiContainer
+    {
+        private final LinkedList<Widget> widgets = new LinkedList<Widget>();
+
+        private final LinkedList<Widget> gadgets = new LinkedList<Widget>();
+
+        public MultiContainer()
+        {
+        }
+
+        public void addGadget( final Widget child )
+        {
+            gadgets.add( child );
+        }
+
+        public void addWidget( final Widget child )
+        {
+            widgets.add( child );
+        }
+
+        public List<Widget> getGadgets()
+        {
+            return gadgets;
+        }
+
+        public List<Widget> getWidgets()
+        {
+            return widgets;
+        }
+    }
+
     // --------------------------------------------------------------- Test cases
     @Test
     public void testDefaultBehaviour()
@@ -151,6 +182,8 @@ public class TestConfigurablePluginAttributes
         assertEquals( Slider.class, gadgets.get( 3 ).getClass() );
     }
 
+    // inner classes used for testing
+
     @Test
     public void testInstanceOverride()
         throws Exception
@@ -210,38 +243,5 @@ public class TestConfigurablePluginAttributes
         assertEquals( TextLabel.class, gadgets.get( 1 ).getClass() );
         assertEquals( TextLabel.class, gadgets.get( 2 ).getClass() );
         assertEquals( TextLabel.class, gadgets.get( 3 ).getClass() );
-    }
-
-    // inner classes used for testing
-
-    public static class MultiContainer
-    {
-        private final LinkedList<Widget> widgets = new LinkedList<Widget>();
-
-        private final LinkedList<Widget> gadgets = new LinkedList<Widget>();
-
-        public MultiContainer()
-        {
-        }
-
-        public void addWidget( final Widget child )
-        {
-            widgets.add( child );
-        }
-
-        public List<Widget> getWidgets()
-        {
-            return widgets;
-        }
-
-        public void addGadget( final Widget child )
-        {
-            gadgets.add( child );
-        }
-
-        public List<Widget> getGadgets()
-        {
-            return gadgets;
-        }
     }
 }

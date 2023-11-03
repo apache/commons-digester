@@ -43,55 +43,6 @@ import org.apache.commons.digester3.Digester;
 public class Main
 {
 
-    /**
-     * Main method : entry point for running this example program.
-     * <p>
-     * Usage: java CatalogDigester example.xml
-     */
-    public static void main( final String[] args )
-    {
-        if ( args.length != 1 )
-        {
-            usage();
-            System.exit( -1 );
-        }
-
-        final String filename = args[0];
-
-        // Create a Digester instance
-        final Digester d = new Digester();
-
-        // Add rules to the digester that will be triggered while
-        // parsing occurs.
-        addRules( d );
-
-        // Process the input file.
-        try
-        {
-            final java.io.Reader reader = getInputData( filename );
-            d.parse( reader );
-        }
-        catch ( final java.io.IOException ioe )
-        {
-            System.out.println( "Error reading input file:" + ioe.getMessage() );
-            System.exit( -1 );
-        }
-        catch ( final org.xml.sax.SAXException se )
-        {
-            System.out.println( "Error parsing input file:" + se.getMessage() );
-            System.exit( -1 );
-        }
-
-        // Get the first object created by the digester's rules
-        // (the "root" object). Note that this is exactly the same object
-        // returned by the Digester.parse method; either approach works.
-        final Catalog catalog = (Catalog) d.getRoot();
-
-        // Print out all the contents of the catalog, as loaded from
-        // the input file.
-        catalog.print();
-    }
-
     private static void addRules( final Digester d )
     {
 
@@ -224,6 +175,55 @@ public class Main
 
         return new java.io.StringReader( baos.toString() );
 
+    }
+
+    /**
+     * Main method : entry point for running this example program.
+     * <p>
+     * Usage: java CatalogDigester example.xml
+     */
+    public static void main( final String[] args )
+    {
+        if ( args.length != 1 )
+        {
+            usage();
+            System.exit( -1 );
+        }
+
+        final String filename = args[0];
+
+        // Create a Digester instance
+        final Digester d = new Digester();
+
+        // Add rules to the digester that will be triggered while
+        // parsing occurs.
+        addRules( d );
+
+        // Process the input file.
+        try
+        {
+            final java.io.Reader reader = getInputData( filename );
+            d.parse( reader );
+        }
+        catch ( final java.io.IOException ioe )
+        {
+            System.out.println( "Error reading input file:" + ioe.getMessage() );
+            System.exit( -1 );
+        }
+        catch ( final org.xml.sax.SAXException se )
+        {
+            System.out.println( "Error parsing input file:" + se.getMessage() );
+            System.exit( -1 );
+        }
+
+        // Get the first object created by the digester's rules
+        // (the "root" object). Note that this is exactly the same object
+        // returned by the Digester.parse method; either approach works.
+        final Catalog catalog = (Catalog) d.getRoot();
+
+        // Print out all the contents of the catalog, as loaded from
+        // the input file.
+        catalog.print();
     }
 
     private static void usage()

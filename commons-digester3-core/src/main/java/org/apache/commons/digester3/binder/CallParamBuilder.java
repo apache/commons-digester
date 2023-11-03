@@ -44,20 +44,25 @@ public final class CallParamBuilder
     }
 
     /**
-     * Sets the zero-relative parameter number.
-     *
-     * @param paramIndex The zero-relative parameter number
-     * @return this builder instance
+     * {@inheritDoc}
      */
-    public CallParamBuilder ofIndex( final int paramIndex )
+    @Override
+    protected CallParamRule createRule()
     {
-        if ( paramIndex < 0 )
+        CallParamRule rule;
+
+        if ( fromStack )
         {
-            reportError( "callParam().ofIndex( int )", "negative index argument not allowed" );
+            rule = new CallParamRule( paramIndex, stackIndex );
+        }
+        else
+        {
+            rule = new CallParamRule( paramIndex );
         }
 
-        this.paramIndex = paramIndex;
-        return this;
+        rule.setAttributeName( attributeName );
+
+        return rule;
     }
 
     /**
@@ -85,6 +90,23 @@ public final class CallParamBuilder
     }
 
     /**
+     * Sets the zero-relative parameter number.
+     *
+     * @param paramIndex The zero-relative parameter number
+     * @return this builder instance
+     */
+    public CallParamBuilder ofIndex( final int paramIndex )
+    {
+        if ( paramIndex < 0 )
+        {
+            reportError( "callParam().ofIndex( int )", "negative index argument not allowed" );
+        }
+
+        this.paramIndex = paramIndex;
+        return this;
+    }
+
+    /**
      * Sets the position of the object from the top of the stack.
      *
      * @param stackIndex The position of the object from the top of the stack
@@ -95,28 +117,6 @@ public final class CallParamBuilder
         this.stackIndex = stackIndex;
         this.fromStack = true;
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected CallParamRule createRule()
-    {
-        CallParamRule rule;
-
-        if ( fromStack )
-        {
-            rule = new CallParamRule( paramIndex, stackIndex );
-        }
-        else
-        {
-            rule = new CallParamRule( paramIndex );
-        }
-
-        rule.setAttributeName( attributeName );
-
-        return rule;
     }
 
 }

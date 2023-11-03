@@ -102,21 +102,18 @@ public class SetPropertyRuleTestCase
     // ------------------------------------------------ Individual Test Methods
 
     /**
-     * Positive test for SetPropertyRule.
+     * Test SetPropertyRule when matched XML element has no attributes. See: DIGESTER-114
      */
     @Test
-    public void testPositive()
+    public void testElementWithNoAttributes()
         throws Exception
     {
-        // Parse the input
-        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
+        final String TEST_XML_3 = "<?xml version='1.0'?><root><set/></root>";
 
-        // Check that the properties were set correctly
-        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
-        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
-        assertNull( "gamma property not set", bean.getGamma() );
-        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
-
+        // Parse the input - should not throw an exception
+        @SuppressWarnings( "unused" )
+        final
+        SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_3 ) );
     }
 
     /**
@@ -178,26 +175,29 @@ public class SetPropertyRuleTestCase
     }
 
     /**
+     * Positive test for SetPropertyRule.
+     */
+    @Test
+    public void testPositive()
+        throws Exception
+    {
+        // Parse the input
+        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
+
+        // Check that the properties were set correctly
+        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
+        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
+        assertNull( "gamma property not set", bean.getGamma() );
+        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
+
+    }
+
+    /**
      * Gets input stream from specified String containing XML data.
      */
     private Reader xmlTestReader( final String xml )
     {
         return new StringReader( xml );
-    }
-
-    /**
-     * Test SetPropertyRule when matched XML element has no attributes. See: DIGESTER-114
-     */
-    @Test
-    public void testElementWithNoAttributes()
-        throws Exception
-    {
-        final String TEST_XML_3 = "<?xml version='1.0'?><root><set/></root>";
-
-        // Parse the input - should not throw an exception
-        @SuppressWarnings( "unused" )
-        final
-        SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_3 ) );
     }
 
 }

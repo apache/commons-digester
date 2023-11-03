@@ -32,6 +32,15 @@ public class TestEntityResolution
 {
 
     @Test
+    public void testDigesterResolveRelative()
+        throws Exception
+    {
+        final Digester digester = new Digester();
+        digester.setValidating( true );
+        digester.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ) );
+    }
+
+    @Test
     public void testParserResolveRelative()
         throws Exception
     {
@@ -42,14 +51,5 @@ public class TestEntityResolution
 
         parser.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ),
                       new DefaultHandler() );
-    }
-
-    @Test
-    public void testDigesterResolveRelative()
-        throws Exception
-    {
-        final Digester digester = new Digester();
-        digester.setValidating( true );
-        digester.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ) );
     }
 }

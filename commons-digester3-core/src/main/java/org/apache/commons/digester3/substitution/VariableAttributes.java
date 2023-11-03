@@ -43,88 +43,6 @@ public class VariableAttributes
 
     // ------------------- Public Methods
 
-    /**
-     * Specify which attributes class this object is a proxy for.
-     *
-     * @param attrs The attributes where variables have to be expanded.
-     * @param expander The variables expander instance.
-     */
-    public void init( final Attributes attrs, final VariableExpander expander )
-    {
-        this.attrs = attrs;
-        this.expander = expander;
-
-        // I hope this doesn't release the memory for this array; for
-        // efficiency, this should just mark the array as being size 0.
-        values.clear();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue( final int index )
-    {
-        if ( index >= values.size() )
-        {
-            // Expand the values array with null elements, so the later
-            // call to set(index, s) works ok.
-            //
-            // Unfortunately, there is no easy way to set the size of
-            // an arraylist; we must repeatedly add null elements to it..
-            values.ensureCapacity( index + 1 );
-            for ( int i = values.size(); i <= index; ++i )
-            {
-                values.add( null );
-            }
-        }
-
-        String s = values.get( index );
-
-        if ( s == null )
-        {
-            // we have never been asked for this value before.
-            // get the real attribute value and perform substitution
-            // on it.
-            s = attrs.getValue( index );
-            if ( s != null )
-            {
-                s = expander.expand( s );
-                values.set( index, s );
-            }
-        }
-
-        return s;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue( final String qName )
-    {
-        final int index = attrs.getIndex( qName );
-        if ( index == -1 )
-        {
-            return null;
-        }
-        return getValue( index );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue( final String uri, final String localName )
-    {
-        final int index = attrs.getIndex( uri, localName );
-        if ( index == -1 )
-        {
-            return null;
-        }
-        return getValue( index );
-    }
-
     // plain proxy methods follow : nothing interesting :-)
     /**
      * {@inheritDoc}
@@ -205,6 +123,88 @@ public class VariableAttributes
     public String getURI( final int index )
     {
         return attrs.getURI( index );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue( final int index )
+    {
+        if ( index >= values.size() )
+        {
+            // Expand the values array with null elements, so the later
+            // call to set(index, s) works ok.
+            //
+            // Unfortunately, there is no easy way to set the size of
+            // an arraylist; we must repeatedly add null elements to it..
+            values.ensureCapacity( index + 1 );
+            for ( int i = values.size(); i <= index; ++i )
+            {
+                values.add( null );
+            }
+        }
+
+        String s = values.get( index );
+
+        if ( s == null )
+        {
+            // we have never been asked for this value before.
+            // get the real attribute value and perform substitution
+            // on it.
+            s = attrs.getValue( index );
+            if ( s != null )
+            {
+                s = expander.expand( s );
+                values.set( index, s );
+            }
+        }
+
+        return s;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue( final String qName )
+    {
+        final int index = attrs.getIndex( qName );
+        if ( index == -1 )
+        {
+            return null;
+        }
+        return getValue( index );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue( final String uri, final String localName )
+    {
+        final int index = attrs.getIndex( uri, localName );
+        if ( index == -1 )
+        {
+            return null;
+        }
+        return getValue( index );
+    }
+
+    /**
+     * Specify which attributes class this object is a proxy for.
+     *
+     * @param attrs The attributes where variables have to be expanded.
+     * @param expander The variables expander instance.
+     */
+    public void init( final Attributes attrs, final VariableExpander expander )
+    {
+        this.attrs = attrs;
+        this.expander = expander;
+
+        // I hope this doesn't release the memory for this array; for
+        // efficiency, this should just mark the array as being size 0.
+        values.clear();
     }
 
 }

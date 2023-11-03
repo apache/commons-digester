@@ -58,6 +58,20 @@ public class ObjectCreateRule
             this.constructorArgs = constructorArgs;
         }
 
+        void establishDelegate()
+            throws Exception
+        {
+            convertTo( constructor.getParameterTypes(), constructorArgs );
+            delegate = constructor.newInstance( constructorArgs );
+            for ( final RecordedInvocation invocation : invocations )
+            {
+                invocation.getInvokedMethod().invoke( delegate, invocation.getArguments() );
+            }
+            constructor = null;
+            constructorArgs = null;
+            invocations = null;
+        }
+
         @Override
         public Object intercept( final Object obj, final Method method, final Object[] args, final MethodProxy proxy )
             throws Throwable
@@ -72,20 +86,6 @@ public class ObjectCreateRule
                 return proxy.invoke( delegate, args );
             }
             return proxy.invokeSuper( obj, args );
-        }
-
-        void establishDelegate()
-            throws Exception
-        {
-            convertTo( constructor.getParameterTypes(), constructorArgs );
-            delegate = constructor.newInstance( constructorArgs );
-            for ( final RecordedInvocation invocation : invocations )
-            {
-                invocation.getInvokedMethod().invoke( delegate, invocation.getArguments() );
-            }
-            constructor = null;
-            constructorArgs = null;
-            invocations = null;
         }
     }
 
@@ -187,53 +187,23 @@ public class ObjectCreateRule
 
     // ----------------------------------------------------------- Constructors
 
-    /**
-     * Construct an object create rule with the specified class name.
-     *
-     * @param className Java class name of the object to be created
-     */
-    public ObjectCreateRule( final String className )
+    private static void convertTo( final Class<?>[] types, final Object[] array )
     {
-        this( className, (String) null );
+        if ( array.length != types.length )
+        {
+            throw new IllegalArgumentException();
+        }
+        // this piece of code is adapted from CallMethodRule
+        for ( int i = 0; i < array.length; i++ )
+        {
+            // convert nulls and convert stringy parameters for non-stringy param types
+            if ( array[i] == null
+                    || ( array[i] instanceof String && !String.class.isAssignableFrom( types[i] ) ) )
+            {
+                array[i] = convert( (String) array[i], types[i] );
+            }
+        }
     }
-
-    /**
-     * Construct an object create rule with the specified class.
-     *
-     * @param clazz Java class name of the object to be created
-     */
-    public ObjectCreateRule( final Class<?> clazz )
-    {
-        this( clazz.getName(), (String) null );
-        this.clazz = clazz;
-    }
-
-    /**
-     * Construct an object create rule with the specified class name and an optional attribute name containing an
-     * override.
-     *
-     * @param className Java class name of the object to be created
-     * @param attributeName Attribute name which, if present, contains an override of the class name to create
-     */
-    public ObjectCreateRule( final String className, final String attributeName )
-    {
-        this.className = className;
-        this.attributeName = attributeName;
-    }
-
-    /**
-     * Construct an object create rule with the specified class and an optional attribute name containing an override.
-     *
-     * @param attributeName Attribute name which, if present, contains an
-     * @param clazz Java class name of the object to be created override of the class name to create
-     */
-    public ObjectCreateRule( final String attributeName, final Class<?> clazz )
-    {
-        this( clazz != null ? clazz.getName() : null, attributeName );
-        this.clazz = clazz;
-    }
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * The attribute containing an override class name if it is present.
@@ -249,6 +219,8 @@ public class ObjectCreateRule
      * The Java class name of the object to be created.
      */
     protected String className;
+
+    // ----------------------------------------------------- Instance Variables
 
     /**
      * The constructor argument types.
@@ -271,41 +243,52 @@ public class ObjectCreateRule
      */
     private ProxyManager proxyManager;
 
-    // --------------------------------------------------------- Public Methods
-
     /**
-     * Allows users to specify constructor argument types.
+     * Construct an object create rule with the specified class.
      *
-     * @param constructorArgumentTypes the constructor argument types
-     * @since 3.2
+     * @param clazz Java class name of the object to be created
      */
-    public void setConstructorArgumentTypes( final Class<?>... constructorArgumentTypes )
+    public ObjectCreateRule( final Class<?> clazz )
     {
-        if ( constructorArgumentTypes == null )
-        {
-            throw new IllegalArgumentException( "Parameter 'constructorArgumentTypes' must not be null" );
-        }
-
-        this.constructorArgumentTypes = constructorArgumentTypes;
+        this( clazz.getName(), (String) null );
+        this.clazz = clazz;
     }
 
     /**
-     * Allows users to specify default constructor arguments.  If a default/no-arg constructor is not available
-     * for the target class, these arguments will be used to create the proxy object.  For any argument
-     * not supplied by a {@link CallParamRule}, the corresponding item from this array will be used
-     * to construct the final object as well.
+     * Construct an object create rule with the specified class name.
      *
-     * @param constructorArguments the default constructor arguments.
-     * @since 3.2
+     * @param className Java class name of the object to be created
      */
-    public void setDefaultConstructorArguments( final Object... constructorArguments )
+    public ObjectCreateRule( final String className )
     {
-        if ( constructorArguments == null )
-        {
-            throw new IllegalArgumentException( "Parameter 'constructorArguments' must not be null" );
-        }
+        this( className, (String) null );
+    }
 
-        this.defaultConstructorArguments = constructorArguments;
+    /**
+     * Construct an object create rule with the specified class and an optional attribute name containing an override.
+     *
+     * @param attributeName Attribute name which, if present, contains an
+     * @param clazz Java class name of the object to be created override of the class name to create
+     */
+    public ObjectCreateRule( final String attributeName, final Class<?> clazz )
+    {
+        this( clazz != null ? clazz.getName() : null, attributeName );
+        this.clazz = clazz;
+    }
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * Construct an object create rule with the specified class name and an optional attribute name containing an
+     * override.
+     *
+     * @param className Java class name of the object to be created
+     * @param attributeName Attribute name which, if present, contains an override of the class name to create
+     */
+    public ObjectCreateRule( final String className, final String attributeName )
+    {
+        this.className = className;
+        this.attributeName = attributeName;
     }
 
     /**
@@ -397,30 +380,47 @@ public class ObjectCreateRule
     }
 
     /**
+     * Allows users to specify constructor argument types.
+     *
+     * @param constructorArgumentTypes the constructor argument types
+     * @since 3.2
+     */
+    public void setConstructorArgumentTypes( final Class<?>... constructorArgumentTypes )
+    {
+        if ( constructorArgumentTypes == null )
+        {
+            throw new IllegalArgumentException( "Parameter 'constructorArgumentTypes' must not be null" );
+        }
+
+        this.constructorArgumentTypes = constructorArgumentTypes;
+    }
+
+    /**
+     * Allows users to specify default constructor arguments.  If a default/no-arg constructor is not available
+     * for the target class, these arguments will be used to create the proxy object.  For any argument
+     * not supplied by a {@link CallParamRule}, the corresponding item from this array will be used
+     * to construct the final object as well.
+     *
+     * @param constructorArguments the default constructor arguments.
+     * @since 3.2
+     */
+    public void setDefaultConstructorArguments( final Object... constructorArguments )
+    {
+        if ( constructorArguments == null )
+        {
+            throw new IllegalArgumentException( "Parameter 'constructorArguments' must not be null" );
+        }
+
+        this.defaultConstructorArguments = constructorArguments;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public String toString()
     {
         return format( "ObjectCreateRule[className=%s, attributeName=%s]", className, attributeName );
-    }
-
-    private static void convertTo( final Class<?>[] types, final Object[] array )
-    {
-        if ( array.length != types.length )
-        {
-            throw new IllegalArgumentException();
-        }
-        // this piece of code is adapted from CallMethodRule
-        for ( int i = 0; i < array.length; i++ )
-        {
-            // convert nulls and convert stringy parameters for non-stringy param types
-            if ( array[i] == null
-                    || ( array[i] instanceof String && !String.class.isAssignableFrom( types[i] ) ) )
-            {
-                array[i] = convert( (String) array[i], types[i] );
-            }
-        }
     }
 
 }

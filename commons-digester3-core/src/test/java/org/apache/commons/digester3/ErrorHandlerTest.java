@@ -36,89 +36,6 @@ public class ErrorHandlerTest
 {
 
     @Test
-    public void testNoCustomErrorHandler()
-    {
-
-        try
-        {
-            newLoader( new AbstractRulesModule()
-            {
-                @Override
-                protected void configure()
-                {
-                    forPattern( "employee" ).createObject().ofType( Employee.class );
-                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
-                }
-            } ).newDigester().parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
-            fail( "Expected SAXException" );
-        }
-        catch ( final IOException e )
-        {
-            fail( "Expected SAXException" );
-        }
-        catch ( final SAXException e )
-        {
-            // expected
-        }
-
-    }
-
-    @Test
-    public void testCustomErrorHandlerWithStack()
-    {
-
-        final ErrorHandler customErrorHandler = new ErrorHandler()
-        {
-            final Log log = LogFactory.getLog( this.getClass() );
-
-            @Override
-            public void warning( final SAXParseException arg0 )
-                throws SAXException
-            {
-                log.warn( "Custom Warn Handler" );
-            }
-
-            @Override
-            public void fatalError( final SAXParseException e )
-                throws SAXException
-            {
-                log.fatal( "Custom Fatal Error Handler", e );
-            }
-
-            @Override
-            public void error( final SAXParseException e )
-                throws SAXException
-            {
-                log.error( "Custom Error Handler", e );
-            }
-        };
-
-        try
-        {
-            final Digester digester = newLoader( new AbstractRulesModule()
-            {
-                @Override
-                protected void configure()
-                {
-                    forPattern( "employee" ).createObject().ofType( Employee.class );
-                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
-                }
-            } ).newDigester();
-            digester.setErrorHandler( customErrorHandler );
-            digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
-            fail( "Expected SAXException" );
-        }
-        catch ( final IOException e )
-        {
-            fail( "Expected SAXException" );
-        }
-        catch ( final SAXException e )
-        {
-            // expected
-        }
-    }
-
-    @Test
     public void testCustomErrorHandler()
     {
 
@@ -127,10 +44,10 @@ public class ErrorHandlerTest
             final Log log = LogFactory.getLog( this.getClass() );
 
             @Override
-            public void warning( final SAXParseException arg0 )
+            public void error( final SAXParseException e )
                 throws SAXException
             {
-                log.warn( "Custom Warn Handler" );
+                log.error( "Custom Error Handler" );
             }
 
             @Override
@@ -141,10 +58,10 @@ public class ErrorHandlerTest
             }
 
             @Override
-            public void error( final SAXParseException e )
+            public void warning( final SAXParseException arg0 )
                 throws SAXException
             {
-                log.error( "Custom Error Handler" );
+                log.warn( "Custom Warn Handler" );
             }
         };
 
@@ -172,5 +89,88 @@ public class ErrorHandlerTest
         {
             // expected
         }
+    }
+
+    @Test
+    public void testCustomErrorHandlerWithStack()
+    {
+
+        final ErrorHandler customErrorHandler = new ErrorHandler()
+        {
+            final Log log = LogFactory.getLog( this.getClass() );
+
+            @Override
+            public void error( final SAXParseException e )
+                throws SAXException
+            {
+                log.error( "Custom Error Handler", e );
+            }
+
+            @Override
+            public void fatalError( final SAXParseException e )
+                throws SAXException
+            {
+                log.fatal( "Custom Fatal Error Handler", e );
+            }
+
+            @Override
+            public void warning( final SAXParseException arg0 )
+                throws SAXException
+            {
+                log.warn( "Custom Warn Handler" );
+            }
+        };
+
+        try
+        {
+            final Digester digester = newLoader( new AbstractRulesModule()
+            {
+                @Override
+                protected void configure()
+                {
+                    forPattern( "employee" ).createObject().ofType( Employee.class );
+                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
+                }
+            } ).newDigester();
+            digester.setErrorHandler( customErrorHandler );
+            digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
+            fail( "Expected SAXException" );
+        }
+        catch ( final IOException e )
+        {
+            fail( "Expected SAXException" );
+        }
+        catch ( final SAXException e )
+        {
+            // expected
+        }
+    }
+
+    @Test
+    public void testNoCustomErrorHandler()
+    {
+
+        try
+        {
+            newLoader( new AbstractRulesModule()
+            {
+                @Override
+                protected void configure()
+                {
+                    forPattern( "employee" ).createObject().ofType( Employee.class );
+                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
+                }
+            } ).newDigester().parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
+            fail( "Expected SAXException" );
+        }
+        catch ( final IOException e )
+        {
+            fail( "Expected SAXException" );
+        }
+        catch ( final SAXException e )
+        {
+            // expected
+        }
+
     }
 }

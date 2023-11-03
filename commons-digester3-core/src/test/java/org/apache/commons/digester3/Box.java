@@ -34,16 +34,6 @@ public class Box
     {
     }
 
-    public String getId()
-    {
-        return id;
-    }
-
-    public void setId( final String id )
-    {
-        this.id = id;
-    }
-
     public void addChild( final Box child )
     {
         this.children.add( child );
@@ -52,6 +42,32 @@ public class Box
     public List<Box> getChildren()
     {
         return children;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    /**
+     * Return a string containing this object's name value, followed by the names of all child objects (and their
+     * children etc) in pre-order sequence. Each name is separated by a space from the preceding one.
+     */
+    public String getIds()
+    {
+        final StringBuilder buf = new StringBuilder();
+        buf.append( this.id );
+        for ( final Box child : children )
+        {
+            buf.append( " " );
+            buf.append( child.getIds() );
+        }
+        return buf.toString();
+    }
+
+    public void setId( final String id )
+    {
+        this.id = id;
     }
 
     @Override
@@ -67,22 +83,6 @@ public class Box
         {
             buf.append( "  " );
             buf.append( child.toString() );
-        }
-        return buf.toString();
-    }
-
-    /**
-     * Return a string containing this object's name value, followed by the names of all child objects (and their
-     * children etc) in pre-order sequence. Each name is separated by a space from the preceding one.
-     */
-    public String getIds()
-    {
-        final StringBuilder buf = new StringBuilder();
-        buf.append( this.id );
-        for ( final Box child : children )
-        {
-            buf.append( " " );
-            buf.append( child.getIds() );
         }
         return buf.toString();
     }

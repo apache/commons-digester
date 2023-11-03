@@ -32,6 +32,23 @@ public final class CatalogTestCase
     extends AbstractAnnotatedPojoTestCase
 {
 
+    @Override
+    protected Collection<RulesModule> getAuxModules()
+    {
+        final Collection<RulesModule> modules = new Stack<RulesModule>();
+        modules.add( new AbstractRulesModule()
+        {
+
+            @Override
+            public void configure()
+            {
+                forPattern( "catalog/dvd/attr" ).setProperty( "id" ).extractingValueFromAttribute( "value" );
+            }
+
+        } );
+        return modules;
+    }
+
     @Test
     public void testCatalog()
         throws Exception
@@ -67,23 +84,6 @@ public final class CatalogTestCase
         catalog.addItem( dvd );
 
         this.verifyExpectedEqualsToParsed( catalog );
-    }
-
-    @Override
-    protected Collection<RulesModule> getAuxModules()
-    {
-        final Collection<RulesModule> modules = new Stack<RulesModule>();
-        modules.add( new AbstractRulesModule()
-        {
-
-            @Override
-            public void configure()
-            {
-                forPattern( "catalog/dvd/attr" ).setProperty( "id" ).extractingValueFromAttribute( "value" );
-            }
-
-        } );
-        return modules;
     }
 
 }

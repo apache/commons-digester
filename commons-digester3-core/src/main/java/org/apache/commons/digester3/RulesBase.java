@@ -77,53 +77,47 @@ public class RulesBase
      * {@inheritDoc}
      */
     @Override
-    public void setDigester( final Digester digester )
-    {
-        super.setDigester( digester );
-        for ( final Rule rule : rules )
-        {
-            rule.setDigester( digester );
-        }
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void registerRule( String pattern, final Rule rule )
-    {
-        // to help users who accidently add '/' to the end of their patterns
-        final int patternLength = pattern.length();
-        if ( patternLength > 1 && pattern.endsWith( "/" ) )
-        {
-            pattern = pattern.substring( 0, patternLength - 1 );
-        }
-
-        List<Rule> list = cache.get( pattern );
-        if ( list == null )
-        {
-            list = new ArrayList<Rule>();
-            if ( pattern.startsWith( "*/" ) )
-            {
-                wildcardCache.add( pattern.substring( 1 ) );
-            }
-            cache.put( pattern, list );
-        }
-        list.add( rule );
-        rules.add( rule );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear()
     {
         wildcardCache.clear();
         cache.clear();
         rules.clear();
+    }
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * Return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any).
+     * If there are no such rules, return {@code null}.
+     *
+     * @param namespaceURI Namespace URI to match, or {@code null} to select matching rules regardless of namespace
+     *            URI
+     * @param pattern Pattern to be matched
+     * @return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any)
+     */
+    protected List<Rule> lookup( final String namespaceURI, final String pattern )
+    {
+        // Optimize when no namespace URI is specified
+        final List<Rule> list = this.cache.get( pattern );
+        if ( list == null )
+        {
+            return ( null );
+        }
+        if ( ( namespaceURI == null ) || ( namespaceURI.isEmpty() ) )
+        {
+            return ( list );
+        }
+
+        // Select only Rules that match on the specified namespace URI
+        final ArrayList<Rule> results = new ArrayList<Rule>();
+        for ( final Rule item : list )
+        {
+            if ( ( namespaceURI.equals( item.getNamespaceURI() ) ) || ( item.getNamespaceURI() == null ) )
+            {
+                results.add( item );
+            }
+        }
+        return ( results );
     }
 
     /**
@@ -162,6 +156,33 @@ public class RulesBase
      * {@inheritDoc}
      */
     @Override
+    protected void registerRule( String pattern, final Rule rule )
+    {
+        // to help users who accidently add '/' to the end of their patterns
+        final int patternLength = pattern.length();
+        if ( patternLength > 1 && pattern.endsWith( "/" ) )
+        {
+            pattern = pattern.substring( 0, patternLength - 1 );
+        }
+
+        List<Rule> list = cache.get( pattern );
+        if ( list == null )
+        {
+            list = new ArrayList<Rule>();
+            if ( pattern.startsWith( "*/" ) )
+            {
+                wildcardCache.add( pattern.substring( 1 ) );
+            }
+            cache.put( pattern, list );
+        }
+        list.add( rule );
+        rules.add( rule );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Rule> rules()
     {
         return ( this.rules );
@@ -170,37 +191,16 @@ public class RulesBase
     // ------------------------------------------------------ Protected Methods
 
     /**
-     * Return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any).
-     * If there are no such rules, return {@code null}.
-     *
-     * @param namespaceURI Namespace URI to match, or {@code null} to select matching rules regardless of namespace
-     *            URI
-     * @param pattern Pattern to be matched
-     * @return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any)
+     * {@inheritDoc}
      */
-    protected List<Rule> lookup( final String namespaceURI, final String pattern )
+    @Override
+    public void setDigester( final Digester digester )
     {
-        // Optimize when no namespace URI is specified
-        final List<Rule> list = this.cache.get( pattern );
-        if ( list == null )
+        super.setDigester( digester );
+        for ( final Rule rule : rules )
         {
-            return ( null );
+            rule.setDigester( digester );
         }
-        if ( ( namespaceURI == null ) || ( namespaceURI.isEmpty() ) )
-        {
-            return ( list );
-        }
-
-        // Select only Rules that match on the specified namespace URI
-        final ArrayList<Rule> results = new ArrayList<Rule>();
-        for ( final Rule item : list )
-        {
-            if ( ( namespaceURI.equals( item.getNamespaceURI() ) ) || ( item.getNamespaceURI() == null ) )
-            {
-                results.add( item );
-            }
-        }
-        return ( results );
     }
 
 }

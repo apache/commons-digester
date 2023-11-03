@@ -52,6 +52,61 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
+     * Private internal method to set values to a {@link Map} instance and return the current builder.
+     *
+     * @param map The target {@link Map}
+     * @param namespaceUri The attribute NameSpace
+     * @param attrName The attribute name
+     * @return this builder instance
+     */
+    private PluginCreateRuleBuilder addToMap( final Map<String, String> map, final String namespaceUri, final String attrName )
+    {
+        map.put( namespaceUri, attrName );
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected PluginCreateRule createRule()
+    {
+        if ( baseClass == null )
+        {
+            reportError( "createPlugin()", "'baseClass' has to be specified" );
+        }
+
+        PluginCreateRule rule;
+        if ( dfltPluginClass != null )
+        {
+            if ( dfltPluginRuleLoader != null )
+            {
+                rule = new PluginCreateRule( baseClass, dfltPluginClass, dfltPluginRuleLoader );
+            }
+            else
+            {
+                rule = new PluginCreateRule( baseClass, dfltPluginClass );
+            }
+        }
+        else
+        {
+            rule = new PluginCreateRule( baseClass );
+        }
+
+        for ( final Entry<String, String> entry : pluginClassAttributes.entrySet() )
+        {
+            rule.setPluginClassAttribute( entry.getKey(), entry.getValue() );
+        }
+
+        for ( final Entry<String, String> entry : pluginIdAttributes.entrySet() )
+        {
+            rule.setPluginIdAttribute( entry.getKey(), entry.getValue() );
+        }
+
+        return rule;
+    }
+
+    /**
      * Sets the class which any specified plugin <i>must</i> be descended from.
      *
      * @param <T> Any Java type
@@ -68,33 +123,6 @@ public final class PluginCreateRuleBuilder
 
         this.baseClass = type;
 
-        return this;
-    }
-
-    /**
-     * Sets the class which will be used if the user doesn't specify any plugin-class or plugin-id.
-     *
-     * @param <T> Any Java type
-     * @param type the class which will be used if the user doesn't specify any plugin-class or plugin-id.
-     * @return this builder instance
-     */
-    public <T> PluginCreateRuleBuilder usingDefaultPluginClass( /* @Nullable */final Class<T> type )
-    {
-        this.dfltPluginClass = type;
-        return this;
-    }
-
-    /**
-     * Sets RuleLoader instance which knows how to load the custom rules associated with the default plugin.
-     *
-     * @param <RL> Any {@link RuleLoader} extension.
-     * @param ruleLoader the RuleLoader instance which knows how to load the custom rules associated with
-     *        the default plugin.
-     * @return this builder instance
-     */
-    public <RL extends RuleLoader> PluginCreateRuleBuilder usingRuleLoader( /* @Nullable */final RL ruleLoader )
-    {
-        this.dfltPluginRuleLoader = ruleLoader;
         return this;
     }
 
@@ -175,58 +203,30 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Private internal method to set values to a {@link Map} instance and return the current builder.
+     * Sets the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *
-     * @param map The target {@link Map}
-     * @param namespaceUri The attribute NameSpace
-     * @param attrName The attribute name
+     * @param <T> Any Java type
+     * @param type the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      * @return this builder instance
      */
-    private PluginCreateRuleBuilder addToMap( final Map<String, String> map, final String namespaceUri, final String attrName )
+    public <T> PluginCreateRuleBuilder usingDefaultPluginClass( /* @Nullable */final Class<T> type )
     {
-        map.put( namespaceUri, attrName );
+        this.dfltPluginClass = type;
         return this;
     }
 
     /**
-     * {@inheritDoc}
+     * Sets RuleLoader instance which knows how to load the custom rules associated with the default plugin.
+     *
+     * @param <RL> Any {@link RuleLoader} extension.
+     * @param ruleLoader the RuleLoader instance which knows how to load the custom rules associated with
+     *        the default plugin.
+     * @return this builder instance
      */
-    @Override
-    protected PluginCreateRule createRule()
+    public <RL extends RuleLoader> PluginCreateRuleBuilder usingRuleLoader( /* @Nullable */final RL ruleLoader )
     {
-        if ( baseClass == null )
-        {
-            reportError( "createPlugin()", "'baseClass' has to be specified" );
-        }
-
-        PluginCreateRule rule;
-        if ( dfltPluginClass != null )
-        {
-            if ( dfltPluginRuleLoader != null )
-            {
-                rule = new PluginCreateRule( baseClass, dfltPluginClass, dfltPluginRuleLoader );
-            }
-            else
-            {
-                rule = new PluginCreateRule( baseClass, dfltPluginClass );
-            }
-        }
-        else
-        {
-            rule = new PluginCreateRule( baseClass );
-        }
-
-        for ( final Entry<String, String> entry : pluginClassAttributes.entrySet() )
-        {
-            rule.setPluginClassAttribute( entry.getKey(), entry.getValue() );
-        }
-
-        for ( final Entry<String, String> entry : pluginIdAttributes.entrySet() )
-        {
-            rule.setPluginIdAttribute( entry.getKey(), entry.getValue() );
-        }
-
-        return rule;
+        this.dfltPluginRuleLoader = ruleLoader;
+        return this;
     }
 
 }

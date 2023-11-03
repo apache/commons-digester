@@ -61,17 +61,6 @@ public class Digester163TestCase
     }
 
     @Test
-    public void testSingle()
-        throws IOException, SAXException
-    {
-        final Digester dig = loader.newDigester();
-        final URL url = Digester163TestCase.class.getResource( "test.xml" );
-        // lets parse - result does not matter here
-        final Entity et = dig.parse( url );
-        assertEquals( "Author 1", et.getAuthor() );
-    }
-
-    @Test
     public void test()
         throws InterruptedException
     {
@@ -129,6 +118,17 @@ public class Digester163TestCase
             }
             fail( "Caught " + exceptions.size() + " exceptions." );
         }
+    }
+
+    @Test
+    public void testSingle()
+        throws IOException, SAXException
+    {
+        final Digester dig = loader.newDigester();
+        final URL url = Digester163TestCase.class.getResource( "test.xml" );
+        // lets parse - result does not matter here
+        final Entity et = dig.parse( url );
+        assertEquals( "Author 1", et.getAuthor() );
     }
 
 }

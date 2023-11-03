@@ -30,94 +30,6 @@ import org.junit.Test;
 public class RegexRulesTestCase
 {
 
-    /** Test regex that matches everything */
-    @Test
-    public void testMatchAll()
-    {
-        // set up which should match every rule
-        final RegexRules rules = new RegexRules( new RegexMatcher()
-        {
-            @Override
-            public boolean match( final String pathPattern, final String rulePattern )
-            {
-                return true;
-            }
-        } );
-
-        rules.add( "/a/b/b", new TestRule( "alpha" ) );
-        rules.add( "/a/d", new TestRule( "beta" ) );
-        rules.add( "/b", new TestRule( "gamma" ) );
-
-        // now test a few patterns
-        // check that all are return in the order which they were added
-        List<Rule> matches = rules.match( "", "x/g/e", null, null );
-        assertEquals( "Wrong number of rules returned (1)", 3, matches.size() );
-        assertEquals( "Rule Out Of Order (1)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (2)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (3)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
-
-        matches = rules.match( "", "/a", null, null );
-        assertEquals( "Wrong number of rules returned (2)", 3, matches.size() );
-        assertEquals( "Rule Out Of Order (4)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (5)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (6)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
-    }
-
-    /** Test regex matcher that matches nothing */
-    @Test
-    public void testMatchNothing()
-    {
-        // set up which should match every rule
-        final RegexRules rules = new RegexRules( new RegexMatcher()
-        {
-            @Override
-            public boolean match( final String pathPattern, final String rulePattern )
-            {
-                return false;
-            }
-        } );
-
-        rules.add( "/b/c/f", new TestRule( "alpha" ) );
-        rules.add( "/c/f", new TestRule( "beta" ) );
-        rules.add( "/b", new TestRule( "gamma" ) );
-
-        // now test a few patterns
-        // check that all are return in the order which they were added
-        List<Rule> matches = rules.match( "", "/b/c", null, null );
-        assertEquals( "Wrong number of rules returned (1)", 0, matches.size() );
-
-        matches = rules.match( "", "/b/c/f", null, null );
-        assertEquals( "Wrong number of rules returned (2)", 0, matches.size() );
-    }
-
-    /** Test a mixed regex - in other words, one that sometimes returns true and sometimes false */
-    @Test
-    public void testMatchMixed()
-    {
-        // set up which should match every rule
-        final RegexRules rules = new RegexRules( new RegexMatcher()
-        {
-            @Override
-            public boolean match( final String pathPattern, final String rulePattern )
-            {
-                return ( rulePattern.equals( "/match/me" ) );
-            }
-        } );
-
-        rules.add( "/match", new TestRule( "alpha" ) );
-        rules.add( "/match/me", new TestRule( "beta" ) );
-        rules.add( "/match", new TestRule( "gamma" ) );
-
-        // now test a few patterns
-        // check that all are return in the order which they were added
-        List<Rule> matches = rules.match( "", "/match", null, null );
-        assertEquals( "Wrong number of rules returned (1)", 1, matches.size() );
-        assertEquals( "Wrong Rule (1)", "beta", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-
-        matches = rules.match( "", "/a/match", null, null );
-        assertEquals( "Wrong Rule (2)", "beta", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-    }
-
     /** Test rules and clear methods */
     @Test
     public void testClear()
@@ -155,6 +67,94 @@ public class RegexRulesTestCase
 
         matches = rules.match( "", "/eggs", null, null );
         assertEquals( "Wrong number of rules returned (4)", 0, matches.size() );
+    }
+
+    /** Test regex that matches everything */
+    @Test
+    public void testMatchAll()
+    {
+        // set up which should match every rule
+        final RegexRules rules = new RegexRules( new RegexMatcher()
+        {
+            @Override
+            public boolean match( final String pathPattern, final String rulePattern )
+            {
+                return true;
+            }
+        } );
+
+        rules.add( "/a/b/b", new TestRule( "alpha" ) );
+        rules.add( "/a/d", new TestRule( "beta" ) );
+        rules.add( "/b", new TestRule( "gamma" ) );
+
+        // now test a few patterns
+        // check that all are return in the order which they were added
+        List<Rule> matches = rules.match( "", "x/g/e", null, null );
+        assertEquals( "Wrong number of rules returned (1)", 3, matches.size() );
+        assertEquals( "Rule Out Of Order (1)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
+        assertEquals( "Rule Out Of Order (2)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
+        assertEquals( "Rule Out Of Order (3)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
+
+        matches = rules.match( "", "/a", null, null );
+        assertEquals( "Wrong number of rules returned (2)", 3, matches.size() );
+        assertEquals( "Rule Out Of Order (4)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
+        assertEquals( "Rule Out Of Order (5)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
+        assertEquals( "Rule Out Of Order (6)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
+    }
+
+    /** Test a mixed regex - in other words, one that sometimes returns true and sometimes false */
+    @Test
+    public void testMatchMixed()
+    {
+        // set up which should match every rule
+        final RegexRules rules = new RegexRules( new RegexMatcher()
+        {
+            @Override
+            public boolean match( final String pathPattern, final String rulePattern )
+            {
+                return ( rulePattern.equals( "/match/me" ) );
+            }
+        } );
+
+        rules.add( "/match", new TestRule( "alpha" ) );
+        rules.add( "/match/me", new TestRule( "beta" ) );
+        rules.add( "/match", new TestRule( "gamma" ) );
+
+        // now test a few patterns
+        // check that all are return in the order which they were added
+        List<Rule> matches = rules.match( "", "/match", null, null );
+        assertEquals( "Wrong number of rules returned (1)", 1, matches.size() );
+        assertEquals( "Wrong Rule (1)", "beta", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
+
+        matches = rules.match( "", "/a/match", null, null );
+        assertEquals( "Wrong Rule (2)", "beta", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
+    }
+
+    /** Test regex matcher that matches nothing */
+    @Test
+    public void testMatchNothing()
+    {
+        // set up which should match every rule
+        final RegexRules rules = new RegexRules( new RegexMatcher()
+        {
+            @Override
+            public boolean match( final String pathPattern, final String rulePattern )
+            {
+                return false;
+            }
+        } );
+
+        rules.add( "/b/c/f", new TestRule( "alpha" ) );
+        rules.add( "/c/f", new TestRule( "beta" ) );
+        rules.add( "/b", new TestRule( "gamma" ) );
+
+        // now test a few patterns
+        // check that all are return in the order which they were added
+        List<Rule> matches = rules.match( "", "/b/c", null, null );
+        assertEquals( "Wrong number of rules returned (1)", 0, matches.size() );
+
+        matches = rules.match( "", "/b/c/f", null, null );
+        assertEquals( "Wrong number of rules returned (2)", 0, matches.size() );
     }
 
     @Test

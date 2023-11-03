@@ -36,10 +36,16 @@ public class AudioVisual
 
     private String type;
 
-    // note: digester can convert a string in the xml file to an int.
-    public void setYearMade( final int yearMade )
+    @Override
+    public void print()
     {
-        this.yearMade = yearMade;
+        System.out.println( "AudioVisual:" );
+        System.out.println( "  type=" + type );
+        System.out.println( "  yearMade=" + yearMade );
+        System.out.println( "  category=" + category );
+        System.out.println( "  name=" + name );
+        System.out.println( "  desc=" + desc );
+        System.out.println( "  runtime=" + runtime );
     }
 
     public void setCategory( final String category )
@@ -47,14 +53,14 @@ public class AudioVisual
         this.category = category;
     }
 
-    public void setName( final String name )
-    {
-        this.name = name;
-    }
-
     public void setDesc( final String desc )
     {
         this.desc = desc;
+    }
+
+    public void setName( final String name )
+    {
+        this.name = name;
     }
 
     // note: digester can convert a string in the xml file to an Integer
@@ -68,16 +74,10 @@ public class AudioVisual
         this.type = type;
     }
 
-    @Override
-    public void print()
+    // note: digester can convert a string in the xml file to an int.
+    public void setYearMade( final int yearMade )
     {
-        System.out.println( "AudioVisual:" );
-        System.out.println( "  type=" + type );
-        System.out.println( "  yearMade=" + yearMade );
-        System.out.println( "  category=" + category );
-        System.out.println( "  name=" + name );
-        System.out.println( "  desc=" + desc );
-        System.out.println( "  runtime=" + runtime );
+        this.yearMade = yearMade;
     }
 
 }

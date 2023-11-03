@@ -29,26 +29,15 @@ import java.io.StringReader;
 public class Main
 {
 
+    /** See the run method. */
+    public static void main( final String[] args )
+        throws Exception
+    {
+        new Main().run();
+    }
+
     /** The input xml to be parsed by this example. */
     String in = "<p>Hi, this is an <i>example</i> of some <b>bold</b> text.</p>";
-
-    /** Invoked when a text segment is present in the parsed input. */
-    public void addSegment( final String text )
-    {
-        System.out.println( "Text segment: [" + text + "]" );
-    }
-
-    /** Invoked when an &lt;i&gt; node is found in the parsed input. */
-    public void addItalic( final String text )
-    {
-        System.out.println( "Italic: [" + text + "]" );
-    }
-
-    /** Invoked when an &lt;b&gt; node is found in the parsed input. */
-    public void addBold( final String text )
-    {
-        System.out.println( "Bold: [" + text + "]" );
-    }
 
     /**
      * Invoked via a standard Digester CallMethodRule, passing the
@@ -59,6 +48,24 @@ public class Main
     public void addAllText( final String text )
     {
         System.out.println( "And the merged text for the p element is [" + text + "]" );
+    }
+
+    /** Invoked when an &lt;b&gt; node is found in the parsed input. */
+    public void addBold( final String text )
+    {
+        System.out.println( "Bold: [" + text + "]" );
+    }
+
+    /** Invoked when an &lt;i&gt; node is found in the parsed input. */
+    public void addItalic( final String text )
+    {
+        System.out.println( "Italic: [" + text + "]" );
+    }
+
+    /** Invoked when a text segment is present in the parsed input. */
+    public void addSegment( final String text )
+    {
+        System.out.println( "Text segment: [" + text + "]" );
     }
 
     /**
@@ -86,13 +93,6 @@ public class Main
         d.parse( new StringReader( in ) );
 
         System.out.println( "Finished." );
-    }
-
-    /** See the run method. */
-    public static void main( final String[] args )
-        throws Exception
-    {
-        new Main().run();
     }
 
 }

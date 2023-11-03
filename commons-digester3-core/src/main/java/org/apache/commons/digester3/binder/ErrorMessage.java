@@ -69,16 +69,6 @@ final class ErrorMessage
     }
 
     /**
-     * Gets the error message text.
-     *
-     * @return The error message text
-     */
-    public String getMessage()
-    {
-        return message;
-    }
-
-    /**
      * Returns the Throwable that caused this message, or {@code null} if this message was not caused by a Throwable.
      *
      * @return The Throwable that caused this message, or {@code null} if this message was not caused by a Throwable
@@ -86,6 +76,16 @@ final class ErrorMessage
     public Throwable getCause()
     {
         return cause;
+    }
+
+    /**
+     * Gets the error message text.
+     *
+     * @return The error message text
+     */
+    public String getMessage()
+    {
+        return message;
     }
 
     /**

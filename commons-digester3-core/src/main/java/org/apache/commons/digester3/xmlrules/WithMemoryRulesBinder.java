@@ -56,15 +56,6 @@ class WithMemoryRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public ClassLoader getContextClassLoader()
-    {
-        return this.wrappedRulesBinder.getContextClassLoader();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         this.wrappedRulesBinder.addError( messagePattern, arguments );
@@ -83,18 +74,26 @@ class WithMemoryRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public void install( final RulesModule rulesModule )
+    public LinkedRuleBuilder forPattern( final String pattern )
     {
-        this.wrappedRulesBinder.install( rulesModule );
+        return this.wrappedRulesBinder.forPattern( pattern );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public LinkedRuleBuilder forPattern( final String pattern )
+    public ClassLoader getContextClassLoader()
     {
-        return this.wrappedRulesBinder.forPattern( pattern );
+        return this.wrappedRulesBinder.getContextClassLoader();
+    }
+
+    /**
+     * @return the set of included files
+     */
+    public Set<String> getIncludedFiles()
+    {
+        return this.includedFiles;
     }
 
     /**
@@ -106,11 +105,12 @@ class WithMemoryRulesBinder
     }
 
     /**
-     * @return the set of included files
+     * {@inheritDoc}
      */
-    public Set<String> getIncludedFiles()
+    @Override
+    public void install( final RulesModule rulesModule )
     {
-        return this.includedFiles;
+        this.wrappedRulesBinder.install( rulesModule );
     }
 
 }

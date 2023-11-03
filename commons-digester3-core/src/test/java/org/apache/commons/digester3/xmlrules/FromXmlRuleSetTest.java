@@ -42,6 +42,20 @@ import org.xml.sax.InputSource;
 public class FromXmlRuleSetTest
 {
 
+    private final RulesModule createRules( final String xmlText )
+    {
+        return new FromXmlRulesModule()
+        {
+
+            @Override
+            protected void loadRules()
+            {
+                loadXMLRulesFromText( xmlText );
+            }
+
+        };
+    }
+
     private final RulesModule createRules( final URL xmlRules )
     {
         return new FromXmlRulesModule()
@@ -56,19 +70,57 @@ public class FromXmlRuleSetTest
         };
     }
 
-    private final RulesModule createRules( final String xmlText )
+    /**
+     * Test the FromXmlRules.addRuleInstances(digester, path) method, ie
+     * test loading rules at a base position other than the root.
+     */
+    @Test
+    public void testBasePath()
+        throws Exception
     {
-        return new FromXmlRulesModule()
-        {
+        final String xmlRules =
+            "<?xml version='1.0'?>"
+            + "<digester-rules>"
+            + "   <pattern value='root/foo'>"
+            + "      <call-method-rule methodname='setProperty' usingElementBodyAsArgument='true' />"
+            + "   </pattern>"
+            + "</digester-rules>";
 
-            @Override
-            protected void loadRules()
-            {
-                loadXMLRulesFromText( xmlText );
-            }
+        final String xml =
+            "<?xml version='1.0'?>"
+            + "<root>"
+            + "  <foo>success</foo>"
+            + "</root>";
 
-        };
+        final ObjectTestImpl testObject = new ObjectTestImpl();
+        final Digester digester = newLoader( createRules( xmlRules ) ).newDigester();
+
+        digester.push( testObject );
+        digester.parse( new InputSource( new StringReader( xml ) ) );
+
+        assertEquals( "success", testObject.getProperty() );
     }
+
+    @Test
+    public void testCallParamRule()
+        throws Exception
+    {
+        final URL rules = getClass().getResource( "test-call-param-rules.xml" );
+
+         final String xml = "<?xml version='1.0' ?>"
+                      + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
+
+        final CallParamTestObject testObject = new CallParamTestObject();
+
+        final Digester digester =
+            newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
+        digester.push( testObject );
+        digester.parse( new StringReader( xml ) );
+
+        assertEquals( "Incorrect left value", "long", testObject.getLeft() );
+        assertEquals( "Incorrect middle value", "short", testObject.getMiddle() );
+        assertEquals( "Incorrect right value", "", testObject.getRight() );
+     }
 
     /**
      * Tests the DigesterLoader.createDigester(), with multiple
@@ -86,6 +138,104 @@ public class FromXmlRuleSetTest
         digester.push( new ArrayList<Object>() );
         final Object root = digester.parse( input.openStream() );
         assertEquals( "[foo1 baz1 foo2, foo3 foo4]", root.toString() );
+    }
+
+    @Test
+    public void testFactoryCreateRule()
+        throws Exception
+    {
+        final URL rules = getClass().getResource( "testfactory.xml" );
+        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
+
+        final Digester digester =
+            newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
+        digester.push( new ArrayList<ObjectCreationFactoryTestImpl>() );
+
+        final Object obj = digester.parse( new StringReader( xml ) );
+        if ( !( obj instanceof ArrayList<?> ) )
+        {
+            fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got " + obj.getClass().getName() );
+        }
+
+        @SuppressWarnings("unchecked") // root is an ArrayList of TestObjectCreationFactory
+        final
+        ArrayList<ObjectCreationFactoryTestImpl> list = (ArrayList<ObjectCreationFactoryTestImpl>) obj;
+
+        assertEquals( "List should contain only the factory object", list.size(), 1 );
+        final ObjectCreationFactoryTestImpl factory = list.get( 0 );
+        assertEquals( "Object create not called(1)", factory.called, true );
+        assertEquals( "Attribute not passed (1)", factory.attributes.getValue( "one" ), "good" );
+        assertEquals( "Attribute not passed (2)", factory.attributes.getValue( "two" ), "bad" );
+        assertEquals( "Attribute not passed (3)", factory.attributes.getValue( "three" ), "ugly" );
+    }
+
+    @Test
+    public void testFactoryIgnoreCreateRule()
+        throws Exception
+    {
+        final URL rules = getClass().getResource( "testfactoryignore.xml" );
+
+        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
+        try {
+            newLoader(createRules(rules)).newDigester().parse(new StringReader(xml));
+        } catch (final Exception e) {
+            fail("This exception should have been ignored: " + e.getClass().getName());
+        }
+    }
+
+    @Test
+    public void testFactoryNotIgnoreCreateRule()
+        throws Exception
+    {
+        final URL rules = getClass().getResource( "testfactorynoignore.xml" );
+
+        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
+        try
+        {
+            newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
+            fail( "Exception should have been propagated from create method." );
+        }
+        catch ( final Exception e )
+        {
+            /* What we expected */
+            assertEquals( org.xml.sax.SAXParseException.class, e.getClass() );
+        }
+    }
+
+    @Test
+    public void testInputSourceLoader() throws Exception {
+        final String rulesXml = "<?xml version='1.0'?>"
+                + "<digester-rules>"
+                + " <pattern value='root'>"
+                + "   <pattern value='foo'>"
+                + "     <call-method-rule methodname='triple' paramcount='3'"
+                + "            paramtypes='java.lang.String,java.lang.String,java.lang.String'/>"
+                + "     <call-param-rule paramnumber='0' attrname='attr'/>"
+                + "        <pattern value='bar'>"
+                + "            <call-param-rule paramnumber='1' from-stack='false'/>"
+                + "        </pattern>"
+                + "        <pattern value='foobar'>"
+                + "            <object-create-rule classname='java.lang.String'/>"
+                + "            <pattern value='ping'>"
+                + "                <call-param-rule paramnumber='2' from-stack='true'/>"
+                + "            </pattern>"
+                + "         </pattern>"
+                + "   </pattern>"
+                + " </pattern>"
+                + "</digester-rules>";
+
+        final String xml = "<?xml version='1.0' ?>"
+                     + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
+
+        final CallParamTestObject testObject = new CallParamTestObject();
+
+        final Digester digester = newLoader( createRules( rulesXml ) ).newDigester();
+        digester.push( testObject );
+        digester.parse( new StringReader( xml ) );
+
+        assertEquals( "Incorrect left value", "long", testObject.getLeft() );
+        assertEquals( "Incorrect middle value", "short", testObject.getMiddle() );
+        assertEquals( "Incorrect right value", "", testObject.getRight() );
     }
 
     /**
@@ -204,155 +354,5 @@ public class FromXmlRuleSetTest
         assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
         assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
         assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
-    }
-
-    @Test
-    public void testFactoryCreateRule()
-        throws Exception
-    {
-        final URL rules = getClass().getResource( "testfactory.xml" );
-        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-
-        final Digester digester =
-            newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
-        digester.push( new ArrayList<ObjectCreationFactoryTestImpl>() );
-
-        final Object obj = digester.parse( new StringReader( xml ) );
-        if ( !( obj instanceof ArrayList<?> ) )
-        {
-            fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got " + obj.getClass().getName() );
-        }
-
-        @SuppressWarnings("unchecked") // root is an ArrayList of TestObjectCreationFactory
-        final
-        ArrayList<ObjectCreationFactoryTestImpl> list = (ArrayList<ObjectCreationFactoryTestImpl>) obj;
-
-        assertEquals( "List should contain only the factory object", list.size(), 1 );
-        final ObjectCreationFactoryTestImpl factory = list.get( 0 );
-        assertEquals( "Object create not called(1)", factory.called, true );
-        assertEquals( "Attribute not passed (1)", factory.attributes.getValue( "one" ), "good" );
-        assertEquals( "Attribute not passed (2)", factory.attributes.getValue( "two" ), "bad" );
-        assertEquals( "Attribute not passed (3)", factory.attributes.getValue( "three" ), "ugly" );
-    }
-
-    @Test
-    public void testFactoryIgnoreCreateRule()
-        throws Exception
-    {
-        final URL rules = getClass().getResource( "testfactoryignore.xml" );
-
-        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-        try {
-            newLoader(createRules(rules)).newDigester().parse(new StringReader(xml));
-        } catch (final Exception e) {
-            fail("This exception should have been ignored: " + e.getClass().getName());
-        }
-    }
-
-    @Test
-    public void testFactoryNotIgnoreCreateRule()
-        throws Exception
-    {
-        final URL rules = getClass().getResource( "testfactorynoignore.xml" );
-
-        final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-        try
-        {
-            newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
-            fail( "Exception should have been propagated from create method." );
-        }
-        catch ( final Exception e )
-        {
-            /* What we expected */
-            assertEquals( org.xml.sax.SAXParseException.class, e.getClass() );
-        }
-    }
-
-    @Test
-    public void testCallParamRule()
-        throws Exception
-    {
-        final URL rules = getClass().getResource( "test-call-param-rules.xml" );
-
-         final String xml = "<?xml version='1.0' ?>"
-                      + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
-
-        final CallParamTestObject testObject = new CallParamTestObject();
-
-        final Digester digester =
-            newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
-        digester.push( testObject );
-        digester.parse( new StringReader( xml ) );
-
-        assertEquals( "Incorrect left value", "long", testObject.getLeft() );
-        assertEquals( "Incorrect middle value", "short", testObject.getMiddle() );
-        assertEquals( "Incorrect right value", "", testObject.getRight() );
-     }
-
-    @Test
-    public void testInputSourceLoader() throws Exception {
-        final String rulesXml = "<?xml version='1.0'?>"
-                + "<digester-rules>"
-                + " <pattern value='root'>"
-                + "   <pattern value='foo'>"
-                + "     <call-method-rule methodname='triple' paramcount='3'"
-                + "            paramtypes='java.lang.String,java.lang.String,java.lang.String'/>"
-                + "     <call-param-rule paramnumber='0' attrname='attr'/>"
-                + "        <pattern value='bar'>"
-                + "            <call-param-rule paramnumber='1' from-stack='false'/>"
-                + "        </pattern>"
-                + "        <pattern value='foobar'>"
-                + "            <object-create-rule classname='java.lang.String'/>"
-                + "            <pattern value='ping'>"
-                + "                <call-param-rule paramnumber='2' from-stack='true'/>"
-                + "            </pattern>"
-                + "         </pattern>"
-                + "   </pattern>"
-                + " </pattern>"
-                + "</digester-rules>";
-
-        final String xml = "<?xml version='1.0' ?>"
-                     + "<root><foo attr='long'><bar>short</bar><foobar><ping>tosh</ping></foobar></foo></root>";
-
-        final CallParamTestObject testObject = new CallParamTestObject();
-
-        final Digester digester = newLoader( createRules( rulesXml ) ).newDigester();
-        digester.push( testObject );
-        digester.parse( new StringReader( xml ) );
-
-        assertEquals( "Incorrect left value", "long", testObject.getLeft() );
-        assertEquals( "Incorrect middle value", "short", testObject.getMiddle() );
-        assertEquals( "Incorrect right value", "", testObject.getRight() );
-    }
-
-    /**
-     * Test the FromXmlRules.addRuleInstances(digester, path) method, ie
-     * test loading rules at a base position other than the root.
-     */
-    @Test
-    public void testBasePath()
-        throws Exception
-    {
-        final String xmlRules =
-            "<?xml version='1.0'?>"
-            + "<digester-rules>"
-            + "   <pattern value='root/foo'>"
-            + "      <call-method-rule methodname='setProperty' usingElementBodyAsArgument='true' />"
-            + "   </pattern>"
-            + "</digester-rules>";
-
-        final String xml =
-            "<?xml version='1.0'?>"
-            + "<root>"
-            + "  <foo>success</foo>"
-            + "</root>";
-
-        final ObjectTestImpl testObject = new ObjectTestImpl();
-        final Digester digester = newLoader( createRules( xmlRules ) ).newDigester();
-
-        digester.push( testObject );
-        digester.parse( new InputSource( new StringReader( xml ) ) );
-
-        assertEquals( "success", testObject.getProperty() );
     }
 }

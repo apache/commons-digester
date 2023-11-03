@@ -82,6 +82,26 @@ public final class CompoundSubstitutorTestCase
 
     private String bodyText;
 
+    private boolean areEqual( final Attributes a, final Attributes b )
+    {
+        if ( a.getLength() != b.getLength() )
+        {
+            return false;
+        }
+
+        boolean success = true;
+        for ( int i = 0; i < a.getLength() && success; i++ )
+        {
+            success = a.getLocalName( i ).equals( b.getLocalName( i ) )
+                    && a.getQName( i ).equals( b.getQName( i ) )
+                    && a.getType( i ).equals( b.getType( i ) )
+                    && a.getURI( i ).equals( b.getURI( i ) )
+                    && a.getValue( i ).equals( b.getValue( i ) );
+        }
+
+        return success;
+    }
+
     @Before
     public void setUp()
     {
@@ -92,6 +112,22 @@ public final class CompoundSubstitutorTestCase
 
         attrib = aImpl;
         bodyText = "Amazing Body Text!";
+    }
+
+    @Test
+    public void testChaining()
+    {
+        final Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
+        final Substitutor b = new SubstitutorStub( "STU", "", "b", "", "bcd" );
+
+        final Substitutor test = new CompoundSubstitutor( a, b );
+
+        final AttributesImpl attribFixture = new AttributesImpl( attrib );
+        attribFixture.addAttribute( "", "a", ":a", "", "abc" );
+        attribFixture.addAttribute( "", "b", ":b", "", "bcd" );
+
+        assertTrue( areEqual( test.substitute( attrib ), attribFixture ) );
+        assertEquals( test.substitute( bodyText ), "STU" );
     }
 
     @Test
@@ -128,42 +164,6 @@ public final class CompoundSubstitutorTestCase
         {
             // OK
         }
-    }
-
-    @Test
-    public void testChaining()
-    {
-        final Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
-        final Substitutor b = new SubstitutorStub( "STU", "", "b", "", "bcd" );
-
-        final Substitutor test = new CompoundSubstitutor( a, b );
-
-        final AttributesImpl attribFixture = new AttributesImpl( attrib );
-        attribFixture.addAttribute( "", "a", ":a", "", "abc" );
-        attribFixture.addAttribute( "", "b", ":b", "", "bcd" );
-
-        assertTrue( areEqual( test.substitute( attrib ), attribFixture ) );
-        assertEquals( test.substitute( bodyText ), "STU" );
-    }
-
-    private boolean areEqual( final Attributes a, final Attributes b )
-    {
-        if ( a.getLength() != b.getLength() )
-        {
-            return false;
-        }
-
-        boolean success = true;
-        for ( int i = 0; i < a.getLength() && success; i++ )
-        {
-            success = a.getLocalName( i ).equals( b.getLocalName( i ) )
-                    && a.getQName( i ).equals( b.getQName( i ) )
-                    && a.getType( i ).equals( b.getType( i ) )
-                    && a.getURI( i ).equals( b.getURI( i ) )
-                    && a.getValue( i ).equals( b.getValue( i ) );
-        }
-
-        return success;
     }
 
 }

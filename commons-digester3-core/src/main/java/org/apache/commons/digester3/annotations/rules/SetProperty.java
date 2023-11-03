@@ -44,23 +44,6 @@ public @interface SetProperty
 {
 
     /**
-     * The element matching pattern.
-     */
-    String pattern();
-
-    /**
-     * The namespace URI for which this Rule is relevant, if any.
-     *
-     * @since 3.0
-     */
-    String namespaceURI() default "";
-
-    /**
-     * The overridden parameter.
-     */
-    String attributeName() default "";
-
-    /**
      * Defines several {@code @SetProperty} annotations on the same element.
      *
      * @see SetProperty
@@ -73,5 +56,22 @@ public @interface SetProperty
     {
         SetProperty[] value();
     }
+
+    /**
+     * The overridden parameter.
+     */
+    String attributeName() default "";
+
+    /**
+     * The namespace URI for which this Rule is relevant, if any.
+     *
+     * @since 3.0
+     */
+    String namespaceURI() default "";
+
+    /**
+     * The element matching pattern.
+     */
+    String pattern();
 
 }

@@ -49,14 +49,57 @@ public final class LinkedRuleBuilder
     }
 
     /**
-     * Construct rule that automatically sets a property from the body text, taking the property
-     * name the same as the current element.
+     * Add a provider in the data structure where storing the providers binding.
      *
-     * @return a new {@link BeanPropertySetterBuilder} instance.
+     * @param <R> The rule will be created by the given provider
+     * @param provider The provider has to be stored in the data structure
+     * @return The provider itself has to be stored in the data structure
      */
-    public BeanPropertySetterBuilder setBeanProperty()
+    private <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB addProvider( final RB provider )
     {
-        return addProvider( new BeanPropertySetterBuilder( keyPattern, namespaceURI, mainBinder, this ) );
+        fromBinderRuleSet.registerProvider( provider );
+        return provider;
+    }
+
+    /**
+     * Add a custom user rule in the specified pattern.
+     *
+     * <b>WARNING</b> keep away from this method as much as you can, since there's the risk
+     * same input {@link Rule} instance is plugged to more than one Digester;
+     * use {@link #addRuleCreatedBy(RuleProvider)} instead!!!
+     *
+     * @see #addRuleCreatedBy(RuleProvider)
+     * @see Rule#setDigester(org.apache.commons.digester3.Digester)
+     * @param <R> The rule type
+     * @param rule The custom user rule
+     * @return a new {@link ByRuleBuilder} instance.
+     */
+    public <R extends Rule> ByRuleBuilder<R> addRule( final R rule )
+    {
+        if ( rule == null )
+        {
+            mainBinder.addError( "{ forPattern( \"%s\" ).addRule( R ) } NULL rule not valid", keyPattern );
+        }
+
+        return this.addProvider( new ByRuleBuilder<R>( keyPattern, namespaceURI, mainBinder, this, rule ) );
+    }
+
+    /**
+     * Add a custom user rule in the specified pattern built by the given provider.
+     *
+     * @param <R> The rule type
+     * @param provider The rule provider
+     * @return a new {@link ByRuleProviderBuilder} instance.
+     */
+    public <R extends Rule> ByRuleProviderBuilder<R> addRuleCreatedBy( final RuleProvider<R> provider )
+    {
+        if ( provider == null )
+        {
+            mainBinder.addError( "{ forPattern( \"%s\" ).addRuleCreatedBy() } null rule provider not valid",
+                                 keyPattern );
+        }
+
+        return addProvider( new ByRuleProviderBuilder<R>( keyPattern, namespaceURI, mainBinder, this, provider ) );
     }
 
     /**
@@ -99,16 +142,13 @@ public final class LinkedRuleBuilder
     }
 
     /**
-     * Uses an {@link org.apache.commons.digester3.ObjectCreationFactory} to create a new object which it
-     * pushes onto the object stack.
+     * A rule implementation that creates a DOM Node containing the XML at the element that matched the rule.
      *
-     * When the element is complete, the object will be popped.
-     *
-     * @return a new {@link FactoryCreateBuilder} instance.
+     * @return a new {@link NodeCreateRuleProvider} instance.
      */
-    public FactoryCreateBuilder factoryCreate()
+    public NodeCreateRuleProvider createNode()
     {
-        return addProvider( new FactoryCreateBuilder( keyPattern, namespaceURI, mainBinder, this, classLoader ) );
+        return addProvider( new NodeCreateRuleProvider( keyPattern, namespaceURI, mainBinder, this ) );
     }
 
     /**
@@ -122,6 +162,46 @@ public final class LinkedRuleBuilder
     }
 
     /**
+     * A Digester rule which allows the user to declare a plugin.
+     *
+     * NOTE: when using this rule, make sure {@link org.apache.commons.digester3.Digester} instances
+     * will be created using {@link org.apache.commons.digester3.plugins.PluginRules} rules strategy.
+     *
+     * @return a new {@link PluginDeclarationRuleBuilder} instance.
+     */
+    public PluginCreateRuleBuilder createPlugin()
+    {
+        return addProvider( new PluginCreateRuleBuilder( keyPattern, namespaceURI, mainBinder, this ) );
+    }
+
+    /**
+     * A Digester rule which allows the user to pre-declare a class which is to
+     * be referenced later at a plugin point by a PluginCreateRule.
+     *
+     * NOTE: when using this rule, make sure {@link org.apache.commons.digester3.Digester} instances
+     * will be created using {@link org.apache.commons.digester3.plugins.PluginRules} rules strategy.
+     *
+     * @return a new {@link PluginDeclarationRuleBuilder} instance.
+     */
+    public PluginDeclarationRuleBuilder declarePlugin()
+    {
+        return addProvider( new PluginDeclarationRuleBuilder( keyPattern, namespaceURI, mainBinder, this ) );
+    }
+
+    /**
+     * Uses an {@link org.apache.commons.digester3.ObjectCreationFactory} to create a new object which it
+     * pushes onto the object stack.
+     *
+     * When the element is complete, the object will be popped.
+     *
+     * @return a new {@link FactoryCreateBuilder} instance.
+     */
+    public FactoryCreateBuilder factoryCreate()
+    {
+        return addProvider( new FactoryCreateBuilder( keyPattern, namespaceURI, mainBinder, this, classLoader ) );
+    }
+
+    /**
      * Saves a parameter for use by a surrounding {@link #callMethod(String)}.
      *
      * @param <T> The parameter type to pass along
@@ -131,6 +211,17 @@ public final class LinkedRuleBuilder
     public <T> ObjectParamBuilder<T> objectParam( /* @Nullable */final T paramObj )
     {
         return addProvider( new ObjectParamBuilder<T>( keyPattern, namespaceURI, mainBinder, this, paramObj ) );
+    }
+
+    /**
+     * Construct rule that automatically sets a property from the body text, taking the property
+     * name the same as the current element.
+     *
+     * @return a new {@link BeanPropertySetterBuilder} instance.
+     */
+    public BeanPropertySetterBuilder setBeanProperty()
+    {
+        return addProvider( new BeanPropertySetterBuilder( keyPattern, namespaceURI, mainBinder, this ) );
     }
 
     /**
@@ -245,84 +336,6 @@ public final class LinkedRuleBuilder
     }
 
     /**
-     * A Digester rule which allows the user to pre-declare a class which is to
-     * be referenced later at a plugin point by a PluginCreateRule.
-     *
-     * NOTE: when using this rule, make sure {@link org.apache.commons.digester3.Digester} instances
-     * will be created using {@link org.apache.commons.digester3.plugins.PluginRules} rules strategy.
-     *
-     * @return a new {@link PluginDeclarationRuleBuilder} instance.
-     */
-    public PluginDeclarationRuleBuilder declarePlugin()
-    {
-        return addProvider( new PluginDeclarationRuleBuilder( keyPattern, namespaceURI, mainBinder, this ) );
-    }
-
-    /**
-     * A Digester rule which allows the user to declare a plugin.
-     *
-     * NOTE: when using this rule, make sure {@link org.apache.commons.digester3.Digester} instances
-     * will be created using {@link org.apache.commons.digester3.plugins.PluginRules} rules strategy.
-     *
-     * @return a new {@link PluginDeclarationRuleBuilder} instance.
-     */
-    public PluginCreateRuleBuilder createPlugin()
-    {
-        return addProvider( new PluginCreateRuleBuilder( keyPattern, namespaceURI, mainBinder, this ) );
-    }
-
-    /**
-     * A rule implementation that creates a DOM Node containing the XML at the element that matched the rule.
-     *
-     * @return a new {@link NodeCreateRuleProvider} instance.
-     */
-    public NodeCreateRuleProvider createNode()
-    {
-        return addProvider( new NodeCreateRuleProvider( keyPattern, namespaceURI, mainBinder, this ) );
-    }
-
-    /**
-     * Add a custom user rule in the specified pattern.
-     *
-     * <b>WARNING</b> keep away from this method as much as you can, since there's the risk
-     * same input {@link Rule} instance is plugged to more than one Digester;
-     * use {@link #addRuleCreatedBy(RuleProvider)} instead!!!
-     *
-     * @see #addRuleCreatedBy(RuleProvider)
-     * @see Rule#setDigester(org.apache.commons.digester3.Digester)
-     * @param <R> The rule type
-     * @param rule The custom user rule
-     * @return a new {@link ByRuleBuilder} instance.
-     */
-    public <R extends Rule> ByRuleBuilder<R> addRule( final R rule )
-    {
-        if ( rule == null )
-        {
-            mainBinder.addError( "{ forPattern( \"%s\" ).addRule( R ) } NULL rule not valid", keyPattern );
-        }
-
-        return this.addProvider( new ByRuleBuilder<R>( keyPattern, namespaceURI, mainBinder, this, rule ) );
-    }
-
-    /**
-     * Add a custom user rule in the specified pattern built by the given provider.
-     *
-     * @param <R> The rule type
-     * @param provider The rule provider
-     * @return a new {@link ByRuleProviderBuilder} instance.
-     */
-    public <R extends Rule> ByRuleProviderBuilder<R> addRuleCreatedBy( final RuleProvider<R> provider )
-    {
-        if ( provider == null )
-        {
-            mainBinder.addError( "{ forPattern( \"%s\" ).addRuleCreatedBy() } null rule provider not valid",
-                                 keyPattern );
-        }
-
-        return addProvider( new ByRuleProviderBuilder<R>( keyPattern, namespaceURI, mainBinder, this, provider ) );
-    }
-
-    /**
      * Sets the namespace URI for the current rule pattern.
      *
      * @param namespaceURI the namespace URI associated to the rule pattern.
@@ -341,19 +354,6 @@ public final class LinkedRuleBuilder
         }
 
         return this;
-    }
-
-    /**
-     * Add a provider in the data structure where storing the providers binding.
-     *
-     * @param <R> The rule will be created by the given provider
-     * @param provider The provider has to be stored in the data structure
-     * @return The provider itself has to be stored in the data structure
-     */
-    private <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB addProvider( final RB provider )
-    {
-        fromBinderRuleSet.registerProvider( provider );
-        return provider;
     }
 
 }

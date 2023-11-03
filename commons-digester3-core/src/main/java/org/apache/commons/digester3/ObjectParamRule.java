@@ -42,6 +42,23 @@ import org.xml.sax.Attributes;
 public class ObjectParamRule
     extends Rule
 {
+    /**
+     * The attribute which we are attempting to match
+     */
+    protected String attributeName;
+
+    /**
+     * The zero-relative index of the parameter we are saving.
+     */
+    protected int paramIndex;
+
+    // ----------------------------------------------------- Instance Variables
+
+    /**
+     * The parameter we wish to pass to the method call
+     */
+    protected Object param;
+
     // ----------------------------------------------------------- Constructors
     /**
      * Construct a "call parameter" rule that will save the given Object as the parameter value.
@@ -68,23 +85,6 @@ public class ObjectParamRule
         this.attributeName = attributeName;
         this.param = param;
     }
-
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The attribute which we are attempting to match
-     */
-    protected String attributeName;
-
-    /**
-     * The zero-relative index of the parameter we are saving.
-     */
-    protected int paramIndex;
-
-    /**
-     * The parameter we wish to pass to the method call
-     */
-    protected Object param;
 
     // --------------------------------------------------------- Public Methods
 

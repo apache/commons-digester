@@ -82,51 +82,6 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
-     * Test that it is an error when a child element exists but no corresponding java property exists.
-     */
-    @Test
-    public void testMandatoryProperties()
-        throws SAXException, IOException
-    {
-        final Digester digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
-                    .then()
-                    .setNestedProperties();
-            }
-
-        }).newDigester();
-
-        final String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<badprop>ALPHA BODY</badprop>" + "</root>";
-
-        try
-        {
-            final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
-
-            // we should never get here...
-            fail( "No exception thrown by parse when unknown child element found." );
-            assertNotNull( bean ); // just to prevent compiler warning on unused var
-        }
-        catch ( final org.xml.sax.SAXParseException e )
-        {
-            final String msg = e.getMessage();
-            if ( msg.indexOf( "badprop" ) >= 0 )
-            {
-                // ok, this is expected; there is no "setBadprop" method on the
-                // SimpleTestBean class...
-            }
-            else
-            {
-                fail( "Unexpected parse exception:" + e.getMessage() );
-            }
-        }
-    }
-
-    /**
      * Test that you can customise the property mappings using the constructor which takes arrays-of-strings.
      */
     @Test
@@ -249,6 +204,51 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
+     * Test that it is an error when a child element exists but no corresponding java property exists.
+     */
+    @Test
+    public void testMandatoryProperties()
+        throws SAXException, IOException
+    {
+        final Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
+                    .then()
+                    .setNestedProperties();
+            }
+
+        }).newDigester();
+
+        final String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<badprop>ALPHA BODY</badprop>" + "</root>";
+
+        try
+        {
+            final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
+
+            // we should never get here...
+            fail( "No exception thrown by parse when unknown child element found." );
+            assertNotNull( bean ); // just to prevent compiler warning on unused var
+        }
+        catch ( final org.xml.sax.SAXParseException e )
+        {
+            final String msg = e.getMessage();
+            if ( msg.indexOf( "badprop" ) >= 0 )
+            {
+                // ok, this is expected; there is no "setBadprop" method on the
+                // SimpleTestBean class...
+            }
+            else
+            {
+                fail( "Unexpected parse exception:" + e.getMessage() );
+            }
+        }
+    }
+
+    /**
      * Test that:
      * <ul>
      * <li>you can have rules matching the same pattern as the SetNestedPropertiesRule,</li>
@@ -298,6 +298,39 @@ public class SetNestedPropertiesRuleTestCase
 
         // check no bad rules object is left
         assertEquals( "Digester rules object not reset.", RulesBase.class, digester.getRules().getClass() );
+    }
+
+    /**
+     * Test that the rule works in a sane manner when the associated pattern is a wildcard such that the rule matches
+     * one of its own child elements.
+     * <p>
+     * See bugzilla entry 31393.
+     */
+    @Test
+    public void testRecursiveNestedProperties()
+        throws SAXException, IOException
+    {
+        final Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "*/testbean" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
+                    .then()
+                    .setNestedProperties().allowUnknownChildElements( true );
+            }
+
+        }).newDigester();
+
+        final String testXml =
+            "<?xml version='1.0'?>" + "<testbean>" + "<beta>BETA BODY</beta>" + "<testbean>" + "<beta>BETA BODY</beta>"
+                + "</testbean>" + "</testbean>";
+
+        final Reader reader = new StringReader( testXml );
+
+        final SimpleTestBean bean = digester.parse( reader );
+        assertNotNull( bean );
     }
 
     /**
@@ -366,39 +399,6 @@ public class SetNestedPropertiesRuleTestCase
         final String testXml =
             "<?xml version='1.0'?>" + "<root>" + "<testbean>" + "<beta>BETA BODY</beta>" + "<foo>GAMMA</foo>"
                 + "</testbean>" + "</root>";
-
-        final Reader reader = new StringReader( testXml );
-
-        final SimpleTestBean bean = digester.parse( reader );
-        assertNotNull( bean );
-    }
-
-    /**
-     * Test that the rule works in a sane manner when the associated pattern is a wildcard such that the rule matches
-     * one of its own child elements.
-     * <p>
-     * See bugzilla entry 31393.
-     */
-    @Test
-    public void testRecursiveNestedProperties()
-        throws SAXException, IOException
-    {
-        final Digester digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "*/testbean" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
-                    .then()
-                    .setNestedProperties().allowUnknownChildElements( true );
-            }
-
-        }).newDigester();
-
-        final String testXml =
-            "<?xml version='1.0'?>" + "<testbean>" + "<beta>BETA BODY</beta>" + "<testbean>" + "<beta>BETA BODY</beta>"
-                + "</testbean>" + "</testbean>";
 
         final Reader reader = new StringReader( testXml );
 

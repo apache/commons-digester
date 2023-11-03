@@ -77,33 +77,11 @@ public class NodeCreateRule
         // ------------------------------------------------------- Constructors
 
         /**
-         * Constructor.
-         * <p>
-         * Stores the content handler currently used by Digester so it can be reset when done, and initializes the DOM
-         * objects needed to build the node.
-         * </p>
-         *
-         * @param doc the document to use to create nodes
-         * @param root the root node
-         * @throws ParserConfigurationException if the DocumentBuilderFactory could not be instantiated
-         * @throws SAXException if the XMLReader could not be instantiated by Digester (should not happen)
-         */
-        public NodeBuilder( final Document doc, final Node root )
-            throws ParserConfigurationException, SAXException
-        {
-            this.doc = doc;
-            this.root = root;
-            this.top = root;
-
-            oldContentHandler = getDigester().getCustomContentHandler();
-        }
-
-        // ------------------------------------------------- Instance Variables
-
-        /**
          * The content handler used by Digester before it was set to this content handler.
          */
         protected ContentHandler oldContentHandler;
+
+        // ------------------------------------------------- Instance Variables
 
         /**
          * Depth of the current node, relative to the element where the content handler was put into action.
@@ -129,6 +107,28 @@ public class NodeCreateRule
          * The text content of the current top DOM node.
          */
         protected StringBuilder topText = new StringBuilder();
+
+        /**
+         * Constructor.
+         * <p>
+         * Stores the content handler currently used by Digester so it can be reset when done, and initializes the DOM
+         * objects needed to build the node.
+         * </p>
+         *
+         * @param doc the document to use to create nodes
+         * @param root the root node
+         * @throws ParserConfigurationException if the DocumentBuilderFactory could not be instantiated
+         * @throws SAXException if the XMLReader could not be instantiated by Digester (should not happen)
+         */
+        public NodeBuilder( final Document doc, final Node root )
+            throws ParserConfigurationException, SAXException
+        {
+            this.doc = doc;
+            this.root = root;
+            this.top = root;
+
+            oldContentHandler = getDigester().getCustomContentHandler();
+        }
 
         // --------------------------------------------- Helper Methods
 
@@ -298,6 +298,18 @@ public class NodeCreateRule
     // ----------------------------------------------------------- Constructors
 
     /**
+     * The JAXP {@code DocumentBuilder} to use.
+     */
+    private DocumentBuilder documentBuilder;
+
+    /**
+     * The type of the node that should be created. Must be one of the constants defined in {@link org.w3c.dom.Node
+     * Node}, but currently only {@link org.w3c.dom.Node#ELEMENT_NODE Node.ELEMENT_NODE} and
+     * {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE} are allowed values.
+     */
+    private int nodeType = Node.ELEMENT_NODE;
+
+    /**
      * Default constructor. Creates an instance of this rule that will create a DOM {@link org.w3c.dom.Element Element}.
      *
      * @throws ParserConfigurationException if a DocumentBuilder cannot be created which satisfies the
@@ -320,6 +332,8 @@ public class NodeCreateRule
     {
         this( Node.ELEMENT_NODE, documentBuilder );
     }
+
+    // ----------------------------------------------------- Instance Variables
 
     /**
      * Constructor. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
@@ -357,20 +371,6 @@ public class NodeCreateRule
         this.nodeType = nodeType;
         this.documentBuilder = documentBuilder;
     }
-
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The JAXP {@code DocumentBuilder} to use.
-     */
-    private DocumentBuilder documentBuilder;
-
-    /**
-     * The type of the node that should be created. Must be one of the constants defined in {@link org.w3c.dom.Node
-     * Node}, but currently only {@link org.w3c.dom.Node#ELEMENT_NODE Node.ELEMENT_NODE} and
-     * {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE} are allowed values.
-     */
-    private int nodeType = Node.ELEMENT_NODE;
 
     // ----------------------------------------------------------- Rule Methods
 

@@ -39,6 +39,15 @@ public final class PathCallParamBuilder
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected PathCallParamRule createRule()
+    {
+        return new PathCallParamRule( paramIndex );
+    }
+
+    /**
      * Sets the zero-relative parameter number.
      *
      * @param paramIndex The zero-relative parameter number
@@ -53,15 +62,6 @@ public final class PathCallParamBuilder
 
         this.paramIndex = paramIndex;
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected PathCallParamRule createRule()
-    {
-        return new PathCallParamRule( paramIndex );
     }
 
 }

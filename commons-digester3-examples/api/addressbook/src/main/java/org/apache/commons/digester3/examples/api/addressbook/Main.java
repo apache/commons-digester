@@ -40,56 +40,6 @@ import org.apache.commons.digester3.Digester;
 public class Main
 {
 
-    /**
-     * Main method : entry point for running this example program.
-     * <p>
-     * Usage: java Example example.xml
-     */
-    public static void main( final String[] args )
-    {
-        if ( args.length != 1 )
-        {
-            usage();
-            System.exit( -1 );
-        }
-
-        final String filename = args[0];
-
-        // Create a Digester instance
-        final Digester d = new Digester();
-
-        // Prime the digester stack with an object for rules to
-        // operate on. Note that it is quite common for "this"
-        // to be the object pushed.
-        final AddressBook book = new AddressBook();
-        d.push( book );
-
-        // Add rules to the digester that will be triggered while
-        // parsing occurs.
-        addRules( d );
-
-        // Process the input file.
-        try
-        {
-            final java.io.File srcfile = new java.io.File( filename );
-            d.parse( srcfile );
-        }
-        catch ( final java.io.IOException ioe )
-        {
-            System.out.println( "Error reading input file:" + ioe.getMessage() );
-            System.exit( -1 );
-        }
-        catch ( final org.xml.sax.SAXException se )
-        {
-            System.out.println( "Error parsing input file:" + se.getMessage() );
-            System.exit( -1 );
-        }
-
-        // Print out all the contents of the address book, as loaded from
-        // the input file.
-        book.print();
-    }
-
     private static void addRules( final Digester d )
     {
 
@@ -152,6 +102,56 @@ public class Main
         d.addObjectCreate( "address-book/person/address", Address.class );
         d.addSetNext( "address-book/person/address", "addAddress" );
         d.addSetNestedProperties( "address-book/person/address" );
+    }
+
+    /**
+     * Main method : entry point for running this example program.
+     * <p>
+     * Usage: java Example example.xml
+     */
+    public static void main( final String[] args )
+    {
+        if ( args.length != 1 )
+        {
+            usage();
+            System.exit( -1 );
+        }
+
+        final String filename = args[0];
+
+        // Create a Digester instance
+        final Digester d = new Digester();
+
+        // Prime the digester stack with an object for rules to
+        // operate on. Note that it is quite common for "this"
+        // to be the object pushed.
+        final AddressBook book = new AddressBook();
+        d.push( book );
+
+        // Add rules to the digester that will be triggered while
+        // parsing occurs.
+        addRules( d );
+
+        // Process the input file.
+        try
+        {
+            final java.io.File srcfile = new java.io.File( filename );
+            d.parse( srcfile );
+        }
+        catch ( final java.io.IOException ioe )
+        {
+            System.out.println( "Error reading input file:" + ioe.getMessage() );
+            System.exit( -1 );
+        }
+        catch ( final org.xml.sax.SAXException se )
+        {
+            System.out.println( "Error parsing input file:" + se.getMessage() );
+            System.exit( -1 );
+        }
+
+        // Print out all the contents of the address book, as loaded from
+        // the input file.
+        book.print();
     }
 
     private static void usage()

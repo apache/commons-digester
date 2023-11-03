@@ -37,30 +37,6 @@ public class URLTestCase
     // ----------------------------------------------------- Overall Test Methods
 
     /**
-     * Sets up instance variables required by this test case.
-     */
-    @Before
-    public void setUp()
-    {
-
-        digester = new Digester();
-
-    }
-
-    /**
-     * Tear down instance variables required by this test case.
-     */
-    @After
-    public void tearDown()
-    {
-
-        digester = null;
-
-    }
-
-    // ------------------------------------------------------ Manifest Constants
-
-    /**
      * <p>
      * Public identifier of the Digester Rules DTD.
      * </p>
@@ -74,6 +50,8 @@ public class URLTestCase
      */
     private static final String DIGESTER_RULES_SYSTEM_ID = "/org/apache/commons/digester3/xmlrules/digester-rules.dtd";
 
+    // ------------------------------------------------------ Manifest Constants
+
     /**
      * <p>
      * System identifier for the Digester Rules file that we will parse.
@@ -82,14 +60,36 @@ public class URLTestCase
     private static final String TEST_INPUT_SYSTEM_ID =
         "/org/apache/commons/digester3/xmlrules/test-call-param-rules.xml";
 
-    // ------------------------------------------------------ Instance Variables
-
     /**
      * <p>
      * The {@code Digester} instance under test.
      * </p>
      */
     private Digester digester;
+
+    /**
+     * Sets up instance variables required by this test case.
+     */
+    @Before
+    public void setUp()
+    {
+
+        digester = new Digester();
+
+    }
+
+    // ------------------------------------------------------ Instance Variables
+
+    /**
+     * Tear down instance variables required by this test case.
+     */
+    @After
+    public void tearDown()
+    {
+
+        digester = null;
+
+    }
 
     // ------------------------------------------------------------ Test Methods
 

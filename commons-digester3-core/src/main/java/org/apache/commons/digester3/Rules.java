@@ -34,37 +34,6 @@ public interface Rules
     // ------------------------------------------------------------- Properties
 
     /**
-     * Return the Digester instance with which this Rules instance is associated.
-     *
-     * @return the Digester instance with which this Rules instance is associated
-     */
-    Digester getDigester();
-
-    /**
-     * Sets the Digester instance with which this Rules instance is associated.
-     *
-     * @param digester The newly associated Digester instance
-     */
-    void setDigester( Digester digester );
-
-    /**
-     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
-     *
-     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
-     */
-    String getNamespaceURI();
-
-    /**
-     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
-     *
-     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
-     *            matching regardless of the current namespace URI
-     */
-    void setNamespaceURI( String namespaceURI );
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
      * Register a new Rule instance matching the specified pattern.
      *
      * @param pattern Nesting pattern to be matched for this Rule
@@ -76,6 +45,22 @@ public interface Rules
      * Clear all existing Rule instance registrations.
      */
     void clear();
+
+    /**
+     * Return the Digester instance with which this Rules instance is associated.
+     *
+     * @return the Digester instance with which this Rules instance is associated
+     */
+    Digester getDigester();
+
+    /**
+     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     *
+     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     */
+    String getNamespaceURI();
+
+    // --------------------------------------------------------- Public Methods
 
     /**
      * Return a List of all registered Rule instances that match the specified nesting pattern, or a zero-length List if
@@ -99,5 +84,20 @@ public interface Rules
      * @return a List of all registered Rule instances
      */
     List<Rule> rules();
+
+    /**
+     * Sets the Digester instance with which this Rules instance is associated.
+     *
+     * @param digester The newly associated Digester instance
+     */
+    void setDigester( Digester digester );
+
+    /**
+     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     *
+     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
+     *            matching regardless of the current namespace URI
+     */
+    void setNamespaceURI( String namespaceURI );
 
 }

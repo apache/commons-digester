@@ -33,6 +33,21 @@ import org.junit.Test;
 public class TestRecursion
 {
 
+    private int countWidgets( final Container c )
+    {
+        final List<Widget> l = c.getChildren();
+        int sum = 0;
+        for ( final Widget w : l )
+        {
+            ++sum;
+            if ( w instanceof Container )
+            {
+                sum += countWidgets( (Container) w );
+            }
+        }
+        return sum;
+    }
+
     // --------------------------------------------------------------- Test cases
     @Test
     public void testRecursiveRules()
@@ -67,20 +82,5 @@ public class TestRecursion
 
         final int nDescendants = countWidgets( root );
         assertEquals( 10, nDescendants );
-    }
-
-    private int countWidgets( final Container c )
-    {
-        final List<Widget> l = c.getChildren();
-        int sum = 0;
-        for ( final Widget w : l )
-        {
-            ++sum;
-            if ( w instanceof Container )
-            {
-                sum += countWidgets( (Container) w );
-            }
-        }
-        return sum;
     }
 }

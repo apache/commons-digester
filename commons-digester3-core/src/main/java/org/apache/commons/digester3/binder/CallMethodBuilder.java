@@ -55,76 +55,14 @@ public final class CallMethodBuilder
     }
 
     /**
-     * Sets the location of the target object.
-     *
-     * Positive numbers are relative to the top of the digester object stack.
-     * Negative numbers are relative to the bottom of the stack. Zero implies the top object on the stack.
-     *
-     * @param targetOffset location of the target object.
-     * @return this builder instance
+     * {@inheritDoc}
      */
-    public CallMethodBuilder withTargetOffset( final int targetOffset )
+    @Override
+    protected CallMethodRule createRule()
     {
-        this.targetOffset = targetOffset;
-        return this;
-    }
-
-    /**
-     * Sets the Java class names that represent the parameter types of the method arguments.
-     *
-     * If you wish to use a primitive type, specify the corresonding Java wrapper class instead,
-     * such as {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter.
-     *
-     * @param paramTypeNames The Java classes names that represent the parameter types of the method arguments
-     * @return this builder instance
-     */
-    public CallMethodBuilder withParamTypes( final String... paramTypeNames )
-    {
-        Class<?>[] paramTypes = null;
-        if ( paramTypeNames != null )
-        {
-            paramTypes = new Class<?>[paramTypeNames.length];
-            for ( int i = 0; i < paramTypeNames.length; i++ )
-            {
-                try
-                {
-                    paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
-                }
-                catch ( final ClassNotFoundException e )
-                {
-                    this.reportError( format( "callMethod( \"%s\" ).withParamTypes( %s )", this.methodName,
-                                                     Arrays.toString( paramTypeNames ) ),
-                                      format( "class '%s' cannot be load", paramTypeNames[i] ) );
-                }
-            }
-        }
-
-        return withParamTypes( paramTypes );
-    }
-
-    /**
-     * Sets the Java classes that represent the parameter types of the method arguments.
-     *
-     * If you wish to use a primitive type, specify the corresonding Java wrapper class instead,
-     * such as {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter.
-     *
-     * @param paramTypes The Java classes that represent the parameter types of the method arguments
-     * @return this builder instance
-     */
-    public CallMethodBuilder withParamTypes( final Class<?>... paramTypes )
-    {
-        this.paramTypes = paramTypes;
-
-        if ( paramTypes != null )
-        {
-            this.paramCount = paramTypes.length;
-        }
-        else
-        {
-            paramCount = 0;
-        }
-
-        return this;
+        final CallMethodRule callMethodRule = new CallMethodRule( targetOffset, methodName, paramCount, paramTypes );
+        callMethodRule.setUseExactMatch( useExactMatch );
+        return callMethodRule;
     }
 
     /**
@@ -137,6 +75,16 @@ public final class CallMethodBuilder
     {
         this.useExactMatch = useExactMatch;
         return this;
+    }
+
+    /**
+     * Prepare the {@link CallMethodRule} to be invoked using the matching element body as argument.
+     *
+     * @return this builder instance
+     */
+    public CallMethodBuilder usingElementBodyAsArgument()
+    {
+        return withParamCount( 0 );
     }
 
     /**
@@ -175,24 +123,76 @@ public final class CallMethodBuilder
     }
 
     /**
-     * Prepare the {@link CallMethodRule} to be invoked using the matching element body as argument.
+     * Sets the Java classes that represent the parameter types of the method arguments.
      *
+     * If you wish to use a primitive type, specify the corresonding Java wrapper class instead,
+     * such as {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter.
+     *
+     * @param paramTypes The Java classes that represent the parameter types of the method arguments
      * @return this builder instance
      */
-    public CallMethodBuilder usingElementBodyAsArgument()
+    public CallMethodBuilder withParamTypes( final Class<?>... paramTypes )
     {
-        return withParamCount( 0 );
+        this.paramTypes = paramTypes;
+
+        if ( paramTypes != null )
+        {
+            this.paramCount = paramTypes.length;
+        }
+        else
+        {
+            paramCount = 0;
+        }
+
+        return this;
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the Java class names that represent the parameter types of the method arguments.
+     *
+     * If you wish to use a primitive type, specify the corresonding Java wrapper class instead,
+     * such as {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter.
+     *
+     * @param paramTypeNames The Java classes names that represent the parameter types of the method arguments
+     * @return this builder instance
      */
-    @Override
-    protected CallMethodRule createRule()
+    public CallMethodBuilder withParamTypes( final String... paramTypeNames )
     {
-        final CallMethodRule callMethodRule = new CallMethodRule( targetOffset, methodName, paramCount, paramTypes );
-        callMethodRule.setUseExactMatch( useExactMatch );
-        return callMethodRule;
+        Class<?>[] paramTypes = null;
+        if ( paramTypeNames != null )
+        {
+            paramTypes = new Class<?>[paramTypeNames.length];
+            for ( int i = 0; i < paramTypeNames.length; i++ )
+            {
+                try
+                {
+                    paramTypes[i] = classLoader.loadClass( paramTypeNames[i] );
+                }
+                catch ( final ClassNotFoundException e )
+                {
+                    this.reportError( format( "callMethod( \"%s\" ).withParamTypes( %s )", this.methodName,
+                                                     Arrays.toString( paramTypeNames ) ),
+                                      format( "class '%s' cannot be load", paramTypeNames[i] ) );
+                }
+            }
+        }
+
+        return withParamTypes( paramTypes );
+    }
+
+    /**
+     * Sets the location of the target object.
+     *
+     * Positive numbers are relative to the top of the digester object stack.
+     * Negative numbers are relative to the bottom of the stack. Zero implies the top object on the stack.
+     *
+     * @param targetOffset location of the target object.
+     * @return this builder instance
+     */
+    public CallMethodBuilder withTargetOffset( final int targetOffset )
+    {
+        this.targetOffset = targetOffset;
+        return this;
     }
 
 }

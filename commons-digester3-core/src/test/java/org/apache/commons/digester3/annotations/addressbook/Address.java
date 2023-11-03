@@ -45,66 +45,6 @@ public class Address
     @BeanPropertySetter( pattern = "address-book/person/address/country" )
     private String country;
 
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType( final String type )
-    {
-        this.type = type;
-    }
-
-    public String getStreet()
-    {
-        return street;
-    }
-
-    public void setStreet( final String street )
-    {
-        this.street = street;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public void setCity( final String city )
-    {
-        this.city = city;
-    }
-
-    public String getState()
-    {
-        return state;
-    }
-
-    public void setState( final String state )
-    {
-        this.state = state;
-    }
-
-    public String getZip()
-    {
-        return zip;
-    }
-
-    public void setZip( final String zip )
-    {
-        this.zip = zip;
-    }
-
-    public String getCountry()
-    {
-        return country;
-    }
-
-    public void setCountry( final String country )
-    {
-        this.country = country;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -173,6 +113,66 @@ public class Address
             return false;
         }
         return true;
+    }
+
+    public String getCity()
+    {
+        return city;
+    }
+
+    public String getCountry()
+    {
+        return country;
+    }
+
+    public String getState()
+    {
+        return state;
+    }
+
+    public String getStreet()
+    {
+        return street;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public String getZip()
+    {
+        return zip;
+    }
+
+    public void setCity( final String city )
+    {
+        this.city = city;
+    }
+
+    public void setCountry( final String country )
+    {
+        this.country = country;
+    }
+
+    public void setState( final String state )
+    {
+        this.state = state;
+    }
+
+    public void setStreet( final String street )
+    {
+        this.street = street;
+    }
+
+    public void setType( final String type )
+    {
+        this.type = type;
+    }
+
+    public void setZip( final String zip )
+    {
+        this.zip = zip;
     }
 
     @Override

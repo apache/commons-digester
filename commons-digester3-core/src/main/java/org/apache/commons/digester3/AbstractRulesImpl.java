@@ -52,44 +52,6 @@ public abstract class AbstractRulesImpl
      * {@inheritDoc}
      */
     @Override
-    public Digester getDigester()
-    {
-        return digester;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDigester( final Digester digester )
-    {
-        this.digester = digester;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getNamespaceURI()
-    {
-        return namespaceURI;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setNamespaceURI( final String namespaceURI )
-    {
-        this.namespaceURI = namespaceURI;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public final void add( final String pattern, final Rule rule )
     {
         // set up rule
@@ -107,6 +69,24 @@ public abstract class AbstractRulesImpl
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Digester getDigester()
+    {
+        return digester;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNamespaceURI()
+    {
+        return namespaceURI;
+    }
+
+    /**
      * Register rule at given pattern. The the Digester and namespaceURI properties of the given {@code Rule} can
      * be assumed to have been set properly before this method is called.
      *
@@ -114,5 +94,25 @@ public abstract class AbstractRulesImpl
      * @param rule Rule instance to be registered
      */
     protected abstract void registerRule( String pattern, Rule rule );
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDigester( final Digester digester )
+    {
+        this.digester = digester;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNamespaceURI( final String namespaceURI )
+    {
+        this.namespaceURI = namespaceURI;
+    }
 
 }

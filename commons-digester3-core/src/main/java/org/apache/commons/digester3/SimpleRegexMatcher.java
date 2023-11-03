@@ -62,18 +62,6 @@ public class SimpleRegexMatcher
     }
 
     /**
-     * Sets the current {@code Log} implementation used by this class.
-     *
-     * @param log the current {@code Log} implementation used by this class.
-     */
-    public void setLog( final Log log )
-    {
-        this.log = log;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -87,7 +75,7 @@ public class SimpleRegexMatcher
         return match( basePattern, regexPattern, 0, 0 );
     }
 
-    // --------------------------------------------------------- Implementations Methods
+    // --------------------------------------------------------- Public Methods
 
     /**
      * Implementation of regex matching algorithm. This calls itself recursively.
@@ -177,6 +165,18 @@ public class SimpleRegexMatcher
                 }
                 return false;
         }
+    }
+
+    // --------------------------------------------------------- Implementations Methods
+
+    /**
+     * Sets the current {@code Log} implementation used by this class.
+     *
+     * @param log the current {@code Log} implementation used by this class.
+     */
+    public void setLog( final Log log )
+    {
+        this.log = log;
     }
 
 }

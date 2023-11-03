@@ -29,6 +29,11 @@ public class TestRuleSet
     // ----------------------------------------------------------- Constructors
 
     /**
+     * The prefix for each matching pattern added to the Digester instance, or an empty String for no prefix.
+     */
+    protected String prefix;
+
+    /**
      * Construct an instance of this RuleSet with default values.
      */
     public TestRuleSet()
@@ -50,6 +55,8 @@ public class TestRuleSet
 
     }
 
+    // ----------------------------------------------------- Instance Variables
+
     /**
      * Construct an instance of this RuleSet associated with the specified prefix and namespace URI.
      *
@@ -70,13 +77,6 @@ public class TestRuleSet
         }
 
     }
-
-    // ----------------------------------------------------- Instance Variables
-
-    /**
-     * The prefix for each matching pattern added to the Digester instance, or an empty String for no prefix.
-     */
-    protected String prefix;
 
     // --------------------------------------------------------- Public Methods
 

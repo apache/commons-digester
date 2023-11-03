@@ -45,6 +45,20 @@ public class CallMethodRuleTestCase
 {
 
     /**
+     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
+     *
+     * @param name Name of the test file we want
+     * @throws IOException if an input/output error occurs
+     */
+    protected InputStream getInputStream( final String name )
+        throws IOException
+    {
+
+        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+
+    }
+
+    /**
      * Test method calls with the CallMethodRule rule. It should be possible to call a method with no arguments using
      * several rule syntaxes.
      */
@@ -80,6 +94,34 @@ public class CallMethodRuleTestCase
     }
 
     /**
+     * Test invoking an object which does not exist on the stack.
+     */
+    @Test
+    public void testCallInvalidTarget()
+        throws Exception
+    {
+
+        final Digester digester = new Digester();
+        digester.addObjectCreate( "employee", HashMap.class );
+
+        // there should be only one object on the stack (index zero),
+        // so selecting a target object with index 1 on the object stack
+        // should result in an exception.
+        final CallMethodRule r = new CallMethodRule( 1, "put", 0 );
+        digester.addRule( "employee", r );
+
+        try
+        {
+            digester.parse( getInputStream( "Test5.xml" ) );
+            fail( "Exception should be thrown for invalid target offset" );
+        }
+        catch ( final SAXException e )
+        {
+            // ok, exception expected
+        }
+    }
+
+    /**
      * Test method calls with the CallMethodRule reading from the element body, with no CallParamMethod rules added.
      */
     @Test
@@ -109,130 +151,179 @@ public class CallMethodRuleTestCase
     }
 
     /**
-     * Test CallMethodRule variants which specify the classes of the parameters to target methods. String, int, boolean,
-     * float should all be acceptable as parameter types.
+     * Test invoking an object which is at top-1 on the stack, like SetNextRule does...
      */
     @Test
-    public void testSettingProperties()
-        throws SAXException, IOException
+    public void testCallNext()
+        throws Exception
     {
-        Digester digester = newLoader( new AbstractRulesModule()
-        {
 
-            @Override
-            protected void configure()
-            {
-                forPattern( "employee" ).createObject().ofType( Employee.class )
-                    .then()
-                    .callMethod( "setLastName" ).withParamTypes( "java.lang.String" );
-                forPattern( "employee/lastName" ).callParam().ofIndex( 0 );
-            }
+        final Digester digester = new Digester();
+        digester.addObjectCreate( "employee", HashMap.class );
 
-        }).newDigester();
+        digester.addObjectCreate( "employee/address", Address.class );
+        digester.addSetNestedProperties( "employee/address" );
+        final CallMethodRule r = new CallMethodRule( 1, "put", 2 );
+        digester.addRule( "employee/address", r );
+        digester.addCallParam( "employee/address/type", 0 );
+        digester.addCallParam( "employee/address", 1, 0 );
 
-        // Parse our test input
+        final HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
 
-        // an exception will be thrown if the method can't be found
-        Employee employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setLastName", "Last Name", employee.getLastName() );
-
-        digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "employee" ).createObject().ofType( Employee.class )
-                    .then()
-                    .callMethod( "setAge" ).withParamTypes( int.class );
-                forPattern( "employee/age" ).callParam();
-            }
-
-        }).newDigester();
-
-        // Parse our test input
-        // an exception will be thrown if the method can't be found
-        employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setAge", 21, employee.getAge() );
-
-        digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "employee" ).createObject().ofType( Employee.class )
-                    .then()
-                    .callMethod( "setActive" ).withParamTypes( boolean.class );
-                forPattern( "employee/active" ).callParam();
-            }
-
-        }).newDigester();
-
-        // Parse our test input
-        // an exception will be thrown if the method can't be found
-        employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setActive", true, employee.isActive() );
-
-        digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "employee" ).createObject().ofType( Employee.class )
-                    .then()
-                    .callMethod( "setSalary" ).withParamTypes( float.class );
-                forPattern( "employee/salary" ).callParam();
-            }
-
-        }).newDigester();
-
-        // Parse our test input
-        // an exception will be thrown if the method can't be found
-        employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setSalary", 1000000.0f, employee.getSalary(), 0.1f );
+        assertNotNull( map );
+        final Set<String> keys = map.keySet();
+        assertEquals( 2, keys.size() );
+        final Address home = map.get( "home" );
+        assertNotNull( home );
+        assertEquals( "HmZip", home.getZipCode() );
+        final Address office = map.get( "office" );
+        assertNotNull( office );
+        assertEquals( "OfZip", office.getZipCode() );
     }
 
     /**
-     * This tests the call methods params enhancement that provides for more complex stack-based calls.
+     * Test invoking an object which is at the root of the stack, like SetRoot does...
      */
     @Test
-    public void testParamsFromStack()
-        throws SAXException, IOException
+    public void testCallRoot()
+        throws Exception
     {
-        final Digester digester = newLoader( new AbstractRulesModule()
-        {
 
-            @Override
-            protected void configure()
-            {
-                forPattern( "map" ).createObject().ofType( HashMap.class )
-                    .then()
-                    .callMethod( "put" ).withParamCount( 2 );
-                forPattern( "map/key" ).createObject().ofType( AlphaBean.class )
-                    .then()
-                    .setProperties()
-                    .then()
-                    .callParam().fromStack( true );
-                forPattern( "map/value" ).createObject().ofType( BetaBean.class )
-                    .then()
-                    .setProperties()
-                    .then()
-                    .callParam().ofIndex( 1 ).fromStack( true );
-            }
+        final Digester digester = new Digester();
+        digester.addObjectCreate( "employee", HashMap.class );
 
-        }).newDigester();
+        digester.addObjectCreate( "employee/address", Address.class );
+        digester.addSetNestedProperties( "employee/address" );
+        final CallMethodRule r = new CallMethodRule( -1, "put", 2 );
+        digester.addRule( "employee/address", r );
+        digester.addCallParam( "employee/address/type", 0 );
+        digester.addCallParam( "employee/address", 1, 0 );
 
-        final StringBuilder xml =
-            new StringBuilder().append( "<?xml version='1.0'?>" ).append( "<map>" ).append( "  <key name='The key'/>" ).append( "  <value name='The value'/>" ).append( "</map>" );
-
-        final HashMap<AlphaBean, BetaBean> map = digester.parse( new StringReader( xml.toString() ) );
+        final HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
 
         assertNotNull( map );
-        assertEquals( 1, map.size() );
-        assertEquals( "The key", map.keySet().iterator().next().getName() );
-        assertEquals( "The value", map.values().iterator().next().getName() );
+        final Set<String> keys = map.keySet();
+        assertEquals( 2, keys.size() );
+        final Address home = map.get( "home" );
+        assertNotNull( home );
+        assertEquals( "HmZip", home.getZipCode() );
+        final Address office = map.get( "office" );
+        assertNotNull( office );
+        assertEquals( "OfZip", office.getZipCode() );
+    }
+
+    @Test
+    public void testFromStack()
+        throws Exception
+    {
+
+        final StringReader reader =
+            new StringReader( "<?xml version='1.0' ?><root><one/><two/><three/><four/><five/></root>" );
+
+        final Digester digester = new Digester();
+
+        final Class<?>[] params = { String.class };
+
+        digester.addObjectCreate( "root/one", NamedBean.class );
+        digester.addSetNext( "root/one", "add" );
+        digester.addCallMethod( "root/one", "setName", 1, params );
+        digester.addCallParam( "root/one", 0, 2 );
+
+        digester.addObjectCreate( "root/two", NamedBean.class );
+        digester.addSetNext( "root/two", "add" );
+        digester.addCallMethod( "root/two", "setName", 1, params );
+        digester.addCallParam( "root/two", 0, 3 );
+
+        digester.addObjectCreate( "root/three", NamedBean.class );
+        digester.addSetNext( "root/three", "add" );
+        digester.addCallMethod( "root/three", "setName", 1, params );
+        digester.addCallParam( "root/three", 0, 4 );
+
+        digester.addObjectCreate( "root/four", NamedBean.class );
+        digester.addSetNext( "root/four", "add" );
+        digester.addCallMethod( "root/four", "setName", 1, params );
+        digester.addCallParam( "root/four", 0, 5 );
+
+        digester.addObjectCreate( "root/five", NamedBean.class );
+        digester.addSetNext( "root/five", "add" );
+        final Class<?>[] newParams = { String.class, String.class };
+        digester.addCallMethod( "root/five", "test", 2, newParams );
+        digester.addCallParam( "root/five", 0, 10 );
+        digester.addCallParam( "root/five", 1, 3 );
+
+        // prepare stack
+        digester.push( "That lamb was sure to go." );
+        digester.push( "And everywhere that Mary went," );
+        digester.push( "It's fleece was white as snow." );
+        digester.push( "Mary had a little lamb," );
+
+        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
+        digester.push( list );
+        digester.parse( reader );
+
+        assertEquals( "Wrong number of beans in list", 5, list.size() );
+        NamedBean bean = list.get( 0 );
+        assertEquals( "Parameter not set from stack (1)", "Mary had a little lamb,", bean.getName() );
+        bean = list.get( 1 );
+        assertEquals( "Parameter not set from stack (2)", "It's fleece was white as snow.", bean.getName() );
+        bean = list.get( 2 );
+        assertEquals( "Parameter not set from stack (3)", "And everywhere that Mary went,", bean.getName() );
+        bean = list.get( 3 );
+        assertEquals( "Parameter not set from stack (4)", "That lamb was sure to go.", bean.getName() );
+        bean = list.get( 4 );
+        assertEquals( "Out of stack not set to null", null, bean.getName() );
+    }
+
+    @Test
+    public void testNestedBody()
+        throws Exception
+    {
+
+        final StringReader reader =
+            new StringReader( "<?xml version='1.0' ?><root>" + "<spam>Simple</spam>"
+                + "<spam>Complex<spam>Deep<spam>Deeper<spam>Deepest</spam></spam></spam></spam>" + "</root>" );
+
+        final Digester digester = new Digester();
+
+        // SimpleLog log = new SimpleLog("[testPrimitiveReading:Digester]");
+        // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
+        // digester.setLogger(log);
+
+        digester.addObjectCreate( "root/spam", NamedBean.class );
+        digester.addSetRoot( "root/spam", "add" );
+        digester.addCallMethod( "root/spam", "setName", 1 );
+        digester.addCallParam( "root/spam", 0 );
+
+        digester.addObjectCreate( "root/spam/spam", NamedBean.class );
+        digester.addSetRoot( "root/spam/spam", "add" );
+        digester.addCallMethod( "root/spam/spam", "setName", 1 );
+        digester.addCallParam( "root/spam/spam", 0 );
+
+        digester.addObjectCreate( "root/spam/spam/spam", NamedBean.class );
+        digester.addSetRoot( "root/spam/spam/spam", "add" );
+        digester.addCallMethod( "root/spam/spam/spam", "setName", 1 );
+        digester.addCallParam( "root/spam/spam/spam", 0 );
+
+        digester.addObjectCreate( "root/spam/spam/spam/spam", NamedBean.class );
+        digester.addSetRoot( "root/spam/spam/spam/spam", "add" );
+        digester.addCallMethod( "root/spam/spam/spam/spam", "setName", 1 );
+        digester.addCallParam( "root/spam/spam/spam/spam", 0 );
+
+        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
+        digester.push( list );
+        digester.parse( reader );
+
+        NamedBean bean = list.get( 0 );
+        assertEquals( "Wrong name (1)", "Simple", bean.getName() );
+        // these are added in deepest first order by the addRootRule
+        bean = list.get( 4 );
+        assertEquals( "Wrong name (2)", "Complex", bean.getName() );
+        bean = list.get( 3 );
+        assertEquals( "Wrong name (3)", "Deep", bean.getName() );
+        bean = list.get( 2 );
+        assertEquals( "Wrong name (4)", "Deeper", bean.getName() );
+        bean = list.get( 1 );
+        assertEquals( "Wrong name (5)", "Deepest", bean.getName() );
     }
 
     /**
@@ -326,6 +417,74 @@ public class CallMethodRuleTestCase
         assertEquals( "Wrong method call order", "CBA", word.toString() );
     }
 
+    /**
+     * This tests the call methods params enhancement that provides for more complex stack-based calls.
+     */
+    @Test
+    public void testParamsFromStack()
+        throws SAXException, IOException
+    {
+        final Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "map" ).createObject().ofType( HashMap.class )
+                    .then()
+                    .callMethod( "put" ).withParamCount( 2 );
+                forPattern( "map/key" ).createObject().ofType( AlphaBean.class )
+                    .then()
+                    .setProperties()
+                    .then()
+                    .callParam().fromStack( true );
+                forPattern( "map/value" ).createObject().ofType( BetaBean.class )
+                    .then()
+                    .setProperties()
+                    .then()
+                    .callParam().ofIndex( 1 ).fromStack( true );
+            }
+
+        }).newDigester();
+
+        final StringBuilder xml =
+            new StringBuilder().append( "<?xml version='1.0'?>" ).append( "<map>" ).append( "  <key name='The key'/>" ).append( "  <value name='The value'/>" ).append( "</map>" );
+
+        final HashMap<AlphaBean, BetaBean> map = digester.parse( new StringReader( xml.toString() ) );
+
+        assertNotNull( map );
+        assertEquals( 1, map.size() );
+        assertEquals( "The key", map.keySet().iterator().next().getName() );
+        assertEquals( "The value", map.values().iterator().next().getName() );
+    }
+
+    /** Test for the PathCallParamRule */
+    @Test
+    public void testPathCallParam()
+        throws Exception
+    {
+        final String xml =
+            "<?xml version='1.0'?><main>" + "<alpha><beta>Ignore this</beta></alpha>"
+                + "<beta><epsilon><gamma>Ignore that</gamma></epsilon></beta>" + "</main>";
+
+        final SimpleTestBean bean = new SimpleTestBean();
+        bean.setAlphaBeta( "[UNSET]", "[UNSET]" );
+
+        final StringReader in = new StringReader( xml );
+        final Digester digester = new Digester();
+        digester.setRules( new ExtendedBaseRules() );
+        digester.addCallParamPath( "*/alpha/?", 0 );
+        digester.addCallParamPath( "*/epsilon/?", 1 );
+        digester.addCallMethod( "main", "setAlphaBeta", 2 );
+
+        digester.push( bean );
+
+        digester.parse( in );
+
+        assertEquals( "Test alpha property setting", "main/alpha/beta", bean.getAlpha() );
+        assertEquals( "Test beta property setting", "main/beta/epsilon/gamma", bean.getBeta() );
+    }
+
     @Test
     public void testPrimitiveReading()
         throws Exception
@@ -380,161 +539,6 @@ public class CallMethodRuleTestCase
     }
 
     @Test
-    public void testFromStack()
-        throws Exception
-    {
-
-        final StringReader reader =
-            new StringReader( "<?xml version='1.0' ?><root><one/><two/><three/><four/><five/></root>" );
-
-        final Digester digester = new Digester();
-
-        final Class<?>[] params = { String.class };
-
-        digester.addObjectCreate( "root/one", NamedBean.class );
-        digester.addSetNext( "root/one", "add" );
-        digester.addCallMethod( "root/one", "setName", 1, params );
-        digester.addCallParam( "root/one", 0, 2 );
-
-        digester.addObjectCreate( "root/two", NamedBean.class );
-        digester.addSetNext( "root/two", "add" );
-        digester.addCallMethod( "root/two", "setName", 1, params );
-        digester.addCallParam( "root/two", 0, 3 );
-
-        digester.addObjectCreate( "root/three", NamedBean.class );
-        digester.addSetNext( "root/three", "add" );
-        digester.addCallMethod( "root/three", "setName", 1, params );
-        digester.addCallParam( "root/three", 0, 4 );
-
-        digester.addObjectCreate( "root/four", NamedBean.class );
-        digester.addSetNext( "root/four", "add" );
-        digester.addCallMethod( "root/four", "setName", 1, params );
-        digester.addCallParam( "root/four", 0, 5 );
-
-        digester.addObjectCreate( "root/five", NamedBean.class );
-        digester.addSetNext( "root/five", "add" );
-        final Class<?>[] newParams = { String.class, String.class };
-        digester.addCallMethod( "root/five", "test", 2, newParams );
-        digester.addCallParam( "root/five", 0, 10 );
-        digester.addCallParam( "root/five", 1, 3 );
-
-        // prepare stack
-        digester.push( "That lamb was sure to go." );
-        digester.push( "And everywhere that Mary went," );
-        digester.push( "It's fleece was white as snow." );
-        digester.push( "Mary had a little lamb," );
-
-        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
-        digester.push( list );
-        digester.parse( reader );
-
-        assertEquals( "Wrong number of beans in list", 5, list.size() );
-        NamedBean bean = list.get( 0 );
-        assertEquals( "Parameter not set from stack (1)", "Mary had a little lamb,", bean.getName() );
-        bean = list.get( 1 );
-        assertEquals( "Parameter not set from stack (2)", "It's fleece was white as snow.", bean.getName() );
-        bean = list.get( 2 );
-        assertEquals( "Parameter not set from stack (3)", "And everywhere that Mary went,", bean.getName() );
-        bean = list.get( 3 );
-        assertEquals( "Parameter not set from stack (4)", "That lamb was sure to go.", bean.getName() );
-        bean = list.get( 4 );
-        assertEquals( "Out of stack not set to null", null, bean.getName() );
-    }
-
-    @Test
-    public void testTwoCalls()
-        throws Exception
-    {
-
-        final StringReader reader =
-            new StringReader( "<?xml version='1.0' ?><root>" + "<param class='int' coolness='true'>25</param>"
-                + "<param class='long'>50</param>" + "<param class='float' coolness='false'>90</param></root>" );
-
-        final Digester digester = new Digester();
-        // SimpleLog log = new SimpleLog("{testTwoCalls:Digester]");
-        // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
-        // digester.setLogger(log);
-
-        digester.addObjectCreate( "root/param", ParamBean.class );
-        digester.addSetNext( "root/param", "add" );
-        digester.addCallMethod( "root/param", "setThisAndThat", 2 );
-        digester.addCallParam( "root/param", 0, "class" );
-        digester.addCallParam( "root/param", 1 );
-        digester.addCallMethod( "root/param", "setCool", 1, new Class[] { boolean.class } );
-        digester.addCallParam( "root/param", 0, "coolness" );
-
-        final ArrayList<ParamBean> list = new ArrayList<ParamBean>();
-        digester.push( list );
-        digester.parse( reader );
-
-        assertEquals( "Wrong number of objects created", 3, list.size() );
-        ParamBean bean = list.get( 0 );
-        assertEquals( "Coolness wrong (1)", true, bean.isCool() );
-        assertEquals( "This wrong (1)", "int", bean.getThis() );
-        assertEquals( "That wrong (1)", "25", bean.getThat() );
-        bean = list.get( 1 );
-        assertEquals( "Coolness wrong (2)", false, bean.isCool() );
-        assertEquals( "This wrong (2)", "long", bean.getThis() );
-        assertEquals( "That wrong (2)", "50", bean.getThat() );
-        bean = list.get( 2 );
-        assertEquals( "Coolness wrong (3)", false, bean.isCool() );
-        assertEquals( "This wrong (3)", "float", bean.getThis() );
-        assertEquals( "That wrong (3)", "90", bean.getThat() );
-    }
-
-    @Test
-    public void testNestedBody()
-        throws Exception
-    {
-
-        final StringReader reader =
-            new StringReader( "<?xml version='1.0' ?><root>" + "<spam>Simple</spam>"
-                + "<spam>Complex<spam>Deep<spam>Deeper<spam>Deepest</spam></spam></spam></spam>" + "</root>" );
-
-        final Digester digester = new Digester();
-
-        // SimpleLog log = new SimpleLog("[testPrimitiveReading:Digester]");
-        // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
-        // digester.setLogger(log);
-
-        digester.addObjectCreate( "root/spam", NamedBean.class );
-        digester.addSetRoot( "root/spam", "add" );
-        digester.addCallMethod( "root/spam", "setName", 1 );
-        digester.addCallParam( "root/spam", 0 );
-
-        digester.addObjectCreate( "root/spam/spam", NamedBean.class );
-        digester.addSetRoot( "root/spam/spam", "add" );
-        digester.addCallMethod( "root/spam/spam", "setName", 1 );
-        digester.addCallParam( "root/spam/spam", 0 );
-
-        digester.addObjectCreate( "root/spam/spam/spam", NamedBean.class );
-        digester.addSetRoot( "root/spam/spam/spam", "add" );
-        digester.addCallMethod( "root/spam/spam/spam", "setName", 1 );
-        digester.addCallParam( "root/spam/spam/spam", 0 );
-
-        digester.addObjectCreate( "root/spam/spam/spam/spam", NamedBean.class );
-        digester.addSetRoot( "root/spam/spam/spam/spam", "add" );
-        digester.addCallMethod( "root/spam/spam/spam/spam", "setName", 1 );
-        digester.addCallParam( "root/spam/spam/spam/spam", 0 );
-
-        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
-        digester.push( list );
-        digester.parse( reader );
-
-        NamedBean bean = list.get( 0 );
-        assertEquals( "Wrong name (1)", "Simple", bean.getName() );
-        // these are added in deepest first order by the addRootRule
-        bean = list.get( 4 );
-        assertEquals( "Wrong name (2)", "Complex", bean.getName() );
-        bean = list.get( 3 );
-        assertEquals( "Wrong name (3)", "Deep", bean.getName() );
-        bean = list.get( 2 );
-        assertEquals( "Wrong name (4)", "Deeper", bean.getName() );
-        bean = list.get( 1 );
-        assertEquals( "Wrong name (5)", "Deepest", bean.getName() );
-    }
-
-    @Test
     public void testProcessingHook()
         throws Exception
     {
@@ -580,137 +584,133 @@ public class CallMethodRuleTestCase
         assertEquals( "Result not passed into hook", "The Other", rule.result );
     }
 
-    /** Test for the PathCallParamRule */
-    @Test
-    public void testPathCallParam()
-        throws Exception
-    {
-        final String xml =
-            "<?xml version='1.0'?><main>" + "<alpha><beta>Ignore this</beta></alpha>"
-                + "<beta><epsilon><gamma>Ignore that</gamma></epsilon></beta>" + "</main>";
-
-        final SimpleTestBean bean = new SimpleTestBean();
-        bean.setAlphaBeta( "[UNSET]", "[UNSET]" );
-
-        final StringReader in = new StringReader( xml );
-        final Digester digester = new Digester();
-        digester.setRules( new ExtendedBaseRules() );
-        digester.addCallParamPath( "*/alpha/?", 0 );
-        digester.addCallParamPath( "*/epsilon/?", 1 );
-        digester.addCallMethod( "main", "setAlphaBeta", 2 );
-
-        digester.push( bean );
-
-        digester.parse( in );
-
-        assertEquals( "Test alpha property setting", "main/alpha/beta", bean.getAlpha() );
-        assertEquals( "Test beta property setting", "main/beta/epsilon/gamma", bean.getBeta() );
-    }
-
     /**
-     * Test invoking an object which does not exist on the stack.
+     * Test CallMethodRule variants which specify the classes of the parameters to target methods. String, int, boolean,
+     * float should all be acceptable as parameter types.
      */
     @Test
-    public void testCallInvalidTarget()
-        throws Exception
+    public void testSettingProperties()
+        throws SAXException, IOException
     {
-
-        final Digester digester = new Digester();
-        digester.addObjectCreate( "employee", HashMap.class );
-
-        // there should be only one object on the stack (index zero),
-        // so selecting a target object with index 1 on the object stack
-        // should result in an exception.
-        final CallMethodRule r = new CallMethodRule( 1, "put", 0 );
-        digester.addRule( "employee", r );
-
-        try
+        Digester digester = newLoader( new AbstractRulesModule()
         {
-            digester.parse( getInputStream( "Test5.xml" ) );
-            fail( "Exception should be thrown for invalid target offset" );
-        }
-        catch ( final SAXException e )
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "employee" ).createObject().ofType( Employee.class )
+                    .then()
+                    .callMethod( "setLastName" ).withParamTypes( "java.lang.String" );
+                forPattern( "employee/lastName" ).callParam().ofIndex( 0 );
+            }
+
+        }).newDigester();
+
+        // Parse our test input
+
+        // an exception will be thrown if the method can't be found
+        Employee employee = digester.parse( getInputStream( "Test5.xml" ) );
+        assertEquals( "Failed to call Employee.setLastName", "Last Name", employee.getLastName() );
+
+        digester = newLoader( new AbstractRulesModule()
         {
-            // ok, exception expected
-        }
-    }
 
-    /**
-     * Test invoking an object which is at top-1 on the stack, like SetNextRule does...
-     */
-    @Test
-    public void testCallNext()
-        throws Exception
-    {
+            @Override
+            protected void configure()
+            {
+                forPattern( "employee" ).createObject().ofType( Employee.class )
+                    .then()
+                    .callMethod( "setAge" ).withParamTypes( int.class );
+                forPattern( "employee/age" ).callParam();
+            }
 
-        final Digester digester = new Digester();
-        digester.addObjectCreate( "employee", HashMap.class );
+        }).newDigester();
 
-        digester.addObjectCreate( "employee/address", Address.class );
-        digester.addSetNestedProperties( "employee/address" );
-        final CallMethodRule r = new CallMethodRule( 1, "put", 2 );
-        digester.addRule( "employee/address", r );
-        digester.addCallParam( "employee/address/type", 0 );
-        digester.addCallParam( "employee/address", 1, 0 );
+        // Parse our test input
+        // an exception will be thrown if the method can't be found
+        employee = digester.parse( getInputStream( "Test5.xml" ) );
+        assertEquals( "Failed to call Employee.setAge", 21, employee.getAge() );
 
-        final HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
+        digester = newLoader( new AbstractRulesModule()
+        {
 
-        assertNotNull( map );
-        final Set<String> keys = map.keySet();
-        assertEquals( 2, keys.size() );
-        final Address home = map.get( "home" );
-        assertNotNull( home );
-        assertEquals( "HmZip", home.getZipCode() );
-        final Address office = map.get( "office" );
-        assertNotNull( office );
-        assertEquals( "OfZip", office.getZipCode() );
-    }
+            @Override
+            protected void configure()
+            {
+                forPattern( "employee" ).createObject().ofType( Employee.class )
+                    .then()
+                    .callMethod( "setActive" ).withParamTypes( boolean.class );
+                forPattern( "employee/active" ).callParam();
+            }
 
-    /**
-     * Test invoking an object which is at the root of the stack, like SetRoot does...
-     */
-    @Test
-    public void testCallRoot()
-        throws Exception
-    {
+        }).newDigester();
 
-        final Digester digester = new Digester();
-        digester.addObjectCreate( "employee", HashMap.class );
+        // Parse our test input
+        // an exception will be thrown if the method can't be found
+        employee = digester.parse( getInputStream( "Test5.xml" ) );
+        assertEquals( "Failed to call Employee.setActive", true, employee.isActive() );
 
-        digester.addObjectCreate( "employee/address", Address.class );
-        digester.addSetNestedProperties( "employee/address" );
-        final CallMethodRule r = new CallMethodRule( -1, "put", 2 );
-        digester.addRule( "employee/address", r );
-        digester.addCallParam( "employee/address/type", 0 );
-        digester.addCallParam( "employee/address", 1, 0 );
+        digester = newLoader( new AbstractRulesModule()
+        {
 
-        final HashMap<String, Address> map = digester.parse( getInputStream( "Test5.xml" ) );
+            @Override
+            protected void configure()
+            {
+                forPattern( "employee" ).createObject().ofType( Employee.class )
+                    .then()
+                    .callMethod( "setSalary" ).withParamTypes( float.class );
+                forPattern( "employee/salary" ).callParam();
+            }
 
-        assertNotNull( map );
-        final Set<String> keys = map.keySet();
-        assertEquals( 2, keys.size() );
-        final Address home = map.get( "home" );
-        assertNotNull( home );
-        assertEquals( "HmZip", home.getZipCode() );
-        final Address office = map.get( "office" );
-        assertNotNull( office );
-        assertEquals( "OfZip", office.getZipCode() );
+        }).newDigester();
+
+        // Parse our test input
+        // an exception will be thrown if the method can't be found
+        employee = digester.parse( getInputStream( "Test5.xml" ) );
+        assertEquals( "Failed to call Employee.setSalary", 1000000.0f, employee.getSalary(), 0.1f );
     }
 
     // ------------------------------------------------ Utility Support Methods
 
-    /**
-     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
-     *
-     * @param name Name of the test file we want
-     * @throws IOException if an input/output error occurs
-     */
-    protected InputStream getInputStream( final String name )
-        throws IOException
+    @Test
+    public void testTwoCalls()
+        throws Exception
     {
 
-        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+        final StringReader reader =
+            new StringReader( "<?xml version='1.0' ?><root>" + "<param class='int' coolness='true'>25</param>"
+                + "<param class='long'>50</param>" + "<param class='float' coolness='false'>90</param></root>" );
 
+        final Digester digester = new Digester();
+        // SimpleLog log = new SimpleLog("{testTwoCalls:Digester]");
+        // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
+        // digester.setLogger(log);
+
+        digester.addObjectCreate( "root/param", ParamBean.class );
+        digester.addSetNext( "root/param", "add" );
+        digester.addCallMethod( "root/param", "setThisAndThat", 2 );
+        digester.addCallParam( "root/param", 0, "class" );
+        digester.addCallParam( "root/param", 1 );
+        digester.addCallMethod( "root/param", "setCool", 1, new Class[] { boolean.class } );
+        digester.addCallParam( "root/param", 0, "coolness" );
+
+        final ArrayList<ParamBean> list = new ArrayList<ParamBean>();
+        digester.push( list );
+        digester.parse( reader );
+
+        assertEquals( "Wrong number of objects created", 3, list.size() );
+        ParamBean bean = list.get( 0 );
+        assertEquals( "Coolness wrong (1)", true, bean.isCool() );
+        assertEquals( "This wrong (1)", "int", bean.getThis() );
+        assertEquals( "That wrong (1)", "25", bean.getThat() );
+        bean = list.get( 1 );
+        assertEquals( "Coolness wrong (2)", false, bean.isCool() );
+        assertEquals( "This wrong (2)", "long", bean.getThis() );
+        assertEquals( "That wrong (2)", "50", bean.getThat() );
+        bean = list.get( 2 );
+        assertEquals( "Coolness wrong (3)", false, bean.isCool() );
+        assertEquals( "This wrong (3)", "float", bean.getThis() );
+        assertEquals( "That wrong (3)", "90", bean.getThat() );
     }
 
 }

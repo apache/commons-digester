@@ -45,6 +45,33 @@ public class CallParamRule
     // ----------------------------------------------------------- Constructors
 
     /**
+     * The attribute from which to save the parameter value
+     */
+    protected String attributeName;
+
+    /**
+     * The zero-relative index of the parameter we are saving.
+     */
+    protected int paramIndex;
+
+    /**
+     * Is the parameter to be set from the stack?
+     */
+    protected boolean fromStack;
+
+    /**
+     * The position of the object from the top of the stack
+     */
+    protected int stackIndex;
+
+    // ----------------------------------------------------- Instance Variables
+
+    /**
+     * Stack is used to allow nested body text to be processed. Lazy creation.
+     */
+    protected Stack<String> bodyTextStack;
+
+    /**
      * Construct a "call parameter" rule that will save the body text of this element as the parameter value.
      * <p>
      * Note that if the element is empty the an <i>empty string</i> is passed to the target method, not null. And if
@@ -57,18 +84,6 @@ public class CallParamRule
     public CallParamRule( final int paramIndex )
     {
         this( paramIndex, null );
-    }
-
-    /**
-     * Construct a "call parameter" rule that will save the value of the specified attribute as the parameter value.
-     *
-     * @param paramIndex The zero-relative parameter number
-     * @param attributeName The name of the attribute to save
-     */
-    public CallParamRule( final int paramIndex, final String attributeName )
-    {
-        this.paramIndex = paramIndex;
-        this.attributeName = attributeName;
     }
 
     /**
@@ -98,45 +113,19 @@ public class CallParamRule
         this.stackIndex = stackIndex;
     }
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
-     * The attribute from which to save the parameter value
-     */
-    protected String attributeName;
-
-    /**
-     * The zero-relative index of the parameter we are saving.
-     */
-    protected int paramIndex;
-
-    /**
-     * Is the parameter to be set from the stack?
-     */
-    protected boolean fromStack;
-
-    /**
-     * The position of the object from the top of the stack
-     */
-    protected int stackIndex;
-
-    /**
-     * Stack is used to allow nested body text to be processed. Lazy creation.
-     */
-    protected Stack<String> bodyTextStack;
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
-     * Sets the attribute from which to save the parameter value.
+     * Construct a "call parameter" rule that will save the value of the specified attribute as the parameter value.
      *
-     * @param attributeName The attribute from which to save the parameter value
-     * @since 3.0
+     * @param paramIndex The zero-relative parameter number
+     * @param attributeName The name of the attribute to save
      */
-    public void setAttributeName( final String attributeName )
+    public CallParamRule( final int paramIndex, final String attributeName )
     {
+        this.paramIndex = paramIndex;
         this.attributeName = attributeName;
     }
+
+    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}
@@ -211,6 +200,17 @@ public class CallParamRule
             final Object[] parameters = getDigester().peekParams();
             parameters[paramIndex] = bodyTextStack.pop();
         }
+    }
+
+    /**
+     * Sets the attribute from which to save the parameter value.
+     *
+     * @param attributeName The attribute from which to save the parameter value
+     * @since 3.0
+     */
+    public void setAttributeName( final String attributeName )
+    {
+        this.attributeName = attributeName;
     }
 
     /**

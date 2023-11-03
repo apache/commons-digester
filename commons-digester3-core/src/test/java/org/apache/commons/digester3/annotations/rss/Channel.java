@@ -47,62 +47,6 @@ public final class Channel
 
     private Image image;
 
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle( final String title )
-    {
-        this.title = title;
-    }
-
-    public String getLink()
-    {
-        return link;
-    }
-
-    public void setLink( final String link )
-    {
-        this.link = link;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription( final String description )
-    {
-        this.description = description;
-    }
-
-    public String getLanguage()
-    {
-        return language;
-    }
-
-    public void setLanguage( final String language )
-    {
-        this.language = language;
-    }
-
-    public List<Item> getItems()
-    {
-        return items;
-    }
-
-    public Image getImage()
-    {
-        return image;
-    }
-
-    @SetNext
-    public void setImage( final Image image )
-    {
-        this.image = image;
-    }
-
     @SetNext
     public void addItem( final Item item )
     {
@@ -177,6 +121,62 @@ public final class Channel
             return false;
         }
         return true;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public Image getImage()
+    {
+        return image;
+    }
+
+    public List<Item> getItems()
+    {
+        return items;
+    }
+
+    public String getLanguage()
+    {
+        return language;
+    }
+
+    public String getLink()
+    {
+        return link;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setDescription( final String description )
+    {
+        this.description = description;
+    }
+
+    @SetNext
+    public void setImage( final Image image )
+    {
+        this.image = image;
+    }
+
+    public void setLanguage( final String language )
+    {
+        this.language = language;
+    }
+
+    public void setLink( final String link )
+    {
+        this.link = link;
+    }
+
+    public void setTitle( final String title )
+    {
+        this.title = title;
     }
 
     @Override

@@ -44,16 +44,18 @@ public @interface CallParam
 {
 
     /**
-     * The element matching pattern.
-     */
-    String pattern();
-
-    /**
-     * The namespace URI for which this Rule is relevant, if any.
+     * Defines several {@code @CallParam} annotations on the same element.
      *
-     * @since 3.0
+     * @see CallParam
      */
-    String namespaceURI() default "";
+    @Documented
+    @Retention( RetentionPolicy.RUNTIME )
+    @Target( ElementType.PARAMETER )
+    @DigesterRuleList
+    @interface List
+    {
+        CallParam[] value();
+    }
 
     /**
      * The attribute from which to save the parameter value.
@@ -70,24 +72,22 @@ public @interface CallParam
     boolean fromStack() default false;
 
     /**
+     * The namespace URI for which this Rule is relevant, if any.
+     *
+     * @since 3.0
+     */
+    String namespaceURI() default "";
+
+    /**
+     * The element matching pattern.
+     */
+    String pattern();
+
+    /**
      * Sets the position of the object from the top of the stack.
      *
      * @since 3.0
      */
     int stackIndex() default 0;
-
-    /**
-     * Defines several {@code @CallParam} annotations on the same element.
-     *
-     * @see CallParam
-     */
-    @Documented
-    @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.PARAMETER )
-    @DigesterRuleList
-    @interface List
-    {
-        CallParam[] value();
-    }
 
 }

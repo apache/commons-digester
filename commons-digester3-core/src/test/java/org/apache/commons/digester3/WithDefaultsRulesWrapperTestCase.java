@@ -61,23 +61,6 @@ public class WithDefaultsRulesWrapperTestCase
     }
 
     @Test
-    public void testRules()
-    {
-        // test rules
-        final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
-        rules.add( "alpha", new TestRule( "Tom" ) );
-        rules.add( "alpha", new TestRule( "Dick" ) );
-        rules.addDefault( new TestRule( "Roger" ) );
-        rules.add( "alpha", new TestRule( "Harry" ) );
-
-        assertNotNull( "Rules should not be null", rules.rules() );
-        assertEquals( "Wrong order (1)", "Tom", ( (TestRule) rules.rules().get( 0 ) ).getIdentifier() );
-        assertEquals( "Wrong order (2)", "Dick", ( (TestRule) rules.rules().get( 1 ) ).getIdentifier() );
-        assertEquals( "Wrong order (3)", "Roger", ( (TestRule) rules.rules().get( 2 ) ).getIdentifier() );
-        assertEquals( "Wrong order (4)", "Harry", ( (TestRule) rules.rules().get( 3 ) ).getIdentifier() );
-    }
-
-    @Test
     public void testMatch()
     {
         // test no defaults
@@ -98,5 +81,22 @@ public class WithDefaultsRulesWrapperTestCase
         assertEquals( "Wrong size (2)", 2, matches.size() );
         assertEquals( "Wrong order (4)", "Roger", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
         assertEquals( "Wrong order (5)", "Rabbit", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
+    }
+
+    @Test
+    public void testRules()
+    {
+        // test rules
+        final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
+        rules.add( "alpha", new TestRule( "Tom" ) );
+        rules.add( "alpha", new TestRule( "Dick" ) );
+        rules.addDefault( new TestRule( "Roger" ) );
+        rules.add( "alpha", new TestRule( "Harry" ) );
+
+        assertNotNull( "Rules should not be null", rules.rules() );
+        assertEquals( "Wrong order (1)", "Tom", ( (TestRule) rules.rules().get( 0 ) ).getIdentifier() );
+        assertEquals( "Wrong order (2)", "Dick", ( (TestRule) rules.rules().get( 1 ) ).getIdentifier() );
+        assertEquals( "Wrong order (3)", "Roger", ( (TestRule) rules.rules().get( 2 ) ).getIdentifier() );
+        assertEquals( "Wrong order (4)", "Harry", ( (TestRule) rules.rules().get( 3 ) ).getIdentifier() );
     }
 }

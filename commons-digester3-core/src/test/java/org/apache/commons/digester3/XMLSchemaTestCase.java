@@ -47,12 +47,56 @@ public class XMLSchemaTestCase
 
     // ----------------------------------------------------- Instance Variables
 
+    static final class TestErrorHandler
+        implements ErrorHandler
+    {
+        public boolean clean = true;
+
+        public TestErrorHandler()
+        {
+        }
+
+        @Override
+        public void error( final SAXParseException exception )
+        {
+            clean = false;
+        }
+
+        @Override
+        public void fatalError( final SAXParseException exception )
+        {
+            clean = false;
+        }
+
+        @Override
+        public void warning( final SAXParseException exception )
+        {
+            clean = false;
+        }
+    }
+
+    // --------------------------------------------------- Overall Test Methods
+
     /**
      * The digester instance we will be processing.
      */
     protected Digester digester;
 
-    // --------------------------------------------------- Overall Test Methods
+    /**
+     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
+     *
+     * @param name Name of the test file we want
+     * @throws IOException if an input/output error occurs
+     */
+    protected InputStream getInputStream( final String name )
+        throws IOException
+    {
+
+        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+
+    }
+
+    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Sets up instance variables required by this test case.
@@ -94,7 +138,22 @@ public class XMLSchemaTestCase
 
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    // ------------------------------------ Utility Support Methods and Classes
+
+    @Test
+    public void testBadDocument()
+        throws SAXException, IOException
+    {
+
+        // Listen to validation errors
+        final TestErrorHandler teh = new TestErrorHandler();
+        digester.setErrorHandler( teh );
+
+        // Parse our test input
+        digester.parse( getInputStream( "Test13-02.xml" ) );
+        assertFalse( "Test13-02 should generate errors in Schema validation", teh.clean );
+
+    }
 
     /**
      * Test XML Schema validation.
@@ -119,65 +178,6 @@ public class XMLSchemaTestCase
         assertEquals( "Home City", ha.getCity() );
         assertEquals( "HS", ha.getState() );
 
-    }
-
-    @Test
-    public void testBadDocument()
-        throws SAXException, IOException
-    {
-
-        // Listen to validation errors
-        final TestErrorHandler teh = new TestErrorHandler();
-        digester.setErrorHandler( teh );
-
-        // Parse our test input
-        digester.parse( getInputStream( "Test13-02.xml" ) );
-        assertFalse( "Test13-02 should generate errors in Schema validation", teh.clean );
-
-    }
-
-    // ------------------------------------ Utility Support Methods and Classes
-
-    /**
-     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
-     *
-     * @param name Name of the test file we want
-     * @throws IOException if an input/output error occurs
-     */
-    protected InputStream getInputStream( final String name )
-        throws IOException
-    {
-
-        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
-
-    }
-
-    static final class TestErrorHandler
-        implements ErrorHandler
-    {
-        public boolean clean = true;
-
-        public TestErrorHandler()
-        {
-        }
-
-        @Override
-        public void error( final SAXParseException exception )
-        {
-            clean = false;
-        }
-
-        @Override
-        public void fatalError( final SAXParseException exception )
-        {
-            clean = false;
-        }
-
-        @Override
-        public void warning( final SAXParseException exception )
-        {
-            clean = false;
-        }
     }
 
 }

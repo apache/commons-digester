@@ -43,54 +43,14 @@ public class ObjectTestImpl
     {
     }
 
-    @Override
-    public String toString()
-    {
-        String str = value;
-        for ( final Object o : children )
-        {
-            str += " " + o;
-        }
-        return str;
-    }
-
     public void add( final Object o )
     {
         children.add( o );
     }
 
-    public void setValue( final String val )
-    {
-        value = val;
-    }
-
-    public void setLongValue( final Long val )
-    {
-        longValue = val;
-    }
-
     public Long getLongValue()
     {
         return longValue;
-    }
-
-    public void setStringValue( final String val )
-    {
-    }
-
-    public boolean isPushed()
-    {
-        return pushed;
-    }
-
-    public void push()
-    {
-        pushed = true;
-    }
-
-    public void setMapValue( final String name, final String value )
-    {
-        this.mapValue.put( name, value );
     }
 
     public String getMapValue( final String name )
@@ -103,8 +63,48 @@ public class ObjectTestImpl
         return property;
     }
 
+    public boolean isPushed()
+    {
+        return pushed;
+    }
+
+    public void push()
+    {
+        pushed = true;
+    }
+
+    public void setLongValue( final Long val )
+    {
+        longValue = val;
+    }
+
+    public void setMapValue( final String name, final String value )
+    {
+        this.mapValue.put( name, value );
+    }
+
     public void setProperty( final String pProperty )
     {
         property = pProperty;
+    }
+
+    public void setStringValue( final String val )
+    {
+    }
+
+    public void setValue( final String val )
+    {
+        value = val;
+    }
+
+    @Override
+    public String toString()
+    {
+        String str = value;
+        for ( final Object o : children )
+        {
+            str += " " + o;
+        }
+        return str;
     }
 }

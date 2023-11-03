@@ -46,6 +46,17 @@ public class RulesBaseTestCase
     // -------------------------------------------------- Overall Test Methods
 
     /**
+     * <p>
+     * This should be overriden by subclasses.
+     *
+     * @return the matching rules to be tested.
+     */
+    protected Rules createMatchingRulesForTest()
+    {
+        return new RulesBase();
+    }
+
+    /**
      * Sets up instance variables required by this test case.
      */
     @Before
@@ -55,17 +66,6 @@ public class RulesBaseTestCase
         digester = new Digester();
         digester.setRules( createMatchingRulesForTest() );
 
-    }
-
-    /**
-     * <p>
-     * This should be overriden by subclasses.
-     *
-     * @return the matching rules to be tested.
-     */
-    protected Rules createMatchingRulesForTest()
-    {
-        return new RulesBase();
     }
 
     /**
@@ -80,87 +80,6 @@ public class RulesBaseTestCase
     }
 
     // ------------------------------------------------ Individual Test Methods
-
-    /**
-     * Basic test for rule creation and matching.
-     */
-    @Test
-    public void testRules()
-    {
-
-        // clear any existing rules
-        digester.getRules().clear();
-
-        // perform tests
-
-        assertEquals( "Initial rules list is empty", 0, digester.getRules().match( null, "a", null, null ).size() );
-        digester.addSetProperties( "a" );
-        assertEquals( "Add a matching rule", 1, digester.getRules().match( null, "a", null, null ).size() );
-        digester.addSetProperties( "b" );
-        assertEquals( "Add a non-matching rule", 1, digester.getRules().match( null, "a", null, null ).size() );
-        digester.addSetProperties( "a/b" );
-        assertEquals( "Add a non-matching nested rule", 1, digester.getRules().match( null, "a", null, null ).size() );
-        digester.addSetProperties( "a/b" );
-        assertEquals( "Add a second matching rule", 2, digester.getRules().match( null, "a/b", null, null ).size() );
-
-        // clean up
-        digester.getRules().clear();
-
-    }
-
-    /**
-     * <p>
-     * Test matching rules in {@link RulesBase}.
-     * </p>
-     * <p>
-     * Tests:
-     * </p>
-     * <ul>
-     * <li>exact match</li>
-     * <li>tail match</li>
-     * <li>longest pattern rule</li>
-     * </ul>
-     */
-    @Test
-    public void testRulesBase()
-    {
-
-        // clear any existing rules
-        digester.getRules().clear();
-
-        assertEquals( "Initial rules list is empty", 0, digester.getRules().rules().size() );
-
-        // We're going to set up
-        digester.addRule( "a/b/c/d", new TestRule( "a/b/c/d" ) );
-        digester.addRule( "*/d", new TestRule( "*/d" ) );
-        digester.addRule( "*/c/d", new TestRule( "*/c/d" ) );
-
-        // Test exact match
-        assertEquals( "Exact match takes precedence 1", 1, digester.getRules().match( null, "a/b/c/d", null, null ).size() );
-        assertEquals( "Exact match takes precedence 2", "a/b/c/d",
-                      ( (TestRule) digester.getRules().match( null, "a/b/c/d", null, null ).iterator().next() ).getIdentifier() );
-
-        // Test wildcard tail matching
-        assertEquals( "Wildcard tail matching rule 1", 1, digester.getRules().match( null, "a/b/d", null, null ).size() );
-        assertEquals( "Wildcard tail matching rule 2", "*/d",
-                      ( (TestRule) digester.getRules().match( null, "a/b/d", null, null ).iterator().next() ).getIdentifier() );
-
-        // Test the longest matching pattern rule
-        assertEquals( "Longest tail rule 1", 1, digester.getRules().match( null, "x/c/d", null, null ).size() );
-        assertEquals( "Longest tail rule 2", "*/c/d",
-                      ( (TestRule) digester.getRules().match( null, "x/c/d", null, null ).iterator().next() ).getIdentifier() );
-
-        // Test wildcard tail matching at the top level,
-        // i.e. the wildcard is nothing
-        digester.addRule( "*/a", new TestRule( "*/a" ) );
-        assertEquals( "Wildcard tail matching rule 3", 1, digester.getRules().match( null, "a", null, null ).size() );
-
-        assertEquals( "Wildcard tail matching rule 3 (match too much)", 0,
-                      digester.getRules().match( null, "aa", null, null ).size() );
-        // clean up
-        digester.getRules().clear();
-
-    }
 
     /**
      * Test basic matchings involving namespaces.
@@ -238,6 +157,87 @@ public class RulesBaseTestCase
         assertEquals( "Testing ordering mismatch (C)", "two", ( (TestRule) it.next() ).getIdentifier() );
         assertEquals( "Testing ordering mismatch (D)", "three", ( (TestRule) it.next() ).getIdentifier() );
 
+        // clean up
+        digester.getRules().clear();
+
+    }
+
+    /**
+     * Basic test for rule creation and matching.
+     */
+    @Test
+    public void testRules()
+    {
+
+        // clear any existing rules
+        digester.getRules().clear();
+
+        // perform tests
+
+        assertEquals( "Initial rules list is empty", 0, digester.getRules().match( null, "a", null, null ).size() );
+        digester.addSetProperties( "a" );
+        assertEquals( "Add a matching rule", 1, digester.getRules().match( null, "a", null, null ).size() );
+        digester.addSetProperties( "b" );
+        assertEquals( "Add a non-matching rule", 1, digester.getRules().match( null, "a", null, null ).size() );
+        digester.addSetProperties( "a/b" );
+        assertEquals( "Add a non-matching nested rule", 1, digester.getRules().match( null, "a", null, null ).size() );
+        digester.addSetProperties( "a/b" );
+        assertEquals( "Add a second matching rule", 2, digester.getRules().match( null, "a/b", null, null ).size() );
+
+        // clean up
+        digester.getRules().clear();
+
+    }
+
+    /**
+     * <p>
+     * Test matching rules in {@link RulesBase}.
+     * </p>
+     * <p>
+     * Tests:
+     * </p>
+     * <ul>
+     * <li>exact match</li>
+     * <li>tail match</li>
+     * <li>longest pattern rule</li>
+     * </ul>
+     */
+    @Test
+    public void testRulesBase()
+    {
+
+        // clear any existing rules
+        digester.getRules().clear();
+
+        assertEquals( "Initial rules list is empty", 0, digester.getRules().rules().size() );
+
+        // We're going to set up
+        digester.addRule( "a/b/c/d", new TestRule( "a/b/c/d" ) );
+        digester.addRule( "*/d", new TestRule( "*/d" ) );
+        digester.addRule( "*/c/d", new TestRule( "*/c/d" ) );
+
+        // Test exact match
+        assertEquals( "Exact match takes precedence 1", 1, digester.getRules().match( null, "a/b/c/d", null, null ).size() );
+        assertEquals( "Exact match takes precedence 2", "a/b/c/d",
+                      ( (TestRule) digester.getRules().match( null, "a/b/c/d", null, null ).iterator().next() ).getIdentifier() );
+
+        // Test wildcard tail matching
+        assertEquals( "Wildcard tail matching rule 1", 1, digester.getRules().match( null, "a/b/d", null, null ).size() );
+        assertEquals( "Wildcard tail matching rule 2", "*/d",
+                      ( (TestRule) digester.getRules().match( null, "a/b/d", null, null ).iterator().next() ).getIdentifier() );
+
+        // Test the longest matching pattern rule
+        assertEquals( "Longest tail rule 1", 1, digester.getRules().match( null, "x/c/d", null, null ).size() );
+        assertEquals( "Longest tail rule 2", "*/c/d",
+                      ( (TestRule) digester.getRules().match( null, "x/c/d", null, null ).iterator().next() ).getIdentifier() );
+
+        // Test wildcard tail matching at the top level,
+        // i.e. the wildcard is nothing
+        digester.addRule( "*/a", new TestRule( "*/a" ) );
+        assertEquals( "Wildcard tail matching rule 3", 1, digester.getRules().match( null, "a", null, null ).size() );
+
+        assertEquals( "Wildcard tail matching rule 3 (match too much)", 0,
+                      digester.getRules().match( null, "aa", null, null ).size() );
         // clean up
         digester.getRules().clear();
 

@@ -53,6 +53,69 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
      */
     private static final int SUPPORTED_ARGS = 1;
 
+    protected abstract void doBind( String pattern, String namespaceURI, Method method, Class<?> type,
+                                    boolean fireOnBegin, RulesBinder rulesBinder );
+
+    private void doHandle( final A methodAnnotation, final Annotation annotation, final Method method, final Class<?> type,
+                           final boolean fireOnBegin, final RulesBinder rulesBinder )
+    {
+        if ( annotation.annotationType().isAnnotationPresent( DigesterRule.class )
+            && annotation.annotationType().isAnnotationPresent( CreationRule.class ) )
+        {
+            rulesBinder.install( new FromAnnotationsRuleModule()
+            {
+
+                @Override
+                protected void configureRules()
+                {
+                    bindRulesFrom( type );
+                }
+
+            } );
+
+            final String pattern = getAnnotationPattern( annotation );
+            final String namespaceURI = getAnnotationNamespaceURI( annotation );
+            doBind( pattern, namespaceURI, method, type, fireOnBegin, rulesBinder );
+        }
+        else if ( annotation.annotationType().isAnnotationPresent( DigesterRuleList.class ) )
+        {
+            // check if it is one of the *.List annotation
+            final Annotation[] annotations = getAnnotationsArrayValue( annotation );
+            if ( annotations != null )
+            {
+                // if it is an annotations array, process them
+                for ( final Annotation ptr : annotations )
+                {
+                    doHandle( methodAnnotation, ptr, method, type, fireOnBegin, rulesBinder );
+                }
+            }
+        }
+    }
+
+    private void doHandle( final A methodAnnotation, final Method method, final Class<?> type, final boolean fireOnBegin,
+                           final RulesBinder rulesBinder )
+    {
+        if ( type.isInterface() && Modifier.isAbstract( type.getModifiers() ) )
+        {
+            rulesBinder.addError( "Impossible to proceed analyzing %s, specified type '%s' is an interface/abstract",
+                                  methodAnnotation, type.getName() );
+            return;
+        }
+
+        for ( final Annotation annotation : type.getAnnotations() )
+        {
+            doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
+        }
+
+        for ( final Constructor<?> constructor : type.getConstructors() )
+        {
+            for ( final Annotation annotation : constructor.getAnnotations() )
+            {
+                doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
+            }
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -101,68 +164,5 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
             doHandle( annotation, element, paramType, fireOnBegin, rulesBinder );
         }
     }
-
-    private void doHandle( final A methodAnnotation, final Method method, final Class<?> type, final boolean fireOnBegin,
-                           final RulesBinder rulesBinder )
-    {
-        if ( type.isInterface() && Modifier.isAbstract( type.getModifiers() ) )
-        {
-            rulesBinder.addError( "Impossible to proceed analyzing %s, specified type '%s' is an interface/abstract",
-                                  methodAnnotation, type.getName() );
-            return;
-        }
-
-        for ( final Annotation annotation : type.getAnnotations() )
-        {
-            doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
-        }
-
-        for ( final Constructor<?> constructor : type.getConstructors() )
-        {
-            for ( final Annotation annotation : constructor.getAnnotations() )
-            {
-                doHandle( methodAnnotation, annotation, method, type, fireOnBegin, rulesBinder );
-            }
-        }
-    }
-
-    private void doHandle( final A methodAnnotation, final Annotation annotation, final Method method, final Class<?> type,
-                           final boolean fireOnBegin, final RulesBinder rulesBinder )
-    {
-        if ( annotation.annotationType().isAnnotationPresent( DigesterRule.class )
-            && annotation.annotationType().isAnnotationPresent( CreationRule.class ) )
-        {
-            rulesBinder.install( new FromAnnotationsRuleModule()
-            {
-
-                @Override
-                protected void configureRules()
-                {
-                    bindRulesFrom( type );
-                }
-
-            } );
-
-            final String pattern = getAnnotationPattern( annotation );
-            final String namespaceURI = getAnnotationNamespaceURI( annotation );
-            doBind( pattern, namespaceURI, method, type, fireOnBegin, rulesBinder );
-        }
-        else if ( annotation.annotationType().isAnnotationPresent( DigesterRuleList.class ) )
-        {
-            // check if it is one of the *.List annotation
-            final Annotation[] annotations = getAnnotationsArrayValue( annotation );
-            if ( annotations != null )
-            {
-                // if it is an annotations array, process them
-                for ( final Annotation ptr : annotations )
-                {
-                    doHandle( methodAnnotation, ptr, method, type, fireOnBegin, rulesBinder );
-                }
-            }
-        }
-    }
-
-    protected abstract void doBind( String pattern, String namespaceURI, Method method, Class<?> type,
-                                    boolean fireOnBegin, RulesBinder rulesBinder );
 
 }

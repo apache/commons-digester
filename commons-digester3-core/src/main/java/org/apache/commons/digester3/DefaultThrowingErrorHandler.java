@@ -34,7 +34,7 @@ public class DefaultThrowingErrorHandler
      * {@inheritDoc}
      */
     @Override
-    public void warning( final SAXParseException e )
+    public void error( final SAXParseException e )
         throws SAXException
     {
         throw e;
@@ -54,7 +54,7 @@ public class DefaultThrowingErrorHandler
      * {@inheritDoc}
      */
     @Override
-    public void error( final SAXParseException e )
+    public void warning( final SAXParseException e )
         throws SAXException
     {
         throw e;

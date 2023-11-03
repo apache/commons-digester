@@ -43,6 +43,19 @@ public interface StackAction
 {
 
     /**
+     * Invoked just after an object has been popped from a digester stack.
+     *
+     * @param <T> whatever type is accepted
+     * @param d is the digester instance.
+     * @param stackName is the name of the stack from which the object has been popped. Null is passed to indicate the
+     *            default stack.
+     * @param o is the object that has just been popped.
+     * @return the object to be returned to the called. Normally, parameter o is returned but this method could return
+     *         an alternate object.
+     */
+    <T> T onPop( Digester d, String stackName, T o );
+
+    /**
      * Invoked just before an object is to be pushed onto a digester stack.
      *
      * @param <T> whatever type is accepted
@@ -55,18 +68,5 @@ public interface StackAction
      *         object to be pushed instead (eg a proxy for the provided object).
      */
     <T> T onPush( Digester d, String stackName, T o );
-
-    /**
-     * Invoked just after an object has been popped from a digester stack.
-     *
-     * @param <T> whatever type is accepted
-     * @param d is the digester instance.
-     * @param stackName is the name of the stack from which the object has been popped. Null is passed to indicate the
-     *            default stack.
-     * @param o is the object that has just been popped.
-     * @return the object to be returned to the called. Normally, parameter o is returned but this method could return
-     *         an alternate object.
-     */
-    <T> T onPop( Digester d, String stackName, T o );
 
 }

@@ -27,14 +27,6 @@ import org.junit.Test;
 
 public class TestDelegate
 {
-    // --------------------------------------------------------------- Test cases
-    @Test
-    public void testDummy()
-    {
-        // it is an error if a TestSuite doesn't have at least one test,
-        // so here is one...
-    }
-
     public void ignoretestDelegate()
         throws Exception
     {
@@ -57,5 +49,13 @@ public class TestDelegate
         {
             throw e;
         }
+    }
+
+    // --------------------------------------------------------------- Test cases
+    @Test
+    public void testDummy()
+    {
+        // it is an error if a TestSuite doesn't have at least one test,
+        // so here is one...
     }
 }

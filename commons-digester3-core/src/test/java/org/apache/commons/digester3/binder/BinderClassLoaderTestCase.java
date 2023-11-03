@@ -49,204 +49,13 @@ import org.junit.Test;
 public final class BinderClassLoaderTestCase
 {
 
-    private final BinderClassLoader classLoader = createBinderClassLoader( new ExtendedClassLoader() );
-
-    @Test
-    public void testLoadBoolean()
-        throws Exception
+    public static class Dummy
     {
-        typeFound( "boolean", boolean.class );
-    }
-
-    @Test
-    public void testLoadByte()
-        throws Exception
-    {
-        typeFound( "byte", byte.class );
-    }
-
-    @Test
-    public void testLoadShort()
-        throws Exception
-    {
-        typeFound( "short", short.class );
-    }
-
-    @Test
-    public void testLoadInt()
-        throws Exception
-    {
-        typeFound( "int", int.class );
-    }
-
-    @Test
-    public void testLoadChar()
-        throws Exception
-    {
-        typeFound( "char", char.class );
-    }
-
-    @Test
-    public void testLoadLong()
-        throws Exception
-    {
-        typeFound( "long", long.class );
-    }
-
-    @Test
-    public void testLoadFloat()
-        throws Exception
-    {
-        typeFound( "float", float.class );
-    }
-
-    @Test
-    public void testLoadDouble()
-        throws Exception
-    {
-        typeFound( "double", double.class );
-    }
-
-    private void typeFound( final String name, final Class<?> expected )
-        throws Exception
-    {
-        final Class<?> actual = classLoader.loadClass( name );
-        assertSame( expected, actual );
-    }
-
-    @Test
-    public void testGetResource()
-    {
-        final ClassLoader clToAdapt = new ClassLoader()
-        {
-
-            @Override
-            public URL getResource( final String name )
-            {
-                if ( "xxx".equals( name ) )
-                {
-                    return super.getResource( "org/apache/commons/digester3/binder/BinderClassLoaderTestCase.class" );
-                }
-                return super.getResource( name );
-            }
-
-        };
-        final ClassLoader binderCl = createBinderClassLoader( clToAdapt );
-        assertNotNull( binderCl.getResource( "xxx" ) );
-    }
-
-    @Test
-    public void testLoadClass()
-        throws Exception
-    {
-        final Class<?> dummyClass1 = Dummy.class;
-        final Class<?> dummyClass2 = classLoader.loadClass( dummyClass1.getName() );
-
-        assertEquals( dummyClass1.getName(), dummyClass2.getName() );
-        assertFalse( dummyClass2.getDeclaredConstructor().newInstance() instanceof Dummy );
-        assertNotSame( dummyClass1, dummyClass2 );
-        assertNotSame( dummyClass1.getClassLoader(), dummyClass2.getClassLoader() );
-        assertSame( classLoader.getAdaptedClassLoader(), dummyClass2.getClassLoader() );
-    }
-
-    @Test
-    public void testGetPrefixedResource()
-        throws Exception
-    {
-        final URL resource = classLoader.getResource( "inmemory:dummyResource" );
-        assertNotNull( resource );
-        assertEquals( resource.getPath(), "dummyResource" );
-        final InputStream input = resource.openStream();
-        try
-        {
-            final byte[] bytes = toByteArray( input );
-            assertArrayEquals( bytes, IN_MEMORY_RESOURCES.get( "dummyResource" ) );
-        }
-        finally
-        {
-            input.close();
-        }
-    }
-
-    private static byte[] toByteArray( final InputStream input )
-        throws IOException
-    {
-        final ByteArrayOutputStream result = new ByteArrayOutputStream( 512 );
-        int n;
-        while ( ( n = input.read() ) != -1 )
-        {
-            result.write( n );
-        }
-        return result.toByteArray();
-    }
-
-    private static final Map<String, byte[]> IN_MEMORY_RESOURCES = new HashMap<String, byte[]>();
-
-    static
-    {
-        try
-        {
-            IN_MEMORY_RESOURCES.put( "dummyResource", "Resource data".getBytes(StandardCharsets.UTF_8) );
-
-            // put bytes of Dummy class
-            final String dummyClassName = Dummy.class.getName();
-            final String resourceName = dummyClassName.replace( '.', '/' ) + ".class";
-            final InputStream input = Dummy.class.getClassLoader().getResourceAsStream( resourceName );
-            try
-            {
-                IN_MEMORY_RESOURCES.put( resourceName, toByteArray( input ) );
-            }
-            finally
-            {
-                input.close();
-            }
-        }
-        catch ( final IOException e )
-        {
-            throw new ExceptionInInitializerError( e );
-        }
     }
 
     private static final class ExtendedClassLoader
         extends ClassLoader
     {
-
-        private final InMemoryURLStreamHandlerFactory streamHandlerFactory = new InMemoryURLStreamHandlerFactory();
-
-        @Override
-        protected Class<?> loadClass( final String name, final boolean resolve )
-            throws ClassNotFoundException
-        {
-            final String dummyClassName = Dummy.class.getName();
-            if ( dummyClassName.equals( name ) ) {
-                Class<?> result = findLoadedClass( name );
-                if ( result == null )
-                {
-                    final byte[] byteCode = IN_MEMORY_RESOURCES.get( dummyClassName.replace( '.', '/' ) + ".class" );
-                    result = defineClass( name, byteCode, 0, byteCode.length );
-                    resolveClass( result );
-                }
-                return result;
-            }
-            return super.loadClass( name, resolve );
-        }
-
-        @Override
-        public URL getResource( final String name )
-        {
-            if ( name.startsWith( "inmemory:" ) )
-            {
-                try
-                {
-                    return new URL( null, name, streamHandlerFactory.createURLStreamHandler( "inmemory" ) );
-                }
-                catch ( final MalformedURLException e )
-                {
-                    throw new RuntimeException( e );
-                }
-            }
-            return super.getResource( name );
-        }
 
         private static final class InMemoryURLStreamHandlerFactory
             implements URLStreamHandlerFactory
@@ -294,10 +103,201 @@ public final class BinderClassLoaderTestCase
                 };
             }
         }
+
+        private final InMemoryURLStreamHandlerFactory streamHandlerFactory = new InMemoryURLStreamHandlerFactory();
+
+        @Override
+        public URL getResource( final String name )
+        {
+            if ( name.startsWith( "inmemory:" ) )
+            {
+                try
+                {
+                    return new URL( null, name, streamHandlerFactory.createURLStreamHandler( "inmemory" ) );
+                }
+                catch ( final MalformedURLException e )
+                {
+                    throw new RuntimeException( e );
+                }
+            }
+            return super.getResource( name );
+        }
+
+        @Override
+        protected Class<?> loadClass( final String name, final boolean resolve )
+            throws ClassNotFoundException
+        {
+            final String dummyClassName = Dummy.class.getName();
+            if ( dummyClassName.equals( name ) ) {
+                Class<?> result = findLoadedClass( name );
+                if ( result == null )
+                {
+                    final byte[] byteCode = IN_MEMORY_RESOURCES.get( dummyClassName.replace( '.', '/' ) + ".class" );
+                    result = defineClass( name, byteCode, 0, byteCode.length );
+                    resolveClass( result );
+                }
+                return result;
+            }
+            return super.loadClass( name, resolve );
+        }
     }
 
-    public static class Dummy
+    private static final Map<String, byte[]> IN_MEMORY_RESOURCES = new HashMap<String, byte[]>();
+
+    static
     {
+        try
+        {
+            IN_MEMORY_RESOURCES.put( "dummyResource", "Resource data".getBytes(StandardCharsets.UTF_8) );
+
+            // put bytes of Dummy class
+            final String dummyClassName = Dummy.class.getName();
+            final String resourceName = dummyClassName.replace( '.', '/' ) + ".class";
+            final InputStream input = Dummy.class.getClassLoader().getResourceAsStream( resourceName );
+            try
+            {
+                IN_MEMORY_RESOURCES.put( resourceName, toByteArray( input ) );
+            }
+            finally
+            {
+                input.close();
+            }
+        }
+        catch ( final IOException e )
+        {
+            throw new ExceptionInInitializerError( e );
+        }
+    }
+
+    private static byte[] toByteArray( final InputStream input )
+        throws IOException
+    {
+        final ByteArrayOutputStream result = new ByteArrayOutputStream( 512 );
+        int n;
+        while ( ( n = input.read() ) != -1 )
+        {
+            result.write( n );
+        }
+        return result.toByteArray();
+    }
+
+    private final BinderClassLoader classLoader = createBinderClassLoader( new ExtendedClassLoader() );
+
+    @Test
+    public void testGetPrefixedResource()
+        throws Exception
+    {
+        final URL resource = classLoader.getResource( "inmemory:dummyResource" );
+        assertNotNull( resource );
+        assertEquals( resource.getPath(), "dummyResource" );
+        final InputStream input = resource.openStream();
+        try
+        {
+            final byte[] bytes = toByteArray( input );
+            assertArrayEquals( bytes, IN_MEMORY_RESOURCES.get( "dummyResource" ) );
+        }
+        finally
+        {
+            input.close();
+        }
+    }
+
+    @Test
+    public void testGetResource()
+    {
+        final ClassLoader clToAdapt = new ClassLoader()
+        {
+
+            @Override
+            public URL getResource( final String name )
+            {
+                if ( "xxx".equals( name ) )
+                {
+                    return super.getResource( "org/apache/commons/digester3/binder/BinderClassLoaderTestCase.class" );
+                }
+                return super.getResource( name );
+            }
+
+        };
+        final ClassLoader binderCl = createBinderClassLoader( clToAdapt );
+        assertNotNull( binderCl.getResource( "xxx" ) );
+    }
+
+    @Test
+    public void testLoadBoolean()
+        throws Exception
+    {
+        typeFound( "boolean", boolean.class );
+    }
+
+    @Test
+    public void testLoadByte()
+        throws Exception
+    {
+        typeFound( "byte", byte.class );
+    }
+
+    @Test
+    public void testLoadChar()
+        throws Exception
+    {
+        typeFound( "char", char.class );
+    }
+
+    @Test
+    public void testLoadClass()
+        throws Exception
+    {
+        final Class<?> dummyClass1 = Dummy.class;
+        final Class<?> dummyClass2 = classLoader.loadClass( dummyClass1.getName() );
+
+        assertEquals( dummyClass1.getName(), dummyClass2.getName() );
+        assertFalse( dummyClass2.getDeclaredConstructor().newInstance() instanceof Dummy );
+        assertNotSame( dummyClass1, dummyClass2 );
+        assertNotSame( dummyClass1.getClassLoader(), dummyClass2.getClassLoader() );
+        assertSame( classLoader.getAdaptedClassLoader(), dummyClass2.getClassLoader() );
+    }
+
+    @Test
+    public void testLoadDouble()
+        throws Exception
+    {
+        typeFound( "double", double.class );
+    }
+
+    @Test
+    public void testLoadFloat()
+        throws Exception
+    {
+        typeFound( "float", float.class );
+    }
+
+    @Test
+    public void testLoadInt()
+        throws Exception
+    {
+        typeFound( "int", int.class );
+    }
+
+    @Test
+    public void testLoadLong()
+        throws Exception
+    {
+        typeFound( "long", long.class );
+    }
+
+    @Test
+    public void testLoadShort()
+        throws Exception
+    {
+        typeFound( "short", short.class );
+    }
+
+    private void typeFound( final String name, final Class<?> expected )
+        throws Exception
+    {
+        final Class<?> actual = classLoader.loadClass( name );
+        assertSame( expected, actual );
     }
 
 }

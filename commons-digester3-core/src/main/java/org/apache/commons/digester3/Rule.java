@@ -67,49 +67,6 @@ import org.xml.sax.Attributes;
     // ------------------------------------------------------------- Properties
 
     /**
-     * Return the Digester with which this Rule is associated.
-     *
-     * @return the Digester with which this Rule is associated
-     */
-    public Digester getDigester()
-    {
-        return ( this.digester );
-    }
-
-    /**
-     * Sets the {@code Digester} with which this {@code Rule} is associated.
-     *
-     * @param digester the {@code Digester} with which this {@code Rule} is associated
-     */
-    public void setDigester( final Digester digester )
-    {
-        this.digester = digester;
-    }
-
-    /**
-     * Return the namespace URI for which this Rule is relevant, if any.
-     *
-     * @return the namespace URI for which this Rule is relevant, if any
-     */
-    public String getNamespaceURI()
-    {
-        return ( this.namespaceURI );
-    }
-
-    /**
-     * Sets the namespace URI for which this Rule is relevant, if any.
-     *
-     * @param namespaceURI Namespace URI for which this Rule is relevant, or {@code null} to match independent of
-     *            namespace.
-     */
-    public void setNamespaceURI( final String namespaceURI )
-    {
-        this.namespaceURI = namespaceURI;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
      * This method is called when the beginning of a matching XML element is encountered.
      *
      * @param namespace the namespace URI of the matching element, or an empty string if the parser is not namespace
@@ -166,6 +123,49 @@ import org.xml.sax.Attributes;
         throws Exception
     {
         // The default implementation does nothing
+    }
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * Return the Digester with which this Rule is associated.
+     *
+     * @return the Digester with which this Rule is associated
+     */
+    public Digester getDigester()
+    {
+        return ( this.digester );
+    }
+
+    /**
+     * Return the namespace URI for which this Rule is relevant, if any.
+     *
+     * @return the namespace URI for which this Rule is relevant, if any
+     */
+    public String getNamespaceURI()
+    {
+        return ( this.namespaceURI );
+    }
+
+    /**
+     * Sets the {@code Digester} with which this {@code Rule} is associated.
+     *
+     * @param digester the {@code Digester} with which this {@code Rule} is associated
+     */
+    public void setDigester( final Digester digester )
+    {
+        this.digester = digester;
+    }
+
+    /**
+     * Sets the namespace URI for which this Rule is relevant, if any.
+     *
+     * @param namespaceURI Namespace URI for which this Rule is relevant, or {@code null} to match independent of
+     *            namespace.
+     */
+    public void setNamespaceURI( final String namespaceURI )
+    {
+        this.namespaceURI = namespaceURI;
     }
 
 }

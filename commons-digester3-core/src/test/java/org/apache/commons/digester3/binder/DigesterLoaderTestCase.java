@@ -32,6 +32,57 @@ import org.xml.sax.SAXParseException;
 public final class DigesterLoaderTestCase
 {
 
+    @Test
+    public void testDigeser152()
+    {
+        final Locator expected = new Locator()
+        {
+
+            @Override
+            public int getColumnNumber()
+            {
+                // just fake method
+                return 0;
+            }
+
+            @Override
+            public int getLineNumber()
+            {
+                // just fake method
+                return 0;
+            }
+
+            @Override
+            public String getPublicId()
+            {
+                // just fake method
+                return null;
+            }
+
+            @Override
+            public String getSystemId()
+            {
+                // just fake method
+                return null;
+            }
+        };
+
+        final Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                // do nothing
+            }
+
+        } ).setDocumentLocator( expected ).newDigester();
+
+        final Locator actual = digester.getDocumentLocator();
+
+        assertSame( expected, actual );
+    }
+
     /**
      * DIGESTER-151
      */
@@ -42,7 +93,7 @@ public final class DigesterLoaderTestCase
         {
 
             @Override
-            public void warning( final SAXParseException exception )
+            public void error( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
@@ -56,7 +107,7 @@ public final class DigesterLoaderTestCase
             }
 
             @Override
-            public void error( final SAXParseException exception )
+            public void warning( final SAXParseException exception )
                 throws SAXException
             {
                 // do nothing
@@ -76,57 +127,6 @@ public final class DigesterLoaderTestCase
         } ).setErrorHandler( expected ).newDigester();
 
         final ErrorHandler actual = digester.getErrorHandler();
-
-        assertSame( expected, actual );
-    }
-
-    @Test
-    public void testDigeser152()
-    {
-        final Locator expected = new Locator()
-        {
-
-            @Override
-            public String getSystemId()
-            {
-                // just fake method
-                return null;
-            }
-
-            @Override
-            public String getPublicId()
-            {
-                // just fake method
-                return null;
-            }
-
-            @Override
-            public int getLineNumber()
-            {
-                // just fake method
-                return 0;
-            }
-
-            @Override
-            public int getColumnNumber()
-            {
-                // just fake method
-                return 0;
-            }
-        };
-
-        final Digester digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                // do nothing
-            }
-
-        } ).setDocumentLocator( expected ).newDigester();
-
-        final Locator actual = digester.getDocumentLocator();
 
         assertSame( expected, actual );
     }

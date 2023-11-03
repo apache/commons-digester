@@ -38,6 +38,11 @@ public class MarkupDigester
     extends Digester
 {
 
+    /**
+     * The text found in the current element since the last child element.
+     */
+    protected StringBuilder currTextSegment = new StringBuilder();
+
     /** See equivalent constructor in Digester class. */
     public MarkupDigester()
     {
@@ -49,18 +54,13 @@ public class MarkupDigester
         super( parser );
     }
 
+    //===================================================================
+
     /** See equivalent constructor in Digester class. */
     public MarkupDigester( final XMLReader reader )
     {
         super( reader );
     }
-
-    //===================================================================
-
-    /**
-     * The text found in the current element since the last child element.
-     */
-    protected StringBuilder currTextSegment = new StringBuilder();
 
     /**
      * Process notification of character data received from the body of
@@ -78,33 +78,6 @@ public class MarkupDigester
     {
         super.characters( buffer, start, length );
         currTextSegment.append( buffer, start, length );
-    }
-
-    /**
-     * Process notification of the start of an XML element being reached.
-     *
-     * @param namespaceURI The Namespace URI, or the empty string if the element
-     *   has no Namespace URI or if Namespace processing is not being performed.
-     * @param localName The local name (without prefix), or the empty
-     *   string if Namespace processing is not being performed.
-     * @param qName The qualified name (with prefix), or the empty
-     *   string if qualified names are not available.
-     * @param list The attributes attached to the element. If there are
-     *   no attributes, it shall be an empty Attributes object.
-     * @throws SAXException if a parsing error is to be reported
-     */
-    @Override
-    public void startElement( final String namespaceURI, final String localName, final String qName, final Attributes list )
-        throws SAXException
-    {
-        handleTextSegments();
-
-        // Unlike bodyText, which accumulates despite intervening child
-        // elements, currTextSegment gets cleared here. This means that
-        // we don't need to save it on a stack either.
-        currTextSegment.setLength( 0 );
-
-        super.startElement( namespaceURI, localName, qName, list );
     }
 
     /**
@@ -159,6 +132,33 @@ public class MarkupDigester
                 }
             }
         }
+    }
+
+    /**
+     * Process notification of the start of an XML element being reached.
+     *
+     * @param namespaceURI The Namespace URI, or the empty string if the element
+     *   has no Namespace URI or if Namespace processing is not being performed.
+     * @param localName The local name (without prefix), or the empty
+     *   string if Namespace processing is not being performed.
+     * @param qName The qualified name (with prefix), or the empty
+     *   string if qualified names are not available.
+     * @param list The attributes attached to the element. If there are
+     *   no attributes, it shall be an empty Attributes object.
+     * @throws SAXException if a parsing error is to be reported
+     */
+    @Override
+    public void startElement( final String namespaceURI, final String localName, final String qName, final Attributes list )
+        throws SAXException
+    {
+        handleTextSegments();
+
+        // Unlike bodyText, which accumulates despite intervening child
+        // elements, currTextSegment gets cleared here. This means that
+        // we don't need to save it on a stack either.
+        currTextSegment.setLength( 0 );
+
+        super.startElement( namespaceURI, localName, qName, list );
     }
 
 }

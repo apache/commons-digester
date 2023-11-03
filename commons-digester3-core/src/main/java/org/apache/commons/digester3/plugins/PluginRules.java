@@ -95,19 +95,6 @@ public class PluginRules
     }
 
     /**
-     * Constructor for top-level Rules object which handles rule-matching using the specified implementation.
-     *
-     * @param decoratedRules The top-level Rules object which handles rule-matching using the specified implementation.
-     */
-    public PluginRules( final Rules decoratedRules )
-    {
-        this.decoratedRules = decoratedRules;
-
-        pluginContext = new PluginContext();
-        pluginManager = new PluginManager( pluginContext );
-    }
-
-    /**
      * Constructs a Rules instance which has a parent Rules object (which is different from having a delegate rules
      * object).
      * <p>
@@ -146,140 +133,20 @@ public class PluginRules
         pluginManager = new PluginManager( parent.pluginManager );
     }
 
+    /**
+     * Constructor for top-level Rules object which handles rule-matching using the specified implementation.
+     *
+     * @param decoratedRules The top-level Rules object which handles rule-matching using the specified implementation.
+     */
+    public PluginRules( final Rules decoratedRules )
+    {
+        this.decoratedRules = decoratedRules;
+
+        pluginContext = new PluginContext();
+        pluginManager = new PluginManager( pluginContext );
+    }
+
     // ------------------------------------------------------------- Properties
-
-    /**
-     * Return the parent Rules object.
-     *
-     * @return the parent Rules object.
-     */
-    public Rules getParent()
-    {
-        return parent;
-    }
-
-    /**
-     * Return the Digester instance with which this instance is associated.
-     *
-     * @return the Digester instance with which this instance is associated.
-     */
-    @Override
-    public Digester getDigester()
-    {
-        return digester;
-    }
-
-    /**
-     * Sets the Digester instance with which this Rules instance is associated.
-     *
-     * @param digester The newly associated Digester instance
-     */
-    @Override
-    public void setDigester( final Digester digester )
-    {
-        this.digester = digester;
-        decoratedRules.setDigester( digester );
-    }
-
-    /**
-     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
-     *
-     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
-     */
-    @Override
-    public String getNamespaceURI()
-    {
-        return decoratedRules.getNamespaceURI();
-    }
-
-    /**
-     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
-     *
-     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
-     *            matching regardless of the current namespace URI
-     */
-    @Override
-    public void setNamespaceURI( final String namespaceURI )
-    {
-        decoratedRules.setNamespaceURI( namespaceURI );
-    }
-
-    /**
-     * Return the object which "knows" about all declared plugins.
-     *
-     * @return The pluginManager value
-     */
-    public PluginManager getPluginManager()
-    {
-        return pluginManager;
-    }
-
-    /**
-     * See {@link PluginContext#getRuleFinders}.
-     *
-     * @return the list of RuleFinder objects
-     */
-    public List<RuleFinder> getRuleFinders()
-    {
-        return pluginContext.getRuleFinders();
-    }
-
-    /**
-     * See {@link PluginContext#setRuleFinders}.
-     *
-     * @param ruleFinders the list of RuleFinder objects
-     */
-    public void setRuleFinders( final List<RuleFinder> ruleFinders )
-    {
-        pluginContext.setRuleFinders( ruleFinders );
-    }
-
-    /**
-     * Return the rules factory object (or null if one has not been specified).
-     *
-     * @return the rules factory object.
-     */
-    public RulesFactory getRulesFactory()
-    {
-        return rulesFactory;
-    }
-
-    /**
-     * Sets the object which is used to generate the new Rules instances created to hold and process the rules associated
-     * with each plugged-in class.
-     *
-     * @param factory the rules factory object
-     */
-    public void setRulesFactory( final RulesFactory factory )
-    {
-        rulesFactory = factory;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
-     * This package-scope method is used by the PluginCreateRule class to get direct access to the rules that were
-     * dynamically added by the plugin. No other class should need access to this object.
-     *
-     * @return The decorated Rule instance
-     */
-    Rules getDecoratedRules()
-    {
-        return decoratedRules;
-    }
-
-    /**
-     * Return the list of rules registered with this object, in the order they were registered with this object.
-     * <p>
-     * Note that Rule objects stored in parent Rules objects are not returned by this method.
-     *
-     * @return list of all Rule objects known to this Rules instance.
-     */
-    @Override
-    public List<Rule> rules()
-    {
-        return decoratedRules.rules();
-    }
 
     /**
      * Register a new Rule instance matching the specified pattern.
@@ -362,6 +229,121 @@ public class PluginRules
     }
 
     /**
+     * This package-scope method is used by the PluginCreateRule class to get direct access to the rules that were
+     * dynamically added by the plugin. No other class should need access to this object.
+     *
+     * @return The decorated Rule instance
+     */
+    Rules getDecoratedRules()
+    {
+        return decoratedRules;
+    }
+
+    /**
+     * Return the Digester instance with which this instance is associated.
+     *
+     * @return the Digester instance with which this instance is associated.
+     */
+    @Override
+    public Digester getDigester()
+    {
+        return digester;
+    }
+
+    /**
+     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     *
+     * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     */
+    @Override
+    public String getNamespaceURI()
+    {
+        return decoratedRules.getNamespaceURI();
+    }
+
+    /**
+     * Return the parent Rules object.
+     *
+     * @return the parent Rules object.
+     */
+    public Rules getParent()
+    {
+        return parent;
+    }
+
+    /**
+     * See {@link PluginContext#getPluginClassAttr}.
+     *
+     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     */
+    public String getPluginClassAttr()
+    {
+        return pluginContext.getPluginClassAttr();
+    }
+
+    /**
+     * See {@link PluginContext#getPluginClassAttrNs}.
+     *
+     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     */
+    public String getPluginClassAttrNs()
+    {
+        return pluginContext.getPluginClassAttrNs();
+    }
+
+    /**
+     * See {@link PluginContext#getPluginIdAttr}.
+     *
+     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     */
+    public String getPluginIdAttr()
+    {
+        return pluginContext.getPluginIdAttr();
+    }
+
+    /**
+     * See {@link PluginContext#getPluginIdAttrNs}.
+     *
+     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     */
+    public String getPluginIdAttrNs()
+    {
+        return pluginContext.getPluginIdAttrNs();
+    }
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * Return the object which "knows" about all declared plugins.
+     *
+     * @return The pluginManager value
+     */
+    public PluginManager getPluginManager()
+    {
+        return pluginManager;
+    }
+
+    /**
+     * See {@link PluginContext#getRuleFinders}.
+     *
+     * @return the list of RuleFinder objects
+     */
+    public List<RuleFinder> getRuleFinders()
+    {
+        return pluginContext.getRuleFinders();
+    }
+
+    /**
+     * Return the rules factory object (or null if one has not been specified).
+     *
+     * @return the rules factory object.
+     */
+    public RulesFactory getRulesFactory()
+    {
+        return rulesFactory;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -401,6 +383,43 @@ public class PluginRules
     }
 
     /**
+     * Return the list of rules registered with this object, in the order they were registered with this object.
+     * <p>
+     * Note that Rule objects stored in parent Rules objects are not returned by this method.
+     *
+     * @return list of all Rule objects known to this Rules instance.
+     */
+    @Override
+    public List<Rule> rules()
+    {
+        return decoratedRules.rules();
+    }
+
+    /**
+     * Sets the Digester instance with which this Rules instance is associated.
+     *
+     * @param digester The newly associated Digester instance
+     */
+    @Override
+    public void setDigester( final Digester digester )
+    {
+        this.digester = digester;
+        decoratedRules.setDigester( digester );
+    }
+
+    /**
+     * Sets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     *
+     * @param namespaceURI Namespace URI that must match on all subsequently added rules, or {@code null} for
+     *            matching regardless of the current namespace URI
+     */
+    @Override
+    public void setNamespaceURI( final String namespaceURI )
+    {
+        decoratedRules.setNamespaceURI( namespaceURI );
+    }
+
+    /**
      * See {@link PluginContext#setPluginClassAttribute}.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
@@ -430,43 +449,24 @@ public class PluginRules
     }
 
     /**
-     * See {@link PluginContext#getPluginClassAttrNs}.
+     * See {@link PluginContext#setRuleFinders}.
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @param ruleFinders the list of RuleFinder objects
      */
-    public String getPluginClassAttrNs()
+    public void setRuleFinders( final List<RuleFinder> ruleFinders )
     {
-        return pluginContext.getPluginClassAttrNs();
+        pluginContext.setRuleFinders( ruleFinders );
     }
 
     /**
-     * See {@link PluginContext#getPluginClassAttr}.
+     * Sets the object which is used to generate the new Rules instances created to hold and process the rules associated
+     * with each plugged-in class.
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @param factory the rules factory object
      */
-    public String getPluginClassAttr()
+    public void setRulesFactory( final RulesFactory factory )
     {
-        return pluginContext.getPluginClassAttr();
-    }
-
-    /**
-     * See {@link PluginContext#getPluginIdAttrNs}.
-     *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
-     */
-    public String getPluginIdAttrNs()
-    {
-        return pluginContext.getPluginIdAttrNs();
-    }
-
-    /**
-     * See {@link PluginContext#getPluginIdAttr}.
-     *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
-     */
-    public String getPluginIdAttr()
-    {
-        return pluginContext.getPluginIdAttr();
+        rulesFactory = factory;
     }
 
 }

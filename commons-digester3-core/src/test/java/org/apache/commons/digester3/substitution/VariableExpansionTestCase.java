@@ -43,11 +43,6 @@ public class VariableExpansionTestCase
     // method used in tests4
     private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<SimpleTestBean>();
 
-    public void addSimpleTestBean( final SimpleTestBean bean )
-    {
-        simpleTestBeans.add( bean );
-    }
-
     // implementation of source shared by the variable expander and
     // is updatable during digesting via an Ant-like property element
     private final HashMap<String, Object> mutableSource = new HashMap<String, Object>();
@@ -59,6 +54,11 @@ public class VariableExpansionTestCase
     public void addProperty( final String key, final String value )
     {
         mutableSource.put( key, value );
+    }
+
+    public void addSimpleTestBean( final SimpleTestBean bean )
+    {
+        simpleTestBeans.add( bean );
     }
 
     /**
@@ -88,112 +88,6 @@ public class VariableExpansionTestCase
     }
 
     // ------------------------------------------------ Individual Test Methods
-
-    /**
-     * Test that by default no expansion occurs.
-     */
-    @Test
-    public void testNoExpansion()
-        throws SAXException, IOException
-    {
-
-        final String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
-        final StringReader input = new StringReader( xml );
-        final Digester digester = new Digester();
-
-        // Configure the digester as required
-        digester.addObjectCreate( "root", SimpleTestBean.class );
-        digester.addSetProperties( "root" );
-
-        // Parse our test input.
-        final SimpleTestBean root = digester.parse( input );
-
-        assertNotNull( "Digester returned no object", root );
-
-        assertEquals( "${attr1}", root.getAlpha() );
-        assertEquals( "var{attr2}", root.getBeta() );
-    }
-
-    /**
-     * Test that a MultiVariableExpander with no sources does no expansion.
-     */
-    @Test
-    public void testExpansionWithNoSource()
-        throws SAXException, IOException
-    {
-
-        final String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
-        final StringReader input = new StringReader( xml );
-        final Digester digester = new Digester();
-
-        // Configure the digester as required
-        final MultiVariableExpander expander = new MultiVariableExpander();
-        digester.setSubstitutor( new VariableSubstitutor( expander ) );
-        digester.addObjectCreate( "root", SimpleTestBean.class );
-        digester.addSetProperties( "root" );
-
-        // Parse our test input.
-        final SimpleTestBean root = digester.parse( input );
-
-        assertNotNull( "Digester returned no object", root );
-
-        assertEquals( "${attr1}", root.getAlpha() );
-        assertEquals( "var{attr2}", root.getBeta() );
-    }
-
-    /**
-     * Test that a MultiVariableExpander with multiple sources works. It also tests that expansion works ok where
-     * multiple elements exist.
-     */
-    @Test
-    public void testExpansionWithMultipleSources()
-        throws SAXException, IOException
-    {
-
-        final String xml =
-            "<root>" + "<bean alpha='${attr1}' beta='var{attr1}'/>" + "<bean alpha='${attr2}' beta='var{attr2}'/>"
-                + "</root>";
-
-        final StringReader input = new StringReader( xml );
-        final Digester digester = new Digester();
-
-        // Configure the digester as required
-        final HashMap<String, Object> source1 = new HashMap<String, Object>();
-        source1.put( "attr1", "source1.attr1" );
-        source1.put( "attr2", "source1.attr2" ); // should not be used
-
-        final HashMap<String, Object> source2 = new HashMap<String, Object>();
-        source2.put( "attr1", "source2.attr1" ); // should not be used
-        source2.put( "attr2", "source2.attr2" );
-
-        final MultiVariableExpander expander = new MultiVariableExpander();
-        expander.addSource( "$", source1 );
-        expander.addSource( "var", source2 );
-
-        digester.setSubstitutor( new VariableSubstitutor( expander ) );
-        digester.addObjectCreate( "root/bean", SimpleTestBean.class );
-        digester.addSetProperties( "root/bean" );
-        digester.addSetNext( "root/bean", "addSimpleTestBean" );
-
-        // Parse our test input.
-        this.simpleTestBeans.clear();
-        digester.push( this );
-        digester.parse( input );
-
-        assertEquals( 2, this.simpleTestBeans.size() );
-
-        {
-            final SimpleTestBean bean = this.simpleTestBeans.get( 0 );
-            assertEquals( "source1.attr1", bean.getAlpha() );
-            assertEquals( "source2.attr1", bean.getBeta() );
-        }
-
-        {
-            final SimpleTestBean bean = this.simpleTestBeans.get( 1 );
-            assertEquals( "source1.attr2", bean.getAlpha() );
-            assertEquals( "source2.attr2", bean.getBeta() );
-        }
-    }
 
     /**
      * Test expansion of text in element bodies.
@@ -267,6 +161,89 @@ public class VariableExpansionTestCase
     }
 
     /**
+     * Second of two tests added to verify that the substitution framework is capable of processing Ant-like properties.
+     * This test shows that if properties were also set while processing a document, the resulting variables could also
+     * be expanded within a property element. This is thus effectively a "closure" test, since it shows that the
+     * mechanism used to bind properties is also capable of having property values that are driven by property
+     * variables.
+     *
+     * @throws IOException
+     * @throws SAXException
+     */
+    @Test
+    public void testExpansionOfPropertyInProperty()
+        throws SAXException, IOException
+    {
+        final String xml =
+            "<root>" + "<property name='attr1' value='prop.value1'/>"
+                + "<property name='attr2' value='substituted-${attr1}'/>" + "<bean alpha='${attr2}'/>" + "</root>";
+        final StringReader input = new StringReader( xml );
+        final Digester digester = createDigesterThatCanDoAnt();
+
+        simpleTestBeans.clear();
+        digester.push( this );
+        digester.parse( input );
+
+        assertEquals( 1, simpleTestBeans.size() );
+        final SimpleTestBean bean = simpleTestBeans.get( 0 );
+        assertEquals( "substituted-prop.value1", bean.getAlpha() );
+    }
+
+    /**
+     * Test that a MultiVariableExpander with multiple sources works. It also tests that expansion works ok where
+     * multiple elements exist.
+     */
+    @Test
+    public void testExpansionWithMultipleSources()
+        throws SAXException, IOException
+    {
+
+        final String xml =
+            "<root>" + "<bean alpha='${attr1}' beta='var{attr1}'/>" + "<bean alpha='${attr2}' beta='var{attr2}'/>"
+                + "</root>";
+
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
+
+        // Configure the digester as required
+        final HashMap<String, Object> source1 = new HashMap<String, Object>();
+        source1.put( "attr1", "source1.attr1" );
+        source1.put( "attr2", "source1.attr2" ); // should not be used
+
+        final HashMap<String, Object> source2 = new HashMap<String, Object>();
+        source2.put( "attr1", "source2.attr1" ); // should not be used
+        source2.put( "attr2", "source2.attr2" );
+
+        final MultiVariableExpander expander = new MultiVariableExpander();
+        expander.addSource( "$", source1 );
+        expander.addSource( "var", source2 );
+
+        digester.setSubstitutor( new VariableSubstitutor( expander ) );
+        digester.addObjectCreate( "root/bean", SimpleTestBean.class );
+        digester.addSetProperties( "root/bean" );
+        digester.addSetNext( "root/bean", "addSimpleTestBean" );
+
+        // Parse our test input.
+        this.simpleTestBeans.clear();
+        digester.push( this );
+        digester.parse( input );
+
+        assertEquals( 2, this.simpleTestBeans.size() );
+
+        {
+            final SimpleTestBean bean = this.simpleTestBeans.get( 0 );
+            assertEquals( "source1.attr1", bean.getAlpha() );
+            assertEquals( "source2.attr1", bean.getBeta() );
+        }
+
+        {
+            final SimpleTestBean bean = this.simpleTestBeans.get( 1 );
+            assertEquals( "source1.attr2", bean.getAlpha() );
+            assertEquals( "source2.attr2", bean.getBeta() );
+        }
+    }
+
+    /**
      * First of two tests added to verify that the substitution framework is capable of processing Ant-like properties.
      * The tests above essentially verify that if a property was pre-set (e.g. using the "-D" option to Ant), then the
      * property could be expanded via a variable used either in an attribute or in body text. This test shows that if
@@ -294,32 +271,55 @@ public class VariableExpansionTestCase
     }
 
     /**
-     * Second of two tests added to verify that the substitution framework is capable of processing Ant-like properties.
-     * This test shows that if properties were also set while processing a document, the resulting variables could also
-     * be expanded within a property element. This is thus effectively a "closure" test, since it shows that the
-     * mechanism used to bind properties is also capable of having property values that are driven by property
-     * variables.
-     *
-     * @throws IOException
-     * @throws SAXException
+     * Test that a MultiVariableExpander with no sources does no expansion.
      */
     @Test
-    public void testExpansionOfPropertyInProperty()
+    public void testExpansionWithNoSource()
         throws SAXException, IOException
     {
-        final String xml =
-            "<root>" + "<property name='attr1' value='prop.value1'/>"
-                + "<property name='attr2' value='substituted-${attr1}'/>" + "<bean alpha='${attr2}'/>" + "</root>";
+
+        final String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
         final StringReader input = new StringReader( xml );
-        final Digester digester = createDigesterThatCanDoAnt();
+        final Digester digester = new Digester();
 
-        simpleTestBeans.clear();
-        digester.push( this );
-        digester.parse( input );
+        // Configure the digester as required
+        final MultiVariableExpander expander = new MultiVariableExpander();
+        digester.setSubstitutor( new VariableSubstitutor( expander ) );
+        digester.addObjectCreate( "root", SimpleTestBean.class );
+        digester.addSetProperties( "root" );
 
-        assertEquals( 1, simpleTestBeans.size() );
-        final SimpleTestBean bean = simpleTestBeans.get( 0 );
-        assertEquals( "substituted-prop.value1", bean.getAlpha() );
+        // Parse our test input.
+        final SimpleTestBean root = digester.parse( input );
+
+        assertNotNull( "Digester returned no object", root );
+
+        assertEquals( "${attr1}", root.getAlpha() );
+        assertEquals( "var{attr2}", root.getBeta() );
+    }
+
+    /**
+     * Test that by default no expansion occurs.
+     */
+    @Test
+    public void testNoExpansion()
+        throws SAXException, IOException
+    {
+
+        final String xml = "<root alpha='${attr1}' beta='var{attr2}'/>";
+        final StringReader input = new StringReader( xml );
+        final Digester digester = new Digester();
+
+        // Configure the digester as required
+        digester.addObjectCreate( "root", SimpleTestBean.class );
+        digester.addSetProperties( "root" );
+
+        // Parse our test input.
+        final SimpleTestBean root = digester.parse( input );
+
+        assertNotNull( "Digester returned no object", root );
+
+        assertEquals( "${attr1}", root.getAlpha() );
+        assertEquals( "var{attr2}", root.getBeta() );
     }
 
 }

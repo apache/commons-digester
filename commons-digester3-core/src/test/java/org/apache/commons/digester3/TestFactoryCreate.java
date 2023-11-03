@@ -39,13 +39,6 @@ import org.xml.sax.Attributes;
 public class TestFactoryCreate
 {
 
-    private final boolean ignoreCreateExceptions;
-
-    public TestFactoryCreate( final boolean ignoreCreateExceptions )
-    {
-        this.ignoreCreateExceptions = ignoreCreateExceptions;
-    }
-
     @Parameters
     public static Collection<Object[]> data()
     {
@@ -57,49 +50,14 @@ public class TestFactoryCreate
         return data;
     }
 
-    // --------------------------------------------------------------- Test cases
+    private final boolean ignoreCreateExceptions;
 
-    @Test
-    public void testPropagateException()
-        throws Exception
+    public TestFactoryCreate( final boolean ignoreCreateExceptions )
     {
-
-        // only used with this method
-        class ThrowExceptionCreateRule
-            extends AbstractObjectCreationFactory<Object>
-        {
-            @Override
-            public Object createObject( final Attributes attributes )
-                throws Exception
-            {
-                throw new RuntimeException();
-            }
-        }
-
-        // now for the tests
-        final String xml = "<?xml version='1.0' ?><root><element/></root>";
-
-        // test default - which is to propagate the exception
-        final Digester digester = new Digester();
-        digester.addFactoryCreate( "root", new ThrowExceptionCreateRule(), ignoreCreateExceptions );
-        try
-        {
-
-            digester.parse( new StringReader( xml ) );
-            if ( !ignoreCreateExceptions )
-            {
-                fail( "Exception should be propagated from create rule" );
-            }
-
-        }
-        catch ( final Exception e )
-        {
-            if ( ignoreCreateExceptions )
-            {
-                fail( "Exception should not be propagated" );
-            }
-        }
+        this.ignoreCreateExceptions = ignoreCreateExceptions;
     }
+
+    // --------------------------------------------------------------- Test cases
 
     @Test
     public void testFactoryCreateRule()
@@ -221,5 +179,47 @@ public class TestFactoryCreate
                       "bad" );
         assertEquals( "Attribute not passed (18)[" + ignoreCreateExceptions + "]", factory.attributes.getValue( "three" ),
                       "ugly" );
+    }
+
+    @Test
+    public void testPropagateException()
+        throws Exception
+    {
+
+        // only used with this method
+        class ThrowExceptionCreateRule
+            extends AbstractObjectCreationFactory<Object>
+        {
+            @Override
+            public Object createObject( final Attributes attributes )
+                throws Exception
+            {
+                throw new RuntimeException();
+            }
+        }
+
+        // now for the tests
+        final String xml = "<?xml version='1.0' ?><root><element/></root>";
+
+        // test default - which is to propagate the exception
+        final Digester digester = new Digester();
+        digester.addFactoryCreate( "root", new ThrowExceptionCreateRule(), ignoreCreateExceptions );
+        try
+        {
+
+            digester.parse( new StringReader( xml ) );
+            if ( !ignoreCreateExceptions )
+            {
+                fail( "Exception should be propagated from create rule" );
+            }
+
+        }
+        catch ( final Exception e )
+        {
+            if ( ignoreCreateExceptions )
+            {
+                fail( "Exception should not be propagated" );
+            }
+        }
     }
 }

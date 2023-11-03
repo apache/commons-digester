@@ -52,15 +52,6 @@ final class WithMemoryRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public ClassLoader getContextClassLoader()
-    {
-        return wrappedRulesBinder.getContextClassLoader();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         wrappedRulesBinder.addError( messagePattern, arguments );
@@ -79,29 +70,27 @@ final class WithMemoryRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public void install( final RulesModule rulesModule )
-    {
-        wrappedRulesBinder.install( rulesModule );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public LinkedRuleBuilder forPattern( final String pattern )
     {
         return wrappedRulesBinder.forPattern( pattern );
     }
 
     /**
-     *
-     *
-     * @param bindingClass
-     * @return true if the specified element has not yet been marked
+     * {@inheritDoc}
      */
-    public boolean markAsBound( final Class<?> bindingClass )
+    @Override
+    public ClassLoader getContextClassLoader()
     {
-        return boundClasses.add( bindingClass );
+        return wrappedRulesBinder.getContextClassLoader();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void install( final RulesModule rulesModule )
+    {
+        wrappedRulesBinder.install( rulesModule );
     }
 
     /**
@@ -113,6 +102,17 @@ final class WithMemoryRulesBinder
     public boolean isAlreadyBound( final Class<?> bindingClass )
     {
         return boundClasses.contains( bindingClass );
+    }
+
+    /**
+     *
+     *
+     * @param bindingClass
+     * @return true if the specified element has not yet been marked
+     */
+    public boolean markAsBound( final Class<?> bindingClass )
+    {
+        return boundClasses.add( bindingClass );
     }
 
 }

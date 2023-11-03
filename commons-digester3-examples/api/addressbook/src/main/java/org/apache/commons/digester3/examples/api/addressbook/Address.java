@@ -35,15 +35,52 @@ public class Address
 
     private String country;
 
-    @Override
-    public String toString()
+    /**
+     * Returns the value of city.
+     */
+    public String getCity()
     {
-        final StringBuilder sb = new StringBuilder();
-        sb.append( " address (type " + type + ")\n" );
-        sb.append( "       " + street + "\n" );
-        sb.append( "       " + city + " " + state + " " + zip + "\n" );
-        sb.append( "       " + country + "\n" );
-        return sb.toString();
+        return city;
+    }
+
+    /**
+     * Returns the value of country.
+     */
+    public String getCountry()
+    {
+        return country;
+    }
+
+    /**
+     * Returns the value of state.
+     */
+    public String getState()
+    {
+        return state;
+    }
+
+    /**
+     * Returns the value of street.
+     */
+    public String getStreet()
+    {
+        return street;
+    }
+
+    /**
+     * Returns the value of type.
+     */
+    public String getType()
+    {
+        return type;
+    }
+
+    /**
+     * Returns the value of zip.
+     */
+    public String getZip()
+    {
+        return zip;
     }
 
     public void print( final java.io.PrintStream out, int indentAmount )
@@ -69,32 +106,6 @@ public class Address
     }
 
     /**
-     * Returns the value of street.
-     */
-    public String getStreet()
-    {
-        return street;
-    }
-
-    /**
-     * Sets the value of street.
-     *
-     * @param street The value to assign to street.
-     */
-    public void setStreet( final String street )
-    {
-        this.street = street;
-    }
-
-    /**
-     * Returns the value of city.
-     */
-    public String getCity()
-    {
-        return city;
-    }
-
-    /**
      * Sets the value of city.
      *
      * @param city The value to assign to city.
@@ -102,50 +113,6 @@ public class Address
     public void setCity( final String city )
     {
         this.city = city;
-    }
-
-    /**
-     * Returns the value of state.
-     */
-    public String getState()
-    {
-        return state;
-    }
-
-    /**
-     * Sets the value of state.
-     *
-     * @param state The value to assign to state.
-     */
-    public void setState( final String state )
-    {
-        this.state = state;
-    }
-
-    /**
-     * Returns the value of zip.
-     */
-    public String getZip()
-    {
-        return zip;
-    }
-
-    /**
-     * Sets the value of zip.
-     *
-     * @param zip The value to assign to zip.
-     */
-    public void setZip( final String zip )
-    {
-        this.zip = zip;
-    }
-
-    /**
-     * Returns the value of country.
-     */
-    public String getCountry()
-    {
-        return country;
     }
 
     /**
@@ -159,11 +126,23 @@ public class Address
     }
 
     /**
-     * Returns the value of type.
+     * Sets the value of state.
+     *
+     * @param state The value to assign to state.
      */
-    public String getType()
+    public void setState( final String state )
     {
-        return type;
+        this.state = state;
+    }
+
+    /**
+     * Sets the value of street.
+     *
+     * @param street The value to assign to street.
+     */
+    public void setStreet( final String street )
+    {
+        this.street = street;
     }
 
     /**
@@ -174,6 +153,27 @@ public class Address
     public void setType( final String type )
     {
         this.type = type;
+    }
+
+    /**
+     * Sets the value of zip.
+     *
+     * @param zip The value to assign to zip.
+     */
+    public void setZip( final String zip )
+    {
+        this.zip = zip;
+    }
+
+    @Override
+    public String toString()
+    {
+        final StringBuilder sb = new StringBuilder();
+        sb.append( " address (type " + type + ")\n" );
+        sb.append( "       " + street + "\n" );
+        sb.append( "       " + city + " " + state + " " + zip + "\n" );
+        sb.append( "       " + country + "\n" );
+        return sb.toString();
     }
 
 }

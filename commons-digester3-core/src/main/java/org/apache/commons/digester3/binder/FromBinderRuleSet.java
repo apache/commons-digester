@@ -40,110 +40,6 @@ final class FromBinderRuleSet
 {
 
     /**
-     * The data structure where storing the providers binding.
-     */
-    private final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> providers =
-        new LinkedList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
-
-    /**
-     * Index for quick-retrieve provider.
-     */
-    private final Map<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>> providersIndex =
-        new HashMap<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>>();
-
-    /**
-     * Register the given rule builder and returns it.
-     *
-     * @param <R> The Digester rule type
-     * @param <RB> The Digester rule builder type
-     * @param ruleBuilder The input rule builder instance.
-     */
-    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> void registerProvider( final RB ruleBuilder )
-    {
-        this.providers.add( ruleBuilder );
-
-        final Key key = new Key( ruleBuilder.getPattern(), ruleBuilder.getNamespaceURI() );
-
-        // O(1)
-        Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
-        if ( indexedProviders == null )
-        {
-            indexedProviders = new ArrayList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
-            this.providersIndex.put( key, indexedProviders ); // O(1)
-        }
-        indexedProviders.add( ruleBuilder );
-    }
-
-    /**
-     * Returns the first instance of {@link RuleProvider} assignable to the input type.
-     *
-     * This method is useful for rules that requires be unique in the pattern,
-     * like {@link org.apache.commons.digester3.SetPropertiesRule}
-     * and {@link org.apache.commons.digester3.SetNestedPropertiesRule}.
-     *
-     * @param <R> The Digester rule type
-     * @param <RB> The Digester rule builder type
-     * @param keyPattern the rule pattern
-     * @param namespaceURI the namespace URI (can be null)
-     * @param type the rule builder type the client is looking for
-     * @return the rule builder of input type, if any
-     */
-    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB getProvider( final String keyPattern,
-    /* @Nullable */final String namespaceURI, final Class<RB> type )
-    {
-        final Key key = new Key( keyPattern, namespaceURI );
-
-        // O(1)
-        final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
-
-        if ( indexedProviders == null || indexedProviders.isEmpty() )
-        {
-            return null;
-        }
-
-        // FIXME O(n) not so good
-        for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> ruleProvider : indexedProviders )
-        {
-            if ( type.isInstance( ruleProvider ) )
-            {
-                return type.cast( ruleProvider );
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Clean the provider index.
-     */
-    public void clear()
-    {
-        providers.clear();
-        providersIndex.clear();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addRuleInstances( final Digester digester )
-    {
-        for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> provider : providers )
-        {
-            digester.addRule( provider.getPattern(), provider.get() );
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getNamespaceURI()
-    {
-        return null;
-    }
-
-    /**
      * Used to associate pattern/namespaceURI
      */
     private static final class Key
@@ -157,29 +53,6 @@ final class FromBinderRuleSet
         {
             this.pattern = pattern;
             this.namespaceURI = namespaceURI;
-        }
-
-        public String getPattern()
-        {
-            return pattern;
-        }
-
-        public String getNamespaceURI()
-        {
-            return namespaceURI;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int hashCode()
-        {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ( ( namespaceURI == null ) ? 0 : namespaceURI.hashCode() );
-            result = prime * result + ( ( pattern == null ) ? 0 : pattern.hashCode() );
-            return result;
         }
 
         /**
@@ -231,6 +104,29 @@ final class FromBinderRuleSet
             return true;
         }
 
+        public String getNamespaceURI()
+        {
+            return namespaceURI;
+        }
+
+        public String getPattern()
+        {
+            return pattern;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int hashCode()
+        {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ( ( namespaceURI == null ) ? 0 : namespaceURI.hashCode() );
+            result = prime * result + ( ( pattern == null ) ? 0 : pattern.hashCode() );
+            return result;
+        }
+
         /**
          * {@inheritDoc}
          */
@@ -240,6 +136,110 @@ final class FromBinderRuleSet
             return "Key [pattern=" + pattern + ", namespaceURI=" + namespaceURI + "]";
         }
 
+    }
+
+    /**
+     * The data structure where storing the providers binding.
+     */
+    private final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> providers =
+        new LinkedList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
+
+    /**
+     * Index for quick-retrieve provider.
+     */
+    private final Map<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>> providersIndex =
+        new HashMap<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>>();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addRuleInstances( final Digester digester )
+    {
+        for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> provider : providers )
+        {
+            digester.addRule( provider.getPattern(), provider.get() );
+        }
+    }
+
+    /**
+     * Clean the provider index.
+     */
+    public void clear()
+    {
+        providers.clear();
+        providersIndex.clear();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNamespaceURI()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the first instance of {@link RuleProvider} assignable to the input type.
+     *
+     * This method is useful for rules that requires be unique in the pattern,
+     * like {@link org.apache.commons.digester3.SetPropertiesRule}
+     * and {@link org.apache.commons.digester3.SetNestedPropertiesRule}.
+     *
+     * @param <R> The Digester rule type
+     * @param <RB> The Digester rule builder type
+     * @param keyPattern the rule pattern
+     * @param namespaceURI the namespace URI (can be null)
+     * @param type the rule builder type the client is looking for
+     * @return the rule builder of input type, if any
+     */
+    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> RB getProvider( final String keyPattern,
+    /* @Nullable */final String namespaceURI, final Class<RB> type )
+    {
+        final Key key = new Key( keyPattern, namespaceURI );
+
+        // O(1)
+        final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
+
+        if ( indexedProviders == null || indexedProviders.isEmpty() )
+        {
+            return null;
+        }
+
+        // FIXME O(n) not so good
+        for ( final AbstractBackToLinkedRuleBuilder<? extends Rule> ruleProvider : indexedProviders )
+        {
+            if ( type.isInstance( ruleProvider ) )
+            {
+                return type.cast( ruleProvider );
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Register the given rule builder and returns it.
+     *
+     * @param <R> The Digester rule type
+     * @param <RB> The Digester rule builder type
+     * @param ruleBuilder The input rule builder instance.
+     */
+    public <R extends Rule, RB extends AbstractBackToLinkedRuleBuilder<R>> void registerProvider( final RB ruleBuilder )
+    {
+        this.providers.add( ruleBuilder );
+
+        final Key key = new Key( ruleBuilder.getPattern(), ruleBuilder.getNamespaceURI() );
+
+        // O(1)
+        Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
+        if ( indexedProviders == null )
+        {
+            indexedProviders = new ArrayList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
+            this.providersIndex.put( key, indexedProviders ); // O(1)
+        }
+        indexedProviders.add( ruleBuilder );
     }
 
 }

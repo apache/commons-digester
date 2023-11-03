@@ -52,56 +52,6 @@ public abstract class FromAnnotationsRuleModule
     private WithMemoryRulesBinder rulesBinder;
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected final void configure()
-    {
-        if ( rulesBinder == null )
-        {
-            rulesBinder = new WithMemoryRulesBinder( rulesBinder() );
-        }
-
-        try
-        {
-            configureRules();
-        }
-        finally
-        {
-            rulesBinder = null;
-        }
-    }
-
-    /**
-     * Configures a {@link org.apache.commons.digester3.binder.RulesBinder} via the exposed methods.
-     */
-    protected abstract void configureRules();
-
-    /**
-     * Allows users plug a different {@link AnnotationHandlerFactory} to create {@link AnnotationHandler} instances.
-     *
-     * @param annotationHandlerFactory A custom {@link AnnotationHandlerFactory} to create
-     *        {@link AnnotationHandler} instances
-     */
-    protected final void useAnnotationHandlerFactory( final AnnotationHandlerFactory annotationHandlerFactory )
-    {
-        if ( annotationHandlerFactory == null )
-        {
-            throw new IllegalArgumentException( "Argument 'annotationHandlerFactory' must be not null" );
-        }
-
-        this.annotationHandlerFactory = annotationHandlerFactory;
-    }
-
-    /**
-     * Allows users to switch back to the default {@link AnnotationHandlerFactory} implementation.
-     */
-    protected final void useDefaultAnnotationHandlerFactory()
-    {
-        useAnnotationHandlerFactory( DEFAULT_HANDLER_FACTORY );
-    }
-
-    /**
      * Scan the input Class, looking for Digester rules expressed via annotations, and binds them.
      *
      * @param type the type has to be analyzed
@@ -156,66 +106,30 @@ public abstract class FromAnnotationsRuleModule
     }
 
     /**
-     *
-     *
-     * @param <AE>
-     * @param action
+     * {@inheritDoc}
      */
-    private <AE extends AnnotatedElement> void visitElements( final PrivilegedAction<AE[]> action )
+    @Override
+    protected final void configure()
     {
-        AE[] annotatedElements = null;
-        if ( System.getSecurityManager() != null )
+        if ( rulesBinder == null )
         {
-            annotatedElements = AccessController.doPrivileged( action );
+            rulesBinder = new WithMemoryRulesBinder( rulesBinder() );
         }
-        else
+
+        try
         {
-            annotatedElements = action.run();
+            configureRules();
         }
-        visitElements( annotatedElements );
+        finally
+        {
+            rulesBinder = null;
+        }
     }
 
     /**
-     *
-     *
-     * @param annotatedElements
+     * Configures a {@link org.apache.commons.digester3.binder.RulesBinder} via the exposed methods.
      */
-    private void visitElements( final AnnotatedElement... annotatedElements )
-    {
-        for ( final AnnotatedElement element : annotatedElements )
-        {
-            for ( final Annotation annotation : element.getAnnotations() )
-            {
-                handle( annotation, element );
-            }
-
-            if ( element instanceof Constructor || element instanceof Method )
-            {
-                Annotation[][] parameterAnnotations;
-                Class<?>[] parameterTypes;
-
-                if ( element instanceof Constructor )
-                {
-                    // constructor args
-                    final Constructor<?> construcotr = (Constructor<?>) element;
-                    parameterAnnotations = construcotr.getParameterAnnotations();
-                    parameterTypes = construcotr.getParameterTypes();
-                }
-                else
-                {
-                    // method args
-                    final Method method = (Method) element;
-                    parameterAnnotations = method.getParameterAnnotations();
-                    parameterTypes = method.getParameterTypes();
-                }
-
-                for ( int i = 0; i < parameterTypes.length; i++ )
-                {
-                    visitElements( new MethodArgument( i, parameterTypes[i], parameterAnnotations[i] ) );
-                }
-            }
-        }
-    }
+    protected abstract void configureRules();
 
     /**
      * Handles the current visited element and related annotation, invoking the
@@ -262,6 +176,92 @@ public abstract class FromAnnotationsRuleModule
                 rulesBinder.addError( e );
             }
         }
+    }
+
+    /**
+     * Allows users plug a different {@link AnnotationHandlerFactory} to create {@link AnnotationHandler} instances.
+     *
+     * @param annotationHandlerFactory A custom {@link AnnotationHandlerFactory} to create
+     *        {@link AnnotationHandler} instances
+     */
+    protected final void useAnnotationHandlerFactory( final AnnotationHandlerFactory annotationHandlerFactory )
+    {
+        if ( annotationHandlerFactory == null )
+        {
+            throw new IllegalArgumentException( "Argument 'annotationHandlerFactory' must be not null" );
+        }
+
+        this.annotationHandlerFactory = annotationHandlerFactory;
+    }
+
+    /**
+     * Allows users to switch back to the default {@link AnnotationHandlerFactory} implementation.
+     */
+    protected final void useDefaultAnnotationHandlerFactory()
+    {
+        useAnnotationHandlerFactory( DEFAULT_HANDLER_FACTORY );
+    }
+
+    /**
+     *
+     *
+     * @param annotatedElements
+     */
+    private void visitElements( final AnnotatedElement... annotatedElements )
+    {
+        for ( final AnnotatedElement element : annotatedElements )
+        {
+            for ( final Annotation annotation : element.getAnnotations() )
+            {
+                handle( annotation, element );
+            }
+
+            if ( element instanceof Constructor || element instanceof Method )
+            {
+                Annotation[][] parameterAnnotations;
+                Class<?>[] parameterTypes;
+
+                if ( element instanceof Constructor )
+                {
+                    // constructor args
+                    final Constructor<?> construcotr = (Constructor<?>) element;
+                    parameterAnnotations = construcotr.getParameterAnnotations();
+                    parameterTypes = construcotr.getParameterTypes();
+                }
+                else
+                {
+                    // method args
+                    final Method method = (Method) element;
+                    parameterAnnotations = method.getParameterAnnotations();
+                    parameterTypes = method.getParameterTypes();
+                }
+
+                for ( int i = 0; i < parameterTypes.length; i++ )
+                {
+                    visitElements( new MethodArgument( i, parameterTypes[i], parameterAnnotations[i] ) );
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     *
+     * @param <AE>
+     * @param action
+     */
+    private <AE extends AnnotatedElement> void visitElements( final PrivilegedAction<AE[]> action )
+    {
+        AE[] annotatedElements = null;
+        if ( System.getSecurityManager() != null )
+        {
+            annotatedElements = AccessController.doPrivileged( action );
+        }
+        else
+        {
+            annotatedElements = action.run();
+        }
+        visitElements( annotatedElements );
     }
 
 }

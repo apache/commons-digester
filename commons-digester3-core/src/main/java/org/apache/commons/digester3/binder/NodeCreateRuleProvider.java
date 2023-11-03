@@ -46,71 +46,6 @@ public final class NodeCreateRuleProvider
     extends AbstractBackToLinkedRuleBuilder<NodeCreateRule>
 {
 
-    private NodeType nodeType = NodeType.ELEMENT;
-
-    private DocumentBuilder documentBuilder;
-
-    NodeCreateRuleProvider( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
-                            final LinkedRuleBuilder mainBuilder )
-    {
-        super( keyPattern, namespaceURI, mainBinder, mainBuilder );
-    }
-
-    /**
-     * {@link NodeCreateRule} instance will be created either a DOM {@link org.w3c.dom.Element Element}
-     * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
-     * {@code nodeType} parameter.
-     *
-     * @param nodeType the type of node to create, which can be either
-     *                 {@link org.w3c.dom.Node#ELEMENT_NODE Node.ELEMENT_NODE} or
-     *                 {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE}
-     * @return this builder instance
-     */
-    public NodeCreateRuleProvider ofType( final NodeType nodeType )
-    {
-        if ( nodeType == null )
-        {
-            reportError( "createNode().ofType( NodeType )", "Null NodeType not allowed" );
-        }
-
-        this.nodeType = nodeType;
-        return this;
-    }
-
-    /**
-     * {@link NodeCreateRule} instance will be created a DOM {@link org.w3c.dom.Element Element}, but
-     * lets users specify the JAXP {@code DocumentBuilder} that should be used when constructing the node tree.
-     *
-     * @param documentBuilder the JAXP {@code DocumentBuilder} to use
-     * @return this builder instance
-     */
-    public NodeCreateRuleProvider usingDocumentBuilder( final DocumentBuilder documentBuilder )
-    {
-        this.documentBuilder = documentBuilder;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected NodeCreateRule createRule()
-    {
-        if ( documentBuilder == null )
-        {
-            try
-            {
-                return new NodeCreateRule( nodeType.getDocumentType() );
-            }
-            catch ( final ParserConfigurationException e )
-            {
-                throw new IllegalStateException( e );
-            }
-        }
-
-        return new NodeCreateRule( nodeType.getDocumentType(), documentBuilder );
-    }
-
     /**
      * Enumeration that wraps admitted {@link org.w3c.dom.Node} node constants.
      */
@@ -178,6 +113,71 @@ public final class NodeCreateRuleProvider
             return documentType;
         }
 
+    }
+
+    private NodeType nodeType = NodeType.ELEMENT;
+
+    private DocumentBuilder documentBuilder;
+
+    NodeCreateRuleProvider( final String keyPattern, final String namespaceURI, final RulesBinder mainBinder,
+                            final LinkedRuleBuilder mainBuilder )
+    {
+        super( keyPattern, namespaceURI, mainBinder, mainBuilder );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected NodeCreateRule createRule()
+    {
+        if ( documentBuilder == null )
+        {
+            try
+            {
+                return new NodeCreateRule( nodeType.getDocumentType() );
+            }
+            catch ( final ParserConfigurationException e )
+            {
+                throw new IllegalStateException( e );
+            }
+        }
+
+        return new NodeCreateRule( nodeType.getDocumentType(), documentBuilder );
+    }
+
+    /**
+     * {@link NodeCreateRule} instance will be created either a DOM {@link org.w3c.dom.Element Element}
+     * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
+     * {@code nodeType} parameter.
+     *
+     * @param nodeType the type of node to create, which can be either
+     *                 {@link org.w3c.dom.Node#ELEMENT_NODE Node.ELEMENT_NODE} or
+     *                 {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE Node.DOCUMENT_FRAGMENT_NODE}
+     * @return this builder instance
+     */
+    public NodeCreateRuleProvider ofType( final NodeType nodeType )
+    {
+        if ( nodeType == null )
+        {
+            reportError( "createNode().ofType( NodeType )", "Null NodeType not allowed" );
+        }
+
+        this.nodeType = nodeType;
+        return this;
+    }
+
+    /**
+     * {@link NodeCreateRule} instance will be created a DOM {@link org.w3c.dom.Element Element}, but
+     * lets users specify the JAXP {@code DocumentBuilder} that should be used when constructing the node tree.
+     *
+     * @param documentBuilder the JAXP {@code DocumentBuilder} to use
+     * @return this builder instance
+     */
+    public NodeCreateRuleProvider usingDocumentBuilder( final DocumentBuilder documentBuilder )
+    {
+        this.documentBuilder = documentBuilder;
+        return this;
     }
 
 }

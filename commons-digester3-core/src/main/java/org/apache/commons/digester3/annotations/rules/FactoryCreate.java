@@ -47,49 +47,6 @@ public @interface FactoryCreate
 {
 
     /**
-     * The Java class of the object creation factory class.
-     */
-    Class<? extends AbstractObjectCreationFactory<?>> factoryClass() default DefaultObjectCreationFactory.class;
-
-    /**
-     * Allows specify the attribute containing an override class name if it is present.
-     *
-     * @since 3.0
-     */
-    String attributeName() default "";
-
-    /**
-     * The element matching pattern.
-     */
-    String pattern();
-
-    /**
-     * The namespace URI for which this Rule is relevant, if any.
-     *
-     * @since 3.0
-     */
-    String namespaceURI() default "";
-
-    /**
-     * When true any exceptions thrown during object creation will be ignored.
-     */
-    boolean ignoreCreateExceptions() default false;
-
-    /**
-     * Defines several {@code @FactoryCreate} annotations on the same element.
-     *
-     * @see FactoryCreate
-     */
-    @Documented
-    @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.TYPE )
-    @DigesterRuleList
-    @interface List
-    {
-        FactoryCreate[] value();
-    }
-
-    /**
      * Dummy ObjectCreationFactory type - only for annotation value type purposes.
      */
     public static final class DefaultObjectCreationFactory
@@ -108,5 +65,48 @@ public @interface FactoryCreate
         }
 
     }
+
+    /**
+     * Defines several {@code @FactoryCreate} annotations on the same element.
+     *
+     * @see FactoryCreate
+     */
+    @Documented
+    @Retention( RetentionPolicy.RUNTIME )
+    @Target( ElementType.TYPE )
+    @DigesterRuleList
+    @interface List
+    {
+        FactoryCreate[] value();
+    }
+
+    /**
+     * Allows specify the attribute containing an override class name if it is present.
+     *
+     * @since 3.0
+     */
+    String attributeName() default "";
+
+    /**
+     * The Java class of the object creation factory class.
+     */
+    Class<? extends AbstractObjectCreationFactory<?>> factoryClass() default DefaultObjectCreationFactory.class;
+
+    /**
+     * When true any exceptions thrown during object creation will be ignored.
+     */
+    boolean ignoreCreateExceptions() default false;
+
+    /**
+     * The namespace URI for which this Rule is relevant, if any.
+     *
+     * @since 3.0
+     */
+    String namespaceURI() default "";
+
+    /**
+     * The element matching pattern.
+     */
+    String pattern();
 
 }

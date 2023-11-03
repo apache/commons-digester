@@ -42,13 +42,29 @@ public class RegexRules
 
     // --------------------------------------------------------- Fields
 
+    /** Used to associate rules with paths in the rules list */
+    private static final class RegisteredRule
+    {
+        String pattern;
+
+        Rule rule;
+
+        RegisteredRule( final String pattern, final Rule rule )
+        {
+            this.pattern = pattern;
+            this.rule = rule;
+        }
+    }
+
     /** All registered {@code Rule}'s */
     private final ArrayList<RegisteredRule> registeredRules = new ArrayList<RegisteredRule>();
+
+    // --------------------------------------------------------- Constructor
 
     /** The regex strategy used by this RegexRules */
     private RegexMatcher matcher;
 
-    // --------------------------------------------------------- Constructor
+    // --------------------------------------------------------- Properties
 
     /**
      * Construct sets the Regex matching strategy.
@@ -60,7 +76,16 @@ public class RegexRules
         setRegexMatcher( matcher );
     }
 
-    // --------------------------------------------------------- Properties
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear()
+    {
+        registeredRules.clear();
+    }
+
+    // --------------------------------------------------------- Public Methods
 
     /**
      * Gets the current regex matching strategy.
@@ -70,40 +95,6 @@ public class RegexRules
     public RegexMatcher getRegexMatcher()
     {
         return matcher;
-    }
-
-    /**
-     * Sets the current regex matching strategy.
-     *
-     * @param matcher use this RegexMatcher, not null
-     */
-    public void setRegexMatcher( final RegexMatcher matcher )
-    {
-        if ( matcher == null )
-        {
-            throw new IllegalArgumentException( "RegexMatcher must not be null." );
-        }
-        this.matcher = matcher;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void registerRule( final String pattern, final Rule rule )
-    {
-        registeredRules.add( new RegisteredRule( pattern, rule ) );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void clear()
-    {
-        registeredRules.clear();
     }
 
     /**
@@ -135,6 +126,15 @@ public class RegexRules
      * {@inheritDoc}
      */
     @Override
+    protected void registerRule( final String pattern, final Rule rule )
+    {
+        registeredRules.add( new RegisteredRule( pattern, rule ) );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Rule> rules()
     {
         final ArrayList<Rule> rules = new ArrayList<Rule>( registeredRules.size() );
@@ -145,18 +145,18 @@ public class RegexRules
         return rules;
     }
 
-    /** Used to associate rules with paths in the rules list */
-    private static final class RegisteredRule
+    /**
+     * Sets the current regex matching strategy.
+     *
+     * @param matcher use this RegexMatcher, not null
+     */
+    public void setRegexMatcher( final RegexMatcher matcher )
     {
-        String pattern;
-
-        Rule rule;
-
-        RegisteredRule( final String pattern, final Rule rule )
+        if ( matcher == null )
         {
-            this.pattern = pattern;
-            this.rule = rule;
+            throw new IllegalArgumentException( "RegexMatcher must not be null." );
         }
+        this.matcher = matcher;
     }
 
 }

@@ -44,62 +44,6 @@ public class Address
     @BeanPropertySetter( pattern = "employee/address/zip-code" )
     private String zipCode;
 
-    @SetTop( pattern = "employee/address" )
-    public void setEmployee( final Employee employee )
-    {
-        employee.addAddress( this );
-    }
-
-    public String getCity()
-    {
-        return this.city;
-    }
-
-    public void setCity( final String city )
-    {
-        this.city = city;
-    }
-
-    public String getState()
-    {
-        return this.state;
-    }
-
-    public void setState( final String state )
-    {
-        this.state = state;
-    }
-
-    public String getStreet()
-    {
-        return this.street;
-    }
-
-    public void setStreet( final String street )
-    {
-        this.street = street;
-    }
-
-    public String getType()
-    {
-        return this.type;
-    }
-
-    public void setType( final String type )
-    {
-        this.type = type;
-    }
-
-    public String getZipCode()
-    {
-        return this.zipCode;
-    }
-
-    public void setZipCode( final String zipCode )
-    {
-        this.zipCode = zipCode;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -159,6 +103,62 @@ public class Address
             return false;
         }
         return true;
+    }
+
+    public String getCity()
+    {
+        return this.city;
+    }
+
+    public String getState()
+    {
+        return this.state;
+    }
+
+    public String getStreet()
+    {
+        return this.street;
+    }
+
+    public String getType()
+    {
+        return this.type;
+    }
+
+    public String getZipCode()
+    {
+        return this.zipCode;
+    }
+
+    public void setCity( final String city )
+    {
+        this.city = city;
+    }
+
+    @SetTop( pattern = "employee/address" )
+    public void setEmployee( final Employee employee )
+    {
+        employee.addAddress( this );
+    }
+
+    public void setState( final String state )
+    {
+        this.state = state;
+    }
+
+    public void setStreet( final String street )
+    {
+        this.street = street;
+    }
+
+    public void setType( final String type )
+    {
+        this.type = type;
+    }
+
+    public void setZipCode( final String zipCode )
+    {
+        this.zipCode = zipCode;
     }
 
     @Override

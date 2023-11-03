@@ -59,51 +59,6 @@ final class RecordedInvocation
     //******************************************************************************************************************
 
     /**
-     * Gets the invokedMethod.
-     *
-     * @return Method
-     */
-    public Method getInvokedMethod()
-    {
-        return invokedMethod;
-    }
-
-    /**
-     * Gets the arguments.
-     *
-     * @return Object[]
-     */
-    public Object[] getArguments()
-    {
-        return arguments;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append( invokedMethod.getDeclaringClass().getName() );
-        buffer.append( "." );
-        buffer.append( invokedMethod.getName() );
-        buffer.append( "(" );
-        final int count = arguments.length;
-        for ( int i = 0; i < count; i++ )
-        {
-            final Object arg = arguments[i];
-            if ( i > 0 )
-            {
-                buffer.append( ", " );
-            }
-            convert( buffer, arg );
-        }
-        buffer.append( ")" );
-        return buffer.toString();
-    }
-
-    /**
      * Add a string representation of {@code input} to {@code buffer}.
      *
      * @param buffer the buffer to append the string representation of the input object.
@@ -142,6 +97,51 @@ final class RecordedInvocation
             }
             buffer.append( "}" );
         }
+    }
+
+    /**
+     * Gets the arguments.
+     *
+     * @return Object[]
+     */
+    public Object[] getArguments()
+    {
+        return arguments;
+    }
+
+    /**
+     * Gets the invokedMethod.
+     *
+     * @return Method
+     */
+    public Method getInvokedMethod()
+    {
+        return invokedMethod;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        final StringBuilder buffer = new StringBuilder();
+        buffer.append( invokedMethod.getDeclaringClass().getName() );
+        buffer.append( "." );
+        buffer.append( invokedMethod.getName() );
+        buffer.append( "(" );
+        final int count = arguments.length;
+        for ( int i = 0; i < count; i++ )
+        {
+            final Object arg = arguments[i];
+            if ( i > 0 )
+            {
+                buffer.append( ", " );
+            }
+            convert( buffer, arg );
+        }
+        buffer.append( ")" );
+        return buffer.toString();
     }
 
 }

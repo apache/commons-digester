@@ -31,13 +31,13 @@ public class ObjectTestImpl
     {
     }
 
-    public void setValue( final String val )
-    {
-        value = val;
-    }
-
     public String getValue()
     {
         return value;
+    }
+
+    public void setValue( final String val )
+    {
+        value = val;
     }
 }

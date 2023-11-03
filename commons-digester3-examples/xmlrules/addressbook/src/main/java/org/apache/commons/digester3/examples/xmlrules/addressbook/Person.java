@@ -37,33 +37,15 @@ public class Person
 
     private final List<Address> addresses = new ArrayList<Address>();
 
-    /**
-     * A unique id for this person. Note that the Digester automatically converts the id to an integer.
-     */
-    public void setId( final int id )
+    public void addAddress( final Address addr )
     {
-        this.id = id;
-    }
-
-    public void setCategory( final String category )
-    {
-        this.category = category;
-    }
-
-    public void setName( final String name )
-    {
-        this.name = name;
+        addresses.add( addr );
     }
 
     /** we assume only one email of each type... */
     public void addEmail( final String type, final String address )
     {
         emails.put( type, address );
-    }
-
-    public void addAddress( final Address addr )
-    {
-        addresses.add( addr );
     }
 
     public void print()
@@ -81,6 +63,24 @@ public class Person
         for (final Address addr : addresses) {
             addr.print( System.out, 2 );
         }
+    }
+
+    public void setCategory( final String category )
+    {
+        this.category = category;
+    }
+
+    /**
+     * A unique id for this person. Note that the Digester automatically converts the id to an integer.
+     */
+    public void setId( final int id )
+    {
+        this.id = id;
+    }
+
+    public void setName( final String name )
+    {
+        this.name = name;
     }
 
 }

@@ -25,6 +25,16 @@ package org.apache.commons.digester3;
 public class Address
 {
 
+    private String city;
+
+    private String state;
+
+    private String street;
+
+    private String type;
+
+    private String zipCode;
+
     public Address()
     {
         this( "My Street", "My City", "US", "MyZip" );
@@ -38,11 +48,29 @@ public class Address
         setZipCode( zipCode );
     }
 
-    private String city;
-
     public String getCity()
     {
         return ( this.city );
+    }
+
+    public String getState()
+    {
+        return ( this.state );
+    }
+
+    public String getStreet()
+    {
+        return ( this.street );
+    }
+
+    public String getType()
+    {
+        return ( this.type );
+    }
+
+    public String getZipCode()
+    {
+        return ( this.zipCode );
     }
 
     public void setCity( final String city )
@@ -50,11 +78,9 @@ public class Address
         this.city = city;
     }
 
-    private String state;
-
-    public String getState()
+    public void setEmployee( final Employee employee )
     {
-        return ( this.state );
+        employee.addAddress( this );
     }
 
     public void setState( final String state )
@@ -62,23 +88,9 @@ public class Address
         this.state = state;
     }
 
-    private String street;
-
-    public String getStreet()
-    {
-        return ( this.street );
-    }
-
     public void setStreet( final String street )
     {
         this.street = street;
-    }
-
-    private String type;
-
-    public String getType()
-    {
-        return ( this.type );
     }
 
     public void setType( final String type )
@@ -86,21 +98,9 @@ public class Address
         this.type = type;
     }
 
-    private String zipCode;
-
-    public String getZipCode()
-    {
-        return ( this.zipCode );
-    }
-
     public void setZipCode( final String zipCode )
     {
         this.zipCode = zipCode;
-    }
-
-    public void setEmployee( final Employee employee )
-    {
-        employee.addAddress( this );
     }
 
     @Override

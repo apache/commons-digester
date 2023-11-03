@@ -110,42 +110,6 @@ public class PluginManager
     }
 
     /**
-     * Return the declaration object with the specified class. If no such plugin is known, null is returned.
-     *
-     * @param className The {@link Declaration} class name
-     * @return The Declaration instance obtained by the input class name
-     */
-    public Declaration getDeclarationByClass( final String className )
-    {
-        Declaration decl = declarationsByClass.get( className );
-
-        if ( ( decl == null ) && ( parent != null ) )
-        {
-            decl = parent.getDeclarationByClass( className );
-        }
-
-        return decl;
-    }
-
-    /**
-     * Return the declaration object with the specified id. If no such plugin is known, null is returned.
-     *
-     * @param id Description of the Parameter
-     * @return The declaration value
-     */
-    public Declaration getDeclarationById( final String id )
-    {
-        Declaration decl = declarationsById.get( id );
-
-        if ( ( decl == null ) && ( parent != null ) )
-        {
-            decl = parent.getDeclarationById( id );
-        }
-
-        return decl;
-    }
-
-    /**
      * Given a plugin class and some associated properties, scan the list of known RuleFinder instances until one
      * detects a source of custom rules for this plugin (aka a RuleLoader).
      * <p>
@@ -194,6 +158,42 @@ public class PluginManager
         log.debug( "scanned ruleFinders." );
 
         return ruleLoader;
+    }
+
+    /**
+     * Return the declaration object with the specified class. If no such plugin is known, null is returned.
+     *
+     * @param className The {@link Declaration} class name
+     * @return The Declaration instance obtained by the input class name
+     */
+    public Declaration getDeclarationByClass( final String className )
+    {
+        Declaration decl = declarationsByClass.get( className );
+
+        if ( ( decl == null ) && ( parent != null ) )
+        {
+            decl = parent.getDeclarationByClass( className );
+        }
+
+        return decl;
+    }
+
+    /**
+     * Return the declaration object with the specified id. If no such plugin is known, null is returned.
+     *
+     * @param id Description of the Parameter
+     * @return The declaration value
+     */
+    public Declaration getDeclarationById( final String id )
+    {
+        Declaration decl = declarationsById.get( id );
+
+        if ( ( decl == null ) && ( parent != null ) )
+        {
+            decl = parent.getDeclarationById( id );
+        }
+
+        return decl;
     }
 
 }

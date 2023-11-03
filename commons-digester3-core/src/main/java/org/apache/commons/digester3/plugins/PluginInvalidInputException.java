@@ -31,16 +31,6 @@ public class PluginInvalidInputException
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructs a new exception with the specified cause.
-     *
-     * @param cause underlying exception that caused this to be thrown
-     */
-    public PluginInvalidInputException( final Throwable cause )
-    {
-        super( cause );
-    }
-
-    /**
      * Constructs a new exception with the specified detail message.
      *
      * @param msg describes the reason this exception is being thrown.
@@ -59,6 +49,16 @@ public class PluginInvalidInputException
     public PluginInvalidInputException( final String msg, final Throwable cause )
     {
         super( msg, cause );
+    }
+
+    /**
+     * Constructs a new exception with the specified cause.
+     *
+     * @param cause underlying exception that caused this to be thrown
+     */
+    public PluginInvalidInputException( final Throwable cause )
+    {
+        super( cause );
     }
 
 }

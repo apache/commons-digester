@@ -27,6 +27,89 @@ import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 public class TestBean
 {
 
+    /**
+     * A boolean property whose initial value is true.
+     */
+    private boolean booleanProperty = true;
+
+    /**
+     * A double property.
+     */
+    private double doubleProperty = 321.0;
+
+    /**
+     * A boolean property whose initial value is false
+     */
+    private boolean falseProperty;
+
+    // ------------------------------------------------------------- Properties
+
+    /**
+     * A float property.
+     */
+    private float floatProperty = (float) 123.0;
+
+    /**
+     * Integer arrays that are accessed as an array as well as indexed.
+     */
+    private int[] intArray = { 0, 10, 20, 30, 40 };
+
+    private final int[] intIndexed = { 0, 10, 20, 30, 40 };
+
+    private int[] intMultibox = new int[0];
+
+    /**
+     * An integer property.
+     */
+    private int intProperty = 123;
+
+    /**
+     * A long property.
+     */
+    private long longProperty = 321;
+
+    /**
+     * A multiple-String SELECT element.
+     */
+    private String[] multipleSelect = { "Multiple 3", "Multiple 5", "Multiple 7" };
+
+    /**
+     * A nested reference to another test bean (populated as needed).
+     */
+    private TestBean nested;
+
+    /**
+     * A String property with an initial value of null.
+     */
+    private String nullProperty;
+
+    /**
+     * A short property.
+     */
+    private short shortProperty = (short) 987;
+
+    /**
+     * A single-String value for a SELECT element.
+     */
+    private String singleSelect = "Single 5";
+
+    /**
+     * String arrays that are accessed as an array as well as indexed.
+     */
+    private String[] stringArray = { "String 0", "String 1", "String 2", "String 3", "String 4" };
+
+    private final String[] stringIndexed = { "String 0", "String 1", "String 2", "String 3", "String 4" };
+
+    /**
+     * A String property.
+     */
+    private String stringProperty = "This is a string";
+
+    /**
+     * An empty String property.
+     */
+    private String emptyStringProperty = "";
+
     public TestBean()
     {
         // do nothing
@@ -51,156 +134,60 @@ public class TestBean
         this( booleanProperty.booleanValue(), doubleProperty.doubleValue() );
     }
 
-    // ------------------------------------------------------------- Properties
-
-    /**
-     * A boolean property whose initial value is true.
-     */
-    private boolean booleanProperty = true;
-
     public boolean getBooleanProperty()
     {
         return ( booleanProperty );
     }
-
-    public void setBooleanProperty( final boolean booleanProperty )
-    {
-        this.booleanProperty = booleanProperty;
-    }
-
-    /**
-     * A double property.
-     */
-    private double doubleProperty = 321.0;
 
     public double getDoubleProperty()
     {
         return ( this.doubleProperty );
     }
 
-    public void setDoubleProperty( final double doubleProperty )
+    public String getEmptyStringProperty()
     {
-        this.doubleProperty = doubleProperty;
+        return ( this.emptyStringProperty );
     }
-
-    /**
-     * A boolean property whose initial value is false
-     */
-    private boolean falseProperty;
 
     public boolean getFalseProperty()
     {
         return ( falseProperty );
     }
 
-    public void setFalseProperty( final boolean falseProperty )
-    {
-        this.falseProperty = falseProperty;
-    }
-
-    /**
-     * A float property.
-     */
-    private float floatProperty = (float) 123.0;
-
     public float getFloatProperty()
     {
         return ( this.floatProperty );
     }
-
-    public void setFloatProperty( final float floatProperty )
-    {
-        this.floatProperty = floatProperty;
-    }
-
-    /**
-     * Integer arrays that are accessed as an array as well as indexed.
-     */
-    private int[] intArray = { 0, 10, 20, 30, 40 };
 
     public int[] getIntArray()
     {
         return ( this.intArray );
     }
 
-    public void setIntArray( final int intArray[] )
-    {
-        this.intArray = intArray;
-    }
-
-    private final int[] intIndexed = { 0, 10, 20, 30, 40 };
-
     public int getIntIndexed( final int index )
     {
         return ( intIndexed[index] );
     }
-
-    public void setIntIndexed( final int index, final int value )
-    {
-        intIndexed[index] = value;
-    }
-
-    private int[] intMultibox = new int[0];
 
     public int[] getIntMultibox()
     {
         return ( this.intMultibox );
     }
 
-    public void setIntMultibox( final int intMultibox[] )
-    {
-        this.intMultibox = intMultibox;
-    }
-
-    /**
-     * An integer property.
-     */
-    private int intProperty = 123;
-
     public int getIntProperty()
     {
         return ( this.intProperty );
     }
-
-    public void setIntProperty( final int intProperty )
-    {
-        this.intProperty = intProperty;
-    }
-
-    /**
-     * A long property.
-     */
-    private long longProperty = 321;
 
     public long getLongProperty()
     {
         return ( this.longProperty );
     }
 
-    public void setLongProperty( final long longProperty )
-    {
-        this.longProperty = longProperty;
-    }
-
-    /**
-     * A multiple-String SELECT element.
-     */
-    private String[] multipleSelect = { "Multiple 3", "Multiple 5", "Multiple 7" };
-
     public String[] getMultipleSelect()
     {
         return ( this.multipleSelect );
     }
-
-    public void setMultipleSelect( final String multipleSelect[] )
-    {
-        this.multipleSelect = multipleSelect;
-    }
-
-    /**
-     * A nested reference to another test bean (populated as needed).
-     */
-    private TestBean nested;
 
     public TestBean getNested()
     {
@@ -210,14 +197,89 @@ public class TestBean
         return ( nested );
     }
 
-    /**
-     * A String property with an initial value of null.
-     */
-    private String nullProperty;
-
     public String getNullProperty()
     {
         return ( this.nullProperty );
+    }
+
+    public short getShortProperty()
+    {
+        return ( this.shortProperty );
+    }
+
+    public String getSingleSelect()
+    {
+        return ( this.singleSelect );
+    }
+
+    public String[] getStringArray()
+    {
+        return ( this.stringArray );
+    }
+
+    public String getStringIndexed( final int index )
+    {
+        return ( stringIndexed[index] );
+    }
+
+    public String getStringProperty()
+    {
+        return ( this.stringProperty );
+    }
+
+    public void setBooleanProperty( final boolean booleanProperty )
+    {
+        this.booleanProperty = booleanProperty;
+    }
+
+    public void setDoubleProperty( final double doubleProperty )
+    {
+        this.doubleProperty = doubleProperty;
+    }
+
+    public void setEmptyStringProperty( final String emptyStringProperty )
+    {
+        this.emptyStringProperty = emptyStringProperty;
+    }
+
+    public void setFalseProperty( final boolean falseProperty )
+    {
+        this.falseProperty = falseProperty;
+    }
+
+    public void setFloatProperty( final float floatProperty )
+    {
+        this.floatProperty = floatProperty;
+    }
+
+    public void setIntArray( final int intArray[] )
+    {
+        this.intArray = intArray;
+    }
+
+    public void setIntIndexed( final int index, final int value )
+    {
+        intIndexed[index] = value;
+    }
+
+    public void setIntMultibox( final int intMultibox[] )
+    {
+        this.intMultibox = intMultibox;
+    }
+
+    public void setIntProperty( final int intProperty )
+    {
+        this.intProperty = intProperty;
+    }
+
+    public void setLongProperty( final long longProperty )
+    {
+        this.longProperty = longProperty;
+    }
+
+    public void setMultipleSelect( final String multipleSelect[] )
+    {
+        this.multipleSelect = multipleSelect;
     }
 
     public void setNullProperty( final String nullProperty )
@@ -225,29 +287,9 @@ public class TestBean
         this.nullProperty = nullProperty;
     }
 
-    /**
-     * A short property.
-     */
-    private short shortProperty = (short) 987;
-
-    public short getShortProperty()
-    {
-        return ( this.shortProperty );
-    }
-
     public void setShortProperty( final short shortProperty )
     {
         this.shortProperty = shortProperty;
-    }
-
-    /**
-     * A single-String value for a SELECT element.
-     */
-    private String singleSelect = "Single 5";
-
-    public String getSingleSelect()
-    {
-        return ( this.singleSelect );
     }
 
     public void setSingleSelect( final String singleSelect )
@@ -255,26 +297,9 @@ public class TestBean
         this.singleSelect = singleSelect;
     }
 
-    /**
-     * String arrays that are accessed as an array as well as indexed.
-     */
-    private String[] stringArray = { "String 0", "String 1", "String 2", "String 3", "String 4" };
-
-    public String[] getStringArray()
-    {
-        return ( this.stringArray );
-    }
-
     public void setStringArray( final String stringArray[] )
     {
         this.stringArray = stringArray;
-    }
-
-    private final String[] stringIndexed = { "String 0", "String 1", "String 2", "String 3", "String 4" };
-
-    public String getStringIndexed( final int index )
-    {
-        return ( stringIndexed[index] );
     }
 
     public void setStringIndexed( final int index, final String value )
@@ -282,34 +307,9 @@ public class TestBean
         stringIndexed[index] = value;
     }
 
-    /**
-     * A String property.
-     */
-    private String stringProperty = "This is a string";
-
-    public String getStringProperty()
-    {
-        return ( this.stringProperty );
-    }
-
     public void setStringProperty( final String stringProperty )
     {
         this.stringProperty = stringProperty;
-    }
-
-    /**
-     * An empty String property.
-     */
-    private String emptyStringProperty = "";
-
-    public String getEmptyStringProperty()
-    {
-        return ( this.emptyStringProperty );
-    }
-
-    public void setEmptyStringProperty( final String emptyStringProperty )
-    {
-        this.emptyStringProperty = emptyStringProperty;
     }
 
 }

@@ -70,26 +70,6 @@ public final class MethodArgument
     }
 
     /**
-     * Returns the method argument index.
-     *
-     * @return the method argument index.
-     */
-    public int getIndex()
-    {
-        return this.index;
-    }
-
-    /**
-     * Returns the method argument type.
-     *
-     * @return the method argument type.
-     */
-    public Class<?> getParameterType()
-    {
-        return this.parameterType;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -115,6 +95,16 @@ public final class MethodArgument
     }
 
     /**
+     * Returns an annotations array, copy of the declared annotations in this method argument.
+     *
+     * @return an annotations array, copy of the declared annotations in this method argument.
+     */
+    private Annotation[] getAnnotationsArrayCopy()
+    {
+        return this.annotations.clone();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -124,13 +114,23 @@ public final class MethodArgument
     }
 
     /**
-     * Returns an annotations array, copy of the declared annotations in this method argument.
+     * Returns the method argument index.
      *
-     * @return an annotations array, copy of the declared annotations in this method argument.
+     * @return the method argument index.
      */
-    private Annotation[] getAnnotationsArrayCopy()
+    public int getIndex()
     {
-        return this.annotations.clone();
+        return this.index;
+    }
+
+    /**
+     * Returns the method argument type.
+     *
+     * @return the method argument type.
+     */
+    public Class<?> getParameterType()
+    {
+        return this.parameterType;
     }
 
     /**

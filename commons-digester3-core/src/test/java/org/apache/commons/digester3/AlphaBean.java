@@ -36,21 +36,15 @@ public class AlphaBean
         setName( name );
     }
 
+    public Nameable getChild()
+    {
+        return child;
+    }
+
     @Override
     public String getName()
     {
         return name;
-    }
-
-    @Override
-    public void setName( final String name )
-    {
-        this.name = name;
-    }
-
-    public void setParent( final Nameable parent )
-    {
-        this.parent = parent;
     }
 
     public Nameable getParent()
@@ -63,9 +57,15 @@ public class AlphaBean
         this.child = child;
     }
 
-    public Nameable getChild()
+    @Override
+    public void setName( final String name )
     {
-        return child;
+        this.name = name;
+    }
+
+    public void setParent( final Nameable parent )
+    {
+        this.parent = parent;
     }
 
     @Override

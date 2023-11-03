@@ -47,57 +47,6 @@ import org.xml.sax.SAXException;
 public class Main
 {
 
-    /**
-     * Main method : entry point for running this example program.
-     * <p>
-     * Usage: java Main example.xml
-     */
-    public static void main( final String[] args )
-    {
-        if ( args.length != 1 )
-        {
-            usage();
-            System.exit( -1 );
-        }
-
-        final String filename = args[0];
-
-        // Create a Digester instance
-        final Digester d = new Digester();
-
-        // Here you would establish a real connection.
-        // There would also be a finally clause to ensure it is
-        // closed after parsing terminates, etc.
-        final Connection connection = null;
-
-        // Add rules to the digester that will be triggered while
-        // parsing occurs.
-        addRules( d, connection );
-
-        // Process the input file.
-        System.out.println( "Parsing commencing..." );
-        try
-        {
-            final File srcfile = new File( filename );
-            d.parse( srcfile );
-        }
-        catch ( final IOException ioe )
-        {
-            System.out.println( "Error reading input file:" + ioe.getMessage() );
-            System.exit( -1 );
-        }
-        catch ( final SAXException se )
-        {
-            System.out.println( "Error parsing input file:" + se.getMessage() );
-            System.exit( -1 );
-        }
-
-        // And here there is nothing to do. The digester rules have
-        // (deliberately) not built a representation of the input, but
-        // instead processed the data as it was read.
-        System.out.println( "Parsing complete." );
-    }
-
     private static void addRules( final Digester d, final java.sql.Connection conn )
     {
 
@@ -151,6 +100,57 @@ public class Main
         d.addCallMethod( "database/table/row/column", "addColumn", 2 );
         d.addCallParam( "database/table/row/column", 0, "name" );
         d.addCallParam( "database/table/row/column", 1 );
+    }
+
+    /**
+     * Main method : entry point for running this example program.
+     * <p>
+     * Usage: java Main example.xml
+     */
+    public static void main( final String[] args )
+    {
+        if ( args.length != 1 )
+        {
+            usage();
+            System.exit( -1 );
+        }
+
+        final String filename = args[0];
+
+        // Create a Digester instance
+        final Digester d = new Digester();
+
+        // Here you would establish a real connection.
+        // There would also be a finally clause to ensure it is
+        // closed after parsing terminates, etc.
+        final Connection connection = null;
+
+        // Add rules to the digester that will be triggered while
+        // parsing occurs.
+        addRules( d, connection );
+
+        // Process the input file.
+        System.out.println( "Parsing commencing..." );
+        try
+        {
+            final File srcfile = new File( filename );
+            d.parse( srcfile );
+        }
+        catch ( final IOException ioe )
+        {
+            System.out.println( "Error reading input file:" + ioe.getMessage() );
+            System.exit( -1 );
+        }
+        catch ( final SAXException se )
+        {
+            System.out.println( "Error parsing input file:" + se.getMessage() );
+            System.exit( -1 );
+        }
+
+        // And here there is nothing to do. The digester rules have
+        // (deliberately) not built a representation of the input, but
+        // instead processed the data as it was read.
+        System.out.println( "Parsing complete." );
     }
 
     private static void usage()

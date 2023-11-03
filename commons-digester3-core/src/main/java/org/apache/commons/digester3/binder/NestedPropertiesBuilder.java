@@ -46,35 +46,6 @@ public final class NestedPropertiesBuilder
     }
 
     /**
-     * Allows ignore a matching element.
-     *
-     * @param elementName The child xml element to be ignored
-     * @return this builder instance
-     */
-    public NestedPropertiesBuilder ignoreElement( final String elementName )
-    {
-        if ( elementName == null )
-        {
-            reportError( "setNestedProperties().ignoreElement( String )", "empty 'elementName' not allowed" );
-        }
-        return addAlias( elementName ).forProperty( null );
-    }
-
-    /**
-     * Allows element2property mapping to be overridden.
-     *
-     * @param elementName The child xml element to match
-     * @param propertyName The java bean property to be assigned the value
-     * @return this builder instance
-     * @deprecated
-     */
-    @Deprecated
-    public NestedPropertiesBuilder addAlias( final String elementName, final String propertyName )
-    {
-        return addAlias( elementName ).forProperty( propertyName );
-    }
-
-    /**
      * Allows element2property mapping to be overridden.
      *
      * @param elementName The child xml element to match
@@ -91,18 +62,17 @@ public final class NestedPropertiesBuilder
     }
 
     /**
-     * When set to true, any text within child elements will have leading
-     * and trailing whitespace removed before assignment to the target
-     * object.
+     * Allows element2property mapping to be overridden.
      *
-     * @param trimData Flag to set any text within child elements will have leading
-     *                 and trailing whitespace removed
+     * @param elementName The child xml element to match
+     * @param propertyName The java bean property to be assigned the value
      * @return this builder instance
+     * @deprecated
      */
-    public NestedPropertiesBuilder trimData( final boolean trimData )
+    @Deprecated
+    public NestedPropertiesBuilder addAlias( final String elementName, final String propertyName )
     {
-        this.trimData = trimData;
-        return this;
+        return addAlias( elementName ).forProperty( propertyName );
     }
 
     /**
@@ -129,6 +99,36 @@ public final class NestedPropertiesBuilder
         rule.setTrimData( trimData );
         rule.setAllowUnknownChildElements( allowUnknownChildElements );
         return rule;
+    }
+
+    /**
+     * Allows ignore a matching element.
+     *
+     * @param elementName The child xml element to be ignored
+     * @return this builder instance
+     */
+    public NestedPropertiesBuilder ignoreElement( final String elementName )
+    {
+        if ( elementName == null )
+        {
+            reportError( "setNestedProperties().ignoreElement( String )", "empty 'elementName' not allowed" );
+        }
+        return addAlias( elementName ).forProperty( null );
+    }
+
+    /**
+     * When set to true, any text within child elements will have leading
+     * and trailing whitespace removed before assignment to the target
+     * object.
+     *
+     * @param trimData Flag to set any text within child elements will have leading
+     *                 and trailing whitespace removed
+     * @return this builder instance
+     */
+    public NestedPropertiesBuilder trimData( final boolean trimData )
+    {
+        this.trimData = trimData;
+        return this;
     }
 
 }

@@ -35,6 +35,10 @@ import org.apache.commons.digester3.binder.RulesModule;
 public abstract class AbstractAnnotatedPojoTestCase
 {
 
+    protected Collection<RulesModule> getAuxModules() {
+        return new ArrayList<RulesModule>();
+    }
+
     /**
      * Loads the digester rules parsing the expected object class, parses the
      * XML and verify the digester produces the same result.
@@ -68,10 +72,6 @@ public abstract class AbstractAnnotatedPojoTestCase
         }
 
         assertEquals(expected, actual);
-    }
-
-    protected Collection<RulesModule> getAuxModules() {
-        return new ArrayList<RulesModule>();
     }
 
 }

@@ -38,11 +38,6 @@ public final class Catalog
         this.items.add( item );
     }
 
-    public List<Item> getItems()
-    {
-        return this.items;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -68,10 +63,9 @@ public final class Catalog
         return true;
     }
 
-    @Override
-    public String toString()
+    public List<Item> getItems()
     {
-        return "Catalog [items=" + items + "]";
+        return this.items;
     }
 
     public void print()
@@ -82,6 +76,12 @@ public final class Catalog
         {
             item.print();
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Catalog [items=" + items + "]";
     }
 
 }

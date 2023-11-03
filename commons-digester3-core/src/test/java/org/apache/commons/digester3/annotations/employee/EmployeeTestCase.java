@@ -32,6 +32,23 @@ public final class EmployeeTestCase
     extends AbstractAnnotatedPojoTestCase
 {
 
+    @Override
+    protected Collection<RulesModule> getAuxModules()
+    {
+        final Collection<RulesModule> modules = new Stack<RulesModule>();
+        modules.add( new FromAnnotationsRuleModule()
+        {
+
+            @Override
+            protected void configureRules()
+            {
+                bindRulesFrom( Address.class );
+            }
+
+        });
+        return modules;
+    }
+
     @Test
     public void testEmployee()
         throws Exception
@@ -57,23 +74,6 @@ public final class EmployeeTestCase
         address.setEmployee( employee );
 
         this.verifyExpectedEqualsToParsed( employee );
-    }
-
-    @Override
-    protected Collection<RulesModule> getAuxModules()
-    {
-        final Collection<RulesModule> modules = new Stack<RulesModule>();
-        modules.add( new FromAnnotationsRuleModule()
-        {
-
-            @Override
-            protected void configureRules()
-            {
-                bindRulesFrom( Address.class );
-            }
-
-        });
-        return modules;
     }
 
 }

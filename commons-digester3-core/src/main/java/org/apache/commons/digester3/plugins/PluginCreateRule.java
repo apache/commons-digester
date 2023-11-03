@@ -119,183 +119,6 @@ public class PluginCreateRule
     // ------------------- properties ---------------------------------------
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which class should be
-     * instantiated.
-     * <p>
-     * See {@link PluginRules#setPluginClassAttribute} for more info.
-     *
-     * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
-     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
-     *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
-     *            this parameter <i>must</i> be null.
-     * @param attrName is the attribute whose value contains the name of the class to be instantiated.
-     */
-    public void setPluginClassAttribute( final String namespaceUri, final String attrName )
-    {
-        pluginClassAttrNs = namespaceUri;
-        pluginClassAttr = attrName;
-    }
-
-    /**
-     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which plugin declaration is
-     * being referenced.
-     * <p>
-     * See {@link PluginRules#setPluginIdAttribute} for more info.
-     *
-     * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
-     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
-     *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
-     *            this parameter <i>must</i> be null.
-     * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
-     *            instantiating an object.
-     */
-    public void setPluginIdAttribute( final String namespaceUri, final String attrName )
-    {
-        pluginIdAttrNs = namespaceUri;
-        pluginIdAttr = attrName;
-    }
-
-    // ------------------- methods --------------------------------------------
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void postRegisterInit( final String matchPattern )
-    {
-        final Log log = LogUtils.getLogger( getDigester() );
-        final boolean debug = log.isDebugEnabled();
-        if ( debug )
-        {
-            log.debug( "PluginCreateRule.postRegisterInit" + ": rule registered for pattern [" + matchPattern + "]" );
-        }
-
-        if ( getDigester() == null )
-        {
-            // We require setDigester to be called before this method.
-            // Note that this means that PluginCreateRule cannot be added
-            // to a Rules object which has not yet been added to a
-            // Digester object.
-            initException =
-                new PluginConfigurationException( "Invalid invocation of postRegisterInit" + ": digester not set." );
-            throw initException;
-        }
-
-        if ( pattern != null )
-        {
-            // We have been called twice, ie a single instance has been
-            // associated with multiple patterns.
-            //
-            // Generally, Digester Rule instances can be associated with
-            // multiple patterns. However for plugins, this creates some
-            // complications. Some day this may be supported; however for
-            // now we just reject this situation.
-            initException =
-                new PluginConfigurationException( "A single PluginCreateRule instance has been mapped to"
-                    + " multiple patterns; this is not supported." );
-            throw initException;
-        }
-
-        if ( matchPattern.indexOf( '*' ) != -1 )
-        {
-            // having wildcards in patterns is extremely difficult to
-            // deal with. For now, we refuse to allow this.
-            //
-            // TODO: check for any chars not valid in xml element name
-            // rather than just *.
-            //
-            // Reasons include:
-            // (a) handling recursive plugins, and
-            // (b) determining whether one pattern is "below" another,
-            // as done by PluginRules. Without wildcards, "below"
-            // just means startsWith, which is easy to check.
-            initException =
-                new PluginConfigurationException( "A PluginCreateRule instance has been mapped to" + " pattern ["
-                    + matchPattern + "]." + " This pattern includes a wildcard character."
-                    + " This is not supported by the plugin architecture." );
-            throw initException;
-        }
-
-        if ( baseClass == null )
-        {
-            baseClass = Object.class;
-        }
-
-        final PluginRules rules = (PluginRules) getDigester().getRules();
-        final PluginManager pm = rules.getPluginManager();
-
-        // check default class is valid
-        if ( defaultPlugin != null )
-        {
-            if ( !baseClass.isAssignableFrom( defaultPlugin.getPluginClass() ) )
-            {
-                initException =
-                    new PluginConfigurationException( "Default class [" + defaultPlugin.getPluginClass().getName()
-                        + "] does not inherit from [" + baseClass.getName() + "]." );
-                throw initException;
-            }
-
-            try
-            {
-                defaultPlugin.init( getDigester(), pm );
-
-            }
-            catch ( final PluginException pwe )
-            {
-
-                throw new PluginConfigurationException( pwe.getMessage(), pwe.getCause() );
-            }
-        }
-
-        // remember the pattern for later
-        pattern = matchPattern;
-
-        if ( pluginClassAttr == null )
-        {
-            // the user hasn't set explicit xml attr names on this rule,
-            // so fetch the default values
-            pluginClassAttrNs = rules.getPluginClassAttrNs();
-            pluginClassAttr = rules.getPluginClassAttr();
-
-            if ( debug )
-            {
-                log.debug( "init: pluginClassAttr set to per-digester values [" + "ns=" + pluginClassAttrNs + ", name="
-                    + pluginClassAttr + "]" );
-            }
-        }
-        else
-        {
-            if ( debug )
-            {
-                log.debug( "init: pluginClassAttr set to rule-specific values [" + "ns=" + pluginClassAttrNs
-                    + ", name=" + pluginClassAttr + "]" );
-            }
-        }
-
-        if ( pluginIdAttr == null )
-        {
-            // the user hasn't set explicit xml attr names on this rule,
-            // so fetch the default values
-            pluginIdAttrNs = rules.getPluginIdAttrNs();
-            pluginIdAttr = rules.getPluginIdAttr();
-
-            if ( debug )
-            {
-                log.debug( "init: pluginIdAttr set to per-digester values [" + "ns=" + pluginIdAttrNs + ", name="
-                    + pluginIdAttr + "]" );
-            }
-        }
-        else
-        {
-            if ( debug )
-            {
-                log.debug( "init: pluginIdAttr set to rule-specific values [" + "ns=" + pluginIdAttrNs + ", name="
-                    + pluginIdAttr + "]" );
-            }
-        }
-    }
-
-    /**
      * Invoked when the Digester matches this rule against an xml element.
      * <p>
      * A new instance of the target class is created, and pushed onto the stack. A new "private" PluginRules object is
@@ -467,6 +290,8 @@ public class PluginCreateRule
         fireBodyMethods( rules, namespace, name, text );
     }
 
+    // ------------------- methods --------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -487,21 +312,6 @@ public class PluginCreateRule
         // and get rid of the instance of the plugin class from the
         // digester object stack.
         getDigester().pop();
-    }
-
-    /**
-     * Return the pattern that this Rule is associated with.
-     * <p>
-     * In general, Rule instances <i>can</i> be associated with multiple patterns. A PluginCreateRule, however, will
-     * only function correctly when associated with a single pattern. It is possible to fix this, but I can't be
-     * bothered just now because this feature is unlikely to be used.
-     * </p>
-     *
-     * @return The pattern value
-     */
-    public String getPattern()
-    {
-        return pattern;
     }
 
     /**
@@ -628,6 +438,196 @@ public class PluginCreateRule
                 }
             }
         }
+    }
+
+    /**
+     * Return the pattern that this Rule is associated with.
+     * <p>
+     * In general, Rule instances <i>can</i> be associated with multiple patterns. A PluginCreateRule, however, will
+     * only function correctly when associated with a single pattern. It is possible to fix this, but I can't be
+     * bothered just now because this feature is unlikely to be used.
+     * </p>
+     *
+     * @return The pattern value
+     */
+    public String getPattern()
+    {
+        return pattern;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void postRegisterInit( final String matchPattern )
+    {
+        final Log log = LogUtils.getLogger( getDigester() );
+        final boolean debug = log.isDebugEnabled();
+        if ( debug )
+        {
+            log.debug( "PluginCreateRule.postRegisterInit" + ": rule registered for pattern [" + matchPattern + "]" );
+        }
+
+        if ( getDigester() == null )
+        {
+            // We require setDigester to be called before this method.
+            // Note that this means that PluginCreateRule cannot be added
+            // to a Rules object which has not yet been added to a
+            // Digester object.
+            initException =
+                new PluginConfigurationException( "Invalid invocation of postRegisterInit" + ": digester not set." );
+            throw initException;
+        }
+
+        if ( pattern != null )
+        {
+            // We have been called twice, ie a single instance has been
+            // associated with multiple patterns.
+            //
+            // Generally, Digester Rule instances can be associated with
+            // multiple patterns. However for plugins, this creates some
+            // complications. Some day this may be supported; however for
+            // now we just reject this situation.
+            initException =
+                new PluginConfigurationException( "A single PluginCreateRule instance has been mapped to"
+                    + " multiple patterns; this is not supported." );
+            throw initException;
+        }
+
+        if ( matchPattern.indexOf( '*' ) != -1 )
+        {
+            // having wildcards in patterns is extremely difficult to
+            // deal with. For now, we refuse to allow this.
+            //
+            // TODO: check for any chars not valid in xml element name
+            // rather than just *.
+            //
+            // Reasons include:
+            // (a) handling recursive plugins, and
+            // (b) determining whether one pattern is "below" another,
+            // as done by PluginRules. Without wildcards, "below"
+            // just means startsWith, which is easy to check.
+            initException =
+                new PluginConfigurationException( "A PluginCreateRule instance has been mapped to" + " pattern ["
+                    + matchPattern + "]." + " This pattern includes a wildcard character."
+                    + " This is not supported by the plugin architecture." );
+            throw initException;
+        }
+
+        if ( baseClass == null )
+        {
+            baseClass = Object.class;
+        }
+
+        final PluginRules rules = (PluginRules) getDigester().getRules();
+        final PluginManager pm = rules.getPluginManager();
+
+        // check default class is valid
+        if ( defaultPlugin != null )
+        {
+            if ( !baseClass.isAssignableFrom( defaultPlugin.getPluginClass() ) )
+            {
+                initException =
+                    new PluginConfigurationException( "Default class [" + defaultPlugin.getPluginClass().getName()
+                        + "] does not inherit from [" + baseClass.getName() + "]." );
+                throw initException;
+            }
+
+            try
+            {
+                defaultPlugin.init( getDigester(), pm );
+
+            }
+            catch ( final PluginException pwe )
+            {
+
+                throw new PluginConfigurationException( pwe.getMessage(), pwe.getCause() );
+            }
+        }
+
+        // remember the pattern for later
+        pattern = matchPattern;
+
+        if ( pluginClassAttr == null )
+        {
+            // the user hasn't set explicit xml attr names on this rule,
+            // so fetch the default values
+            pluginClassAttrNs = rules.getPluginClassAttrNs();
+            pluginClassAttr = rules.getPluginClassAttr();
+
+            if ( debug )
+            {
+                log.debug( "init: pluginClassAttr set to per-digester values [" + "ns=" + pluginClassAttrNs + ", name="
+                    + pluginClassAttr + "]" );
+            }
+        }
+        else
+        {
+            if ( debug )
+            {
+                log.debug( "init: pluginClassAttr set to rule-specific values [" + "ns=" + pluginClassAttrNs
+                    + ", name=" + pluginClassAttr + "]" );
+            }
+        }
+
+        if ( pluginIdAttr == null )
+        {
+            // the user hasn't set explicit xml attr names on this rule,
+            // so fetch the default values
+            pluginIdAttrNs = rules.getPluginIdAttrNs();
+            pluginIdAttr = rules.getPluginIdAttr();
+
+            if ( debug )
+            {
+                log.debug( "init: pluginIdAttr set to per-digester values [" + "ns=" + pluginIdAttrNs + ", name="
+                    + pluginIdAttr + "]" );
+            }
+        }
+        else
+        {
+            if ( debug )
+            {
+                log.debug( "init: pluginIdAttr set to rule-specific values [" + "ns=" + pluginIdAttrNs + ", name="
+                    + pluginIdAttr + "]" );
+            }
+        }
+    }
+
+    /**
+     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which class should be
+     * instantiated.
+     * <p>
+     * See {@link PluginRules#setPluginClassAttribute} for more info.
+     *
+     * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
+     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
+     *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
+     *            this parameter <i>must</i> be null.
+     * @param attrName is the attribute whose value contains the name of the class to be instantiated.
+     */
+    public void setPluginClassAttribute( final String namespaceUri, final String attrName )
+    {
+        pluginClassAttrNs = namespaceUri;
+        pluginClassAttr = attrName;
+    }
+
+    /**
+     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which plugin declaration is
+     * being referenced.
+     * <p>
+     * See {@link PluginRules#setPluginIdAttribute} for more info.
+     *
+     * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
+     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
+     *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
+     *            this parameter <i>must</i> be null.
+     * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
+     *            instantiating an object.
+     */
+    public void setPluginIdAttribute( final String namespaceUri, final String attrName )
+    {
+        pluginIdAttrNs = namespaceUri;
+        pluginIdAttr = attrName;
     }
 
 }

@@ -41,20 +41,20 @@ public interface RuleSet
     // ------------------------------------------------------------- Properties
 
     /**
-     * Return the namespace URI that will be applied to all Rule instances created from this RuleSet.
-     *
-     * @return the namespace URI that will be applied to all Rule instances created from this RuleSet
-     */
-    String getNamespaceURI();
-
-    // --------------------------------------------------------- Public Methods
-
-    /**
      * Add the set of Rule instances defined in this RuleSet to the specified {@code Digester} instance,
      * associating them with our namespace URI (if any). This method should only be called by a Digester instance.
      *
      * @param digester Digester instance to which the new Rule instances should be added.
      */
     void addRuleInstances( Digester digester );
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * Return the namespace URI that will be applied to all Rule instances created from this RuleSet.
+     *
+     * @return the namespace URI that will be applied to all Rule instances created from this RuleSet
+     */
+    String getNamespaceURI();
 
 }

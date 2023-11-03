@@ -45,20 +45,12 @@ public final class ObjectParamBuilder<T>
     }
 
     /**
-     * The zero-relative index of the parameter we are saving.
-     *
-     * @param paramIndex The zero-relative index of the parameter we are saving
-     * @return this builder instance
+     * {@inheritDoc}
      */
-    public ObjectParamBuilder<T> ofIndex( final int paramIndex )
+    @Override
+    protected ObjectParamRule createRule()
     {
-        if ( paramIndex < 0 )
-        {
-            this.reportError( "objectParam( %s ).ofIndex( int )", "negative index argument not allowed" );
-        }
-
-        this.paramIndex = paramIndex;
-        return this;
+        return new ObjectParamRule( paramIndex, attributeName, paramObj );
     }
 
     /**
@@ -74,12 +66,20 @@ public final class ObjectParamBuilder<T>
     }
 
     /**
-     * {@inheritDoc}
+     * The zero-relative index of the parameter we are saving.
+     *
+     * @param paramIndex The zero-relative index of the parameter we are saving
+     * @return this builder instance
      */
-    @Override
-    protected ObjectParamRule createRule()
+    public ObjectParamBuilder<T> ofIndex( final int paramIndex )
     {
-        return new ObjectParamRule( paramIndex, attributeName, paramObj );
+        if ( paramIndex < 0 )
+        {
+            this.reportError( "objectParam( %s ).ofIndex( int )", "negative index argument not allowed" );
+        }
+
+        this.paramIndex = paramIndex;
+        return this;
     }
 
 }

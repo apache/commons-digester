@@ -39,15 +39,14 @@ public final class BeanPropertySetterBuilder
     }
 
     /**
-     * Sets the name of property to set.
-     *
-     * @param propertyName The name of property to set
-     * @return this builder instance
+     * {@inheritDoc}
      */
-    public BeanPropertySetterBuilder withName( /* @Nullable */final String propertyName )
+    @Override
+    protected BeanPropertySetterRule createRule()
     {
-        this.propertyName = propertyName;
-        return this;
+        final BeanPropertySetterRule rule = new BeanPropertySetterRule( propertyName );
+        rule.setPropertyNameFromAttribute( attribute );
+        return rule;
     }
 
     /**
@@ -68,14 +67,15 @@ public final class BeanPropertySetterBuilder
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the name of property to set.
+     *
+     * @param propertyName The name of property to set
+     * @return this builder instance
      */
-    @Override
-    protected BeanPropertySetterRule createRule()
+    public BeanPropertySetterBuilder withName( /* @Nullable */final String propertyName )
     {
-        final BeanPropertySetterRule rule = new BeanPropertySetterRule( propertyName );
-        rule.setPropertyNameFromAttribute( attribute );
-        return rule;
+        this.propertyName = propertyName;
+        return this;
     }
 
 }

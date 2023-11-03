@@ -36,16 +36,44 @@ public class TestRule
 
     // ----------------------------------------------------- Instance Variables
 
+    public static class TestRuleProvider implements RuleProvider<TestRule>
+    {
+
+        private final String identifier;
+
+        private final List<Rule> callOrder;
+
+        public TestRuleProvider( final String identifier )
+        {
+            this( identifier, null );
+        }
+
+        public TestRuleProvider( final String identifier, final List<Rule> callOrder )
+        {
+            this.identifier = identifier;
+            this.callOrder = callOrder;
+        }
+
+        @Override
+        public TestRule get()
+        {
+            final TestRule testRule = new TestRule( identifier );
+            testRule.setOrder( callOrder );
+            return testRule;
+        }
+
+    }
+
     /** String identifing this particular {@code TestRule} */
     private final String identifier;
 
     /** Used when testing body text */
     private String bodyText;
 
+    // ----------------------------------------------------------- Constructors
+
     /** Used when testing call orders */
     private List<Rule> order;
-
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Base constructor.
@@ -57,6 +85,8 @@ public class TestRule
 
         this.identifier = identifier;
     }
+
+    // ------------------------------------------------ Rule Implementation
 
     /**
      * Constructor sets namespace URI.
@@ -72,7 +102,15 @@ public class TestRule
 
     }
 
-    // ------------------------------------------------ Rule Implementation
+    /**
+     * If a list has been set, append this to the list.
+     */
+    protected void appendCall()
+    {
+        if ( order != null ) {
+            order.add( this );
+        }
+    }
 
     /**
      * 'Begin' call.
@@ -83,6 +121,8 @@ public class TestRule
     {
         appendCall();
     }
+
+    // ------------------------------------------------ Methods
 
     /**
      * 'Body' call.
@@ -103,18 +143,6 @@ public class TestRule
         throws Exception
     {
         appendCall();
-    }
-
-    // ------------------------------------------------ Methods
-
-    /**
-     * If a list has been set, append this to the list.
-     */
-    protected void appendCall()
-    {
-        if ( order != null ) {
-            order.add( this );
-        }
     }
 
     /**
@@ -156,34 +184,6 @@ public class TestRule
     public String toString()
     {
         return identifier;
-    }
-
-    public static class TestRuleProvider implements RuleProvider<TestRule>
-    {
-
-        private final String identifier;
-
-        private final List<Rule> callOrder;
-
-        public TestRuleProvider( final String identifier )
-        {
-            this( identifier, null );
-        }
-
-        public TestRuleProvider( final String identifier, final List<Rule> callOrder )
-        {
-            this.identifier = identifier;
-            this.callOrder = callOrder;
-        }
-
-        @Override
-        public TestRule get()
-        {
-            final TestRule testRule = new TestRule( identifier );
-            testRule.setOrder( callOrder );
-            return testRule;
-        }
-
     }
 
 }

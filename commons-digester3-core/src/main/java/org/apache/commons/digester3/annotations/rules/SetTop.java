@@ -44,9 +44,18 @@ public @interface SetTop
 {
 
     /**
-     * The element matching pattern.
+     * Defines several {@code @SetTop} annotations on the same element
+     *
+     * @see SetTop
      */
-    String pattern();
+    @Documented
+    @Retention( RetentionPolicy.RUNTIME )
+    @Target( ElementType.METHOD )
+    @DigesterRuleList
+    @interface List
+    {
+        SetTop[] value();
+    }
 
     /**
      * Marks the rule be invoked when {@code begin} or {@code end} events match.
@@ -61,17 +70,8 @@ public @interface SetTop
     String namespaceURI() default "";
 
     /**
-     * Defines several {@code @SetTop} annotations on the same element
-     *
-     * @see SetTop
+     * The element matching pattern.
      */
-    @Documented
-    @Retention( RetentionPolicy.RUNTIME )
-    @Target( ElementType.METHOD )
-    @DigesterRuleList
-    @interface List
-    {
-        SetTop[] value();
-    }
+    String pattern();
 
 }

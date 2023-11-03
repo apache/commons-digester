@@ -23,11 +23,15 @@ import org.apache.commons.digester3.Digester;
 public class Slider
     implements Widget
 {
-    private String label = "nolabel";
-
-    private int min;
-
-    private int max;
+    // define different rules on this class
+    public static void addRangeRules( final Digester digester, final String pattern )
+    {
+        // note: deliberately no addSetProperties rule
+        final Class<?>[] paramtypes = { Integer.class, Integer.class };
+        digester.addCallMethod( pattern + "/range", "setRange", 2, paramtypes );
+        digester.addCallParam( pattern + "/range", 0, "min" );
+        digester.addCallParam( pattern + "/range", 1, "max" );
+    }
 
     // define rules on this class
     public static void addRules( final Digester digester, final String pattern )
@@ -39,15 +43,11 @@ public class Slider
         digester.addCallMethod( pattern + "/max", "setMax", 0, paramtypes );
     }
 
-    // define different rules on this class
-    public static void addRangeRules( final Digester digester, final String pattern )
-    {
-        // note: deliberately no addSetProperties rule
-        final Class<?>[] paramtypes = { Integer.class, Integer.class };
-        digester.addCallMethod( pattern + "/range", "setRange", 2, paramtypes );
-        digester.addCallParam( pattern + "/range", 0, "min" );
-        digester.addCallParam( pattern + "/range", 1, "max" );
-    }
+    private String label = "nolabel";
+
+    private int min;
+
+    private int max;
 
     public Slider()
     {
@@ -58,14 +58,9 @@ public class Slider
         return label;
     }
 
-    public void setLabel( final String label )
+    public int getMax()
     {
-        this.label = label;
-    }
-
-    public void setMin( final int min )
-    {
-        this.min = min;
+        return max;
     }
 
     public int getMin()
@@ -73,14 +68,19 @@ public class Slider
         return min;
     }
 
+    public void setLabel( final String label )
+    {
+        this.label = label;
+    }
+
     public void setMax( final int max )
     {
         this.max = max;
     }
 
-    public int getMax()
+    public void setMin( final int min )
     {
-        return max;
+        this.min = min;
     }
 
     public void setRange( final int min, final int max )

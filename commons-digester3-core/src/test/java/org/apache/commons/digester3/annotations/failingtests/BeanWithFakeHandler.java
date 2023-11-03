@@ -23,14 +23,14 @@ public final class BeanWithFakeHandler
     @FakeRule
     private String something;
 
-    public void setSomething( final String something )
-    {
-        this.something = something;
-    }
-
     public String getSomething()
     {
         return something;
+    }
+
+    public void setSomething( final String something )
+    {
+        this.something = something;
     }
 
 }

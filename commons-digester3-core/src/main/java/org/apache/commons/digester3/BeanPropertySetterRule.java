@@ -52,16 +52,21 @@ public class BeanPropertySetterRule
     // ----------------------------------------------------------- Constructors
 
     /**
-     * <p>
-     * Construct rule that sets the given property from the body text.
-     * </p>
-     *
-     * @param propertyName name of property to set
+     * Sets this property on the top object.
      */
-    public BeanPropertySetterRule( final String propertyName )
-    {
-        this.propertyName = propertyName;
-    }
+    private String propertyName;
+
+    /**
+     * Extract the property name from attribute
+     */
+    private String propertyNameFromAttribute;
+
+    // ----------------------------------------------------- Instance Variables
+
+    /**
+     * The body text used to set the property.
+     */
+    private String bodyText;
 
     /**
      * <p>
@@ -74,55 +79,19 @@ public class BeanPropertySetterRule
         this( null );
     }
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
-     * Sets this property on the top object.
+     * <p>
+     * Construct rule that sets the given property from the body text.
+     * </p>
+     *
+     * @param propertyName name of property to set
      */
-    private String propertyName;
-
-    /**
-     * Extract the property name from attribute
-     */
-    private String propertyNameFromAttribute;
-
-    /**
-     * The body text used to set the property.
-     */
-    private String bodyText;
+    public BeanPropertySetterRule( final String propertyName )
+    {
+        this.propertyName = propertyName;
+    }
 
     // --------------------------------------------------------- Public Methods
-
-    /**
-     * Returns the property name associated to this setter rule.
-     *
-     * @return The property name associated to this setter rule
-     */
-    public String getPropertyName()
-    {
-        return propertyName;
-    }
-
-    /**
-     * Sets the attribute name from which the property name has to be extracted.
-     *
-     * @param propertyNameFromAttribute the attribute name from which the property name has to be extracted.
-     * @since 3.0
-     */
-    public void setPropertyNameFromAttribute( final String propertyNameFromAttribute )
-    {
-        this.propertyNameFromAttribute = propertyNameFromAttribute;
-    }
-
-    /**
-     * Returns the body text used to set the property.
-     *
-     * @return The body text used to set the property
-     */
-    protected String getBodyText()
-    {
-        return bodyText;
-    }
 
     /**
      * {@inheritDoc}
@@ -219,6 +188,37 @@ public class BeanPropertySetterRule
         throws Exception
     {
         bodyText = null;
+    }
+
+    /**
+     * Returns the body text used to set the property.
+     *
+     * @return The body text used to set the property
+     */
+    protected String getBodyText()
+    {
+        return bodyText;
+    }
+
+    /**
+     * Returns the property name associated to this setter rule.
+     *
+     * @return The property name associated to this setter rule
+     */
+    public String getPropertyName()
+    {
+        return propertyName;
+    }
+
+    /**
+     * Sets the attribute name from which the property name has to be extracted.
+     *
+     * @param propertyNameFromAttribute the attribute name from which the property name has to be extracted.
+     * @since 3.0
+     */
+    public void setPropertyNameFromAttribute( final String propertyNameFromAttribute )
+    {
+        this.propertyNameFromAttribute = propertyNameFromAttribute;
     }
 
     /**

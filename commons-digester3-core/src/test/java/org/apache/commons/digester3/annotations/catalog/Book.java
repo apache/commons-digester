@@ -44,41 +44,6 @@ public final class Book
         this.isbn = isbn;
     }
 
-    public String getTitle()
-    {
-        return this.title;
-    }
-
-    public void setTitle( final String title )
-    {
-        this.title = title;
-    }
-
-    public String getAuthor()
-    {
-        return this.author;
-    }
-
-    public void setAuthor( final String author )
-    {
-        this.author = author;
-    }
-
-    public String getDesc()
-    {
-        return this.desc;
-    }
-
-    public void setDesc( final String desc )
-    {
-        this.desc = desc;
-    }
-
-    public String getIsbn()
-    {
-        return this.isbn;
-    }
-
     @Override
     public boolean equals( final Object obj )
     {
@@ -131,16 +96,51 @@ public final class Book
         return true;
     }
 
-    @Override
-    public String toString()
+    public String getAuthor()
     {
-        return "Book [author=" + author + ", desc=" + desc + ", isbn=" + isbn + ", title=" + title + "]";
+        return this.author;
+    }
+
+    public String getDesc()
+    {
+        return this.desc;
+    }
+
+    public String getIsbn()
+    {
+        return this.isbn;
+    }
+
+    public String getTitle()
+    {
+        return this.title;
     }
 
     @Override
     public void print()
     {
         System.out.println( this.toString() );
+    }
+
+    public void setAuthor( final String author )
+    {
+        this.author = author;
+    }
+
+    public void setDesc( final String desc )
+    {
+        this.desc = desc;
+    }
+
+    public void setTitle( final String title )
+    {
+        this.title = title;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Book [author=" + author + ", desc=" + desc + ", isbn=" + isbn + ", title=" + title + "]";
     }
 
 }

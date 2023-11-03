@@ -62,37 +62,6 @@ public class SetPropertiesRuleTestCase
     // ------------------------------------------------ Individual Test Methods
 
     /**
-     * Positive test for SetPropertiesRule.
-     */
-    @Test
-    public void testPositive()
-        throws Exception
-    {
-        final Digester digester = newLoader( new AbstractRulesModule()
-        {
-
-            @Override
-            protected void configure()
-            {
-                forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
-                    .then()
-                    .setProperties();
-            }
-
-        }).newDigester();
-
-        // Parse the input
-        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
-
-        // Check that the properties were set correctly
-        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
-        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
-        assertNull( "gamma property not set", bean.getGamma() );
-        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
-
-    }
-
-    /**
      * Positive test for SetPropertyRule ignoring missing properties.
      */
     @Test
@@ -180,6 +149,37 @@ public class SetPropertiesRuleTestCase
                 fail( "Should have thrown NoSuchMethodException, threw " + e );
             }
         }
+    }
+
+    /**
+     * Positive test for SetPropertiesRule.
+     */
+    @Test
+    public void testPositive()
+        throws Exception
+    {
+        final Digester digester = newLoader( new AbstractRulesModule()
+        {
+
+            @Override
+            protected void configure()
+            {
+                forPattern( "root" ).createObject().ofType( "org.apache.commons.digester3.SimpleTestBean" )
+                    .then()
+                    .setProperties();
+            }
+
+        }).newDigester();
+
+        // Parse the input
+        final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
+
+        // Check that the properties were set correctly
+        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
+        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
+        assertNull( "gamma property not set", bean.getGamma() );
+        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
+
     }
 
     /**

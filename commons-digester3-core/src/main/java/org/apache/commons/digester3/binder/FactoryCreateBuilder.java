@@ -49,6 +49,58 @@ public final class FactoryCreateBuilder
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected FactoryCreateRule createRule()
+    {
+        if ( type == null && attributeName == null && creationFactory == null )
+        {
+            reportError( "factoryCreate()",
+                         "at least one between 'className', 'attributeName' or 'creationFactory' has to be specified" );
+        }
+
+        if ( type != null || attributeName != null )
+        {
+            return new FactoryCreateRule( type, attributeName, ignoreCreateExceptions );
+        }
+
+        return new FactoryCreateRule( creationFactory, ignoreCreateExceptions );
+    }
+
+    /**
+     * Exceptions thrown by the object creation factory will be ignored or not.
+     *
+     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored
+     * @return this builder instance
+     */
+    public FactoryCreateBuilder ignoreCreateExceptions( final boolean ignoreCreateExceptions )
+    {
+        this.ignoreCreateExceptions = ignoreCreateExceptions;
+        return this;
+    }
+
+    /**
+     * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
+     * which will then be used to create an object and push it on the stack.
+     *
+     * @param type Java class of the object creation factory class
+     * @return this builder instance
+     */
+    public FactoryCreateBuilder ofType( final Class<? extends ObjectCreationFactory<?>> type )
+    {
+        if ( type == null )
+        {
+            reportError( "factoryCreate().ofType( Class<? extends ObjectCreationFactory<?>> )",
+                              "NULL Java type not allowed" );
+        }
+
+        this.type = type;
+
+        return this;
+    }
+
+    /**
      * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
      *
@@ -83,22 +135,14 @@ public final class FactoryCreateBuilder
     }
 
     /**
-     * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
-     * which will then be used to create an object and push it on the stack.
+     * Allows specify the attribute containing an override class name if it is present.
      *
-     * @param type Java class of the object creation factory class
+     * @param attributeName The attribute containing an override class name if it is present
      * @return this builder instance
      */
-    public FactoryCreateBuilder ofType( final Class<? extends ObjectCreationFactory<?>> type )
+    public FactoryCreateBuilder overriddenByAttribute( /* @Nullable */final String attributeName )
     {
-        if ( type == null )
-        {
-            reportError( "factoryCreate().ofType( Class<? extends ObjectCreationFactory<?>> )",
-                              "NULL Java type not allowed" );
-        }
-
-        this.type = type;
-
+        this.attributeName = attributeName;
         return this;
     }
 
@@ -113,50 +157,6 @@ public final class FactoryCreateBuilder
     {
         this.creationFactory = creationFactory;
         return this;
-    }
-
-    /**
-     * Allows specify the attribute containing an override class name if it is present.
-     *
-     * @param attributeName The attribute containing an override class name if it is present
-     * @return this builder instance
-     */
-    public FactoryCreateBuilder overriddenByAttribute( /* @Nullable */final String attributeName )
-    {
-        this.attributeName = attributeName;
-        return this;
-    }
-
-    /**
-     * Exceptions thrown by the object creation factory will be ignored or not.
-     *
-     * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored
-     * @return this builder instance
-     */
-    public FactoryCreateBuilder ignoreCreateExceptions( final boolean ignoreCreateExceptions )
-    {
-        this.ignoreCreateExceptions = ignoreCreateExceptions;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected FactoryCreateRule createRule()
-    {
-        if ( type == null && attributeName == null && creationFactory == null )
-        {
-            reportError( "factoryCreate()",
-                         "at least one between 'className', 'attributeName' or 'creationFactory' has to be specified" );
-        }
-
-        if ( type != null || attributeName != null )
-        {
-            return new FactoryCreateRule( type, attributeName, ignoreCreateExceptions );
-        }
-
-        return new FactoryCreateRule( creationFactory, ignoreCreateExceptions );
     }
 
 }

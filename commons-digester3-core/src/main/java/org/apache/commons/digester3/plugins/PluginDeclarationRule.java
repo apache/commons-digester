@@ -40,12 +40,51 @@ public class PluginDeclarationRule
 
     // ------------------- constructors ---------------------------------------
 
+    /**
+     * Helper method to declare a plugin inside the given Digester.
+     *
+     * @param digester The Digester instance to declare plugin
+     * @param props the properties where extracting plugin attributes
+     * @throws PluginException if any error occurs while declaring the plugin
+     */
+    public static void declarePlugin( final Digester digester, final Properties props )
+        throws PluginException
+    {
+        final String id = props.getProperty( "id" );
+        final String pluginClassName = props.getProperty( "class" );
+
+        if ( id == null )
+        {
+            throw new PluginInvalidInputException( "mandatory attribute id not present on plugin declaration" );
+        }
+
+        if ( pluginClassName == null )
+        {
+            throw new PluginInvalidInputException( "mandatory attribute class not present on plugin declaration" );
+        }
+
+        final Declaration newDecl = new Declaration( pluginClassName );
+        newDecl.setId( id );
+        newDecl.setProperties( props );
+
+        final PluginRules rc = (PluginRules) digester.getRules();
+        final PluginManager pm = rc.getPluginManager();
+
+        newDecl.init( digester, pm );
+        pm.addDeclaration( newDecl );
+
+        // Note that it is perfectly safe to redeclare a plugin, because
+        // the declaration doesn't add any rules to digester; all it does
+        // is create a RuleLoader instance whch is *capable* of adding the
+        // rules to the digester.
+    }
+
+    // ------------------- methods --------------------------------------------
+
     /** constructor */
     public PluginDeclarationRule()
     {
     }
-
-    // ------------------- methods --------------------------------------------
 
     /**
      * Invoked upon reading a tag defining a plugin declaration. The tag must have the following mandatory attributes:
@@ -85,45 +124,6 @@ public class PluginDeclarationRule
             throw new PluginInvalidInputException( "Error on element [" + getDigester().getMatch() + "]: "
                 + ex.getMessage() );
         }
-    }
-
-    /**
-     * Helper method to declare a plugin inside the given Digester.
-     *
-     * @param digester The Digester instance to declare plugin
-     * @param props the properties where extracting plugin attributes
-     * @throws PluginException if any error occurs while declaring the plugin
-     */
-    public static void declarePlugin( final Digester digester, final Properties props )
-        throws PluginException
-    {
-        final String id = props.getProperty( "id" );
-        final String pluginClassName = props.getProperty( "class" );
-
-        if ( id == null )
-        {
-            throw new PluginInvalidInputException( "mandatory attribute id not present on plugin declaration" );
-        }
-
-        if ( pluginClassName == null )
-        {
-            throw new PluginInvalidInputException( "mandatory attribute class not present on plugin declaration" );
-        }
-
-        final Declaration newDecl = new Declaration( pluginClassName );
-        newDecl.setId( id );
-        newDecl.setProperties( props );
-
-        final PluginRules rc = (PluginRules) digester.getRules();
-        final PluginManager pm = rc.getPluginManager();
-
-        newDecl.init( digester, pm );
-        pm.addDeclaration( newDecl );
-
-        // Note that it is perfectly safe to redeclare a plugin, because
-        // the declaration doesn't add any rules to digester; all it does
-        // is create a RuleLoader instance whch is *capable* of adding the
-        // rules to the digester.
     }
 
 }
