@@ -543,7 +543,7 @@ public class CallMethodRuleTestCase
         throws Exception
     {
 
-        class TestCallMethodRule
+        final class TestCallMethodRule
             extends CallMethodRule
         {
             Object result;

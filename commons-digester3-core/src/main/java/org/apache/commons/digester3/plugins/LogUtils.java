@@ -46,7 +46,7 @@ import org.apache.commons.logging.Log;
  *
  * @since 1.6
  */
-class LogUtils
+final class LogUtils
 {
 
     /**

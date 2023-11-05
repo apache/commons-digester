@@ -133,7 +133,7 @@ public class DigesterTestCase
     public void testBasicSubstitution()
         throws Exception
     {
-        class TestSubRule
+        final class TestSubRule
             extends Rule
         {
             public String body;
@@ -404,7 +404,7 @@ public class DigesterTestCase
         throws Exception
     {
 
-        class TestConfigureDigester
+        final class TestConfigureDigester
             extends Digester
         {
             public int called;

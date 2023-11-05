@@ -187,7 +187,7 @@ public class TestFactoryCreate
     {
 
         // only used with this method
-        class ThrowExceptionCreateRule
+        final class ThrowExceptionCreateRule
             extends AbstractObjectCreationFactory<Object>
         {
             @Override
