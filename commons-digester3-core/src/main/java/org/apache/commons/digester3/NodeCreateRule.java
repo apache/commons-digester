@@ -70,7 +70,7 @@ public class NodeCreateRule
     /**
      * The SAX content handler that does all the actual work of assembling the DOM node tree from the SAX events.
      */
-    private class NodeBuilder
+    private final class NodeBuilder
         extends DefaultHandler
     {
 

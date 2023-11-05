@@ -102,7 +102,7 @@ public class SetNestedPropertiesRule
     extends Rule
 {
 
-    private class AnyChildRule
+    private final class AnyChildRule
         extends Rule
     {
 
@@ -202,7 +202,7 @@ public class SetNestedPropertiesRule
     }
 
     /** Private Rules implementation */
-    private class AnyChildRules
+    private final class AnyChildRules
         implements Rules
     {
         private String matchPrefix;
