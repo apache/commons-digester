@@ -55,7 +55,7 @@ public class PluginManager
     // ------------------- constructors ---------------------------------------
 
     /**
-     * Construct a "root" PluginManager, ie one with no parent.
+     * Constructs a "root" PluginManager, ie one with no parent.
      *
      * @param r The object containing data that should only exist once for each Digester instance.
      */
@@ -65,7 +65,7 @@ public class PluginManager
     }
 
     /**
-     * Construct a "child" PluginManager. When declarations are added to a "child", they are stored within the child and
+     * Constructs a "child" PluginManager. When declarations are added to a "child", they are stored within the child and
      * do not modify the parent, so when the child goes out of scope, those declarations disappear. When asking a
      * "child" to retrieve a declaration, it delegates the search to its parent if it does not hold a matching entry
      * itself.

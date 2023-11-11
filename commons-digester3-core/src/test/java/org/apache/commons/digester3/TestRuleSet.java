@@ -34,7 +34,7 @@ public class TestRuleSet
     protected String prefix;
 
     /**
-     * Construct an instance of this RuleSet with default values.
+     * Constructs an instance of this RuleSet with default values.
      */
     public TestRuleSet()
     {
@@ -44,7 +44,7 @@ public class TestRuleSet
     }
 
     /**
-     * Construct an instance of this RuleSet associated with the specified prefix, associated with no namespace URI.
+     * Constructs an instance of this RuleSet associated with the specified prefix, associated with no namespace URI.
      *
      * @param prefix Matching pattern prefix (must end with '/') or null.
      */
@@ -58,7 +58,7 @@ public class TestRuleSet
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * Construct an instance of this RuleSet associated with the specified prefix and namespace URI.
+     * Constructs an instance of this RuleSet associated with the specified prefix and namespace URI.
      *
      * @param prefix Matching pattern prefix (must end with '/') or null.
      * @param namespaceURI The namespace URI these rules belong to

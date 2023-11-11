@@ -46,7 +46,7 @@ public class PathCallParamRule
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * Construct a "call parameter" rule that will save the body text of this element as the parameter value.
+     * Constructs a "call parameter" rule that will save the body text of this element as the parameter value.
      *
      * @param paramIndex The zero-relative parameter number
      */

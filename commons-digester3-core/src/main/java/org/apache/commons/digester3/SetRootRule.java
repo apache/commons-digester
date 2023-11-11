@@ -37,7 +37,7 @@ public class SetRootRule
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Construct a "set root" rule with the specified method name. The method's argument type is assumed to be the class
+     * Constructs a "set root" rule with the specified method name. The method's argument type is assumed to be the class
      * of the child object.
      *
      * @param methodName Method name of the parent method to call
@@ -48,7 +48,7 @@ public class SetRootRule
     }
 
     /**
-     * Construct a "set root" rule with the specified method name.
+     * Constructs a "set root" rule with the specified method name.
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
@@ -61,7 +61,7 @@ public class SetRootRule
     }
 
     /**
-     * Construct a "set root" rule with the specified method name.
+     * Constructs a "set root" rule with the specified method name.
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class name of the parent method's argument (if you wish to use a primitive type,

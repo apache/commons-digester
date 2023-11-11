@@ -52,7 +52,7 @@ public class SetPropertyRule
     protected String value;
 
     /**
-     * Construct a "set property" rule with the specified name and value attributes.
+     * Constructs a "set property" rule with the specified name and value attributes.
      *
      * @param name Name of the attribute that will contain the name of the property to be set
      * @param value Name of the attribute that will contain the value to which the property should be set

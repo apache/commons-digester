@@ -290,14 +290,14 @@ public class Digester
     protected List<InputSource> inputSources = new ArrayList<InputSource>( 5 );
 
     /**
-     * Construct a new Digester with default properties.
+     * Constructs a new Digester with default properties.
      */
     public Digester()
     {
     }
 
     /**
-     * Construct a new Digester, allowing a SAXParser to be passed in. This allows Digester to be used in environments
+     * Constructs a new Digester, allowing a SAXParser to be passed in. This allows Digester to be used in environments
      * which are unfriendly to JAXP1.1 (such as WebLogic 6.0). This may help in places where you are able to load JAXP
      * 1.1 classes yourself.
      *
@@ -311,7 +311,7 @@ public class Digester
     // ------------------------------------------------------------- Properties
 
     /**
-     * Construct a new Digester, allowing an XMLReader to be passed in. This allows Digester to be used in environments
+     * Constructs a new Digester, allowing an XMLReader to be passed in. This allows Digester to be used in environments
      * which are unfriendly to JAXP1.1 (such as WebLogic 6.0). Note that if you use this option you have to configure
      * namespace and validation support yourself, as these properties only affect the SAXParser and emtpy constructor.
      *

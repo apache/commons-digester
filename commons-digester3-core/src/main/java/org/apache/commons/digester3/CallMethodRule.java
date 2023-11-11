@@ -127,7 +127,7 @@ public class CallMethodRule
     private boolean useExactMatch;
 
     /**
-     * Construct a "call method" rule with the specified method name. The method should accept no parameters.
+     * Constructs a "call method" rule with the specified method name. The method should accept no parameters.
      *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
      *            object stack. Negative numbers are relative to the bottom of the stack. Zero implies the top object on
@@ -142,7 +142,7 @@ public class CallMethodRule
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * Construct a "call method" rule with the specified method name. The parameter types (if any) default to
+     * Constructs a "call method" rule with the specified method name. The parameter types (if any) default to
      * java.lang.String.
      *
      * @param targetOffset location of the target object. Positive numbers are relative to the top of the digester
@@ -169,7 +169,7 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
+     * Constructs a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
@@ -199,7 +199,7 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
+     * Constructs a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
@@ -231,7 +231,7 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name. The method should accept no parameters.
+     * Constructs a "call method" rule with the specified method name. The method should accept no parameters.
      *
      * @param methodName Method name of the parent method to call
      */
@@ -241,7 +241,7 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name. The parameter types (if any) default to
+     * Constructs a "call method" rule with the specified method name. The parameter types (if any) default to
      * java.lang.String.
      *
      * @param methodName Method name of the parent method to call
@@ -254,7 +254,7 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
+     * Constructs a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
@@ -270,7 +270,7 @@ public class CallMethodRule
     }
 
     /**
-     * Construct a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
+     * Constructs a "call method" rule with the specified method name and parameter types. If {@code paramCount} is
      * set to zero the rule will use the body of this element as the single argument of the method, unless
      * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *

@@ -72,7 +72,7 @@ public class CallParamRule
     protected Stack<String> bodyTextStack;
 
     /**
-     * Construct a "call parameter" rule that will save the body text of this element as the parameter value.
+     * Constructs a "call parameter" rule that will save the body text of this element as the parameter value.
      * <p>
      * Note that if the element is empty the an <i>empty string</i> is passed to the target method, not null. And if
      * automatic type conversion is being applied (ie if the target function takes something other than a string as a
@@ -87,7 +87,7 @@ public class CallParamRule
     }
 
     /**
-     * Construct a "call parameter" rule.
+     * Constructs a "call parameter" rule.
      *
      * @param paramIndex The zero-relative parameter number
      * @param fromStack should this parameter be taken from the top of the stack?
@@ -114,7 +114,7 @@ public class CallParamRule
     }
 
     /**
-     * Construct a "call parameter" rule that will save the value of the specified attribute as the parameter value.
+     * Constructs a "call parameter" rule that will save the value of the specified attribute as the parameter value.
      *
      * @param paramIndex The zero-relative parameter number
      * @param attributeName The name of the attribute to save

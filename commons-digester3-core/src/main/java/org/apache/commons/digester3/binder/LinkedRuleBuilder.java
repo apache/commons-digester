@@ -132,7 +132,7 @@ public final class LinkedRuleBuilder
     }
 
     /**
-     * Construct a "call parameter" rule that will save the body text of this element as the parameter value.
+     * Constructs a "call parameter" rule that will save the body text of this element as the parameter value.
      *
      * @return a new {@link PathCallParamBuilder} instance.
      */
@@ -152,7 +152,7 @@ public final class LinkedRuleBuilder
     }
 
     /**
-     * Construct an object.
+     * Constructs an object.
      *
      * @return a new {@link ObjectCreateBuilder} instance.
      */
@@ -214,7 +214,7 @@ public final class LinkedRuleBuilder
     }
 
     /**
-     * Construct rule that automatically sets a property from the body text, taking the property
+     * Constructs rule that automatically sets a property from the body text, taking the property
      * name the same as the current element.
      *
      * @return a new {@link BeanPropertySetterBuilder} instance.

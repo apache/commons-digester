@@ -68,7 +68,7 @@ public class FactoryCreateRule
 
     /**
      * <p>
-     * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
+     * Constructs a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
      * </p>
      * <p>
@@ -83,7 +83,7 @@ public class FactoryCreateRule
     }
 
     /**
-     * Construct a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
+     * Constructs a factory create rule that will use the specified class to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
      *
      * @param clazz Java class name of the object creation factory class
@@ -96,7 +96,7 @@ public class FactoryCreateRule
 
     /**
      * <p>
-     * Construct a factory create rule that will use the specified class (possibly overridden by the specified attribute
+     * Constructs a factory create rule that will use the specified class (possibly overridden by the specified attribute
      * if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an object instance
      * and push it onto the stack.
      * </p>
@@ -114,7 +114,7 @@ public class FactoryCreateRule
     }
 
     /**
-     * Construct a factory create rule that will use the specified class (possibly overridden by the specified attribute
+     * Constructs a factory create rule that will use the specified class (possibly overridden by the specified attribute
      * if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an object instance
      * and push it onto the stack.
      *
@@ -131,7 +131,7 @@ public class FactoryCreateRule
 
     /**
      * <p>
-     * Construct a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
+     * Constructs a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
      * </p>
      * <p>
      * Exceptions thrown during the object creation process will be propagated.
@@ -145,7 +145,7 @@ public class FactoryCreateRule
     }
 
     /**
-     * Construct a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
+     * Constructs a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
      *
      * @param creationFactory called on to create the object.
      * @param ignoreCreateExceptions if true, exceptions thrown by the object creation factory will be ignored.
@@ -158,7 +158,7 @@ public class FactoryCreateRule
 
     /**
      * <p>
-     * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
+     * Constructs a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
      * </p>
      * <p>
@@ -175,7 +175,7 @@ public class FactoryCreateRule
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * Construct a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
+     * Constructs a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
      *
      * @param className Java class name of the object creation factory class
@@ -188,7 +188,7 @@ public class FactoryCreateRule
 
     /**
      * <p>
-     * Construct a factory create rule that will use the specified class name (possibly overridden by the specified
+     * Constructs a factory create rule that will use the specified class name (possibly overridden by the specified
      * attribute if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an
      * object instance and push it onto the stack.
      * </p>
@@ -206,7 +206,7 @@ public class FactoryCreateRule
     }
 
     /**
-     * Construct a factory create rule that will use the specified class name (possibly overridden by the specified
+     * Constructs a factory create rule that will use the specified class name (possibly overridden by the specified
      * attribute if present) to create an {@link ObjectCreationFactory}, which will then be used to instantiate an
      * object instance and push it onto the stack.
      *

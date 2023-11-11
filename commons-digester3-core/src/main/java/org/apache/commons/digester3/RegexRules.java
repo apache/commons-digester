@@ -67,7 +67,7 @@ public class RegexRules
     // --------------------------------------------------------- Properties
 
     /**
-     * Construct sets the Regex matching strategy.
+     * Constructs sets the Regex matching strategy.
      *
      * @param matcher the regex strategy to be used, not null
      */
