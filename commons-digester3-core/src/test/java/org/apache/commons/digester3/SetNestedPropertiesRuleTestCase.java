@@ -204,7 +204,7 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
-     * Test that it is an error when a child element exists but no corresponding java property exists.
+     * Test that it is an error when a child element exists but no corresponding Java property exists.
      */
     @Test
     public void testMandatoryProperties()

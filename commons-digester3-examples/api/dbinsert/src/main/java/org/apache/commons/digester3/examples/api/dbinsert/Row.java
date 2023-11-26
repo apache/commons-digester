@@ -32,7 +32,7 @@ public class Row
      * order. This wouldn't be a problem if we were really inserting into
      * a database; it only matters because we are displaying the SQL statements
      * via stdout instead. The LinkedHashMap class would be nice to use, but
-     * that would require java 1.4, so we'll use a list instead, and may as
+     * that would require Java 1.4, so we'll use a list instead, and may as
      * well call the entries in the list 'Column' objects.
      */
     public static class Column

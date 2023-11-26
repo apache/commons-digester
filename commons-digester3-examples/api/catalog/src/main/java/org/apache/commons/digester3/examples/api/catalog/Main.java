@@ -26,7 +26,7 @@ import org.apache.commons.digester3.Digester;
  * Commons Digester module.
  * <p>
  * This code will parse the provided "example.xml" file to build a tree
- * of java objects, then cause those objects to print out their values
+ * of Java objects, then cause those objects to print out their values
  * to demonstrate that the input file has been processed correctly. The
  * input file represents a catalog of items in a library.
  * <p>

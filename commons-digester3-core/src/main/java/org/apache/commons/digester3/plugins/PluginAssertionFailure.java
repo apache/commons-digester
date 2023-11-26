@@ -22,8 +22,8 @@ package org.apache.commons.digester3.plugins;
 /**
  * Thrown when a bug is detected in the plugins code.
  * <p>
- * This class is intended to be used in assertion statements, similar to the way that java 1.4's native assertion
- * mechanism is used. However there is a difference: when a java 1.4 assertion fails, an AssertionError is thrown, which
+ * This class is intended to be used in assertion statements, similar to the way that Java 1.4's native assertion
+ * mechanism is used. However there is a difference: when a Java 1.4 assertion fails, an AssertionError is thrown, which
  * is a subclass of Error; here, the PluginAssertionFailure class extends RuntimeException rather than Error.
  * <p>
  * This difference in design is because throwing Error objects is not good in a container-based architecture.

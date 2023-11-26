@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
  * Commons Digester module with the xmlrules extension.
  * <p>
  * This code will parse the provided "example.xml" file to build a tree
- * of java objects, then cause those objects to print out their values
+ * of Java objects, then cause those objects to print out their values
  * to demonstrate that the input file has been processed correctly.
  * <p>
  * Unlike the "addressbook" example in the "api" section, this implementation

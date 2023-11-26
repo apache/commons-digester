@@ -331,7 +331,7 @@ public class SetNestedPropertiesRule
     /**
      * Base constructor, which maps every child element into a bean property with the same name as the xml element.
      * <p>
-     * It is an error if a child xml element exists but the target java bean has no such property (unless
+     * It is an error if a child xml element exists but the target Java bean has no such property (unless
      * {@link #setAllowUnknownChildElements(boolean)} has been set to true).
      * </p>
      */
@@ -366,7 +366,7 @@ public class SetNestedPropertiesRule
      * </p>
      *
      * @param elementName is the child xml element to match
-     * @param propertyName is the java bean property to be assigned the value of the specified xml element. This may be
+     * @param propertyName is the Java bean property to be assigned the value of the specified xml element. This may be
      *            null, in which case the specified xml element will be ignored.
      */
     public SetNestedPropertiesRule( final String elementName, final String propertyName )
@@ -379,7 +379,7 @@ public class SetNestedPropertiesRule
      * Constructor which allows element->property mapping to be overridden.
      * </p>
      * <p>
-     * Two arrays are passed in. One contains xml element names and the other java bean property names. The element name
+     * Two arrays are passed in. One contains xml element names and the other Java bean property names. The element name
      * / property name pairs are matched by position; in order words, the first string in the element name array
      * corresponds to the first string in the property name array and so on.
      * </p>

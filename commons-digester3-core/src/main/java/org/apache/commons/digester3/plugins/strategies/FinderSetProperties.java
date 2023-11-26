@@ -77,7 +77,7 @@ public class FinderSetProperties
      * propsAttr, and the value matching what is in falseval.
      * <p>
      * If no custom source of rules for a plugin is found, then the user almost always wants xml attributes to map to
-     * java bean properties, so this is the default behavior unless the user explicitly indicates that they do
+     * Java bean properties, so this is the default behavior unless the user explicitly indicates that they do
      * <i>not</i> want a SetPropertiesRule to be provided for the plugged-in class.
      * <p>
      * The returned object (when non-null) will add a SetPropertiesRule to the digester whenever its addRules method is

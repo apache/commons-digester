@@ -65,7 +65,7 @@ public final class NestedPropertiesBuilder
      * Allows element2property mapping to be overridden.
      *
      * @param elementName The child xml element to match
-     * @param propertyName The java bean property to be assigned the value
+     * @param propertyName The Java bean property to be assigned the value
      * @return this builder instance
      * @deprecated
      */

@@ -61,7 +61,7 @@ public final class SetPropertiesBuilder
      * Add an additional attribute name to property name mapping.
      *
      * @param attributeName The attribute to match
-     * @param propertyName The java bean property to be assigned the value
+     * @param propertyName The Java bean property to be assigned the value
      * @return this builder instance
      * @deprecated
      */
