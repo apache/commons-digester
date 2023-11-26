@@ -32,7 +32,6 @@ import org.xml.sax.helpers.AttributesImpl;
 public final class CompoundSubstitutorTestCase
 {
 
-
     private static final class SubstitutorStub
         extends Substitutor
     {

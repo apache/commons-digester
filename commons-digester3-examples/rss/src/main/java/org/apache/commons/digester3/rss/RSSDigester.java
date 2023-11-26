@@ -26,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-
 /**
  * <p>Implementation of <strong>org.apache.commons.digester3.Digester</strong>
  * designed to process input streams that conform to the <em>Rich Site
@@ -264,7 +263,6 @@ public class RSSDigester
         configure();
         return ( super.<T>parse( uri ) );
     }
-
 
     public void setChannelClass( final String channelClass )
     {

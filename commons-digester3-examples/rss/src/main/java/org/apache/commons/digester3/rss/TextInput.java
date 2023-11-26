@@ -20,7 +20,6 @@ package org.apache.commons.digester3.rss;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
-
 /**
  * <p>Implementation object representing a <strong>textinput</strong> in the
  * <em>Rich Site Summary</em> DTD, version 0.91.  This class may be subclassed

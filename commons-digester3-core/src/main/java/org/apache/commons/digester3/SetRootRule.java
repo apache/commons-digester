@@ -19,7 +19,6 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
-
 /**
  * <p>
  * Rule implementation that calls a method on the root object on the stack, passing the top object (child) as an

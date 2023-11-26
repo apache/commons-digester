@@ -19,7 +19,6 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
-
 /**
  * <p>
  * {@code AbstractRuleImpl} provides basic services for {@code Rules} implementations. Extending this class

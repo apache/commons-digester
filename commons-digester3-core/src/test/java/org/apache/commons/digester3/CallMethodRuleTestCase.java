@@ -361,7 +361,6 @@ public class CallMethodRuleTestCase
        // an exception will be thrown if the method can't be found
         final NamedBean root1 = digester.parse( getInputStream( "Test8.xml" ) );
 
-
         // if the CallMethodRule were to incorrectly invoke the method call
         // on the second-created NamedBean instance, then the root one would
         // have a null name. If it works correctly, the target element will
