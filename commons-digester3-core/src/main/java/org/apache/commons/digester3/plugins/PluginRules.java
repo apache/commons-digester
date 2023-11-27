@@ -173,7 +173,7 @@ public class PluginRules
             pattern = pattern.substring( 1 );
         }
 
-        if ( mountPoint != null && !pattern.equals( mountPoint ) && !pattern.startsWith( mountPoint + "/" ) )
+        if (isValidPattern(pattern))
         {
             // This can only occur if a plugin attempts to add a
             // rule with a pattern that doesn't start with the
@@ -217,6 +217,10 @@ public class PluginRules
             log.debug( "add exit" + ": mapped pattern [" + pattern + "]" + " to rule of type ["
                 + rule.getClass().getName() + "]" );
         }
+    }
+
+    private boolean isValidPattern(String pattern) {
+        return mountPoint != null && !pattern.equals(mountPoint) && !pattern.startsWith(mountPoint + "/");
     }
 
     /**

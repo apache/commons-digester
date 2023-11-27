@@ -55,96 +55,95 @@ final class IncludeRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( final String namespace, final String name, final Attributes attributes )
-        throws Exception
-    {
-        // The path attribute gives the URI to another digester rules xml file
-        final String fileName = attributes.getValue( "url" );
-        if ( fileName != null && !fileName.isEmpty() )
-        {
-            final URL xmlRulesResource;
+    public void begin(final String namespace, final String name, final Attributes attributes) throws Exception {
+        handleInclude(attributes);
+        handleClass(attributes);
+    }
 
-            if ( fileName.startsWith( CLASSPATH_URL_PREFIX ) )
-            {
-                String path = fileName.substring( CLASSPATH_URL_PREFIX.length() );
-                if ( '/' == path.charAt( 0 ) )
-                {
-                    path = path.substring( 1 );
-                }
-                xmlRulesResource = this.targetRulesBinder.getContextClassLoader().getResource( path );
-                if ( xmlRulesResource == null )
-                {
-                    targetRulesBinder.addError( "Resource '%s' not found, please make sure it is in the classpath",
-                                                path );
-                    return;
-                }
-            }
-            else
-            {
-                try
-                {
-                    xmlRulesResource = new URL( fileName );
-                }
-                catch ( final MalformedURLException e )
-                {
-                    targetRulesBinder.addError( "An error occurred while inculing file from '%s': %s", fileName,
-                                                e.getMessage() );
-                    return;
-                }
-            }
+    private void handleInclude(Attributes attributes) {
+        final String fileName = attributes.getValue("url");
+        if (fileName != null && !fileName.isEmpty()) {
+            final URL xmlRulesResource = resolveXmlRulesResource(fileName);
 
-            final Set<String> includedFiles = memoryRulesBinder.getIncludedFiles();
-            final String xmlRulesResourceString = xmlRulesResource.toString();
-            if ( includedFiles.add( xmlRulesResourceString ) )
-            {
-                try
-                {
-                    install( new FromXmlRulesModule()
-                    {
-
-                        @Override
-                        protected void loadRules()
-                        {
-                            loadXMLRules( xmlRulesResource );
-                        }
-
-                    } );
-                }
-                finally
-                {
-                    includedFiles.remove( xmlRulesResourceString );
-                }
-            }
-            else
-            {
-                targetRulesBinder.addError( "Circular file inclusion detected for XML rules: %s", xmlRulesResource );
+            if (xmlRulesResource != null) {
+                processXmlRulesResource(xmlRulesResource);
             }
         }
+    }
 
-        // The class attribute gives the name of a class that implements
-        // the DigesterRulesSource interface
-        final String className = attributes.getValue( "class" );
-        if ( className != null && !className.isEmpty() )
-        {
-            try
-            {
-                final Class<?> cls = Class.forName( className );
-                if ( !RulesModule.class.isAssignableFrom( cls ) )
-                {
-                    targetRulesBinder.addError( "Class '%s' if not a '%s' implementation", className,
-                                                RulesModule.class.getName() );
-                    return;
-                }
+    private URL resolveXmlRulesResource(String fileName) {
+        if (fileName.startsWith(CLASSPATH_URL_PREFIX)) {
+            return resolveClasspathResource(fileName);
+        } else {
+            return resolveExternalResource(fileName);
+        }
+    }
 
-                final RulesModule rulesSource = (RulesModule) cls.newInstance();
+    private URL resolveClasspathResource(String fileName) {
+        String path = fileName.substring(CLASSPATH_URL_PREFIX.length());
+        if ('/' == path.charAt(0)) {
+            path = path.substring(1);
+        }
+        URL xmlRulesResource = this.targetRulesBinder.getContextClassLoader().getResource(path);
+        if (xmlRulesResource == null) {
+            targetRulesBinder.addError("Resource '%s' not found, please make sure it is in the classpath", path);
+            return null;
+        }
+        return xmlRulesResource;
+    }
 
-                install( rulesSource );
+    private URL resolveExternalResource(String fileName) {
+        try {
+            return new URL(fileName);
+        } catch (MalformedURLException e) {
+            targetRulesBinder.addError("An error occurred while including file from '%s': %s", fileName, e.getMessage());
+            return null;
+        }
+    }
+
+    private void processXmlRulesResource(URL xmlRulesResource) {
+        final Set<String> includedFiles = memoryRulesBinder.getIncludedFiles();
+        final String xmlRulesResourceString = xmlRulesResource.toString();
+        if (includedFiles.add(xmlRulesResourceString)) {
+            try {
+                installFromXmlRulesModule(xmlRulesResource);
+            } finally {
+                includedFiles.remove(xmlRulesResourceString);
             }
-            catch ( final Exception e )
-            {
-                targetRulesBinder.addError( "Impossible to include programmatic rules from class '%s': %s", className,
-                                            e.getMessage() );
+        } else {
+            targetRulesBinder.addError("Circular file inclusion detected for XML rules: %s", xmlRulesResource);
+        }
+    }
+
+    private void installFromXmlRulesModule(URL xmlRulesResource) {
+        install(new FromXmlRulesModule() {
+            @Override
+            protected void loadRules() {
+                loadXMLRules(xmlRulesResource);
             }
+        });
+    }
+
+    private void handleClass(Attributes attributes) {
+        final String className = attributes.getValue("class");
+        if (className != null && !className.isEmpty()) {
+            processClassAttribute(className);
+        }
+    }
+
+    private void processClassAttribute(String className) {
+        try {
+            final Class<?> cls = Class.forName(className);
+            if (!RulesModule.class.isAssignableFrom(cls)) {
+                targetRulesBinder.addError("Class '%s' is not a '%s' implementation", className, RulesModule.class.getName());
+                return;
+            }
+
+            final RulesModule rulesSource = (RulesModule) cls.newInstance();
+
+            install(rulesSource);
+        } catch (Exception e) {
+            targetRulesBinder.addError("Impossible to include programmatic rules from class '%s': %s", className, e.getMessage());
         }
     }
 
