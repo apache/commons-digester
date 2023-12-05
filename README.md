@@ -59,7 +59,7 @@ Documentation
 
 More information can be found on the [Apache Commons Digester homepage](https://commons.apache.org/proper/commons-digester).
 The [Javadoc](https://commons.apache.org/proper/commons-digester/apidocs) can be browsed.
-Questions related to the usage of Apache Commons Digester should be posted to the [user mailing list][ml].
+Questions related to the usage of Apache Commons Digester should be posted to the [user mailing list](https://commons.apache.org/mail-lists.html).
 
 Where can I get the latest release?
 -----------------------------------
