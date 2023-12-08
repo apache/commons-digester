@@ -81,7 +81,7 @@
       Bump Java requirement from version 6 to 7
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-187">
-      Bump Apache Commons Bean Utils from 1.8.3 to 1.9.4.
+      Bump Apache Commons BeanUtils from 1.8.3 to 1.9.4.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-188" due-to="Dependabot">
       Bump cglib from 2.2.2 to 3.3.0 #9.
