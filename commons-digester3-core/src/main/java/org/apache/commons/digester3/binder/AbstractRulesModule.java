@@ -33,7 +33,7 @@ public abstract class AbstractRulesModule
     /**
      * Records an error message which will be presented to the user at a later time.
      *
-     * Uses {@link java.lang.String#format(String, Object...)} to insert the arguments into the message.
+     * Uses {@link String#format(String, Object...)} to insert the arguments into the message.
      *
      * @param messagePattern A
      *        <a href="http://download.oracle.com/javase/6/docs/api/java/util/Formatter.html#syntax">format string</a>
