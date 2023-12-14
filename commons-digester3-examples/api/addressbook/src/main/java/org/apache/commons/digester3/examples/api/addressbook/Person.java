@@ -42,7 +42,7 @@ public class Person
         addresses.add( addr );
     }
 
-    /** we assume only one email of each type... */
+    /** We assume only one email of each type... */
     public void addEmail( final String type, final String address )
     {
         emails.put( type, address );

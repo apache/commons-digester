@@ -81,7 +81,7 @@ public class PluginDeclarationRule
 
     // ------------------- methods --------------------------------------------
 
-    /** constructor */
+    /** Constructor */
     public PluginDeclarationRule()
     {
     }
