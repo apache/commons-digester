@@ -44,7 +44,7 @@ public class PluginManager
     /** Map of id->Declaration */
     private final HashMap<String, Declaration> declarationsById = new HashMap<String, Declaration>();
 
-    /** the parent manager to which this one may delegate lookups. */
+    /** The parent manager to which this one may delegate lookups. */
     private PluginManager parent;
 
     /**
