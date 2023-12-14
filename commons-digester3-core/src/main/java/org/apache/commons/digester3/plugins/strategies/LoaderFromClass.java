@@ -61,7 +61,7 @@ public class LoaderFromClass
     private final Method rulesMethod;
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param rulesClass The target class
      * @param rulesMethod The method has to be invoked
@@ -73,7 +73,7 @@ public class LoaderFromClass
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param rulesClass The target class
      * @param methodName The method name has to be invoked

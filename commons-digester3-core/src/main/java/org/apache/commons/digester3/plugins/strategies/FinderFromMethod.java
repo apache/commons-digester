@@ -45,7 +45,7 @@ public class FinderFromMethod
     /** See {@link #findLoader}. */
     private final String methodAttr;
 
-    /** Constructor. */
+    /** Constructs a new instance. */
     public FinderFromMethod()
     {
         this( DFLT_METHOD_ATTR );

@@ -56,7 +56,7 @@ public class Declaration
     // ---------------------- constructors ----------------------------------
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param pluginClass The class of the object to be instantiated (will be load in the init method)
      */
@@ -81,7 +81,7 @@ public class Declaration
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param pluginClassName The name of the class of the object to be instantiated (will be load in the init method)
      */

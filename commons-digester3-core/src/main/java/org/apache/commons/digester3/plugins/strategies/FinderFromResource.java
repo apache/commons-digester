@@ -83,7 +83,7 @@ public class FinderFromResource
     /** See {@link #findLoader}. */
     private final String resourceAttr;
 
-    /** Constructor. */
+    /** Constructs a new instance. */
     public FinderFromResource()
     {
         this( DFLT_RESOURCE_ATTR );

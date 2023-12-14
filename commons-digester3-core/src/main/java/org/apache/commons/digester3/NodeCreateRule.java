@@ -109,7 +109,7 @@ public class NodeCreateRule
         protected StringBuilder topText = new StringBuilder();
 
         /**
-         * Constructor.
+         * Constructs a new instance.
          * <p>
          * Stores the content handler currently used by Digester so it can be reset when done, and initializes the DOM
          * objects needed to build the node.
@@ -323,7 +323,7 @@ public class NodeCreateRule
     }
 
     /**
-     * Constructor. Creates an instance of this rule that will create a DOM {@link org.w3c.dom.Element Element}, but
+     * Constructs a new instance. Creates an instance of this rule that will create a DOM {@link org.w3c.dom.Element Element}, but
      * lets you specify the JAXP {@code DocumentBuilder} that should be used when constructing the node tree.
      *
      * @param documentBuilder the JAXP {@code DocumentBuilder} to use
@@ -336,7 +336,7 @@ public class NodeCreateRule
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * Constructor. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
+     * Constructs a new instance. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
      * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
      * {@code nodeType} parameter.
      *
@@ -353,7 +353,7 @@ public class NodeCreateRule
     }
 
     /**
-     * Constructor. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
+     * Constructs a new instance. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
      * or a DOM {@link org.w3c.dom.DocumentFragment DocumentFragment}, depending on the value of the
      * {@code nodeType} parameter. This constructor lets you specify the JAXP {@code DocumentBuilder} that
      * should be used when constructing the node tree.
