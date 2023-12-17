@@ -57,7 +57,7 @@ public class SetNextRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *                  corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *                  corresonding Java wrapper class instead, such as {@link Boolean} for a
      *                  {@code boolean} parameter)
      */
     public SetNextRule( final String methodName, final Class<?> paramType )
@@ -70,7 +70,7 @@ public class SetNextRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class name of the parent method's argument (if you wish to use a primitive type,
-     *                  specify the corresonding Java wrapper class instead, such as {@code java.lang.Boolean}
+     *                  specify the corresonding Java wrapper class instead, such as {@link Boolean}
      *                  for a {@code boolean} parameter)
      */
     public SetNextRule( final String methodName, final String paramType )

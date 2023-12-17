@@ -379,7 +379,7 @@ public class Digester
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      * @see CallMethodRule
      */
@@ -398,7 +398,7 @@ public class Digester
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @param paramTypes Set of Java class names for the types of the expected parameters (if you wish to use a
      *            primitive type, specify the corresonding Java wrapper class instead, such as
-     *            {@code java.lang.Boolean} for a {@code boolean} parameter)
+     *            {@link Boolean} for a {@code boolean} parameter)
      * @see CallMethodRule
      */
     public void addCallMethod( final String pattern, final String methodName, final int paramCount, final String paramTypes[] )
@@ -783,7 +783,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      * @see SetNextRule
      */
@@ -887,7 +887,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@code java.lang.Boolean} for a
+     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      * @see SetTopRule
      */
