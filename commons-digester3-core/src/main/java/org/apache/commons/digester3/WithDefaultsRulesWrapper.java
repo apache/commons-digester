@@ -36,7 +36,7 @@ import org.xml.sax.Attributes;
  * </p>
  * <p>
  * For example,
- *
+ * </p>
  * <pre>
  *   Rule alpha;
  *   ...
@@ -46,7 +46,7 @@ import org.xml.sax.Attributes;
  *   digester.setRules(rules);
  *   ...
  * </pre>
- *
+ * <p>
  * when a pattern does not match any other rule, then rule alpha will be called.
  * </p>
  * <p>
@@ -59,8 +59,6 @@ public class WithDefaultsRulesWrapper
     implements Rules
 {
 
-    // --------------------------------------------------------- Fields
-
     /** The Rules implementation that this class wraps. */
     private final Rules wrappedRules;
 
@@ -69,8 +67,6 @@ public class WithDefaultsRulesWrapper
 
     /** All rules (preserves order in which they were originally added) */
     private final List<Rule> allRules = new ArrayList<Rule>();
-
-    // --------------------------------------------------------- Constructor
 
     /**
      * Base constructor.
@@ -85,8 +81,6 @@ public class WithDefaultsRulesWrapper
         }
         this.wrappedRules = wrappedRules;
     }
-
-    // --------------------------------------------------------- Properties
 
     /**
      * {@inheritDoc}
@@ -149,8 +143,6 @@ public class WithDefaultsRulesWrapper
     {
         return wrappedRules.getDigester();
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

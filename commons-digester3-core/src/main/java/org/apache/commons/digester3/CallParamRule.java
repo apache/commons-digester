@@ -26,23 +26,21 @@ import org.xml.sax.Attributes;
 
 /**
  * <p>
- * Rule implementation that saves a parameter for use by a surrounding <code>CallMethodRule<code>.
+ * Rule implementation that saves a parameter for use by a surrounding {@link CallMethodRule}.
  * </p>
  * <p>
  * This parameter may be:
+ * </p>
  * <ul>
  * <li>from an attribute of the current element See {@link #CallParamRule(int paramIndex, String attributeName)}
  * <li>from current the element body See {@link #CallParamRule(int paramIndex)}
  * <li>from the top object on the stack. See {@link #CallParamRule(int paramIndex, boolean fromStack)}
  * <li>the current path being processed (separate {@code Rule}). See {@link PathCallParamRule}
  * </ul>
- * </p>
  */
 public class CallParamRule
     extends Rule
 {
-
-    // ----------------------------------------------------------- Constructors
 
     /**
      * The attribute from which to save the parameter value
@@ -63,8 +61,6 @@ public class CallParamRule
      * The position of the object from the top of the stack
      */
     protected int stackIndex;
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * Stack is used to allow nested body text to be processed. Lazy creation.
@@ -124,8 +120,6 @@ public class CallParamRule
         this.paramIndex = paramIndex;
         this.attributeName = attributeName;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

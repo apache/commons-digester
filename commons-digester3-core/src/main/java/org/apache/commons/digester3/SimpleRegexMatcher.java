@@ -28,11 +28,13 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <p>
  * This uses just two wildcards:
+ * </p>
  * <ul>
  * <li>{@code *} matches any sequence of none, one or more characters
  * <li>{@code ?} matches any one character
  * </ul>
- * Escaping these wildcards is not supported .
+ * <p>
+ * Escaping these wildcards is not supported.
  * </p>
  *
  * @since 1.5
@@ -41,15 +43,11 @@ public class SimpleRegexMatcher
     extends RegexMatcher
 {
 
-    // --------------------------------------------------------- Fields
-
     /** Default log (class wide) */
     private static final Log BASE_LOG = LogFactory.getLog( SimpleRegexMatcher.class );
 
     /** Custom log (can be set per object) */
     private Log log = BASE_LOG;
-
-    // --------------------------------------------------------- Properties
 
     /**
      * Gets the {@code Log} implementation.
@@ -74,8 +72,6 @@ public class SimpleRegexMatcher
         }
         return match( basePattern, regexPattern, 0, 0 );
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Implementation of regex matching algorithm. This calls itself recursively.
@@ -166,8 +162,6 @@ public class SimpleRegexMatcher
                 return false;
         }
     }
-
-    // --------------------------------------------------------- Implementations Methods
 
     /**
      * Sets the current {@code Log} implementation used by this class.

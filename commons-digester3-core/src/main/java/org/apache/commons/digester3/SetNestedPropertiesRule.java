@@ -341,9 +341,9 @@ public class SetNestedPropertiesRule
     }
 
     /**
-     * Constructor which allows element->property mapping to be overridden.
+     * Constructor which allows element to property mapping to be overridden.
      *
-     * @param elementNames names of elements->properties to map
+     * @param elementNames names of elements to properties to map
      * @since 3.0
      */
     public SetNestedPropertiesRule( final Map<String, String> elementNames )
@@ -365,9 +365,9 @@ public class SetNestedPropertiesRule
      * {@link #SetNestedPropertiesRule(String[] elementNames, String[] propertyNames)}.
      * </p>
      *
-     * @param elementName is the child xml element to match
-     * @param propertyName is the Java bean property to be assigned the value of the specified xml element. This may be
-     *            null, in which case the specified xml element will be ignored.
+     * @param elementName is the child XML element to match
+     * @param propertyName is the Java bean property to be assigned the value of the specified XML element. This may be
+     *            null, in which case the specified XML element will be ignored.
      */
     public SetNestedPropertiesRule( final String elementName, final String propertyName )
     {
@@ -376,7 +376,7 @@ public class SetNestedPropertiesRule
 
     /**
      * <p>
-     * Constructor which allows element->property mapping to be overridden.
+     * Constructor which allows element to property mapping to be overridden.
      * </p>
      * <p>
      * Two arrays are passed in. One contains xml element names and the other Java bean property names. The element name
@@ -387,26 +387,28 @@ public class SetNestedPropertiesRule
      * If a property name is null or the xml element name has no matching property name due to the arrays being of
      * different lengths then this indicates that the xml element should be ignored.
      * </p>
-     * <h5>Example One</h5>
+     * <b>Example One</b>
      * <p>
      * The following constructs a rule that maps the {@code alt-city} element to the {@code city} property and
      * the {@code alt-state} to the {@code state} property. All other child elements are mapped as usual using
-     * exact name matching. <code><pre>
+     * exact name matching. 
+     * </p>
+     * <pre>{@code
      *      SetNestedPropertiesRule(
      *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
-     * </pre></code>
-     * </p>
-     * <h5>Example Two</h5>
+     * }</pre>
+     * <b>Example Two</b>
      * <p>
      * The following constructs a rule that maps the {@code class} xml element to the {@code className}
      * property. The xml element {@code ignore-me} is not mapped, ie is ignored. All other elements are mapped as
-     * usual using exact name matching. <code><pre>
+     * usual using exact name matching.
+     * </p>
+     * <pre>{@code
      *      SetPropertiesRule(
      *                new String[] {"class", "ignore-me"},
      *                new String[] {"className"});
-     * </pre></code>
-     * </p>
+     * }</pre>
      *
      * @param elementNames names of elements to map
      * @param propertyNames names of properties mapped to
@@ -426,11 +428,12 @@ public class SetNestedPropertiesRule
     }
 
     /**
-     * Add an additional custom xml-element -> property mapping.
+     * Add an additional custom xml-element to property mapping.
      * <p>
      * This is primarily intended to be used from the xml rules module (as it is not possible there to pass the
      * necessary parameters to the constructor for this class). However it is valid to use this method directly if
      * desired.
+     * </p>
      *
      * @param elementName the xml-element has to be mapped
      * @param propertyName the property name target

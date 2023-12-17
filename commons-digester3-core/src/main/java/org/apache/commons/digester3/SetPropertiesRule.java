@@ -43,8 +43,6 @@ public class SetPropertiesRule
     extends Rule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     private final Map<String, String> aliases = new HashMap<String, String>();
 
     /**
@@ -62,9 +60,9 @@ public class SetPropertiesRule
     }
 
     /**
-     * Constructor allows attribute->property mapping to be overriden.
+     * Constructor allows attribute to property mapping to be overriden.
      *
-     * @param aliases attribute->property mapping
+     * @param aliases attribute to property mapping
      * @since 3.0
      */
     public SetPropertiesRule( final Map<String, String> aliases )
@@ -74,8 +72,6 @@ public class SetPropertiesRule
             this.aliases.putAll( aliases );
         }
     }
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * <p>
@@ -96,7 +92,7 @@ public class SetPropertiesRule
 
     /**
      * <p>
-     * Constructor allows attribute->property mapping to be overriden.
+     * Constructor allows attribute to property mapping to be overriden.
      * </p>
      * <p>
      * Two arrays are passed in. One contains the attribute names and the other the property names. The attribute name /
@@ -107,24 +103,28 @@ public class SetPropertiesRule
      * If a property name is null or the attribute name has no matching property name, then this indicates that the
      * attibute should be ignored.
      * </p>
-     * <h5>Example One</h5>
+     * <b>Example One</b>
      * <p>
      * The following constructs a rule that maps the {@code alt-city} attribute to the {@code city} property
      * and the {@code alt-state} to the {@code state} property. All other attributes are mapped as usual using
-     * exact name matching. <code><pre>
+     * exact name matching.
+     * </p> 
+     * <pre>{@code
      *      SetPropertiesRule(
      *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
-     * </pre></code>
-     * <h5>Example Two</h5>
+     * }</pre>
+     * <b>Example Two</b>
      * <p>
      * The following constructs a rule that maps the {@code class} attribute to the {@code className}
      * property. The attribute {@code ignore-me} is not mapped. All other attributes are mapped as usual using
-     * exact name matching. <code><pre>
+     * exact name matching.
+     * </p>
+     * <pre>{@code
      *      SetPropertiesRule(
      *                new String[] {"class", "ignore-me"},
      *                new String[] {"className"});
-     * </pre></code>
+     * }</pre>
      *
      * @param attributeNames names of attributes to map
      * @param propertyNames names of properties mapped to
@@ -142,8 +142,6 @@ public class SetPropertiesRule
             aliases.put( attributeNames[i], propName );
         }
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Add an additional attribute name to property name mapping. This is intended to be used from the xml rules.

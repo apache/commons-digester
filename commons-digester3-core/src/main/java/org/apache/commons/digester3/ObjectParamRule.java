@@ -25,17 +25,17 @@ import org.xml.sax.Attributes;
 
 /**
  * <p>
- * Rule implementation that saves a parameter for use by a surrounding <code>CallMethodRule<code>.
+ * Rule implementation that saves a parameter for use by a surrounding {@link CallMethodRule}.
  * </p>
  * <p>
  * This parameter may be:
+ * </p>
  * <ul>
  * <li>an arbitrary Object defined programatically, assigned when the element pattern associated with the Rule is
  * matched. See {@link #ObjectParamRule(int paramIndex, Object param)}.
  * <li>an arbitrary Object defined programatically, assigned if the element pattern AND specified attribute name are
  * matched. See {@link #ObjectParamRule(int paramIndex, String attributeName, Object param)}.
  * </ul>
- * </p>
  *
  * @since 1.4
  */
@@ -52,14 +52,11 @@ public class ObjectParamRule
      */
     protected int paramIndex;
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The parameter we wish to pass to the method call
      */
     protected Object param;
 
-    // ----------------------------------------------------------- Constructors
     /**
      * Constructs a "call parameter" rule that will save the given Object as the parameter value.
      *
@@ -85,8 +82,6 @@ public class ObjectParamRule
         this.attributeName = attributeName;
         this.param = param;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

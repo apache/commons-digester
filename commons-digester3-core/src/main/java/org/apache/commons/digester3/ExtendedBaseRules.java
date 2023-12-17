@@ -38,10 +38,11 @@ import org.xml.sax.Attributes;
  * It is intended to be a minimal extension of the standard rules big enough to support complex schema but without the
  * full generality offered by more exotic matching pattern rules.
  * </p>
- * <h4>When should you use this rather than the original?</h4>
+ * <h2>When should you use this rather than the original?</h2>
  * <p>
  * This pattern-matching engine is complex and slower than the basic default RulesBase class, but offers more
  * functionality:
+ * </p>
  * <ul>
  * <li>Universal patterns allow patterns to be specified which will match regardless of whether there are
  * "better matching" patterns available.</li>
@@ -50,8 +51,7 @@ import org.xml.sax.Attributes;
  * depth.</li>
  * <li>Completely-wild patterns ("*" or "!*") allow matching all elements.</li>
  * </ul>
- * </p>
- * <h4>Universal Match Patterns</h4>
+ * <h2>Universal Match Patterns</h2>
  * <p>
  * The default RulesBase pattern-matching engine always attempts to find the "best matching pattern", and will ignore
  * rules associated with other patterns that match but are not "as good". As an example, if the pattern "a/b/c" is
@@ -81,9 +81,10 @@ import org.xml.sax.Attributes;
  * <li>Pattern {@code "!*&#47;a/b/*"} matches any elements whose path contains 'a/b' (see
  * "Ancestor Match Patterns").</li>
  * </ul>
- * <h4>Parent Match Patterns</h4>
+ * <h2>Parent Match Patterns</h2>
  * <p>
  * These will match direct child elements of a particular parent element.
+ * </p>
  * <ul>
  * <li>
  *  {@code "a/b/c/?"} matches any child whose parent matches {@code "a/b/c"}. Exact parent rules take
@@ -93,10 +94,10 @@ import org.xml.sax.Attributes;
  * matching still applies to parent matches but the length excludes the '?', which effectively means that standard
  * wildcard matches with the same level of depth are chosen in preference.</li>
  * </ul>
- * </p>
- * <h4>Ancestor Match Patterns</h4>
+ * <h2>Ancestor Match Patterns</h2>
  * <p>
  * These will match elements whose parentage includes a particular sequence of elements.
+ * </p>
  * <ul>
  * <li>
  *  {@code "a/b/*"} matches any element whose path starts with 'a' then 'b'. Exact parent and parent match rules
@@ -105,26 +106,25 @@ import org.xml.sax.Attributes;
  *  {@code "*&#47;a/b/*"} matches any elements whose path contains an element 'a' followed by an element 'b'.
  * The longest matching still applies but the length excludes the '*' at the end.</li>
  * </ul>
- * </p>
- * <h4>Completely Wild Patterns</h4>
+ * <h2>Completely Wild Patterns</h2>
  * <p>
  * Pattern {@code "*"} matches every pattern that isn't matched by any other basic rule.
  * </p>
  * <p>
  * Pattern {@code "!*"} matches every pattern.
  * </p>
- * <h4>Using The Extended Rules</h4>
+ * <h2>Using The Extended Rules</h2>
  * <p>
  * By default, a Digester instance uses a {@link RulesBase} instance as its pattern matching engine. To use an
  * ExtendedBaseRules instance, call the Digester.setRules method before adding any Rule objects to the digester
  * instance:
+ * </p>
  *
  * <pre>
  * Digester digester = new Digester();
  * digester.setRules( new ExtendedBaseRules() );
  * </pre>
  *
- * </p>
  * <p>
  * The most important thing to remember when using the extended rules is that universal and non-universal patterns are
  * completely independent. Universal patterns are never affected by the addition of new patterns or the removal of
@@ -133,6 +133,7 @@ import org.xml.sax.Attributes;
  * <strong>can</strong> be affected by the addition of new <em>non-universal</em> patterns or the removal of existing
  * <em>non-universal</em> patterns, because only rules associated with the "best matching" pattern for each xml element
  * are executed.
+ * </p>
  * <p>
  * This means that you can use universal patterns to build up the simple parts of your structure - for example defining
  * universal creation and property setting rules. More sophisticated and complex mapping will require non-universal
@@ -145,8 +146,6 @@ public class ExtendedBaseRules
     extends RulesBase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Counts the entry number for the rules.
      */
@@ -157,8 +156,6 @@ public class ExtendedBaseRules
      * which orders the list of matches before it's returned. This map stores the entry number keyed by the rule.
      */
     private final Map<Rule, Integer> order = new HashMap<Rule, Integer>();
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Standard match. Matches the end of the pattern to the key.

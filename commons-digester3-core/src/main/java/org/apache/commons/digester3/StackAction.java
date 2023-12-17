@@ -26,11 +26,11 @@ package org.apache.commons.digester3;
  * Because objects are pushed onto the main object stack when a rule has created a new object, this gives the ability to
  * intercept such operations and perform modifications on created objects.
  * <p>
- * One use expected for this interface is to store information about the xml line that a particular object was created
+ * One use expected for this interface is to store information about the XML line that a particular object was created
  * from. An implementation of this interface can detect whenever an object is pushed onto the digester object stack,
- * call Digester.getDocumentLocator() to get the location within the current xml file, and store this either on the
+ * call Digester.getDocumentLocator() to get the location within the current XML file, and store this either on the
  * object on the stack (if it supports some user-specific interface for this purpose), or build a map of
- * (object->locationinfo) separately.
+ * (object to locationinfo) separately.
  * <p>
  * It is recommended that objects implementing this interface provide a method to set a "next" action, and invoke it
  * from the callback methods. This allows multiple actions to be "chained" together.
