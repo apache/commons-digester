@@ -93,9 +93,9 @@ public abstract class FromXmlRulesModule
     protected abstract void loadRules();
 
     /**
-     * Opens a new {@code org.xml.sax.InputSource} given a {@code java.io.File}.
+     * Opens a new {@code org.xml.sax.InputSource} given a {@link java.io.File}.
      *
-     * @param file The {@code java.io.File} where reading the XML rules from.
+     * @param file The {@link java.io.File} where reading the XML rules from.
      */
     protected final void loadXMLRules( final File file )
     {
@@ -152,9 +152,9 @@ public abstract class FromXmlRulesModule
     }
 
     /**
-     * Opens a new {@code org.xml.sax.InputSource} given a {@code java.io.InputStream}.
+     * Opens a new {@code org.xml.sax.InputSource} given a {@link java.io.InputStream}.
      *
-     * @param input The {@code java.io.InputStream} where reading the XML rules from.
+     * @param input The {@link java.io.InputStream} where reading the XML rules from.
      */
     protected final void loadXMLRules( final InputStream input )
     {
@@ -167,9 +167,9 @@ public abstract class FromXmlRulesModule
     }
 
     /**
-     * Opens a new {@code org.xml.sax.InputSource} given a {@code java.io.Reader}.
+     * Opens a new {@code org.xml.sax.InputSource} given a {@link java.io.Reader}.
      *
-     * @param reader The {@code java.io.Reader} where reading the XML rules from.
+     * @param reader The {@link java.io.Reader} where reading the XML rules from.
      */
     protected final void loadXMLRules( final Reader reader )
     {
@@ -204,9 +204,9 @@ public abstract class FromXmlRulesModule
     }
 
     /**
-     * Opens a new {@code org.xml.sax.InputSource} given a {@code java.net.URL}.
+     * Opens a new {@code org.xml.sax.InputSource} given a {@link java.net.URL}.
      *
-     * @param url The {@code java.net.URL} where reading the XML rules from.
+     * @param url The {@link java.net.URL} where reading the XML rules from.
      */
     protected final void loadXMLRules( final URL url )
     {

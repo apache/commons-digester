@@ -180,7 +180,7 @@ public class CallMethodRule
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java classes that represent the parameter types of the method arguments (if you wish to use
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
-     *            {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter)
+     *            {@link java.lang.Boolean#TYPE} for a {@code boolean} parameter)
      */
     public CallMethodRule( final int targetOffset, final String methodName, final int paramCount, final Class<?>[] paramTypes )
     {
@@ -262,7 +262,7 @@ public class CallMethodRule
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java classes that represent the parameter types of the method arguments (if you wish to use
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
-     *            {@code java.lang.Boolean.TYPE} for a {@code boolean} parameter)
+     *            {@link java.lang.Boolean#TYPE} for a {@code boolean} parameter)
      */
     public CallMethodRule( final String methodName, final int paramCount, final Class<?> paramTypes[] )
     {
