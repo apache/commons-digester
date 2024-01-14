@@ -36,7 +36,7 @@ public abstract class AbstractRulesModule
      * Uses {@link String#format(String, Object...)} to insert the arguments into the message.
      *
      * @param messagePattern A
-     *        <a href="http://download.oracle.com/javase/6/docs/api/java/util/Formatter.html#syntax">format string</a>
+     *        <a href="https://download.oracle.com/javase/6/docs/api/java/util/Formatter.html#syntax">format string</a>
      * @param arguments Arguments referenced by the format specifiers in the format string
      * @see RulesBinder#addError(String, Object...)
      */
