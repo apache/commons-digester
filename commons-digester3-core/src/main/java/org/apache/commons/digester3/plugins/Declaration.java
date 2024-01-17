@@ -128,7 +128,7 @@ public class Declaration
     }
 
     /**
-     * Return the id associated with this declaration. For plugins declared "inline", null will be returned.
+     * Gets the id associated with this declaration. For plugins declared "inline", null will be returned.
      *
      * @return The id value. May be null.
      */
@@ -138,7 +138,7 @@ public class Declaration
     }
 
     /**
-     * Return plugin class associated with this declaration.
+     * Gets plugin class associated with this declaration.
      *
      * @return The pluginClass.
      */

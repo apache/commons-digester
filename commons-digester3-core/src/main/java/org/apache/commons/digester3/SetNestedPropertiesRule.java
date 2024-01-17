@@ -470,7 +470,7 @@ public class SetNestedPropertiesRule
     }
 
     /**
-     * Return the flag to ignore any child element for which there is no corresponding object property
+     * Gets the flag to ignore any child element for which there is no corresponding object property
      *
      * @return flag to ignore any child element for which there is no corresponding object property
      * @see #setAllowUnknownChildElements(boolean)
@@ -481,7 +481,7 @@ public class SetNestedPropertiesRule
     }
 
     /**
-     * Return the flag to have leading and trailing whitespace removed.
+     * Gets the flag to have leading and trailing whitespace removed.
      *
      * @see #setTrimData(boolean)
      * @return flag to have leading and trailing whitespace removed

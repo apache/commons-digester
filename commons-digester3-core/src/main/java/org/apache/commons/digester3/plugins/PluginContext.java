@@ -129,7 +129,7 @@ public class PluginContext
     }
 
     /**
-     * Return the list of RuleFinder objects. Under normal circumstances this method creates a default list of these
+     * Gets the list of RuleFinder objects. Under normal circumstances this method creates a default list of these
      * objects when first called (ie "on-demand" or "lazy initialization"). However if setRuleFinders has been called
      * first, then the list specified there is returned.
      * <p>

@@ -47,14 +47,14 @@ public interface Rules
     void clear();
 
     /**
-     * Return the Digester instance with which this Rules instance is associated.
+     * Gets the Digester instance with which this Rules instance is associated.
      *
      * @return the Digester instance with which this Rules instance is associated
      */
     Digester getDigester();
 
     /**
-     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     * Gets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
      * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
@@ -63,7 +63,7 @@ public interface Rules
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Return a List of all registered Rule instances that match the specified nesting pattern, or a zero-length List if
+     * Gets a List of all registered Rule instances that match the specified nesting pattern, or a zero-length List if
      * there are no matches. If more than one Rule instance matches, they <strong>must</strong> be returned in the order
      * originally registered through the {@code add()} method.
      *
@@ -77,7 +77,7 @@ public interface Rules
     List<Rule> match( String namespaceURI, String pattern, String name, Attributes attributes );
 
     /**
-     * Return a List of all registered Rule instances, or a zero-length List if there are no registered Rule instances.
+     * Gets a List of all registered Rule instances, or a zero-length List if there are no registered Rule instances.
      * If more than one Rule instance has been registered, they <strong>must</strong> be returned in the order
      * originally registered through the {@code add()} method.
      *

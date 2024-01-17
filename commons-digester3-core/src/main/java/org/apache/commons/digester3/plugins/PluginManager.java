@@ -161,7 +161,7 @@ public class PluginManager
     }
 
     /**
-     * Return the declaration object with the specified class. If no such plugin is known, null is returned.
+     * Gets the declaration object with the specified class. If no such plugin is known, null is returned.
      *
      * @param className The {@link Declaration} class name
      * @return The Declaration instance obtained by the input class name
@@ -179,7 +179,7 @@ public class PluginManager
     }
 
     /**
-     * Return the declaration object with the specified id. If no such plugin is known, null is returned.
+     * Gets the declaration object with the specified id. If no such plugin is known, null is returned.
      *
      * @param id Description of the Parameter
      * @return The declaration value

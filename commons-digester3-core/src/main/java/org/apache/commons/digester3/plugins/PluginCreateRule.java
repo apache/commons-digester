@@ -441,7 +441,7 @@ public class PluginCreateRule
     }
 
     /**
-     * Return the pattern that this Rule is associated with.
+     * Gets the pattern that this Rule is associated with.
      * <p>
      * In general, Rule instances <i>can</i> be associated with multiple patterns. A PluginCreateRule, however, will
      * only function correctly when associated with a single pattern. It is possible to fix this, but I can't be

@@ -229,7 +229,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Return the error handler for this Digester.
+     * Gets the error handler for this Digester.
      *
      * @return the error handler for this Digester.
      * @since 3.2
@@ -251,7 +251,7 @@ public final class DigesterLoader
     }
 
     /**
-     * Return the set of DTD URL registrations, keyed by public identifier.
+     * Gets the set of DTD URL registrations, keyed by public identifier.
      *
      * @return the set of DTD URL registrations.
      */

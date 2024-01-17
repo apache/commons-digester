@@ -240,7 +240,7 @@ public class PluginRules
     }
 
     /**
-     * Return the Digester instance with which this instance is associated.
+     * Gets the Digester instance with which this instance is associated.
      *
      * @return the Digester instance with which this instance is associated.
      */
@@ -251,7 +251,7 @@ public class PluginRules
     }
 
     /**
-     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     * Gets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
      * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
@@ -262,7 +262,7 @@ public class PluginRules
     }
 
     /**
-     * Return the parent Rules object.
+     * Gets the parent Rules object.
      *
      * @return the parent Rules object.
      */
@@ -314,7 +314,7 @@ public class PluginRules
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Return the object which "knows" about all declared plugins.
+     * Gets the object which "knows" about all declared plugins.
      *
      * @return The pluginManager value
      */
@@ -334,7 +334,7 @@ public class PluginRules
     }
 
     /**
-     * Return the rules factory object (or null if one has not been specified).
+     * Gets the rules factory object (or null if one has not been specified).
      *
      * @return the rules factory object.
      */
@@ -383,7 +383,7 @@ public class PluginRules
     }
 
     /**
-     * Return the list of rules registered with this object, in the order they were registered with this object.
+     * Gets the list of rules registered with this object, in the order they were registered with this object.
      * <p>
      * Note that Rule objects stored in parent Rules objects are not returned by this method.
      *

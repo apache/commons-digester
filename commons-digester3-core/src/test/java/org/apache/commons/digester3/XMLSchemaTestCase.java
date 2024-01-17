@@ -83,7 +83,7 @@ public class XMLSchemaTestCase
     protected Digester digester;
 
     /**
-     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
+     * Gets an appropriate InputStream for the specified test file (which must be inside our current package.
      *
      * @param name Name of the test file we want
      * @throws IOException if an input/output error occurs

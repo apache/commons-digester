@@ -50,7 +50,7 @@ public class Box
     }
 
     /**
-     * Return a string containing this object's name value, followed by the names of all child objects (and their
+     * Gets a string containing this object's name value, followed by the names of all child objects (and their
      * children etc) in pre-order sequence. Each name is separated by a space from the preceding one.
      */
     public String getIds()

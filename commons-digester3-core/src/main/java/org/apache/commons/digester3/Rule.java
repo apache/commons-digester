@@ -128,7 +128,7 @@ import org.xml.sax.Attributes;
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Return the Digester with which this Rule is associated.
+     * Gets the Digester with which this Rule is associated.
      *
      * @return the Digester with which this Rule is associated
      */
@@ -138,7 +138,7 @@ import org.xml.sax.Attributes;
     }
 
     /**
-     * Return the namespace URI for which this Rule is relevant, if any.
+     * Gets the namespace URI for which this Rule is relevant, if any.
      *
      * @return the namespace URI for which this Rule is relevant, if any
      */

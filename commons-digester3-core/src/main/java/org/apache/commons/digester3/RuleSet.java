@@ -51,7 +51,7 @@ public interface RuleSet
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Return the namespace URI that will be applied to all Rule instances created from this RuleSet.
+     * Gets the namespace URI that will be applied to all Rule instances created from this RuleSet.
      *
      * @return the namespace URI that will be applied to all Rule instances created from this RuleSet
      */

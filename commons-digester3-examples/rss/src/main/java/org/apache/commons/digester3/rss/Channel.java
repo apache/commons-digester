@@ -168,7 +168,7 @@ public class Channel
     }
 
     /**
-     * Return the items for this channel.
+     * Gets the items for this channel.
      */
     public Item[] findItems()
     {
@@ -180,7 +180,7 @@ public class Channel
     }
 
     /**
-     * Return the skip days for this channel.
+     * Gets the skip days for this channel.
      */
     public String[] findSkipDays()
     {
@@ -192,7 +192,7 @@ public class Channel
     }
 
     /**
-     * Return the skip hours for this channel.
+     * Gets the skip hours for this channel.
      */
     public String[] findSkipHours()
     {
@@ -224,7 +224,7 @@ public class Channel
     }
 
     /**
-     * Return the items for this channel.
+     * Gets the items for this channel.
      */
     public Item[] getItems()
     {
@@ -262,7 +262,7 @@ public class Channel
     }
 
     /**
-     * Return the skip days for this channel.
+     * Gets the skip days for this channel.
      */
     public String[] getSkipDays()
     {
@@ -270,7 +270,7 @@ public class Channel
     }
 
     /**
-     * Return the skip hours for this channel.
+     * Gets the skip hours for this channel.
      */
     public String[] getSkipHours()
     {

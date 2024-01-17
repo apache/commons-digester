@@ -27,7 +27,7 @@ public class Utils
 {
 
     /**
-     * Return an appropriate InputStream for the specified test file (which must be inside our current package.
+     * Gets an appropriate InputStream for the specified test file (which must be inside our current package.
      *
      * @param caller is always "this" for the calling object.
      * @param name is the test file we want

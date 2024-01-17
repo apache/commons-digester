@@ -333,7 +333,7 @@ public class FactoryCreateRule
     }
 
     /**
-     * Return an instance of our associated object creation factory, creating one if necessary.
+     * Gets an instance of our associated object creation factory, creating one if necessary.
      *
      * @param attributes Attributes passed to our factory creation element
      * @return An instance of our associated object creation factory, creating one if necessary

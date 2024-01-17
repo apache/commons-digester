@@ -1537,7 +1537,7 @@ public class Digester
     }
 
     /**
-     * Return the class loader to be used for instantiating application objects when required. This is determined based
+     * Gets the class loader to be used for instantiating application objects when required. This is determined based
      * upon the following rules:
      * <ul>
      * <li>The class loader set by {@code setClassLoader()}, if any</li>
@@ -1568,7 +1568,7 @@ public class Digester
     // ------------------------------------------------------- Public Methods
 
     /**
-     * Return the current depth of the element stack.
+     * Gets the current depth of the element stack.
      *
      * @return the current depth of the element stack.
      */
@@ -1578,7 +1578,7 @@ public class Digester
     }
 
     /**
-     * Return the name of the XML element that is currently being processed.
+     * Gets the name of the XML element that is currently being processed.
      *
      * @return the name of the XML element that is currently being processed.
      */
@@ -1646,7 +1646,7 @@ public class Digester
     }
 
     /**
-     * Return the Entity Resolver used by the SAX parser.
+     * Gets the Entity Resolver used by the SAX parser.
      *
      * @return the Entity Resolver used by the SAX parser.
      */
@@ -1656,7 +1656,7 @@ public class Digester
     }
 
     /**
-     * Return the error handler for this Digester.
+     * Gets the error handler for this Digester.
      *
      * @return the error handler for this Digester.
      */
@@ -1677,7 +1677,7 @@ public class Digester
     }
 
     /**
-     * Return the SAXParserFactory we will use, creating one if necessary.
+     * Gets the SAXParserFactory we will use, creating one if necessary.
      *
      * @return the SAXParserFactory we will use, creating one if necessary.
      */
@@ -1713,7 +1713,7 @@ public class Digester
     }
 
     /**
-     * Return the current Logger associated with this instance of the Digester
+     * Gets the current Logger associated with this instance of the Digester
      *
      * @return the current Logger associated with this instance of the Digester
      */
@@ -1723,7 +1723,7 @@ public class Digester
     }
 
     /**
-     * Return the current rule match path
+     * Gets the current rule match path
      *
      * @return the current rule match path
      */
@@ -1733,7 +1733,7 @@ public class Digester
     }
 
     /**
-     * Return a Stack whose elements are List objects, each containing a list of
+     * Gets a Stack whose elements are List objects, each containing a list of
      * Rule objects as returned from Rules.getMatch().
      *
      * @return a Stack whose elements are List objects, each containing a list of
@@ -1746,7 +1746,7 @@ public class Digester
     }
 
     /**
-     * Return the "namespace aware" flag for parsers we create.
+     * Gets the "namespace aware" flag for parsers we create.
      *
      * @return the "namespace aware" flag for parsers we create.
      */
@@ -1756,7 +1756,7 @@ public class Digester
     }
 
     /**
-     * Return the SAXParser we will use to parse the input stream.
+     * Gets the SAXParser we will use to parse the input stream.
      *
      * If there is a problem creating the parser, return {@code null}.
      *
@@ -1785,7 +1785,7 @@ public class Digester
     }
 
     /**
-     * Return the current value of the specified property for the underlying {@code XMLReader} implementation.
+     * Gets the current value of the specified property for the underlying {@code XMLReader} implementation.
      *
      * See <a href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2
      * properties.
@@ -1802,7 +1802,7 @@ public class Digester
     }
 
     /**
-     * Return the public identifier of the DTD we are currently parsing under, if any.
+     * Gets the public identifier of the DTD we are currently parsing under, if any.
      *
      * @return the public identifier of the DTD we are currently parsing under, if any.
      */
@@ -1812,7 +1812,7 @@ public class Digester
     }
 
     /**
-     * Return the set of DTD URL registrations, keyed by public identifier. NOTE: the returned map is in read-only mode.
+     * Gets the set of DTD URL registrations, keyed by public identifier. NOTE: the returned map is in read-only mode.
      *
      * @return the read-only Map of DTD URL registrations.
      */
@@ -1850,7 +1850,7 @@ public class Digester
     // --------------------------------------------------------- Rule Methods
 
     /**
-     * Return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
+     * Gets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      *
      * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
@@ -1860,7 +1860,7 @@ public class Digester
     }
 
     /**
-     * Return the {@code Rules} implementation object containing our rules collection and associated matching
+     * Gets the {@code Rules} implementation object containing our rules collection and associated matching
      * policy. If none has been established, a default implementation will be created and returned.
      *
      * @return the {@code Rules} implementation object.
@@ -1887,7 +1887,7 @@ public class Digester
     }
 
     /**
-     * Return the callback object which is invoked whenever an object is pushed onto a digester object stack,
+     * Gets the callback object which is invoked whenever an object is pushed onto a digester object stack,
      * or popped off one.
      *
      * @return the callback object which is invoked whenever an object is pushed onto a digester object stack,
@@ -1912,7 +1912,7 @@ public class Digester
     }
 
     /**
-     * Return the boolean as to whether the context ClassLoader should be used.
+     * Gets the boolean as to whether the context ClassLoader should be used.
      *
      * @return true, if the context ClassLoader should be used, false otherwise.
      */
@@ -1922,7 +1922,7 @@ public class Digester
     }
 
     /**
-     * Return the validating parser flag.
+     * Gets the validating parser flag.
      *
      * @return the validating parser flag.
      */
@@ -1932,7 +1932,7 @@ public class Digester
     }
 
     /**
-     * Return the XInclude-aware flag for parsers we create. XInclude functionality additionally requires
+     * Gets the XInclude-aware flag for parsers we create. XInclude functionality additionally requires
      * namespace-awareness.
      *
      * @return The XInclude-aware flag
@@ -1945,7 +1945,7 @@ public class Digester
     }
 
     /**
-     * Return the XMLReader to be used for parsing the input document.
+     * Gets the XMLReader to be used for parsing the input document.
      *
      * FIXME: there is a bug in JAXP/XERCES that prevent the use of a parser that contains a schema with a DTD.
      *
@@ -1985,7 +1985,7 @@ public class Digester
     }
 
     /**
-     * Return the XML Schema used when parsing.
+     * Gets the XML Schema used when parsing.
      *
      * @return The {@link Schema} instance in use.
      * @since 2.0
