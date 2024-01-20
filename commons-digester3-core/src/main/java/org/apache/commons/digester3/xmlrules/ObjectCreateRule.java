@@ -27,7 +27,6 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.xml.sax.Attributes;
 
 /**
- *
  */
 final class ObjectCreateRule
     extends AbstractXmlRule

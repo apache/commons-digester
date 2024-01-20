@@ -24,7 +24,6 @@ import org.apache.commons.digester3.binder.NestedPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
- *
  */
 final class SetNestedPropertiesIgnoreRule
     extends Rule

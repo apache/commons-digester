@@ -35,7 +35,6 @@ public class Channel
 {
 
     /**
-     *
      */
     private static final long serialVersionUID = -7358941908590407568L;
 

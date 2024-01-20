@@ -26,7 +26,6 @@ import org.apache.commons.digester3.binder.RulesBinder;
 import org.apache.commons.digester3.binder.RulesModule;
 
 /**
- *
  */
 final class XmlRulesModule
     implements RulesModule

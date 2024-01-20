@@ -23,7 +23,6 @@ import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
 /**
- *
  */
 class PatternRule
     extends Rule

@@ -30,7 +30,6 @@ public class Image
 {
 
     /**
-     *
      */
     private static final long serialVersionUID = 7651966908064015194L;
 

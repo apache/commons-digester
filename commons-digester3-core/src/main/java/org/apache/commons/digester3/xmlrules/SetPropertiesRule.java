@@ -25,7 +25,6 @@ import org.apache.commons.digester3.binder.SetPropertiesBuilder;
 import org.xml.sax.Attributes;
 
 /**
- *
  */
 final class SetPropertiesRule
     extends AbstractXmlRule

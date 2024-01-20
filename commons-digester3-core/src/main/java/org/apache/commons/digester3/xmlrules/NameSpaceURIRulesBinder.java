@@ -97,7 +97,6 @@ final class NameSpaceURIRulesBinder
     }
 
     /**
-     *
      */
     public void removeNamespaceURI()
     {

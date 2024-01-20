@@ -88,7 +88,6 @@ public abstract class FromXmlRulesModule
     }
 
     /**
-     *
      */
     protected abstract void loadRules();
 

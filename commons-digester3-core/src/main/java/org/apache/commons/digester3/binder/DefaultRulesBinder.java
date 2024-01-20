@@ -41,12 +41,10 @@ final class DefaultRulesBinder
     private final List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 
     /**
-     *
      */
     private final FromBinderRuleSet fromBinderRuleSet = new FromBinderRuleSet();
 
     /**
-     *
      */
     private ClassLoader classLoader;
 
