@@ -26,7 +26,6 @@ import org.apache.commons.digester3.binder.RulesModule;
 import org.junit.Test;
 
 /**
- * @since 2.1
  */
 public final class CatalogTestCase
     extends AbstractAnnotatedPojoTestCase

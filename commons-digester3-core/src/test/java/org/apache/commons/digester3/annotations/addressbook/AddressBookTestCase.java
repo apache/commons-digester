@@ -21,7 +21,6 @@ import org.apache.commons.digester3.annotations.AbstractAnnotatedPojoTestCase;
 import org.junit.Test;
 
 /**
- * @since 2.1
  */
 public final class AddressBookTestCase
     extends AbstractAnnotatedPojoTestCase
