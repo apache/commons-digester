@@ -40,15 +40,11 @@ public class FactoryCreateRule
     extends Rule
 {
 
-    // ----------------------------------------------------------- Fields
-
     /** Should exceptions thrown by the factory be ignored? */
     private final boolean ignoreCreateExceptions;
 
     /** Stock to manage */
     private Stack<Boolean> exceptionIgnoredStack;
-
-    // ----------------------------------------------------------- Constructors
 
     /**
      * The attribute containing an override class name if it is present.
@@ -172,8 +168,6 @@ public class FactoryCreateRule
         this( className, false );
     }
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Constructs a factory create rule that will use the specified class name to create an {@link ObjectCreationFactory}
      * which will then be used to create an object and push it on the stack.
@@ -221,8 +215,6 @@ public class FactoryCreateRule
         this.attributeName = attributeName;
         this.ignoreCreateExceptions = ignoreCreateExceptions;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}
@@ -364,8 +356,6 @@ public class FactoryCreateRule
         }
         return ( creationFactory );
     }
-
-    // ------------------------------------------------------ Protected Methods
 
     /**
      * {@inheritDoc}

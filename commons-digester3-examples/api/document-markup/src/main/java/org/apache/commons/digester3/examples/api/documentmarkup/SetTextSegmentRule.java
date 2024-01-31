@@ -29,21 +29,15 @@ public class SetTextSegmentRule
     implements TextSegmentHandler
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * The method name to call on the parent object.
      */
     protected String methodName;
 
-    // ----------------------------------------------------- Instance Variables
-
     public SetTextSegmentRule( final String methodName )
     {
         this.methodName = methodName;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Process the end of this element.

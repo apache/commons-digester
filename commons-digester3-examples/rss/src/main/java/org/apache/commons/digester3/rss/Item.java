@@ -31,8 +31,6 @@ public class Item implements Serializable {
      */
     private static final long serialVersionUID = -2535241576243936839L;
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * The item description (1-500 characters).
      */
@@ -100,8 +98,6 @@ public class Item implements Serializable {
     {
         this.link = link;
     }
-
-    // -------------------------------------------------------- Package Methods
 
     public void setTitle( final String title )
     {

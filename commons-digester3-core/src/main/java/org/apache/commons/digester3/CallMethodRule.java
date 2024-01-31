@@ -86,8 +86,6 @@ public class CallMethodRule
     extends Rule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * The body text collected from this element.
      */
@@ -138,8 +136,6 @@ public class CallMethodRule
     {
         this( targetOffset, methodName, 0, (Class[]) null );
     }
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * Constructs a "call method" rule with the specified method name. The parameter types (if any) default to
@@ -284,8 +280,6 @@ public class CallMethodRule
     {
         this( 0, methodName, paramCount, paramTypes );
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

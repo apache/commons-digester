@@ -26,8 +26,6 @@ public class TestRuleSet
     extends RuleSetBase
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * The prefix for each matching pattern added to the Digester instance, or an empty String for no prefix.
      */
@@ -55,8 +53,6 @@ public class TestRuleSet
 
     }
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Constructs an instance of this RuleSet associated with the specified prefix and namespace URI.
      *
@@ -77,8 +73,6 @@ public class TestRuleSet
         }
 
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

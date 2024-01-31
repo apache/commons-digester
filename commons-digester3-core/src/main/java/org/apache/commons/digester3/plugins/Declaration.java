@@ -53,8 +53,6 @@ public class Declaration
      */
     private RuleLoader ruleLoader;
 
-    // ---------------------- constructors ----------------------------------
-
     /**
      * Constructs a new instance.
      *
@@ -93,8 +91,6 @@ public class Declaration
         // init method.
         this.pluginClassName = pluginClassName;
     }
-
-    // ---------------------- properties -----------------------------------
 
     /**
      * Attempt to load custom rules for the target class at the specified pattern.
@@ -211,8 +207,6 @@ public class Declaration
 
         initialized = true;
     }
-
-    // ---------------------- methods -----------------------------------
 
     /**
      * The id that the user associated with a particular plugin declaration in the input xml. This id is later used in

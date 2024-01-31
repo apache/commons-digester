@@ -33,8 +33,6 @@ public class Image
      */
     private static final long serialVersionUID = 7651966908064015194L;
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * The image description (1-100 characters).
      */
@@ -162,8 +160,6 @@ public class Image
     {
         this.url = url;
     }
-
-    // -------------------------------------------------------- Package Methods
 
     public void setWidth( final int width )
     {

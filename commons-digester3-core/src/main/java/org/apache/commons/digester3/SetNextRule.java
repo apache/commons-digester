@@ -39,8 +39,6 @@ public class SetNextRule
     extends AbstractMethodRule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * Constructs a "set next" rule with the specified method name. The method's argument type is assumed to be the class
      * of the child object.

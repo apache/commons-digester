@@ -53,8 +53,6 @@ import org.xml.sax.helpers.AttributesImpl;
 public class DigesterTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /** Utility class for method testStackAction */
     private static final class TrackingStackAction
         implements StackAction
@@ -97,8 +95,6 @@ public class DigesterTestCase
         "/org/apache/commons/digester3/rss/rss-0.9.dtd", "-//Netscape Communications//DTD RSS 0.91//EN",
         "/org/apache/commons/digester3/rss/rss-0.91.dtd", };
 
-    // -------------------------------------------------- Overall Test Methods
-
     /**
      * The digester instance we will be processing.
      */
@@ -115,8 +111,6 @@ public class DigesterTestCase
         digester.setRules( new RulesBase() );
 
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Tear down instance variables required by this test case.

@@ -31,7 +31,6 @@ import org.xml.sax.SAXParseException;
 public class TestDefaultPlugin
 {
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testDefaultPlugins1()
         throws Exception

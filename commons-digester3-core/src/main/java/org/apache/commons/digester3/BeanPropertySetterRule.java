@@ -49,8 +49,6 @@ public class BeanPropertySetterRule
     extends Rule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * Sets this property on the top object.
      */
@@ -60,8 +58,6 @@ public class BeanPropertySetterRule
      * Extract the property name from attribute
      */
     private String propertyNameFromAttribute;
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * The body text used to set the property.
@@ -90,8 +86,6 @@ public class BeanPropertySetterRule
     {
         this.propertyName = propertyName;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

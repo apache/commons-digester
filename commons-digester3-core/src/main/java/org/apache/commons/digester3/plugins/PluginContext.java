@@ -76,8 +76,6 @@ public class PluginContext
      */
     private List<RuleFinder> ruleFinders;
 
-    // ------------------- methods ---------------------------------------
-
     /**
      * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
      * <p>

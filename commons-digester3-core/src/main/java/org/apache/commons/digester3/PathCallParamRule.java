@@ -36,14 +36,10 @@ public class PathCallParamRule
     extends Rule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * The zero-relative index of the parameter we are saving.
      */
     protected int paramIndex;
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * Constructs a "call parameter" rule that will save the body text of this element as the parameter value.
@@ -54,8 +50,6 @@ public class PathCallParamRule
     {
         this.paramIndex = paramIndex;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

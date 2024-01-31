@@ -38,8 +38,6 @@ package org.apache.commons.digester3;
 public interface RuleSet
 {
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * Add the set of Rule instances defined in this RuleSet to the specified {@code Digester} instance,
      * associating them with our namespace URI (if any). This method should only be called by a Digester instance.
@@ -47,8 +45,6 @@ public interface RuleSet
      * @param digester Digester instance to which the new Rule instances should be added.
      */
     void addRuleInstances( Digester digester );
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Gets the namespace URI that will be applied to all Rule instances created from this RuleSet.

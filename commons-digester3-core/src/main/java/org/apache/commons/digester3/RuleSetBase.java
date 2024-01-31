@@ -29,14 +29,10 @@ public abstract class RuleSetBase
     implements RuleSet
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The namespace URI that all Rule instances created by this RuleSet will be associated with.
      */
     private final String namespaceURI;
-
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Build a new RuleSetBase with a null namespaceURI
@@ -56,8 +52,6 @@ public abstract class RuleSetBase
     {
         this.namespaceURI = namespaceURI;
     }
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * {@inheritDoc}

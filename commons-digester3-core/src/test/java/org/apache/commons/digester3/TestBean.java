@@ -42,8 +42,6 @@ public class TestBean
      */
     private boolean falseProperty;
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * A float property.
      */

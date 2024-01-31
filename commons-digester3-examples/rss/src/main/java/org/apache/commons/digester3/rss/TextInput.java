@@ -32,8 +32,6 @@ public class TextInput implements Serializable {
      */
     private static final long serialVersionUID = -147615076863607237L;
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * The text input description (1-100 characters).
      */
@@ -117,8 +115,6 @@ public class TextInput implements Serializable {
     {
         this.name = name;
     }
-
-    // -------------------------------------------------------- Package Methods
 
     public void setTitle( final String title )
     {

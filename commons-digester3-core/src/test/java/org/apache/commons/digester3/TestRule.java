@@ -34,8 +34,6 @@ public class TestRule
     extends Rule
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     public static class TestRuleProvider implements RuleProvider<TestRule>
     {
 
@@ -70,8 +68,6 @@ public class TestRule
     /** Used when testing body text */
     private String bodyText;
 
-    // ----------------------------------------------------------- Constructors
-
     /** Used when testing call orders */
     private List<Rule> order;
 
@@ -85,8 +81,6 @@ public class TestRule
 
         this.identifier = identifier;
     }
-
-    // ------------------------------------------------ Rule Implementation
 
     /**
      * Constructor sets namespace URI.
@@ -121,8 +115,6 @@ public class TestRule
     {
         appendCall();
     }
-
-    // ------------------------------------------------ Methods
 
     /**
      * 'Body' call.

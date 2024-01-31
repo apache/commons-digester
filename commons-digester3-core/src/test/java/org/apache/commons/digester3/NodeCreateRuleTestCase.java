@@ -51,15 +51,11 @@ import org.xml.sax.SAXException;
 public class NodeCreateRuleTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Simple test xml document used in the tests.
      */
     protected final static String TEST_XML = "<?xml version='1.0'?><root>ROOT BODY<alpha>ALPHA BODY</alpha>"
         + "<beta>BETA BODY</beta><gamma>GAMMA BODY</gamma></root>";
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Gets an appropriate InputStream for the specified test file (which must be inside our current package.
@@ -503,8 +499,6 @@ public class NodeCreateRuleTestCase
         assertTrue( list.get( 1 ) instanceof String );
 
     }
-
-    // ------------------------------------------------ Utility Support Methods
 
     /**
      * Tests whether non-namespaced attributes are handled correctly, using the example from the file Test11 XML file.

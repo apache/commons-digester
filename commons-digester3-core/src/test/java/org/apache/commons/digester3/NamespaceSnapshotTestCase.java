@@ -85,8 +85,6 @@ public class NamespaceSnapshotTestCase
 
     }
 
-    // ------------------------------------------------ Utility Support Methods
-
     /**
      * Namespace snapshot test case.
      */

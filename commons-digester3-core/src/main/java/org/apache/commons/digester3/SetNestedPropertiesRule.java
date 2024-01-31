@@ -322,8 +322,6 @@ public class SetNestedPropertiesRule
 
     private boolean trimData = true;
 
-    // ----------------------------------------------------------- Constructors
-
     private boolean allowUnknownChildElements;
 
     private final HashMap<String, String> elementNames = new HashMap<String, String>();
@@ -353,8 +351,6 @@ public class SetNestedPropertiesRule
             this.elementNames.putAll( elementNames );
         }
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * <p>
@@ -519,8 +515,6 @@ public class SetNestedPropertiesRule
         super.setDigester( digester );
         log = digester.getLogger();
     }
-
-    // ----------------------------------------- local classes
 
     /**
      * When set to true, any text within child elements will have leading and trailing whitespace removed before

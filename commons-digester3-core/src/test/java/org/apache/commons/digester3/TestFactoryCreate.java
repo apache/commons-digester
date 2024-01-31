@@ -57,8 +57,6 @@ public class TestFactoryCreate
         this.ignoreCreateExceptions = ignoreCreateExceptions;
     }
 
-    // --------------------------------------------------------------- Test cases
-
     @Test
     public void testFactoryCreateRule()
         throws Exception

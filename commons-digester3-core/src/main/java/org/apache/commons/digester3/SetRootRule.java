@@ -33,8 +33,6 @@ public class SetRootRule
     extends AbstractMethodRule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * Constructs a "set root" rule with the specified method name. The method's argument type is assumed to be the class
      * of the child object.

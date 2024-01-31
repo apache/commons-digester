@@ -32,7 +32,6 @@ import org.junit.Test;
 public class TestDeclaration
 {
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testPredeclaration()
         throws Exception

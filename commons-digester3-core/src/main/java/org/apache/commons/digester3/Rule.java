@@ -52,8 +52,6 @@ import org.xml.sax.Attributes;
  */public abstract class Rule
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The Digester with which this Rule is associated.
      */
@@ -63,8 +61,6 @@ import org.xml.sax.Attributes;
      * The namespace URI for which this Rule is relevant, if any.
      */
     private String namespaceURI;
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * This method is called when the beginning of a matching XML element is encountered.
@@ -124,8 +120,6 @@ import org.xml.sax.Attributes;
     {
         // The default implementation does nothing
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Gets the Digester with which this Rule is associated.

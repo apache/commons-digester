@@ -39,8 +39,6 @@ import org.xml.sax.SAXException;
 public class SetPropertiesRuleTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Simple test xml document used in the tests.
      */
@@ -58,8 +56,6 @@ public class SetPropertiesRuleTestCase
      */
     protected final static String TEST_XML_3 =
         "<?xml version='1.0'?><root alpha='ALPHA VALUE' beta='BETA VALUE' delta='DELTA VALUE' ignore='ignore value'/>";
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Positive test for SetPropertyRule ignoring missing properties.

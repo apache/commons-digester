@@ -78,7 +78,6 @@ public class TestRuleInfo
         assertEquals( "std label", label.getLabel() );
     }
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testRuleInfoExplicitClass()
         throws Exception

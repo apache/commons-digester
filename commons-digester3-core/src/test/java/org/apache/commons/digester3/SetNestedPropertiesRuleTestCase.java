@@ -39,15 +39,11 @@ import org.xml.sax.SAXException;
 public class SetNestedPropertiesRuleTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Simple test xml document used in the tests.
      */
     protected final static String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<alpha>ALPHA BODY</alpha>"
         + "<beta>BETA BODY</beta>" + "<gamma>GAMMA BODY</gamma>" + "<delta>DELTA BODY</delta>" + "</root>";
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test that you can successfully automatically set properties.

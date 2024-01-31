@@ -36,8 +36,6 @@ import org.xml.sax.SAXException;
 public class OverlappingCallMethodRuleTestCase
 {
 
-    // --------------------------------------------------- Overall Test Methods
-
     String itemId;
 
     String itemName;
@@ -51,8 +49,6 @@ public class OverlappingCallMethodRuleTestCase
     {
         itemName = name;
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     @Test
     public void testItem1()

@@ -53,8 +53,6 @@ public class RulesBase
     extends AbstractRulesImpl
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The set of registered Rule instances, keyed by the matching pattern. Each value is a List containing the Rules
      * for that pattern, in the order that they were orginally registered.
@@ -71,8 +69,6 @@ public class RulesBase
      */
     protected ArrayList<Rule> rules = new ArrayList<Rule>();
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * {@inheritDoc}
      */
@@ -83,8 +79,6 @@ public class RulesBase
         cache.clear();
         rules.clear();
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Return a List of Rule instances for the specified pattern that also match the specified namespace URI (if any).
@@ -187,8 +181,6 @@ public class RulesBase
     {
         return ( this.rules );
     }
-
-    // ------------------------------------------------------ Protected Methods
 
     /**
      * {@inheritDoc}

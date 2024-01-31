@@ -38,8 +38,6 @@ public class Channel
      */
     private static final long serialVersionUID = -7358941908590407568L;
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The set of items associated with this Channel.
      */
@@ -54,8 +52,6 @@ public class Channel
      * The set of skip hours for this channel.
      */
     protected ArrayList<String> skipHours = new ArrayList<String>();
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * The channel copyright (1-100 characters).
@@ -380,8 +376,6 @@ public class Channel
         render( pw, encoding );
         pw.flush();
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Render this channel as XML conforming to the RSS 0.91 specification,

@@ -37,15 +37,11 @@ public abstract class AbstractRulesImpl
     implements Rules
 {
 
-    // ------------------------------------------------------------- Fields
-
     /** Digester using this {@code Rules} implementation */
     private Digester digester;
 
     /** Namespace uri to assoicate with subsequent {@code Rule}'s */
     private String namespaceURI;
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * {@inheritDoc}
@@ -93,8 +89,6 @@ public abstract class AbstractRulesImpl
      * @param rule Rule instance to be registered
      */
     protected abstract void registerRule( String pattern, Rule rule );
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

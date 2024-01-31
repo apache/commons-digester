@@ -43,8 +43,6 @@ import org.xml.sax.SAXException;
 public class SetPropertyRuleTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Simple test xml document used in the tests.
      */
@@ -75,8 +73,6 @@ public class SetPropertyRuleTestCase
      */
     protected Digester digester;
 
-    // --------------------------------------------------- Overall Test Methods
-
     /**
      * Sets up instance variables required by this test case.
      */
@@ -98,8 +94,6 @@ public class SetPropertyRuleTestCase
         digester = null;
 
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test SetPropertyRule when matched XML element has no attributes. See: DIGESTER-114

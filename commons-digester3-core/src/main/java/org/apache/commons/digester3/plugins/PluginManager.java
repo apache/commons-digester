@@ -52,8 +52,6 @@ public class PluginManager
      */
     private final PluginContext pluginContext;
 
-    // ------------------- constructors ---------------------------------------
-
     /**
      * Constructs a "root" PluginManager, ie one with no parent.
      *
@@ -78,8 +76,6 @@ public class PluginManager
         this.parent = parent;
         this.pluginContext = parent.pluginContext;
     }
-
-    // ------------------- methods --------------------------------------------
 
     /**
      * Add the declaration to the set of known declarations.

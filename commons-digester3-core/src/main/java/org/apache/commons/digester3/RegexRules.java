@@ -40,8 +40,6 @@ public class RegexRules
     extends AbstractRulesImpl
 {
 
-    // --------------------------------------------------------- Fields
-
     /** Used to associate rules with paths in the rules list */
     private static final class RegisteredRule
     {
@@ -59,12 +57,8 @@ public class RegexRules
     /** All registered {@code Rule}'s */
     private final ArrayList<RegisteredRule> registeredRules = new ArrayList<RegisteredRule>();
 
-    // --------------------------------------------------------- Constructor
-
     /** The regex strategy used by this RegexRules */
     private RegexMatcher matcher;
-
-    // --------------------------------------------------------- Properties
 
     /**
      * Constructs sets the Regex matching strategy.
@@ -84,8 +78,6 @@ public class RegexRules
     {
         registeredRules.clear();
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Gets the current regex matching strategy.

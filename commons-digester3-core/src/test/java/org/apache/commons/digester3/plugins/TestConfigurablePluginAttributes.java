@@ -64,7 +64,6 @@ public class TestConfigurablePluginAttributes
         }
     }
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testDefaultBehaviour()
         throws Exception

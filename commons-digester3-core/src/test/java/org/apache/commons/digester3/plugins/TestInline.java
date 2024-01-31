@@ -32,7 +32,6 @@ import org.junit.Test;
 public class TestInline
 {
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testInlineDeclaration()
         throws Exception

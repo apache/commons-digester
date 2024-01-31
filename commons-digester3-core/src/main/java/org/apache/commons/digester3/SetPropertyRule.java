@@ -37,14 +37,10 @@ public class SetPropertyRule
     extends Rule
 {
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * The attribute that will contain the property name.
      */
     protected String name;
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * The attribute that will contain the property value.
@@ -62,8 +58,6 @@ public class SetPropertyRule
         this.name = name;
         this.value = value;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * {@inheritDoc}

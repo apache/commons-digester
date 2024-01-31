@@ -48,7 +48,6 @@ public class TestRecursion
         return sum;
     }
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testRecursiveRules()
         throws Exception

@@ -41,14 +41,10 @@ import org.xml.sax.SAXException;
 public class RuleTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The digester instance we will be processing.
      */
     protected Digester digester;
-
-    // --------------------------------------------------- Overall Test Methods
 
     /**
      * Gets an appropriate InputStream for the specified test file (which must be inside our current package.
@@ -74,8 +70,6 @@ public class RuleTestCase
         digester = new Digester();
 
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Tear down instance variables required by this test case.
@@ -504,8 +498,6 @@ public class RuleTestCase
         validateObjectCreate3( root );
 
     }
-
-    // ------------------------------------------------ Utility Support Methods
 
     /**
      * Same as {@code testSetTopRule1} except using the three argument form of the SetTopRule rule.

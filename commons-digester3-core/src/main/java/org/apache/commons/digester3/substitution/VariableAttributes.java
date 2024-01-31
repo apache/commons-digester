@@ -41,8 +41,6 @@ public class VariableAttributes
 
     private VariableExpander expander;
 
-    // ------------------- Public Methods
-
     // plain proxy methods follow : nothing interesting :-)
     /**
      * {@inheritDoc}

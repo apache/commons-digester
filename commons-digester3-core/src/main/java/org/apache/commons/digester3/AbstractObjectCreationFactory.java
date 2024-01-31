@@ -30,14 +30,10 @@ public abstract class AbstractObjectCreationFactory<T>
     implements ObjectCreationFactory<T>
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The associated {@code Digester} instance that was set up by {@link FactoryCreateRule} upon initialization.
      */
     private Digester digester;
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Factory method called by {@link FactoryCreateRule} to supply an object based on the element's attributes.

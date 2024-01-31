@@ -34,8 +34,6 @@ import org.junit.Test;
 public class URLTestCase
 {
 
-    // ----------------------------------------------------- Overall Test Methods
-
     /**
      * <p>
      * Public identifier of the Digester Rules DTD.
@@ -49,8 +47,6 @@ public class URLTestCase
      * </p>
      */
     private static final String DIGESTER_RULES_SYSTEM_ID = "/org/apache/commons/digester3/xmlrules/digester-rules.dtd";
-
-    // ------------------------------------------------------ Manifest Constants
 
     /**
      * <p>
@@ -78,8 +74,6 @@ public class URLTestCase
 
     }
 
-    // ------------------------------------------------------ Instance Variables
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -90,8 +84,6 @@ public class URLTestCase
         digester = null;
 
     }
-
-    // ------------------------------------------------------------ Test Methods
 
     // Test a pristine instance
     @Test

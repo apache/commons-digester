@@ -68,8 +68,6 @@ public class PluginCreateRule
      */
     private PluginConfigurationException initException;
 
-    // -------------------- constructors -------------------------------------
-
     /**
      * Create a plugin rule where the user <i>must</i> specify a plugin-class or plugin-id.
      *
@@ -115,8 +113,6 @@ public class PluginCreateRule
             defaultPlugin = new Declaration( dfltPluginClass, dfltPluginRuleLoader );
         }
     }
-
-    // ------------------- properties ---------------------------------------
 
     /**
      * Invoked when the Digester matches this rule against an xml element.
@@ -289,8 +285,6 @@ public class PluginCreateRule
         final List<Rule> rules = newRules.getDecoratedRules().match( namespace, path, name, null );
         fireBodyMethods( rules, namespace, name, text );
     }
-
-    // ------------------- methods --------------------------------------------
 
     /**
      * {@inheritDoc}

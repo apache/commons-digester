@@ -83,8 +83,6 @@ public class PluginRules
      */
     private PluginContext pluginContext;
 
-    // ------------------------------------------------------------- Constructor
-
     /**
      * Constructor for top-level Rules objects. Exactly one of these must be created and installed into the Digester
      * instance as the Rules object before parsing starts.
@@ -145,8 +143,6 @@ public class PluginRules
         pluginContext = new PluginContext();
         pluginManager = new PluginManager( pluginContext );
     }
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * Register a new Rule instance matching the specified pattern.
@@ -310,8 +306,6 @@ public class PluginRules
     {
         return pluginContext.getPluginIdAttrNs();
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Gets the object which "knows" about all declared plugins.

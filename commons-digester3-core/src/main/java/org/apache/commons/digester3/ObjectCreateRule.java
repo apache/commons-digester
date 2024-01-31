@@ -185,8 +185,6 @@ public class ObjectCreateRule
         }
     }
 
-    // ----------------------------------------------------------- Constructors
-
     private static void convertTo( final Class<?>[] types, final Object[] array )
     {
         if ( array.length != types.length )
@@ -219,8 +217,6 @@ public class ObjectCreateRule
      * The Java class name of the object to be created.
      */
     protected String className;
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * The constructor argument types.
@@ -275,8 +271,6 @@ public class ObjectCreateRule
         this( clazz != null ? clazz.getName() : null, attributeName );
         this.clazz = clazz;
     }
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Constructs an object create rule with the specified class name and an optional attribute name containing an

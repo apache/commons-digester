@@ -75,7 +75,6 @@ public class TestXmlRuleInfo
         assertEquals( "xmlrules-ruleinfo", testObject.getValue() );
     }
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testXmlRuleInfoExplicitFile()
         throws Exception

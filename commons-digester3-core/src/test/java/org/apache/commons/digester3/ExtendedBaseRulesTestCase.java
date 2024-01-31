@@ -33,8 +33,6 @@ public class ExtendedBaseRulesTestCase
     extends RulesBaseTestCase
 {
 
-    // -------------------------------------------------- Overall Test Methods
-
     /**
      * <p>
      * This should be overriden by subclasses.

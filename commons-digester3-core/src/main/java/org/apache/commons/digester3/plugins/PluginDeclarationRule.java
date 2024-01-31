@@ -38,8 +38,6 @@ public class PluginDeclarationRule
     extends Rule
 {
 
-    // ------------------- constructors ---------------------------------------
-
     /**
      * Helper method to declare a plugin inside the given Digester.
      *
@@ -78,8 +76,6 @@ public class PluginDeclarationRule
         // is create a RuleLoader instance whch is *capable* of adding the
         // rules to the digester.
     }
-
-    // ------------------- methods --------------------------------------------
 
     /** Constructor */
     public PluginDeclarationRule()

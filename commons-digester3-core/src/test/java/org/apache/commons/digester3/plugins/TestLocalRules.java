@@ -32,7 +32,6 @@ import org.junit.Test;
 public class TestLocalRules
 {
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testLocalRules()
         throws Exception

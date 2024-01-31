@@ -38,7 +38,6 @@ import org.xml.sax.SAXException;
 public class VariableExpansionTestCase
 {
 
-    // --------------------------------------------------- Overall Test Methods
 
     // method used in tests4
     private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<SimpleTestBean>();
@@ -86,8 +85,6 @@ public class VariableExpansionTestCase
         digester.addSetNext( "root/bean", "addSimpleTestBean" );
         return digester;
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test expansion of text in element bodies.

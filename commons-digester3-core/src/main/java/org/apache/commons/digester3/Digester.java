@@ -96,8 +96,6 @@ public class Digester
     extends DefaultHandler
 {
 
-    // --------------------------------------------------------- Constructors
-
     /**
      * The schema language supported. By default, we use this one.
      */
@@ -112,8 +110,6 @@ public class Digester
      * The stack of body text string buffers for surrounding elements.
      */
     private final Stack<StringBuilder> bodyTexts = new Stack<StringBuilder>();
-
-    // --------------------------------------------------- Instance Variables
 
     /**
      * Stack whose elements are List objects, each containing a list of Rule objects as returned from Rules.getMatch().
@@ -307,8 +303,6 @@ public class Digester
     {
         this.parser = parser;
     }
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * Constructs a new Digester, allowing an XMLReader to be passed in. This allows Digester to be used in environments
@@ -962,8 +956,6 @@ public class Digester
         } );
     }
 
-    // ------------------------------------------------- ContentHandler Methods
-
     /**
      * Creates a Callable instance that parse the content of the specified reader using this Digester.
      *
@@ -1255,8 +1247,6 @@ public class Digester
         return createSAXException( message, null );
     }
 
-    // ----------------------------------------------------- DTDHandler Methods
-
     /**
      * Create a SAX exception which also understands about the location in the digester file where the exception occurs
      *
@@ -1333,8 +1323,6 @@ public class Digester
         // Perform final cleanup
         clear();
     }
-
-    // ----------------------------------------------- EntityResolver Methods
 
     /**
      * {@inheritDoc}
@@ -1499,8 +1487,6 @@ public class Digester
                 + exception.getMessage(), exception );
     }
 
-    // ------------------------------------------------- ErrorHandler Methods
-
     /**
      * {@inheritDoc}
      */
@@ -1564,8 +1550,6 @@ public class Digester
         }
         return ( this.getClass().getClassLoader() );
     }
-
-    // ------------------------------------------------------- Public Methods
 
     /**
      * Gets the current depth of the element stack.
@@ -1846,8 +1830,6 @@ public class Digester
     {
         return this.<T> npeSafeCast( root );
     }
-
-    // --------------------------------------------------------- Rule Methods
 
     /**
      * Gets the namespace URI that will be applied to all subsequently added {@code Rule} objects.
@@ -2741,8 +2723,6 @@ public class Digester
         this.classLoader = classLoader;
     }
 
-    // --------------------------------------------------- Object Stack Methods
-
     /**
      * Redirects (or cancels redirecting) of SAX ContentHandler events to an external object.
      * <p>
@@ -2911,10 +2891,6 @@ public class Digester
         this.rules.setDigester( this );
     }
 
-    // ------------------------------------------------ Parameter Stack Methods
-
-    // ------------------------------------------------------ Protected Methods
-
     /**
      * Sets the logger used for logging SAX-related information. <strong>Note</strong> the output is finely grained.
      *
@@ -2961,8 +2937,6 @@ public class Digester
     {
         useContextClassLoader = use;
     }
-
-    // -------------------------------------------------------- Package Methods
 
     /**
      * Sets the validating parser flag. This must be called before {@code parse()} is called the first time.

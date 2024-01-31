@@ -65,8 +65,6 @@ public class NodeCreateRule
     extends Rule
 {
 
-    // ---------------------------------------------------------- Inner Classes
-
     /**
      * The SAX content handler that does all the actual work of assembling the DOM node tree from the SAX events.
      */
@@ -74,14 +72,10 @@ public class NodeCreateRule
         extends DefaultHandler
     {
 
-        // ------------------------------------------------------- Constructors
-
         /**
          * The content handler used by Digester before it was set to this content handler.
          */
         protected ContentHandler oldContentHandler;
-
-        // ------------------------------------------------- Instance Variables
 
         /**
          * Depth of the current node, relative to the element where the content handler was put into action.
@@ -130,8 +124,6 @@ public class NodeCreateRule
             oldContentHandler = getDigester().getCustomContentHandler();
         }
 
-        // --------------------------------------------- Helper Methods
-
         /**
          * Appends a {@link org.w3c.dom.Text Text} node to the current node if the content reported by the parser is not
          * purely whitespace.
@@ -160,8 +152,6 @@ public class NodeCreateRule
                 }
             }
         }
-
-        // --------------------------------------------- ContentHandler Methods
 
         /**
          * Handle notification about text embedded within the current node.
@@ -295,8 +285,6 @@ public class NodeCreateRule
         }
     }
 
-    // ----------------------------------------------------------- Constructors
-
     /**
      * The JAXP {@code DocumentBuilder} to use.
      */
@@ -332,8 +320,6 @@ public class NodeCreateRule
     {
         this( Node.ELEMENT_NODE, documentBuilder );
     }
-
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * Constructs a new instance. Creates an instance of this rule that will create either a DOM {@link org.w3c.dom.Element Element}
@@ -371,8 +357,6 @@ public class NodeCreateRule
         this.nodeType = nodeType;
         this.documentBuilder = documentBuilder;
     }
-
-    // ----------------------------------------------------------- Rule Methods
 
     /**
      * When this method fires, the digester is told to forward all SAX ContentHandler events to the builder object,

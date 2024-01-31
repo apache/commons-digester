@@ -44,10 +44,6 @@ public class RSSDigester
     extends Digester
 {
 
-    // ----------------------------------------------------------- Constructors
-
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * Test main program that parses the channel description included in this
      * package as a static resource.
@@ -81,8 +77,6 @@ public class RSSDigester
             e.printStackTrace( System.out );
         }
     }
-
-    // ------------------------------------------------------------- Properties
 
     /**
      * Have we been configured yet?
@@ -226,8 +220,6 @@ public class RSSDigester
         return ( super.<T>parse( input ) );
     }
 
-    // --------------------------------------------------------- Public Methods
-
     /**
      * Parse the content of the specified input stream using this Digester.
      * Returns the root element from the object stack (which will be
@@ -274,16 +266,10 @@ public class RSSDigester
         this.imageClass = imageClass;
     }
 
-    // -------------------------------------------------------- Package Methods
-
-    // ------------------------------------------------------ Protected Methods
-
     public void setItemClass( final String itemClass )
     {
         this.itemClass = itemClass;
     }
-
-    // ------------------------------------------------------ Test Main Program
 
     public void setTextInputClass( final String textInputClass )
     {

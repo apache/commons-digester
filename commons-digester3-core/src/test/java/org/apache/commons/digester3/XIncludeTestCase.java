@@ -37,8 +37,6 @@ import org.xml.sax.SAXException;
 public class XIncludeTestCase
 {
 
-    // ------------------------------------------------ Individual Test Methods
-
     /**
      * Gets an appropriate InputStream for the specified test file (which must be inside our current package.
      *
@@ -52,8 +50,6 @@ public class XIncludeTestCase
         return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
 
     }
-
-    // ------------------------------------------------ Utility Support Methods
 
     /**
      * Test XInclude.

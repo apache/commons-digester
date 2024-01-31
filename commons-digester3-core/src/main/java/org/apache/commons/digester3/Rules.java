@@ -31,8 +31,6 @@ import org.xml.sax.Attributes;
 public interface Rules
 {
 
-    // ------------------------------------------------------------- Properties
-
     /**
      * Register a new Rule instance matching the specified pattern.
      *
@@ -59,8 +57,6 @@ public interface Rules
      * @return the namespace URI that will be applied to all subsequently added {@code Rule} objects.
      */
     String getNamespaceURI();
-
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Gets a List of all registered Rule instances that match the specified nesting pattern, or a zero-length List if

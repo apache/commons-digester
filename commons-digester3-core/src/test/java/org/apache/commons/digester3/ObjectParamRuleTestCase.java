@@ -38,8 +38,6 @@ import org.xml.sax.SAXException;
 public class ObjectParamRuleTestCase
 {
 
-    // ------------------------------------------------ Individual Test Methods
-
     private final StringBuilder sb =
         new StringBuilder().append( "<arraylist><A/><B/><C/><D desc=\"the fourth\"/><E/></arraylist>" );
 

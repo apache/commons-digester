@@ -51,7 +51,6 @@ public class TestDelegate
         }
     }
 
-    // --------------------------------------------------------------- Test cases
     @Test
     public void testDummy()
     {

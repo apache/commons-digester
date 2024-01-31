@@ -669,8 +669,6 @@ public class CallMethodRuleTestCase
         assertEquals( "Failed to call Employee.setSalary", 1000000.0f, employee.getSalary(), 0.1f );
     }
 
-    // ------------------------------------------------ Utility Support Methods
-
     @Test
     public void testTwoCalls()
         throws Exception

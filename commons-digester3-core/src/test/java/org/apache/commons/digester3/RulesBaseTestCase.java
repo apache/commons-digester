@@ -36,14 +36,10 @@ import org.junit.Test;
 public class RulesBaseTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     /**
      * The digester instance we will be processing.
      */
     protected Digester digester;
-
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * <p>
@@ -78,8 +74,6 @@ public class RulesBaseTestCase
         digester = null;
 
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test basic matchings involving namespaces.

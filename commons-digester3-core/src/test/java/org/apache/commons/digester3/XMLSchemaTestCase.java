@@ -45,8 +45,6 @@ import org.xml.sax.SAXParseException;
 public class XMLSchemaTestCase
 {
 
-    // ----------------------------------------------------- Instance Variables
-
     static final class TestErrorHandler
         implements ErrorHandler
     {
@@ -75,8 +73,6 @@ public class XMLSchemaTestCase
         }
     }
 
-    // --------------------------------------------------- Overall Test Methods
-
     /**
      * The digester instance we will be processing.
      */
@@ -95,8 +91,6 @@ public class XMLSchemaTestCase
         return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
 
     }
-
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Sets up instance variables required by this test case.
@@ -137,8 +131,6 @@ public class XMLSchemaTestCase
         digester = null;
 
     }
-
-    // ------------------------------------ Utility Support Methods and Classes
 
     @Test
     public void testBadDocument()
