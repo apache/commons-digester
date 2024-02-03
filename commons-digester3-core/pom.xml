@@ -57,6 +57,9 @@
     </dependency>
   </dependencies>
 
+  <properties>
+    <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
+  </properties>
   <build>
     <resources>
       <resource>

@@ -24,9 +24,8 @@
   <body>
   <release version="3.3" date="202?-??-??" description="Maintenance release.">
     <!-- ADD -->
-    <action dev="simonetripodi" type="fix" issue="DIGESTER-171" due-to="Nick Williams">
-      Add DefaultThrowingErrorHandler to Digester API - patch provided by Ivan Diana
-    </action>
+    <action dev="simonetripodi" type="add" issue="DIGESTER-171" due-to="Nick Williams, Ivan Diana">Add DefaultThrowingErrorHandler to Digester API.</action>
+    <action dev="ggregory" type="add" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
     <!--  FIX -->
     <action dev="simonetripodi" type="fix" issue="DIGESTER-175">
       Regression: DigesterTestCase#testPopNamedStackNotPushed expects EmptyStackException
@@ -90,7 +89,7 @@
       Bump JUnit from 4.10 to 4.13.2 in #77, #78.
     </action>
     <action dev="ggregory" type="update">
-      Bump commons-parent from 28 to 65, #109.
+      Bump commons-parent from 28 to 66.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump findbugs-maven-plugin from 2.3.2 to 3.0.5 #80.
