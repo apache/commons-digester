@@ -109,6 +109,9 @@
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump org.apache.maven.plugins:maven-pmd-plugin from 2.3 to 3.21.2 #110.
     </action>
+    <action dev="ggregory" type="update" due-to="Dependabot">
+      Bump org.codehaus.mojo:exec-maven-plugin from 3.1.1 to 3.2.0 #130.
+    </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
     <action dev="simonetripodi" type="fix" issue="DIGESTER-160">
