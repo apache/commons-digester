@@ -358,7 +358,7 @@ public class ExtendedBaseRules
                         }
                         else
                         {
-                            ancesterMatched = ( pattern.indexOf( patternBody + "/" ) > -1 );
+                            ancesterMatched = ( pattern.contains( patternBody + "/" ) );
                         }
                     }
                     else

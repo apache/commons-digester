@@ -232,7 +232,7 @@ public class SetNestedPropertiesRuleTestCase
         catch ( final org.xml.sax.SAXParseException e )
         {
             final String msg = e.getMessage();
-            if ( msg.indexOf( "badprop" ) >= 0 )
+            if ( msg.contains( "badprop" ) )
             {
                 // ok, this is expected; there is no "setBadprop" method on the
                 // SimpleTestBean class...
