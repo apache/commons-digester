@@ -20,6 +20,7 @@ package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -215,7 +216,7 @@ public class OverlappingCallMethodRuleTestCase
         // assertEquals("name", this.itemName);
 
         // These are what actually happens
-        assertEquals( null, this.itemId );
+        assertNull( this.itemId );
         assertEquals( "name", this.itemName );
     }
 

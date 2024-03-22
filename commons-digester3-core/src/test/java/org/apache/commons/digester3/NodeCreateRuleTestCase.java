@@ -527,7 +527,7 @@ public class NodeCreateRuleTestCase
         assertNotNull( element.getAttributeNode( "firstName" ) );
         assertEquals( "First Name", element.getAttributeNode( "firstName" ).getNodeValue() );
         assertEquals( "firstName", element.getAttributeNode( "firstName" ).getLocalName() );
-        assertEquals( null, element.getAttributeNode( "firstName" ).getPrefix() );
+        assertNull( element.getAttributeNode( "firstName" ).getPrefix() );
         assertEquals( "firstName", element.getAttributeNode( "firstName" ).getName() );
 
     }
