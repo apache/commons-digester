@@ -74,7 +74,7 @@ public class SimpleRegexMatcher
     }
 
     /**
-     * Implementation of regex matching algorithm. This calls itself recursively.
+     * Implements a regex matching algorithm. This calls itself recursively.
      *
      * @param basePattern the standard digester path representing the element
      * @param regexPattern the regex pattern the path will be tested against
