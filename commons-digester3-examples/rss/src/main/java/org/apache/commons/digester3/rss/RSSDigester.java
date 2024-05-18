@@ -27,8 +27,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * <p>Implementation of <strong>org.apache.commons.digester3.Digester</strong>
- * designed to process input streams that conform to the <em>Rich Site
+ * <p>Implements {@link Digester}
+ * to process input streams that conform to the <em>Rich Site
  * Summary</em> DTD, version 0.91.  For more information about this format,
  * see the <a href="http://my.netscape.com/publish/">My Netscape</a> site.</p>
  *
