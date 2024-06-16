@@ -83,12 +83,12 @@ public class MarkupDigester
     /**
      * Process notification of the end of an XML element being reached.
      *
-     * @param namespaceURI - The Namespace URI, or the empty string if the
+     * @param namespaceURI   The Namespace URI, or the empty string if the
      *   element has no Namespace URI or if Namespace processing is not
      *   being performed.
-     * @param localName - The local name (without prefix), or the empty
+     * @param localName   The local name (without prefix), or the empty
      *   string if Namespace processing is not being performed.
-     * @param qName - The qualified XML 1.0 name (with prefix), or the
+     * @param qName   The qualified XML 1.0 name (with prefix), or the
      *   empty string if qualified names are not available.
      * @throws SAXException if a parsing error is to be reported
      */
