@@ -126,7 +126,7 @@ public final class CallMethodBuilder
      * Sets the Java classes that represent the parameter types of the method arguments.
      *
      * If you wish to use a primitive type, specify the corresonding Java wrapper class instead,
-     * such as {@link java.lang.Boolean#TYPE} for a {@code boolean} parameter.
+     * such as {@link Boolean#TYPE} for a {@code boolean} parameter.
      *
      * @param paramTypes The Java classes that represent the parameter types of the method arguments
      * @return this builder instance
@@ -151,7 +151,7 @@ public final class CallMethodBuilder
      * Sets the Java class names that represent the parameter types of the method arguments.
      *
      * If you wish to use a primitive type, specify the corresonding Java wrapper class instead,
-     * such as {@link java.lang.Boolean#TYPE} for a {@code boolean} parameter.
+     * such as {@link Boolean#TYPE} for a {@code boolean} parameter.
      *
      * @param paramTypeNames The Java classes names that represent the parameter types of the method arguments
      * @return this builder instance
