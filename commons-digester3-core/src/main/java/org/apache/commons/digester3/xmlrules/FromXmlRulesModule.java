@@ -52,7 +52,7 @@ public abstract class FromXmlRulesModule
 
     private final URL xmlRulesDtdUrl = FromXmlRulesModule.class.getResource( DIGESTER_DTD_PATH );
 
-    private final Set<String> systemIds = new HashSet<String>();
+    private final Set<String> systemIds = new HashSet<>();
 
     private String rootPath;
 
