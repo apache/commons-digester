@@ -44,7 +44,6 @@ Apache Commons Digester
 ===================
 
 [![Java CI](https://github.com/apache/commons-digester/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-digester/actions/workflows/maven.yml)
-[![Coverage Status](https://codecov.io/gh/apache/commons-digester/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-digester)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-digester3/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-digester3/?gav=true)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-digester3-parent/3.3.svg)](https://javadoc.io/doc/org.apache.commons/commons-digester3-parent/3.3)
 [![CodeQL](https://github.com/apache/commons-digester/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-digester/actions/workflows/codeql-analysis.yml)
