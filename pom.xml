@@ -245,34 +245,7 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
-
-      <!-- TODO remove when upgrading to parent 28 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-scm-publish-plugin</artifactId>
-        <version>1.0-beta-2</version>
-        <configuration>
-          <content>${project.reporting.outputDirectory}</content>
-          <pubScmUrl>scm:svn:${commons.scmPubUrl}</pubScmUrl>
-          <checkoutDirectory>site-content</checkoutDirectory>
-          <tryUpdate>true</tryUpdate>
-          <ignorePathsToDelete>
-            <ignorePathToDelete>commons-digester-*</ignorePathToDelete>
-          </ignorePathsToDelete>
-        </configuration>
-        <executions>
-          <execution>
-            <id>scm-publish</id>
-            <phase>site-deploy</phase><!-- deploy site with maven-scm-publish-plugin -->
-            <goals>
-              <goal>publish-scm</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
     </plugins>
-
     <pluginManagement>
       <plugins>
         <!-- TODO remove when upgrading to parent 28 -->
