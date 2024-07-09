@@ -323,7 +323,7 @@ public class PluginCreateRule
         throws Exception
     {
 
-        if ( ( rules != null ) && ( !rules.isEmpty() ) )
+        if ( rules != null && !rules.isEmpty() )
         {
             final Log log = getDigester().getLogger();
             final boolean debug = log.isDebugEnabled();
@@ -365,7 +365,7 @@ public class PluginCreateRule
     private void fireBodyMethods( final List<Rule> rules, final String namespaceURI, final String name, final String text )
         throws Exception
     {
-        if ( ( rules != null ) && ( !rules.isEmpty() ) )
+        if ( rules != null && !rules.isEmpty() )
         {
             final Log log = getDigester().getLogger();
             final boolean debug = log.isDebugEnabled();
@@ -412,7 +412,7 @@ public class PluginCreateRule
             final boolean debug = log.isDebugEnabled();
             for ( int i = 0; i < rules.size(); i++ )
             {
-                final int j = ( rules.size() - i ) - 1;
+                final int j = rules.size() - i - 1;
                 final Rule rule = rules.get( j );
                 if ( debug )
                 {
@@ -554,14 +554,10 @@ public class PluginCreateRule
                 log.debug( "init: pluginClassAttr set to per-digester values [" + "ns=" + pluginClassAttrNs + ", name="
                     + pluginClassAttr + "]" );
             }
-        }
-        else
+        } else if ( debug )
         {
-            if ( debug )
-            {
-                log.debug( "init: pluginClassAttr set to rule-specific values [" + "ns=" + pluginClassAttrNs
-                    + ", name=" + pluginClassAttr + "]" );
-            }
+            log.debug( "init: pluginClassAttr set to rule-specific values [" + "ns=" + pluginClassAttrNs
+                + ", name=" + pluginClassAttr + "]" );
         }
 
         if ( pluginIdAttr == null )
@@ -576,14 +572,10 @@ public class PluginCreateRule
                 log.debug( "init: pluginIdAttr set to per-digester values [" + "ns=" + pluginIdAttrNs + ", name="
                     + pluginIdAttr + "]" );
             }
-        }
-        else
+        } else if ( debug )
         {
-            if ( debug )
-            {
-                log.debug( "init: pluginIdAttr set to rule-specific values [" + "ns=" + pluginIdAttrNs + ", name="
-                    + pluginIdAttr + "]" );
-            }
+            log.debug( "init: pluginIdAttr set to rule-specific values [" + "ns=" + pluginIdAttrNs + ", name="
+                + pluginIdAttr + "]" );
         }
     }
 
