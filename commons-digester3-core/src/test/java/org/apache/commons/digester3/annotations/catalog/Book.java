@@ -17,6 +17,8 @@
  */
 package org.apache.commons.digester3.annotations.catalog;
 
+import java.util.Objects;
+
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.FactoryCreate;
 
@@ -57,40 +59,20 @@ public final class Book
             return false;
         }
         final Book other = (Book) obj;
-        if ( this.author == null )
+        if ( !Objects.equals(this.author, other.getAuthor()) )
         {
-            if ( other.getAuthor() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.author.equals( other.getAuthor() ) ) {
             return false;
         }
-        if ( this.desc == null )
+        if ( !Objects.equals(this.desc, other.getDesc()) )
         {
-            if ( other.getDesc() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.desc.equals( other.getDesc() ) ) {
             return false;
         }
-        if ( this.isbn == null )
+        if ( !Objects.equals(this.isbn, other.getIsbn()) )
         {
-            if ( other.getIsbn() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.isbn.equals( other.getIsbn() ) ) {
             return false;
         }
-        if ( this.title == null )
+        if ( !Objects.equals(this.title, other.getTitle()) )
         {
-            if ( other.getTitle() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.title.equals( other.getTitle() ) ) {
             return false;
         }
         return true;
@@ -119,7 +101,7 @@ public final class Book
     @Override
     public void print()
     {
-        System.out.println( this.toString() );
+        System.out.println( toString() );
     }
 
     public void setAuthor( final String author )
