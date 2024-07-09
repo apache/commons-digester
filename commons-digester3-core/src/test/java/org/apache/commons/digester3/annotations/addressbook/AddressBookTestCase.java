@@ -76,7 +76,7 @@ public final class AddressBookTestCase
 
         addressBook.addPerson( person );
 
-        this.verifyExpectedEqualsToParsed( addressBook );
+        verifyExpectedEqualsToParsed( addressBook );
     }
 
 }
