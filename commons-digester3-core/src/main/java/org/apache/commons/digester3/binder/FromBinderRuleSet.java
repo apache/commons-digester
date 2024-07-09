@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.Rule;
@@ -77,26 +78,12 @@ final class FromBinderRuleSet
             }
 
             final Key other = (Key) obj;
-            if ( namespaceURI == null )
-            {
-                if ( other.getNamespaceURI() != null )
-                {
-                    return false;
-                }
-            }
-            else if ( !namespaceURI.equals( other.getNamespaceURI() ) )
+            if ( !Objects.equals(namespaceURI, other.getNamespaceURI()) )
             {
                 return false;
             }
 
-            if ( pattern == null )
-            {
-                if ( other.getPattern() != null )
-                {
-                    return false;
-                }
-            }
-            else if ( !pattern.equals( other.getPattern() ) )
+            if ( !Objects.equals(pattern, other.getPattern()) )
             {
                 return false;
             }
@@ -120,11 +107,7 @@ final class FromBinderRuleSet
         @Override
         public int hashCode()
         {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ( ( namespaceURI == null ) ? 0 : namespaceURI.hashCode() );
-            result = prime * result + ( ( pattern == null ) ? 0 : pattern.hashCode() );
-            return result;
+            return Objects.hash(namespaceURI, pattern);
         }
 
         /**
@@ -142,13 +125,13 @@ final class FromBinderRuleSet
      * The data structure where storing the providers binding.
      */
     private final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> providers =
-        new LinkedList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
+        new LinkedList<>();
 
     /**
      * Index for quick-retrieve provider.
      */
     private final Map<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>> providersIndex =
-        new HashMap<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>>();
+        new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -236,7 +219,7 @@ final class FromBinderRuleSet
         Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
         if ( indexedProviders == null )
         {
-            indexedProviders = new ArrayList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
+            indexedProviders = new ArrayList<>();
             this.providersIndex.put( key, indexedProviders ); // O(1)
         }
         indexedProviders.add( ruleBuilder );
