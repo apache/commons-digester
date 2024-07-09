@@ -102,7 +102,7 @@ public final class DigesterLoader
      * The URLs of entityValidator that have been registered, keyed by the public
      * identifier that corresponds.
      */
-    private final Map<String, URL> entityValidator = new HashMap<String, URL>();
+    private final Map<String, URL> entityValidator = new HashMap<>();
 
     /**
      * The SAXParserFactory to create new default {@link Digester} instances.
@@ -236,7 +236,7 @@ public final class DigesterLoader
      */
     public ErrorHandler getErrorHandler()
     {
-        return ( this.errorHandler );
+        return this.errorHandler;
     }
 
     /**
