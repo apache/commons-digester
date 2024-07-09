@@ -227,7 +227,7 @@ public class FactoryCreateRule
         {
             if ( exceptionIgnoredStack == null )
             {
-                exceptionIgnoredStack = new Stack<Boolean>();
+                exceptionIgnoredStack = new Stack<>();
             }
 
             try
@@ -238,8 +238,8 @@ public class FactoryCreateRule
                 {
                     getDigester().getLogger().debug( format( "[FactoryCreateRule]{%s} New %s",
                                                              getDigester().getMatch(),
-                                                             ( instance == null ? "null object"
-                                                                             : instance.getClass().getName() ) ) );
+                                                             instance == null ? "null object"
+                                                                             : instance.getClass().getName() ) );
                 }
                 getDigester().push( instance );
                 exceptionIgnoredStack.push( Boolean.FALSE );
@@ -252,8 +252,8 @@ public class FactoryCreateRule
                 {
                     getDigester().getLogger().info( format( "[FactoryCreateRule]{%s} Create exception ignored: %s",
                                                             getDigester().getMatch(),
-                                                            ( ( e.getMessage() == null ) ? e.getClass().getName()
-                                                                            : e.getMessage() ) ) );
+                                                            e.getMessage() == null ? e.getClass().getName()
+                                                                            : e.getMessage() ) );
                     if ( getDigester().getLogger().isDebugEnabled() )
                     {
                         getDigester().getLogger().debug( "[FactoryCreateRule] Ignored exception:", e );
@@ -271,8 +271,8 @@ public class FactoryCreateRule
             {
                 getDigester().getLogger().debug( format( "[FactoryCreateRule]{%s} New %s",
                                                          getDigester().getMatch(),
-                                                         ( instance == null ? "null object"
-                                                                         : instance.getClass().getName() ) ) );
+                                                         instance == null ? "null object"
+                                                                         : instance.getClass().getName() ) );
             }
             getDigester().push( instance );
         }
@@ -354,7 +354,7 @@ public class FactoryCreateRule
             creationFactory = (ObjectCreationFactory<?>) clazz.newInstance();
             creationFactory.setDigester( getDigester() );
         }
-        return ( creationFactory );
+        return creationFactory;
     }
 
     /**
@@ -370,7 +370,7 @@ public class FactoryCreateRule
             formatter.format( ", creationFactory=%s", creationFactory );
         }
         formatter.format( "]" );
-        return ( formatter.toString() );
+        return formatter.toString();
     }
 
 }
