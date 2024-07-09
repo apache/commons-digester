@@ -57,17 +57,17 @@ public class RulesBase
      * The set of registered Rule instances, keyed by the matching pattern. Each value is a List containing the Rules
      * for that pattern, in the order that they were orginally registered.
      */
-    protected HashMap<String, List<Rule>> cache = new HashMap<String, List<Rule>>();
+    protected HashMap<String, List<Rule>> cache = new HashMap<>();
 
     /**
      * The subset of registered Rule instances with wildcard pattern.
      */
-    protected List<String> wildcardCache = new LinkedList<String>();
+    protected List<String> wildcardCache = new LinkedList<>();
 
     /**
      * The set of registered Rule instances, in the order that they were originally registered.
      */
-    protected ArrayList<Rule> rules = new ArrayList<Rule>();
+    protected ArrayList<Rule> rules = new ArrayList<>();
 
     /**
      * {@inheritDoc}
@@ -95,23 +95,23 @@ public class RulesBase
         final List<Rule> list = this.cache.get( pattern );
         if ( list == null )
         {
-            return ( null );
+            return null;
         }
-        if ( ( namespaceURI == null ) || ( namespaceURI.isEmpty() ) )
+        if ( namespaceURI == null || namespaceURI.isEmpty() )
         {
-            return ( list );
+            return list;
         }
 
         // Select only Rules that match on the specified namespace URI
-        final ArrayList<Rule> results = new ArrayList<Rule>();
+        final ArrayList<Rule> results = new ArrayList<>();
         for ( final Rule item : list )
         {
-            if ( ( namespaceURI.equals( item.getNamespaceURI() ) ) || ( item.getNamespaceURI() == null ) )
+            if ( namespaceURI.equals( item.getNamespaceURI() ) || item.getNamespaceURI() == null )
             {
                 results.add( item );
             }
         }
-        return ( results );
+        return results;
     }
 
     /**
@@ -122,7 +122,7 @@ public class RulesBase
     {
         // List rulesList = (List) this.cache.get(pattern);
         List<Rule> rulesList = lookup( namespaceURI, pattern );
-        if ( ( rulesList == null ) || ( rulesList.size() < 1 ) )
+        if ( rulesList == null || rulesList.size() < 1 )
         {
             // Find the longest key, ie more discriminant
             String longKey = "";
@@ -141,9 +141,9 @@ public class RulesBase
         }
         if ( rulesList == null )
         {
-            rulesList = new ArrayList<Rule>();
+            rulesList = new ArrayList<>();
         }
-        return ( rulesList );
+        return rulesList;
     }
 
     /**
@@ -162,7 +162,7 @@ public class RulesBase
         List<Rule> list = cache.get( pattern );
         if ( list == null )
         {
-            list = new ArrayList<Rule>();
+            list = new ArrayList<>();
             if ( pattern.startsWith( "*/" ) )
             {
                 wildcardCache.add( pattern.substring( 1 ) );
@@ -179,7 +179,7 @@ public class RulesBase
     @Override
     public List<Rule> rules()
     {
-        return ( this.rules );
+        return this.rules;
     }
 
     /**
