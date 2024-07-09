@@ -33,9 +33,9 @@ public class Person
 
     private String name;
 
-    private final HashMap<String, String> emails = new HashMap<String, String>();
+    private final HashMap<String, String> emails = new HashMap<>();
 
-    private final List<Address> addresses = new ArrayList<Address>();
+    private final List<Address> addresses = new ArrayList<>();
 
     public void addAddress( final Address addr )
     {
