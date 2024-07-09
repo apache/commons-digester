@@ -35,9 +35,9 @@ public class TestConfigurablePluginAttributes
 
     public static class MultiContainer
     {
-        private final LinkedList<Widget> widgets = new LinkedList<Widget>();
+        private final LinkedList<Widget> widgets = new LinkedList<>();
 
-        private final LinkedList<Widget> gadgets = new LinkedList<Widget>();
+        private final LinkedList<Widget> gadgets = new LinkedList<>();
 
         public MultiContainer()
         {
