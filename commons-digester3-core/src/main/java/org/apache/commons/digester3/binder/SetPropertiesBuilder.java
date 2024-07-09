@@ -31,7 +31,7 @@ public final class SetPropertiesBuilder
     extends AbstractBackToLinkedRuleBuilder<SetPropertiesRule>
 {
 
-    private final Map<String, String> aliases = new HashMap<String, String>();
+    private final Map<String, String> aliases = new HashMap<>();
 
     private boolean ignoreMissingProperty = true;
 
@@ -54,7 +54,7 @@ public final class SetPropertiesBuilder
         {
             reportError( "setProperties().addAlias( String )", "empty 'attributeName' not allowed" );
         }
-        return new AddAliasBuilder<SetPropertiesBuilder>( this, aliases, attributeName );
+        return new AddAliasBuilder<>( this, aliases, attributeName );
     }
 
     /**
