@@ -56,7 +56,7 @@ public class Row
         }
     }
 
-    private final LinkedList<Column> columns = new LinkedList<Column>();
+    private final LinkedList<Column> columns = new LinkedList<>();
 
     public Row()
     {
