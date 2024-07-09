@@ -19,6 +19,7 @@ package org.apache.commons.digester3.annotations.catalog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 import org.apache.commons.digester3.annotations.rules.SetNext;
@@ -30,7 +31,7 @@ import org.apache.commons.digester3.annotations.rules.SetNext;
 public final class Catalog
 {
 
-    private final List<Item> items = new ArrayList<Item>();
+    private final List<Item> items = new ArrayList<>();
 
     @SetNext( { AudioVisual.class, Book.class } )
     public void addItem( final Item item )
@@ -51,13 +52,8 @@ public final class Catalog
             return false;
         }
         final Catalog other = (Catalog) obj;
-        if ( this.items == null )
+        if ( !Objects.equals(this.items, other.getItems()) )
         {
-            if ( other.getItems() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.items.equals( other.getItems() ) ) {
             return false;
         }
         return true;
