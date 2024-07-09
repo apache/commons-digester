@@ -69,7 +69,7 @@ public final class RssTestCase
         item.setDescription( "" );
         channel.addItem( item );
 
-        this.verifyExpectedEqualsToParsed( channel );
+        verifyExpectedEqualsToParsed( channel );
     }
 
 }
