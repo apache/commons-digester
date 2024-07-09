@@ -19,6 +19,7 @@ package org.apache.commons.digester3.annotations.servletbean;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.CallMethod;
@@ -32,7 +33,7 @@ import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 public final class ServletBean
 {
 
-    private final Map<String, String> initParams = new HashMap<String, String>();
+    private final Map<String, String> initParams = new HashMap<>();
 
     @BeanPropertySetter( pattern = "web-app/servlet/servlet-name" )
     private String servletName;
@@ -60,31 +61,16 @@ public final class ServletBean
             return false;
         }
         final ServletBean other = (ServletBean) obj;
-        if ( initParams == null )
+        if ( !Objects.equals(initParams, other.initParams) )
         {
-            if ( other.initParams != null ) {
-                return false;
-            }
-        }
-        else if ( !initParams.equals( other.initParams ) ) {
             return false;
         }
-        if ( servletClass == null )
+        if ( !Objects.equals(servletClass, other.servletClass) )
         {
-            if ( other.servletClass != null ) {
-                return false;
-            }
-        }
-        else if ( !servletClass.equals( other.servletClass ) ) {
             return false;
         }
-        if ( servletName == null )
+        if ( !Objects.equals(servletName, other.servletName) )
         {
-            if ( other.servletName != null ) {
-                return false;
-            }
-        }
-        else if ( !servletName.equals( other.servletName ) ) {
             return false;
         }
         return true;
