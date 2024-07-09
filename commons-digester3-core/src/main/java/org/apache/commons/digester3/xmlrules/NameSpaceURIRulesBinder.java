@@ -33,7 +33,7 @@ final class NameSpaceURIRulesBinder
 {
 
     // a stack is needed because of includes!!!
-    private final Stack<String> namespaceURIs = new Stack<String>();
+    private final Stack<String> namespaceURIs = new Stack<>();
 
     private final RulesBinder wrappedBinder;
 
