@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.CallMethod;
@@ -36,9 +37,9 @@ import org.apache.commons.digester3.annotations.rules.SetProperty;
 public class Person
 {
 
-    private final Map<String, String> emails = new HashMap<String, String>();
+    private final Map<String, String> emails = new HashMap<>();
 
-    private final List<Address> addresses = new ArrayList<Address>();
+    private final List<Address> addresses = new ArrayList<>();
 
     @SetProperty( pattern = "address-book/person" )
     private int id;
@@ -75,43 +76,23 @@ public class Person
             return false;
         }
         final Person other = (Person) obj;
-        if ( addresses == null )
+        if ( !Objects.equals(addresses, other.addresses) )
         {
-            if ( other.addresses != null ) {
-                return false;
-            }
-        }
-        else if ( !addresses.equals( other.addresses ) ) {
             return false;
         }
-        if ( category == null )
+        if ( !Objects.equals(category, other.category) )
         {
-            if ( other.category != null ) {
-                return false;
-            }
-        }
-        else if ( !category.equals( other.category ) ) {
             return false;
         }
-        if ( emails == null )
+        if ( !Objects.equals(emails, other.emails) )
         {
-            if ( other.emails != null ) {
-                return false;
-            }
-        }
-        else if ( !emails.equals( other.emails ) ) {
             return false;
         }
         if ( id != other.id ) {
             return false;
         }
-        if ( name == null )
+        if ( !Objects.equals(name, other.name) )
         {
-            if ( other.name != null ) {
-                return false;
-            }
-        }
-        else if ( !name.equals( other.name ) ) {
             return false;
         }
         return true;
