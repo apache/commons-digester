@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class Employee
 {
 
-    private final ArrayList<Address> addresses = new ArrayList<Address>();
+    private final ArrayList<Address> addresses = new ArrayList<>();
 
     private String firstName;
 
@@ -61,10 +61,10 @@ public class Employee
         for ( final Address address : addresses )
         {
             if ( type.equals( address.getType() ) ) {
-                return ( address );
+                return address;
             }
         }
-        return ( null );
+        return null;
     }
 
     public int getAge()
@@ -74,12 +74,12 @@ public class Employee
 
     public String getFirstName()
     {
-        return ( this.firstName );
+        return this.firstName;
     }
 
     public String getLastName()
     {
-        return ( this.lastName );
+        return this.lastName;
     }
 
     public float getSalary()
@@ -131,7 +131,7 @@ public class Employee
         sb.append( ", lastName=" );
         sb.append( lastName );
         sb.append( "]" );
-        return ( sb.toString() );
+        return sb.toString();
     }
 
 }
