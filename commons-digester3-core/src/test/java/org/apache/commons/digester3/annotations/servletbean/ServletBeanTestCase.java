@@ -36,7 +36,7 @@ public final class ServletBeanTestCase
         servletBean.addInitParam( "application", "org.apache.struts.example.ApplicationResources" );
         servletBean.addInitParam( "config", "/WEB-INF/struts-config.xml" );
 
-        this.verifyExpectedEqualsToParsed( servletBean );
+        verifyExpectedEqualsToParsed( servletBean );
     }
 
 }
