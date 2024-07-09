@@ -17,6 +17,8 @@
  */
 package org.apache.commons.digester3.annotations.employee;
 
+import java.util.Objects;
+
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 import org.apache.commons.digester3.annotations.rules.SetProperty;
@@ -57,49 +59,24 @@ public class Address
             return false;
         }
         final Address other = (Address) obj;
-        if ( this.city == null )
+        if ( !Objects.equals(this.city, other.getCity()) )
         {
-            if ( other.getCity() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.city.equals( other.getCity() ) ) {
             return false;
         }
-        if ( this.state == null )
+        if ( !Objects.equals(this.state, other.getState()) )
         {
-            if ( other.getState() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.state.equals( other.getState() ) ) {
             return false;
         }
-        if ( this.street == null )
+        if ( !Objects.equals(this.street, other.getStreet()) )
         {
-            if ( other.getStreet() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.street.equals( other.getStreet() ) ) {
             return false;
         }
-        if ( this.type == null )
+        if ( !Objects.equals(this.type, other.getType()) )
         {
-            if ( other.getType() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.type.equals( other.getType() ) ) {
             return false;
         }
-        if ( this.zipCode == null )
+        if ( !Objects.equals(this.zipCode, other.getZipCode()) )
         {
-            if ( other.getZipCode() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.zipCode.equals( other.getZipCode() ) ) {
             return false;
         }
         return true;
