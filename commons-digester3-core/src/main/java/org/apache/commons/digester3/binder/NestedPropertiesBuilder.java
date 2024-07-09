@@ -33,7 +33,7 @@ public final class NestedPropertiesBuilder
     extends AbstractBackToLinkedRuleBuilder<SetNestedPropertiesRule>
 {
 
-    private final Map<String, String> elementNames = new HashMap<String, String>();
+    private final Map<String, String> elementNames = new HashMap<>();
 
     private boolean trimData = true;
 
@@ -58,7 +58,7 @@ public final class NestedPropertiesBuilder
         {
             reportError( "setProperties().addAlias( String )", "empty 'elementName' not allowed" );
         }
-        return new AddAliasBuilder<NestedPropertiesBuilder>( this, elementNames, elementName );
+        return new AddAliasBuilder<>( this, elementNames, elementName );
     }
 
     /**
