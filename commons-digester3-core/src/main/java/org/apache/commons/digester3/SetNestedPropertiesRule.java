@@ -209,7 +209,7 @@ public class SetNestedPropertiesRule
 
         private Rules decoratedRules;
 
-        private final ArrayList<Rule> rules = new ArrayList<Rule>( 1 );
+        private final ArrayList<Rule> rules = new ArrayList<>( 1 );
 
         private final AnyChildRule rule;
 
@@ -257,7 +257,7 @@ public class SetNestedPropertiesRule
         {
             final List<Rule> match = decoratedRules.match( namespaceURI, matchPath, name, attributes );
 
-            if ( ( matchPath.startsWith( matchPrefix ) ) && ( matchPath.indexOf( '/', matchPrefix.length() ) == -1 ) )
+            if ( matchPath.startsWith( matchPrefix ) && matchPath.indexOf( '/', matchPrefix.length() ) == -1 )
             {
 
                 // The current element is a direct child of the element
@@ -265,7 +265,7 @@ public class SetNestedPropertiesRule
                 // the rule passed to this object's constructor is included
                 // in the returned list of matching rules.
 
-                if ( ( match == null || match.isEmpty() ) )
+                if ( match == null || match.isEmpty() )
                 {
                     // The "real" rules class doesn't have any matches for
                     // the specified path, so we return a list containing
@@ -279,7 +279,7 @@ public class SetNestedPropertiesRule
                 //
                 // It might not be safe to modify the returned list,
                 // so clone it first.
-                final LinkedList<Rule> newMatch = new LinkedList<Rule>( match );
+                final LinkedList<Rule> newMatch = new LinkedList<>( match );
                 newMatch.addLast( rule );
                 return newMatch;
             }
@@ -324,7 +324,7 @@ public class SetNestedPropertiesRule
 
     private boolean allowUnknownChildElements;
 
-    private final HashMap<String, String> elementNames = new HashMap<String, String>();
+    private final HashMap<String, String> elementNames = new HashMap<>();
 
     /**
      * Base constructor, which maps every child element into a bean property with the same name as the xml element.
@@ -387,7 +387,7 @@ public class SetNestedPropertiesRule
      * <p>
      * The following constructs a rule that maps the {@code alt-city} element to the {@code city} property and
      * the {@code alt-state} to the {@code state} property. All other child elements are mapped as usual using
-     * exact name matching. 
+     * exact name matching.
      * </p>
      * <pre>{@code
      *      SetNestedPropertiesRule(
