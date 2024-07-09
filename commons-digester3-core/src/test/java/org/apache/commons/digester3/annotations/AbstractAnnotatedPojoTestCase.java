@@ -34,7 +34,7 @@ public abstract class AbstractAnnotatedPojoTestCase
 {
 
     protected Collection<RulesModule> getAuxModules() {
-        return new ArrayList<RulesModule>();
+        return new ArrayList<>();
     }
 
     /**
@@ -50,7 +50,7 @@ public abstract class AbstractAnnotatedPojoTestCase
         final String resource = clazz.getSimpleName() + ".xml";
         final InputStream input = clazz.getResourceAsStream(resource);
 
-        final Collection<RulesModule> modules = this.getAuxModules();
+        final Collection<RulesModule> modules = getAuxModules();
         modules.add(new FromAnnotationsRuleModule()
         {
 
