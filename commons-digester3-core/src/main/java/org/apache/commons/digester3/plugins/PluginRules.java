@@ -81,7 +81,7 @@ public class PluginRules
     /**
      * A reference to the object that holds all data which should only exist once per digester instance.
      */
-    private PluginContext pluginContext;
+    private final PluginContext pluginContext;
 
     /**
      * Constructor for top-level Rules objects. Exactly one of these must be created and installed into the Digester
@@ -348,11 +348,11 @@ public class PluginRules
 
         if ( debug )
         {
-            log.debug( "Matching path [" + path + "] on rules object " + this.toString() );
+            log.debug( "Matching path [" + path + "] on rules object " + toString() );
         }
 
         List<Rule> matches;
-        if ( ( mountPoint != null ) && ( path.length() <= mountPoint.length() ) )
+        if ( mountPoint != null && path.length() <= mountPoint.length() )
         {
             if ( debug )
             {
