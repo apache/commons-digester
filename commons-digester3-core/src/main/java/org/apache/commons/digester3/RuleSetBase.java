@@ -59,7 +59,7 @@ public abstract class RuleSetBase
     @Override
     public String getNamespaceURI()
     {
-        return ( this.namespaceURI );
+        return this.namespaceURI;
     }
 
 }
