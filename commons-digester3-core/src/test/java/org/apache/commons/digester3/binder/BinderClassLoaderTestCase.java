@@ -142,7 +142,7 @@ public final class BinderClassLoaderTestCase
         }
     }
 
-    private static final Map<String, byte[]> IN_MEMORY_RESOURCES = new HashMap<String, byte[]>();
+    private static final Map<String, byte[]> IN_MEMORY_RESOURCES = new HashMap<>();
 
     static
     {
