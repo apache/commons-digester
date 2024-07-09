@@ -54,7 +54,7 @@ public class TestBean
 
     private final int[] intIndexed = { 0, 10, 20, 30, 40 };
 
-    private int[] intMultibox = new int[0];
+    private int[] intMultibox = {};
 
     /**
      * An integer property.
@@ -134,57 +134,57 @@ public class TestBean
 
     public boolean getBooleanProperty()
     {
-        return ( booleanProperty );
+        return booleanProperty;
     }
 
     public double getDoubleProperty()
     {
-        return ( this.doubleProperty );
+        return this.doubleProperty;
     }
 
     public String getEmptyStringProperty()
     {
-        return ( this.emptyStringProperty );
+        return this.emptyStringProperty;
     }
 
     public boolean getFalseProperty()
     {
-        return ( falseProperty );
+        return falseProperty;
     }
 
     public float getFloatProperty()
     {
-        return ( this.floatProperty );
+        return this.floatProperty;
     }
 
     public int[] getIntArray()
     {
-        return ( this.intArray );
+        return this.intArray;
     }
 
     public int getIntIndexed( final int index )
     {
-        return ( intIndexed[index] );
+        return intIndexed[index];
     }
 
     public int[] getIntMultibox()
     {
-        return ( this.intMultibox );
+        return this.intMultibox;
     }
 
     public int getIntProperty()
     {
-        return ( this.intProperty );
+        return this.intProperty;
     }
 
     public long getLongProperty()
     {
-        return ( this.longProperty );
+        return this.longProperty;
     }
 
     public String[] getMultipleSelect()
     {
-        return ( this.multipleSelect );
+        return this.multipleSelect;
     }
 
     public TestBean getNested()
@@ -192,37 +192,37 @@ public class TestBean
         if ( nested == null ) {
             nested = new TestBean();
         }
-        return ( nested );
+        return nested;
     }
 
     public String getNullProperty()
     {
-        return ( this.nullProperty );
+        return this.nullProperty;
     }
 
     public short getShortProperty()
     {
-        return ( this.shortProperty );
+        return this.shortProperty;
     }
 
     public String getSingleSelect()
     {
-        return ( this.singleSelect );
+        return this.singleSelect;
     }
 
     public String[] getStringArray()
     {
-        return ( this.stringArray );
+        return this.stringArray;
     }
 
     public String getStringIndexed( final int index )
     {
-        return ( stringIndexed[index] );
+        return stringIndexed[index];
     }
 
     public String getStringProperty()
     {
-        return ( this.stringProperty );
+        return this.stringProperty;
     }
 
     public void setBooleanProperty( final boolean booleanProperty )
