@@ -42,7 +42,7 @@ public class LocationTrackerTestCase
     private static final class LocationTracker
         implements StackAction
     {
-        public Map<Object, String> locations = new HashMap<Object, String>();
+        public Map<Object, String> locations = new HashMap<>();
 
         @Override
         public <T> T onPop( final Digester d, final String stackName, final T o )
