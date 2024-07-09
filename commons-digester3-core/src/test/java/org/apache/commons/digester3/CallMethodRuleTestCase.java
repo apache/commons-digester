@@ -54,7 +54,7 @@ public class CallMethodRuleTestCase
         throws IOException
     {
 
-        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+        return this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name );
 
     }
 
@@ -257,7 +257,7 @@ public class CallMethodRuleTestCase
         digester.push( "It's fleece was white as snow." );
         digester.push( "Mary had a little lamb," );
 
-        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
+        final ArrayList<NamedBean> list = new ArrayList<>();
         digester.push( list );
         digester.parse( reader );
 
@@ -309,7 +309,7 @@ public class CallMethodRuleTestCase
         digester.addCallMethod( "root/spam/spam/spam/spam", "setName", 1 );
         digester.addCallParam( "root/spam/spam/spam/spam", 0 );
 
-        final ArrayList<NamedBean> list = new ArrayList<NamedBean>();
+        final ArrayList<NamedBean> list = new ArrayList<>();
         digester.push( list );
         digester.parse( reader );
 
@@ -512,7 +512,7 @@ public class CallMethodRuleTestCase
         digester.addCallParam( "root/beanie", 0, "bad" );
         digester.addCallParam( "root/beanie", 1, "good" );
 
-        final ArrayList<PrimitiveBean> list = new ArrayList<PrimitiveBean>();
+        final ArrayList<PrimitiveBean> list = new ArrayList<>();
         digester.push( list );
         digester.parse( reader );
 
@@ -575,7 +575,7 @@ public class CallMethodRuleTestCase
         digester.addCallParam( "root/param", 0, "class" );
         digester.addCallParam( "root/param", 1, "coolness" );
 
-        final ArrayList<ParamBean> list = new ArrayList<ParamBean>();
+        final ArrayList<ParamBean> list = new ArrayList<>();
         digester.push( list );
         digester.parse( reader );
 
@@ -691,7 +691,7 @@ public class CallMethodRuleTestCase
         digester.addCallMethod( "root/param", "setCool", 1, new Class[] { boolean.class } );
         digester.addCallParam( "root/param", 0, "coolness" );
 
-        final ArrayList<ParamBean> list = new ArrayList<ParamBean>();
+        final ArrayList<ParamBean> list = new ArrayList<>();
         digester.push( list );
         digester.parse( reader );
 
