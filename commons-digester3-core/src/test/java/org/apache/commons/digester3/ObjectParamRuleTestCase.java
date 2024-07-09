@@ -83,7 +83,7 @@ public class ObjectParamRuleTestCase
         assertTrue( al.contains( new Float( 3.14159 ) ) );
         assertTrue( al.contains( new Long( 999999999 ) ) );
         assertTrue( al.contains( "foobarbazbing" ) );
-        assertTrue( !( al.contains( "ignore" ) ) );
+        assertTrue( !al.contains( "ignore" ) );
     }
 
 }
