@@ -41,7 +41,7 @@ public class CompoundTransform
         d.addSetNext( patternPrefix + "/subtransform", "addTransform" );
     }
 
-    private final LinkedList<Transform> transforms = new LinkedList<Transform>();
+    private final LinkedList<Transform> transforms = new LinkedList<>();
 
     public void addTransform( final Transform transform )
     {
