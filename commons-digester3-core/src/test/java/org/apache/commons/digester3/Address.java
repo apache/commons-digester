@@ -50,27 +50,27 @@ public class Address
 
     public String getCity()
     {
-        return ( this.city );
+        return this.city;
     }
 
     public String getState()
     {
-        return ( this.state );
+        return this.state;
     }
 
     public String getStreet()
     {
-        return ( this.street );
+        return this.street;
     }
 
     public String getType()
     {
-        return ( this.type );
+        return this.type;
     }
 
     public String getZipCode()
     {
-        return ( this.zipCode );
+        return this.zipCode;
     }
 
     public void setCity( final String city )
@@ -116,7 +116,7 @@ public class Address
         sb.append( ", zipCode=" );
         sb.append( zipCode );
         sb.append( "]" );
-        return ( sb.toString() );
+        return sb.toString();
     }
 
 }
