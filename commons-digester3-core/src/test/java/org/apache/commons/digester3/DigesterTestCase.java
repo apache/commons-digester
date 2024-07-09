@@ -57,7 +57,7 @@ public class DigesterTestCase
     private static final class TrackingStackAction
         implements StackAction
     {
-        public ArrayList<String> events = new ArrayList<String>();
+        public ArrayList<String> events = new ArrayList<>();
 
         @Override
         public Object onPop( final Digester d, final String stackName, final Object o )
@@ -206,7 +206,7 @@ public class DigesterTestCase
 
         final Object root = digester.getRoot();
         assertNotNull( "root object not retrieved", root );
-        assertTrue( "root object not a TestRule instance", ( root instanceof TestBean ) );
+        assertTrue( "root object not a TestRule instance", root instanceof TestBean );
     }
 
     /** Tests that values are stored independently */
