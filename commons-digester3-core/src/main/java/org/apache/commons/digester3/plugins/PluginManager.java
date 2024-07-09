@@ -39,10 +39,10 @@ public class PluginManager
 {
 
     /** Map of class name->Declaration */
-    private final HashMap<String, Declaration> declarationsByClass = new HashMap<String, Declaration>();
+    private final HashMap<String, Declaration> declarationsByClass = new HashMap<>();
 
     /** Map of id->Declaration */
-    private final HashMap<String, Declaration> declarationsById = new HashMap<String, Declaration>();
+    private final HashMap<String, Declaration> declarationsById = new HashMap<>();
 
     /** The parent manager to which this one may delegate lookups. */
     private PluginManager parent;
@@ -166,7 +166,7 @@ public class PluginManager
     {
         Declaration decl = declarationsByClass.get( className );
 
-        if ( ( decl == null ) && ( parent != null ) )
+        if ( decl == null && parent != null )
         {
             decl = parent.getDeclarationByClass( className );
         }
@@ -184,7 +184,7 @@ public class PluginManager
     {
         Declaration decl = declarationsById.get( id );
 
-        if ( ( decl == null ) && ( parent != null ) )
+        if ( decl == null && parent != null )
         {
             decl = parent.getDeclarationById( id );
         }
