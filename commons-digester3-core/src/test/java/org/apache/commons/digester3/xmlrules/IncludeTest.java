@@ -75,7 +75,7 @@ public class IncludeTest
 
         final String xml = "<?xml version='1.0' ?><root><foo><bar>short</bar></foo></root>";
 
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
         final Digester digester = newLoader( new FromXmlRulesModule()
         {
 
@@ -131,7 +131,7 @@ public class IncludeTest
 
         final String xml = "<?xml version='1.0' ?><root><foo1><bar><foo value='foo1'/></bar></foo1><foo2><bar><foo value='foo2'/></bar></foo2></root>";
 
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
         final Digester digester = newLoader( new FromXmlRulesModule()
         {
 
