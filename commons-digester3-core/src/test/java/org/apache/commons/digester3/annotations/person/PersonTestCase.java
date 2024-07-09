@@ -37,7 +37,7 @@ public final class PersonTestCase
         person.addEmail( "business", "gonzo@muppets.com" );
         person.addEmail( "home", "gonzo@mymuppets.com" );
 
-        this.verifyExpectedEqualsToParsed( person );
+        verifyExpectedEqualsToParsed( person );
     }
 
 }
