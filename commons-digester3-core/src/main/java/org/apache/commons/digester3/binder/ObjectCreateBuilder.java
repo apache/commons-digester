@@ -183,7 +183,7 @@ public final class ObjectCreateBuilder
             }
             catch ( final ClassNotFoundException e )
             {
-                this.reportError( format( "createObject().usingConstructor( %s )",
+                reportError( format( "createObject().usingConstructor( %s )",
                                           Arrays.toString( paramTypeNames ) ),
                                   format( "class '%s' cannot be loaded", paramTypeNames[i] ) );
             }
