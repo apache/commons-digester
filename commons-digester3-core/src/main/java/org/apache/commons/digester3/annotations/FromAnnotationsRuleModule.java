@@ -24,7 +24,6 @@ import static org.apache.commons.digester3.annotations.utils.AnnotationUtils.get
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -71,35 +70,14 @@ public abstract class FromAnnotationsRuleModule
         if ( !type.isInterface() )
         {
             // CONSTRUCTOR
-            visitElements( new PrivilegedAction<Constructor<?>[]>()
-            {
-                @Override
-                public Constructor<?>[] run()
-                {
-                    return type.getDeclaredConstructors();
-                }
-            } );
+            visitElements( () -> type.getDeclaredConstructors() );
 
             // FIELD
-            visitElements( new PrivilegedAction<Field[]>()
-            {
-                @Override
-                public Field[] run()
-                {
-                    return type.getDeclaredFields();
-                }
-            } );
+            visitElements( () -> type.getDeclaredFields() );
         }
 
         // METHOD
-        visitElements( new PrivilegedAction<Method[]>()
-        {
-            @Override
-            public Method[] run()
-            {
-                return type.getDeclaredMethods();
-            }
-        } );
+        visitElements( () -> type.getDeclaredMethods() );
 
         rulesBinder.markAsBound( type );
         bindRulesFrom( type.getSuperclass() );
