@@ -38,7 +38,7 @@ final class DefaultRulesBinder
     /**
      * Errors that can occur during binding time or rules creation.
      */
-    private final List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+    private final List<ErrorMessage> errors = new ArrayList<>();
 
     /**
      */
@@ -140,18 +140,14 @@ final class DefaultRulesBinder
         {
             addError( "Null or empty pattern is not valid" );
             keyPattern = null;
+        } else if ( pattern.endsWith( "/" ) )
+        {
+            // to help users who accidently add '/' to the end of their patterns
+            keyPattern = pattern.substring( 0, pattern.length() - 1 );
         }
         else
         {
-            if ( pattern.endsWith( "/" ) )
-            {
-                // to help users who accidently add '/' to the end of their patterns
-                keyPattern = pattern.substring( 0, pattern.length() - 1 );
-            }
-            else
-            {
-                keyPattern = pattern;
-            }
+            keyPattern = pattern;
         }
 
         return new LinkedRuleBuilder( this, fromBinderRuleSet, classLoader, keyPattern );
