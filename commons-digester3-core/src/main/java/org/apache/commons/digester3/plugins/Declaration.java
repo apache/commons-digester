@@ -165,7 +165,7 @@ public class Declaration
             throw new PluginAssertionFailure( "Init called multiple times." );
         }
 
-        if ( ( pluginClass == null ) && ( pluginClassName != null ) )
+        if ( pluginClass == null && pluginClassName != null )
         {
             try
             {
