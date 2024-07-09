@@ -42,7 +42,7 @@ public final class CallMethodBuilder
 
     private int paramCount;
 
-    private Class<?>[] paramTypes = new Class<?>[]{};
+    private Class<?>[] paramTypes = {};
 
     private boolean useExactMatch;
 
@@ -98,7 +98,7 @@ public final class CallMethodBuilder
     {
         if ( paramCount < 0 )
         {
-            this.reportError( format( "callMethod(\"%s\").withParamCount(int)", this.methodName ),
+            reportError( format( "callMethod(\"%s\").withParamCount(int)", this.methodName ),
                               "negative parameters counter not allowed" );
         }
 
@@ -170,7 +170,7 @@ public final class CallMethodBuilder
                 }
                 catch ( final ClassNotFoundException e )
                 {
-                    this.reportError( format( "callMethod( \"%s\" ).withParamTypes( %s )", this.methodName,
+                    reportError( format( "callMethod( \"%s\" ).withParamTypes( %s )", this.methodName,
                                                      Arrays.toString( paramTypeNames ) ),
                                       format( "class '%s' cannot be load", paramTypeNames[i] ) );
                 }
