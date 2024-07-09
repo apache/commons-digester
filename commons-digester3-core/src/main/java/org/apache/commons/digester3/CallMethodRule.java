@@ -387,7 +387,7 @@ public class CallMethodRule
             // convert nulls and convert stringy parameters
             // for non-stringy param types
             if ( parameters[i] == null
-                || ( parameters[i] instanceof String && !String.class.isAssignableFrom( paramTypes[i] ) ) )
+                || parameters[i] instanceof String && !String.class.isAssignableFrom( paramTypes[i] ) )
             {
                 paramValues[i] = convert( (String) parameters[i], paramTypes[i] );
             }
@@ -424,7 +424,7 @@ public class CallMethodRule
                                         methodName );
             for ( int i = 0; i < paramValues.length; i++ )
             {
-                formatter.format( "%s%s/%s", ( i > 0 ? ", " : "" ), paramValues[i], paramTypes[i].getName() );
+                formatter.format( "%s%s/%s", i > 0 ? ", " : "", paramValues[i], paramTypes[i].getName() );
             }
             formatter.format( ")" );
             getDigester().getLogger().debug( formatter.toString() );
@@ -527,12 +527,12 @@ public class CallMethodRule
             for ( int i = 0; i < paramTypes.length; i++ )
             {
                 formatter.format( "%s%s",
-                                  ( i > 0 ? ", " : "" ),
-                                  ( paramTypes[i] != null ? paramTypes[i].getName() : "null" ) );
+                                  i > 0 ? ", " : "",
+                                  paramTypes[i] != null ? paramTypes[i].getName() : "null" );
             }
         }
         formatter.format( "}]" );
-        return ( formatter.toString() );
+        return formatter.toString();
     }
 
 }
