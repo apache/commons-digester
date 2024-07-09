@@ -45,7 +45,7 @@ abstract class AbstractXmlRule
         throws Exception
     {
         super.begin( namespace, name, attributes );
-        this.bindRule( this.targetRulesBinder.forPattern( this.getMatchingPattern() ), attributes );
+        bindRule( this.targetRulesBinder.forPattern( getMatchingPattern() ), attributes );
     }
 
     /**
