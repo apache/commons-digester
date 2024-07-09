@@ -91,7 +91,7 @@ public final class MethodArgument
     @Override
     public Annotation[] getAnnotations()
     {
-        return this.getAnnotationsArrayCopy();
+        return getAnnotationsArrayCopy();
     }
 
     /**
@@ -110,7 +110,7 @@ public final class MethodArgument
     @Override
     public Annotation[] getDeclaredAnnotations()
     {
-        return this.getAnnotationsArrayCopy();
+        return getAnnotationsArrayCopy();
     }
 
     /**
