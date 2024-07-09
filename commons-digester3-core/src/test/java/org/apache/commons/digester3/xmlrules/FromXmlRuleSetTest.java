@@ -135,7 +135,7 @@ public class FromXmlRuleSetTest
         final URL input = getClass().getResource( "test.xml" );
 
         final Digester digester = newLoader( createRules( rules ) ).newDigester();
-        digester.push( new ArrayList<Object>() );
+        digester.push( new ArrayList<>() );
         final Object root = digester.parse( input.openStream() );
         assertEquals( "[foo1 baz1 foo2, foo3 foo4]", root.toString() );
     }
@@ -252,7 +252,7 @@ public class FromXmlRuleSetTest
         final URL input = getClass().getResource( "test.xml" );
 
         final Digester digester = newLoader( createRules( rules ) ).setClassLoader( classLoader ).newDigester();
-        digester.push( new ArrayList<Object>() );
+        digester.push( new ArrayList<>() );
 
         final Object root = digester.parse( input );
         if ( !( root instanceof ArrayList<?> ) )
@@ -290,7 +290,7 @@ public class FromXmlRuleSetTest
         final InputStream input = getClass().getResourceAsStream( "test.xml" );
         final Digester digester =
             newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
-        digester.push( new ArrayList<Object>() );
+        digester.push( new ArrayList<>() );
 
         final ArrayList<Object> list = digester.parse( input );
 
@@ -314,7 +314,7 @@ public class FromXmlRuleSetTest
 
         final Digester digester =
             newLoader( createRules( rules ) ).setClassLoader( this.getClass().getClassLoader() ).newDigester();
-        digester.push( new ArrayList<Object>() );
+        digester.push( new ArrayList<>() );
 
         final Object obj = digester.parse( input );
 
