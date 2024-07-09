@@ -19,6 +19,7 @@ package org.apache.commons.digester3.annotations.rss;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
@@ -31,7 +32,7 @@ import org.apache.commons.digester3.annotations.rules.SetNext;
 public final class Channel
 {
 
-    private final List<Item> items = new ArrayList<Item>();
+    private final List<Item> items = new ArrayList<>();
 
     @BeanPropertySetter( pattern = "rss/channel/title" )
     private String title;
@@ -66,58 +67,28 @@ public final class Channel
             return false;
         }
         final Channel other = (Channel) obj;
-        if ( description == null )
+        if ( !Objects.equals(description, other.description) )
         {
-            if ( other.description != null ) {
-                return false;
-            }
-        }
-        else if ( !description.equals( other.description ) ) {
             return false;
         }
-        if ( image == null )
+        if ( !Objects.equals(image, other.image) )
         {
-            if ( other.image != null ) {
-                return false;
-            }
-        }
-        else if ( !image.equals( other.image ) ) {
             return false;
         }
-        if ( items == null )
+        if ( !Objects.equals(items, other.items) )
         {
-            if ( other.items != null ) {
-                return false;
-            }
-        }
-        else if ( !items.equals( other.items ) ) {
             return false;
         }
-        if ( language == null )
+        if ( !Objects.equals(language, other.language) )
         {
-            if ( other.language != null ) {
-                return false;
-            }
-        }
-        else if ( !language.equals( other.language ) ) {
             return false;
         }
-        if ( link == null )
+        if ( !Objects.equals(link, other.link) )
         {
-            if ( other.link != null ) {
-                return false;
-            }
-        }
-        else if ( !link.equals( other.link ) ) {
             return false;
         }
-        if ( title == null )
+        if ( !Objects.equals(title, other.title) )
         {
-            if ( other.title != null ) {
-                return false;
-            }
-        }
-        else if ( !title.equals( other.title ) ) {
             return false;
         }
         return true;
