@@ -75,7 +75,7 @@ public final class ObjectParamBuilder<T>
     {
         if ( paramIndex < 0 )
         {
-            this.reportError( "objectParam( %s ).ofIndex( int )", "negative index argument not allowed" );
+            reportError( "objectParam( %s ).ofIndex( int )", "negative index argument not allowed" );
         }
 
         this.paramIndex = paramIndex;
