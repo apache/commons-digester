@@ -35,9 +35,9 @@ public class MultiVariableExpander
 
     private int nEntries;
 
-    private final ArrayList<String> markers = new ArrayList<String>( 2 );
+    private final ArrayList<String> markers = new ArrayList<>( 2 );
 
-    private final ArrayList<Map<String, Object>> sources = new ArrayList<Map<String, Object>>( 2 );
+    private final ArrayList<Map<String, Object>> sources = new ArrayList<>( 2 );
 
     /**
      * Add a new variables source, identified by the input marker
