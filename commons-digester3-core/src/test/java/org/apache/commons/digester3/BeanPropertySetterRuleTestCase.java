@@ -87,7 +87,7 @@ public class BeanPropertySetterRuleTestCase
     public void testDigesterBodyTextStack()
         throws SAXException, IOException
     {
-        final List<Rule> callOrder = new ArrayList<Rule>();
+        final List<Rule> callOrder = new ArrayList<>();
 
         final Digester digester = newLoader(new AbstractRulesModule()
         {
@@ -124,7 +124,7 @@ public class BeanPropertySetterRuleTestCase
         throws SAXException, IOException
     {
 
-        final List<Rule> callOrder = new ArrayList<Rule>();
+        final List<Rule> callOrder = new ArrayList<>();
 
         final Digester digester = newLoader( new AbstractRulesModule()
         {
