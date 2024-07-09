@@ -21,6 +21,8 @@ package org.apache.commons.digester3;
 
 import static java.lang.String.format;
 
+import java.util.Objects;
+
 import org.xml.sax.Attributes;
 
 /**
@@ -69,14 +71,7 @@ final class PatternRuleMatcher
         }
 
         final PatternRuleMatcher other = (PatternRuleMatcher) obj;
-        if ( namespaceURI == null )
-        {
-            if ( other.getNamespaceURI() != null )
-            {
-                return false;
-            }
-        }
-        else if ( !namespaceURI.equals( other.getNamespaceURI() ) )
+        if ( !Objects.equals(namespaceURI, other.getNamespaceURI()) )
         {
             return false;
         }
@@ -107,7 +102,7 @@ final class PatternRuleMatcher
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ( ( namespaceURI == null ) ? 0 : namespaceURI.hashCode() );
+        result = prime * result + ( namespaceURI == null ? 0 : namespaceURI.hashCode() );
         result = prime * result + pattern.hashCode();
         return result;
     }
