@@ -19,6 +19,7 @@ package org.apache.commons.digester3.annotations.addressbook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 import org.apache.commons.digester3.annotations.rules.SetNext;
@@ -30,7 +31,7 @@ import org.apache.commons.digester3.annotations.rules.SetNext;
 public class AddressBook
 {
 
-    private final List<Person> people = new ArrayList<Person>();
+    private final List<Person> people = new ArrayList<>();
 
     @SetNext
     public void addPerson( final Person p )
@@ -51,13 +52,8 @@ public class AddressBook
             return false;
         }
         final AddressBook other = (AddressBook) obj;
-        if ( people == null )
+        if ( !Objects.equals(people, other.people) )
         {
-            if ( other.people != null ) {
-                return false;
-            }
-        }
-        else if ( !people.equals( other.people ) ) {
             return false;
         }
         return true;
