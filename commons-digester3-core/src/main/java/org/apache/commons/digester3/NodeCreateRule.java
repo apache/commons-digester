@@ -251,7 +251,7 @@ public class NodeCreateRule
             try
             {
                 final Node previousTop = top;
-                if ( ( localName == null ) || ( localName.isEmpty() ) )
+                if ( localName == null || localName.isEmpty() )
                 {
                     top = doc.createElement( qName );
                 }
@@ -262,7 +262,7 @@ public class NodeCreateRule
                 for ( int i = 0; i < atts.getLength(); i++ )
                 {
                     Attr attr = null;
-                    if ( ( atts.getLocalName( i ) == null ) || ( atts.getLocalName( i ).isEmpty() ) )
+                    if ( atts.getLocalName( i ) == null || atts.getLocalName( i ).isEmpty() )
                     {
                         attr = doc.createAttribute( atts.getQName( i ) );
                         attr.setNodeValue( atts.getValue( i ) );
@@ -288,7 +288,7 @@ public class NodeCreateRule
     /**
      * The JAXP {@code DocumentBuilder} to use.
      */
-    private DocumentBuilder documentBuilder;
+    private final DocumentBuilder documentBuilder;
 
     /**
      * The type of the node that should be created. Must be one of the constants defined in {@link org.w3c.dom.Node
@@ -350,7 +350,7 @@ public class NodeCreateRule
      */
     public NodeCreateRule( final int nodeType, final DocumentBuilder documentBuilder )
     {
-        if ( !( ( nodeType == Node.DOCUMENT_FRAGMENT_NODE ) || ( nodeType == Node.ELEMENT_NODE ) ) )
+        if ( !( nodeType == Node.DOCUMENT_FRAGMENT_NODE || nodeType == Node.ELEMENT_NODE ) )
         {
             throw new IllegalArgumentException( "Can only create nodes of type DocumentFragment and Element" );
         }
