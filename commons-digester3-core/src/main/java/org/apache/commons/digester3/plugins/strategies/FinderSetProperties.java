@@ -96,7 +96,7 @@ public class FinderSetProperties
         throws PluginException
     {
         final String state = p.getProperty( propsAttr );
-        if ( ( state != null ) && state.equals( falseval ) )
+        if ( state != null && state.equals( falseval ) )
         {
             // user has explicitly disabled automatic setting of properties.
             // this is not expected to be common, but allowed.
