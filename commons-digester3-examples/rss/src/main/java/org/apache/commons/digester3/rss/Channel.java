@@ -41,17 +41,17 @@ public class Channel
     /**
      * The set of items associated with this Channel.
      */
-    protected ArrayList<Item> items = new ArrayList<Item>();
+    protected ArrayList<Item> items = new ArrayList<>();
 
     /**
      * The set of skip days for this channel.
      */
-    protected ArrayList<String> skipDays = new ArrayList<String>();
+    protected ArrayList<String> skipDays = new ArrayList<>();
 
     /**
      * The set of skip hours for this channel.
      */
-    protected ArrayList<String> skipHours = new ArrayList<String>();
+    protected ArrayList<String> skipHours = new ArrayList<>();
 
     /**
      * The channel copyright (1-100 characters).
@@ -200,22 +200,22 @@ public class Channel
 
     public String getCopyright()
     {
-        return ( this.copyright );
+        return this.copyright;
     }
 
     public String getDescription()
     {
-        return ( this.description );
+        return this.description;
     }
 
     public String getDocs()
     {
-        return ( this.docs );
+        return this.docs;
     }
 
     public Image getImage()
     {
-        return ( this.image );
+        return this.image;
     }
 
     /**
@@ -228,32 +228,32 @@ public class Channel
 
     public String getLanguage()
     {
-        return ( this.language );
+        return this.language;
     }
 
     public String getLastBuildDate()
     {
-        return ( this.lastBuildDate );
+        return this.lastBuildDate;
     }
 
     public String getLink()
     {
-        return ( this.link );
+        return this.link;
     }
 
     public String getManagingEditor()
     {
-        return ( this.managingEditor );
+        return this.managingEditor;
     }
 
     public String getPubDate()
     {
-        return ( this.pubDate );
+        return this.pubDate;
     }
 
     public String getRating()
     {
-        return ( this.rating );
+        return this.rating;
     }
 
     /**
@@ -274,22 +274,22 @@ public class Channel
 
     public TextInput getTextInput()
     {
-        return ( this.textInput );
+        return this.textInput;
     }
 
     public String getTitle()
     {
-        return ( this.title );
+        return this.title;
     }
 
     public double getVersion()
     {
-        return ( this.version );
+        return this.version;
     }
 
     public String getWebMaster()
     {
-        return ( this.webMaster );
+        return this.webMaster;
     }
 
     /**
