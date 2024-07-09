@@ -17,6 +17,8 @@
  */
 package org.apache.commons.digester3.annotations.catalog;
 
+import java.util.Objects;
+
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 import org.apache.commons.digester3.annotations.rules.SetProperty;
 
@@ -52,31 +54,16 @@ public final class AudioVisual
             return false;
         }
         final AudioVisual other = (AudioVisual) obj;
-        if ( this.category == null )
+        if ( !Objects.equals(this.category, other.getCategory()) )
         {
-            if ( other.getCategory() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.category.equals( other.getCategory() ) ) {
             return false;
         }
-        if ( this.desc == null )
+        if ( !Objects.equals(this.desc, other.getDesc()) )
         {
-            if ( other.getDesc() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.desc.equals( other.getDesc() ) ) {
             return false;
         }
-        if ( this.name == null )
+        if ( !Objects.equals(this.name, other.getName()) )
         {
-            if ( other.getName() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.name.equals( other.getName() ) ) {
             return false;
         }
         if ( this.runtime != other.getRuntime() ) {
@@ -116,7 +103,7 @@ public final class AudioVisual
     @Override
     public void print()
     {
-        System.out.println( this.toString() );
+        System.out.println( toString() );
     }
 
     public void setCategory( final String category )
