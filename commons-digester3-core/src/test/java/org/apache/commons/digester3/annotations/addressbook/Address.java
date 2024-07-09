@@ -17,6 +17,8 @@
  */
 package org.apache.commons.digester3.annotations.addressbook;
 
+import java.util.Objects;
+
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 
@@ -58,58 +60,28 @@ public class Address
             return false;
         }
         final Address other = (Address) obj;
-        if ( city == null )
+        if ( !Objects.equals(city, other.city) )
         {
-            if ( other.city != null ) {
-                return false;
-            }
-        }
-        else if ( !city.equals( other.city ) ) {
             return false;
         }
-        if ( country == null )
+        if ( !Objects.equals(country, other.country) )
         {
-            if ( other.country != null ) {
-                return false;
-            }
-        }
-        else if ( !country.equals( other.country ) ) {
             return false;
         }
-        if ( state == null )
+        if ( !Objects.equals(state, other.state) )
         {
-            if ( other.state != null ) {
-                return false;
-            }
-        }
-        else if ( !state.equals( other.state ) ) {
             return false;
         }
-        if ( street == null )
+        if ( !Objects.equals(street, other.street) )
         {
-            if ( other.street != null ) {
-                return false;
-            }
-        }
-        else if ( !street.equals( other.street ) ) {
             return false;
         }
-        if ( type == null )
+        if ( !Objects.equals(type, other.type) )
         {
-            if ( other.type != null ) {
-                return false;
-            }
-        }
-        else if ( !type.equals( other.type ) ) {
             return false;
         }
-        if ( zip == null )
+        if ( !Objects.equals(zip, other.zip) )
         {
-            if ( other.zip != null ) {
-                return false;
-            }
-        }
-        else if ( !zip.equals( other.zip ) ) {
             return false;
         }
         return true;
