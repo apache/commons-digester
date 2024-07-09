@@ -34,7 +34,7 @@ public final class CatalogTestCase
     @Override
     protected Collection<RulesModule> getAuxModules()
     {
-        final Collection<RulesModule> modules = new Stack<RulesModule>();
+        final Collection<RulesModule> modules = new Stack<>();
         modules.add( new AbstractRulesModule()
         {
 
@@ -82,7 +82,7 @@ public final class CatalogTestCase
         dvd.setYearMade( 1993 );
         catalog.addItem( dvd );
 
-        this.verifyExpectedEqualsToParsed( catalog );
+        verifyExpectedEqualsToParsed( catalog );
     }
 
 }
