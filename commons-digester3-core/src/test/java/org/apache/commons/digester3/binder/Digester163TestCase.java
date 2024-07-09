@@ -68,26 +68,21 @@ public class Digester163TestCase
                                                               MAX_THREADS,
                                                               Long.MAX_VALUE,
                                                               TimeUnit.NANOSECONDS,
-                                                              new LinkedBlockingQueue<Runnable>() );
+                                                              new LinkedBlockingQueue<>() );
         final URL url = Digester163TestCase.class.getResource( "test.xml" );
-        final LinkedBlockingQueue<Exception> exceptions = new LinkedBlockingQueue<Exception>();
+        final LinkedBlockingQueue<Exception> exceptions = new LinkedBlockingQueue<>();
         for ( int i = 0; i < MAX_THREADS * 2; i++ )
         {
-            executor.submit( new Runnable()
-            {
-                @Override
-                public void run()
+            executor.submit( () -> {
+                try
                 {
-                    try
-                    {
-                        final Digester dig = loader.newDigester();
-                        // lets parse - result does not matter here
-                        dig.parse( url );
-                    }
-                    catch ( final Exception e )
-                    {
-                        exceptions.add( e );
-                    }
+                    final Digester dig = loader.newDigester();
+                    // lets parse - result does not matter here
+                    dig.parse( url );
+                }
+                catch ( final Exception e )
+                {
+                    exceptions.add( e );
                 }
             } );
         }
