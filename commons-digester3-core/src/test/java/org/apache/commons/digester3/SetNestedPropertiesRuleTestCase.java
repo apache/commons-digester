@@ -364,7 +364,7 @@ public class SetNestedPropertiesRuleTestCase
         catch ( final SAXException e )
         {
             final Exception nested = e.getException();
-            if ( ( nested == null ) || !( nested instanceof NoSuchMethodException ) )
+            if ( nested == null || !( nested instanceof NoSuchMethodException ) )
             {
                 // nope, not the sort of exception we expected
                 throw e;
