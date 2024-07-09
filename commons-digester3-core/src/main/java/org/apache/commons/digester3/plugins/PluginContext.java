@@ -142,7 +142,7 @@ public class PluginContext
             // when processing a plugin declaration, attempts are made to
             // find custom rules in the order in which the Finder objects
             // are added below. However this list can be modified
-            ruleFinders = new LinkedList<RuleFinder>();
+            ruleFinders = new LinkedList<>();
             ruleFinders.add( new FinderFromFile() );
             ruleFinders.add( new FinderFromResource() );
             ruleFinders.add( new FinderFromClass() );
