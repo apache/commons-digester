@@ -34,7 +34,7 @@ public final class EmployeeTestCase
     @Override
     protected Collection<RulesModule> getAuxModules()
     {
-        final Collection<RulesModule> modules = new Stack<RulesModule>();
+        final Collection<RulesModule> modules = new Stack<>();
         modules.add( new FromAnnotationsRuleModule()
         {
 
@@ -72,7 +72,7 @@ public final class EmployeeTestCase
         address.setZipCode( "OfZip" );
         address.setEmployee( employee );
 
-        this.verifyExpectedEqualsToParsed( employee );
+        verifyExpectedEqualsToParsed( employee );
     }
 
 }
