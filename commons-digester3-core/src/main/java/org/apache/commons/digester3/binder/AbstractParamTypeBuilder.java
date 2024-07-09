@@ -145,7 +145,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
             }
             catch ( final ClassNotFoundException e )
             {
-                this.reportError( format( ".%s.withParameterType( Class<?> )", methodName ),
+                reportError( format( ".%s.withParameterType( Class<?> )", methodName ),
                                   format( "class '%s' cannot be load", paramType ) );
             }
         }
