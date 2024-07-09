@@ -40,11 +40,11 @@ public class VariableExpansionTestCase
 
 
     // method used in tests4
-    private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<SimpleTestBean>();
+    private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<>();
 
     // implementation of source shared by the variable expander and
     // is updatable during digesting via an Ant-like property element
-    private final HashMap<String, Object> mutableSource = new HashMap<String, Object>();
+    private final HashMap<String, Object> mutableSource = new HashMap<>();
 
     /**
      * Used in test case "testExpansionWithMutableSource", where the set of variables available to be substituted into
@@ -100,12 +100,12 @@ public class VariableExpansionTestCase
         final Digester digester = new Digester();
 
         // Configure the digester as required
-        final HashMap<String, Object> nouns = new HashMap<String, Object>();
+        final HashMap<String, Object> nouns = new HashMap<>();
         nouns.put( "1", "brillig" );
         nouns.put( "2", "slithy toves" );
         nouns.put( "3", "wabe" );
 
-        final HashMap<String, Object> verbs = new HashMap<String, Object>();
+        final HashMap<String, Object> verbs = new HashMap<>();
         verbs.put( "1", "gyre" );
         verbs.put( "2", "gimble" );
 
@@ -139,7 +139,7 @@ public class VariableExpansionTestCase
 
         // Configure the digester as required
         final MultiVariableExpander expander = new MultiVariableExpander();
-        expander.addSource( "$", new HashMap<String, Object>() );
+        expander.addSource( "$", new HashMap<>() );
         digester.setSubstitutor( new VariableSubstitutor( expander ) );
 
         digester.addObjectCreate( "root", SimpleTestBean.class );
@@ -203,11 +203,11 @@ public class VariableExpansionTestCase
         final Digester digester = new Digester();
 
         // Configure the digester as required
-        final HashMap<String, Object> source1 = new HashMap<String, Object>();
+        final HashMap<String, Object> source1 = new HashMap<>();
         source1.put( "attr1", "source1.attr1" );
         source1.put( "attr2", "source1.attr2" ); // should not be used
 
-        final HashMap<String, Object> source2 = new HashMap<String, Object>();
+        final HashMap<String, Object> source2 = new HashMap<>();
         source2.put( "attr1", "source2.attr1" ); // should not be used
         source2.put( "attr2", "source2.attr2" );
 
