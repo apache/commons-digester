@@ -47,7 +47,7 @@ public class XIncludeTestCase
         throws IOException
     {
 
-        return ( this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name ) );
+        return this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name );
 
     }
 
