@@ -176,7 +176,7 @@ public class CallParamRule
             // is at the top of the stack
             if ( bodyTextStack == null )
             {
-                bodyTextStack = new Stack<String>();
+                bodyTextStack = new Stack<>();
             }
             bodyTextStack.push( text.trim() );
         }
