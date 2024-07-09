@@ -112,7 +112,7 @@ public class RegexRulesTestCase
             @Override
             public boolean match( final String pathPattern, final String rulePattern )
             {
-                return ( rulePattern.equals( "/match/me" ) );
+                return rulePattern.equals( "/match/me" );
             }
         } );
 
