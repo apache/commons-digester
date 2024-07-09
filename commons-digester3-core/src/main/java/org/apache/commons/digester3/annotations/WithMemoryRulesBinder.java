@@ -39,7 +39,7 @@ final class WithMemoryRulesBinder
     /**
      * Maintains all the classes that this RuleSet produces mapping for.
      */
-    private final Set<Class<?>> boundClasses = new HashSet<Class<?>>();
+    private final Set<Class<?>> boundClasses = new HashSet<>();
 
     private final RulesBinder wrappedRulesBinder;
 
