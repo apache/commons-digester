@@ -19,6 +19,7 @@ package org.apache.commons.digester3.annotations.employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 import org.apache.commons.digester3.annotations.rules.SetProperty;
@@ -30,7 +31,7 @@ import org.apache.commons.digester3.annotations.rules.SetProperty;
 public class Employee
 {
 
-    private final List<Address> addresses = new ArrayList<Address>();
+    private final List<Address> addresses = new ArrayList<>();
 
     @SetProperty( pattern = "employee", attributeName = "name" )
     private String firstName;
@@ -56,31 +57,16 @@ public class Employee
             return false;
         }
         final Employee other = (Employee) obj;
-        if ( this.addresses == null )
+        if ( !Objects.equals(this.addresses, other.getAddresses()) )
         {
-            if ( other.getAddresses() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.addresses.equals( other.getAddresses() ) ) {
             return false;
         }
-        if ( this.firstName == null )
+        if ( !Objects.equals(this.firstName, other.getFirstName()) )
         {
-            if ( other.getFirstName() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.firstName.equals( other.getFirstName() ) ) {
             return false;
         }
-        if ( this.lastName == null )
+        if ( !Objects.equals(this.lastName, other.getLastName()) )
         {
-            if ( other.getLastName() != null ) {
-                return false;
-            }
-        }
-        else if ( !this.lastName.equals( other.getLastName() ) ) {
             return false;
         }
         return true;
