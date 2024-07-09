@@ -17,6 +17,8 @@
  */
 package org.apache.commons.digester3.annotations.rss;
 
+import java.util.Objects;
+
 import org.apache.commons.digester3.annotations.rules.BeanPropertySetter;
 import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 
@@ -58,43 +60,23 @@ public final class Image
             return false;
         }
         final Image other = (Image) obj;
-        if ( description == null )
+        if ( !Objects.equals(description, other.description) )
         {
-            if ( other.description != null ) {
-                return false;
-            }
-        }
-        else if ( !description.equals( other.description ) ) {
             return false;
         }
         if ( height != other.height ) {
             return false;
         }
-        if ( link == null )
+        if ( !Objects.equals(link, other.link) )
         {
-            if ( other.link != null ) {
-                return false;
-            }
-        }
-        else if ( !link.equals( other.link ) ) {
             return false;
         }
-        if ( title == null )
+        if ( !Objects.equals(title, other.title) )
         {
-            if ( other.title != null ) {
-                return false;
-            }
-        }
-        else if ( !title.equals( other.title ) ) {
             return false;
         }
-        if ( url == null )
+        if ( !Objects.equals(url, other.url) )
         {
-            if ( other.url != null ) {
-                return false;
-            }
-        }
-        else if ( !url.equals( other.url ) ) {
             return false;
         }
         if ( width != other.width ) {
