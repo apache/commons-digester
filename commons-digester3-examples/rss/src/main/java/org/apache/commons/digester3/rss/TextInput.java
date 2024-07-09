@@ -54,22 +54,22 @@ public class TextInput implements Serializable {
 
     public String getDescription()
     {
-        return ( this.description );
+        return this.description;
     }
 
     public String getLink()
     {
-        return ( this.link );
+        return this.link;
     }
 
     public String getName()
     {
-        return ( this.name );
+        return this.name;
     }
 
     public String getTitle()
     {
-        return ( this.title );
+        return this.title;
     }
 
     /**
