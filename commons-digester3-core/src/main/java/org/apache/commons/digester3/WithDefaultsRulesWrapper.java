@@ -63,10 +63,10 @@ public class WithDefaultsRulesWrapper
     private final Rules wrappedRules;
 
     /** Rules to be fired when the wrapped implementations returns none. */
-    private final List<Rule> defaultRules = new ArrayList<Rule>();
+    private final List<Rule> defaultRules = new ArrayList<>();
 
     /** All rules (preserves order in which they were originally added) */
-    private final List<Rule> allRules = new ArrayList<Rule>();
+    private final List<Rule> allRules = new ArrayList<>();
 
     /**
      * Base constructor.
@@ -163,7 +163,7 @@ public class WithDefaultsRulesWrapper
         if ( matches == null || matches.isEmpty() )
         {
             // a little bit of defensive programming
-            return new ArrayList<Rule>( defaultRules );
+            return new ArrayList<>( defaultRules );
         }
         // otherwise
         return matches;
