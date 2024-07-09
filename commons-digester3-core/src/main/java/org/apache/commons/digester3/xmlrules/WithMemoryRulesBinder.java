@@ -42,7 +42,7 @@ final class WithMemoryRulesBinder
     /**
      * Used to detect circular includes
      */
-    private final Set<String> includedFiles = new HashSet<String>();
+    private final Set<String> includedFiles = new HashSet<>();
 
     private final RulesBinder wrappedRulesBinder;
 
