@@ -65,32 +65,32 @@ public class Image
 
     public String getDescription()
     {
-        return ( this.description );
+        return this.description;
     }
 
     public int getHeight()
     {
-        return ( this.height );
+        return this.height;
     }
 
     public String getLink()
     {
-        return ( this.link );
+        return this.link;
     }
 
     public String getTitle()
     {
-        return ( this.title );
+        return this.title;
     }
 
     public String getURL()
     {
-        return ( this.url );
+        return this.url;
     }
 
     public int getWidth()
     {
-        return ( this.width );
+        return this.width;
     }
 
     /**
