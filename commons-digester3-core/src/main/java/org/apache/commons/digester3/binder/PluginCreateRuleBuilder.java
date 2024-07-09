@@ -35,9 +35,9 @@ public final class PluginCreateRuleBuilder
     extends AbstractBackToLinkedRuleBuilder<PluginCreateRule>
 {
 
-    private final Map<String, String> pluginClassAttributes = new LinkedHashMap<String, String>();
+    private final Map<String, String> pluginClassAttributes = new LinkedHashMap<>();
 
-    private final Map<String, String> pluginIdAttributes = new LinkedHashMap<String, String>();
+    private final Map<String, String> pluginIdAttributes = new LinkedHashMap<>();
 
     private Class<?> baseClass;
 
