@@ -25,7 +25,7 @@ import java.util.LinkedList;
 public class Catalog
 {
 
-    private final LinkedList<Item> items = new LinkedList<Item>();
+    private final LinkedList<Item> items = new LinkedList<>();
 
     public void addItem( final Item item )
     {
