@@ -60,7 +60,7 @@ public class RSSDigester
                 RSSDigester.class.getResourceAsStream( "/org/apache/commons/digester3/rss/rss-example.xml" );
             System.out.println( "Creating new digester ..." );
             final RSSDigester digester = new RSSDigester();
-            if ( ( args.length > 0 ) && ( args[0].equals( "-debug" ) ) )
+            if ( args.length > 0 && args[0].equals( "-debug" ) )
             {
                 digester.setLogger( LogFactory.getLog( "RSSDigester" ) );
             }
@@ -167,22 +167,22 @@ public class RSSDigester
 
     public String getChannelClass()
     {
-        return ( this.channelClass );
+        return this.channelClass;
     }
 
     public String getImageClass()
     {
-        return ( this.imageClass );
+        return this.imageClass;
     }
 
     public String getItemClass()
     {
-        return ( this.itemClass );
+        return this.itemClass;
     }
 
     public String getTextInputClass()
     {
-        return ( this.textInputClass );
+        return this.textInputClass;
     }
 
     /**
@@ -199,7 +199,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return ( super.<T>parse( file ) );
+        return super.<T>parse( file );
     }
 
     /**
@@ -217,7 +217,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return ( super.<T>parse( input ) );
+        return super.<T>parse( input );
     }
 
     /**
@@ -235,7 +235,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return ( super.<T>parse( input ) );
+        return super.<T>parse( input );
     }
 
     /**
@@ -253,7 +253,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return ( super.<T>parse( uri ) );
+        return super.<T>parse( uri );
     }
 
     public void setChannelClass( final String channelClass )
