@@ -49,7 +49,7 @@ public class ObjectCreateRule
     {
         Constructor<?> constructor;
         Object[] constructorArgs;
-        ArrayList<RecordedInvocation> invocations = new ArrayList<RecordedInvocation>();
+        ArrayList<RecordedInvocation> invocations = new ArrayList<>();
         Object delegate;
 
         DeferredConstructionCallback( final Constructor<?> constructor, final Object[] constructorArgs )
@@ -196,7 +196,7 @@ public class ObjectCreateRule
         {
             // convert nulls and convert stringy parameters for non-stringy param types
             if ( array[i] == null
-                    || ( array[i] instanceof String && !String.class.isAssignableFrom( types[i] ) ) )
+                    || array[i] instanceof String && !String.class.isAssignableFrom( types[i] ) )
             {
                 array[i] = convert( (String) array[i], types[i] );
             }
