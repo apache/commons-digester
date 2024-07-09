@@ -21,7 +21,6 @@ package org.apache.commons.digester3;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -155,7 +154,7 @@ public class ExtendedBaseRules
      * The decision algorithm used (unfortunately) doesn't preserve the entry order. This map is used by a comparator
      * which orders the list of matches before it's returned. This map stores the entry number keyed by the rule.
      */
-    private final Map<Rule, Integer> order = new HashMap<Rule, Integer>();
+    private final Map<Rule, Integer> order = new HashMap<>();
 
     /**
      * Standard match. Matches the end of the pattern to the key.
@@ -166,7 +165,7 @@ public class ExtendedBaseRules
      */
     private boolean basicMatch( final String key, final String pattern )
     {
-        return ( pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) ) );
+        return pattern.equals( key.substring( 2 ) ) || pattern.endsWith( key.substring( 1 ) );
     }
 
     /**
@@ -218,7 +217,7 @@ public class ExtendedBaseRules
         }
 
         // we keep the list of universal matches separate
-        final List<Rule> universalList = new ArrayList<Rule>( counter );
+        final List<Rule> universalList = new ArrayList<>( counter );
 
         // Universal wildcards ('*') in the middle of the pattern-string
         List<Rule> recList = null;
@@ -279,33 +278,28 @@ public class ExtendedBaseRules
             // so ignore all basic matches from now on
             ignoreBasicMatches = true;
 
-        }
-        else
+        } else // see if we have an exact child match
+        if ( hasParent )
         {
-
-            // see if we have an exact child match
-            if ( hasParent )
+            // matching children takes preference
+            rulesList = this.cache.get( parentPattern + "/?" );
+            if ( rulesList != null )
             {
-                // matching children takes preference
-                rulesList = this.cache.get( parentPattern + "/?" );
+                // we have a match!
+                // so ignore all basic matches from now on
+                ignoreBasicMatches = true;
+
+            }
+            else
+            {
+                // we don't have a match yet - so try exact ancester
+                //
+                rulesList = findExactAncesterMatch( pattern );
                 if ( rulesList != null )
                 {
                     // we have a match!
                     // so ignore all basic matches from now on
                     ignoreBasicMatches = true;
-
-                }
-                else
-                {
-                    // we don't have a match yet - so try exact ancester
-                    //
-                    rulesList = findExactAncesterMatch( pattern );
-                    if ( rulesList != null )
-                    {
-                        // we have a match!
-                        // so ignore all basic matches from now on
-                        ignoreBasicMatches = true;
-                    }
                 }
             }
         }
@@ -332,7 +326,7 @@ public class ExtendedBaseRules
             // don't need to check exact matches
             final boolean wildcardMatchStart = key.startsWith( "*/" );
             final boolean wildcardMatchEnd = key.endsWith( "/*" );
-            if ( wildcardMatchStart || ( isUniversal && wildcardMatchEnd ) )
+            if ( wildcardMatchStart || isUniversal && wildcardMatchEnd )
             {
 
                 boolean parentMatched = false;
@@ -358,7 +352,7 @@ public class ExtendedBaseRules
                         }
                         else
                         {
-                            ancesterMatched = ( pattern.contains( patternBody + "/" ) );
+                            ancesterMatched = pattern.contains( patternBody + "/" );
                         }
                     }
                     else
@@ -373,7 +367,7 @@ public class ExtendedBaseRules
                             }
                             else
                             {
-                                ancesterMatched = ( pattern.charAt( bodyPattern.length() ) == '/' );
+                                ancesterMatched = pattern.charAt( bodyPattern.length() ) == '/';
                             }
                         }
                         else
@@ -400,36 +394,28 @@ public class ExtendedBaseRules
                             universalList.addAll( tempList );
                         }
 
-                    }
-                    else
+                    } else if ( !ignoreBasicMatches )
                     {
-                        if ( !ignoreBasicMatches )
+                        // ensure that all parent matches are SHORTER
+                        // than rules with same level of matching.
+                        //
+                        // the calculations below don't work for universal
+                        // matching, but we don't care because in that case
+                        // this if-stmt is not entered.
+                        int keyLength = key.length();
+                        if ( wildcardMatchStart )
                         {
-                            // ensure that all parent matches are SHORTER
-                            // than rules with same level of matching.
-                            //
-                            // the calculations below don't work for universal
-                            // matching, but we don't care because in that case
-                            // this if-stmt is not entered.
-                            int keyLength = key.length();
-                            if ( wildcardMatchStart )
-                            {
-                                --keyLength;
-                            }
-                            if ( wildcardMatchEnd )
-                            {
-                                --keyLength;
-                            }
-                            else if ( parentMatchEnd )
-                            {
-                                --keyLength;
-                            }
+                            --keyLength;
+                        }
+                        if ( wildcardMatchEnd || parentMatchEnd )
+                        {
+                            --keyLength;
+                        }
 
-                            if ( keyLength > longKeyLength )
-                            {
-                                rulesList = this.cache.get( key );
-                                longKeyLength = keyLength;
-                            }
+                        if ( keyLength > longKeyLength )
+                        {
+                            rulesList = this.cache.get( key );
+                            longKeyLength = keyLength;
                         }
                     }
                 }
@@ -467,34 +453,28 @@ public class ExtendedBaseRules
 
         // need to make sure that the collection is sort in the order
         // of addition. We use a custom comparator for this
-        Collections.sort( universalList, new Comparator<Rule>()
-        {
+        Collections.sort( universalList, (r1, r2) -> {
+            // Get the entry order from the map
+            final Integer i1 = order.get( r1 );
+            final Integer i2 = order.get( r2 );
 
-            @Override
-            public int compare( final Rule r1, final Rule r2 )
+            // and use that to perform the comparison
+            if ( i1 == null )
             {
-                // Get the entry order from the map
-                final Integer i1 = order.get( r1 );
-                final Integer i2 = order.get( r2 );
-
-                // and use that to perform the comparison
-                if ( i1 == null )
-                {
-                    if ( i2 == null )
-                    {
-
-                        return 0;
-
-                    }
-                    return -1;
-                }
                 if ( i2 == null )
                 {
-                    return 1;
-                }
 
-                return ( i1.intValue() - i2.intValue() );
+                    return 0;
+
+                }
+                return -1;
             }
+            if ( i2 == null )
+            {
+                return 1;
+            }
+
+            return i1.intValue() - i2.intValue();
         } );
 
         return universalList;
