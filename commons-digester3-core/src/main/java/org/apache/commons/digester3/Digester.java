@@ -109,7 +109,7 @@ public class Digester
     /**
      * The stack of body text string buffers for surrounding elements.
      */
-    private final Stack<StringBuilder> bodyTexts = new Stack<StringBuilder>();
+    private final Stack<StringBuilder> bodyTexts = new Stack<>();
 
     /**
      * Stack whose elements are List objects, each containing a list of Rule objects as returned from Rules.getMatch().
@@ -119,7 +119,7 @@ public class Digester
      *
      * @since 1.6
      */
-    private final Stack<List<Rule>> matches = new Stack<List<Rule>>();
+    private final Stack<List<Rule>> matches = new Stack<>();
 
     /**
      * The class loader to use for instantiating application objects. If not specified, the context class loader, or the
@@ -141,7 +141,7 @@ public class Digester
     /**
      * The URLs of entityValidator that have been registered, keyed by the public identifier that corresponds.
      */
-    private final HashMap<String, URL> entityValidator = new HashMap<String, URL>();
+    private final HashMap<String, URL> entityValidator = new HashMap<>();
 
     /**
      * The application-supplied error handler that is notified when parsing warnings, errors, or fatal errors occur.
@@ -180,7 +180,7 @@ public class Digester
      * the most current one. (This architecture is required because documents can declare nested uses of the same prefix
      * for different Namespace URIs).
      */
-    private final HashMap<String, Stack<String>> namespaces = new HashMap<String, Stack<String>>();
+    private final HashMap<String, Stack<String>> namespaces = new HashMap<>();
 
     /**
      * Do we want a "XInclude aware" parser.
@@ -192,7 +192,7 @@ public class Digester
      *
      * @since 2.0
      */
-    private final Stack<Object[]> params = new Stack<Object[]>();
+    private final Stack<Object[]> params = new Stack<>();
 
     /**
      * The SAXParser we will use to parse the input stream.
@@ -230,7 +230,7 @@ public class Digester
     /**
      * The object stack being constructed.
      */
-    private final Stack<Object> stack = new Stack<Object>();
+    private final Stack<Object> stack = new Stack<>();
 
     /**
      * Do we want to use the Context ClassLoader when loading classes for instantiating new objects. Default is
@@ -260,7 +260,7 @@ public class Digester
     private Substitutor substitutor;
 
     /** Stacks used for interrule communication, indexed by name String */
-    private final HashMap<String, Stack<Object>> stacksByName = new HashMap<String, Stack<Object>>();
+    private final HashMap<String, Stack<Object>> stacksByName = new HashMap<>();
 
     /**
      * If not null, then calls by the parser to this object's characters, startElement, endElement and
@@ -283,7 +283,7 @@ public class Digester
      * potentially locked JAR files on Windows.
      * </p>
      */
-    protected List<InputSource> inputSources = new ArrayList<InputSource>( 5 );
+    protected List<InputSource> inputSources = new ArrayList<>( 5 );
 
     /**
      * Constructs a new Digester with default properties.
@@ -919,17 +919,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final File file )
     {
-        return asyncParse( new Callable<T>()
-        {
-
-            @Override
-            public T call()
-                throws Exception
-            {
-                return Digester.this.<T> parse( file );
-            }
-
-        } );
+        return asyncParse( () -> Digester.this.<T> parse( file ) );
     }
 
     /**
@@ -943,17 +933,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final InputSource input )
     {
-        return asyncParse( new Callable<T>()
-        {
-
-            @Override
-            public T call()
-                throws Exception
-            {
-                return Digester.this.<T> parse( input );
-            }
-
-        } );
+        return asyncParse( () -> Digester.this.<T> parse( input ) );
     }
 
     /**
@@ -967,17 +947,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final InputStream input )
     {
-        return asyncParse( new Callable<T>()
-        {
-
-            @Override
-            public T call()
-                throws Exception
-            {
-                return Digester.this.<T> parse( input );
-            }
-
-        } );
+        return asyncParse( () -> Digester.this.<T> parse( input ) );
     }
 
     /**
@@ -991,17 +961,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final Reader reader )
     {
-        return asyncParse( new Callable<T>()
-        {
-
-            @Override
-            public T call()
-                throws Exception
-            {
-                return Digester.this.<T> parse( reader );
-            }
-
-        } );
+        return asyncParse( () -> Digester.this.<T> parse( reader ) );
     }
 
     /**
@@ -1015,17 +975,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final String uri )
     {
-        return asyncParse( new Callable<T>()
-        {
-
-            @Override
-            public T call()
-                throws Exception
-            {
-                return Digester.this.<T> parse( uri );
-            }
-
-        } );
+        return asyncParse( () -> Digester.this.<T> parse( uri ) );
     }
 
     /**
@@ -1039,17 +989,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final URL url )
     {
-        return asyncParse( new Callable<T>()
-        {
-
-            @Override
-            public T call()
-                throws Exception
-            {
-                return Digester.this.<T> parse( url );
-            }
-
-        } );
+        return asyncParse( () -> Digester.this.<T> parse( url ) );
     }
 
     /**
@@ -1228,7 +1168,7 @@ public class Digester
         if ( e instanceof InvocationTargetException )
         {
             final Throwable t = ( (InvocationTargetException) e ).getTargetException();
-            if ( ( t != null ) && ( t instanceof Exception ) )
+            if ( t instanceof Exception )
             {
                 e = (Exception) t;
             }
@@ -1256,10 +1196,10 @@ public class Digester
      */
     public SAXException createSAXException( final String message, Exception e )
     {
-        if ( ( e != null ) && ( e instanceof InvocationTargetException ) )
+        if ( e instanceof InvocationTargetException )
         {
             final Throwable t = ( (InvocationTargetException) e ).getTargetException();
-            if ( ( t != null ) && ( t instanceof Exception ) )
+            if ( t instanceof Exception )
             {
                 e = (Exception) t;
             }
@@ -1353,14 +1293,14 @@ public class Digester
         // the actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
         String name = localName;
-        if ( ( name == null ) || ( name.length() < 1 ) )
+        if ( name == null || name.length() < 1 )
         {
             name = qName;
         }
 
         // Fire "body" events for all relevant rules
         final List<Rule> rules = matches.pop();
-        if ( ( rules != null ) && ( !rules.isEmpty() ) )
+        if ( rules != null && !rules.isEmpty() )
         {
             String bodyText = this.bodyText.toString();
             final Substitutor substitutor = getSubstitutor();
@@ -1388,13 +1328,9 @@ public class Digester
                     throw e;
                 }
             }
-        }
-        else
+        } else if ( debug )
         {
-            if ( debug )
-            {
-                log.debug( "  No rules found matching '" + match + "'." );
-            }
+            log.debug( "  No rules found matching '" + match + "'." );
         }
 
         // Recover the body text from the surrounding element
@@ -1409,7 +1345,7 @@ public class Digester
         {
             for ( int i = 0; i < rules.size(); i++ )
             {
-                final int j = ( rules.size() - i ) - 1;
+                final int j = rules.size() - i - 1;
                 try
                 {
                     final Rule rule = rules.get( j );
@@ -1514,7 +1450,7 @@ public class Digester
         }
         try
         {
-            return ( nsStack.peek() );
+            return nsStack.peek();
         }
         catch ( final EmptyStackException e )
         {
@@ -1538,17 +1474,17 @@ public class Digester
     {
         if ( this.classLoader != null )
         {
-            return ( this.classLoader );
+            return this.classLoader;
         }
         if ( this.useContextClassLoader )
         {
             final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             if ( classLoader != null )
             {
-                return ( classLoader );
+                return classLoader;
             }
         }
-        return ( this.getClass().getClassLoader() );
+        return this.getClass().getClassLoader();
     }
 
     /**
@@ -1558,7 +1494,7 @@ public class Digester
      */
     public int getCount()
     {
-        return ( stack.size() );
+        return stack.size();
     }
 
     /**
@@ -1574,7 +1510,7 @@ public class Digester
         {
             elementName = elementName.substring( lastSlash + 1 );
         }
-        return ( elementName );
+        return elementName;
     }
 
     /**
@@ -1590,7 +1526,7 @@ public class Digester
         {
             log.warn( "Digester is not namespace aware" );
         }
-        final Map<String, String> currentNamespaces = new HashMap<String, String>();
+        final Map<String, String> currentNamespaces = new HashMap<>();
         for ( final Map.Entry<String, Stack<String>> nsEntry : namespaces.entrySet() )
         {
             try
@@ -1646,7 +1582,7 @@ public class Digester
      */
     public ErrorHandler getErrorHandler()
     {
-        return ( this.errorHandler );
+        return this.errorHandler;
     }
 
     /**
@@ -1675,7 +1611,7 @@ public class Digester
             factory.setValidating( validating );
             factory.setSchema( schema );
         }
-        return ( factory );
+        return factory;
     }
 
     /**
@@ -1693,7 +1629,7 @@ public class Digester
     public boolean getFeature( final String feature )
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException
     {
-        return ( getFactory().getFeature( feature ) );
+        return getFactory().getFeature( feature );
     }
 
     /**
@@ -1736,7 +1672,7 @@ public class Digester
      */
     public boolean getNamespaceAware()
     {
-        return ( this.namespaceAware );
+        return this.namespaceAware;
     }
 
     /**
@@ -1751,7 +1687,7 @@ public class Digester
         // Return the parser we already created (if any)
         if ( parser != null )
         {
-            return ( parser );
+            return parser;
         }
 
         // Create a new parser
@@ -1762,10 +1698,10 @@ public class Digester
         catch ( final Exception e )
         {
             log.error( "Digester.getParser: ", e );
-            return ( null );
+            return null;
         }
 
-        return ( parser );
+        return parser;
     }
 
     /**
@@ -1782,7 +1718,7 @@ public class Digester
     public Object getProperty( final String property )
         throws SAXNotRecognizedException, SAXNotSupportedException
     {
-        return ( getParser().getProperty( property ) );
+        return getParser().getProperty( property );
     }
 
     /**
@@ -1792,7 +1728,7 @@ public class Digester
      */
     public String getPublicId()
     {
-        return ( this.publicId );
+        return this.publicId;
     }
 
     /**
@@ -1838,7 +1774,7 @@ public class Digester
      */
     public String getRuleNamespaceURI()
     {
-        return ( getRules().getNamespaceURI() );
+        return getRules().getNamespaceURI();
     }
 
     /**
@@ -1854,7 +1790,7 @@ public class Digester
             this.rules = new RulesBase();
             this.rules.setDigester( this );
         }
-        return ( this.rules );
+        return this.rules;
     }
 
     /**
@@ -1910,7 +1846,7 @@ public class Digester
      */
     public boolean getValidating()
     {
-        return ( this.validating );
+        return this.validating;
     }
 
     /**
@@ -1923,7 +1859,7 @@ public class Digester
      */
     public boolean getXIncludeAware()
     {
-        return ( this.xincludeAware );
+        return this.xincludeAware;
     }
 
     /**
@@ -1974,7 +1910,7 @@ public class Digester
      */
     public Schema getXMLSchema()
     {
-        return ( this.schema );
+        return this.schema;
     }
 
     /**
@@ -2099,7 +2035,7 @@ public class Digester
         final InputSource input = new InputSource( new FileInputStream( file ) );
         input.setSystemId( file.toURI().toURL().toString() );
 
-        return ( this.<T> parse( input ) );
+        return this.<T> parse( input );
     }
 
     /**
@@ -2160,7 +2096,7 @@ public class Digester
             throw new IllegalArgumentException( "InputStream to parse is null" );
         }
 
-        return ( this.<T> parse( new InputSource( input ) ) );
+        return this.<T> parse( new InputSource( input ) );
     }
 
     /**
@@ -2181,7 +2117,7 @@ public class Digester
             throw new IllegalArgumentException( "Reader to parse is null" );
         }
 
-        return ( this.<T> parse( new InputSource( reader ) ) );
+        return this.<T> parse( new InputSource( reader ) );
     }
 
     /**
@@ -2202,7 +2138,7 @@ public class Digester
             throw new IllegalArgumentException( "String URI to parse is null" );
         }
 
-        return ( this.<T> parse( createInputSourceFromURL( uri ) ) );
+        return this.<T> parse( createInputSourceFromURL( uri ) );
     }
 
     /**
@@ -2224,7 +2160,7 @@ public class Digester
             throw new IllegalArgumentException( "URL to parse is null" );
         }
 
-        return ( this.<T> parse( createInputSourceFromURL( url ) ) );
+        return this.<T> parse( createInputSourceFromURL( url ) );
     }
 
     /**
@@ -2244,7 +2180,7 @@ public class Digester
         catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
     }
 
@@ -2258,11 +2194,11 @@ public class Digester
      */
     public <T> T peek( final int n )
     {
-        final int index = ( stack.size() - 1 ) - n;
+        final int index = stack.size() - 1 - n;
         if ( index < 0 )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
         try
         {
@@ -2271,7 +2207,7 @@ public class Digester
         catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
     }
 
@@ -2320,7 +2256,7 @@ public class Digester
             throw new EmptyStackException();
         }
 
-        final int index = ( namedStack.size() - 1 ) - n;
+        final int index = namedStack.size() - 1 - n;
         if ( index < 0 )
         {
             throw new EmptyStackException();
@@ -2345,12 +2281,12 @@ public class Digester
     {
         try
         {
-            return ( params.peek() );
+            return params.peek();
         }
         catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
     }
 
@@ -2368,20 +2304,20 @@ public class Digester
      */
     public Object[] peekParams( final int n )
     {
-        final int index = ( params.size() - 1 ) - n;
+        final int index = params.size() - 1 - n;
         if ( index < 0 )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
         try
         {
-            return ( params.get( index ) );
+            return params.get( index );
         }
         catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
     }
 
@@ -2406,7 +2342,7 @@ public class Digester
         catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
     }
 
@@ -2465,12 +2401,12 @@ public class Digester
             {
                 log.trace( "Popping params" );
             }
-            return ( params.pop() );
+            return params.pop();
         }
         catch ( final EmptyStackException e )
         {
             log.warn( "Empty stack (returning null)" );
-            return ( null );
+            return null;
         }
     }
 
@@ -2515,7 +2451,7 @@ public class Digester
         Stack<Object> namedStack = stacksByName.get( stackName );
         if ( namedStack == null )
         {
-            namedStack = new Stack<Object>();
+            namedStack = new Stack<>();
             stacksByName.put( stackName, namedStack );
         }
         namedStack.push( value );
@@ -2679,7 +2615,7 @@ public class Digester
                 {
                     log.debug( " Cannot resolve null entity, returning null InputSource" );
                 }
-                return ( null );
+                return null;
 
             }
             // try to resolve using system ID
@@ -3041,7 +2977,7 @@ public class Digester
         // the actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
         String name = localName;
-        if ( ( name == null ) || ( name.length() < 1 ) )
+        if ( name == null || name.length() < 1 )
         {
             name = qName;
         }
@@ -3062,7 +2998,7 @@ public class Digester
         // Fire "begin" events for all relevant rules
         final List<Rule> rules = getRules().match( namespaceURI, match, localName, list );
         matches.push( rules );
-        if ( ( rules != null ) && ( !rules.isEmpty() ) )
+        if ( rules != null && !rules.isEmpty() )
         {
             final Substitutor substitutor = getSubstitutor();
             if ( substitutor != null )
@@ -3089,13 +3025,9 @@ public class Digester
                     throw e;
                 }
             }
-        }
-        else
+        } else if ( debug )
         {
-            if ( debug )
-            {
-                log.debug( "  No rules found matching '" + match + "'." );
-            }
+            log.debug( "  No rules found matching '" + match + "'." );
         }
     }
 
@@ -3115,7 +3047,7 @@ public class Digester
         Stack<String> stack = namespaces.get( prefix );
         if ( stack == null )
         {
-            stack = new Stack<String>();
+            stack = new Stack<>();
             namespaces.put( prefix, stack );
         }
         stack.push( namespaceURI );
