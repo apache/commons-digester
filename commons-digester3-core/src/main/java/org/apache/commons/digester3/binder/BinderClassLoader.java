@@ -35,7 +35,7 @@ final class BinderClassLoader
     private static final Map<String, Class<?>> PRIMITIVE_TYPES;
     static
     {
-        final HashMap<String, Class<?>> primitiveTypes = new HashMap<String, Class<?>>();
+        final HashMap<String, Class<?>> primitiveTypes = new HashMap<>();
         primitiveTypes.put( "boolean", boolean.class );
         primitiveTypes.put( "byte", byte.class );
         primitiveTypes.put( "short", short.class );
@@ -49,16 +49,7 @@ final class BinderClassLoader
 
     public static BinderClassLoader createBinderClassLoader( final ClassLoader adaptedClassLoader )
     {
-        final PrivilegedAction<BinderClassLoader> action = new PrivilegedAction<BinderClassLoader>()
-        {
-
-            @Override
-            public BinderClassLoader run()
-            {
-                return new BinderClassLoader( adaptedClassLoader );
-            }
-
-        };
+        final PrivilegedAction<BinderClassLoader> action = () -> new BinderClassLoader( adaptedClassLoader );
 
         if ( getSecurityManager() != null )
         {
