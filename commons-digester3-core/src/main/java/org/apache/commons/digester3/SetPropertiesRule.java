@@ -43,7 +43,7 @@ public class SetPropertiesRule
     extends Rule
 {
 
-    private final Map<String, String> aliases = new HashMap<String, String>();
+    private final Map<String, String> aliases = new HashMap<>();
 
     /**
      * Used to determine whether the parsing should fail if an property specified in the XML is missing from the bean.
@@ -108,7 +108,7 @@ public class SetPropertiesRule
      * The following constructs a rule that maps the {@code alt-city} attribute to the {@code city} property
      * and the {@code alt-state} to the {@code state} property. All other attributes are mapped as usual using
      * exact name matching.
-     * </p> 
+     * </p>
      * <pre>{@code
      *      SetPropertiesRule(
      *                new String[] {"alt-city", "alt-state"},
@@ -162,7 +162,7 @@ public class SetPropertiesRule
         throws Exception
     {
         // Build a set of attribute names and corresponding values
-        final Map<String, String> values = new HashMap<String, String>();
+        final Map<String, String> values = new HashMap<>();
 
         for ( int i = 0; i < attributes.getLength(); i++ )
         {
@@ -187,7 +187,7 @@ public class SetPropertiesRule
                                                          attributeName ) );
             }
 
-            if ( ( !ignoreMissingProperty ) && ( attributeName != null ) )
+            if ( !ignoreMissingProperty && attributeName != null )
             {
                 // The BeanUtils.populate method silently ignores items in
                 // the map (ie xml entities) which have no corresponding
