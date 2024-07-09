@@ -52,7 +52,7 @@ public abstract class AbstractObjectCreationFactory<T>
     @Override
     public Digester getDigester()
     {
-        return ( this.digester );
+        return this.digester;
     }
 
     /**
