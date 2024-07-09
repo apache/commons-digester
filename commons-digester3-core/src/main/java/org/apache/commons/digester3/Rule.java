@@ -128,7 +128,7 @@ import org.xml.sax.Attributes;
      */
     public Digester getDigester()
     {
-        return ( this.digester );
+        return this.digester;
     }
 
     /**
@@ -138,7 +138,7 @@ import org.xml.sax.Attributes;
      */
     public String getNamespaceURI()
     {
-        return ( this.namespaceURI );
+        return this.namespaceURI;
     }
 
     /**
