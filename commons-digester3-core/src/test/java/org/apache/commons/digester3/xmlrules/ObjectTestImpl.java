@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class ObjectTestImpl
 {
 
-    private final ArrayList<Object> children = new ArrayList<Object>();
+    private final ArrayList<Object> children = new ArrayList<>();
 
     private String value = "";
 
@@ -35,7 +35,7 @@ public class ObjectTestImpl
 
     private String property = "";
 
-    private final HashMap<String, String> mapValue = new HashMap<String, String>();
+    private final HashMap<String, String> mapValue = new HashMap<>();
 
     private boolean pushed;
 
