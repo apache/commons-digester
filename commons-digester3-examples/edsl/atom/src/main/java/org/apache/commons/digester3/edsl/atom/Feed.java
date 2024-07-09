@@ -33,11 +33,11 @@ public final class Feed
 
     private Date updated;
 
-    private final List<String> authors = new ArrayList<String>();
+    private final List<String> authors = new ArrayList<>();
 
     private String id;
 
-    private final List<Entry> entries = new ArrayList<Entry>();
+    private final List<Entry> entries = new ArrayList<>();
 
     public void addAuthor( final String author )
     {
