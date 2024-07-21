@@ -34,7 +34,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * This allows ordinary JavaBean classes to be used as plugins, and have xml attributes be mapped to bean properties of
  * the same name, without any custom plugin rules being created for them.
  * <p>
- * This RuleFinder is typically used as the <i>last</i> RuleFinder, so that automatic property setting only occurs if
+ * This RuleFinder is typically used as the <em>last</em> RuleFinder, so that automatic property setting only occurs if
  * there is no other source of custom rules available.
  *
  * @since 1.6
@@ -73,12 +73,12 @@ public class FinderSetProperties
     }
 
     /**
-     * Returns a RuleLoader <i>unless</i> the properties contain an entry with the name matching constructor param
+     * Returns a RuleLoader <em>unless</em> the properties contain an entry with the name matching constructor param
      * propsAttr, and the value matching what is in falseval.
      * <p>
      * If no custom source of rules for a plugin is found, then the user almost always wants xml attributes to map to
      * Java bean properties, so this is the default behavior unless the user explicitly indicates that they do
-     * <i>not</i> want a SetPropertiesRule to be provided for the plugged-in class.
+     * <em>not</em> want a SetPropertiesRule to be provided for the plugged-in class.
      * <p>
      * The returned object (when non-null) will add a SetPropertiesRule to the digester whenever its addRules method is
      * invoked.

@@ -69,9 +69,9 @@ public class PluginCreateRule
     private PluginConfigurationException initException;
 
     /**
-     * Create a plugin rule where the user <i>must</i> specify a plugin-class or plugin-id.
+     * Create a plugin rule where the user <em>must</em> specify a plugin-class or plugin-id.
      *
-     * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
+     * @param baseClass is the class which any specified plugin <em>must</em> be descended from.
      */
     public PluginCreateRule( final Class<?> baseClass )
     {
@@ -79,10 +79,10 @@ public class PluginCreateRule
     }
 
     /**
-     * Create a plugin rule where the user <i>may</i> specify a plugin. If the user doesn't specify a plugin, then the
+     * Create a plugin rule where the user <em>may</em> specify a plugin. If the user doesn't specify a plugin, then the
      * default class specified in this constructor is used.
      *
-     * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
+     * @param baseClass is the class which any specified plugin <em>must</em> be descended from.
      * @param dfltPluginClass is the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *            This class will have custom rules installed for it just like a declared plugin.
      */
@@ -96,10 +96,10 @@ public class PluginCreateRule
     }
 
     /**
-     * Create a plugin rule where the user <i>may</i> specify a plugin. If the user doesn't specify a plugin, then the
+     * Create a plugin rule where the user <em>may</em> specify a plugin. If the user doesn't specify a plugin, then the
      * default class specified in this constructor is used.
      *
-     * @param baseClass is the class which any specified plugin <i>must</i> be descended from.
+     * @param baseClass is the class which any specified plugin <em>must</em> be descended from.
      * @param dfltPluginClass is the class which will be used if the user doesn't specify any plugin-class or plugin-id.
      *            This class will have custom rules installed for it just like a declared plugin.
      * @param dfltPluginRuleLoader is a RuleLoader instance which knows how to load the custom rules associated with
@@ -437,7 +437,7 @@ public class PluginCreateRule
     /**
      * Gets the pattern that this Rule is associated with.
      * <p>
-     * In general, Rule instances <i>can</i> be associated with multiple patterns. A PluginCreateRule, however, will
+     * In general, Rule instances <em>can</em> be associated with multiple patterns. A PluginCreateRule, however, will
      * only function correctly when associated with a single pattern. It is possible to fix this, but I can't be
      * bothered just now because this feature is unlikely to be used.
      * </p>
@@ -586,9 +586,9 @@ public class PluginCreateRule
      * See {@link PluginRules#setPluginClassAttribute} for more info.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
-     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
+     *            then this should be null. Note that if a namespace is used, the attrName value should <em>not</em>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
-     *            this parameter <i>must</i> be null.
+     *            this parameter <em>must</em> be null.
      * @param attrName is the attribute whose value contains the name of the class to be instantiated.
      */
     public void setPluginClassAttribute( final String namespaceUri, final String attrName )
@@ -604,9 +604,9 @@ public class PluginCreateRule
      * See {@link PluginRules#setPluginIdAttribute} for more info.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
-     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
+     *            then this should be null. Note that if a namespace is used, the attrName value should <em>not</em>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
-     *            this parameter <i>must</i> be null.
+     *            this parameter <em>must</em> be null.
      * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
      *            instantiating an object.
      */

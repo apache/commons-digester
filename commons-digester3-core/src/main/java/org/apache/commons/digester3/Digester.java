@@ -1051,13 +1051,13 @@ public class Digester
      * Clear the current contents of the default object stack, the param stack, all named stacks, and other internal
      * variables.
      * <p>
-     * Calling this method <i>might</i> allow another document of the same type to be correctly parsed. However this
+     * Calling this method <em>might</em> allow another document of the same type to be correctly parsed. However this
      * method was not intended for this purpose (just to tidy up memory usage). In general, a separate Digester object
      * should be created for each document to be parsed.
      * <p>
      * Note that this method is called automatically after a document has been successfully parsed by a Digester
      * instance. However it is not invoked automatically when a parse fails, so when reusing a Digester instance (which
-     * is not recommended) this method <i>must</i> be called manually after a parse failure.
+     * is not recommended) this method <em>must</em> be called manually after a parse failure.
      */
     public void clear()
     {

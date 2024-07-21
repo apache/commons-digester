@@ -417,9 +417,9 @@ public class PluginRules
      * See {@link PluginContext#setPluginClassAttribute}.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
-     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
+     *            then this should be null. Note that if a namespace is used, the attrName value should <em>not</em>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
-     *            this parameter <i>must</i> be null.
+     *            this parameter <em>must</em> be null.
      * @param attrName is the attribute whose value contains the name of the class to be instantiated.
      * */
     public void setPluginClassAttribute( final String namespaceUri, final String attrName )
@@ -431,9 +431,9 @@ public class PluginRules
      * See {@link PluginContext#setPluginIdAttribute}.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
-     *            then this should be null. Note that if a namespace is used, the attrName value should <i>not</i>
+     *            then this should be null. Note that if a namespace is used, the attrName value should <em>not</em>
      *            contain any kind of namespace-prefix. Note also that if you are using a non-namespace-aware parser,
-     *            this parameter <i>must</i> be null.
+     *            this parameter <em>must</em> be null.
      * @param attrName is the attribute whose value contains the id of the plugin declaration to be used when
      *            instantiating an object.
      **/

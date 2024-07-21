@@ -41,7 +41,7 @@ import org.xml.sax.SAXException;
  * potentially makes it somewhat easier to review the parsing rules.
  * <p>
  * Note, however, that there is tyically quite a tight coupling between
- * the parsing rules and the <i>purpose</i> of the application which means
+ * the parsing rules and the <em>purpose</em> of the application which means
  * that it may not be all that common for parsing rules to be altered
  * without the application code also being altered, so only in some cases
  * will this prove of benefit. As with all software, it must be determined

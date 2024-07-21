@@ -35,7 +35,7 @@ import org.xml.sax.Attributes;
  * JNDI references, database connections, etc) that it may in the
  * process of generating an appropriate object.
  * <p>
- * Note that it is <i>not</i> possible for any data to be extracted
+ * Note that it is <em>not</em> possible for any data to be extracted
  * from the body or subelements of the xml element that caused the
  * createObject method on this factory to be invoked. For example:
  * <pre>

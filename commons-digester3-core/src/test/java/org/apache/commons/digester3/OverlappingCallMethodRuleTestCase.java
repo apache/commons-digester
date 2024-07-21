@@ -162,7 +162,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     /**
-     * This is an "anti-test" that demonstrates how digester can <i>fails</i> to produce the correct results, due to a
+     * This is an "anti-test" that demonstrates how digester can <em>fails</em> to produce the correct results, due to a
      * design flaw (or at least limitation) in the way that CallMethodRule and CallParamRule work.
      * <p>
      * The following sequence always fails:

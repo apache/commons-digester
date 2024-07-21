@@ -57,7 +57,7 @@ public class RowInserterRule
      * real implementation should be fairly simple.
      * <p>
      * Note that after this rule completes, the row/column information is
-     * <i>discarded</i>, ie this rule performs actions <i>as the input is
+     * <em>discarded</em>, ie this rule performs actions <i>as the input is
      * parsed</i>. This contrasts with the more usual way digester is used,
      * which is to build trees of objects for later use. But it's a perfectly
      * valid use of Digester.

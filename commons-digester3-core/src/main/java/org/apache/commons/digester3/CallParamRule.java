@@ -70,7 +70,7 @@ public class CallParamRule
     /**
      * Constructs a "call parameter" rule that will save the body text of this element as the parameter value.
      * <p>
-     * Note that if the element is empty the an <i>empty string</i> is passed to the target method, not null. And if
+     * Note that if the element is empty the an <em>empty string</em> is passed to the target method, not null. And if
      * automatic type conversion is being applied (ie if the target function takes something other than a string as a
      * parameter) then the conversion will fail if the converter class does not accept an empty string as valid input.
      * </p>

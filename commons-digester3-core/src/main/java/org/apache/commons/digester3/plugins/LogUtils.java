@@ -31,13 +31,13 @@ import org.apache.commons.logging.Log;
  * the digester instance that the object *doing* the logging is associated with.
  * <p>
  * This is done because apparently some "container"-type applications such as Avalon and Tomcat need to be able to
- * configure different logging for different <i>instances</i> of the Digester class which have been loaded from the same
+ * configure different logging for different <em>instances</em> of the Digester class which have been loaded from the same
  * ClassLoader [info from Craig McClanahan]. Not only the logging of the Digester instance should be affected; all
  * objects associated with that Digester instance should obey the reconfiguration of their owning Digester instance's
  * logging. The current solution is to force all objects to output logging info via a single Log object stored on the
  * Digester instance they are associated with.
  * <p>
- * Of course this causes problems if logging is attempted before an object <i>has</i> a valid reference to its owning
+ * Of course this causes problems if logging is attempted before an object <em>has</em> a valid reference to its owning
  * Digester. The getLogging method provided here resolves this issue by returning a Log object which silently discards
  * all logging output in this situation.
  * <p>

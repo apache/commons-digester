@@ -49,8 +49,8 @@ import org.xml.sax.SAXException;
  * Setting the {@code UseExactMatch} to true reverts to the use of this method.
  * </p>
  * <p>
- * Note that the target method is invoked when the <i>end</i> of the tag the CallMethodRule fired on is encountered,
- * <i>not</i> when the last parameter becomes available. This implies that rules which fire on tags nested within the
+ * Note that the target method is invoked when the <em>end</em> of the tag the CallMethodRule fired on is encountered,
+ * <em>not</em> when the last parameter becomes available. This implies that rules which fire on tags nested within the
  * one associated with the CallMethodRule will fire before the CallMethodRule invokes the target method. This behavior
  * is not configurable.
  * </p>
@@ -67,7 +67,7 @@ import org.xml.sax.SAXException;
  * </p>
  * <p>
  * Note that when a constructor is used with paramCount=0, indicating that the body of the element is to be passed to
- * the target method, an empty element will cause an <i>empty string</i> to be passed to the target method, not null.
+ * the target method, an empty element will cause an <em>empty string</em> to be passed to the target method, not null.
  * And if automatic type conversion is being applied (ie if the target function takes something other than a string as a
  * parameter) then the conversion will fail if the converter class does not accept an empty string as valid input.
  * </p>
