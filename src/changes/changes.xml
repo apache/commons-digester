@@ -77,7 +77,10 @@
       Bump Java requirement from version 5 to 6.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-194">
-      Bump Java requirement from version 6 to 7
+      Bump Java requirement from version 6 to 7.
+    </action>
+    <action dev="ggregory" type="update">
+      Bump Java requirement from version 7 to 8.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-187">
       Bump Apache Commons BeanUtils from 1.8.3 to 1.9.4.
