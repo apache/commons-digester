@@ -21,7 +21,7 @@ The files in this directory are intended as an example of how to use
 the Apache Digester's basic functionality via its xmlrules interface.
 
 Topics covered:
-* how to create a digester instance initialised with
+* how to create a digester instance initialized with
   rules specified in an external file.
 * how to parse a file
 * how to use the "object create" rule to create java objects

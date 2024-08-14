@@ -196,7 +196,7 @@ public class PluginRules
             {
                 // Currently, Digester doesn't handle exceptions well
                 // from the add method. The workaround is for the
-                // initialisable rule to remember that its initialization
+                // initializable rule to remember that its initialization
                 // failed, and to throw the exception when begin is
                 // called for the first time.
                 if ( debug )
