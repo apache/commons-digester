@@ -135,7 +135,7 @@ public class VariableAttributes
             // call to set(index, s) works ok.
             //
             // Unfortunately, there is no easy way to set the size of
-            // an arraylist; we must repeatedly add null elements to it..
+            // an arraylist; we must repeatedly add null elements to it.
             values.ensureCapacity( index + 1 );
             for ( int i = values.size(); i <= index; ++i )
             {
