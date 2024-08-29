@@ -92,7 +92,7 @@
       Bump JUnit from 4.10 to 4.13.2 in #77, #78.
     </action>
     <action dev="ggregory" type="update">
-      Bump commons-parent from 28 to 73 #146, #161, #169.
+      Bump commons-parent from 28 to 74 #146, #161, #169, #189.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump findbugs-maven-plugin from 2.3.2 to 3.0.5 #80.
