@@ -271,7 +271,7 @@ public class CallMethodRule
      * {@code paramTypes} is null or empty, in this case the rule will call the specified method with no arguments.
      *
      * @param methodName Method name of the parent method to call
-     * @param paramCount The number of parameters to collect, or zero for a single argument from the body of ths element
+     * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
      *            corresonding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
