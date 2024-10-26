@@ -76,7 +76,7 @@ final class RecordedInvocation
         // use toString().
         if ( !( input instanceof Object[] ) )
         {
-            buffer.append( input.toString() );
+            buffer.append( input );
         }
         else
         {

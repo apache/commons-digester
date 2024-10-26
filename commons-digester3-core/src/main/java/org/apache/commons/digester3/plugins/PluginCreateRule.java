@@ -236,8 +236,7 @@ public class PluginCreateRule
 
         if ( debug )
         {
-            log.debug( "PluginCreateRule.begin: installing new plugin: " + "oldrules=" + oldRules.toString()
-                + ", newrules=" + newRules.toString() );
+            log.debug( "PluginCreateRule.begin: installing new plugin: oldrules=" + oldRules + ", newrules=" + newRules );
         }
 
         // load up the custom rules

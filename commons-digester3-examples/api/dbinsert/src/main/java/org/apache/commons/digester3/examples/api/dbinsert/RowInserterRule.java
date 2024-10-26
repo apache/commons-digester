@@ -99,13 +99,13 @@ public class RowInserterRule
         buf.append( "insert into " );
         buf.append( table.getName() );
         buf.append( " (" );
-        buf.append( colnames.toString() );
+        buf.append( colnames );
         buf.append( ") values (" );
-        buf.append( colvalues.toString() );
+        buf.append( colvalues );
         buf.append( ")" );
 
         // here the prepared statement would be executed....
-        System.out.println( buf.toString() );
+        System.out.println( buf );
     }
 
 }

@@ -348,7 +348,7 @@ public class PluginRules
 
         if ( debug )
         {
-            log.debug( "Matching path [" + path + "] on rules object " + toString() );
+            log.debug( "Matching path [" + path + "] on rules object " + this );
         }
 
         List<Rule> matches;
