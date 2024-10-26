@@ -20,7 +20,6 @@ package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
@@ -261,9 +260,8 @@ public class BeanPropertySetterRuleTestCase
         // Attempt to parse the input
         try
         {
-            final SimpleTestBean bean = digester.parse( xmlTestReader() );
+            digester.parse( xmlTestReader() );
             fail( "Should have thrown NoSuchMethodException" );
-            assertNotNull( bean ); // just to avoid compiler warning on unused variable
         }
         catch ( final Exception e )
         {

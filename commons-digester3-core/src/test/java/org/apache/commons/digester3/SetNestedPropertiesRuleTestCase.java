@@ -223,11 +223,8 @@ public class SetNestedPropertiesRuleTestCase
 
         try
         {
-            final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
-
-            // we should never get here...
+            digester.parse( new StringReader( TEST_XML ) );
             fail( "No exception thrown by parse when unknown child element found." );
-            assertNotNull( bean ); // just to prevent compiler warning on unused var
         }
         catch ( final org.xml.sax.SAXParseException e )
         {
@@ -357,9 +354,8 @@ public class SetNestedPropertiesRuleTestCase
 
         try
         {
-            final SimpleTestBean bean = digester.parse( reader );
+            digester.parse( reader );
             fail( "Expected to generate an exception." );
-            assertNotNull( bean ); // just to prevent compiler warning on unused var
         }
         catch ( final SAXException e )
         {
