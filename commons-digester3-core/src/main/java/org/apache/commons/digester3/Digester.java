@@ -2448,12 +2448,7 @@ public class Digester
             value = stackAction.onPush( this, stackName, value );
         }
 
-        Stack<Object> namedStack = stacksByName.get( stackName );
-        if ( namedStack == null )
-        {
-            namedStack = new Stack<>();
-            stacksByName.put( stackName, namedStack );
-        }
+        Stack<Object> namedStack = stacksByName.computeIfAbsent( stackName, k -> new Stack<>() );
         namedStack.push( value );
     }
 
@@ -3044,12 +3039,7 @@ public class Digester
         }
 
         // Register this prefix mapping
-        Stack<String> stack = namespaces.get( prefix );
-        if ( stack == null )
-        {
-            stack = new Stack<>();
-            namespaces.put( prefix, stack );
-        }
+        Stack<String> stack = namespaces.computeIfAbsent( prefix, k -> new Stack<>() );
         stack.push( namespaceURI );
     }
 

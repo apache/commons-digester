@@ -216,12 +216,7 @@ final class FromBinderRuleSet
         final Key key = new Key( ruleBuilder.getPattern(), ruleBuilder.getNamespaceURI() );
 
         // O(1)
-        Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get( key );
-        if ( indexedProviders == null )
-        {
-            indexedProviders = new ArrayList<>();
-            this.providersIndex.put( key, indexedProviders ); // O(1)
-        }
+        Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.computeIfAbsent( key, k -> new ArrayList<>() );
         indexedProviders.add( ruleBuilder );
     }
 
