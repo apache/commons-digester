@@ -70,14 +70,14 @@ public abstract class FromAnnotationsRuleModule
         if ( !type.isInterface() )
         {
             // CONSTRUCTOR
-            visitElements( () -> type.getDeclaredConstructors() );
+            visitElements( type::getDeclaredConstructors );
 
             // FIELD
-            visitElements( () -> type.getDeclaredFields() );
+            visitElements( type::getDeclaredFields );
         }
 
         // METHOD
-        visitElements( () -> type.getDeclaredMethods() );
+        visitElements( type::getDeclaredMethods );
 
         rulesBinder.markAsBound( type );
         bindRulesFrom( type.getSuperclass() );
