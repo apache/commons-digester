@@ -73,7 +73,7 @@ public class MarkupDigester
      * @throws SAXException if a parsing error is to be reported
      */
     @Override
-    public void characters( final char buffer[], final int start, final int length )
+    public void characters( final char[] buffer, final int start, final int length )
         throws SAXException
     {
         super.characters( buffer, start, length );

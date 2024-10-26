@@ -250,7 +250,7 @@ public class TestBean
         this.floatProperty = floatProperty;
     }
 
-    public void setIntArray( final int intArray[] )
+    public void setIntArray( final int[] intArray )
     {
         this.intArray = intArray;
     }
@@ -260,7 +260,7 @@ public class TestBean
         intIndexed[index] = value;
     }
 
-    public void setIntMultibox( final int intMultibox[] )
+    public void setIntMultibox( final int[] intMultibox )
     {
         this.intMultibox = intMultibox;
     }
@@ -275,7 +275,7 @@ public class TestBean
         this.longProperty = longProperty;
     }
 
-    public void setMultipleSelect( final String multipleSelect[] )
+    public void setMultipleSelect( final String[] multipleSelect )
     {
         this.multipleSelect = multipleSelect;
     }
@@ -295,7 +295,7 @@ public class TestBean
         this.singleSelect = singleSelect;
     }
 
-    public void setStringArray( final String stringArray[] )
+    public void setStringArray( final String[] stringArray )
     {
         this.stringArray = stringArray;
     }

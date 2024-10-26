@@ -260,7 +260,7 @@ public class CallMethodRule
      *            a primitive type, specify the corresponding Java wrapper class instead, such as
      *            {@link Boolean#TYPE} for a {@code boolean} parameter)
      */
-    public CallMethodRule( final String methodName, final int paramCount, final Class<?> paramTypes[] )
+    public CallMethodRule( final String methodName, final int paramCount, final Class<?>[] paramTypes )
     {
         this( 0, methodName, paramCount, paramTypes );
     }

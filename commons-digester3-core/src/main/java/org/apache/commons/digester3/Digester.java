@@ -377,7 +377,7 @@ public class Digester
      *            {@code boolean} parameter)
      * @see CallMethodRule
      */
-    public void addCallMethod( final String pattern, final String methodName, final int paramCount, final Class<?> paramTypes[] )
+    public void addCallMethod( final String pattern, final String methodName, final int paramCount, final Class<?>[] paramTypes )
     {
         addRule( pattern, new CallMethodRule( methodName, paramCount, paramTypes ) );
     }
@@ -395,7 +395,7 @@ public class Digester
      *            {@link Boolean} for a {@code boolean} parameter)
      * @see CallMethodRule
      */
-    public void addCallMethod( final String pattern, final String methodName, final int paramCount, final String paramTypes[] )
+    public void addCallMethod( final String pattern, final String methodName, final int paramCount, final String[] paramTypes )
     {
         addRule( pattern, new CallMethodRule( methodName, paramCount, paramTypes ) );
     }
@@ -996,7 +996,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void characters( final char buffer[], final int start, final int length )
+    public void characters( final char[] buffer, final int start, final int length )
         throws SAXException
     {
         if ( customContentHandler != null )
@@ -1917,7 +1917,7 @@ public class Digester
      * {@inheritDoc}
      */
     @Override
-    public void ignorableWhitespace( final char buffer[], final int start, final int len )
+    public void ignorableWhitespace( final char[] buffer, final int start, final int len )
         throws SAXException
     {
         if ( saxLog.isDebugEnabled() )

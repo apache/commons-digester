@@ -173,7 +173,7 @@ public abstract class AbstractMethodRule
         }
 
         // Call the specified method
-        final Class<?> paramTypes[] = new Class<?>[1];
+        final Class<?>[] paramTypes = new Class<?>[1];
         if ( paramType != null )
         {
             paramTypes[0] = getDigester().getClassLoader().loadClass( paramTypeName );

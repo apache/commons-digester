@@ -50,7 +50,7 @@ public class RSSDigester
      *
      * @param args The command line arguments (ignored)
      */
-    public static void main( final String args[] )
+    public static void main( final String[] args )
     {
         try
         {

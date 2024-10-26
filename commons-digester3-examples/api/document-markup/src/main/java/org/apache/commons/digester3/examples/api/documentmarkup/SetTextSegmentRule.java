@@ -49,7 +49,7 @@ public class SetTextSegmentRule
         final Object target = getDigester().peek( 0 );
 
         // Call the specified method
-        final Class<?> paramTypes[] = new Class[] { String.class };
+        final Class<?>[] paramTypes = new Class[] { String.class };
         MethodUtils.invokeMethod( target, methodName, new Object[] { text }, paramTypes );
     }
 
