@@ -291,106 +291,40 @@ public class DigesterTestCase
     /**
      * Test {@code null} parsing. (should lead to {@code IllegalArgumentException}s)
      */
-    @Test
-    public void testNullFileParse()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testNullFileParse() throws Exception
     {
-
-        try
-        {
-            digester.parse( (File) null );
-            fail( "Expected IllegalArgumentException with null argument" );
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // expected
-        }
-
+        digester.parse( (File) null );
     }
 
-    @Test
-    public void testNullInputSourceParse()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testNullInputSourceParse() throws Exception
     {
-
-        try
-        {
-            digester.parse( (InputSource) null );
-            fail( "Expected IllegalArgumentException with null argument" );
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // expected
-        }
-
+        digester.parse( (InputSource) null );
     }
 
-    @Test
-    public void testNullInputStreamParse()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testNullInputStreamParse() throws Exception
     {
-
-        try
-        {
-            digester.parse( (InputStream) null );
-            fail( "Expected IllegalArgumentException with null argument" );
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // expected
-        }
-
+        digester.parse( (InputStream) null );
     }
 
-    @Test
-    public void testNullReaderParse()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testNullReaderParse() throws Exception
     {
-
-        try
-        {
-            digester.parse( (Reader) null );
-            fail( "Expected IllegalArgumentException with null argument" );
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // expected
-        }
-
+        digester.parse( (Reader) null );
     }
 
-    @Test
-    public void testNullStringParse()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testNullStringParse() throws Exception
     {
-
-        try
-        {
-            digester.parse( (String) null );
-            fail( "Expected IllegalArgumentException with null argument" );
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // expected
-        }
-
+        digester.parse( (String) null );
     }
 
-    @Test
-    public void testNullURLParse()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testNullURLParse() throws Exception
     {
-
-        try
-        {
-            digester.parse( (URL) null );
-            fail( "Expected IllegalArgumentException with null argument" );
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // expected
-        }
-
+        digester.parse( (URL) null );
     }
 
     @Test
@@ -423,34 +357,20 @@ public class DigesterTestCase
     }
 
     /** Tests popping named stack not yet pushed */
-    @Test
-    public void testPopNamedStackNotPushed()
+    @Test( expected = EmptyStackException.class )
+    public void testPopNamedStackNotPushed() {
+        String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
+        Digester digester = new Digester();
+        digester.pop(testStackName);
+    }
+
+    /** Tests peeking named stack not yet pushed */
+    @Test( expected = EmptyStackException.class )
+    public void testPeekNamedStackNotPushed()
     {
-        final String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
-        final Digester digester = new Digester();
-        try
-        {
-
-            digester.pop( testStackName );
-            fail( "Expected an EmptyStackException" );
-
-        }
-        catch ( final EmptyStackException e )
-        {
-            // expected
-        }
-
-        try
-        {
-
-            digester.peek( testStackName );
-            fail( "Expected an EmptyStackException" );
-
-        }
-        catch ( final EmptyStackException e )
-        {
-            // expected
-        }
+        String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
+        Digester digester = new Digester();
+        digester.peek( testStackName );
     }
 
     /**

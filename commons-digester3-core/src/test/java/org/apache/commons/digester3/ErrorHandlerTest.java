@@ -20,9 +20,6 @@ package org.apache.commons.digester3;
  */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.fail;
-
-import java.io.IOException;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.logging.Log;
@@ -35,8 +32,8 @@ import org.xml.sax.SAXParseException;
 public class ErrorHandlerTest
 {
 
-    @Test
-    public void testCustomErrorHandler()
+    @Test( expected = SAXException.class )
+    public void testCustomErrorHandler() throws Exception
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -65,34 +62,21 @@ public class ErrorHandlerTest
             }
         };
 
-        try
+        Digester digester = newLoader( new AbstractRulesModule()
         {
-            final Digester digester = newLoader( new AbstractRulesModule()
+            @Override
+            protected void configure()
             {
-                @Override
-                protected void configure()
-                {
-                    forPattern( "employee" ).createObject().ofType( Employee.class );
-                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
-                }
-            } ).newDigester();
-            digester.setErrorHandler( customErrorHandler );
-            digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
-            fail( "No Expected SAXException" );
-
-        }
-        catch ( final IOException e )
-        {
-            fail( "Expected SAXException" );
-        }
-        catch ( final SAXException e )
-        {
-            // expected
-        }
+                forPattern( "employee" ).createObject().ofType( Employee.class );
+                forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
+            }
+        } ).newDigester();
+        digester.setErrorHandler( customErrorHandler );
+        digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
     }
 
-    @Test
-    public void testCustomErrorHandlerWithStack()
+    @Test( expected = SAXException.class )
+    public void testCustomErrorHandlerWithStack() throws Exception
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -121,56 +105,30 @@ public class ErrorHandlerTest
             }
         };
 
-        try
+        Digester digester = newLoader( new AbstractRulesModule()
         {
-            final Digester digester = newLoader( new AbstractRulesModule()
+            @Override
+            protected void configure()
             {
-                @Override
-                protected void configure()
-                {
-                    forPattern( "employee" ).createObject().ofType( Employee.class );
-                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
-                }
-            } ).newDigester();
-            digester.setErrorHandler( customErrorHandler );
-            digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
-            fail( "Expected SAXException" );
-        }
-        catch ( final IOException e )
-        {
-            fail( "Expected SAXException" );
-        }
-        catch ( final SAXException e )
-        {
-            // expected
-        }
+                forPattern( "employee" ).createObject().ofType( Employee.class );
+                forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
+            }
+        } ).newDigester();
+        digester.setErrorHandler( customErrorHandler );
+        digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
     }
 
-    @Test
-    public void testNoCustomErrorHandler()
+    @Test( expected = SAXException.class )
+    public void testNoCustomErrorHandler() throws Exception
     {
-
-        try
+        newLoader( new AbstractRulesModule()
         {
-            newLoader( new AbstractRulesModule()
+            @Override
+            protected void configure()
             {
-                @Override
-                protected void configure()
-                {
-                    forPattern( "employee" ).createObject().ofType( Employee.class );
-                    forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
-                }
-            } ).newDigester().parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
-            fail( "Expected SAXException" );
-        }
-        catch ( final IOException e )
-        {
-            fail( "Expected SAXException" );
-        }
-        catch ( final SAXException e )
-        {
-            // expected
-        }
-
+                forPattern( "employee" ).createObject().ofType( Employee.class );
+                forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
+            }
+        } ).newDigester().parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
     }
 }

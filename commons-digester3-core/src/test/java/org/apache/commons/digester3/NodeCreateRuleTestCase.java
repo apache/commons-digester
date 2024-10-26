@@ -23,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -264,102 +263,64 @@ public class NodeCreateRuleTestCase
     /**
      * Tests simple element construction, using the {@link #TEST_XML} XML input data.
      */
-    @Test
-    public void testInvalidNodeTypes()
-        throws Exception
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidAttributeNode() throws Exception
     {
+        new NodeCreateRule(Node.ATTRIBUTE_NODE);
+    }
 
-        try
-        {
-            new NodeCreateRule( Node.ATTRIBUTE_NODE );
-            fail( "IllegalArgumentException expected for type ATTRIBUTE_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.CDATA_SECTION_NODE );
-            fail( "IllegalArgumentException expected for type " + "CDATA_SECTION_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.COMMENT_NODE );
-            fail( "IllegalArgumentException expected for type COMMENT_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.DOCUMENT_NODE );
-            fail( "IllegalArgumentException expected for type DOCUMENT_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.DOCUMENT_TYPE_NODE );
-            fail( "IllegalArgumentException expected for type " + "DOCUMENT_TYPE_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.ENTITY_NODE );
-            fail( "IllegalArgumentException expected for type ENTITY_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.ENTITY_REFERENCE_NODE );
-            fail( "IllegalArgumentException expected for type " + "ENTITY_REFERENCE_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.NOTATION_NODE );
-            fail( "IllegalArgumentException expected for type NOTATION_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE );
-            fail( "IllegalArgumentException expected for type " + "PROCESSING_INSTRUCTION_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
-        try
-        {
-            new NodeCreateRule( Node.TEXT_NODE );
-            fail( "IllegalArgumentException expected for type TEXT_NODE" );
-        }
-        catch ( final IllegalArgumentException iae )
-        {
-            // expected
-        }
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidCDATANode() throws Exception
+    {
+        new NodeCreateRule( Node.CDATA_SECTION_NODE );
+    }
 
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidCommentNode() throws Exception
+    {
+        new NodeCreateRule( Node.COMMENT_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidDocumentNode() throws Exception
+    {
+        new NodeCreateRule( Node.DOCUMENT_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidTypeNode() throws Exception
+    {
+        new NodeCreateRule( Node.DOCUMENT_TYPE_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidEntityNode() throws Exception
+    {
+        new NodeCreateRule( Node.ENTITY_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidReferenceNode() throws Exception
+    {
+        new NodeCreateRule( Node.ENTITY_REFERENCE_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidNotationNode() throws Exception
+    {
+        new NodeCreateRule( Node.NOTATION_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class )
+    public void testInvalidProcessingInstructionNode() throws Exception
+    {
+        new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE );
+    }
+
+    @Test( expected = IllegalArgumentException.class)
+    public void testInvalidTextNode() throws Exception
+    {
+        new NodeCreateRule( Node.TEXT_NODE );
     }
 
     /**
