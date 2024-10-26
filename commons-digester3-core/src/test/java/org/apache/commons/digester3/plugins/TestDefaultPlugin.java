@@ -75,6 +75,7 @@ public class TestDefaultPlugin
         assertEquals( "slider1", slider1.getLabel() );
     }
 
+    @Test
     public void testDefaultPlugins2()
         throws Exception
     {
@@ -109,6 +110,7 @@ public class TestDefaultPlugin
 
     }
 
+    @Test
     public void testDefaultPlugins3()
         throws Exception
     {
