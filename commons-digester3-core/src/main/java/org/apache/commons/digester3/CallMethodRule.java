@@ -430,7 +430,7 @@ public class CallMethodRule
             getDigester().getLogger().debug( formatter.toString() );
         }
 
-        Object result = null;
+        Object result;
         if ( useExactMatch )
         {
             // invoke using exact match

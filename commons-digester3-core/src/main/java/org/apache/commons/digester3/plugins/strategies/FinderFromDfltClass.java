@@ -87,7 +87,7 @@ public class FinderFromDfltClass
     {
         final String rulesClassName = pluginClass.getName() + rulesClassSuffix;
 
-        Class<?> rulesClass = null;
+        Class<?> rulesClass;
         try
         {
             rulesClass = digester.getClassLoader().loadClass( rulesClassName );

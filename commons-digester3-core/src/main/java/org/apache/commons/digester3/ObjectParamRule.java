@@ -90,7 +90,7 @@ public class ObjectParamRule
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        Object anAttribute = null;
+        Object anAttribute;
         final Object[] parameters = getDigester().peekParams();
 
         if ( attributeName != null )

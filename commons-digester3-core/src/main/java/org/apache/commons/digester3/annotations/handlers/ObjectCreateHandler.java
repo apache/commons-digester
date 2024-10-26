@@ -42,7 +42,7 @@ public final class ObjectCreateHandler
     @Override
     public void handle( final ObjectCreate annotation, final AnnotatedElement element, final RulesBinder rulesBinder )
     {
-        Class<?> type = null;
+        Class<?> type;
         if ( element instanceof Class<?> )
         {
             type = (Class<?>) element;

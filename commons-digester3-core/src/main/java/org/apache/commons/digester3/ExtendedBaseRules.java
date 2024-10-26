@@ -175,14 +175,13 @@ public class ExtendedBaseRules
      */
     private List<Rule> findExactAncesterMatch( final String parentPattern )
     {
-        List<Rule> matchingRules = null;
         int lastIndex = parentPattern.length();
         while ( lastIndex-- > 0 )
         {
             lastIndex = parentPattern.lastIndexOf( '/', lastIndex );
             if ( lastIndex > 0 )
             {
-                matchingRules = this.cache.get( parentPattern.substring( 0, lastIndex ) + "/*" );
+                List<Rule> matchingRules = this.cache.get( parentPattern.substring( 0, lastIndex ) + "/*" );
                 if ( matchingRules != null )
                 {
                     return matchingRules;

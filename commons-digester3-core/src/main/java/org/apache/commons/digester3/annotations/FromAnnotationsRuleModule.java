@@ -230,7 +230,7 @@ public abstract class FromAnnotationsRuleModule
      */
     private <AE extends AnnotatedElement> void visitElements( final PrivilegedAction<AE[]> action )
     {
-        AE[] annotatedElements = null;
+        AE[] annotatedElements;
         if ( System.getSecurityManager() != null )
         {
             annotatedElements = AccessController.doPrivileged( action );

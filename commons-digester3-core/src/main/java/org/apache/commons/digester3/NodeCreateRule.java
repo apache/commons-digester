@@ -375,10 +375,10 @@ public class NodeCreateRule
         throws Exception
     {
         final Document doc = documentBuilder.newDocument();
-        NodeBuilder builder = null;
+        NodeBuilder builder;
         if ( nodeType == Node.ELEMENT_NODE )
         {
-            Element element = null;
+            Element element;
             if ( getDigester().getNamespaceAware() )
             {
                 element = doc.createElementNS( namespaceURI, name );

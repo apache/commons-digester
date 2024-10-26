@@ -150,7 +150,7 @@ public class PluginCreateRule
         // load any custom rules associated with the plugin
         final PluginRules oldRules = (PluginRules) getDigester().getRules();
         final PluginManager pluginManager = oldRules.getPluginManager();
-        Declaration currDeclaration = null;
+        Declaration currDeclaration;
 
         String pluginClassName;
         if ( pluginClassAttrNs == null )

@@ -96,7 +96,7 @@ public class FinderFromFile
             return null;
         }
 
-        InputStream is = null;
+        InputStream is;
         try
         {
             is = new FileInputStream( rulesFileName );

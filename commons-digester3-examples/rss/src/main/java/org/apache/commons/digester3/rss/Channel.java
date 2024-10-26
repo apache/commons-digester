@@ -364,7 +364,7 @@ public class Channel
     public void render( final OutputStream stream, final String encoding )
         throws UnsupportedEncodingException
     {
-        PrintWriter pw = null;
+        PrintWriter pw;
         if ( encoding == null )
         {
             pw = new PrintWriter( stream );

@@ -400,12 +400,10 @@ public class CallMethodRuleTestCase
         digester.push( word );
 
         // Parse our test input
-        Object root1 = null;
         try
         {
             // an exception will be thrown if the method can't be found
-            root1 = digester.parse( getInputStream( "Test8.xml" ) );
-            assertNotNull( root1 );
+            assertNotNull( digester.parse( getInputStream( "Test8.xml" ) ) );
         }
         catch ( final Throwable t )
         {

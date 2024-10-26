@@ -48,11 +48,10 @@ final class CallMethodRule
 
         // Select which element is to be the target. Default to zero,
         // ie the top object on the stack.
-        int targetOffset = 0;
         final String targetOffsetStr = attributes.getValue( "targetoffset" );
         if ( targetOffsetStr != null )
         {
-            targetOffset = Integer.parseInt( targetOffsetStr );
+            int targetOffset = Integer.parseInt( targetOffsetStr );
             builder.withTargetOffset( targetOffset );
         }
 
