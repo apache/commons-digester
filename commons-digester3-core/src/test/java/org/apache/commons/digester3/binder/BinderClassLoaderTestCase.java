@@ -153,14 +153,9 @@ public final class BinderClassLoaderTestCase
             // put bytes of Dummy class
             final String dummyClassName = Dummy.class.getName();
             final String resourceName = dummyClassName.replace( '.', '/' ) + ".class";
-            final InputStream input = Dummy.class.getClassLoader().getResourceAsStream( resourceName );
-            try
+            try ( InputStream input = Dummy.class.getClassLoader().getResourceAsStream( resourceName ) )
             {
                 IN_MEMORY_RESOURCES.put( resourceName, toByteArray( input ) );
-            }
-            finally
-            {
-                input.close();
             }
         }
         catch ( final IOException e )
@@ -190,15 +185,10 @@ public final class BinderClassLoaderTestCase
         final URL resource = classLoader.getResource( "inmemory:dummyResource" );
         assertNotNull( resource );
         assertEquals( resource.getPath(), "dummyResource" );
-        final InputStream input = resource.openStream();
-        try
+        try ( InputStream input = resource.openStream() )
         {
             final byte[] bytes = toByteArray( input );
             assertArrayEquals( bytes, IN_MEMORY_RESOURCES.get( "dummyResource" ) );
-        }
-        finally
-        {
-            input.close();
         }
     }
 
