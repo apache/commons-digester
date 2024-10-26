@@ -1293,7 +1293,7 @@ public class Digester
         // the actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
         String name = localName;
-        if ( name == null || name.length() < 1 )
+        if ( name == null || name.isEmpty() )
         {
             name = qName;
         }
@@ -2972,7 +2972,7 @@ public class Digester
         // the actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
         String name = localName;
-        if ( name == null || name.length() < 1 )
+        if ( name == null || name.isEmpty() )
         {
             name = qName;
         }

@@ -122,7 +122,7 @@ public class RulesBase
     {
         // List rulesList = (List) this.cache.get(pattern);
         List<Rule> rulesList = lookup( namespaceURI, pattern );
-        if ( rulesList == null || rulesList.size() < 1 )
+        if ( rulesList == null || rulesList.isEmpty() )
         {
             // Find the longest key, ie more discriminant
             String longKey = "";
