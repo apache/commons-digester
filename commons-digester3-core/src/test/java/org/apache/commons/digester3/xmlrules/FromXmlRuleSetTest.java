@@ -42,7 +42,7 @@ import org.xml.sax.InputSource;
 public class FromXmlRuleSetTest
 {
 
-    private final RulesModule createRules( final String xmlText )
+    private RulesModule createRules( final String xmlText )
     {
         return new FromXmlRulesModule()
         {
@@ -56,7 +56,7 @@ public class FromXmlRuleSetTest
         };
     }
 
-    private final RulesModule createRules( final URL xmlRules )
+    private RulesModule createRules( final URL xmlRules )
     {
         return new FromXmlRulesModule()
         {
