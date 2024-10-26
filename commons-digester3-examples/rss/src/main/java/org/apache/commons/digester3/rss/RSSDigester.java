@@ -65,7 +65,7 @@ public class RSSDigester
                 digester.setLogger( LogFactory.getLog( "RSSDigester" ) );
             }
             System.out.println( "Parsing input stream ..." );
-            final Channel channel = (Channel) digester.parse( is );
+            final Channel channel = digester.parse( is );
             System.out.println( "Closing input stream ..." );
             is.close();
             System.out.println( "Dumping channel info ..." );

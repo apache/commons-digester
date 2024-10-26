@@ -219,7 +219,7 @@ public class Main
         // Get the first object created by the digester's rules
         // (the "root" object). Note that this is exactly the same object
         // returned by the Digester.parse method; either approach works.
-        final Catalog catalog = (Catalog) d.getRoot();
+        final Catalog catalog = d.getRoot();
 
         // Print out all the contents of the catalog, as loaded from
         // the input file.

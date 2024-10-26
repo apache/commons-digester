@@ -145,24 +145,24 @@ public class NodeCreateRuleTestCase
         final Node alpha = fragment.getChildNodes().item( 1 );
         assertEquals( Node.ELEMENT_NODE, alpha.getNodeType() );
         assertEquals( "alpha", alpha.getNodeName() );
-        assertNull( ( (Element) alpha ).getLocalName() );
-        assertNull( ( (Element) alpha ).getNamespaceURI() );
+        assertNull( alpha.getLocalName() );
+        assertNull( alpha.getNamespaceURI() );
         assertEquals( 1, alpha.getChildNodes().getLength() );
         assertEquals( "ALPHA BODY", alpha.getFirstChild().getNodeValue() );
 
         final Node beta = fragment.getChildNodes().item( 2 );
         assertEquals( Node.ELEMENT_NODE, beta.getNodeType() );
         assertEquals( "beta", beta.getNodeName() );
-        assertNull( ( (Element) beta ).getLocalName() );
-        assertNull( ( (Element) beta ).getNamespaceURI() );
+        assertNull( beta.getLocalName() );
+        assertNull( beta.getNamespaceURI() );
         assertEquals( 1, beta.getChildNodes().getLength() );
         assertEquals( "BETA BODY", beta.getFirstChild().getNodeValue() );
 
         final Node gamma = fragment.getChildNodes().item( 3 );
         assertEquals( Node.ELEMENT_NODE, gamma.getNodeType() );
         assertEquals( "gamma", gamma.getNodeName() );
-        assertNull( ( (Element) gamma ).getLocalName() );
-        assertNull( ( (Element) gamma ).getNamespaceURI() );
+        assertNull( gamma.getLocalName() );
+        assertNull( gamma.getNamespaceURI() );
         assertEquals( 1, gamma.getChildNodes().getLength() );
         assertEquals( "GAMMA BODY", gamma.getFirstChild().getNodeValue() );
 
