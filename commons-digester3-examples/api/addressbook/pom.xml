@@ -23,7 +23,7 @@
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-digester3-samples-parent</artifactId>
     <version>3.3-SNAPSHOT</version>
-    <relativePath>../../</relativePath>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <artifactId>commons-digester3-samples-addressbook</artifactId>
