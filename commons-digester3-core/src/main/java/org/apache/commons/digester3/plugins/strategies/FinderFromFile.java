@@ -108,8 +108,7 @@ public class FinderFromFile
 
         try
         {
-            final RuleLoader loader = new LoaderFromStream( is );
-            return loader;
+            return new LoaderFromStream( is );
         }
         catch ( final Exception e )
         {

@@ -51,9 +51,7 @@ public class LoaderFromClass
         throws PluginException
     {
         final Class<?>[] paramSpec = { Digester.class, String.class };
-        final Method rulesMethod = getAccessibleMethod( rulesClass, methodName, paramSpec );
-
-        return rulesMethod;
+        return getAccessibleMethod( rulesClass, methodName, paramSpec );
     }
 
     private final Class<?> rulesClass;
