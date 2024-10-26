@@ -20,7 +20,6 @@ package org.apache.commons.digester3;
  */
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -453,7 +452,7 @@ public class ExtendedBaseRules
 
         // need to make sure that the collection is sort in the order
         // of addition. We use a custom comparator for this
-        Collections.sort( universalList, (r1, r2) -> {
+        universalList.sort( ( r1, r2 ) -> {
             // Get the entry order from the map
             final Integer i1 = order.get( r1 );
             final Integer i2 = order.get( r2 );
