@@ -90,15 +90,7 @@ public class TestConfigurablePluginAttributes
         final MultiContainer root = new MultiContainer();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test7.xml" ) );
-
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test7.xml" ) );
 
         final List<Widget> widgets = root.getWidgets();
         assertNotNull( widgets );
@@ -152,15 +144,7 @@ public class TestConfigurablePluginAttributes
         final MultiContainer root = new MultiContainer();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test7.xml" ) );
-
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test7.xml" ) );
 
         final List<Widget> widgets = root.getWidgets();
         assertNotNull( widgets );
@@ -216,14 +200,7 @@ public class TestConfigurablePluginAttributes
         final MultiContainer root = new MultiContainer();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test7.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test7.xml" ) );
 
         final List<Widget> widgets = root.getWidgets();
         assertNotNull( widgets );

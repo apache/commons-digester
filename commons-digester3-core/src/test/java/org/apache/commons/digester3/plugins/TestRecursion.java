@@ -70,14 +70,7 @@ public class TestRecursion
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test6.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test6.xml" ) );
 
         final int nDescendants = countWidgets( root );
         assertEquals( 10, nDescendants );

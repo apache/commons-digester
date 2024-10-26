@@ -52,14 +52,7 @@ public class TestDeclaration
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test3.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test3.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();

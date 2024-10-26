@@ -41,14 +41,7 @@ public class TestDelegate
         final DumperRule dr = new DumperRule();
         digester.addRule( "root", dr );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test1.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test1.xml" ) );
     }
 
     @Test

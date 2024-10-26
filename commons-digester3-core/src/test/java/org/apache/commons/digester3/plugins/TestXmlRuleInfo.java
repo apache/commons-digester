@@ -60,14 +60,7 @@ public class TestXmlRuleInfo
         final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
         digester.addRule( "root/object", pcr );
 
-        try
-        {
-            digester.parse( new StringReader( input.toString() ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( new StringReader( input.toString() ) );
 
         final Object root = digester.getRoot();
         assertEquals( ObjectTestImpl.class, root.getClass() );
@@ -103,14 +96,7 @@ public class TestXmlRuleInfo
         final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
         digester.addRule( "root/object", pcr );
 
-        try
-        {
-            digester.parse( new StringReader( input.toString() ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( new StringReader( input.toString() ) );
 
         final Object root = digester.getRoot();
         assertEquals( ObjectTestImpl.class, root.getClass() );
@@ -147,14 +133,7 @@ public class TestXmlRuleInfo
         final PluginCreateRule pcr = new PluginCreateRule( ObjectTestImpl.class );
         digester.addRule( "root/object", pcr );
 
-        try
-        {
-            digester.parse( new StringReader( input.toString() ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( new StringReader( input.toString() ) );
 
         final Object root = digester.getRoot();
         assertEquals( ObjectTestImpl.class, root.getClass() );

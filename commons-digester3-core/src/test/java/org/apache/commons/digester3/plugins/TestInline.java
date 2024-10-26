@@ -52,14 +52,7 @@ public class TestInline
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test1.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test1.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();
@@ -102,14 +95,7 @@ public class TestInline
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test1.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test1.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();

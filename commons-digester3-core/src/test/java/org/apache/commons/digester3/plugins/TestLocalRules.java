@@ -52,14 +52,7 @@ public class TestLocalRules
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test4a.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test4a.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();
@@ -119,14 +112,7 @@ public class TestLocalRules
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test4b.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test4b.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();

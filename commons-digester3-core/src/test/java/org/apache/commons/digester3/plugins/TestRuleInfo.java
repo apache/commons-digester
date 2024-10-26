@@ -54,14 +54,7 @@ public class TestRuleInfo
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test5c.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test5c.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();
@@ -99,14 +92,7 @@ public class TestRuleInfo
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test5a.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test5a.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();
@@ -145,14 +131,7 @@ public class TestRuleInfo
         final Container root = new Container();
         digester.push( root );
 
-        try
-        {
-            digester.parse( Utils.getInputStream( this, "test5b.xml" ) );
-        }
-        catch ( final Exception e )
-        {
-            throw e;
-        }
+        digester.parse( Utils.getInputStream( this, "test5b.xml" ) );
 
         Object child;
         final List<Widget> children = root.getChildren();

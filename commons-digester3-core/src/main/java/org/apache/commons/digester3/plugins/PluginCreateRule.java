@@ -341,10 +341,6 @@ public class PluginCreateRule
                 {
                     throw getDigester().createSAXException( e );
                 }
-                catch ( final Error e )
-                {
-                    throw e;
-                }
             }
         }
     }
@@ -382,10 +378,6 @@ public class PluginCreateRule
                 catch ( final Exception e )
                 {
                     throw getDigester().createSAXException( e );
-                }
-                catch ( final Error e )
-                {
-                    throw e;
                 }
             }
         }
@@ -425,10 +417,6 @@ public class PluginCreateRule
                 catch ( final Exception e )
                 {
                     throw getDigester().createSAXException( e );
-                }
-                catch ( final Error e )
-                {
-                    throw e;
                 }
             }
         }
