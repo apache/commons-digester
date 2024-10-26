@@ -919,7 +919,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final File file )
     {
-        return asyncParse( () -> Digester.this.<T> parse( file ) );
+        return asyncParse( () -> Digester.this.parse( file ) );
     }
 
     /**
@@ -933,7 +933,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final InputSource input )
     {
-        return asyncParse( () -> Digester.this.<T> parse( input ) );
+        return asyncParse( () -> Digester.this.parse( input ) );
     }
 
     /**
@@ -947,7 +947,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final InputStream input )
     {
-        return asyncParse( () -> Digester.this.<T> parse( input ) );
+        return asyncParse( () -> Digester.this.parse( input ) );
     }
 
     /**
@@ -961,7 +961,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final Reader reader )
     {
-        return asyncParse( () -> Digester.this.<T> parse( reader ) );
+        return asyncParse( () -> Digester.this.parse( reader ) );
     }
 
     /**
@@ -975,7 +975,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final String uri )
     {
-        return asyncParse( () -> Digester.this.<T> parse( uri ) );
+        return asyncParse( () -> Digester.this.parse( uri ) );
     }
 
     /**
@@ -989,7 +989,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final URL url )
     {
-        return asyncParse( () -> Digester.this.<T> parse( url ) );
+        return asyncParse( () -> Digester.this.parse( url ) );
     }
 
     /**
@@ -1764,7 +1764,7 @@ public class Digester
      */
     public <T> T getRoot()
     {
-        return this.<T> npeSafeCast( root );
+        return this.npeSafeCast( root );
     }
 
     /**
@@ -2035,7 +2035,7 @@ public class Digester
         final InputSource input = new InputSource( new FileInputStream( file ) );
         input.setSystemId( file.toURI().toURL().toString() );
 
-        return this.<T> parse( input );
+        return this.parse( input );
     }
 
     /**
@@ -2075,7 +2075,7 @@ public class Digester
             throw e;
         }
         cleanup();
-        return this.<T> getRoot();
+        return this.getRoot();
     }
 
     /**
@@ -2096,7 +2096,7 @@ public class Digester
             throw new IllegalArgumentException( "InputStream to parse is null" );
         }
 
-        return this.<T> parse( new InputSource( input ) );
+        return this.parse( new InputSource( input ) );
     }
 
     /**
@@ -2117,7 +2117,7 @@ public class Digester
             throw new IllegalArgumentException( "Reader to parse is null" );
         }
 
-        return this.<T> parse( new InputSource( reader ) );
+        return this.parse( new InputSource( reader ) );
     }
 
     /**
@@ -2138,7 +2138,7 @@ public class Digester
             throw new IllegalArgumentException( "String URI to parse is null" );
         }
 
-        return this.<T> parse( createInputSourceFromURL( uri ) );
+        return this.parse( createInputSourceFromURL( uri ) );
     }
 
     /**
@@ -2160,7 +2160,7 @@ public class Digester
             throw new IllegalArgumentException( "URL to parse is null" );
         }
 
-        return this.<T> parse( createInputSourceFromURL( url ) );
+        return this.parse( createInputSourceFromURL( url ) );
     }
 
     /**
@@ -2175,7 +2175,7 @@ public class Digester
     {
         try
         {
-            return this.<T> npeSafeCast( stack.peek() );
+            return this.npeSafeCast( stack.peek() );
         }
         catch ( final EmptyStackException e )
         {
@@ -2202,7 +2202,7 @@ public class Digester
         }
         try
         {
-            return this.<T> npeSafeCast( stack.get( index ) );
+            return this.npeSafeCast( stack.get( index ) );
         }
         catch ( final EmptyStackException e )
         {
@@ -2226,7 +2226,7 @@ public class Digester
      */
     public <T> T peek( final String stackName )
     {
-        return this.<T> npeSafeCast( peek( stackName, 0 ) );
+        return this.npeSafeCast( peek( stackName, 0 ) );
     }
 
     /**
@@ -2261,7 +2261,7 @@ public class Digester
         {
             throw new EmptyStackException();
         }
-        result = this.<T> npeSafeCast( namedStack.get( index ) );
+        result = this.npeSafeCast( namedStack.get( index ) );
 
         return result;
     }
@@ -2332,7 +2332,7 @@ public class Digester
     {
         try
         {
-            T popped = this.<T> npeSafeCast( stack.pop() );
+            T popped = this.npeSafeCast( stack.pop() );
             if ( stackAction != null )
             {
                 popped = stackAction.onPop( this, null, popped );
@@ -2372,7 +2372,7 @@ public class Digester
             throw new EmptyStackException();
         }
 
-        T result = this.<T> npeSafeCast( namedStack.pop() );
+        T result = this.npeSafeCast( namedStack.pop() );
 
         if ( stackAction != null )
         {

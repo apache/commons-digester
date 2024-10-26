@@ -199,7 +199,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return super.<T>parse( file );
+        return super.parse( file );
     }
 
     /**
@@ -217,7 +217,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return super.<T>parse( input );
+        return super.parse( input );
     }
 
     /**
@@ -235,7 +235,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return super.<T>parse( input );
+        return super.parse( input );
     }
 
     /**
@@ -253,7 +253,7 @@ public class RSSDigester
         throws IOException, SAXException
     {
         configure();
-        return super.<T>parse( uri );
+        return super.parse( uri );
     }
 
     public void setChannelClass( final String channelClass )
