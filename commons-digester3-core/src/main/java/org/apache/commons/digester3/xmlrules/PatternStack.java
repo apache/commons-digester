@@ -33,9 +33,8 @@ final class PatternStack
     public String toString()
     {
         final StringBuilder strBuilder = new StringBuilder();
-        for ( int i = 0; i < size(); i++ )
+        for ( String elem : this )
         {
-            final String elem = get( i );
             if ( !elem.isEmpty() )
             {
                 if ( strBuilder.length() > 0 )

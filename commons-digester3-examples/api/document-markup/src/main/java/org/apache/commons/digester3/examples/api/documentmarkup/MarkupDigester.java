@@ -114,10 +114,8 @@ public class MarkupDigester
         {
             final String segment = currTextSegment.toString();
             final List<Rule> parentMatches = getMatches().peek();
-            final int len = parentMatches.size();
-            for ( int i = 0; i < len; ++i )
+            for ( Rule r : parentMatches )
             {
-                final Rule r = parentMatches.get( i );
                 if ( r instanceof TextSegmentHandler )
                 {
                     final TextSegmentHandler h = (TextSegmentHandler) r;
