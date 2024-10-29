@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 /**
  * <p>
@@ -100,8 +99,7 @@ public class RuleTestCase
      * appropriate Employee object to be returned.
      */
     @Test
-    public void testObjectCreate1()
-        throws SAXException, IOException
+    public void testObjectCreate1() throws Exception
     {
 
         // Configure the digester as required
@@ -123,8 +121,7 @@ public class RuleTestCase
      * well, but will not attempt to add them to the Employee.
      */
     @Test
-    public void testObjectCreate2()
-        throws SAXException, IOException
+    public void testObjectCreate2() throws Exception
     {
 
         // Configure the digester as required
@@ -148,8 +145,7 @@ public class RuleTestCase
      * well, and will add them to the owning Employee.
      */
     @Test
-    public void testObjectCreate3()
-        throws SAXException, IOException
+    public void testObjectCreate3() throws Exception
     {
 
         // Configure the digester as required
@@ -175,8 +171,7 @@ public class RuleTestCase
      * Same as testObjectCreate1(), except use individual call method rules to set the properties of the Employee.
      */
     @Test
-    public void testObjectCreate4()
-        throws SAXException, IOException
+    public void testObjectCreate4() throws Exception
     {
 
         // Configure the digester as required
@@ -201,8 +196,7 @@ public class RuleTestCase
      * the body of the element is the argument of the method).
      */
     @Test
-    public void testObjectCreate5()
-        throws SAXException, IOException
+    public void testObjectCreate5() throws Exception
     {
 
         // Configure the digester as required
@@ -224,8 +218,7 @@ public class RuleTestCase
      * identical object instances.
      */
     @Test
-    public void testRepeatedParse()
-        throws SAXException, IOException
+    public void testRepeatedParse() throws Exception
     {
 
         // Configure the digester as required
@@ -258,8 +251,7 @@ public class RuleTestCase
      * well, but will not attempt to add them to the Employee.
      */
     @Test
-    public void testRuleSet1()
-        throws SAXException, IOException
+    public void testRuleSet1() throws Exception
     {
 
         // Configure the digester as required
@@ -281,8 +273,7 @@ public class RuleTestCase
      * Same as {@code testRuleSet1} except using a single namespace.
      */
     @Test
-    public void testRuleSet2()
-        throws SAXException, IOException
+    public void testRuleSet2() throws Exception
     {
 
         // Configure the digester as required
@@ -306,8 +297,7 @@ public class RuleTestCase
      * for address that we should skip.
      */
     @Test
-    public void testRuleSet3()
-        throws SAXException, IOException
+    public void testRuleSet3() throws Exception
     {
 
         // Configure the digester as required
@@ -329,8 +319,7 @@ public class RuleTestCase
     /**
      */
     @Test
-    public void testSetCustomProperties()
-        throws SAXException, IOException
+    public void testSetCustomProperties() throws Exception
     {
 
         final Digester digester = new Digester();
@@ -389,8 +378,7 @@ public class RuleTestCase
     }
 
     @Test
-    public void testSetNext()
-        throws SAXException, IOException
+    public void testSetNext() throws Exception
     {
         final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
@@ -422,8 +410,7 @@ public class RuleTestCase
     }
 
     @Test
-    public void testSetTop()
-        throws SAXException, IOException
+    public void testSetTop() throws Exception
     {
         final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
@@ -474,8 +461,7 @@ public class RuleTestCase
      * argument form is tested in {@code testSetTopRule2}.
      */
     @Test
-    public void testSetTopRule1()
-        throws SAXException, IOException
+    public void testSetTopRule1() throws Exception
     {
 
         // Configure the digester as required
@@ -496,8 +482,7 @@ public class RuleTestCase
      * Same as {@code testSetTopRule1} except using the three argument form of the SetTopRule rule.
      */
     @Test
-    public void testSetTopRule2()
-        throws SAXException, IOException
+    public void testSetTopRule2() throws Exception
     {
 
         // Configure the digester as required

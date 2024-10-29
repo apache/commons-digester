@@ -24,7 +24,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -51,8 +50,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can successfully automatically set properties.
      */
     @Test
-    public void testAutomaticallySetProperties()
-        throws SAXException, IOException
+    public void testAutomaticallySetProperties() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -83,8 +81,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can customise the property mappings using the constructor which takes arrays-of-strings.
      */
     @Test
-    public void testCustomisedProperties1()
-        throws SAXException, IOException
+    public void testCustomisedProperties1() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -125,8 +122,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can ignore a single input xml element using the constructor which takes a single remapping.
      */
     @Test
-    public void testCustomisedProperties2a()
-        throws SAXException, IOException
+    public void testCustomisedProperties2a() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -165,8 +161,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can customise the property mappings using the constructor which takes a single remapping.
      */
     @Test
-    public void testCustomisedProperties2b()
-        throws SAXException, IOException
+    public void testCustomisedProperties2b() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -236,8 +231,7 @@ public class SetNestedPropertiesRuleTestCase
      * </ul>
      */
     @Test
-    public void testMultiRuleMatch()
-        throws SAXException, IOException
+    public void testMultiRuleMatch() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -286,8 +280,7 @@ public class SetNestedPropertiesRuleTestCase
      * See bugzilla entry 31393.
      */
     @Test
-    public void testRecursiveNestedProperties()
-        throws SAXException, IOException
+    public void testRecursiveNestedProperties() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -345,8 +338,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that unknown child elements are allowed if the appropriate flag is set.
      */
     @Test
-    public void testUnknownChildrenExceptionOverride()
-        throws SAXException, IOException
+    public void testUnknownChildrenExceptionOverride() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {

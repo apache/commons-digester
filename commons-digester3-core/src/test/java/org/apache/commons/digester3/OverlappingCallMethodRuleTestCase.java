@@ -22,12 +22,10 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 /**
  * <p>
@@ -52,8 +50,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     @Test
-    public void testItem1()
-        throws SAXException, IOException
+    public void testItem1() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -87,8 +84,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     @Test
-    public void testItem2()
-        throws SAXException, IOException
+    public void testItem2() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -122,8 +118,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     @Test
-    public void testItem3()
-        throws SAXException, IOException
+    public void testItem3() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -180,8 +175,7 @@ public class OverlappingCallMethodRuleTestCase
      * design.
      */
     @Test
-    public void testItem4()
-        throws SAXException, IOException
+    public void testItem4() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -226,8 +220,7 @@ public class OverlappingCallMethodRuleTestCase
      * begin[1]/begin[2]/body[2]/end[2]/body[1]/end[1]
      */
     @Test
-    public void testWildcard1()
-        throws SAXException, IOException
+    public void testWildcard1() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<box id='A1'>" );
@@ -270,8 +263,7 @@ public class OverlappingCallMethodRuleTestCase
      * begin[1]/begin[2]/body[2]/end[2]/body[1]/end[1]
      */
     @Test
-    public void testWildcard2()
-        throws SAXException, IOException
+    public void testWildcard2() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<box>A1" );

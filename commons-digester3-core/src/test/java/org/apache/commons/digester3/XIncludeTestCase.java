@@ -27,7 +27,6 @@ import java.io.InputStream;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 /**
  * <p>
@@ -55,8 +54,7 @@ public class XIncludeTestCase
      * Test XInclude.
      */
     @Test
-    public void testXInclude()
-        throws SAXException, IOException
+    public void testXInclude() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {

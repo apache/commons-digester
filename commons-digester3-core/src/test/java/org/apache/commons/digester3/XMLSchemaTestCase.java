@@ -34,7 +34,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
@@ -96,8 +95,7 @@ public class XMLSchemaTestCase
      * Sets up instance variables required by this test case.
      */
     @Before
-    public void setUp()
-        throws SAXException
+    public void setUp() throws Exception
     {
 
         digester = new Digester();
@@ -133,8 +131,7 @@ public class XMLSchemaTestCase
     }
 
     @Test
-    public void testBadDocument()
-        throws SAXException, IOException
+    public void testBadDocument() throws Exception
     {
 
         // Listen to validation errors
@@ -151,8 +148,7 @@ public class XMLSchemaTestCase
      * Test XML Schema validation.
      */
     @Test
-    public void testGoodDocument()
-        throws SAXException, IOException
+    public void testGoodDocument() throws Exception
     {
 
         // Listen to validation errors

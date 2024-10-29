@@ -63,8 +63,7 @@ public class CallMethodRuleTestCase
      * several rule syntaxes.
      */
     @Test
-    public void testBasic()
-        throws SAXException, IOException
+    public void testBasic() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -401,8 +400,7 @@ public class CallMethodRuleTestCase
      * This tests the call methods params enhancement that provides for more complex stack-based calls.
      */
     @Test
-    public void testParamsFromStack()
-        throws SAXException, IOException
+    public void testParamsFromStack() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -569,8 +567,7 @@ public class CallMethodRuleTestCase
      * float should all be acceptable as parameter types.
      */
     @Test
-    public void testSettingProperties()
-        throws SAXException, IOException
+    public void testSettingProperties() throws Exception
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
