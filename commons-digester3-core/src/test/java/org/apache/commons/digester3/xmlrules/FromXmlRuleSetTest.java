@@ -20,6 +20,7 @@ package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -34,6 +35,7 @@ import org.apache.commons.digester3.ObjectCreationFactoryTestImpl;
 import org.apache.commons.digester3.binder.RulesModule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXParseException;
 
 /**
  * Tests loading Digester rules from an XML file.
@@ -185,21 +187,12 @@ public class FromXmlRuleSetTest
 
     @Test
     public void testFactoryNotIgnoreCreateRule()
-        throws Exception
     {
         final URL rules = getClass().getResource( "testfactorynoignore.xml" );
 
         final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-        try
-        {
-            newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
-            fail( "Exception should have been propagated from create method." );
-        }
-        catch ( final Exception e )
-        {
-            /* What we expected */
-            assertEquals( org.xml.sax.SAXParseException.class, e.getClass() );
-        }
+        Digester digester = newLoader( createRules( rules ) ).newDigester();
+        assertThrows( "Exception should have been propagated from create method.", SAXParseException.class, () -> digester.parse( new StringReader( xml ) ) );
     }
 
     @Test

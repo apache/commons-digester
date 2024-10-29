@@ -21,8 +21,8 @@ package org.apache.commons.digester3;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -98,7 +98,6 @@ public class CallMethodRuleTestCase
      */
     @Test
     public void testCallInvalidTarget()
-        throws Exception
     {
 
         final Digester digester = new Digester();
@@ -110,15 +109,7 @@ public class CallMethodRuleTestCase
         final CallMethodRule r = new CallMethodRule( 1, "put", 0 );
         digester.addRule( "employee", r );
 
-        try
-        {
-            digester.parse( getInputStream( "Test5.xml" ) );
-            fail( "Exception should be thrown for invalid target offset" );
-        }
-        catch ( final SAXException e )
-        {
-            // ok, exception expected
-        }
+        assertThrows( "Exception should be thrown for invalid target offset", SAXException.class, () -> digester.parse( getInputStream( "Test5.xml" ) ) );
     }
 
     /**
@@ -400,16 +391,8 @@ public class CallMethodRuleTestCase
         digester.push( word );
 
         // Parse our test input
-        try
-        {
-            // an exception will be thrown if the method can't be found
-            assertNotNull( digester.parse( getInputStream( "Test8.xml" ) ) );
-        }
-        catch ( final Throwable t )
-        {
-            // this means that the method can't be found and so the test fails
-            fail( "Digester threw Exception:  " + t );
-        }
+        // an exception will be thrown if the method can't be found
+        assertNotNull( digester.parse( getInputStream( "Test8.xml" ) ) );
 
         assertEquals( "Wrong method call order", "CBA", word.toString() );
     }

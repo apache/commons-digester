@@ -21,18 +21,19 @@ package org.apache.commons.digester3;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * <p>
@@ -258,27 +259,8 @@ public class BeanPropertySetterRuleTestCase
         }).newDigester();
 
         // Attempt to parse the input
-        try
-        {
-            digester.parse( xmlTestReader() );
-            fail( "Should have thrown NoSuchMethodException" );
-        }
-        catch ( final Exception e )
-        {
-            if ( e instanceof InvocationTargetException )
-            {
-                final Throwable t = ( (InvocationTargetException) e ).getTargetException();
-                if ( t instanceof NoSuchMethodException )
-                {
-                    // Expected result
-                }
-                else
-                {
-                    fail( "Should have thrown NoSuchMethodException, threw " + t );
-                }
-            }
-        }
-
+        SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( xmlTestReader() ) );
+        assertTrue( "Should have thrown SAXParseException->NoSuchMethodException", e.getException() instanceof NoSuchMethodException );
     }
 
     /**

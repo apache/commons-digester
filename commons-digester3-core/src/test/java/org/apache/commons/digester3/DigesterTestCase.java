@@ -26,7 +26,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.InputStream;
@@ -266,27 +265,11 @@ public class DigesterTestCase
         assertEquals( "Peek#3", "3", digester.peek( testStackName, 0 ) );
         assertEquals( "Peek#3a", "3", digester.peek( testStackName ) );
 
-        try
-        {
-            // peek beyond stack
-            digester.peek( testStackName, 3 );
-            fail( "Peek#4 failed to throw an exception." );
-        }
-        catch ( final EmptyStackException ex )
-        {
-            // ok, expected
-        }
+        // peek beyond stack
+        assertThrows( "Peek#4 failed to throw an exception.", EmptyStackException.class, () -> digester.peek( testStackName, 3 ) );
 
-        try
-        {
-            // peek a nonexistent named stack
-            digester.peek( "no.such.stack", 0 );
-            fail( "Peeking a non-existent stack failed to throw an exception." );
-        }
-        catch ( final EmptyStackException ex )
-        {
-            // ok, expected
-        }
+        // peek a nonexistent named stack
+        assertThrows( "Peeking a non-existent stack failed to throw an exception.", EmptyStackException.class, () -> digester.peek( "no.such.stack", 0 ) );
     }
 
     /**

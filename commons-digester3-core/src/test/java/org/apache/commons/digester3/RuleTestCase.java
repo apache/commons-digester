@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -166,14 +165,8 @@ public class RuleTestCase
         validateObjectCreate3( root );
 
         // Parse the same input again
-        try
-        {
-            root = digester.parse( getInputStream( "Test1.xml" ) );
-        }
-        catch ( final Throwable t )
-        {
-            fail( "Digester threw IOException: " + t );
-        }
+        root = digester.parse( getInputStream( "Test1.xml" ) );
+
         validateObjectCreate3( root );
 
     }

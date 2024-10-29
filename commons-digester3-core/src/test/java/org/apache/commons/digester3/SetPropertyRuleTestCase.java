@@ -21,11 +21,11 @@ package org.apache.commons.digester3;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.DigesterLoader;
@@ -116,54 +116,8 @@ public class SetPropertyRuleTestCase
     public void testNegative()
     {
         // Parse the input (should fail)
-        try
-        {
-            digester.parse( xmlTestReader( TEST_XML_2 ) );
-            fail( "Should have thrown NoSuchMethodException" );
-        }
-        catch ( final Exception e )
-        {
-            if ( e instanceof NoSuchMethodException )
-            {
-                // Expected result
-            }
-            else if ( e instanceof InvocationTargetException )
-            {
-                final Throwable t = ( (InvocationTargetException) e ).getTargetException();
-                if ( t instanceof NoSuchMethodException )
-                {
-                    // Expected result
-                }
-                else
-                {
-                    fail( "Should have thrown ITE->NoSuchMethodException, threw " + t );
-                }
-            }
-            else if ( e instanceof SAXException )
-            {
-                final Exception ee = ( (SAXException) e ).getException();
-                if ( ee != null )
-                {
-                    if ( ee instanceof NoSuchMethodException )
-                    {
-                        // Expected result
-                    }
-                    else
-                    {
-                        fail( "Should have thrown SE->NoSuchMethodException, threw " + ee );
-                    }
-                }
-                else
-                {
-                    fail( "Should have thrown NoSuchMethodException, threw " + e.getClass().getName() );
-                }
-            }
-            else
-            {
-                fail( "Should have thrown NoSuchMethodException, threw " + e );
-            }
-        }
-
+        SAXException e = assertThrows( SAXException.class, () -> digester.parse( xmlTestReader( TEST_XML_2 ) ) );
+        assertTrue( "Should have thrown SAXException->NoSuchMethodException, threw " + e.getException(), e.getException() instanceof NoSuchMethodException );
     }
 
     /**

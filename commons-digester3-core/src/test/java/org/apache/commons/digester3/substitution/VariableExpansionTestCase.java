@@ -146,15 +146,7 @@ public class VariableExpansionTestCase
         digester.addSetProperties( "root" );
 
         // Parse our test input.
-        try
-        {
-            digester.parse( input );
-            fail( "Exception expected due to unknown variable." );
-        }
-        catch ( final SAXException e )
-        {
-            // expected, due to reference to undefined variable
-        }
+        assertThrows( "Exception expected due to unknown variable.", SAXException.class, () -> digester.parse( input ) );
     }
 
     /**

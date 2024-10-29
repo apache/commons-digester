@@ -93,14 +93,10 @@ public class TestDefaultPlugin
         digester.push( root );
 
         final Log oldLog = digester.getLogger();
+        digester.setLogger( new NoOpLog() );
         try
         {
-            digester.setLogger( new NoOpLog() );
-            digester.parse( Utils.getInputStream( this, "test2.xml" ) );
-            fail("Expected SAXParseException");
-        }
-        catch ( final SAXParseException e )
-        {
+            SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( Utils.getInputStream( this, "test2.xml" ) ) );
             assertEquals( PluginInvalidInputException.class, e.getException().getClass() );
         }
         finally
@@ -112,7 +108,6 @@ public class TestDefaultPlugin
 
     @Test
     public void testDefaultPlugins3()
-        throws Exception
     {
         // * tests that the default plugin must implement or extend the
         // plugin base class.
@@ -128,14 +123,10 @@ public class TestDefaultPlugin
         digester.push( root );
 
         final Log oldLog = digester.getLogger();
+        digester.setLogger( new NoOpLog() );
         try
         {
-            digester.setLogger( new NoOpLog() );
-            digester.parse( Utils.getInputStream( this, "test2.xml" ) );
-            fail("Expected SAXParseException");
-        }
-        catch ( final SAXParseException e )
-        {
+            SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( Utils.getInputStream( this, "test2.xml" ) ) );
             assertEquals( PluginConfigurationException.class, e.getException().getClass() );
         }
         finally

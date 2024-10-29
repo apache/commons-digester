@@ -19,15 +19,13 @@ package org.apache.commons.digester3.substitution;
  * under the License.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.apache.commons.digester3.Substitutor;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
+
+import static org.junit.Assert.*;
 
 public final class CompoundSubstitutorTestCase
 {
@@ -132,37 +130,13 @@ public final class CompoundSubstitutorTestCase
     @Test
     public void testConstructors()
     {
-        try
-        {
-            new CompoundSubstitutor( null, null );
-            fail();
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // OK
-        }
+        assertThrows( IllegalArgumentException.class, () -> new CompoundSubstitutor( null, null ) );
 
         final Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
 
-        try
-        {
-            new CompoundSubstitutor( a, null );
-            fail();
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // OK
-        }
+        assertThrows( IllegalArgumentException.class, () -> new CompoundSubstitutor( a, null ) );
 
-        try
-        {
-            new CompoundSubstitutor( null, a );
-            fail();
-        }
-        catch ( final IllegalArgumentException e )
-        {
-            // OK
-        }
+        assertThrows( IllegalArgumentException.class, () -> new CompoundSubstitutor( null, a ) );
     }
 
 }

@@ -21,7 +21,8 @@ package org.apache.commons.digester3;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.io.Reader;
 import java.io.StringReader;
@@ -92,7 +93,6 @@ public class SetPropertiesRuleTestCase
      */
     @Test
     public void testNegativeNotIgnoreMissing()
-        throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -107,42 +107,9 @@ public class SetPropertiesRuleTestCase
 
         }).newDigester();
 
-        try
-        {
-            // Parse the input
-            digester.parse( xmlTestReader( TEST_XML_2 ) );
-            fail( "Should have thrown NoSuchMethodException" );
-        }
-        catch ( final Exception e )
-        {
-            if ( e instanceof NoSuchMethodException )
-            {
-                // Expected;
-            }
-            else if ( e instanceof SAXException )
-            {
-                final Exception ee = ( (SAXException) e ).getException();
-                if ( ee != null )
-                {
-                    if ( ee instanceof NoSuchMethodException )
-                    {
-                        // Expected result
-                    }
-                    else
-                    {
-                        fail( "Should have thrown SE->NoSuchMethodException, threw " + ee );
-                    }
-                }
-                else
-                {
-                    fail( "Should have thrown NoSuchMethodException, threw " + e.getClass().getName() );
-                }
-            }
-            else
-            {
-                fail( "Should have thrown NoSuchMethodException, threw " + e );
-            }
-        }
+        // Parse the input
+        SAXException e = assertThrows( SAXException.class, () -> digester.parse( xmlTestReader( TEST_XML_2 ) ) );
+        assertTrue( "Should have thrown NoSuchMethodException" + e.getClass().getName(), e.getException() instanceof NoSuchMethodException );
     }
 
     /**

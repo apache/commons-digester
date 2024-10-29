@@ -21,7 +21,8 @@ package org.apache.commons.digester3;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -30,6 +31,7 @@ import java.io.StringReader;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * <p>
@@ -204,7 +206,6 @@ public class SetNestedPropertiesRuleTestCase
      */
     @Test
     public void testMandatoryProperties()
-        throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -221,24 +222,9 @@ public class SetNestedPropertiesRuleTestCase
 
         final String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<badprop>ALPHA BODY</badprop>" + "</root>";
 
-        try
-        {
-            digester.parse( new StringReader( TEST_XML ) );
-            fail( "No exception thrown by parse when unknown child element found." );
-        }
-        catch ( final org.xml.sax.SAXParseException e )
-        {
-            final String msg = e.getMessage();
-            if ( msg.contains( "badprop" ) )
-            {
-                // ok, this is expected; there is no "setBadprop" method on the
-                // SimpleTestBean class...
-            }
-            else
-            {
-                fail( "Unexpected parse exception:" + e.getMessage() );
-            }
-        }
+        SAXParseException e = assertThrows( "No exception thrown by parse when unknown child element found.", SAXParseException.class,
+                () -> digester.parse( new StringReader( TEST_XML ) ) );
+        assertTrue( "Unexpected parse exception:" + e.getMessage(), e.getMessage().contains( "badprop" ) ); // there is no "setBadprop" method on the SimpleTestBean class
     }
 
     /**
@@ -331,7 +317,6 @@ public class SetNestedPropertiesRuleTestCase
      */
     @Test
     public void testUnknownChildrenCausesException()
-        throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -352,20 +337,8 @@ public class SetNestedPropertiesRuleTestCase
 
         final Reader reader = new StringReader( testXml );
 
-        try
-        {
-            digester.parse( reader );
-            fail( "Expected to generate an exception." );
-        }
-        catch ( final SAXException e )
-        {
-            final Exception nested = e.getException();
-            if ( nested == null || !( nested instanceof NoSuchMethodException ) )
-            {
-                // nope, not the sort of exception we expected
-                throw e;
-            }
-        }
+        SAXException e = assertThrows( SAXException.class, () -> digester.parse( reader ) );
+        assertTrue( e.getException() instanceof NoSuchMethodException );
     }
 
     /**
