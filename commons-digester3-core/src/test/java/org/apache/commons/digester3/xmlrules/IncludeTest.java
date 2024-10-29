@@ -51,7 +51,6 @@ public class IncludeTest
 
                 @Override
                 public void body( final String namespace, final String name, final String text )
-                    throws Exception
                 {
                     final List<String> stringList = getDigester().peek();
                     stringList.add( text );

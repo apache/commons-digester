@@ -84,7 +84,6 @@ public class XMLSchemaTestCase
      * @throws IOException if an input/output error occurs
      */
     protected InputStream getInputStream( final String name )
-        throws IOException
     {
 
         return this.getClass().getResourceAsStream( "/org/apache/commons/digester3/" + name );

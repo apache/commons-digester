@@ -245,7 +245,6 @@ public class DigesterTestCase
     /** Tests the push-peek-pop cycle for a named stack */
     @Test
     public void testNamedStackPushPeekPop()
-        throws Exception
     {
         final BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
         final String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";

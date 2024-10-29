@@ -48,7 +48,6 @@ public class ExtendedBaseRulesTestCase
 
     @Test
     public void testAncesterMatch()
-        throws Exception
     {
         // test fixed root ancester
         digester.getRules().clear();

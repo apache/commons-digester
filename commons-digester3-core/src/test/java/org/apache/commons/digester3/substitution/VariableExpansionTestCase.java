@@ -130,7 +130,6 @@ public class VariableExpansionTestCase
      */
     @Test
     public void testExpansionException()
-        throws IOException
     {
 
         final String xml = "<root alpha='${attr1}'/>";

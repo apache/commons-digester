@@ -26,7 +26,6 @@ import org.apache.commons.digester3.Digester;
 import org.junit.Test;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.Locator;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public final class DigesterLoaderTestCase
@@ -94,21 +93,18 @@ public final class DigesterLoaderTestCase
 
             @Override
             public void error( final SAXParseException exception )
-                throws SAXException
             {
                 // do nothing
             }
 
             @Override
             public void fatalError( final SAXParseException exception )
-                throws SAXException
             {
                 // do nothing
             }
 
             @Override
             public void warning( final SAXParseException exception )
-                throws SAXException
             {
                 // do nothing
             }

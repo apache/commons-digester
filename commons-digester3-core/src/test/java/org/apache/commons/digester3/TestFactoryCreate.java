@@ -181,7 +181,6 @@ public class TestFactoryCreate
 
     @Test
     public void testPropagateException()
-        throws Exception
     {
 
         // only used with this method
@@ -190,7 +189,6 @@ public class TestFactoryCreate
         {
             @Override
             public Object createObject( final Attributes attributes )
-                throws Exception
             {
                 throw new RuntimeException();
             }

@@ -67,7 +67,6 @@ public final class BinderClassLoaderTestCase
                 {
                     @Override
                     protected URLConnection openConnection( final URL u )
-                        throws IOException
                     {
                         return new URLConnection( u )
                         {
@@ -75,7 +74,6 @@ public final class BinderClassLoaderTestCase
 
                             @Override
                             public void connect()
-                                throws IOException
                             {
                                 if ( !connected ) {
                                     final byte[] data = IN_MEMORY_RESOURCES.get( url.getPath() );

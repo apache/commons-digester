@@ -34,7 +34,6 @@ public class Utils
      * @throws IOException if an input/output error occurs
      */
     public static InputStream getInputStream( final Object caller, final String name )
-        throws IOException
     {
         return caller.getClass().getResourceAsStream( "/org/apache/commons/digester3/plugins/" + name );
     }

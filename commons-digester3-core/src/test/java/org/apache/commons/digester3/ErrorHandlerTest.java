@@ -43,21 +43,18 @@ public class ErrorHandlerTest
 
             @Override
             public void error( final SAXParseException e )
-                throws SAXException
             {
                 log.error( "Custom Error Handler" );
             }
 
             @Override
             public void fatalError( final SAXParseException e )
-                throws SAXException
             {
                 log.fatal( "Custom Fatal Error Handler" );
             }
 
             @Override
             public void warning( final SAXParseException arg0 )
-                throws SAXException
             {
                 log.warn( "Custom Warn Handler" );
             }
@@ -86,21 +83,18 @@ public class ErrorHandlerTest
 
             @Override
             public void error( final SAXParseException e )
-                throws SAXException
             {
                 log.error( "Custom Error Handler", e );
             }
 
             @Override
             public void fatalError( final SAXParseException e )
-                throws SAXException
             {
                 log.fatal( "Custom Fatal Error Handler", e );
             }
 
             @Override
             public void warning( final SAXParseException arg0 )
-                throws SAXException
             {
                 log.warn( "Custom Warn Handler" );
             }

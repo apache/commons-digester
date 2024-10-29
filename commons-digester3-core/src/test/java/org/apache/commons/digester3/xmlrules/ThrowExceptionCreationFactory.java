@@ -31,7 +31,6 @@ public class ThrowExceptionCreationFactory
 
     @Override
     public Object createObject( final Attributes attributes )
-        throws Exception
     {
         throw new RuntimeException();
     }

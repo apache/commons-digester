@@ -111,7 +111,6 @@ public class TestRule
      */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
-        throws Exception
     {
         appendCall();
     }
@@ -121,7 +120,6 @@ public class TestRule
      */
     @Override
     public void body( final String namespace, final String name, final String text )
-        throws Exception
     {
         this.bodyText = text;
         appendCall();
@@ -132,7 +130,6 @@ public class TestRule
      */
     @Override
     public void end( final String namespace, final String name )
-        throws Exception
     {
         appendCall();
     }

@@ -28,7 +28,6 @@ public class DumperRule
 {
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
-        throws Exception
     {
         System.out.print( "<" );
         System.out.print( name );
@@ -50,14 +49,12 @@ public class DumperRule
 
     @Override
     public void body( final String namespace, final String name, final String text )
-        throws Exception
     {
         System.out.print( text );
     }
 
     @Override
     public void end( final String namespace, final String name )
-        throws Exception
     {
         System.out.print( "</" );
         System.out.print( name );
