@@ -22,6 +22,7 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -263,64 +264,64 @@ public class NodeCreateRuleTestCase
     /**
      * Tests simple element construction, using the {@link #TEST_XML} XML input data.
      */
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidAttributeNode() throws Exception
+    @Test
+    public void testInvalidAttributeNode()
     {
-        new NodeCreateRule(Node.ATTRIBUTE_NODE);
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.ATTRIBUTE_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidCDATANode() throws Exception
+    @Test
+    public void testInvalidCDATANode()
     {
-        new NodeCreateRule( Node.CDATA_SECTION_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.CDATA_SECTION_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidCommentNode() throws Exception
+    @Test
+    public void testInvalidCommentNode()
     {
-        new NodeCreateRule( Node.COMMENT_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.COMMENT_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidDocumentNode() throws Exception
+    @Test
+    public void testInvalidDocumentNode()
     {
-        new NodeCreateRule( Node.DOCUMENT_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.DOCUMENT_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidTypeNode() throws Exception
+    @Test
+    public void testInvalidTypeNode()
     {
-        new NodeCreateRule( Node.DOCUMENT_TYPE_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.DOCUMENT_TYPE_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidEntityNode() throws Exception
+    @Test
+    public void testInvalidEntityNode()
     {
-        new NodeCreateRule( Node.ENTITY_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.ENTITY_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidReferenceNode() throws Exception
+    @Test
+    public void testInvalidReferenceNode()
     {
-        new NodeCreateRule( Node.ENTITY_REFERENCE_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.ENTITY_REFERENCE_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidNotationNode() throws Exception
+    @Test
+    public void testInvalidNotationNode()
     {
-        new NodeCreateRule( Node.NOTATION_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.NOTATION_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testInvalidProcessingInstructionNode() throws Exception
+    @Test
+    public void testInvalidProcessingInstructionNode()
     {
-        new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE ) );
     }
 
-    @Test( expected = IllegalArgumentException.class)
-    public void testInvalidTextNode() throws Exception
+    @Test
+    public void testInvalidTextNode()
     {
-        new NodeCreateRule( Node.TEXT_NODE );
+        assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.TEXT_NODE ) );
     }
 
     /**

@@ -20,6 +20,7 @@ package org.apache.commons.digester3;
  */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.Assert.assertThrows;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.logging.Log;
@@ -32,8 +33,8 @@ import org.xml.sax.SAXParseException;
 public class ErrorHandlerTest
 {
 
-    @Test( expected = SAXException.class )
-    public void testCustomErrorHandler() throws Exception
+    @Test
+    public void testCustomErrorHandler()
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -72,11 +73,11 @@ public class ErrorHandlerTest
             }
         } ).newDigester();
         digester.setErrorHandler( customErrorHandler );
-        digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
+        assertThrows( SAXException.class, () -> digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) ) );
     }
 
-    @Test( expected = SAXException.class )
-    public void testCustomErrorHandlerWithStack() throws Exception
+    @Test
+    public void testCustomErrorHandlerWithStack()
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -115,13 +116,13 @@ public class ErrorHandlerTest
             }
         } ).newDigester();
         digester.setErrorHandler( customErrorHandler );
-        digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
+        assertThrows( SAXException.class, () -> digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) ) );
     }
 
-    @Test( expected = SAXException.class )
-    public void testNoCustomErrorHandler() throws Exception
+    @Test
+    public void testNoCustomErrorHandler()
     {
-        newLoader( new AbstractRulesModule()
+        Digester digester = newLoader( new AbstractRulesModule()
         {
             @Override
             protected void configure()
@@ -129,6 +130,7 @@ public class ErrorHandlerTest
                 forPattern( "employee" ).createObject().ofType( Employee.class );
                 forPattern( "employee/firstName" ).setBeanProperty().extractPropertyNameFromAttribute( "name" );
             }
-        } ).newDigester().parse( getClass().getResource( "Test-digester-172-wrong.xml" ) );
+        } ).newDigester();
+        assertThrows( SAXException.class, () -> digester.parse( getClass().getResource( "Test-digester-172-wrong.xml" ) ) );
     }
 }

@@ -22,6 +22,7 @@ package org.apache.commons.digester3;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
@@ -37,9 +38,8 @@ import org.xml.sax.SAXParseException;
 public final class Digester153TestCase
 {
 
-    @Test( expected = SAXParseException.class )
+    @Test
     public void basicConstructorWithWrongParameters()
-        throws Exception
     {
         final ObjectCreateRule createRule = new ObjectCreateRule( TestBean.class );
         createRule.setConstructorArgumentTypes( boolean.class );
@@ -47,7 +47,7 @@ public final class Digester153TestCase
         final Digester digester = new Digester();
         digester.addRule( "toplevel/bean", createRule );
 
-        digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) );
+        assertThrows( SAXParseException.class, () -> digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) ) );
     }
 
     private void succesfullConstructor( final RulesModule rulesModule )

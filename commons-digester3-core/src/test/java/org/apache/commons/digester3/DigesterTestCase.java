@@ -24,6 +24,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -291,40 +292,40 @@ public class DigesterTestCase
     /**
      * Test {@code null} parsing. (should lead to {@code IllegalArgumentException}s)
      */
-    @Test( expected = IllegalArgumentException.class )
-    public void testNullFileParse() throws Exception
+    @Test
+    public void testNullFileParse()
     {
-        digester.parse( (File) null );
+        assertThrows( IllegalArgumentException.class, () -> digester.parse( ( File ) null ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testNullInputSourceParse() throws Exception
+    @Test
+    public void testNullInputSourceParse()
     {
-        digester.parse( (InputSource) null );
+        assertThrows( IllegalArgumentException.class, () -> digester.parse( ( InputSource ) null ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testNullInputStreamParse() throws Exception
+    @Test
+    public void testNullInputStreamParse()
     {
-        digester.parse( (InputStream) null );
+        assertThrows( IllegalArgumentException.class, () -> digester.parse( ( InputStream ) null ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testNullReaderParse() throws Exception
+    @Test
+    public void testNullReaderParse()
     {
-        digester.parse( (Reader) null );
+        assertThrows( IllegalArgumentException.class, () -> digester.parse( ( Reader ) null ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testNullStringParse() throws Exception
+    @Test
+    public void testNullStringParse()
     {
-        digester.parse( (String) null );
+        assertThrows( IllegalArgumentException.class, () -> digester.parse( ( String ) null ) );
     }
 
-    @Test( expected = IllegalArgumentException.class )
-    public void testNullURLParse() throws Exception
+    @Test
+    public void testNullURLParse()
     {
-        digester.parse( (URL) null );
+        assertThrows( IllegalArgumentException.class, () -> digester.parse( ( URL ) null ) );
     }
 
     @Test
@@ -357,20 +358,21 @@ public class DigesterTestCase
     }
 
     /** Tests popping named stack not yet pushed */
-    @Test( expected = EmptyStackException.class )
-    public void testPopNamedStackNotPushed() {
+    @Test
+    public void testPopNamedStackNotPushed()
+    {
         String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
         Digester digester = new Digester();
-        digester.pop(testStackName);
+        assertThrows( EmptyStackException.class, () -> digester.pop( testStackName ) );
     }
 
     /** Tests peeking named stack not yet pushed */
-    @Test( expected = EmptyStackException.class )
+    @Test
     public void testPeekNamedStackNotPushed()
     {
         String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
         Digester digester = new Digester();
-        digester.peek( testStackName );
+        assertThrows( EmptyStackException.class, () -> digester.peek( testStackName ) );
     }
 
     /**

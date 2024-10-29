@@ -18,6 +18,7 @@
 package org.apache.commons.digester3.annotations.failingtests;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.Assert.assertThrows;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
 import org.apache.commons.digester3.binder.DigesterLoadingException;
@@ -29,9 +30,10 @@ public final class FailingTestCase
     /**
      * Tests to make sure loader fails
      */
-    @Test(expected = DigesterLoadingException.class)
+    @Test
     public void failsBecauseFailingDigesterLoaderHandlerFactory() {
 
+        assertThrows( DigesterLoadingException.class, () ->
         newLoader(new FromAnnotationsRuleModule()
         {
 
@@ -42,7 +44,7 @@ public final class FailingTestCase
                 bindRulesFrom( BeanWithFakeHandler.class );
             }
 
-        }).newDigester();
+        } ).newDigester() );
     }
 
 }

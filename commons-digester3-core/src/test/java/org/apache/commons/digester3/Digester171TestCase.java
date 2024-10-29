@@ -20,6 +20,7 @@ package org.apache.commons.digester3;
  */
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.Assert.assertThrows;
 
 import java.io.File;
 
@@ -31,13 +32,13 @@ import org.xml.sax.SAXParseException;
 public class Digester171TestCase
 {
 
-    @Test( expected = SAXParseException.class )
+    @Test
     public void testDefaultThrowingErrorHandler()
         throws Exception
     {
         final ErrorHandler customErrorHandler = new DefaultThrowingErrorHandler();
 
-        newLoader( new AbstractRulesModule()
+        Digester digester = newLoader( new AbstractRulesModule()
         {
 
             @Override
@@ -49,8 +50,8 @@ public class Digester171TestCase
         } )
         .setFeature( "http://xml.org/sax/features/validation", true )
         .setErrorHandler( customErrorHandler )
-        .newDigester()
-        .parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) );
+        .newDigester();
+        assertThrows( SAXParseException.class, () -> digester.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd-error.xml" ) ) );
     }
 
     @Test
