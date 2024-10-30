@@ -18,7 +18,7 @@
 package org.apache.commons.digester3.annotations.person;
 
 import org.apache.commons.digester3.annotations.AbstractAnnotatedPojoTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  */

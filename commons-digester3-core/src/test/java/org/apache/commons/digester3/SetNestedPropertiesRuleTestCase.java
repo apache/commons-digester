@@ -19,16 +19,18 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.Reader;
 import java.io.StringReader;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -68,13 +70,13 @@ public class SetNestedPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader() );
 
         // check properties are set correctly
-        assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
+        assertEquals( "ALPHA BODY", bean.getAlpha(), "Property alpha not set correctly" );
 
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+        assertEquals( "BETA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+        assertEquals( "GAMMA BODY", bean.getGamma(), "Property gamma not set correctly" );
 
-        assertEquals( "Property delta not set correctly", "DELTA BODY", bean.getDeltaValue() );
+        assertEquals( "DELTA BODY", bean.getDeltaValue(), "Property delta not set correctly" );
     }
 
     /**
@@ -106,16 +108,16 @@ public class SetNestedPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
         // check properties are set correctly
-        assertEquals( "Property alpha was not ignored (it should be)", null, bean.getAlpha() );
+        assertNull( bean.getAlpha(), "Property alpha was not ignored (it should be)" );
 
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+        assertEquals( "BETA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+        assertEquals( "GAMMA BODY", bean.getGamma(), "Property gamma not set correctly" );
 
-        assertEquals( "Property delta was not ignored (it should be)", null, bean.getDeltaValue() );
+        assertNull( bean.getDeltaValue(), "Property delta was not ignored (it should be)" );
 
         // check no bad rules object is left
-        assertEquals( "Digester rules object not reset.", RulesBase.class, digester.getRules().getClass() );
+        assertInstanceOf( RulesBase.class, digester.getRules(), "Digester rules object not reset." );
     }
 
     /**
@@ -145,16 +147,16 @@ public class SetNestedPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
         // check properties are set correctly
-        assertEquals( "Property alpha was not ignored (it should be)", null, bean.getAlpha() );
+        assertNull( bean.getAlpha(), "Property alpha was not ignored (it should be)" );
 
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+        assertEquals( "BETA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+        assertEquals( "GAMMA BODY", bean.getGamma(), "Property gamma not set correctly" );
 
-        assertEquals( "Property delta not set correctly", "DELTA BODY", bean.getDeltaValue() );
+        assertEquals( "DELTA BODY", bean.getDeltaValue(), "Property delta not set correctly" );
 
         // check no bad rules object is left
-        assertEquals( "Digester rules object not reset.", RulesBase.class, digester.getRules().getClass() );
+        assertInstanceOf( RulesBase.class, digester.getRules(), "Digester rules object not reset." );
     }
 
     /**
@@ -184,16 +186,16 @@ public class SetNestedPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( new StringReader( TEST_XML ) );
 
         // check properties are set correctly
-        assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
+        assertEquals( "ALPHA BODY", bean.getAlpha(), "Property alpha not set correctly" );
 
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+        assertEquals( "BETA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+        assertEquals( "GAMMA BODY", bean.getGamma(), "Property gamma not set correctly" );
 
-        assertEquals( "Property delta not set correctly", "DELTA BODY", bean.getDeltaValue() );
+        assertEquals( "DELTA BODY", bean.getDeltaValue(), "Property delta not set correctly" );
 
         // check no bad rules object is left
-        assertEquals( "Digester rules object not reset.", RulesBase.class, digester.getRules().getClass() );
+        assertInstanceOf( RulesBase.class, digester.getRules(), "Digester rules object not reset." );
     }
 
     /**
@@ -217,9 +219,8 @@ public class SetNestedPropertiesRuleTestCase
 
         final String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<badprop>ALPHA BODY</badprop>" + "</root>";
 
-        SAXParseException e = assertThrows( "No exception thrown by parse when unknown child element found.", SAXParseException.class,
-                () -> digester.parse( new StringReader( TEST_XML ) ) );
-        assertTrue( "Unexpected parse exception:" + e.getMessage(), e.getMessage().contains( "badprop" ) ); // there is no "setBadprop" method on the SimpleTestBean class
+        SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( new StringReader( TEST_XML ) ), "No exception thrown by parse when unknown child element found." );
+        assertTrue( e.getMessage().contains( "badprop" ), "Unexpected parse exception:" + e.getMessage() ); // there is no "setBadprop" method on the SimpleTestBean class
     }
 
     /**
@@ -258,19 +259,19 @@ public class SetNestedPropertiesRuleTestCase
 
         final SimpleTestBean bean = digester.parse( reader );
 
-        assertNotNull( "No object created", bean );
+        assertNotNull( bean, "No object created" );
 
         // check properties are set correctly
-        assertEquals( "Property alpha not set correctly", "alpha-attr", bean.getAlpha() );
+        assertEquals( "alpha-attr", bean.getAlpha(), "Property alpha not set correctly" );
 
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+        assertEquals( "BETA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+        assertEquals( "GAMMA BODY", bean.getGamma(), "Property gamma not set correctly" );
 
-        assertEquals( "Property delta not set correctly", "delta-prop", bean.getDeltaValue() );
+        assertEquals( "delta-prop", bean.getDeltaValue(), "Property delta not set correctly" );
 
         // check no bad rules object is left
-        assertEquals( "Digester rules object not reset.", RulesBase.class, digester.getRules().getClass() );
+        assertInstanceOf( RulesBase.class, digester.getRules(), "Digester rules object not reset." );
     }
 
     /**
@@ -331,7 +332,7 @@ public class SetNestedPropertiesRuleTestCase
         final Reader reader = new StringReader( testXml );
 
         SAXException e = assertThrows( SAXException.class, () -> digester.parse( reader ) );
-        assertTrue( e.getException() instanceof NoSuchMethodException );
+        assertInstanceOf( NoSuchMethodException.class, e.getException() );
     }
 
     /**

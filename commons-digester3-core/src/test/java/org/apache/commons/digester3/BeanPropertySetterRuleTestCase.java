@@ -19,10 +19,10 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -71,11 +71,11 @@ public class BeanPropertySetterRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader() );
 
         // check properties are set correctly
-        assertEquals( "Property alpha not set correctly", "ALPHA BODY", bean.getAlpha() );
+        assertEquals( "ALPHA BODY", bean.getAlpha(), "Property alpha not set correctly" );
 
-        assertEquals( "Property beta not set correctly", "BETA BODY", bean.getBeta() );
+        assertEquals( "BETA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertEquals( "Property gamma not set correctly", "GAMMA BODY", bean.getGamma() );
+        assertEquals( "GAMMA BODY", bean.getGamma(), "Property gamma not set correctly" );
 
     }
 
@@ -105,13 +105,13 @@ public class BeanPropertySetterRuleTestCase
 
         digester.parse( xmlTestReader() );
 
-        assertEquals( "Root body text not set correct.", "ROOT BODY", ( (TestRule) callOrder.get( 0 ) ).getBodyText() );
+        assertEquals( "ROOT BODY", ( ( TestRule ) callOrder.get( 0 ) ).getBodyText(), "Root body text not set correct." );
 
-        assertEquals( "Alpha body text not set correct.", "ALPHA BODY", ( (TestRule) callOrder.get( 1 ) ).getBodyText() );
+        assertEquals( "ALPHA BODY", ( ( TestRule ) callOrder.get( 1 ) ).getBodyText(), "Alpha body text not set correct." );
 
-        assertEquals( "Beta body text not set correct.", "BETA BODY", ( (TestRule) callOrder.get( 4 ) ).getBodyText() );
+        assertEquals( "BETA BODY", ( ( TestRule ) callOrder.get( 4 ) ).getBodyText(), "Beta body text not set correct." );
 
-        assertEquals( "Gamma body text not set correct.", "GAMMA BODY", ( (TestRule) callOrder.get( 7 ) ).getBodyText() );
+        assertEquals( "GAMMA BODY", ( ( TestRule ) callOrder.get( 7 ) ).getBodyText(), "Gamma body text not set correct." );
 
     }
 
@@ -146,32 +146,28 @@ public class BeanPropertySetterRuleTestCase
 
         // we should have nine entries in our list of calls
 
-        assertEquals( "Nine calls should have been made.", 9, callOrder.size() );
+        assertEquals( 9, callOrder.size(), "Nine calls should have been made." );
 
         // begin should be called in the order added
-        assertEquals( "First rule begin not called first.", "first", ( (TestRule) callOrder.get( 0 ) ).getIdentifier() );
+        assertEquals( "first", ( ( TestRule ) callOrder.get( 0 ) ).getIdentifier(), "First rule begin not called first." );
 
-        assertEquals( "Second rule begin not called second.", "second",
-                      ( (TestRule) callOrder.get( 1 ) ).getIdentifier() );
+        assertEquals( "second", ( ( TestRule ) callOrder.get( 1 ) ).getIdentifier(), "Second rule begin not called second." );
 
-        assertEquals( "Third rule begin not called third.", "third", ( (TestRule) callOrder.get( 2 ) ).getIdentifier() );
+        assertEquals( "third", ( ( TestRule ) callOrder.get( 2 ) ).getIdentifier(), "Third rule begin not called third." );
 
         // body text should be called in the order added
-        assertEquals( "First rule body text not called first.", "first",
-                      ( (TestRule) callOrder.get( 3 ) ).getIdentifier() );
+        assertEquals( "first", ( ( TestRule ) callOrder.get( 3 ) ).getIdentifier(), "First rule body text not called first." );
 
-        assertEquals( "Second rule body text not called second.", "second",
-                      ( (TestRule) callOrder.get( 4 ) ).getIdentifier() );
+        assertEquals( "second", ( ( TestRule ) callOrder.get( 4 ) ).getIdentifier(), "Second rule body text not called second." );
 
-        assertEquals( "Third rule body text not called third.", "third",
-                      ( (TestRule) callOrder.get( 5 ) ).getIdentifier() );
+        assertEquals( "third", ( ( TestRule ) callOrder.get( 5 ) ).getIdentifier(), "Third rule body text not called third." );
 
         // end should be called in reverse order
-        assertEquals( "Third rule end not called first.", "third", ( (TestRule) callOrder.get( 6 ) ).getIdentifier() );
+        assertEquals( "third", ( ( TestRule ) callOrder.get( 6 ) ).getIdentifier(), "Third rule end not called first." );
 
-        assertEquals( "Second rule end not called second.", "second", ( (TestRule) callOrder.get( 7 ) ).getIdentifier() );
+        assertEquals( "second", ( ( TestRule ) callOrder.get( 7 ) ).getIdentifier(), "Second rule end not called second." );
 
-        assertEquals( "First rule end not called third.", "first", ( (TestRule) callOrder.get( 8 ) ).getIdentifier() );
+        assertEquals( "first", ( ( TestRule ) callOrder.get( 8 ) ).getIdentifier(), "First rule end not called third." );
 
     }
 
@@ -227,13 +223,13 @@ public class BeanPropertySetterRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader() );
 
         // check properties are set correctly
-        assertEquals( "Property alpha not set correctly", "ROOT BODY", bean.getAlpha() );
+        assertEquals( "ROOT BODY", bean.getAlpha(), "Property alpha not set correctly" );
 
-        assertEquals( "Property beta not set correctly", "ALPHA BODY", bean.getBeta() );
+        assertEquals( "ALPHA BODY", bean.getBeta(), "Property beta not set correctly" );
 
-        assertNull( "Property gamma not set correctly", bean.getGamma() );
+        assertNull( bean.getGamma(), "Property gamma not set correctly" );
 
-        assertEquals( "Property delta not set correctly", "DELTA BODY", bean.getDeltaValue() );
+        assertEquals( "DELTA BODY", bean.getDeltaValue(), "Property delta not set correctly" );
 
     }
 
@@ -260,7 +256,7 @@ public class BeanPropertySetterRuleTestCase
 
         // Attempt to parse the input
         SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( xmlTestReader() ) );
-        assertTrue( "Should have thrown SAXParseException->NoSuchMethodException", e.getException() instanceof NoSuchMethodException );
+        assertInstanceOf( NoSuchMethodException.class, e.getException(), "Should have thrown SAXParseException->NoSuchMethodException");
     }
 
     /**

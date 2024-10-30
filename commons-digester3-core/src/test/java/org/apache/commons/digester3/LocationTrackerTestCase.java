@@ -20,8 +20,8 @@ package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.StringReader;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Locator;
 
 /**

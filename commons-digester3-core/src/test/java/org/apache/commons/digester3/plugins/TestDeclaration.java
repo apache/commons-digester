@@ -18,12 +18,12 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for basic PluginDeclarationRule behavior.
@@ -61,12 +61,12 @@ public class TestDeclaration
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
-        assertEquals( "label1", ( (TextLabel) child ).getLabel() );
+        assertInstanceOf( TextLabel.class, child );
+        assertEquals( "label1", ( ( TextLabel ) child ).getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
-        assertEquals( "label2", ( (TextLabel) child ).getLabel() );
+        assertInstanceOf( TextLabel.class, child );
+        assertEquals( "label2", ( ( TextLabel ) child ).getLabel() );
     }
 }

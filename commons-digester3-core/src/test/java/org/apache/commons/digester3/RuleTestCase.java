@@ -18,18 +18,19 @@
 
 package org.apache.commons.digester3;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>
@@ -60,7 +61,7 @@ public class RuleTestCase
     /**
      * Sets up instance variables required by this test case.
      */
-    @Before
+    @BeforeEach
     public void setUp()
     {
 
@@ -71,7 +72,7 @@ public class RuleTestCase
     /**
      * Tear down instance variables required by this test case.
      */
-    @After
+    @AfterEach
     public void tearDown()
     {
 
@@ -89,7 +90,7 @@ public class RuleTestCase
         final TestRule rule = new TestRule( "Test" );
         digester.addRule( "/root", rule );
 
-        assertEquals( "Digester is not properly on rule addition.", digester, rule.getDigester() );
+        assertEquals( digester, rule.getDigester(), "Digester is not properly on rule addition." );
 
     }
 
@@ -108,9 +109,9 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
 
     }
 
@@ -132,9 +133,9 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
 
     }
 
@@ -183,9 +184,9 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
 
     }
 
@@ -206,9 +207,9 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test5.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
 
     }
 
@@ -240,7 +241,7 @@ public class RuleTestCase
         validateObjectCreate3( root2 );
 
         // Make sure that it was a different root
-        assertTrue( "Different tree instances were returned", root1 != root2 );
+        assertNotSame( root1, root2, "Different tree instances were returned" );
 
     }
 
@@ -260,11 +261,11 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test1.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
-        assertNotNull( "Can retrieve home address", employee.getAddress( "home" ) );
-        assertNotNull( "Can retrieve office address", employee.getAddress( "office" ) );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
+        assertNotNull( employee.getAddress( "home" ), "Can retrieve home address" );
+        assertNotNull( employee.getAddress( "office" ), "Can retrieve office address" );
 
     }
 
@@ -283,11 +284,11 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test2.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
-        assertNotNull( "Can retrieve home address", employee.getAddress( "home" ) );
-        assertNotNull( "Can retrieve office address", employee.getAddress( "office" ) );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
+        assertNotNull( employee.getAddress( "home" ), "Can retrieve home address" );
+        assertNotNull( employee.getAddress( "office" ), "Can retrieve office address" );
 
     }
 
@@ -307,11 +308,11 @@ public class RuleTestCase
         // Parse our test input.
         final Employee employee = digester.parse( getInputStream( "Test3.xml" ) );
 
-        assertNotNull( "Digester returned an object", employee );
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
-        assertNull( "Can not retrieve home address", employee.getAddress( "home" ) );
-        assertNull( "Can not retrieve office address", employee.getAddress( "office" ) );
+        assertNotNull( employee, "Digester returned an object" );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
+        assertNull( employee.getAddress( "home" ), "Can not retrieve home address" );
+        assertNull( employee.getAddress( "office" ), "Can not retrieve office address" );
 
     }
 
@@ -342,37 +343,37 @@ public class RuleTestCase
 
         final ArrayList<?> root = digester.parse( getInputStream( "Test7.xml" ) );
 
-        assertEquals( "Wrong array size", 4, root.size() );
+        assertEquals( 4, root.size(), "Wrong array size" );
 
         // note that the array is in popped order (rather than pushed)
 
         Object obj = root.get( 0 );
-        assertTrue( "(1) Should be an Address ", obj instanceof Address );
+        assertInstanceOf( Address.class, obj, "(1) Should be an Address " );
         final Address addressOne = (Address) obj;
-        assertEquals( "(1) Street attribute", "New Street", addressOne.getStreet() );
-        assertEquals( "(1) City attribute", "Las Vegas", addressOne.getCity() );
-        assertEquals( "(1) State attribute", "Nevada", addressOne.getState() );
+        assertEquals( "New Street", addressOne.getStreet(), "(1) Street attribute" );
+        assertEquals( "Las Vegas", addressOne.getCity(), "(1) City attribute" );
+        assertEquals( "Nevada", addressOne.getState(), "(1) State attribute" );
 
         obj = root.get( 1 );
-        assertTrue( "(2) Should be an Address ", obj instanceof Address );
+        assertInstanceOf( Address.class, obj, "(2) Should be an Address " );
         final Address addressTwo = (Address) obj;
-        assertEquals( "(2) Street attribute", "Old Street", addressTwo.getStreet() );
-        assertEquals( "(2) City attribute", "Portland", addressTwo.getCity() );
-        assertEquals( "(2) State attribute", "Oregon", addressTwo.getState() );
+        assertEquals( "Old Street", addressTwo.getStreet(), "(2) Street attribute" );
+        assertEquals( "Portland", addressTwo.getCity(), "(2) City attribute" );
+        assertEquals( "Oregon", addressTwo.getState(), "(2) State attribute" );
 
         obj = root.get( 2 );
-        assertTrue( "(3) Should be an Address ", obj instanceof Address );
+        assertInstanceOf( Address.class, obj, "(3) Should be an Address " );
         final Address addressThree = (Address) obj;
-        assertEquals( "(3) Street attribute", "4th Street", addressThree.getStreet() );
-        assertEquals( "(3) City attribute", "Dayton", addressThree.getCity() );
-        assertEquals( "(3) State attribute", "US", addressThree.getState() );
+        assertEquals( "4th Street", addressThree.getStreet(), "(3) Street attribute" );
+        assertEquals( "Dayton", addressThree.getCity(), "(3) City attribute" );
+        assertEquals( "US", addressThree.getState(), "(3) State attribute" );
 
         obj = root.get( 3 );
-        assertTrue( "(4) Should be an Address ", obj instanceof Address );
+        assertInstanceOf( Address.class, obj, "(4) Should be an Address " );
         final Address addressFour = (Address) obj;
-        assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
-        assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
-        assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
+        assertEquals( "6th Street", addressFour.getStreet(), "(4) Street attribute" );
+        assertEquals( "Cleveland", addressFour.getCity(), "(4) City attribute" );
+        assertEquals( "Ohio", addressFour.getState(), "(4) State attribute" );
 
     }
 
@@ -392,19 +393,19 @@ public class RuleTestCase
         digester.addSetNext( "!root/?", "add" );
         final ArrayList<?> root = digester.parse( getInputStream( "Test4.xml" ) );
 
-        assertEquals( "Wrong array size", 2, root.size() );
+        assertEquals( 2, root.size(), "Wrong array size" );
         final AlphaBean one = (AlphaBean) root.get( 0 );
-        assertTrue( one.getChild() instanceof BetaBean );
+        assertInstanceOf( BetaBean.class, one.getChild() );
         final BetaBean two = (BetaBean) one.getChild();
-        assertEquals( "Wrong name (1)", two.getName(), "TWO" );
-        assertTrue( two.getChild() instanceof AlphaBean );
+        assertEquals( two.getName(), "TWO", "Wrong name (1)" );
+        assertInstanceOf( AlphaBean.class, two.getChild() );
         final AlphaBean three = (AlphaBean) two.getChild();
-        assertEquals( "Wrong name (2)", three.getName(), "THREE" );
+        assertEquals( three.getName(), "THREE", "Wrong name (2)" );
         final BetaBean four = (BetaBean) root.get( 1 );
-        assertEquals( "Wrong name (3)", four.getName(), "FOUR" );
-        assertTrue( four.getChild() instanceof BetaBean );
+        assertEquals( four.getName(), "FOUR", "Wrong name (3)" );
+        assertInstanceOf( BetaBean.class, four.getChild() );
         final BetaBean five = (BetaBean) four.getChild();
-        assertEquals( "Wrong name (4)", five.getName(), "FIVE" );
+        assertEquals( five.getName(), "FIVE", "Wrong name (4)" );
 
     }
 
@@ -425,30 +426,30 @@ public class RuleTestCase
         digester.addSetRoot( "!*/b", "add" );
         final ArrayList<?> root = digester.parse( getInputStream( "Test4.xml" ) );
 
-        assertEquals( "Wrong array size", 5, root.size() );
+        assertEquals( 5, root.size(), "Wrong array size" );
 
         // note that the array is in popped order (rather than pushed)
 
         Object obj = root.get( 1 );
-        assertTrue( "TWO should be a BetaBean", obj instanceof BetaBean );
+        assertInstanceOf( BetaBean.class, obj, "TWO should be a BetaBean" );
         final BetaBean two = (BetaBean) obj;
-        assertNotNull( "Two's parent should not be null", two.getParent() );
-        assertEquals( "Wrong name (1)", "TWO", two.getName() );
-        assertEquals( "Wrong name (2)", "ONE", two.getParent().getName() );
+        assertNotNull( two.getParent(), "Two's parent should not be null" );
+        assertEquals( "TWO", two.getName(), "Wrong name (1)" );
+        assertEquals( "ONE", two.getParent().getName(), "Wrong name (2)" );
 
         obj = root.get( 0 );
-        assertTrue( "THREE should be an AlphaBean", obj instanceof AlphaBean );
+        assertInstanceOf( AlphaBean.class, obj, "THREE should be an AlphaBean" );
         final AlphaBean three = (AlphaBean) obj;
-        assertNotNull( "Three's parent should not be null", three.getParent() );
-        assertEquals( "Wrong name (3)", "THREE", three.getName() );
-        assertEquals( "Wrong name (4)", "TWO", three.getParent().getName() );
+        assertNotNull( three.getParent(), "Three's parent should not be null" );
+        assertEquals( "THREE", three.getName(), "Wrong name (3)" );
+        assertEquals( "TWO", three.getParent().getName(), "Wrong name (4)" );
 
         obj = root.get( 3 );
-        assertTrue( "FIVE should be a BetaBean", obj instanceof BetaBean );
+        assertInstanceOf( BetaBean.class, obj, "FIVE should be a BetaBean" );
         final BetaBean five = (BetaBean) obj;
-        assertNotNull( "Five's parent should not be null", five.getParent() );
-        assertEquals( "Wrong name (5)", "FIVE", five.getName() );
-        assertEquals( "Wrong name (6)", "FOUR", five.getParent().getName() );
+        assertNotNull( five.getParent(), "Five's parent should not be null" );
+        assertEquals( "FIVE", five.getName(), "Wrong name (5)" );
+        assertEquals( "FOUR", five.getParent().getName(), "Wrong name (6)" );
 
     }
 
@@ -508,27 +509,27 @@ public class RuleTestCase
     {
 
         // Validate the retrieved Employee
-        assertNotNull( "Digester returned an object", root );
-        assertTrue( "Digester returned an Employee", root instanceof Employee );
+        assertNotNull( root, "Digester returned an object" );
+        assertInstanceOf( Employee.class, root, "Digester returned an Employee" );
         final Employee employee = (Employee) root;
-        assertEquals( "First name is correct", "First Name", employee.getFirstName() );
-        assertEquals( "Last name is correct", "Last Name", employee.getLastName() );
+        assertEquals( "First Name", employee.getFirstName(), "First name is correct" );
+        assertEquals( "Last Name", employee.getLastName(), "Last name is correct" );
 
         // Validate the corresponding "home" Address
         final Address home = employee.getAddress( "home" );
-        assertNotNull( "Retrieved home address", home );
-        assertEquals( "Home street", "Home Street", home.getStreet() );
-        assertEquals( "Home city", "Home City", home.getCity() );
-        assertEquals( "Home state", "HS", home.getState() );
-        assertEquals( "Home zip", "HmZip", home.getZipCode() );
+        assertNotNull( home, "Retrieved home address" );
+        assertEquals( "Home Street", home.getStreet(), "Home street" );
+        assertEquals( "Home City", home.getCity(), "Home city" );
+        assertEquals( "HS", home.getState(), "Home state" );
+        assertEquals( "HmZip", home.getZipCode(), "Home zip" );
 
         // Validate the corresponding "office" Address
         final Address office = employee.getAddress( "office" );
-        assertNotNull( "Retrieved office address", office );
-        assertEquals( "Office street", "Office Street", office.getStreet() );
-        assertEquals( "Office city", "Office City", office.getCity() );
-        assertEquals( "Office state", "OS", office.getState() );
-        assertEquals( "Office zip", "OfZip", office.getZipCode() );
+        assertNotNull( office, "Retrieved office address" );
+        assertEquals( "Office Street", office.getStreet(), "Office street" );
+        assertEquals( "Office City", office.getCity(), "Office city" );
+        assertEquals( "OS", office.getState(), "Office state" );
+        assertEquals( "OfZip", office.getZipCode(), "Office zip" );
 
     }
 

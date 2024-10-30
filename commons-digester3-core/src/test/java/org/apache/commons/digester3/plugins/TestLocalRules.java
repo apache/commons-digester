@@ -18,12 +18,12 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for defining custom rules on the plugin class itself.
@@ -63,7 +63,7 @@ public class TestLocalRules
         // setproperties should be in effect
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( Slider.class, child.getClass() );
+        assertInstanceOf( Slider.class, child );
         final Slider slider1 = (Slider) child;
         assertEquals( "slider1", slider1.getLabel() );
         assertEquals( 1, slider1.getMin() );
@@ -73,7 +73,7 @@ public class TestLocalRules
         // setproperties should be in effect
         child = children.get( 1 );
         assertNotNull( child );
-        assertEquals( Slider.class, child.getClass() );
+        assertInstanceOf( Slider.class, child );
         final Slider slider2 = (Slider) child;
         assertEquals( "slider2", slider2.getLabel() );
         assertEquals( 0, slider2.getMin() );
@@ -82,8 +82,8 @@ public class TestLocalRules
         // setproperties should be working on text label
         child = children.get( 2 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
-        assertEquals( "text1", ( (TextLabel) child ).getLabel() );
+        assertInstanceOf( TextLabel.class, child );
+        assertEquals( "text1", ( ( TextLabel ) child ).getLabel() );
     }
 
     @Test
@@ -123,7 +123,7 @@ public class TestLocalRules
         // setproperties should not be in effect
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( Slider.class, child.getClass() );
+        assertInstanceOf( Slider.class, child );
         final Slider slider1 = (Slider) child;
         assertEquals( "nolabel", slider1.getLabel() );
         assertEquals( 0, slider1.getMin() );
@@ -133,7 +133,7 @@ public class TestLocalRules
         // setproperties should not be in effect
         child = children.get( 1 );
         assertNotNull( child );
-        assertEquals( Slider.class, child.getClass() );
+        assertInstanceOf( Slider.class, child );
         final Slider slider2 = (Slider) child;
         assertEquals( "nolabel", slider2.getLabel() );
         assertEquals( 10, slider2.getMin() );
@@ -142,7 +142,7 @@ public class TestLocalRules
         // setproperties should be working on text label
         child = children.get( 2 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
-        assertEquals( "text1", ( (TextLabel) child ).getLabel() );
+        assertInstanceOf( TextLabel.class, child );
+        assertEquals( "text1", ( ( TextLabel ) child ).getLabel() );
     }
 }

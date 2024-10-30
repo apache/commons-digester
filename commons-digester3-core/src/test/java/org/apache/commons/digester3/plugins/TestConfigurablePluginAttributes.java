@@ -18,13 +18,13 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for functionality which sets what xml attributes specify the plugin class or plugin declaration id.
@@ -96,19 +96,19 @@ public class TestConfigurablePluginAttributes
         assertNotNull( widgets );
         assertEquals( 4, widgets.size() );
 
-        assertEquals( TextLabel.class, widgets.get( 0 ).getClass() );
-        assertEquals( TextLabel.class, widgets.get( 1 ).getClass() );
-        assertEquals( TextLabel.class, widgets.get( 2 ).getClass() );
-        assertEquals( TextLabel.class, widgets.get( 3 ).getClass() );
+        assertInstanceOf( TextLabel.class, widgets.get( 0 ) );
+        assertInstanceOf( TextLabel.class, widgets.get( 1 ) );
+        assertInstanceOf( TextLabel.class, widgets.get( 2 ) );
+        assertInstanceOf( TextLabel.class, widgets.get( 3 ) );
 
         final List<Widget> gadgets = root.getGadgets();
         assertNotNull( gadgets );
         assertEquals( 4, gadgets.size() );
 
-        assertEquals( TextLabel.class, gadgets.get( 0 ).getClass() );
-        assertEquals( TextLabel.class, gadgets.get( 1 ).getClass() );
-        assertEquals( TextLabel.class, gadgets.get( 2 ).getClass() );
-        assertEquals( TextLabel.class, gadgets.get( 3 ).getClass() );
+        assertInstanceOf( TextLabel.class, gadgets.get( 0 ) );
+        assertInstanceOf( TextLabel.class, gadgets.get( 1 ) );
+        assertInstanceOf( TextLabel.class, gadgets.get( 2 ) );
+        assertInstanceOf( TextLabel.class, gadgets.get( 3 ) );
     }
 
     @Test
@@ -150,19 +150,19 @@ public class TestConfigurablePluginAttributes
         assertNotNull( widgets );
         assertEquals( 4, widgets.size() );
 
-        assertEquals( Slider.class, widgets.get( 0 ).getClass() );
-        assertEquals( Slider.class, widgets.get( 1 ).getClass() );
-        assertEquals( Slider.class, widgets.get( 2 ).getClass() );
-        assertEquals( Slider.class, widgets.get( 3 ).getClass() );
+        assertInstanceOf( Slider.class, widgets.get( 0 ) );
+        assertInstanceOf( Slider.class, widgets.get( 1 ) );
+        assertInstanceOf( Slider.class, widgets.get( 2 ) );
+        assertInstanceOf( Slider.class, widgets.get( 3 ) );
 
         final List<Widget> gadgets = root.getGadgets();
         assertNotNull( gadgets );
         assertEquals( 4, gadgets.size() );
 
-        assertEquals( Slider.class, gadgets.get( 0 ).getClass() );
-        assertEquals( Slider.class, gadgets.get( 1 ).getClass() );
-        assertEquals( Slider.class, gadgets.get( 2 ).getClass() );
-        assertEquals( Slider.class, gadgets.get( 3 ).getClass() );
+        assertInstanceOf( Slider.class, gadgets.get( 0 ) );
+        assertInstanceOf( Slider.class, gadgets.get( 1 ) );
+        assertInstanceOf( Slider.class, gadgets.get( 2 ) );
+        assertInstanceOf( Slider.class, gadgets.get( 3 ) );
     }
 
     // inner classes used for testing
@@ -206,18 +206,18 @@ public class TestConfigurablePluginAttributes
         assertNotNull( widgets );
         assertEquals( 4, widgets.size() );
 
-        assertEquals( TextLabel2.class, widgets.get( 0 ).getClass() );
-        assertEquals( TextLabel2.class, widgets.get( 1 ).getClass() );
-        assertEquals( TextLabel2.class, widgets.get( 2 ).getClass() );
-        assertEquals( TextLabel2.class, widgets.get( 3 ).getClass() );
+        assertInstanceOf( TextLabel2.class, widgets.get( 0 ) );
+        assertInstanceOf( TextLabel2.class, widgets.get( 1 ) );
+        assertInstanceOf( TextLabel2.class, widgets.get( 2 ) );
+        assertInstanceOf( TextLabel2.class, widgets.get( 3 ) );
 
         final List<Widget> gadgets = root.getGadgets();
         assertNotNull( gadgets );
         assertEquals( 4, gadgets.size() );
 
-        assertEquals( TextLabel.class, gadgets.get( 0 ).getClass() );
-        assertEquals( TextLabel.class, gadgets.get( 1 ).getClass() );
-        assertEquals( TextLabel.class, gadgets.get( 2 ).getClass() );
-        assertEquals( TextLabel.class, gadgets.get( 3 ).getClass() );
+        assertInstanceOf( TextLabel.class, gadgets.get( 0 ) );
+        assertInstanceOf( TextLabel.class, gadgets.get( 1 ) );
+        assertInstanceOf( TextLabel.class, gadgets.get( 2 ) );
+        assertInstanceOf( TextLabel.class, gadgets.get( 3 ) );
     }
 }

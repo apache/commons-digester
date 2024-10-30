@@ -19,12 +19,12 @@ package org.apache.commons.digester3;
  * under the License.
  */
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public final class Digester162TestCase
 {
@@ -47,7 +47,7 @@ public final class Digester162TestCase
 
         final Object object = digester.parse( getClass().getResource( "digester-162.xml" ) );
 
-        assertTrue( BetaBean.class.isInstance( object ) );
+        assertInstanceOf( BetaBean.class, object );
     }
 
 }

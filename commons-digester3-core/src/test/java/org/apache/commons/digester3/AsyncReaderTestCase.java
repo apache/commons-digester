@@ -22,7 +22,7 @@ package org.apache.commons.digester3;
 import static java.lang.System.getProperty;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 import java.io.InputStreamReader;
@@ -30,9 +30,9 @@ import java.util.concurrent.Future;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.DigesterLoader;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.InputSource;
 
 public final class AsyncReaderTestCase
@@ -51,13 +51,13 @@ public final class AsyncReaderTestCase
 
     private Digester digester;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         digester = digesterLoader.newDigester();
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         digester = null;

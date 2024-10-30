@@ -18,12 +18,12 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for declaration of plugin classes "inline" (ie by specifying plugin-class).
@@ -61,14 +61,14 @@ public class TestInline
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
+        assertInstanceOf( TextLabel.class, child );
         final TextLabel label1 = (TextLabel) child;
         assertEquals( "anonymous", label1.getId() );
         assertEquals( "1", label1.getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
+        assertInstanceOf( TextLabel.class, child );
         final TextLabel label2 = (TextLabel) child;
         assertEquals( "L1", label2.getId() );
         assertEquals( "2", label2.getLabel() );
@@ -104,14 +104,14 @@ public class TestInline
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
+        assertInstanceOf( TextLabel.class, child );
         final TextLabel label1 = (TextLabel) child;
         assertEquals( "anonymous", label1.getId() );
         assertEquals( "1", label1.getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
+        assertInstanceOf( TextLabel.class, child );
         final TextLabel label2 = (TextLabel) child;
         assertEquals( "L1", label2.getId() );
         assertEquals( "2", label2.getLabel() );

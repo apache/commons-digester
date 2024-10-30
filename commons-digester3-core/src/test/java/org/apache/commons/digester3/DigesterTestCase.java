@@ -18,14 +18,15 @@
 
 package org.apache.commons.digester3;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.InputStream;
@@ -37,9 +38,9 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.helpers.AttributesImpl;
@@ -103,7 +104,7 @@ public class DigesterTestCase
     /**
      * Sets up instance variables required by this test case.
      */
-    @Before
+    @BeforeEach
     public void setUp()
     {
 
@@ -115,7 +116,7 @@ public class DigesterTestCase
     /**
      * Tear down instance variables required by this test case.
      */
-    @After
+    @AfterEach
     public void tearDown()
     {
 
@@ -158,10 +159,10 @@ public class DigesterTestCase
 
         digester.parse( in );
 
-        assertEquals( "Unsubstituted body text", "Do you feel luck punk?", tsr.body );
-        assertEquals( "Unsubstituted number of attributes", 2, tsr.attributes.getLength() );
-        assertEquals( "Unsubstituted forname attribute value", "Dirty", tsr.attributes.getValue( "forname" ) );
-        assertEquals( "Unsubstituted surname attribute value", "Harry", tsr.attributes.getValue( "surname" ) );
+        assertEquals( "Do you feel luck punk?", tsr.body, "Unsubstituted body text" );
+        assertEquals( 2, tsr.attributes.getLength(), "Unsubstituted number of attributes" );
+        assertEquals( "Dirty", tsr.attributes.getValue( "forname" ), "Unsubstituted forname attribute value" );
+        assertEquals( "Harry", tsr.attributes.getValue( "surname" ), "Unsubstituted surname attribute value" );
 
         digester.setSubstitutor( new Substitutor()
         {
@@ -184,9 +185,9 @@ public class DigesterTestCase
         in = new InputSource( new StringReader( xml ) );
         digester.parse( in );
 
-        assertEquals( "Substituted body text", "And now for something completely different...", tsr.body );
-        assertEquals( "Substituted number of attributes", 1, tsr.attributes.getLength() );
-        assertEquals( "Substituted python attribute value", "Cleese", tsr.attributes.getValue( "", "python" ) );
+        assertEquals( "And now for something completely different...", tsr.body, "Substituted body text" );
+        assertEquals( 1, tsr.attributes.getLength(), "Substituted number of attributes" );
+        assertEquals( "Cleese", tsr.attributes.getValue( "", "python" ), "Substituted python attribute value" );
     }
 
     /**
@@ -205,8 +206,8 @@ public class DigesterTestCase
         digester.parse( in );
 
         final Object root = digester.getRoot();
-        assertNotNull( "root object not retrieved", root );
-        assertTrue( "root object not a TestRule instance", root instanceof TestBean );
+        assertNotNull( root, "root object not retrieved" );
+        assertInstanceOf( TestBean.class, root, "root object not a TestRule instance" );
     }
 
     /** Tests that values are stored independently */
@@ -218,8 +219,8 @@ public class DigesterTestCase
         final Digester digester = new Digester();
         digester.push( testStackOneName, "Tweedledum" );
         digester.push( testStackTwoName, "Tweedledee" );
-        assertEquals( "Popped value one:", "Tweedledum", digester.pop( testStackOneName ) );
-        assertEquals( "Popped value two:", "Tweedledee", digester.pop( testStackTwoName ) );
+        assertEquals( "Tweedledum", digester.pop( testStackOneName ), "Popped value one:" );
+        assertEquals( "Tweedledee", digester.pop( testStackTwoName ), "Popped value two:" );
     }
 
     /** Tests for isEmpty */
@@ -228,18 +229,16 @@ public class DigesterTestCase
     {
         final String testStackName = "org.apache.commons.digester3.tests.testNamedStackIsEmpty";
         final Digester digester = new Digester();
-        assertTrue( "A named stack that has no object pushed onto it yet should be empty",
-                    digester.isEmpty( testStackName ) );
+        assertTrue( digester.isEmpty( testStackName ), "A named stack that has no object pushed onto it yet should be empty" );
 
         digester.push( testStackName, "Some test value" );
-        assertFalse( "A named stack that has an object pushed onto it should be not empty",
-                     digester.isEmpty( testStackName ) );
+        assertFalse( digester.isEmpty( testStackName ), "A named stack that has an object pushed onto it should be not empty" );
 
         digester.peek( testStackName );
-        assertFalse( "Peek should not effect whether the stack is empty", digester.isEmpty( testStackName ) );
+        assertFalse( digester.isEmpty( testStackName ), "Peek should not effect whether the stack is empty" );
 
         digester.pop( testStackName );
-        assertTrue( "A named stack that has it's last object popped is empty", digester.isEmpty( testStackName ) );
+        assertTrue( digester.isEmpty( testStackName ), "A named stack that has it's last object popped is empty" );
     }
 
     /** Tests the push-peek-pop cycle for a named stack */
@@ -249,26 +248,26 @@ public class DigesterTestCase
         final BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
         final String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";
         final Digester digester = new Digester();
-        assertTrue( "Stack starts empty:", digester.isEmpty( testStackName ) );
+        assertTrue( digester.isEmpty( testStackName ), "Stack starts empty:" );
         digester.push( testStackName, archimedesAveragePi );
-        assertEquals( "Peeked value:", archimedesAveragePi, digester.peek( testStackName ) );
-        assertEquals( "Popped value:", archimedesAveragePi, digester.pop( testStackName ) );
-        assertTrue( "Stack ends empty:", digester.isEmpty( testStackName ) );
+        assertEquals( archimedesAveragePi, digester.peek( testStackName ), "Peeked value:" );
+        assertEquals( archimedesAveragePi, digester.pop( testStackName ), "Popped value:" );
+        assertTrue( digester.isEmpty( testStackName ), "Stack ends empty:" );
 
         digester.push( testStackName, "1" );
         digester.push( testStackName, "2" );
         digester.push( testStackName, "3" );
 
-        assertEquals( "Peek#1", "1", digester.peek( testStackName, 2 ) );
-        assertEquals( "Peek#2", "2", digester.peek( testStackName, 1 ) );
-        assertEquals( "Peek#3", "3", digester.peek( testStackName, 0 ) );
-        assertEquals( "Peek#3a", "3", digester.peek( testStackName ) );
+        assertEquals( "1", digester.peek( testStackName, 2 ), "Peek#1" );
+        assertEquals( "2", digester.peek( testStackName, 1 ), "Peek#2" );
+        assertEquals( "3", digester.peek( testStackName, 0 ), "Peek#3" );
+        assertEquals( "3", digester.peek( testStackName ), "Peek#3a" );
 
         // peek beyond stack
-        assertThrows( "Peek#4 failed to throw an exception.", EmptyStackException.class, () -> digester.peek( testStackName, 3 ) );
+        assertThrows( EmptyStackException.class, () -> digester.peek( testStackName, 3 ), "Peek#4 failed to throw an exception." );
 
         // peek a nonexistent named stack
-        assertThrows( "Peeking a non-existent stack failed to throw an exception.", EmptyStackException.class, () -> digester.peek( "no.such.stack", 0 ) );
+        assertThrows( EmptyStackException.class, () -> digester.peek( "no.such.stack", 0 ), "Peeking a non-existent stack failed to throw an exception." );
     }
 
     /**
@@ -336,7 +335,7 @@ public class DigesterTestCase
         final String xml = "<?xml version='1.0'?><document/>";
         digester.parse( new StringReader( xml ) );
 
-        assertEquals( "Initialize should be called once and only once", 1, digester.called );
+        assertEquals( 1, digester.called, "Initialize should be called once and only once" );
     }
 
     /** Tests popping named stack not yet pushed */
@@ -364,23 +363,23 @@ public class DigesterTestCase
     public void testProperties()
     {
 
-        assertNull( "Initial error handler is null", digester.getErrorHandler() );
+        assertNull( digester.getErrorHandler(), "Initial error handler is null" );
         digester.setErrorHandler( digester );
-        assertTrue( "Set error handler is digester", digester.getErrorHandler() == digester );
+        assertSame( digester.getErrorHandler(), digester, "Set error handler is digester" );
         digester.setErrorHandler( null );
-        assertNull( "Reset error handler is null", digester.getErrorHandler() );
+        assertNull( digester.getErrorHandler(), "Reset error handler is null" );
 
-        assertTrue( "Initial namespace aware is false", !digester.getNamespaceAware() );
+        assertFalse( digester.getNamespaceAware(), "Initial namespace aware is false" );
         digester.setNamespaceAware( true );
-        assertTrue( "Set namespace aware is true", digester.getNamespaceAware() );
+        assertTrue( digester.getNamespaceAware(), "Set namespace aware is true" );
         digester.setNamespaceAware( false );
-        assertTrue( "Reset namespace aware is false", !digester.getNamespaceAware() );
+        assertFalse( digester.getNamespaceAware(), "Reset namespace aware is false" );
 
-        assertTrue( "Initial validating is false", !digester.getValidating() );
+        assertFalse( digester.getValidating(), "Initial validating is false" );
         digester.setValidating( true );
-        assertTrue( "Set validating is true", digester.getValidating() );
+        assertTrue( digester.getValidating(), "Set validating is true" );
         digester.setValidating( false );
-        assertTrue( "Reset validating is false", !digester.getValidating() );
+        assertFalse( digester.getValidating(), "Reset validating is false" );
 
     }
 
@@ -392,7 +391,7 @@ public class DigesterTestCase
     {
 
         Map<String, URL> map = digester.getRegistrations();
-        assertEquals( "Initially zero registrations", 0, map.size() );
+        assertEquals( 0, map.size(), "Initially zero registrations" );
         int n = 0;
         for ( int i = 0; i < registrations.length; i += 2 )
         {
@@ -404,7 +403,7 @@ public class DigesterTestCase
             }
         }
         map = digester.getRegistrations();
-        assertEquals( "Registered two URLs", n, map.size() );
+        assertEquals( n, map.size(), "Registered two URLs" );
 
         final int[] count = new int[n];
         for ( int i = 0; i < n; i++ ) {
@@ -422,7 +421,7 @@ public class DigesterTestCase
             }
         }
         for ( int i = 0; i < n; i++ ) {
-            assertEquals( "Count for key " + registrations[i * 2], 1, count[i] );
+            assertEquals( 1, count[i], "Count for key " + registrations[i * 2] );
         }
 
     }
@@ -434,15 +433,15 @@ public class DigesterTestCase
     public void testRules()
     {
 
-        assertEquals( "Initial rules list is empty", 0, digester.getRules().match( null, "a", null, null ).size() );
+        assertEquals( 0, digester.getRules().match( null, "a", null, null ).size(), "Initial rules list is empty" );
         digester.addSetProperties( "a" );
-        assertEquals( "Add a matching rule", 1, digester.getRules().match( null, "a", null, null ).size() );
+        assertEquals( 1, digester.getRules().match( null, "a", null, null ).size(), "Add a matching rule" );
         digester.addSetProperties( "b" );
-        assertEquals( "Add a non-matching rule", 1, digester.getRules().match( null, "a", null, null ).size() );
+        assertEquals( 1, digester.getRules().match( null, "a", null, null ).size(), "Add a non-matching rule" );
         digester.addSetProperties( "a/b" );
-        assertEquals( "Add a non-matching nested rule", 1, digester.getRules().match( null, "a", null, null ).size() );
+        assertEquals( 1, digester.getRules().match( null, "a", null, null ).size(), "Add a non-matching nested rule" );
         digester.addSetProperties( "a/b" );
-        assertEquals( "Add a second matching rule", 2, digester.getRules().match( null, "a/b", null, null ).size() );
+        assertEquals( 2, digester.getRules().match( null, "a/b", null, null ).size(), "Add a second matching rule" );
 
     }
 
@@ -463,7 +462,7 @@ public class DigesterTestCase
     public void testRulesBase()
     {
 
-        assertEquals( "Initial rules list is empty", 0, digester.getRules().rules().size() );
+        assertEquals( 0, digester.getRules().rules().size(), "Initial rules list is empty" );
 
         // We're going to set up
         digester.addRule( "a/b/c/d", new TestRule( "a/b/c/d" ) );
@@ -471,19 +470,16 @@ public class DigesterTestCase
         digester.addRule( "*/c/d", new TestRule( "*/c/d" ) );
 
         // Test exact match
-        assertEquals( "Exact match takes precedence 1", 1, digester.getRules().match( null, "a/b/c/d", null, null ).size() );
-        assertEquals( "Exact match takes precedence 2", "a/b/c/d",
-                      ( (TestRule) digester.getRules().match( null, "a/b/c/d", null, null ).iterator().next() ).getIdentifier() );
+        assertEquals( 1, digester.getRules().match( null, "a/b/c/d", null, null ).size(), "Exact match takes precedence 1" );
+        assertEquals( "a/b/c/d", ( ( TestRule ) digester.getRules().match( null, "a/b/c/d", null, null ).iterator().next() ).getIdentifier(), "Exact match takes precedence 2" );
 
         // Test wildcard tail matching
-        assertEquals( "Wildcard tail matching rule 1", 1, digester.getRules().match( null, "a/b/d", null, null ).size() );
-        assertEquals( "Wildcard tail matching rule 2", "*/d",
-                      ( (TestRule) digester.getRules().match( null, "a/b/d", null, null ).iterator().next() ).getIdentifier() );
+        assertEquals( 1, digester.getRules().match( null, "a/b/d", null, null ).size(), "Wildcard tail matching rule 1" );
+        assertEquals( "*/d", ( ( TestRule ) digester.getRules().match( null, "a/b/d", null, null ).iterator().next() ).getIdentifier(), "Wildcard tail matching rule 2" );
 
         // Test the longest matching pattern rule
-        assertEquals( "Longest tail rule 1", 1, digester.getRules().match( null, "x/c/d", null, null ).size() );
-        assertEquals( "Longest tail rule 2", "*/c/d",
-                      ( (TestRule) digester.getRules().match( null, "x/c/d", null, null ).iterator().next() ).getIdentifier() );
+        assertEquals( 1, digester.getRules().match( null, "x/c/d", null, null ).size(), "Longest tail rule 1" );
+        assertEquals( "*/c/d", ( ( TestRule ) digester.getRules().match( null, "x/c/d", null, null ).iterator().next() ).getIdentifier(), "Longest tail rule 2" );
 
     }
 
@@ -526,9 +522,9 @@ public class DigesterTestCase
         final Object obj2a = d.pop();
         final Object obj1a = d.pop();
 
-        assertFalse( obj4 == obj4a );
+        assertNotSame( obj4, obj4a );
         assertEquals( obj4, obj4a );
-        assertFalse( obj3 == obj4a );
+        assertNotSame( obj3, obj4a );
         assertEquals( obj3, obj3a );
         assertSame( obj2, obj2a );
         assertSame( obj1, obj1a );
@@ -567,42 +563,42 @@ public class DigesterTestCase
         Object value;
 
         // New stack must be empty
-        assertEquals( "New stack is empty", 0, digester.getCount() );
+        assertEquals( 0, digester.getCount(), "New stack is empty" );
         value = digester.peek();
-        assertNull( "New stack peek() returns null", value );
+        assertNull( value, "New stack peek() returns null" );
         value = digester.pop();
-        assertNull( "New stack pop() returns null", value );
+        assertNull( value, "New stack pop() returns null" );
 
         // Test pushing and popping activities
         digester.push( "First Item" );
-        assertEquals( "Pushed one item size", 1, digester.getCount() );
+        assertEquals( 1, digester.getCount(), "Pushed one item size" );
         value = digester.peek();
-        assertNotNull( "Peeked first item is not null", value );
-        assertEquals( "Peeked first item value", "First Item", value );
+        assertNotNull( value, "Peeked first item is not null" );
+        assertEquals( "First Item", value, "Peeked first item value" );
 
         digester.push( "Second Item" );
-        assertEquals( "Pushed two items size", 2, digester.getCount() );
+        assertEquals( 2, digester.getCount(), "Pushed two items size" );
         value = digester.peek();
-        assertNotNull( "Peeked second item is not null", value );
-        assertEquals( "Peeked second item value", "Second Item", value );
+        assertNotNull( value, "Peeked second item is not null" );
+        assertEquals( "Second Item", value, "Peeked second item value" );
 
         value = digester.pop();
-        assertEquals( "Popped stack size", 1, digester.getCount() );
-        assertNotNull( "Popped second item is not null", value );
-        assertEquals( "Popped second item value", "Second Item", value );
+        assertEquals( 1, digester.getCount(), "Popped stack size" );
+        assertNotNull( value, "Popped second item is not null" );
+        assertEquals( "Second Item", value, "Popped second item value" );
         value = digester.peek();
-        assertNotNull( "Remaining item is not null", value );
-        assertEquals( "Remaining item value", "First Item", value );
-        assertEquals( "Remaining stack size", 1, digester.getCount() );
+        assertNotNull( value, "Remaining item is not null" );
+        assertEquals( "First Item", value, "Remaining item value" );
+        assertEquals( 1, digester.getCount(), "Remaining stack size" );
 
         // Cleared stack is empty
         digester.push( "Dummy Item" );
         digester.clear();
-        assertEquals( "Cleared stack is empty", 0, digester.getCount() );
+        assertEquals( 0, digester.getCount(), "Cleared stack is empty" );
         value = digester.peek();
-        assertNull( "Cleared stack peek() returns null", value );
+        assertNull( value, "Cleared stack peek() returns null" );
         value = digester.pop();
-        assertNull( "Cleared stack pop() returns null", value );
+        assertNull( value, "Cleared stack pop() returns null" );
 
     }
 }

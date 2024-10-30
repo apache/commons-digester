@@ -19,14 +19,14 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>
@@ -80,7 +80,7 @@ public class XIncludeTestCase
 
         // Parse our test input
         final Employee employee = digester.parse( getInputStream( "Test12.xml" ) );
-        assertNotNull( "failed to parsed an employee", employee );
+        assertNotNull( employee, "failed to parse an employee" );
 
         // Test basics
         assertEquals( "First Name", employee.getFirstName() );

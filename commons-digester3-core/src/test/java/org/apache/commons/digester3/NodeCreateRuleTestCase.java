@@ -19,11 +19,11 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +37,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.NodeCreateRuleProvider.NodeType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
@@ -348,13 +348,10 @@ public class NodeCreateRuleTestCase
         assertNotNull( element );
 
         assertNotNull( element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ) );
-        assertEquals( "MyTestAttribute",
-                      element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getNodeValue() );
-        assertEquals( "test",
-                      element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getLocalName() );
+        assertEquals( "MyTestAttribute", element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getNodeValue() );
+        assertEquals( "test", element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getLocalName() );
         assertEquals( "bar", element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getPrefix() );
-        assertEquals( "bar:test",
-                      element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getName() );
+        assertEquals( "bar:test", element.getAttributeNodeNS( "http://commons.apache.org/digester/Bar", "test" ).getName() );
 
     }
 
@@ -438,7 +435,7 @@ public class NodeCreateRuleTestCase
         assertNotNull( list );
         assertEquals( 2, list.size() );
 
-        assertTrue( list.get( 0 ) instanceof DocumentFragment );
+        assertInstanceOf( DocumentFragment.class, list.get( 0 ) );
         final DocumentFragment fragment = (DocumentFragment) list.get( 0 );
 
         assertEquals( Node.ELEMENT_NODE, fragment.getFirstChild().getNodeType() );
@@ -447,7 +444,7 @@ public class NodeCreateRuleTestCase
         assertEquals( 1, a.getAttributes().getLength() );
         assertEquals( "THREE", a.getAttribute( "name" ) );
 
-        assertTrue( list.get( 1 ) instanceof String );
+        assertInstanceOf( String.class, list.get( 1 ) );
 
     }
 

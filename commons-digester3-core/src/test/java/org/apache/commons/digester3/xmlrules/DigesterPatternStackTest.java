@@ -18,10 +18,10 @@
 
 package org.apache.commons.digester3.xmlrules;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test case tests the behavior of DigesterRuleParser.PatternStack, a specialized stack whose toString() method
@@ -33,7 +33,7 @@ public class DigesterPatternStackTest
 
     private final PatternStack patternStack = new PatternStack();
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         patternStack.clear();

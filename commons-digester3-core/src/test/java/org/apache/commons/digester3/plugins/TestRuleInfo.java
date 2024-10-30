@@ -18,12 +18,12 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for the declaration of custom rules for a plugin using a separate class to define the rules.
@@ -63,7 +63,7 @@ public class TestRuleInfo
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel2.class, child.getClass() );
+        assertInstanceOf( TextLabel2.class, child );
         final TextLabel2 label = (TextLabel2) child;
 
         // id should not be mapped, label should
@@ -101,7 +101,7 @@ public class TestRuleInfo
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel2.class, child.getClass() );
+        assertInstanceOf( TextLabel2.class, child );
         final TextLabel2 label = (TextLabel2) child;
 
         // id should not be mapped, label should
@@ -140,7 +140,7 @@ public class TestRuleInfo
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel2.class, child.getClass() );
+        assertInstanceOf( TextLabel2.class, child );
         final TextLabel2 label = (TextLabel2) child;
 
         // id should not be mapped, altlabel should

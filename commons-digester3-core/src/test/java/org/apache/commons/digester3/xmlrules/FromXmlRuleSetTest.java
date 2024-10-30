@@ -19,10 +19,12 @@
 package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -33,7 +35,7 @@ import org.apache.commons.digester3.Address;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.ObjectCreationFactoryTestImpl;
 import org.apache.commons.digester3.binder.RulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
@@ -119,9 +121,9 @@ public class FromXmlRuleSetTest
         digester.push( testObject );
         digester.parse( new StringReader( xml ) );
 
-        assertEquals( "Incorrect left value", "long", testObject.getLeft() );
-        assertEquals( "Incorrect middle value", "short", testObject.getMiddle() );
-        assertEquals( "Incorrect right value", "", testObject.getRight() );
+        assertEquals( "long", testObject.getLeft(), "Incorrect left value" );
+        assertEquals( "short", testObject.getMiddle(), "Incorrect middle value" );
+        assertEquals( "", testObject.getRight(), "Incorrect right value" );
      }
 
     /**
@@ -154,26 +156,22 @@ public class FromXmlRuleSetTest
         digester.push( new ArrayList<ObjectCreationFactoryTestImpl>() );
 
         final Object obj = digester.parse( new StringReader( xml ) );
-        if ( !( obj instanceof ArrayList<?> ) )
-        {
-            fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got " + obj.getClass().getName() );
-        }
+        assertInstanceOf( ArrayList.class, obj, "Unexpected object returned from DigesterLoader" );
 
         @SuppressWarnings("unchecked") // root is an ArrayList of TestObjectCreationFactory
         final
         ArrayList<ObjectCreationFactoryTestImpl> list = (ArrayList<ObjectCreationFactoryTestImpl>) obj;
 
-        assertEquals( "List should contain only the factory object", list.size(), 1 );
+        assertEquals( list.size(), 1, "List should contain only the factory object" );
         final ObjectCreationFactoryTestImpl factory = list.get( 0 );
-        assertEquals( "Object create not called(1)", factory.called, true );
-        assertEquals( "Attribute not passed (1)", factory.attributes.getValue( "one" ), "good" );
-        assertEquals( "Attribute not passed (2)", factory.attributes.getValue( "two" ), "bad" );
-        assertEquals( "Attribute not passed (3)", factory.attributes.getValue( "three" ), "ugly" );
+        assertTrue( factory.called, "Object create not called(1)" );
+        assertEquals( factory.attributes.getValue( "one" ), "good", "Attribute not passed (1)" );
+        assertEquals( factory.attributes.getValue( "two" ), "bad", "Attribute not passed (2)" );
+        assertEquals( factory.attributes.getValue( "three" ), "ugly", "Attribute not passed (3)" );
     }
 
     @Test
     public void testFactoryIgnoreCreateRule()
-        throws Exception
     {
         final URL rules = getClass().getResource( "testfactoryignore.xml" );
 
@@ -192,7 +190,7 @@ public class FromXmlRuleSetTest
 
         final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
         Digester digester = newLoader( createRules( rules ) ).newDigester();
-        assertThrows( "Exception should have been propagated from create method.", SAXParseException.class, () -> digester.parse( new StringReader( xml ) ) );
+        assertThrows( SAXParseException.class, () -> digester.parse( new StringReader( xml ) ), "Exception should have been propagated from create method." );
     }
 
     @Test
@@ -226,9 +224,9 @@ public class FromXmlRuleSetTest
         digester.push( testObject );
         digester.parse( new StringReader( xml ) );
 
-        assertEquals( "Incorrect left value", "long", testObject.getLeft() );
-        assertEquals( "Incorrect middle value", "short", testObject.getMiddle() );
-        assertEquals( "Incorrect right value", "", testObject.getRight() );
+        assertEquals( "long", testObject.getLeft(), "Incorrect left value" );
+        assertEquals( "short", testObject.getMiddle(), "Incorrect middle value" );
+        assertEquals( "", testObject.getRight(), "Incorrect right value" );
     }
 
     /**
@@ -248,11 +246,7 @@ public class FromXmlRuleSetTest
         digester.push( new ArrayList<>() );
 
         final Object root = digester.parse( input );
-        if ( !( root instanceof ArrayList<?> ) )
-        {
-            fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got "
-                + root.getClass().getName() );
-        }
+        assertInstanceOf( ArrayList.class, root, "Unexpected object returned from DigesterLoader" );
         assertEquals( "[foo1 baz1 foo2, foo3 foo4]", root.toString() );
 
         @SuppressWarnings( "unchecked" )
@@ -260,11 +254,7 @@ public class FromXmlRuleSetTest
         // root is an ArrayList
         ArrayList<Object> al = (ArrayList<Object>) root;
         final Object obj = al.get( 0 );
-        if ( !( obj instanceof ObjectTestImpl ) )
-        {
-            fail( "Unexpected object returned from DigesterLoader. Expected TestObject; got "
-                + obj.getClass().getName() );
-        }
+        assertInstanceOf( ObjectTestImpl.class, obj, "Unexpected object returned from DigesterLoader" );
         final ObjectTestImpl to = (ObjectTestImpl) obj;
         assertEquals( new Long( 555 ), to.getLongValue() );
         assertEquals( "foo", to.getMapValue( "test1" ) );
@@ -288,11 +278,10 @@ public class FromXmlRuleSetTest
         final ArrayList<Object> list = digester.parse( input );
 
         assertEquals( list.toString(), "[foo1 baz1 foo2, foo3 foo4]" );
-        assertEquals( "Wrong number of classes created", 2, list.size() );
-        assertEquals( "Pushed first", true, ( (ObjectTestImpl) list.get( 0 ) ).isPushed() );
-        assertEquals( "Didn't push second", false, ( (ObjectTestImpl) list.get( 1 ) ).isPushed() );
-        assertTrue( "Property was set properly",
-                    ( (ObjectTestImpl) list.get( 0 ) ).getProperty().equals( "I am a property!" ) );
+        assertEquals( 2, list.size(), "Wrong number of classes created" );
+        assertTrue( ( ( ObjectTestImpl ) list.get( 0 ) ).isPushed(), "Pushed first" );
+        assertFalse( ( ( ObjectTestImpl ) list.get( 1 ) ).isPushed(), "Didn't push second" );
+        assertEquals( "I am a property!", ( ( ObjectTestImpl ) list.get( 0 ) ).getProperty(), "Property was set properly" );
     }
 
     /**
@@ -311,41 +300,38 @@ public class FromXmlRuleSetTest
 
         final Object obj = digester.parse( input );
 
-        if ( !( obj instanceof ArrayList<?> ) )
-        {
-            fail( "Unexpected object returned from DigesterLoader. Expected ArrayList; got " + obj.getClass().getName() );
-        }
+        assertInstanceOf( ArrayList.class, obj, "Unexpected object returned from DigesterLoader" );
 
         @SuppressWarnings("unchecked") // root is an ArrayList of Address
         final
         ArrayList<Address> root = (ArrayList<Address>) obj;
 
-        assertEquals( "Wrong array size", 4, root.size() );
+        assertEquals( 4, root.size(), "Wrong array size" );
 
         // note that the array is in popped order (rather than pushed)
 
         Address add = root.get( 0 );
         final Address addressOne = add;
-        assertEquals( "(1) Street attribute", "New Street", addressOne.getStreet() );
-        assertEquals( "(1) City attribute", "Las Vegas", addressOne.getCity() );
-        assertEquals( "(1) State attribute", "Nevada", addressOne.getState() );
+        assertEquals( "New Street", addressOne.getStreet(), "(1) Street attribute" );
+        assertEquals( "Las Vegas", addressOne.getCity(), "(1) City attribute" );
+        assertEquals( "Nevada", addressOne.getState(), "(1) State attribute" );
 
         add = root.get( 1 );
         final Address addressTwo = add;
-        assertEquals( "(2) Street attribute", "Old Street", addressTwo.getStreet() );
-        assertEquals( "(2) City attribute", "Portland", addressTwo.getCity() );
-        assertEquals( "(2) State attribute", "Oregon", addressTwo.getState() );
+        assertEquals( "Old Street", addressTwo.getStreet(), "(2) Street attribute" );
+        assertEquals( "Portland", addressTwo.getCity(), "(2) City attribute" );
+        assertEquals( "Oregon", addressTwo.getState(), "(2) State attribute" );
 
         add = root.get( 2 );
         final Address addressThree = add;
-        assertEquals( "(3) Street attribute", "4th Street", addressThree.getStreet() );
-        assertEquals( "(3) City attribute", "Dayton", addressThree.getCity() );
-        assertEquals( "(3) State attribute", "US", addressThree.getState() );
+        assertEquals( "4th Street", addressThree.getStreet(), "(3) Street attribute" );
+        assertEquals( "Dayton", addressThree.getCity(), "(3) City attribute" );
+        assertEquals( "US", addressThree.getState(), "(3) State attribute" );
 
         add = root.get( 3 );
         final Address addressFour = add;
-        assertEquals( "(4) Street attribute", "6th Street", addressFour.getStreet() );
-        assertEquals( "(4) City attribute", "Cleveland", addressFour.getCity() );
-        assertEquals( "(4) State attribute", "Ohio", addressFour.getState() );
+        assertEquals( "6th Street", addressFour.getStreet(), "(4) Street attribute" );
+        assertEquals( "Cleveland", addressFour.getCity(), "(4) City attribute" );
+        assertEquals( "Ohio", addressFour.getState(), "(4) State attribute" );
     }
 }

@@ -23,7 +23,7 @@ import java.util.Stack;
 import org.apache.commons.digester3.annotations.AbstractAnnotatedPojoTestCase;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.RulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  */

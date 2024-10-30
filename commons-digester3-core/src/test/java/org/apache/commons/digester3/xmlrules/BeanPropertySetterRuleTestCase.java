@@ -1,10 +1,10 @@
 package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.commons.digester3.Employee;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one

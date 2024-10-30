@@ -19,16 +19,16 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.Reader;
 import java.io.StringReader;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -81,10 +81,10 @@ public class SetPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_2 ) );
 
         // Check that the properties were set correctly
-        assertNull( "alpha property not set", bean.getAlpha() );
-        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
-        assertNull( "gamma property not set", bean.getGamma() );
-        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
+        assertNull( bean.getAlpha(), "alpha property not set" );
+        assertEquals( "BETA VALUE", bean.getBeta(), "beta property set" );
+        assertNull( bean.getGamma(), "gamma property not set" );
+        assertEquals( "DELTA VALUE", bean.getDeltaValue(), "delta property set" );
 
     }
 
@@ -109,7 +109,7 @@ public class SetPropertiesRuleTestCase
 
         // Parse the input
         SAXException e = assertThrows( SAXException.class, () -> digester.parse( xmlTestReader( TEST_XML_2 ) ) );
-        assertTrue( "Should have thrown NoSuchMethodException" + e.getClass().getName(), e.getException() instanceof NoSuchMethodException );
+        assertInstanceOf( NoSuchMethodException.class, e.getException(), "Should have thrown NoSuchMethodException" + e.getClass().getName() );
     }
 
     /**
@@ -136,10 +136,10 @@ public class SetPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
 
         // Check that the properties were set correctly
-        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
-        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
-        assertNull( "gamma property not set", bean.getGamma() );
-        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
+        assertEquals( "ALPHA VALUE", bean.getAlpha(), "alpha property set" );
+        assertEquals( "BETA VALUE", bean.getBeta(), "beta property set" );
+        assertNull( bean.getGamma(), "gamma property not set" );
+        assertEquals( "DELTA VALUE", bean.getDeltaValue(), "delta property set" );
 
     }
 
@@ -169,10 +169,10 @@ public class SetPropertiesRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_3 ) );
 
         // Check that the properties were set correctly
-        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
-        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
-        assertNull( "gamma property not set", bean.getGamma() );
-        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
+        assertEquals( "ALPHA VALUE", bean.getAlpha(), "alpha property set" );
+        assertEquals( "BETA VALUE", bean.getBeta(), "beta property set" );
+        assertNull( bean.getGamma(), "gamma property not set" );
+        assertEquals( "DELTA VALUE", bean.getDeltaValue(), "delta property set" );
     }
 
     /**

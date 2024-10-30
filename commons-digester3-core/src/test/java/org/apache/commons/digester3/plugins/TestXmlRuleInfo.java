@@ -18,12 +18,12 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.StringReader;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for the declaration of custom rules for a plugin using xmlrules format files.
@@ -63,7 +63,7 @@ public class TestXmlRuleInfo
         digester.parse( new StringReader( input.toString() ) );
 
         final Object root = digester.getRoot();
-        assertEquals( ObjectTestImpl.class, root.getClass() );
+        assertInstanceOf( ObjectTestImpl.class, root );
         final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules-ruleinfo", testObject.getValue() );
     }
@@ -99,7 +99,7 @@ public class TestXmlRuleInfo
         digester.parse( new StringReader( input.toString() ) );
 
         final Object root = digester.getRoot();
-        assertEquals( ObjectTestImpl.class, root.getClass() );
+        assertInstanceOf( ObjectTestImpl.class, root );
         final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules1", testObject.getValue() );
     }
@@ -136,7 +136,7 @@ public class TestXmlRuleInfo
         digester.parse( new StringReader( input.toString() ) );
 
         final Object root = digester.getRoot();
-        assertEquals( ObjectTestImpl.class, root.getClass() );
+        assertInstanceOf( ObjectTestImpl.class, root );
         final ObjectTestImpl testObject = (ObjectTestImpl) root;
         assertEquals( "xmlrules2", testObject.getValue() );
     }

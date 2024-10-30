@@ -19,11 +19,11 @@ package org.apache.commons.digester3.binder;
  * under the License.
  */
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXParseException;

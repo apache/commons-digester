@@ -18,13 +18,13 @@
 
 package org.apache.commons.digester3;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.net.URL;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>
@@ -66,7 +66,7 @@ public class URLTestCase
     /**
      * Sets up instance variables required by this test case.
      */
-    @Before
+    @BeforeEach
     public void setUp()
     {
 
@@ -77,7 +77,7 @@ public class URLTestCase
     /**
      * Tear down instance variables required by this test case.
      */
-    @After
+    @AfterEach
     public void tearDown()
     {
 

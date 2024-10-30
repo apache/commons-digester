@@ -19,9 +19,9 @@ package org.apache.commons.digester3.binder;
  * under the License.
  */
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.fail;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -45,7 +45,7 @@ public class Digester163TestCase
 
     private DigesterLoader loader;
 
-    @Before
+    @BeforeEach
     public void before()
     {
         final URL url = getClass().getResource( "rules.xml" );

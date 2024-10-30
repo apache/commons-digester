@@ -19,8 +19,8 @@
 package org.apache.commons.digester3.xmlrules;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.StringReader;
 import java.net.URL;
@@ -31,7 +31,7 @@ import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.Rule;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.DigesterLoadingException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the include class functionality
@@ -90,8 +90,8 @@ public class IncludeTest
         digester.push( list );
         digester.parse( new StringReader( xml ) );
 
-        assertEquals( "Number of entries", 1, list.size() );
-        assertEquals( "Entry value", "short", list.get( 0 ) );
+        assertEquals( 1, list.size(), "Number of entries" );
+        assertEquals( "short", list.get( 0 ), "Entry value" );
     }
 
     /**

@@ -19,19 +19,19 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.Reader;
 import java.io.StringReader;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 import org.apache.commons.digester3.binder.DigesterLoader;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -75,7 +75,7 @@ public class SetPropertyRuleTestCase
     /**
      * Sets up instance variables required by this test case.
      */
-    @Before
+    @BeforeEach
     public void setUp()
     {
 
@@ -86,7 +86,7 @@ public class SetPropertyRuleTestCase
     /**
      * Tear down instance variables required by this test case.
      */
-    @After
+    @AfterEach
     public void tearDown()
     {
 
@@ -117,7 +117,7 @@ public class SetPropertyRuleTestCase
     {
         // Parse the input (should fail)
         SAXException e = assertThrows( SAXException.class, () -> digester.parse( xmlTestReader( TEST_XML_2 ) ) );
-        assertTrue( "Should have thrown SAXException->NoSuchMethodException, threw " + e.getException(), e.getException() instanceof NoSuchMethodException );
+        assertInstanceOf( NoSuchMethodException.class, e.getException(), "Should have thrown SAXException->NoSuchMethodException, threw " + e.getException() );
     }
 
     /**
@@ -131,10 +131,10 @@ public class SetPropertyRuleTestCase
         final SimpleTestBean bean = digester.parse( xmlTestReader( TEST_XML_1 ) );
 
         // Check that the properties were set correctly
-        assertEquals( "alpha property set", "ALPHA VALUE", bean.getAlpha() );
-        assertEquals( "beta property set", "BETA VALUE", bean.getBeta() );
-        assertNull( "gamma property not set", bean.getGamma() );
-        assertEquals( "delta property set", "DELTA VALUE", bean.getDeltaValue() );
+        assertEquals( "ALPHA VALUE", bean.getAlpha(), "alpha property set" );
+        assertEquals( "BETA VALUE", bean.getBeta(), "beta property set" );
+        assertNull( bean.getGamma(), "gamma property not set" );
+        assertEquals( "DELTA VALUE", bean.getDeltaValue(), "delta property set" );
 
     }
 

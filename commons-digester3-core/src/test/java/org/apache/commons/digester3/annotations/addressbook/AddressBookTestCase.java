@@ -18,7 +18,7 @@
 package org.apache.commons.digester3.annotations.addressbook;
 
 import org.apache.commons.digester3.annotations.AbstractAnnotatedPojoTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  */

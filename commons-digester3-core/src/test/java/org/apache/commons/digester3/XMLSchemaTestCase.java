@@ -18,10 +18,10 @@
 
 package org.apache.commons.digester3;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,9 +30,9 @@ import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
@@ -93,7 +93,7 @@ public class XMLSchemaTestCase
     /**
      * Sets up instance variables required by this test case.
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception
     {
 
@@ -121,7 +121,7 @@ public class XMLSchemaTestCase
     /**
      * Tear down instance variables required by this test case.
      */
-    @After
+    @AfterEach
     public void tearDown()
     {
 
@@ -139,7 +139,7 @@ public class XMLSchemaTestCase
 
         // Parse our test input
         digester.parse( getInputStream( "Test13-02.xml" ) );
-        assertFalse( "Test13-02 should generate errors in Schema validation", teh.clean );
+        assertFalse( teh.clean, "Test13-02 should generate errors in Schema validation" );
 
     }
 
@@ -156,8 +156,8 @@ public class XMLSchemaTestCase
 
         // Parse our test input
         final Employee employee = digester.parse( getInputStream( "Test13-01.xml" ) );
-        assertNotNull( "failed to parsed an employee", employee );
-        assertTrue( "Test13-01 should not generate errors in Schema validation", teh.clean );
+        assertNotNull( employee, "failed to parse an employee" );
+        assertTrue( teh.clean, "Test13-01 should not generate errors in Schema validation" );
 
         // Test document has been processed
         final Address ha = employee.getAddress( "home" );

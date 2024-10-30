@@ -18,14 +18,14 @@
 
 package org.apache.commons.digester3.plugins;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXParseException;
 
 public class TestDefaultPlugin
@@ -58,26 +58,25 @@ public class TestDefaultPlugin
 
         child = children.get( 0 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
+        assertInstanceOf( TextLabel.class, child );
         final TextLabel label1 = (TextLabel) child;
         assertEquals( "label1", label1.getLabel() );
 
         child = children.get( 1 );
         assertNotNull( child );
-        assertEquals( TextLabel.class, child.getClass() );
+        assertInstanceOf( TextLabel.class, child );
         final TextLabel label2 = (TextLabel) child;
         assertEquals( "label2", label2.getLabel() );
 
         child = children.get( 2 );
         assertNotNull( child );
-        assertEquals( Slider.class, child.getClass() );
+        assertInstanceOf( Slider.class, child );
         final Slider slider1 = (Slider) child;
         assertEquals( "slider1", slider1.getLabel() );
     }
 
     @Test
     public void testDefaultPlugins2()
-        throws Exception
     {
         // * tests that when there is no default plugin, it is an error
         // not to have one of plugin-class or plugin-id specified
@@ -97,7 +96,7 @@ public class TestDefaultPlugin
         try
         {
             SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( Utils.getInputStream( this, "test2.xml" ) ) );
-            assertEquals( PluginInvalidInputException.class, e.getException().getClass() );
+            assertInstanceOf( PluginInvalidInputException.class, e.getException() );
         }
         finally
         {
@@ -127,7 +126,7 @@ public class TestDefaultPlugin
         try
         {
             SAXParseException e = assertThrows( SAXParseException.class, () -> digester.parse( Utils.getInputStream( this, "test2.xml" ) ) );
-            assertEquals( PluginConfigurationException.class, e.getException().getClass() );
+            assertInstanceOf( PluginConfigurationException.class, e.getException() );
         }
         finally
         {

@@ -18,11 +18,11 @@
 package org.apache.commons.digester3.annotations.failingtests;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.digester3.annotations.FromAnnotationsRuleModule;
 import org.apache.commons.digester3.binder.DigesterLoadingException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public final class FailingTestCase
 {

@@ -19,7 +19,8 @@
 package org.apache.commons.digester3.plugins;
 
 import org.apache.commons.digester3.Digester;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for Delegate behavior.
@@ -27,8 +28,9 @@ import org.junit.Test;
 
 public class TestDelegate
 {
-    public void ignoretestDelegate()
-        throws Exception
+    @Test
+    @Disabled
+    public void testDelegate() throws Exception
     {
         // this method tests the Delegate functionality by capturing all
         // data below the specified pattern, and printing it to stdout.
@@ -42,12 +44,5 @@ public class TestDelegate
         digester.addRule( "root", dr );
 
         digester.parse( Utils.getInputStream( this, "test1.xml" ) );
-    }
-
-    @Test
-    public void testDummy()
-    {
-        // it is an error if a TestSuite doesn't have at least one test,
-        // so here is one...
     }
 }

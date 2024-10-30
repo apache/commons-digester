@@ -19,16 +19,17 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -83,7 +84,7 @@ public class ObjectParamRuleTestCase
         assertTrue( al.contains( new Float( 3.14159 ) ) );
         assertTrue( al.contains( new Long( 999999999 ) ) );
         assertTrue( al.contains( "foobarbazbing" ) );
-        assertTrue( !al.contains( "ignore" ) );
+        assertFalse( al.contains( "ignore" ) );
     }
 
 }

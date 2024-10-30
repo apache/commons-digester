@@ -19,13 +19,15 @@ package org.apache.commons.digester3.substitution;
  * under the License.
  */
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.apache.commons.digester3.Substitutor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
-
-import static org.junit.Assert.*;
 
 public final class CompoundSubstitutorTestCase
 {
@@ -99,7 +101,7 @@ public final class CompoundSubstitutorTestCase
         return success;
     }
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         final AttributesImpl aImpl = new AttributesImpl();
@@ -124,7 +126,7 @@ public final class CompoundSubstitutorTestCase
         attribFixture.addAttribute( "", "b", ":b", "", "bcd" );
 
         assertTrue( areEqual( test.substitute( attrib ), attribFixture ) );
-        assertEquals( test.substitute( bodyText ), "STU" );
+        assertEquals( "STU", test.substitute( bodyText ) );
     }
 
     @Test

@@ -18,11 +18,13 @@
 
 package org.apache.commons.digester3;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for RegexRules
@@ -50,23 +52,23 @@ public class RegexRulesTestCase
 
         // check that rules returns all rules in the order which they were added
         List<Rule> matches = rules.rules();
-        assertEquals( "Wrong number of rules returned (1)", 3, matches.size() );
-        assertEquals( "Rule Out Of Order (1)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (2)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (3)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
+        assertEquals( 3, matches.size(), "Wrong number of rules returned (1)" );
+        assertEquals( "alpha", ( ( TestRule ) matches.get( 0 ) ).getIdentifier(), "Rule Out Of Order (1)" );
+        assertEquals( "beta", ( ( TestRule ) matches.get( 1 ) ).getIdentifier(), "Rule Out Of Order (2)" );
+        assertEquals( "gamma", ( ( TestRule ) matches.get( 2 ) ).getIdentifier(), "Rule Out Of Order (3)" );
 
         matches = rules.match( "", "/eggs", null, null );
-        assertEquals( "Wrong number of rules returned (2)", 3, matches.size() );
-        assertEquals( "Rule Out Of Order (4)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (5)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (6)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
+        assertEquals( 3, matches.size(), "Wrong number of rules returned (2)" );
+        assertEquals( "alpha", ( ( TestRule ) matches.get( 0 ) ).getIdentifier(), "Rule Out Of Order (4)" );
+        assertEquals( "beta", ( ( TestRule ) matches.get( 1 ) ).getIdentifier(), "Rule Out Of Order (5)" );
+        assertEquals( "gamma", ( ( TestRule ) matches.get( 2 ) ).getIdentifier(), "Rule Out Of Order (6)" );
 
         rules.clear();
         matches = rules.rules();
-        assertEquals( "Wrong number of rules returned (3)", 0, matches.size() );
+        assertEquals( 0, matches.size(), "Wrong number of rules returned (3)" );
 
         matches = rules.match( "", "/eggs", null, null );
-        assertEquals( "Wrong number of rules returned (4)", 0, matches.size() );
+        assertEquals( 0, matches.size(), "Wrong number of rules returned (4)" );
     }
 
     /** Test regex that matches everything */
@@ -90,16 +92,16 @@ public class RegexRulesTestCase
         // now test a few patterns
         // check that all are return in the order which they were added
         List<Rule> matches = rules.match( "", "x/g/e", null, null );
-        assertEquals( "Wrong number of rules returned (1)", 3, matches.size() );
-        assertEquals( "Rule Out Of Order (1)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (2)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (3)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
+        assertEquals( 3, matches.size(), "Wrong number of rules returned (1)" );
+        assertEquals( "alpha", ( ( TestRule ) matches.get( 0 ) ).getIdentifier(), "Rule Out Of Order (1)" );
+        assertEquals( "beta", ( ( TestRule ) matches.get( 1 ) ).getIdentifier(), "Rule Out Of Order (2)" );
+        assertEquals( "gamma", ( ( TestRule ) matches.get( 2 ) ).getIdentifier(), "Rule Out Of Order (3)" );
 
         matches = rules.match( "", "/a", null, null );
-        assertEquals( "Wrong number of rules returned (2)", 3, matches.size() );
-        assertEquals( "Rule Out Of Order (4)", "alpha", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (5)", "beta", ( (TestRule) matches.get( 1 ) ).getIdentifier() );
-        assertEquals( "Rule Out Of Order (6)", "gamma", ( (TestRule) matches.get( 2 ) ).getIdentifier() );
+        assertEquals( 3, matches.size(), "Wrong number of rules returned (2)" );
+        assertEquals( "alpha", ( ( TestRule ) matches.get( 0 ) ).getIdentifier(), "Rule Out Of Order (4)" );
+        assertEquals( "beta", ( ( TestRule ) matches.get( 1 ) ).getIdentifier(), "Rule Out Of Order (5)" );
+        assertEquals( "gamma", ( ( TestRule ) matches.get( 2 ) ).getIdentifier(), "Rule Out Of Order (6)" );
     }
 
     /** Test a mixed regex - in other words, one that sometimes returns true and sometimes false */
@@ -123,11 +125,11 @@ public class RegexRulesTestCase
         // now test a few patterns
         // check that all are return in the order which they were added
         List<Rule> matches = rules.match( "", "/match", null, null );
-        assertEquals( "Wrong number of rules returned (1)", 1, matches.size() );
-        assertEquals( "Wrong Rule (1)", "beta", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
+        assertEquals( 1, matches.size(), "Wrong number of rules returned (1)" );
+        assertEquals( "beta", ( ( TestRule ) matches.get( 0 ) ).getIdentifier(), "Wrong Rule (1)" );
 
         matches = rules.match( "", "/a/match", null, null );
-        assertEquals( "Wrong Rule (2)", "beta", ( (TestRule) matches.get( 0 ) ).getIdentifier() );
+        assertEquals( "beta", ( ( TestRule ) matches.get( 0 ) ).getIdentifier(), "Wrong Rule (2)" );
     }
 
     /** Test regex matcher that matches nothing */
@@ -151,10 +153,10 @@ public class RegexRulesTestCase
         // now test a few patterns
         // check that all are return in the order which they were added
         List<Rule> matches = rules.match( "", "/b/c", null, null );
-        assertEquals( "Wrong number of rules returned (1)", 0, matches.size() );
+        assertEquals( 0, matches.size(), "Wrong number of rules returned (1)" );
 
         matches = rules.match( "", "/b/c/f", null, null );
-        assertEquals( "Wrong number of rules returned (2)", 0, matches.size() );
+        assertEquals( 0, matches.size(), "Wrong number of rules returned (2)" );
     }
 
     @Test
@@ -166,38 +168,23 @@ public class RegexRulesTestCase
         // SimpleLog log = new SimpleLog("{testSimpleRegexMatch:SimpleRegexMatcher]");
         // log.setLevel(SimpleLog.LOG_LEVEL_TRACE);
 
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/beta/gamma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/beta/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/beta/gamma/epsilon' ", false,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/beta/gamma/epsilon" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/*' ", true,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/*" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/*/gamma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/*/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/*me' ", false,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/*me" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '*/beta/gamma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "*/beta/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '*/alpha/beta/gamma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "*/alpha/beta/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '*/bet/gamma' ", false,
-                      matcher.match( "/alpha/beta/gamma", "*/bet/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to 'alph?/beta/gamma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "/alph?/beta/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/?lpha/beta/gamma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "/?lpha/beta/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/?beta/gamma' ", false,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/?beta/gamma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/?eta/*' ", true,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/?eta/*" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '/alpha/?eta/*e' ", false,
-                      matcher.match( "/alpha/beta/gamma", "/alpha/?eta/*e" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma' to '*/?et?/?amma' ", true,
-                      matcher.match( "/alpha/beta/gamma", "*/?et?/?amma" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma/beta/epsilon/beta/gamma/epsilon' to "
-                          + " '*/beta/gamma/?p*n' ", true,
-                      matcher.match( "/alpha/beta/gamma/beta/epsilon/beta/gamma/epsilon", "*/beta/gamma/?p*n" ) );
-        assertEquals( "Simple Regex Match '/alpha/beta/gamma/beta/epsilon/beta/gamma/epsilon' to "
-            + " '*/beta/gamma/?p*no' ", false, matcher.match( "/alpha/beta/gamma", "*/beta/gamma/?p*no" ) );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "/alpha/beta/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/beta/gamma' " );
+        assertFalse( matcher.match( "/alpha/beta/gamma", "/alpha/beta/gamma/epsilon" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/beta/gamma/epsilon' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "/alpha/*" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/*' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "/alpha/*/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/*/gamma' " );
+        assertFalse( matcher.match( "/alpha/beta/gamma", "/alpha/*me" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/*me' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "*/beta/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '*/beta/gamma' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "*/alpha/beta/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '*/alpha/beta/gamma' " );
+        assertFalse( matcher.match( "/alpha/beta/gamma", "*/bet/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '*/bet/gamma' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "/alph?/beta/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to 'alph?/beta/gamma' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "/?lpha/beta/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '/?lpha/beta/gamma' " );
+        assertFalse( matcher.match( "/alpha/beta/gamma", "/alpha/?beta/gamma" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/?beta/gamma' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "/alpha/?eta/*" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/?eta/*' " );
+        assertFalse( matcher.match( "/alpha/beta/gamma", "/alpha/?eta/*e" ), "Simple Regex Match '/alpha/beta/gamma' to '/alpha/?eta/*e' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma", "*/?et?/?amma" ), "Simple Regex Match '/alpha/beta/gamma' to '*/?et?/?amma' " );
+        assertTrue( matcher.match( "/alpha/beta/gamma/beta/epsilon/beta/gamma/epsilon", "*/beta/gamma/?p*n" ), "Simple Regex Match '/alpha/beta/gamma/beta/epsilon/beta/gamma/epsilon' to "
+                + " '*/beta/gamma/?p*n' " );
+        assertFalse( matcher.match( "/alpha/beta/gamma", "*/beta/gamma/?p*no" ), "Simple Regex Match '/alpha/beta/gamma/beta/epsilon/beta/gamma/epsilon' to "
+                + " '*/beta/gamma/?p*no' " );
     }
 }

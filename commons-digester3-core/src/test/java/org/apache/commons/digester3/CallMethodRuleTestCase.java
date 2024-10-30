@@ -19,10 +19,12 @@
 package org.apache.commons.digester3;
 
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +34,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import org.apache.commons.digester3.binder.AbstractRulesModule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 //import org.apache.commons.logging.impl.SimpleLog;
@@ -107,7 +109,7 @@ public class CallMethodRuleTestCase
         final CallMethodRule r = new CallMethodRule( 1, "put", 0 );
         digester.addRule( "employee", r );
 
-        assertThrows( "Exception should be thrown for invalid target offset", SAXException.class, () -> digester.parse( getInputStream( "Test5.xml" ) ) );
+        assertThrows( SAXException.class, () -> digester.parse( getInputStream( "Test5.xml" ) ), "Exception should be thrown for invalid target offset" );
     }
 
     /**
@@ -132,11 +134,11 @@ public class CallMethodRuleTestCase
 
         // Parse our test input
         final Employee employee = digester.parse( getInputStream( "Test9.xml" ) );
-        assertNotNull( "parsed an employee", employee );
+        assertNotNull( employee, "parsed an employee" );
 
         // Validate that the property setters were called
-        assertEquals( "Set first name", "First Name", employee.getFirstName() );
-        assertEquals( "Set last name", "Last Name", employee.getLastName() );
+        assertEquals( "First Name", employee.getFirstName(), "Set first name" );
+        assertEquals( "Last Name", employee.getLastName(), "Set last name" );
     }
 
     /**
@@ -250,17 +252,17 @@ public class CallMethodRuleTestCase
         digester.push( list );
         digester.parse( reader );
 
-        assertEquals( "Wrong number of beans in list", 5, list.size() );
+        assertEquals( 5, list.size(), "Wrong number of beans in list" );
         NamedBean bean = list.get( 0 );
-        assertEquals( "Parameter not set from stack (1)", "Mary had a little lamb,", bean.getName() );
+        assertEquals( "Mary had a little lamb,", bean.getName(), "Parameter not set from stack (1)" );
         bean = list.get( 1 );
-        assertEquals( "Parameter not set from stack (2)", "It's fleece was white as snow.", bean.getName() );
+        assertEquals( "It's fleece was white as snow.", bean.getName(), "Parameter not set from stack (2)" );
         bean = list.get( 2 );
-        assertEquals( "Parameter not set from stack (3)", "And everywhere that Mary went,", bean.getName() );
+        assertEquals( "And everywhere that Mary went,", bean.getName(), "Parameter not set from stack (3)" );
         bean = list.get( 3 );
-        assertEquals( "Parameter not set from stack (4)", "That lamb was sure to go.", bean.getName() );
+        assertEquals( "That lamb was sure to go.", bean.getName(), "Parameter not set from stack (4)" );
         bean = list.get( 4 );
-        assertEquals( "Out of stack not set to null", null, bean.getName() );
+        assertNull( bean.getName(), "Out of stack not set to null" );
     }
 
     @Test
@@ -303,16 +305,16 @@ public class CallMethodRuleTestCase
         digester.parse( reader );
 
         NamedBean bean = list.get( 0 );
-        assertEquals( "Wrong name (1)", "Simple", bean.getName() );
+        assertEquals( "Simple", bean.getName(), "Wrong name (1)" );
         // these are added in deepest first order by the addRootRule
         bean = list.get( 4 );
-        assertEquals( "Wrong name (2)", "Complex", bean.getName() );
+        assertEquals( "Complex", bean.getName(), "Wrong name (2)" );
         bean = list.get( 3 );
-        assertEquals( "Wrong name (3)", "Deep", bean.getName() );
+        assertEquals( "Deep", bean.getName(), "Wrong name (3)" );
         bean = list.get( 2 );
-        assertEquals( "Wrong name (4)", "Deeper", bean.getName() );
+        assertEquals( "Deeper", bean.getName(), "Wrong name (4)" );
         bean = list.get( 1 );
-        assertEquals( "Wrong name (5)", "Deepest", bean.getName() );
+        assertEquals( "Deepest", bean.getName(), "Wrong name (5)" );
     }
 
     /**
@@ -356,7 +358,7 @@ public class CallMethodRuleTestCase
         // be the first-created (root) one, despite the fact that a second
         // object instance was created between the firing of the
         // CallMethodRule and its associated CallParamRule.
-        assertEquals( "Wrong method call order", "C", root1.getName() );
+        assertEquals( "C", root1.getName(), "Wrong method call order" );
     }
 
     /**
@@ -392,7 +394,7 @@ public class CallMethodRuleTestCase
         // an exception will be thrown if the method can't be found
         assertNotNull( digester.parse( getInputStream( "Test8.xml" ) ) );
 
-        assertEquals( "Wrong method call order", "CBA", word.toString() );
+        assertEquals( "CBA", word.toString(), "Wrong method call order" );
     }
 
     /**
@@ -458,8 +460,8 @@ public class CallMethodRuleTestCase
 
         digester.parse( in );
 
-        assertEquals( "Test alpha property setting", "main/alpha/beta", bean.getAlpha() );
-        assertEquals( "Test beta property setting", "main/beta/epsilon/gamma", bean.getBeta() );
+        assertEquals( "main/alpha/beta", bean.getAlpha(), "Test alpha property setting" );
+        assertEquals( "main/beta/epsilon/gamma", bean.getBeta(), "Test beta property setting" );
     }
 
     @Test
@@ -494,25 +496,25 @@ public class CallMethodRuleTestCase
         digester.push( list );
         digester.parse( reader );
 
-        assertEquals( "Wrong number of beans in list", 6, list.size() );
+        assertEquals( 6, list.size(), "Wrong number of beans in list" );
         PrimitiveBean bean = list.get( 0 );
-        assertTrue( "Bean 0 property not called", bean.getSetBooleanCalled() );
-        assertEquals( "Bean 0 property incorrect", true, bean.getBoolean() );
+        assertTrue( bean.getSetBooleanCalled(), "Bean 0 property not called" );
+        assertTrue( bean.getBoolean(), "Bean 0 property incorrect" );
         bean = list.get( 1 );
-        assertTrue( "Bean 1 property not called", bean.getSetBooleanCalled() );
-        assertEquals( "Bean 1 property incorrect", false, bean.getBoolean() );
+        assertTrue( bean.getSetBooleanCalled(), "Bean 1 property not called" );
+        assertFalse( bean.getBoolean(), "Bean 1 property incorrect" );
         bean = list.get( 2 );
         // no attibute, no call is what's expected
-        assertTrue( "Bean 2 property called", !bean.getSetBooleanCalled() );
+        assertFalse( bean.getSetBooleanCalled(), "Bean 2 property called" );
         bean = list.get( 3 );
-        assertTrue( "Bean 3 property not called", bean.getSetBooleanCalled() );
-        assertEquals( "Bean 3 property incorrect", true, bean.getBoolean() );
+        assertTrue( bean.getSetBooleanCalled(), "Bean 3 property not called" );
+        assertTrue( bean.getBoolean(), "Bean 3 property incorrect" );
         bean = list.get( 4 );
-        assertTrue( "Bean 4 property not called", bean.getSetBooleanCalled() );
-        assertEquals( "Bean 4 property incorrect", false, bean.getBoolean() );
+        assertTrue( bean.getSetBooleanCalled(), "Bean 4 property not called" );
+        assertFalse( bean.getBoolean(), "Bean 4 property incorrect" );
         bean = list.get( 5 );
-        assertTrue( "Bean 5 property not called", bean.getSetBooleanCalled() );
-        assertEquals( "Bean 5 property incorrect", false, bean.getBoolean() );
+        assertTrue( bean.getSetBooleanCalled(), "Bean 5 property not called" );
+        assertFalse( bean.getBoolean(), "Bean 5 property incorrect" );
     }
 
     @Test
@@ -557,8 +559,8 @@ public class CallMethodRuleTestCase
         digester.push( list );
         digester.parse( reader );
 
-        assertEquals( "Wrong number of objects created", 1, list.size() );
-        assertEquals( "Result not passed into hook", "The Other", rule.result );
+        assertEquals( 1, list.size(), "Wrong number of objects created" );
+        assertEquals( "The Other", rule.result, "Result not passed into hook" );
     }
 
     /**
@@ -586,7 +588,7 @@ public class CallMethodRuleTestCase
 
         // an exception will be thrown if the method can't be found
         Employee employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setLastName", "Last Name", employee.getLastName() );
+        assertEquals( "Last Name", employee.getLastName(), "Failed to call Employee.setLastName" );
 
         digester = newLoader( new AbstractRulesModule()
         {
@@ -605,7 +607,7 @@ public class CallMethodRuleTestCase
         // Parse our test input
         // an exception will be thrown if the method can't be found
         employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setAge", 21, employee.getAge() );
+        assertEquals( 21, employee.getAge(), "Failed to call Employee.setAge" );
 
         digester = newLoader( new AbstractRulesModule()
         {
@@ -624,7 +626,7 @@ public class CallMethodRuleTestCase
         // Parse our test input
         // an exception will be thrown if the method can't be found
         employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setActive", true, employee.isActive() );
+        assertTrue( employee.isActive(), "Failed to call Employee.setActive" );
 
         digester = newLoader( new AbstractRulesModule()
         {
@@ -643,7 +645,7 @@ public class CallMethodRuleTestCase
         // Parse our test input
         // an exception will be thrown if the method can't be found
         employee = digester.parse( getInputStream( "Test5.xml" ) );
-        assertEquals( "Failed to call Employee.setSalary", 1000000.0f, employee.getSalary(), 0.1f );
+        assertEquals( 1000000.0f, employee.getSalary(), 0.1f, "Failed to call Employee.setSalary" );
     }
 
     @Test
@@ -672,19 +674,19 @@ public class CallMethodRuleTestCase
         digester.push( list );
         digester.parse( reader );
 
-        assertEquals( "Wrong number of objects created", 3, list.size() );
+        assertEquals(3, list.size(), "Wrong number of objects created");
         ParamBean bean = list.get( 0 );
-        assertEquals( "Coolness wrong (1)", true, bean.isCool() );
-        assertEquals( "This wrong (1)", "int", bean.getThis() );
-        assertEquals( "That wrong (1)", "25", bean.getThat() );
+        assertTrue( bean.isCool(), "Coolness wrong (1)" );
+        assertEquals( "int", bean.getThis(), "This wrong (1)" );
+        assertEquals( "25", bean.getThat(), "That wrong (1)" );
         bean = list.get( 1 );
-        assertEquals( "Coolness wrong (2)", false, bean.isCool() );
-        assertEquals( "This wrong (2)", "long", bean.getThis() );
-        assertEquals( "That wrong (2)", "50", bean.getThat() );
+        assertFalse(bean.isCool(), "Coolness wrong (2)" );
+        assertEquals( "long", bean.getThis(), "This wrong (2)" );
+        assertEquals( "50", bean.getThat(), "That wrong (2)" );
         bean = list.get( 2 );
-        assertEquals( "Coolness wrong (3)", false, bean.isCool() );
-        assertEquals( "This wrong (3)", "float", bean.getThis() );
-        assertEquals( "That wrong (3)", "90", bean.getThat() );
+        assertFalse( bean.isCool(), "Coolness wrong (3)" );
+        assertEquals( "float", bean.getThis(), "This wrong (3)" );
+        assertEquals( "90", bean.getThat(), "That wrong (3)" );
     }
 
 }

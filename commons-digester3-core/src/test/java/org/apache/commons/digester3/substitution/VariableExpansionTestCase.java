@@ -18,7 +18,7 @@
 
 package org.apache.commons.digester3.substitution;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import org.apache.commons.digester3.CallMethodRule;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.SimpleTestBean;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -120,7 +120,7 @@ public class VariableExpansionTestCase
         // Parse our test input.
         final SimpleTestBean root = digester.parse( input );
 
-        assertNotNull( "Digester returned no object", root );
+        assertNotNull( root, "Digester returned no object" );
 
         assertEquals( "Twas brillig and the slithy toves" + " did gyre and gimble in the wabe", root.getAlpha() );
     }
@@ -145,7 +145,7 @@ public class VariableExpansionTestCase
         digester.addSetProperties( "root" );
 
         // Parse our test input.
-        assertThrows( "Exception expected due to unknown variable.", SAXException.class, () -> digester.parse( input ) );
+        assertThrows( SAXException.class, () -> digester.parse( input ), "Exception expected due to unknown variable." );
     }
 
     /**
@@ -279,7 +279,7 @@ public class VariableExpansionTestCase
         // Parse our test input.
         final SimpleTestBean root = digester.parse( input );
 
-        assertNotNull( "Digester returned no object", root );
+        assertNotNull( root, "Digester returned no object" );
 
         assertEquals( "${attr1}", root.getAlpha() );
         assertEquals( "var{attr2}", root.getBeta() );
@@ -304,7 +304,7 @@ public class VariableExpansionTestCase
         // Parse our test input.
         final SimpleTestBean root = digester.parse( input );
 
-        assertNotNull( "Digester returned no object", root );
+        assertNotNull( root, "Digester returned no object" );
 
         assertEquals( "${attr1}", root.getAlpha() );
         assertEquals( "var{attr2}", root.getBeta() );
