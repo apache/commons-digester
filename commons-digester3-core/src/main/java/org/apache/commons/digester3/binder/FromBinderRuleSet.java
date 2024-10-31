@@ -77,13 +77,13 @@ final class FromBinderRuleSet
                 return false;
             }
 
-            final Key other = (Key) obj;
-            if ( !Objects.equals(namespaceURI, other.getNamespaceURI()) )
+            final Key other = ( Key ) obj;
+            if ( !Objects.equals( namespaceURI, other.getNamespaceURI() ) )
             {
                 return false;
             }
 
-            if ( !Objects.equals(pattern, other.getPattern()) )
+            if ( !Objects.equals( pattern, other.getPattern() ) )
             {
                 return false;
             }
@@ -107,7 +107,7 @@ final class FromBinderRuleSet
         @Override
         public int hashCode()
         {
-            return Objects.hash(namespaceURI, pattern);
+            return Objects.hash( namespaceURI, pattern );
         }
 
         /**

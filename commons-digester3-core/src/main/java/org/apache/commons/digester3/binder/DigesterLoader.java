@@ -555,7 +555,7 @@ public final class DigesterLoader
     public DigesterLoader setFeature( final String feature, final boolean value )
         throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException
     {
-        factory.setFeature(feature, value);
+        factory.setFeature( feature, value );
         return this;
     }
 

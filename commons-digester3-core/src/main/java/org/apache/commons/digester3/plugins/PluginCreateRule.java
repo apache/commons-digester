@@ -541,7 +541,8 @@ public class PluginCreateRule
                 log.debug( "init: pluginClassAttr set to per-digester values [" + "ns=" + pluginClassAttrNs + ", name="
                     + pluginClassAttr + "]" );
             }
-        } else if ( debug )
+        }
+        else if ( debug )
         {
             log.debug( "init: pluginClassAttr set to rule-specific values [" + "ns=" + pluginClassAttrNs
                 + ", name=" + pluginClassAttr + "]" );
@@ -559,7 +560,8 @@ public class PluginCreateRule
                 log.debug( "init: pluginIdAttr set to per-digester values [" + "ns=" + pluginIdAttrNs + ", name="
                     + pluginIdAttr + "]" );
             }
-        } else if ( debug )
+        }
+        else if ( debug )
         {
             log.debug( "init: pluginIdAttr set to rule-specific values [" + "ns=" + pluginIdAttrNs + ", name="
                 + pluginIdAttr + "]" );

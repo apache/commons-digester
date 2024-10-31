@@ -140,7 +140,8 @@ final class DefaultRulesBinder
         {
             addError( "Null or empty pattern is not valid" );
             keyPattern = null;
-        } else if ( pattern.endsWith( "/" ) )
+        }
+        else if ( pattern.endsWith( "/" ) )
         {
             // to help users who accidently add '/' to the end of their patterns
             keyPattern = pattern.substring( 0, pattern.length() - 1 );

@@ -57,12 +57,13 @@ final class CallParamRule
             }
             else if ( fromStack != null )
             {
-                builder.fromStack( Boolean.parseBoolean(fromStack) );
+                builder.fromStack( Boolean.parseBoolean( fromStack ) );
             }
         }
         else
         {
-            if ( fromStack != null ) {
+            if ( fromStack != null )
+            {
                 // specifying both from-stack and attribute name is not allowed
                 throw new IllegalArgumentException( "Attributes from-stack and attrname cannot both be present." );
             }

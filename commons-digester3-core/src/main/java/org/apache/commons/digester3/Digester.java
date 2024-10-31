@@ -1308,7 +1308,8 @@ public class Digester
             {
                 bodyText = substitutor.substitute( bodyText );
             }
-            for (final Rule rule : rules) {
+            for ( final Rule rule : rules )
+            {
                 try
                 {
                     if ( debug )
@@ -1328,7 +1329,8 @@ public class Digester
                     throw e;
                 }
             }
-        } else if ( debug )
+        }
+        else if ( debug )
         {
             log.debug( "  No rules found matching '" + match + "'." );
         }
@@ -1419,7 +1421,7 @@ public class Digester
     public void error( final SAXParseException exception )
         throws SAXException
     {
-    	log.error( "Parse Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
+        log.error( "Parse Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
                 + exception.getMessage(), exception );
     }
 
@@ -3000,7 +3002,8 @@ public class Digester
             {
                 list = substitutor.substitute( list );
             }
-            for (final Rule rule : rules) {
+            for ( final Rule rule : rules )
+            {
                 try
                 {
                     if ( debug )
@@ -3020,7 +3023,8 @@ public class Digester
                     throw e;
                 }
             }
-        } else if ( debug )
+        }
+        else if ( debug )
         {
             log.debug( "  No rules found matching '" + match + "'." );
         }

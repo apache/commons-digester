@@ -276,8 +276,8 @@ public class ExtendedBaseRules
             // so ignore all basic matches from now on
             ignoreBasicMatches = true;
 
-        } else // see if we have an exact child match
-        if ( hasParent )
+        }
+        else if ( hasParent ) // see if we have an exact child match
         {
             // matching children takes preference
             rulesList = this.cache.get( parentPattern + "/?" );
@@ -392,7 +392,8 @@ public class ExtendedBaseRules
                             universalList.addAll( tempList );
                         }
 
-                    } else if ( !ignoreBasicMatches )
+                    }
+                    else if ( !ignoreBasicMatches )
                     {
                         // ensure that all parent matches are SHORTER
                         // than rules with same level of matching.

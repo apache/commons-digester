@@ -71,7 +71,7 @@ final class PatternRuleMatcher
         }
 
         final PatternRuleMatcher other = (PatternRuleMatcher) obj;
-        if ( !Objects.equals(namespaceURI, other.getNamespaceURI()) )
+        if ( !Objects.equals( namespaceURI, other.getNamespaceURI() ) )
         {
             return false;
         }
