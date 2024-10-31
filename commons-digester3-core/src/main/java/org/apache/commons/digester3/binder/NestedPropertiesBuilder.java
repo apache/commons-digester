@@ -48,7 +48,7 @@ public final class NestedPropertiesBuilder
     /**
      * Allows element2property mapping to be overridden.
      *
-     * @param elementName The child xml element to match
+     * @param elementName The child XML element to match
      * @return the property alias builder
      * @since 3.2
      */
@@ -64,7 +64,7 @@ public final class NestedPropertiesBuilder
     /**
      * Allows element2property mapping to be overridden.
      *
-     * @param elementName The child xml element to match
+     * @param elementName The child XML element to match
      * @param propertyName The Java bean property to be assigned the value
      * @return this builder instance
      * @deprecated
@@ -101,7 +101,7 @@ public final class NestedPropertiesBuilder
     /**
      * Allows ignore a matching element.
      *
-     * @param elementName The child xml element to be ignored
+     * @param elementName The child XML element to be ignored
      * @return this builder instance
      */
     public NestedPropertiesBuilder ignoreElement( final String elementName )

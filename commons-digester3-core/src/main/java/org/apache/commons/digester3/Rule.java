@@ -27,7 +27,7 @@ import org.xml.sax.Attributes;
  * <p>
  * Writing a custom Rule is considered perfectly normal when using Digester, and
  * is encouraged whenever the default set of Rule classes don't meet your
- * requirements; the digester framework can help process xml even when the
+ * requirements; the digester framework can help process XML even when the
  * built-in rules aren't quite what is needed. Creating a custom Rule is just as
  * easy as subclassing javax.servlet.http.HttpServlet for webapps, or
  * javax.swing.Action for GUI applications.

@@ -25,7 +25,7 @@ Topics covered:
   rules specified in an external file.
 * how to parse a file
 * how to use the "object create" rule to create java objects
-* how to use the "set properties" rule (basic usage) to map xml attributes
+* how to use the "set properties" rule (basic usage) to map XML attributes
   to java bean properties.
 * how to use the "set nested properties" rule (basic usage) to map nested
   elements to java bean properties.
@@ -34,7 +34,7 @@ Topics covered:
 * how to use the "call parameter rule" to process the text contained
   in a tag's body
 * how to use the "call parameter rule" to process the contents of an 
-  xml attribute.
+  XML attribute.
 
 == compiling and running
 

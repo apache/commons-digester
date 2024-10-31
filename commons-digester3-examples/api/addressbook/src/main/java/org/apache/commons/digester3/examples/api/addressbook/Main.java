@@ -55,14 +55,14 @@ public class Main
         // instance created by the preceding rule).
         //
         // For example:
-        // if attribute "id" exists on the xml tag, and method setId
+        // if attribute "id" exists on the XML tag, and method setId
         // with one parameter exists on the object that is on top of
         // the digester object stack, then a call will be made to that
         // method. The value will be type-converted from string to
         // whatever type the target method declares (where possible),
         // using the commons ConvertUtils functionality.
         //
-        // Attributes on the xml tag for which no setter methods exist
+        // Attributes on the XML tag for which no setter methods exist
         // on the top object on the stack are just ignored.
         d.addSetProperties( "address-book/person" );
 
@@ -95,10 +95,10 @@ public class Main
         // doing that, call addAddress on the second-to-top object on the
         // digester stack (a "Person" object), passing the top object on
         // the digester stack (the "Address" object). And also set things
-        // up so that for each child xml element encountered between the start
+        // up so that for each child XML element encountered between the start
         // of the address tag and the end of the address tag, the text
         // contained in that element is passed to a setXXX method on the
-        // Address object where XXX is the name of the xml element found.
+        // Address object where XXX is the name of the XML element found.
         d.addObjectCreate( "address-book/person/address", Address.class );
         d.addSetNext( "address-book/person/address", "addAddress" );
         d.addSetNestedProperties( "address-book/person/address" );

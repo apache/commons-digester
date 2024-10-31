@@ -27,7 +27,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * A RuleLoader which creates a single SetPropertiesRule and adds it to the digester when its addRules() method is
  * invoked.
  * <p>
- * This loader ensures that any xml attributes on the plugin tag get mapped to equivalent properties on a javabean. This
+ * This loader ensures that any XML attributes on the plugin tag get mapped to equivalent properties on a javabean. This
  * allows JavaBean classes to be used as plugins without any requirement to create custom plugin rules.
  *
  * @since 1.6

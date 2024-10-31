@@ -128,7 +128,7 @@ public class FromXmlRuleSetTest
 
     /**
      * Tests the DigesterLoader.createDigester(), with multiple
-     * included rule sources: testrules.xml includes another rules xml
+     * included rule sources: testrules.xml includes another rules XML
      * file, and also includes programmatically created rules.
      */
     @Test
@@ -231,7 +231,7 @@ public class FromXmlRuleSetTest
 
     /**
      * Tests the DigesterLoader.load(), with multiple included rule
-     * sources: testrules.xml includes another rules xml file, and
+     * sources: testrules.xml includes another rules XML file, and
      * also includes programmatically created rules.
      */
     @Test

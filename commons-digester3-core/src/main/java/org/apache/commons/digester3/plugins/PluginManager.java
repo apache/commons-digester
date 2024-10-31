@@ -112,9 +112,9 @@ public class PluginManager
      * If no source of custom rules can be found, null is returned.
      *
      * @param digester The digester instance where locating plugin classes
-     * @param id The id that the user associated with a particular plugin declaration in the input xml
+     * @param id The id that the user associated with a particular plugin declaration in the input XML
      * @param pluginClass The plugin Java class
-     * @param props The properties object that holds any xml attributes the user may have specified on the plugin
+     * @param props The properties object that holds any XML attributes the user may have specified on the plugin
      *        declaration in order to indicate how to locate the plugin rules.
      * @return The discovered Rule loader instance
      * @throws PluginException if any error occurs while finding the loader

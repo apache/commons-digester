@@ -43,14 +43,14 @@ public class SetPropertyRuleTestCase
 {
 
     /**
-     * Simple test xml document used in the tests.
+     * Simple test XML document used in the tests.
      */
     protected final static String TEST_XML_1 = "<?xml version='1.0'?><root>"
         + "<set name='alpha' value='ALPHA VALUE'/>" + "<set name='beta' value='BETA VALUE'/>"
         + "<set name='delta' value='DELTA VALUE'/>" + "</root>";
 
     /**
-     * Simple test xml document used in the tests.
+     * Simple test XML document used in the tests.
      */
     protected final static String TEST_XML_2 = "<?xml version='1.0'?><root>"
         + "<set name='unknown' value='UNKNOWN VALUE'/>" + "</root>";

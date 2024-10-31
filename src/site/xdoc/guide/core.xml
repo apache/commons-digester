@@ -967,7 +967,7 @@ Example usage:
 <code>Digester</code> ships only with one <code>RegexMatcher</code>
 implementation: <a href="../apidocs/SimpleRegexMatcher.html">SimpleRegexMatcher</a>.
 This implementation is unsophisticated and lacks many good features
-lacking in more power Regex libraries. There are some good reasons
+found in more powerful libraries. There are some good reasons
 why this approach was adopted. The first is that <code>SimpleRegexMatcher</code>
 is simple, it is easy to write and runs quickly. The second has to do with 
 the way that <code>RegexRules</code> is intended to be used.
@@ -1093,16 +1093,16 @@ public class MyRuleSet
     <section name="Using Named Stacks For Inter-Rule Communication" id="doc.NamedStacks">
       <p>
 <code>Digester</code> is based on <code>Rule</code> instances working together 
-to process xml. For anything other than the most trivial processing, 
+to process XML. For anything other than the most trivial processing, 
 communication between <code>Rule</code> instances is necessary. Since <code>Rule</code>
 instances are processed in sequence, this usually means storing an Object 
 somewhere where later instances can retrieve it.
 </p>
 <p>
 <code>Digester</code> is based on SAX. The most natural data structure to use with 
-SAX based xml processing is the stack. This allows more powerful processes to be
+SAX based XML processing is the stack. This allows more powerful processes to be
 specified more simply since the pushing and popping of objects can mimic the 
-nested structure of the xml. 
+nested structure of the XML. 
 </p>
 <p>
 <code>Digester</code> uses two basic stacks: one for the main beans and the other 
@@ -1157,7 +1157,7 @@ can be downloaded.
 <p>
 URLs may be local or remote but if the URL is chosen to be local, it is likely only
 to function correctly on a small number of machines (which are configured precisely
-to allow the xml to be parsed). This is usually unsatisfactory and so a universally
+to allow the XML to be parsed). This is usually unsatisfactory and so a universally
 accessible URL is preferred. This usually means an internet URL.
 </p>
 <p>
@@ -1232,7 +1232,7 @@ This is a short, potted guide to SAX error handling strategies. It's not intende
 proper guide to error handling in SAX.
 </p>
 <p>
-When a SAX parser encounters a problem with the xml (well, ok - sometime after it 
+When a SAX parser encounters a problem with the XML (well, ok - sometime after it 
 encounters a problem) it will throw a 
 <a href='http://www.saxproject.org/apidoc/org/xml/sax/SAXParseException.html'>
 SAXParseException</a>. This is a subclass of <code>SAXException</code> and contains
@@ -1269,7 +1269,7 @@ manipulation of attributes and element body text before it is processed by the r
     </li>
     <li>
 <a href="../apidocs/org/apache/commons/digester3/xmlrules/package-summary.html">xmlrules</a> package contains a
-system allowing digester rule configurations to be specified through an xml file.
+system allowing digester rule configurations to be specified through an XML file.
     </li>
     <li>
 <a href="../apidocs/org/apache/commons/digester3/annotations/package-summary.html">annotations</a> package contains a

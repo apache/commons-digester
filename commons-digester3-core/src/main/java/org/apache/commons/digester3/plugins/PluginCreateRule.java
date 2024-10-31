@@ -115,7 +115,7 @@ public class PluginCreateRule
     }
 
     /**
-     * Invoked when the Digester matches this rule against an xml element.
+     * Invoked when the Digester matches this rule against an XML element.
      * <p>
      * A new instance of the target class is created, and pushed onto the stack. A new "private" PluginRules object is
      * then created and set as the digester's default Rules object. Any custom rules associated with the plugin class
@@ -471,7 +471,7 @@ public class PluginCreateRule
             // having wildcards in patterns is extremely difficult to
             // deal with. For now, we refuse to allow this.
             //
-            // TODO: check for any chars not valid in xml element name
+            // TODO: check for any chars not valid in XML element name
             // rather than just *.
             //
             // Reasons include:
@@ -522,7 +522,7 @@ public class PluginCreateRule
 
         if ( pluginClassAttr == null )
         {
-            // the user hasn't set explicit xml attr names on this rule,
+            // the user hasn't set explicit XML attr names on this rule,
             // so fetch the default values
             pluginClassAttrNs = rules.getPluginClassAttrNs();
             pluginClassAttr = rules.getPluginClassAttr();
@@ -541,7 +541,7 @@ public class PluginCreateRule
 
         if ( pluginIdAttr == null )
         {
-            // the user hasn't set explicit xml attr names on this rule,
+            // the user hasn't set explicit XML attr names on this rule,
             // so fetch the default values
             pluginIdAttrNs = rules.getPluginIdAttrNs();
             pluginIdAttr = rules.getPluginIdAttr();
@@ -560,7 +560,7 @@ public class PluginCreateRule
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which class should be
+     * Sets the XML attribute which the input XML uses to indicate to a PluginCreateRule which class should be
      * instantiated.
      * <p>
      * See {@link PluginRules#setPluginClassAttribute} for more info.
@@ -578,7 +578,7 @@ public class PluginCreateRule
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which plugin declaration is
+     * Sets the XML attribute which the input XML uses to indicate to a PluginCreateRule which plugin declaration is
      * being referenced.
      * <p>
      * See {@link PluginRules#setPluginIdAttribute} for more info.

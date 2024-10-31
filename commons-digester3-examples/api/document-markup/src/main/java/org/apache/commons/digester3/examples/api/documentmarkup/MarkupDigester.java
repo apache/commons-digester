@@ -105,7 +105,7 @@ public class MarkupDigester
      * Iterate over the list of rules most recently matched, and
      * if any of them implement the TextSegmentHandler interface then
      * invoke that rule's textSegment method passing the current
-     * segment of text from the xml element body.
+     * segment of text from the XML element body.
      */
     private void handleTextSegments()
         throws SAXException

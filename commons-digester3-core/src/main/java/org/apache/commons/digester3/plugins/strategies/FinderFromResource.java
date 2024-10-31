@@ -39,7 +39,7 @@ public class FinderFromResource
 {
 
     /**
-     * Default name of xml attribute on the plugin declaration which is used to configure rule-loading
+     * Default name of XML attribute on the plugin declaration which is used to configure rule-loading
      * for that declaration.
      */
     private static final String DFLT_RESOURCE_ATTR = "resource";
@@ -49,7 +49,7 @@ public class FinderFromResource
      * it through the xmlrules module and return an object encapsulating those rules.
      *
      * @param d is the digester into which rules will eventually be loaded.
-     * @param pluginClass is the class whose xml params the rules are parsing.
+     * @param pluginClass is the class whose XML params the rules are parsing.
      * @param is is where the xmlrules will be read from, and must be non-null.
      * @param resourceName is a string describing the source of the xmlrules, for use in generating error messages.
      * @return a source of digester rules for the specified plugin class.
@@ -91,7 +91,7 @@ public class FinderFromResource
     /**
      * See {@link #findLoader}.
      *
-     * @param resourceAttr Name of xml attribute on the plugin declaration which is used to configure rule-loading
+     * @param resourceAttr Name of XML attribute on the plugin declaration which is used to configure rule-loading
      *        for that declaration
      */
     public FinderFromResource( final String resourceAttr )
@@ -110,7 +110,7 @@ public class FinderFromResource
      *
      * @param d The digester instance where locating plugin classes
      * @param pluginClass The plugin Java class
-     * @param p The properties object that holds any xml attributes the user may have specified on the plugin
+     * @param p The properties object that holds any XML attributes the user may have specified on the plugin
      *          declaration in order to indicate how to locate the plugin rules.
      * @return a source of digester rules for the specified plugin class.
      * @throws PluginException if the algorithm finds a source of rules, but there is something invalid

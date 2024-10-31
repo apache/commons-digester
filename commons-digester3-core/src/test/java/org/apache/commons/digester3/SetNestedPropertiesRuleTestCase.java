@@ -43,7 +43,7 @@ public class SetNestedPropertiesRuleTestCase
 {
 
     /**
-     * Simple test xml document used in the tests.
+     * Simple test XML document used in the tests.
      */
     protected final static String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<alpha>ALPHA BODY</alpha>"
         + "<beta>BETA BODY</beta>" + "<gamma>GAMMA BODY</gamma>" + "<delta>DELTA BODY</delta>" + "</root>";
@@ -121,7 +121,7 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
-     * Test that you can ignore a single input xml element using the constructor which takes a single remapping.
+     * Test that you can ignore a single input XML element using the constructor which takes a single remapping.
      */
     @Test
     public void testCustomisedProperties2a() throws Exception

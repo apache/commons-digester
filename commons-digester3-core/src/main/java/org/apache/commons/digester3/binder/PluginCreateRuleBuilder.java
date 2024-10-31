@@ -124,10 +124,10 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a
+     * Sets the XML attribute which the input XML uses to indicate to a
      * PluginCreateRule which class should be instantiated.
      *
-     * @param attrName the xml attribute which the input xml uses to indicate to a
+     * @param attrName the XML attribute which the input XML uses to indicate to a
      *                 PluginCreateRule which class should be instantiated.
      * @return this builder instance
      */
@@ -143,7 +143,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a
+     * Sets the XML attribute which the input XML uses to indicate to a
      * PluginCreateRule which class should be instantiated.
      *
      * @param namespaceUri The attribute NameSpace
@@ -163,7 +163,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a
+     * Sets the XML attribute which the input XML uses to indicate to a
      * PluginCreateRule which plugin declaration is being referenced.
      *
      * @param attrName The attribute name
@@ -181,7 +181,7 @@ public final class PluginCreateRuleBuilder
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a
+     * Sets the XML attribute which the input XML uses to indicate to a
      * PluginCreateRule which plugin declaration is being referenced.
      *
      * @param namespaceUri The attribute NameSpace

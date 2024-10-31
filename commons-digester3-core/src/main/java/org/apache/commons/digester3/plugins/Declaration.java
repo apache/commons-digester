@@ -26,7 +26,7 @@ import org.apache.commons.digester3.Digester;
 
 /**
  * Represents a Class that can be instantiated by a PluginCreateRule, plus info on how to load custom digester rules for
- * mapping xml into that plugged-in class.
+ * mapping XML into that plugged-in class.
  *
  * @since 1.6
  */
@@ -209,12 +209,12 @@ public class Declaration
     }
 
     /**
-     * The id that the user associated with a particular plugin declaration in the input xml. This id is later used in
-     * the input xml to refer back to the original declaration.
+     * The id that the user associated with a particular plugin declaration in the input XML. This id is later used in
+     * the input XML to refer back to the original declaration.
      * <p>
      * For plugins declared "in-line", the id is null.
      *
-     * @param id The id that the user associated with a particular plugin declaration in the input xml
+     * @param id The id that the user associated with a particular plugin declaration in the input XML
      */
     public void setId( final String id )
     {

@@ -156,12 +156,12 @@ public class NodeCreateRule
         /**
          * Handle notification about text embedded within the current node.
          * <p>
-         * An xml parser calls this when text is found. We need to ensure that this text gets attached to the new Node
+         * An XML parser calls this when text is found. We need to ensure that this text gets attached to the new Node
          * we are creating - except in the case where the only text in the node is whitespace.
          * <p>
          * There is a catch, however. According to the sax specification, a parser does not need to pass all of the text
          * content of a node in one go; it can make multiple calls passing part of the data on each call. In particular,
-         * when the body of an element includes xml entity-references, at least some parsers make a separate call to
+         * when the body of an element includes XML entity-references, at least some parsers make a separate call to
          * this method to pass just the entity content.
          * <p>
          * In this method, we therefore just append the provided text to a "current text" buffer. When the element end
@@ -361,7 +361,7 @@ public class NodeCreateRule
     /**
      * When this method fires, the digester is told to forward all SAX ContentHandler events to the builder object,
      * resulting in a DOM being built instead of normal digester rule-handling occurring. When the end of the current
-     * xml element is encountered, the original content handler is restored (expected to be NULL, allowing normal
+     * XML element is encountered, the original content handler is restored (expected to be NULL, allowing normal
      * Digester operations to continue).
      *
      * @param namespaceURI the namespace URI of the matching element, or an empty string if the parser is not namespace

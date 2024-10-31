@@ -91,19 +91,19 @@ public class Main
 
         d.addSetNext( "catalog/dvd", "addItem" );
 
-        // We want to map every xml attribute onto a corresponding
+        // We want to map every XML attribute onto a corresponding
         // property-setter method on the Dvd class instance. However
-        // this doesn't work with the xml attribute "year-made", because
+        // this doesn't work with the XML attribute "year-made", because
         // of the internal hyphen. We could use explicit CallMethodRule
         // rules instead, or use a version of the SetPropertiesRule that
         // allows us to override any troublesome mappings...
         //
         // If there was more than one troublesome mapping, we could
-        // use the method variant that takes arrays of xml-attribute-names
+        // use the method variant that takes arrays of XML attribute-names
         // and bean-property-names to override multiple mappings.
         //
         // For any attributes not explicitly mapped here, the default
-        // processing is applied, so xml attribute "category" --> setCategory.
+        // processing is applied, so XML attribute "category" --> setCategory.
 
         d.addSetProperties( "catalog/dvd", "year-made", "yearMade" );
 
@@ -123,11 +123,11 @@ public class Main
         //
         // This is an alternative to the syntax used for books above (see
         // method addSetNestedProperties), where the name of the subtag
-        // indicated which property to set. Using this syntax in the xml has
+        // indicated which property to set. Using this syntax in the XML has
         // advantages and disadvantages both for the user and the application
         // developer. It is commonly used with the FactoryCreateRule variant
         // which allows the target class to be created to be specified in an
-        // xml attribute; this feature of FactoryCreateRule is not demonstrated
+        // XML attribute; this feature of FactoryCreateRule is not demonstrated
         // in this example, but see the Apache Tomcat configuration files for
         // an example of this usage.
         //
@@ -150,7 +150,7 @@ public class Main
     /*
      * Reads the specified file into memory, and returns a StringReader object which reads from that in-memory buffer.
      * <p> This method exists just to demonstrate that the input to the digester doesn't need to be from a file; for
-     * example, xml could be read from a database or generated dynamically; any old buffer in memory can be processed by
+     * example, XML could be read from a database or generated dynamically; any old buffer in memory can be processed by
      * the digester. <p> Clearly, if the data is always coming from a file, then calling the Digester.parse method that
      * takes a File object would be more sensible (see AddressBook example).
      */

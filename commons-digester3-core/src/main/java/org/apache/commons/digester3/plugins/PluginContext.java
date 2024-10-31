@@ -52,7 +52,7 @@ public class PluginContext
 
     private static final String DFLT_PLUGIN_CLASS_ATTR = "plugin-class";
 
-    // the xml attribute the user uses on an xml element to specify
+    // the XML attribute the user uses on an XML element to specify
     // the plugin's class
     private static final String DFLT_PLUGIN_ID_ATTR_NS = null;
 
@@ -77,11 +77,11 @@ public class PluginContext
     private List<RuleFinder> ruleFinders;
 
     /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * Gets the namespace for the XML attribute which indicates to a PluginCreateRule which class is to be plugged in.
      * <p>
      * The return value is never null.
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @return the namespace for the XML attribute which indicates which class is to be plugged in.
      */
     public String getPluginClassAttr()
     {
@@ -89,11 +89,11 @@ public class PluginContext
     }
 
     /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which class is to be plugged in.
+     * Gets the namespace for the XML attribute which indicates to a PluginCreateRule which class is to be plugged in.
      * <p>
      * May be null (in fact, normally will be).
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @return the namespace for the XML attribute which indicates which class is to be plugged in.
      */
     public String getPluginClassAttrNs()
     {
@@ -101,12 +101,12 @@ public class PluginContext
     }
 
     /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
+     * Gets the namespace for the XML attribute which indicates to a PluginCreateRule which previous plugin declaration
      * should be used.
      * <p>
      * The return value is never null.
      *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     * @return the namespace for the XML attribute which indicates which previous plugin declaration should be used.
      */
     public String getPluginIdAttr()
     {
@@ -114,12 +114,12 @@ public class PluginContext
     }
 
     /**
-     * Gets the namespace for the xml attribute which indicates to a PluginCreateRule which previous plugin declaration
+     * Gets the namespace for the XML attribute which indicates to a PluginCreateRule which previous plugin declaration
      * should be used.
      * <p>
      * May be null (in fact, normally will be).
      *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     * @return the namespace for the XML attribute which indicates which previous plugin declaration should be used.
      */
     public String getPluginIdAttrNs()
     {
@@ -157,7 +157,7 @@ public class PluginContext
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which class should be
+     * Sets the XML attribute which the input XML uses to indicate to a PluginCreateRule which class should be
      * instantiated.
      * <p>
      * Example:
@@ -166,7 +166,7 @@ public class PluginContext
      * setPluginClassAttribute( null, &quot;class&quot; );
      * </pre>
      *
-     * will allow this in the input xml:
+     * will allow this in the input XML:
      *
      * <pre>
      *  &lt;root&gt;
@@ -180,9 +180,9 @@ public class PluginContext
      *    &lt;some-plugin plugin-class="com.acme.widget"&gt; ......
      * </pre>
      *
-     * This is particularly useful if the input xml document is not in English.
+     * This is particularly useful if the input XML document is not in English.
      * <p>
-     * Note that the xml attributes used by PluginDeclarationRules are not affected by this method.
+     * Note that the XML attributes used by PluginDeclarationRules are not affected by this method.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
      *            then this should be null. Note that if a namespace is used, the attrName value should <em>not</em>
@@ -197,7 +197,7 @@ public class PluginContext
     }
 
     /**
-     * Sets the xml attribute which the input xml uses to indicate to a PluginCreateRule which plugin declaration is
+     * Sets the XML attribute which the input XML uses to indicate to a PluginCreateRule which plugin declaration is
      * being referenced.
      * <p>
      * Example:
@@ -206,7 +206,7 @@ public class PluginContext
      * setPluginIdAttribute( null, &quot;id&quot; );
      * </pre>
      *
-     * will allow this in the input xml:
+     * will allow this in the input XML:
      *
      * <pre>
      *  &lt;root&gt;
@@ -220,9 +220,9 @@ public class PluginContext
      *    &lt;some-plugin plugin-id="widget"&gt; ......
      * </pre>
      *
-     * This is particularly useful if the input xml document is not in English.
+     * This is particularly useful if the input XML document is not in English.
      * <p>
-     * Note that the xml attributes used by PluginDeclarationRules are not affected by this method.
+     * Note that the XML attributes used by PluginDeclarationRules are not affected by this method.
      *
      * @param namespaceUri is the namespace uri that the specified attribute is in. If the attribute is in no namespace,
      *            then this should be null. Note that if a namespace is used, the attrName value should <em>not</em>
@@ -239,7 +239,7 @@ public class PluginContext
 
     /**
      * Sets the list of RuleFinder objects. This may be useful if working in a non-english language, allowing the
-     * application developer to replace the standard list with a list of objects which look for xml attributes in the
+     * application developer to replace the standard list with a list of objects which look for XML attributes in the
      * local language.
      * <p>
      * If the intent is just to add an additional rule-finding algorithm, then it may be better to call #getRuleFinders,

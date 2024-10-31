@@ -31,7 +31,7 @@ import org.apache.commons.digester3.plugins.RuleLoader;
  * class discovers that this is in fact the case for a declaration, then a RuleLoader is returned which, when invoked,
  * adds a single SetPropertiesRule instance to the digester.
  * <p>
- * This allows ordinary JavaBean classes to be used as plugins, and have xml attributes be mapped to bean properties of
+ * This allows ordinary JavaBean classes to be used as plugins, and have XML attributes be mapped to bean properties of
  * the same name, without any custom plugin rules being created for them.
  * <p>
  * This RuleFinder is typically used as the <em>last</em> RuleFinder, so that automatic property setting only occurs if
@@ -59,7 +59,7 @@ public class FinderSetProperties
 
     /**
      * Create a rule-finder which will arrange for a SetPropertiesRule to be defined for each instance of a plugin, so
-     * that xml attributes map to bean properties.
+     * that XML attributes map to bean properties.
      * <p>
      * Param falseval will commonly be the string "false" for config files written in English.
      *
@@ -76,7 +76,7 @@ public class FinderSetProperties
      * Returns a RuleLoader <em>unless</em> the properties contain an entry with the name matching constructor param
      * propsAttr, and the value matching what is in falseval.
      * <p>
-     * If no custom source of rules for a plugin is found, then the user almost always wants xml attributes to map to
+     * If no custom source of rules for a plugin is found, then the user almost always wants XML attributes to map to
      * Java bean properties, so this is the default behavior unless the user explicitly indicates that they do
      * <em>not</em> want a SetPropertiesRule to be provided for the plugged-in class.
      * <p>
@@ -85,7 +85,7 @@ public class FinderSetProperties
      *
      * @param d The digester instance where locating plugin classes
      * @param pluginClass The plugin Java class
-     * @param p The properties object that holds any xml attributes the user may have specified on the plugin
+     * @param p The properties object that holds any XML attributes the user may have specified on the plugin
      *          declaration in order to indicate how to locate the plugin rules.
      * @return a source of digester rules for the specified plugin class.
      * @throws PluginException if the algorithm finds a source of rules, but there is something invalid

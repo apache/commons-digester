@@ -37,7 +37,7 @@ public class TestDefaultPlugin
     {
         // * tests that when a PluginCreateRule is defined with a default
         // class, that the default class is instantiated when no class
-        // or id is specified in the xml file.
+        // or id is specified in the XML file.
         final Digester digester = new Digester();
         final PluginRules rc = new PluginRules();
         digester.setRules( rc );

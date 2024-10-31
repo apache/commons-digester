@@ -36,11 +36,11 @@ import org.xml.sax.Attributes;
  * Digester always holds a reference to the instance at the head of the list in the rules member. Initially, this
  * list/stack holds just one instance, ie head and tail are the same object.
  * <p>
- * When the start of an xml element causes a PluginCreateRule to fire, a new PluginRules instance is created and
+ * When the start of an XML element causes a PluginCreateRule to fire, a new PluginRules instance is created and
  * inserted at the head of the list (ie pushed onto the stack of Rules objects). Digester.getRules() therefore returns
  * this new Rules object, and any custom rules associated with that plugin are added to that instance.
  * <p>
- * When the end of the xml element is encountered (and therefore the PluginCreateRule end method fires), the stack of
+ * When the end of the XML element is encountered (and therefore the PluginCreateRule end method fires), the stack of
  * Rules objects is popped, so that Digester.getRules returns the previous Rules object.
  *
  * @since 1.6
@@ -270,7 +270,7 @@ public class PluginRules
     /**
      * See {@link PluginContext#getPluginClassAttr}.
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @return the namespace for the XML attribute which indicates which class is to be plugged in.
      */
     public String getPluginClassAttr()
     {
@@ -280,7 +280,7 @@ public class PluginRules
     /**
      * See {@link PluginContext#getPluginClassAttrNs}.
      *
-     * @return the namespace for the xml attribute which indicates which class is to be plugged in.
+     * @return the namespace for the XML attribute which indicates which class is to be plugged in.
      */
     public String getPluginClassAttrNs()
     {
@@ -290,7 +290,7 @@ public class PluginRules
     /**
      * See {@link PluginContext#getPluginIdAttr}.
      *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     * @return the namespace for the XML attribute which indicates which previous plugin declaration should be used.
      */
     public String getPluginIdAttr()
     {
@@ -300,7 +300,7 @@ public class PluginRules
     /**
      * See {@link PluginContext#getPluginIdAttrNs}.
      *
-     * @return the namespace for the xml attribute which indicates which previous plugin declaration should be used.
+     * @return the namespace for the XML attribute which indicates which previous plugin declaration should be used.
      */
     public String getPluginIdAttrNs()
     {

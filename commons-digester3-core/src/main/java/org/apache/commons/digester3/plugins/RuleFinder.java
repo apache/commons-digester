@@ -53,13 +53,13 @@ public abstract class RuleFinder
      * If no dynamic rules can be found, null is returned. This is not an error; merely an indication that this
      * particular algorithm found no matches.
      * <p>
-     * The properties object holds any xml attributes the user may have specified on the plugin declaration in order to
+     * The properties object holds any XML attributes the user may have specified on the plugin declaration in order to
      * indicate how to locate the plugin rules.
      * <p>
      *
      * @param d The digester instance where locating plugin classes
      * @param pluginClass The plugin Java class
-     * @param p The properties object that holds any xml attributes the user may have specified on the plugin
+     * @param p The properties object that holds any XML attributes the user may have specified on the plugin
      *          declaration in order to indicate how to locate the plugin rules.
      * @return a source of digester rules for the specified plugin class.
      * @throws PluginException if the algorithm finds a source of rules, but there is something invalid

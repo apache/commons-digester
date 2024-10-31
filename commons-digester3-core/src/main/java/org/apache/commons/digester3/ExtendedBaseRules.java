@@ -32,7 +32,7 @@ import org.xml.sax.Attributes;
  * Extension of {@link RulesBase} for complex schema.
  * </p>
  * <p>
- * This is an extension of the basic pattern matching scheme intended to improve support for mapping complex xml-schema.
+ * This is an extension of the basic pattern matching scheme intended to improve support for mapping complex XML schema.
  * It is intended to be a minimal extension of the standard rules big enough to support complex schema but without the
  * full generality offered by more exotic matching pattern rules.
  * </p>
@@ -129,7 +129,7 @@ import org.xml.sax.Attributes;
  * existing ones. Non-universal patterns are never affected by the addition of new <em>universal</em> patterns or the
  * removal of existing <em>universal</em> patterns. As in the basic matching rules, non-universal (basic) patterns
  * <strong>can</strong> be affected by the addition of new <em>non-universal</em> patterns or the removal of existing
- * <em>non-universal</em> patterns, because only rules associated with the "best matching" pattern for each xml element
+ * <em>non-universal</em> patterns, because only rules associated with the "best matching" pattern for each XML element
  * are executed.
  * </p>
  * <p>

@@ -22,7 +22,7 @@ package org.apache.commons.digester3.examples.plugins.pipeline;
  * input text to either upper or lower case.
  * <p>
  * Note that because it doesn't use any nested tags for configuration,
- * just xml attributes which map 1:1 onto bean property-setter methods,
+ * just XML attributes which map 1:1 onto bean property-setter methods,
  * there is no need to define any custom addRules method to use this
  * as a Digester plugin class.
  */

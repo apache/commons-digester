@@ -113,9 +113,9 @@ public class Digester
 
     /**
      * Stack whose elements are List objects, each containing a list of Rule objects as returned from Rules.getMatch().
-     * As each xml element in the input is entered, the matching rules are pushed onto this stack. After the end tag is
+     * As each XML element in the input is entered, the matching rules are pushed onto this stack. After the end tag is
      * reached, the matches are popped again. The depth of is stack is therefore exactly the same as the current
-     * "nesting" level of the input xml.
+     * "nesting" level of the input XML.
      *
      * @since 1.6
      */
@@ -1118,7 +1118,7 @@ public class Digester
      * causes the jar archive file to be locked on disk ("in use") which makes it impossible to delete the jar file -
      * and that really stuffs up "undeploy" in webapps in particular.
      * <p>
-     * In JDK1.4 and later, Apache XercesJ is used as the xml parser. The InputSource object provided is converted into
+     * In JDK1.4 and later, Apache XercesJ is used as the XML parser. The InputSource object provided is converted into
      * an XMLInputSource, and eventually passed to an instance of XMLDocumentScannerImpl to specify the source data to
      * be converted into tokens for the rest of the XMLReader code to handle. XMLDocumentScannerImpl calls
      * fEntityManager.startDocumentEntity(source), where fEntityManager is declared in ancestor class XMLScanner to be
@@ -1732,7 +1732,7 @@ public class Digester
      * If the digester stack was "primed" by explicitly pushing a root object onto the stack before parsing started,
      * then that root object is returned here.
      * <p>
-     * Alternatively, if a Rule which creates an object (eg ObjectCreateRule) matched the root element of the xml, then
+     * Alternatively, if a Rule which creates an object (eg ObjectCreateRule) matched the root element of the XML, then
      * the object created will be returned here.
      * <p>
      * In other cases, the object most recently pushed onto an empty digester stack is returned. This would be a most
@@ -2499,7 +2499,7 @@ public class Digester
      * {@code Digester} contains an internal {@code EntityResolver} implementation. This maps
      * {@code PUBLICID}'s to URLs (from which the resource will be loaded). A common use case for this method is to
      * register local URLs (possibly computed at runtime by a classloader) for DTDs. This allows the performance
-     * advantage of using a local version without having to ensure every {@code SYSTEM} URI on every processed xml
+     * advantage of using a local version without having to ensure every {@code SYSTEM} URI on every processed XML
      * document is local. This implementation provides only basic functionality. If more sophisticated features are
      * required, using {@link #setEntityResolver} to set a custom resolver is recommended.
      * </p>
@@ -2536,7 +2536,7 @@ public class Digester
     /**
      * This method allows the "root" variable to be reset to null.
      * <p>
-     * It is not considered safe for a digester instance to be reused to parse multiple xml documents. However if you
+     * It is not considered safe for a digester instance to be reused to parse multiple XML documents. However if you
      * are determined to do so, then you should call both clear() and resetRoot() before each parse.
      *
      * @since 1.7
@@ -2648,7 +2648,7 @@ public class Digester
      *
      * for these reasons:
      * <ul>
-     * <li>Some xml parsers don't like having setContentHandler called after parsing has started. The Aelfred parser is
+     * <li>Some XML parsers don't like having setContentHandler called after parsing has started. The Aelfred parser is
      * one example.</li>
      * <li>Directing the events via the Digester object potentially allows us to log information about those SAX events
      * at the digester level.</li>

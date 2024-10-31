@@ -22,7 +22,7 @@ import java.io.StringReader;
 /**
  * A simple "test harness" which demonstrates how the MarkupDigester class
  * (plus the supporting interface/rule classes) can process "document-markup"
- * style xml data.
+ * style XML data.
  * <p>
  * See the readme file included with this example for more information.
  */
@@ -36,14 +36,14 @@ public class Main
         new Main().run();
     }
 
-    /** The input xml to be parsed by this example. */
+    /** The input XML to be parsed by this example. */
     String in = "<p>Hi, this is an <em>example</em> of some <b>bold</b> text.</p>";
 
     /**
      * Invoked via a standard Digester CallMethodRule, passing the
-     * "body text" of the top-level xml element. This demonstrates
+     * "body text" of the top-level XML element. This demonstrates
      * the default behavior of Digester (which is not suitable for
-     * processing markup-style xml).
+     * processing markup-style XML).
      */
     public void addAllText( final String text )
     {
@@ -70,7 +70,7 @@ public class Main
 
     /**
      * Main method of this test harness. Set up some digester rules,
-     * then parse the input xml contained in the "in" member variable.
+     * then parse the input XML contained in the "in" member variable.
      * The rules cause methods on this object to be invoked, which just
      * dump information to standard output, to show the callbacks that
      * a real program could arrange to get when parsing markup input.

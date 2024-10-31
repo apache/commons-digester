@@ -445,7 +445,7 @@ public final class DigesterLoader
      * method is to register local URLs (possibly computed at runtime by a
      * classloader) for DTDs. This allows the performance advantage of using
      * a local version without having to ensure every {@code SYSTEM}
-     * URI on every processed xml document is local. This implementation provides
+     * URI on every processed XML document is local. This implementation provides
      * only basic functionality. If more sophisticated features are required,
      * using {@link #setEntityResolver(EntityResolver)} to set a custom resolver is recommended.
      * </p><p>

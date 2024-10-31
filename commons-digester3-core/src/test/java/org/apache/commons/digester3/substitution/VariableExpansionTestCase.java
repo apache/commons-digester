@@ -48,7 +48,7 @@ public class VariableExpansionTestCase
 
     /**
      * Used in test case "testExpansionWithMutableSource", where the set of variables available to be substituted into
-     * the xml is updated as the xml is parsed.
+     * the XML is updated as the XML is parsed.
      */
     public void addProperty( final String key, final String value )
     {

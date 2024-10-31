@@ -37,7 +37,7 @@ public class RowInserterRule
     }
 
     /**
-     * This method is invoked when the start tag for an xml element representing
+     * This method is invoked when the start tag for an XML element representing
      * a database row is encountered. It pushes a new Row instance onto the
      * digester stack (rather like an ObjectCreateRule) so that column data
      * can be stored on it.
@@ -49,7 +49,7 @@ public class RowInserterRule
     }
 
     /**
-     * This method is invoked when the end tag for an xml element representing
+     * This method is invoked when the end tag for an XML element representing
      * a database row is encountered. It pops a fully-configured Row instance
      * off the digester stack, accesses the object below it on the stack (a
      * Table object) to get the tablename, then does an SQL insert). Actually,

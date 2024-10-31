@@ -215,7 +215,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     /**
-     * This test checks that CallParamRule instances which fetch data from xml attributes work ok when invoked
+     * This test checks that CallParamRule instances which fetch data from XML attributes work ok when invoked
      * "recursively", ie a rule instances' methods gets called in the order
      * begin[1]/begin[2]/body[2]/end[2]/body[1]/end[1]
      */
@@ -258,7 +258,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     /**
-     * This test checks that CallParamRule instances which fetch data from the xml element body work ok when invoked
+     * This test checks that CallParamRule instances which fetch data from the XML element body work ok when invoked
      * "recursively", ie a rule instances' methods gets called in the order
      * begin[1]/begin[2]/body[2]/end[2]/body[1]/end[1]
      */

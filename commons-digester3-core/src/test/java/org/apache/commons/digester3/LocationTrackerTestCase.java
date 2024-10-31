@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.xml.sax.Locator;
 
 /**
- * Tests that StackAction can be used to track the source location of objects created from input xml stream.
+ * Tests that StackAction can be used to track the source location of objects created from input XML stream.
  */
 
 public class LocationTrackerTestCase

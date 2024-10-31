@@ -27,7 +27,7 @@ import org.apache.commons.digester3.Digester;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test cases for functionality which sets what xml attributes specify the plugin class or plugin declaration id.
+ * Test cases for functionality which sets what XML attributes specify the plugin class or plugin declaration id.
  */
 
 public class TestConfigurablePluginAttributes
@@ -183,7 +183,7 @@ public class TestConfigurablePluginAttributes
         final PluginDeclarationRule pdr = new PluginDeclarationRule();
         digester.addRule( "root/plugin", pdr );
 
-        // for plugins at pattern "root/widget", use xml attributes "id" and
+        // for plugins at pattern "root/widget", use XML attributes "id" and
         // "class" in the custom namespace as the values for plugin id and
         // class, not the default (and non-namespaced) values of
         // "plugin-id" and "plugin-class".

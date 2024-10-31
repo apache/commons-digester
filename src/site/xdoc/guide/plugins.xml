@@ -28,7 +28,7 @@ limitations under the License.
 can be added dynamically during a digestion.</p>
 
       <subsection name="Introduction">
-        <p>Many applications have xml configuration files which are "extensible".
+        <p>Many applications have XML configuration files which are "extensible".
 Some examples of this are:</p>
 <ul>
 <li>Apache log4j allows user-provided "Appender" classes to be specified in 
@@ -105,7 +105,7 @@ pattern)</code> on the class being "plugged in", or</li>
 <li> providing an xmlrules file which defines the associated parsing rules.</li>
 </ul>
 <p>If a plugin class has a no-parameter constructor, does not expect any subtags, 
-and is satisfied with mapping any attributes on the parent xml tag to 
+and is satisfied with mapping any attributes on the parent XML tag to 
 bean-property-setter methods on itself, then no rules need to be defined at 
 all; the class can be used as a plugin without any coding.</p>
 <p>
@@ -140,11 +140,11 @@ framework to be extended almost without limit by the end user.</p>
       </subsection>
 
       <subsection name="Terminology">
-        <p>The term "plugin declaration" refers to an xml element which matches a
+        <p>The term "plugin declaration" refers to an XML element which matches a
 PluginDeclarationRule, where the user specifies an id-to-class mapping.</p>
 <p>
 The term "plugin point" refers to a pattern associated with a PluginCreateRule.
-An xml element matching that pattern is expected to have a plugin-id attribute
+An XML element matching that pattern is expected to have a plugin-id attribute
 (but see note on "default plugins" elsewhere in this document).</p>
       </subsection>
 
@@ -237,7 +237,7 @@ earlier ones.</p>
 In situations where a user <i>might</i> want to specify a custom class,
 but will often want "default" behaviour, a PluginCreateRule can specify
 a default class. If the user then omits the "plugin-id" attribute on
-the matching xml element, an instance of the default class will be
+the matching XML element, an instance of the default class will be
 created.</p>
       </subsection>
 
@@ -257,13 +257,13 @@ is only relevant to people really wishing to tweak plugins in unexpected
 ways. If this is the case, come and talk to us on the digester email lists
 as we would be interested in knowing about your requirements.</p>
 <p>
-When the plugins module is being used and the input xml indicates that
+When the plugins module is being used and the input XML indicates that
 a specific plugin class is to be instantiated, that class may then wish
-to configure itself from the xml attributes on that tag or xml attributes
+to configure itself from the XML attributes on that tag or XML attributes
 and elements nested within that tag.</p>
 <p>
 The question is: how is the digester going to figure out where the plugin
-keeps its custom rules which are to be applied to the xml within that
+keeps its custom rules which are to be applied to the XML within that
 plugin tag?</p>
 <p>
 Well, the answer is that there is a list of "rule finding strategies",
@@ -274,16 +274,16 @@ desired.</p>
 <p>
 A RuleFinder is essentially a "strategy" or "algorithm" for finding the dynamic
 rules associated with a plugin class. When a plugin declaration is encountered 
-in the input xml, the PluginContext object is asked for the list of RuleFinder 
+in the input XML, the PluginContext object is asked for the list of RuleFinder 
 objects, then each RuleFinder instance in turn is passed the declaration 
 parameters, and asked "are you able to locate custom parsing rules for this 
 declaration?". When one can, it returns a RuleLoader instance which is 
-remembered. When the input xml indicates that an instance of the declared 
+remembered. When the input XML indicates that an instance of the declared 
 plugin class is to be created, that RuleLoader is invoked to temporarily add 
-the relevant custom rules to the Digester in order to map xml 
+the relevant custom rules to the Digester in order to map XML 
 attributes/elements/etc into the instantiated plugin object. Once the end of 
 the plugin tag is encountered, those temporary rules are removed. This repeats 
-each time the input xml indicates that an instance of a plugin class is to be 
+each time the input XML indicates that an instance of a plugin class is to be 
 instantiated.</p>
 <p>
 If the plugin is declared "inline", using the "plugin-class" attribute

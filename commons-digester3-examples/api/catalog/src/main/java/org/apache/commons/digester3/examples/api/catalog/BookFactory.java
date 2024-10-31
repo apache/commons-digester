@@ -30,19 +30,19 @@ import org.xml.sax.Attributes;
  * The "createObject" method of the factory is invoked to generate
  * object instances when required.
  * <p>
- * The factory object can access any xml attributes, plus of course
+ * The factory object can access any XML attributes, plus of course
  * any values set up within it before digester parsing starts (like
  * JNDI references, database connections, etc) that it may in the
  * process of generating an appropriate object.
  * <p>
  * Note that it is <em>not</em> possible for any data to be extracted
- * from the body or subelements of the xml element that caused the
+ * from the body or subelements of the XML element that caused the
  * createObject method on this factory to be invoked. For example:
  * <pre>
  *  [book isdn="12345"]
  * </pre>
  * is fine; the isdn value can be accessed during the createObject method.
- * However, given the xml:
+ * However, given the XML:
  * <pre>
  * [book]
  *   [isdn]12345[/isdn]

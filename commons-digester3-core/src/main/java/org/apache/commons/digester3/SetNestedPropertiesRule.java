@@ -58,7 +58,7 @@ import org.xml.sax.Attributes;
  * method, then the setter method is invoked.
  * </p>
  * <p>
- * This rule supports custom mapping of xml element names to property names. The default mapping for particular elements
+ * This rule supports custom mapping of XML element names to property names. The default mapping for particular elements
  * can be overridden by using {@link #SetNestedPropertiesRule(String[] elementNames, String[] propertyNames)}. This
  * allows child elements to be mapped to properties with different names. Certain elements can also be marked to be
  * ignored.
@@ -70,8 +70,8 @@ import org.xml.sax.Attributes;
  * </p>
  * <p>
  * Note that this rule is designed to be used to set only "primitive" bean properties, eg String, int, boolean. If some
- * of the child xml elements match ObjectCreateRule rules (ie cause objects to be created) then you must use one of the
- * more complex constructors to this rule to explicitly skip processing of that xml element, and define a SetNextRule
+ * of the child XML elements match ObjectCreateRule rules (ie cause objects to be created) then you must use one of the
+ * more complex constructors to this rule to explicitly skip processing of that XML element, and define a SetNextRule
  * (or equivalent) to handle assigning the child object to the appropriate property instead.
  * </p>
  * <p>
@@ -299,7 +299,7 @@ public class SetNestedPropertiesRule
             // method attempts to invoke the "finish" method for every Rule
             // instance - and thus needs to call rules() on its Rules object,
             // which is this one. Actually, java 1.5 and 1.6beta2 have a
-            // bug in their xml implementation such that endDocument is not
+            // bug in their XML implementation such that endDocument is not
             // called after a SAXException, but other parsers (eg Aelfred)
             // do call endDocument. Here, we therefore need to return the
             // rules registered with the underlying Rules object.
@@ -327,9 +327,9 @@ public class SetNestedPropertiesRule
     private final HashMap<String, String> elementNames = new HashMap<>();
 
     /**
-     * Base constructor, which maps every child element into a bean property with the same name as the xml element.
+     * Base constructor, which maps every child element into a bean property with the same name as the XML element.
      * <p>
-     * It is an error if a child xml element exists but the target Java bean has no such property (unless
+     * It is an error if a child XML element exists but the target Java bean has no such property (unless
      * {@link #setAllowUnknownChildElements(boolean)} has been set to true).
      * </p>
      */
@@ -375,13 +375,13 @@ public class SetNestedPropertiesRule
      * Constructor which allows element to property mapping to be overridden.
      * </p>
      * <p>
-     * Two arrays are passed in. One contains xml element names and the other Java bean property names. The element name
+     * Two arrays are passed in. One contains XML element names and the other Java bean property names. The element name
      * / property name pairs are matched by position; in order words, the first string in the element name array
      * corresponds to the first string in the property name array and so on.
      * </p>
      * <p>
-     * If a property name is null or the xml element name has no matching property name due to the arrays being of
-     * different lengths then this indicates that the xml element should be ignored.
+     * If a property name is null or the XML element name has no matching property name due to the arrays being of
+     * different lengths then this indicates that the XML element should be ignored.
      * </p>
      * <b>Example One</b>
      * <p>
@@ -396,8 +396,8 @@ public class SetNestedPropertiesRule
      * }</pre>
      * <b>Example Two</b>
      * <p>
-     * The following constructs a rule that maps the {@code class} xml element to the {@code className}
-     * property. The xml element {@code ignore-me} is not mapped, ie is ignored. All other elements are mapped as
+     * The following constructs a rule that maps the {@code class} XML element to the {@code className}
+     * property. The XML element {@code ignore-me} is not mapped, ie is ignored. All other elements are mapped as
      * usual using exact name matching.
      * </p>
      * <pre>{@code
@@ -424,14 +424,14 @@ public class SetNestedPropertiesRule
     }
 
     /**
-     * Add an additional custom xml-element to property mapping.
+     * Add an additional custom XML element to property mapping.
      * <p>
-     * This is primarily intended to be used from the xml rules module (as it is not possible there to pass the
+     * This is primarily intended to be used from the XML rules module (as it is not possible there to pass the
      * necessary parameters to the constructor for this class). However it is valid to use this method directly if
      * desired.
      * </p>
      *
-     * @param elementName the xml-element has to be mapped
+     * @param elementName the XML element has to be mapped
      * @param propertyName the property name target
      */
     public void addAlias( final String elementName, final String propertyName )

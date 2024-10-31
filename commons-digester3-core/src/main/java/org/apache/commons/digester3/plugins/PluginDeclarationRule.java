@@ -89,9 +89,9 @@ public class PluginDeclarationRule
      * <li>class</li>
      * </ul>
      *
-     * @param namespace The xml namespace in which the xml element which triggered this rule resides.
-     * @param name The name of the xml element which triggered this rule.
-     * @param attributes The set of attributes on the xml element which triggered this rule.
+     * @param namespace The XML namespace in which the XML element which triggered this rule resides.
+     * @param name The name of the XML element which triggered this rule.
+     * @param attributes The set of attributes on the XML element which triggered this rule.
      * @throws Exception if any error occurs
      */
     @Override

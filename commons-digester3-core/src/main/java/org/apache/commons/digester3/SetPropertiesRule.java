@@ -144,7 +144,7 @@ public class SetPropertiesRule
     }
 
     /**
-     * Add an additional attribute name to property name mapping. This is intended to be used from the xml rules.
+     * Add an additional attribute name to property name mapping. This is intended to be used from the XML rules.
      *
      * @param attributeName the attribute name has to be mapped
      * @param propertyName the target property name
@@ -187,8 +187,8 @@ public class SetPropertiesRule
             if ( !ignoreMissingProperty && attributeName != null )
             {
                 // The BeanUtils.populate method silently ignores items in
-                // the map (ie xml entities) which have no corresponding
-                // setter method, so here we check whether each xml attribute
+                // the map (ie XML entities) which have no corresponding
+                // setter method, so here we check whether each XML attribute
                 // does have a corresponding property before calling the
                 // BeanUtils.populate method.
                 //
@@ -240,7 +240,7 @@ public class SetPropertiesRule
 
     /**
      * <p>
-     * Are attributes found in the xml without matching properties to be ignored?
+     * Are attributes found in the XML file without matching properties to be ignored?
      * </p>
      * <p>
      * If false, the parsing will interrupt with an {@code NoSuchMethodException} if a property specified in the
@@ -255,8 +255,8 @@ public class SetPropertiesRule
     }
 
     /**
-     * Sets whether attributes found in the xml without matching properties should be ignored. If set to false, the
-     * parsing will throw an {@code NoSuchMethodException} if an unmatched attribute is found. This allows to trap
+     * Sets whether attributes found in the XML file without matching properties should be ignored. If set to false,
+     * the parsing will throw an {@code NoSuchMethodException} if an unmatched attribute is found. This allows to trap
      * misspellings in the XML file.
      *
      * @param ignoreMissingProperty false to stop the parsing on unmatched attributes.

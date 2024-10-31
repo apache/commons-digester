@@ -63,7 +63,7 @@ public class AudioVisual
         this.name = name;
     }
 
-    // note: digester can convert a string in the xml file to an Integer
+    // note: digester can convert a string in the XML file to an Integer
     public void setRuntime( final Integer runtime )
     {
         this.runtime = runtime;
@@ -74,7 +74,7 @@ public class AudioVisual
         this.type = type;
     }
 
-    // note: digester can convert a string in the xml file to an int.
+    // note: digester can convert a string in the XML file to an int.
     public void setYearMade( final int yearMade )
     {
         this.yearMade = yearMade;

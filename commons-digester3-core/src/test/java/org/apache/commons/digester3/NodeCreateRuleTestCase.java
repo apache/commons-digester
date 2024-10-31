@@ -52,7 +52,7 @@ public class NodeCreateRuleTestCase
 {
 
     /**
-     * Simple test xml document used in the tests.
+     * Simple test XML document used in the tests.
      */
     protected final static String TEST_XML = "<?xml version='1.0'?><root>ROOT BODY<alpha>ALPHA BODY</alpha>"
         + "<beta>BETA BODY</beta><gamma>GAMMA BODY</gamma></root>";
@@ -198,8 +198,8 @@ public class NodeCreateRuleTestCase
     }
 
     /**
-     * This unit test checks that text nodes are correctly created when xml entities are used. In particular, this
-     * usually causes the xml parser to make multiple invocations of the characters(..) sax callback, rather than just
+     * This unit test checks that text nodes are correctly created when XML entities are used. In particular, this
+     * usually causes the XML parser to make multiple invocations of the characters(..) sax callback, rather than just
      * one.
      */
     @Test
