@@ -21,7 +21,6 @@ package org.apache.commons.digester3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -438,16 +437,7 @@ public class ExtendedBaseRules
         if ( namespaceURI != null )
         {
             // remove invalid namespaces
-            final Iterator<Rule> it = universalList.iterator();
-            while ( it.hasNext() )
-            {
-                final Rule rule = it.next();
-                final String nsUri = rule.getNamespaceURI();
-                if ( nsUri != null && !nsUri.equals( namespaceURI ) )
-                {
-                    it.remove();
-                }
-            }
+            universalList.removeIf( rule -> rule.getNamespaceURI() != null && !rule.getNamespaceURI().equals( namespaceURI ) );
         }
 
         // need to make sure that the collection is sort in the order
