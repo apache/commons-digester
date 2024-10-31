@@ -75,32 +75,32 @@ public class NodeCreateRule
         /**
          * The content handler used by Digester before it was set to this content handler.
          */
-        protected ContentHandler oldContentHandler;
+        ContentHandler oldContentHandler;
 
         /**
          * Depth of the current node, relative to the element where the content handler was put into action.
          */
-        protected int depth;
+        int depth;
 
         /**
          * A DOM Document used to create the various Node instances.
          */
-        protected Document doc;
+        Document doc;
 
         /**
          * The DOM node that will be pushed on Digester's stack.
          */
-        protected Node root;
+        Node root;
 
         /**
          * The current top DOM mode.
          */
-        protected Node top;
+        Node top;
 
         /**
          * The text content of the current top DOM node.
          */
-        protected StringBuilder topText = new StringBuilder();
+        StringBuilder topText = new StringBuilder();
 
         /**
          * Constructs a new instance.

@@ -64,7 +64,7 @@ final class RecordedInvocation
      * @param buffer the buffer to append the string representation of the input object.
      * @param input the input object has to be serialized to string.
      */
-    protected void convert( final StringBuilder buffer, final Object input )
+    void convert( final StringBuilder buffer, final Object input )
     {
         if ( input == null )
         {

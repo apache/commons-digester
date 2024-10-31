@@ -117,7 +117,7 @@ final class XmlRulesModule
      * @param pattern
      * @return
      */
-    protected LinkedRuleBuilder forPattern( final String pattern )
+    LinkedRuleBuilder forPattern( final String pattern )
     {
         return memoryRulesBinder.forPattern( pattern );
     }
