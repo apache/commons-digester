@@ -209,6 +209,27 @@
         </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <configuration>
+            <configLocation>config/maven_checks.xml</configLocation>
+            <headerLocation>config/maven-header.txt</headerLocation>
+            <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
+            <suppressionsFileExpression>${basedir}/checkstyle-suppressions.xml</suppressionsFileExpression>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.maven.shared</groupId>
+              <artifactId>maven-shared-resources</artifactId>
+              <version>6</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
   <reporting>
@@ -216,12 +237,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <configuration>
-          <configLocation>config/maven_checks.xml</configLocation>
-          <headerLocation>config/maven-header.txt</headerLocation>
-          <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
-          <suppressionsFileExpression>${basedir}/checkstyle-suppressions.xml</suppressionsFileExpression>
-        </configuration>
       </plugin>
     </plugins>
   </reporting>
