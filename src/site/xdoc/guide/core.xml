@@ -972,7 +972,7 @@ There are many good regex libraries available. (For example
 <a href="https://jakarta.apache.org/regexp/index.html">Jakarta Regex</a>,
 <a href="http://www.cacas.org/java/gnu/regexp/">GNU Regex</a> and
 <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/regex/package-summary.html">
-Java 1.4 Regex</a>)
+Java standard regex</a>)
 Not only do different people have different personal tastes when it comes to
 regular expression matching but these products all offer different functionality
 and different strengths.
@@ -1267,7 +1267,7 @@ system allowing digester rule configurations to be specified through an XML file
     </li>
     <li>
 <a href="../apidocs/org/apache/commons/digester3/annotations/package-summary.html">annotations</a> package contains a
-system allowing digester rule configurations to be specified through Java 5 Annotations.
+system allowing digester rule configurations to be specified through Java annotations.
     </li>
 </ul>
     </section>

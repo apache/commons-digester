@@ -24,14 +24,14 @@ limitations under the License.
   </properties>
   <body>
     <section name="Annotations">
-      <p>The <code>annotations</code> package provides for Java5 Annotations
-        meta-data based definition of rules for <code>Digester</code>.
+      <p>The <code>annotations</code> package provides annotations based
+        rule definitions for <code>Digester</code>.
         This improves maintainability of both Java code and XML documents, as
         rules are now defined in POJOs and generating <code>Digester</code>
         parsers at run-time, avoiding manual updates.</p>
 
        <subsection name="Introduction">
-         <p>This is a brief overview of the digester-rules-in-Java5 Annotations
+         <p>This is a brief overview of the digester rules annotations
         feature. Inspired by the basic idea behind the JPA, BeanValidation and
         JAXB's specifications, this feature lets you define Digester rules
         directly in target POJOs, instead of creating and initializing the Rules
