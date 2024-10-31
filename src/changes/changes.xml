@@ -76,17 +76,11 @@
     <action type="update" dev="ggregory" due-to="Gary Gregory">
       Bump GitHub build actions.
     </action>
-    <action dev="ggregory" type="update" issue="DIGESTER-185">
-      Bump Apache Commons Logging from 1.1.1 to 1.3.1 #142.
-    </action>
-    <action dev="ggregory" type="update" issue="DIGESTER-186">
-      Bump Java requirement from version 5 to 6.
-    </action>
-    <action dev="ggregory" type="update" issue="DIGESTER-194">
-      Bump Java requirement from version 6 to 7.
+    <action dev="ggregory" type="update" issue="DIGESTER-185" due-to="Gary Gregory">
+      Bump Apache Commons Logging from 1.1.1 to 1.3.4 #142, #160, #175, #187.
     </action>
     <action dev="ggregory" type="update">
-      Bump Java requirement from version 7 to 8.
+      Bump Java requirement from version 5 to 8.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-187">
       Bump Apache Commons BeanUtils from 1.8.3 to 1.9.4.
@@ -104,19 +98,13 @@
       Bump jarjar-maven-plugin from 1.5 to 1.9 #79.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
-      Bump exec-maven-plugin from 1.1 to 3.1.1 #32.
-    </action>
-    <action dev="ggregory" type="update" due-to="Gary Gregory">
-      Bump commons-logging:commons-logging from 1.2 to 1.3.4 #160, #175, #187.
+      Bump exec-maven-plugin from 1.1 to 3.2.0 #32, #130.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump org.apache.maven.plugins:maven-changes-plugin from 2.3 to 2.12.1 #112.
     </action>
     <action dev="ggregory" type="update" due-to="Dependabot">
       Bump org.apache.maven.plugins:maven-pmd-plugin from 2.3 to 3.21.2 #110.
-    </action>
-    <action dev="ggregory" type="update" due-to="Dependabot">
-      Bump org.codehaus.mojo:exec-maven-plugin from 3.1.1 to 3.2.0 #130.
     </action>
   </release>
   <release version="3.2" date="2011-12-13" description="Maintenance release.">
