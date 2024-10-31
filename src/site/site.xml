@@ -52,29 +52,29 @@
       - appropriate dirs on the website; maven won't set this up.
     -->
     <menu name="Release 3.2 (Current)">
-      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.2/apidocs" />
-      <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-3.2/RELEASE-NOTES.txt" />
+      <item name="Javadoc" href="https://commons.apache.org/digester/commons-digester-3.2/apidocs" />
+      <item name="Release Notes" href="https://commons.apache.org/digester/commons-digester-3.2/RELEASE-NOTES.txt" />
     </menu>
     <menu name="Release 3.1">
-      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.1/apidocs" />
-      <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-3.1/RELEASE-NOTES.txt" />
+      <item name="Javadoc" href="https://commons.apache.org/digester/commons-digester-3.1/apidocs" />
+      <item name="Release Notes" href="https://commons.apache.org/digester/commons-digester-3.1/RELEASE-NOTES.txt" />
     </menu>
     <menu name="Release 3.0">
-      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-3.0/apidocs" />
-      <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt" />
+      <item name="Javadoc" href="https://commons.apache.org/digester/commons-digester-3.0/apidocs" />
+      <item name="Release Notes" href="https://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt" />
     </menu>
     <!-- maintain it just for old users -->
     <menu name="Release 2.1">
-      <item name="Guide" href="http://commons.apache.org/digester/commons-digester-2.1/core.html">
-        <item name="Core APIs"            href="http://commons.apache.org/digester/commons-digester-2.1/core.html" />
-        <item name="Plugins"              href="http://commons.apache.org/digester/commons-digester-2.1/plugins.html" />
-        <item name="Substitution"         href="http://commons.apache.org/digester/commons-digester-2.1/substitution.html" />
-        <item name="XML Rules"            href="http://commons.apache.org/digester/commons-digester-2.1/xmlrules.html" />
-        <item name="Annotations"          href="http://commons.apache.org/digester/commons-digester-2.1/annotations.html" />
-        <item name="FAQ"                  href="http://commons.apache.org/digester/commons-digester-2.1/faq.html" />
+      <item name="Guide" href="https://commons.apache.org/digester/commons-digester-2.1/core.html">
+        <item name="Core APIs"            href="https://commons.apache.org/digester/commons-digester-2.1/core.html" />
+        <item name="Plugins"              href="https://commons.apache.org/digester/commons-digester-2.1/plugins.html" />
+        <item name="Substitution"         href="https://commons.apache.org/digester/commons-digester-2.1/substitution.html" />
+        <item name="XML Rules"            href="https://commons.apache.org/digester/commons-digester-2.1/xmlrules.html" />
+        <item name="Annotations"          href="https://commons.apache.org/digester/commons-digester-2.1/annotations.html" />
+        <item name="FAQ"                  href="https://commons.apache.org/digester/commons-digester-2.1/faq.html" />
       </item>
-      <item name="Javadoc" href="http://commons.apache.org/digester/commons-digester-2.1/docs/api" />
-      <item name="Release Notes" href="http://commons.apache.org/digester/commons-digester-2.1/RELEASE-NOTES.txt" />
+      <item name="Javadoc" href="https://commons.apache.org/digester/commons-digester-2.1/docs/api" />
+      <item name="Release Notes" href="https://commons.apache.org/digester/commons-digester-2.1/RELEASE-NOTES.txt" />
     </menu>
 
   </body>

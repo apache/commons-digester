@@ -46,9 +46,9 @@ use, or you can also create your own.</p>
 <section name="Documentation">
 
 <p>User documentation is available in the website, you can start reading the
-<a href="http://commons.apache.org/digester/guide/core.html">Core APIs</a>.</p>
+<a href="https://commons.apache.org/digester/guide/core.html">Core APIs</a>.</p>
 
-<p>The <a href="http://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt">
+<p>The <a href="https://commons.apache.org/digester/commons-digester-3.0/RELEASE-NOTES.txt">
 Release Notes</a> document the new features and bug fixes that have been
 included in this release.</p>
 
@@ -56,13 +56,13 @@ included in this release.</p>
 demonstrates the basic functionality. In particular, you should read the 
 AddressBook example in the "api" subdirectory. You can view the examples
 directly from the Subversion repository via <a
-href="http://svn.apache.org/viewvc/commons/proper/digester/trunk/src/examples/">
+href="https://svn.apache.org/viewvc/commons/proper/digester/trunk/src/examples/">
 the web-based repository browser</a> web site, or can use subversion to 
 download the files.
 </p>
 
 <p>For the FAQ and other digester-related information, see
- <a href="http://wiki.apache.org/commons/Digester">the Digester wiki page</a>.
+ <a href="https://wiki.apache.org/commons/Digester">the Digester wiki page</a>.
 </p>
 
 </section>
@@ -147,7 +147,7 @@ Daniele Testa [mrwolfgraphics AT gmail DOT com], who provided the Digester3 logo
     <a href="http://jaxenter.com/what-s-new-in-apache-commons-digester-3-0-36817.html">What's New in Apache Commons Digester 3.0?</a>.
   </li>
   <li>
-   <a href="http://wiki.apache.org/commons/Digester">The Apache wiki page for the commons digester component</a>.
+   <a href="https://wiki.apache.org/commons/Digester">The Apache wiki page for the commons digester component</a>.
   </li>
   <li>
    Jan 6, 2005 - <a href="http://www.onjava.com/pub/a/onjava/2004/12/22/jakarta-gems-1.html">O&apos;Reilly article</a> by Timothy M. O&apos;Brien about jakarta commons in general, including info on Digester.

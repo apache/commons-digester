@@ -34,7 +34,7 @@
     object mapping module which triggers certain actions called rules whenever
     a particular pattern of nested XML elements is recognized.
   </description>
-  <url>http://commons.apache.org/proper/commons-digester/</url>
+  <url>https://commons.apache.org/proper/commons-digester/</url>
   <inceptionYear>2001</inceptionYear>
 
   <developers>
@@ -184,7 +184,7 @@
   </scm>
   <issueManagement>
     <system>jira</system>
-    <url>http://issues.apache.org/jira/browse/DIGESTER</url>
+    <url>https://issues.apache.org/jira/browse/DIGESTER</url>
   </issueManagement>
 
   <distributionManagement>
@@ -323,7 +323,7 @@
           <linksource>true</linksource>
           <links>
             <link>https://docs.oracle.com/javase/8/docs/api/</link>
-            <link>http://commons.apache.org/beanutils/v1.8.3/apidocs/</link>
+            <link>https://commons.apache.org/beanutils/v1.8.3/apidocs/</link>
           </links>
         </configuration>
       </plugin>
