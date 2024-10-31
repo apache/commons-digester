@@ -27,7 +27,7 @@ import java.io.*;
  * <p>
  * It can be run via {@code java Pipeline config-file-name}.
  * <p>
- * The specified config file is parsed using the Apache Commons Digester.
+ * The specified config file is parsed using Apache Commons Digester.
  * This config file specifies an input file to be read, a number of
  * user-defined transform classes to be instantiated and configured from
  * the config file, and an output file.

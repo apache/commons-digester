@@ -20,8 +20,8 @@ package org.apache.commons.digester3.examples.api.addressbook;
 import org.apache.commons.digester3.Digester;
 
 /**
- * A simple program to demonstrate the basic functionality of the
- * Commons Digester module.
+ * A simple program to demonstrate the basic functionality of Apache
+ * Commons Digester.
  * <p>
  * This code will parse the provided "example.xml" file to build a tree
  * of Java objects, then cause those objects to print out their values

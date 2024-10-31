@@ -25,7 +25,7 @@ import org.apache.commons.digester3.Digester;
 import org.xml.sax.SAXException;
 
 /**
- * A simple program to demonstrate that the Commons Digester module can be
+ * A simple program to demonstrate that Apache Commons Digester can be
  * used to trigger actions as the XML is parsed, rather than just build
  * up in-memory representations of the parsed data. This example also shows
  * how to write a custom Rule class.

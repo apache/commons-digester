@@ -15,7 +15,7 @@
    limitations under the License.
 -->
 
-                          Commons Digester Package
+                          Apache Commons Digester
                                 Version 3.3
                                Release Notes
 
