@@ -63,6 +63,9 @@
     <action dev="simonetripodi" type="fix" issue="DIGESTER-161" due-to="Eduard Papa">
       Document thread-safety in Javadoc of Rule class
     </action>
+    <action dev="ebourg" type="update">
+      ObjectCreationFactory is now a functional interface and can be used as a lambda expression
+    </action>
     <!-- UPDATE -->
     <action dev="ggregory" type="update">
       Bump commons-parent from 28 to 78 #146, #161, #169, #189, #193, #197, #200, #206.

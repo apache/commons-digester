@@ -32,6 +32,7 @@ import org.xml.sax.Attributes;
  *
  * @param <T> The object type created byt the factory.
  */
+@FunctionalInterface
 public interface ObjectCreationFactory<T>
 {
 
@@ -50,7 +51,10 @@ public interface ObjectCreationFactory<T>
      *
      * @return the {@link Digester} that was set by the {@link FactoryCreateRule} upon initialization
      */
-    Digester getDigester();
+    default Digester getDigester()
+    {
+        return null;
+    }
 
     /**
      * Sets the {@link Digester} to allow the implementation to do logging, classloading based on the digester's
@@ -58,6 +62,8 @@ public interface ObjectCreationFactory<T>
      *
      * @param digester parent Digester object
      */
-    void setDigester( Digester digester );
+    default void setDigester( Digester digester )
+    {
+    }
 
 }
