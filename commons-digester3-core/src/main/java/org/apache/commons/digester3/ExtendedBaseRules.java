@@ -197,8 +197,7 @@ public class ExtendedBaseRules
     @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
-        // calculate the pattern of the parent
-        // (if the element has one)
+        // calculate the pattern of the parent (if the element has one)
         String parentPattern = "";
         final int lastIndex = pattern.lastIndexOf( '/' );
 
@@ -223,24 +222,20 @@ public class ExtendedBaseRules
         // we don't want to change anything....
         String tempParentPattern = parentPattern;
         int parentLastIndex = tempParentPattern.lastIndexOf( '/' );
-        // look for pattern. Here, we search the whole
-        // parent. Not ideal, but does the thing....
+        // look for pattern. Here, we search the whole parent. Not ideal, but does the thing....
         while ( parentLastIndex > -1 && recList == null )
         {
             recList = this.cache.get( tempParentPattern + "/*/" + pattern.substring( lastIndex + 1 ) );
             if ( recList != null )
             {
-                // when /*/-pattern-string is found, add method
-                // list to universalList.
+                // when /*/-pattern-string is found, add method list to universalList.
                 // Digester will do the rest
                 universalList.addAll( recList );
             }
             else
             {
-                // if not, shorten tempParent to move /*/ one position
-                // to the left.
-                // as last part of patttern is always added
-                // we make sure pattern is allowed anywhere.
+                // if not, shorten tempParent to move /*/ one position to the left.
+                // as last part of patttern is always added we make sure pattern is allowed anywhere.
                 tempParentPattern = parentPattern.substring( 0, parentLastIndex );
             }
 
@@ -263,19 +258,16 @@ public class ExtendedBaseRules
             universalList.addAll( tempList );
         }
 
-        // base behavior means that if we certain matches, we don't continue
-        // but we just have a single combined loop and so we have to set
-        // a variable
+        // base behavior means that if we certain matches, we don't continue but we just have
+        // a single combined loop and so we have to set a variable
         boolean ignoreBasicMatches = false;
 
         // see if we have an exact basic pattern match
         List<Rule> rulesList = this.cache.get( pattern );
         if ( rulesList != null )
         {
-            // we have a match!
-            // so ignore all basic matches from now on
+            // we have a match! so ignore all basic matches from now on
             ignoreBasicMatches = true;
-
         }
         else if ( hasParent ) // see if we have an exact child match
         {
@@ -283,35 +275,29 @@ public class ExtendedBaseRules
             rulesList = this.cache.get( parentPattern + "/?" );
             if ( rulesList != null )
             {
-                // we have a match!
-                // so ignore all basic matches from now on
+                // we have a match! so ignore all basic matches from now on
                 ignoreBasicMatches = true;
-
             }
             else
             {
                 // we don't have a match yet - so try exact ancester
-                //
                 rulesList = findExactAncesterMatch( pattern );
                 if ( rulesList != null )
                 {
-                    // we have a match!
-                    // so ignore all basic matches from now on
+                    // we have a match! so ignore all basic matches from now on
                     ignoreBasicMatches = true;
                 }
             }
         }
 
         // OK - we're ready for the big loop!
-        // Unlike the basic rules case,
-        // we have to go through for all those universal rules in all cases.
+        // Unlike the basic rules case, we have to go through for all those universal rules in all cases.
 
         // Find the longest key, ie more discriminant
         int longKeyLength = 0;
 
         for ( String key : this.cache.keySet() )
         {
-
             // find out if it's a univeral pattern
             // set a flag
             final boolean isUniversal = key.startsWith( "!" );
@@ -326,7 +312,6 @@ public class ExtendedBaseRules
             final boolean wildcardMatchEnd = key.endsWith( "/*" );
             if ( wildcardMatchStart || isUniversal && wildcardMatchEnd )
             {
-
                 boolean parentMatched = false;
                 boolean basicMatched = false;
                 boolean ancesterMatched = false;
@@ -336,7 +321,6 @@ public class ExtendedBaseRules
                 {
                     // try for a parent match
                     parentMatched = parentMatch( key, parentPattern );
-
                 }
                 else if ( wildcardMatchEnd )
                 {
@@ -380,23 +364,19 @@ public class ExtendedBaseRules
                 {
                     if ( isUniversal )
                     {
-                        // universal rules go straight in
-                        // (no longest matching rule)
+                        // universal rules go straight in (no longest matching rule)
                         tempList = this.cache.get( "!" + key );
                         if ( tempList != null )
                         {
                             universalList.addAll( tempList );
                         }
-
                     }
                     else if ( !ignoreBasicMatches )
                     {
-                        // ensure that all parent matches are SHORTER
-                        // than rules with same level of matching.
+                        // ensure that all parent matches are SHORTER than rules with same level of matching.
                         //
-                        // the calculations below don't work for universal
-                        // matching, but we don't care because in that case
-                        // this if-stmt is not entered.
+                        // the calculations below don't work for universal matching,
+                        // but we don't care because in that case this if-stmt is not entered.
                         int keyLength = key.length();
                         if ( wildcardMatchStart )
                         {
@@ -417,8 +397,7 @@ public class ExtendedBaseRules
             }
         }
 
-        // '*' works in practice as a default matching
-        // (this is because anything is a deeper match!)
+        // '*' works in practice as a default matching (this is because anything is a deeper match!)
         if ( rulesList == null )
         {
             rulesList = this.cache.get( "*" );
