@@ -20,6 +20,7 @@ package org.apache.commons.digester3;
  */
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -440,31 +441,8 @@ public class ExtendedBaseRules
             universalList.removeIf( rule -> rule.getNamespaceURI() != null && !rule.getNamespaceURI().equals( namespaceURI ) );
         }
 
-        // need to make sure that the collection is sort in the order
-        // of addition. We use a custom comparator for this
-        universalList.sort( ( r1, r2 ) -> {
-            // Get the entry order from the map
-            final Integer i1 = order.get( r1 );
-            final Integer i2 = order.get( r2 );
-
-            // and use that to perform the comparison
-            if ( i1 == null )
-            {
-                if ( i2 == null )
-                {
-
-                    return 0;
-
-                }
-                return -1;
-            }
-            if ( i2 == null )
-            {
-                return 1;
-            }
-
-            return i1.intValue() - i2.intValue();
-        } );
+        // need to make sure that the collection is sorted in the order of addition. We use a custom comparator for this
+        universalList.sort( Comparator.nullsFirst( Comparator.comparing( order::get ) ) );
 
         return universalList;
     }
