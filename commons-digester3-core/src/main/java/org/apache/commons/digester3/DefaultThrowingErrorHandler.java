@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * @since 3.2
+ * @since 3.3
  */
 public class DefaultThrowingErrorHandler
     implements ErrorHandler
