@@ -39,7 +39,7 @@ final class XmlRulesModule
 
     private WithMemoryRulesBinder memoryRulesBinder;
 
-    public XmlRulesModule( final NameSpaceURIRulesBinder targetRulesBinder, final Set<String> rootSystemIds,
+    XmlRulesModule( final NameSpaceURIRulesBinder targetRulesBinder, final Set<String> rootSystemIds,
     /* @Nullable */final String rootPath )
     {
         this.targetRulesBinder = targetRulesBinder;

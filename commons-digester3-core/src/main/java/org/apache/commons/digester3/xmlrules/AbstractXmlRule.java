@@ -31,7 +31,7 @@ abstract class AbstractXmlRule
 
     private final RulesBinder targetRulesBinder;
 
-    public AbstractXmlRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    AbstractXmlRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( "pattern", patternStack );
         this.targetRulesBinder = targetRulesBinder;

@@ -50,7 +50,7 @@ final class FromBinderRuleSet
 
         private final String namespaceURI;
 
-        public Key( final String pattern, final String namespaceURI )
+        Key( final String pattern, final String namespaceURI )
         {
             this.pattern = pattern;
             this.namespaceURI = namespaceURI;

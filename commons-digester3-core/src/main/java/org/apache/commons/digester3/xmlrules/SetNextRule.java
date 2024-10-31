@@ -33,7 +33,7 @@ final class SetNextRule
      * @param targetRulesBinder
      * @param patternStack
      */
-    public SetNextRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    SetNextRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

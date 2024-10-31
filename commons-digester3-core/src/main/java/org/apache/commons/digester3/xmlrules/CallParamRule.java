@@ -30,7 +30,7 @@ final class CallParamRule
     extends AbstractXmlRule
 {
 
-    public CallParamRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    CallParamRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

@@ -114,7 +114,7 @@ public class NodeCreateRule
          * @throws ParserConfigurationException if the DocumentBuilderFactory could not be instantiated
          * @throws SAXException if the XMLReader could not be instantiated by Digester (should not happen)
          */
-        public NodeBuilder( final Document doc, final Node root )
+        NodeBuilder( final Document doc, final Node root )
             throws ParserConfigurationException, SAXException
         {
             this.doc = doc;

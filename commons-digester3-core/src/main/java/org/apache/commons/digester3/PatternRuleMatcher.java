@@ -36,12 +36,12 @@ final class PatternRuleMatcher
 
     private final String namespaceURI;
 
-    public PatternRuleMatcher( final String pattern )
+    PatternRuleMatcher( final String pattern )
     {
         this( pattern, null );
     }
 
-    public PatternRuleMatcher( final String pattern, /* @Nullable */final String namespaceURI )
+    PatternRuleMatcher( final String pattern, /* @Nullable */final String namespaceURI )
     {
         if ( pattern == null )
         {

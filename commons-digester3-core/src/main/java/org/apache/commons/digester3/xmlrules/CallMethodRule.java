@@ -32,7 +32,7 @@ final class CallMethodRule
     extends AbstractXmlRule
 {
 
-    public CallMethodRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    CallMethodRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

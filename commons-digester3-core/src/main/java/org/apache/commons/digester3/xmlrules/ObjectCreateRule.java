@@ -32,7 +32,7 @@ final class ObjectCreateRule
     extends AbstractXmlRule
 {
 
-    public ObjectCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    ObjectCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

@@ -37,7 +37,7 @@ final class NameSpaceURIRulesBinder
 
     private final RulesBinder wrappedBinder;
 
-    public NameSpaceURIRulesBinder( final RulesBinder wrappedBinder )
+    NameSpaceURIRulesBinder( final RulesBinder wrappedBinder )
     {
         this.wrappedBinder = wrappedBinder;
     }

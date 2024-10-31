@@ -31,7 +31,7 @@ final class PrefixedRulesBinder
 
     private final String prefix;
 
-    public PrefixedRulesBinder( final RulesBinder wrappedRulesBinder, final String prefix )
+    PrefixedRulesBinder( final RulesBinder wrappedRulesBinder, final String prefix )
     {
         this.wrappedRulesBinder = wrappedRulesBinder;
         this.prefix = prefix;

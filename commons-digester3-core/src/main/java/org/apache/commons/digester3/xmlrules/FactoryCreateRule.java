@@ -29,7 +29,7 @@ final class FactoryCreateRule
     extends AbstractXmlRule
 {
 
-    public FactoryCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    FactoryCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

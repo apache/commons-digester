@@ -46,7 +46,7 @@ final class WithMemoryRulesBinder
 
     private final RulesBinder wrappedRulesBinder;
 
-    public WithMemoryRulesBinder( final RulesBinder wrappedRulesBinder )
+    WithMemoryRulesBinder( final RulesBinder wrappedRulesBinder )
     {
         this.wrappedRulesBinder = wrappedRulesBinder;
     }

@@ -29,7 +29,7 @@ abstract class AbstractXmlMethodRule
     extends AbstractXmlRule
 {
 
-    public AbstractXmlMethodRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    AbstractXmlMethodRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

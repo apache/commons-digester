@@ -30,7 +30,7 @@ final class SetPropertiesRule
     extends AbstractXmlRule
 {
 
-    public SetPropertiesRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    SetPropertiesRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

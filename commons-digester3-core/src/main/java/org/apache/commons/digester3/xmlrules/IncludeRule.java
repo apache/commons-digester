@@ -45,7 +45,7 @@ final class IncludeRule
 
     private final RulesBinder targetRulesBinder;
 
-    public IncludeRule( final WithMemoryRulesBinder memoryRulesBinder, final RulesBinder targetRulesBinder )
+    IncludeRule( final WithMemoryRulesBinder memoryRulesBinder, final RulesBinder targetRulesBinder )
     {
         this.memoryRulesBinder = memoryRulesBinder;
         this.targetRulesBinder = targetRulesBinder;

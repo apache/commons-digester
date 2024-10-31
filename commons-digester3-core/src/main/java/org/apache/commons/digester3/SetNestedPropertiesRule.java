@@ -213,7 +213,7 @@ public class SetNestedPropertiesRule
 
         private final AnyChildRule rule;
 
-        public AnyChildRules( final AnyChildRule rule )
+        AnyChildRules( final AnyChildRule rule )
         {
             this.rule = rule;
             rules.add( rule );

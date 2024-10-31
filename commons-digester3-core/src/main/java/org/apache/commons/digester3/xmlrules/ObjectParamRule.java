@@ -38,7 +38,7 @@ final class ObjectParamRule
      * @param targetRulesBinder
      * @param patternStack
      */
-    public ObjectParamRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    ObjectParamRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

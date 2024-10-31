@@ -31,7 +31,7 @@ final class SetNamespaceURIRule
 
     private final NameSpaceURIRulesBinder rulesBinder;
 
-    public SetNamespaceURIRule( final NameSpaceURIRulesBinder rulesBinder )
+    SetNamespaceURIRule( final NameSpaceURIRulesBinder rulesBinder )
     {
         this.rulesBinder = rulesBinder;
     }

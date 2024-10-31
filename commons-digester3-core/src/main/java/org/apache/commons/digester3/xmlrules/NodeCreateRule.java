@@ -33,7 +33,7 @@ final class NodeCreateRule
     extends AbstractXmlRule
 {
 
-    public NodeCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    NodeCreateRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

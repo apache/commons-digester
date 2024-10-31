@@ -48,7 +48,7 @@ final class RecordedInvocation
      * @param invokedMethod
      * @param arguments
      */
-    public RecordedInvocation( final Method invokedMethod, final Object[] arguments )
+    RecordedInvocation( final Method invokedMethod, final Object[] arguments )
     {
         this.invokedMethod = invokedMethod;
         this.arguments = arguments;

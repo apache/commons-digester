@@ -51,7 +51,7 @@ final class ErrorMessage
      * @param messagePattern The error message text pattern
      * @param arguments Arguments referenced by the format specifiers in the format string
      */
-    public ErrorMessage( final String messagePattern, final Object... arguments )
+    ErrorMessage( final String messagePattern, final Object... arguments )
     {
         this( format( messagePattern, arguments ), (Throwable) null );
     }
@@ -62,7 +62,7 @@ final class ErrorMessage
      * @param message The error message text
      * @param cause The throwable that caused this message
      */
-    public ErrorMessage( final String message, final Throwable cause )
+    ErrorMessage( final String message, final Throwable cause )
     {
         this.message = message;
         this.cause = cause;

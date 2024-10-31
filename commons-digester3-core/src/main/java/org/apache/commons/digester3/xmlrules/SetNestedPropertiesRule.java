@@ -30,7 +30,7 @@ final class SetNestedPropertiesRule
     extends AbstractXmlRule
 {
 
-    public SetNestedPropertiesRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    SetNestedPropertiesRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

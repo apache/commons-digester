@@ -30,7 +30,7 @@ final class BeanPropertySetterRule
     extends AbstractXmlRule
 {
 
-    public BeanPropertySetterRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
+    BeanPropertySetterRule( final RulesBinder targetRulesBinder, final PatternStack patternStack )
     {
         super( targetRulesBinder, patternStack );
     }

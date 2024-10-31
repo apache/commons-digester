@@ -34,12 +34,12 @@ class PatternRule
 
     private String pattern;
 
-    public PatternRule( final PatternStack patternStack )
+    PatternRule( final PatternStack patternStack )
     {
         this( "value", patternStack );
     }
 
-    public PatternRule( final String attributeName, final PatternStack patternStack )
+    PatternRule( final String attributeName, final PatternStack patternStack )
     {
         this.attributeName = attributeName;
         this.patternStack = patternStack;
