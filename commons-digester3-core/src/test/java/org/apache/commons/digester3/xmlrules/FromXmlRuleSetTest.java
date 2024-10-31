@@ -256,7 +256,7 @@ public class FromXmlRuleSetTest
         final Object obj = al.get( 0 );
         assertInstanceOf( ObjectTestImpl.class, obj, "Unexpected object returned from DigesterLoader" );
         final ObjectTestImpl to = (ObjectTestImpl) obj;
-        assertEquals( new Long( 555 ), to.getLongValue() );
+        assertEquals( 555L, to.getLongValue() );
         assertEquals( "foo", to.getMapValue( "test1" ) );
         assertEquals( "bar", to.getMapValue( "test2" ) );
     }

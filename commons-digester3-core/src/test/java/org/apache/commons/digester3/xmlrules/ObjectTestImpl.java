@@ -31,7 +31,7 @@ public class ObjectTestImpl
 
     private String value = "";
 
-    private Long longValue = new Long( -1L );
+    private Long longValue = -1L;
 
     private String property = "";
 

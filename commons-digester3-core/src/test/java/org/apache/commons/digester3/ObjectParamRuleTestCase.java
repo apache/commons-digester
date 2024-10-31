@@ -59,13 +59,13 @@ public class ObjectParamRuleTestCase
                 forPattern( "arraylist" ).createObject().ofType( ArrayList.class );
                 forPattern( "arraylist/A" ).callMethod( "add" ).withParamCount( 1 )
                     .then()
-                    .objectParam( new Integer( -9 ) );
+                    .objectParam( -9 );
                 forPattern( "arraylist/B" ).callMethod( "add" ).withParamCount( 1 )
                     .then()
-                    .objectParam( new Float( 3.14159 ) );
+                    .objectParam( 3.14159f );
                 forPattern( "arraylist/C" ).callMethod( "add" ).withParamCount( 1 )
                     .then()
-                    .objectParam( new Long( 999999999 ) );
+                    .objectParam( 999999999L );
                 forPattern( "arraylist/D" ).callMethod( "add" ).withParamCount( 1 )
                     .then()
                     .objectParam( "foobarbazbing" ).matchingAttribute( "desc" );
@@ -80,9 +80,9 @@ public class ObjectParamRuleTestCase
         final ArrayList<?> al = digester.parse( new StringReader( sb.toString() ) );
         assertNotNull( al );
         assertEquals( al.size(), 4 );
-        assertTrue( al.contains( new Integer( -9 ) ) );
-        assertTrue( al.contains( new Float( 3.14159 ) ) );
-        assertTrue( al.contains( new Long( 999999999 ) ) );
+        assertTrue( al.contains( -9 ) );
+        assertTrue( al.contains( 3.14159f ) );
+        assertTrue( al.contains( 999999999L ) );
         assertTrue( al.contains( "foobarbazbing" ) );
         assertFalse( al.contains( "ignore" ) );
     }
