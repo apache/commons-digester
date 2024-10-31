@@ -33,7 +33,7 @@ public class Employee
 
     private String lastName;
 
-    // this is to allow testing of primitive convertion
+    // this is to allow testing of primitive conversion
     private int age;
 
     private boolean active;

@@ -50,7 +50,7 @@ public final class Digester153TestCase
         assertThrows( SAXParseException.class, () -> digester.parse( getClass().getResourceAsStream( "BasicConstructor.xml" ) ) );
     }
 
-    private void succesfullConstructor( final RulesModule rulesModule )
+    private void successfulConstructor( final RulesModule rulesModule )
         throws Exception
     {
         final TestBean bean = newLoader( rulesModule )
@@ -89,7 +89,7 @@ public final class Digester153TestCase
     public void testBasicConstructorViaAnnotations()
         throws Exception
     {
-        succesfullConstructor( new FromAnnotationsRuleModule()
+        successfulConstructor( new FromAnnotationsRuleModule()
         {
 
             @Override
@@ -105,7 +105,7 @@ public final class Digester153TestCase
     public void testBasicConstructorViaBinder()
         throws Exception
     {
-        succesfullConstructor( new AbstractRulesModule()
+        successfulConstructor( new AbstractRulesModule()
         {
 
             @Override
@@ -126,7 +126,7 @@ public final class Digester153TestCase
     public void testBasicConstructorViaXML()
         throws Exception
     {
-        succesfullConstructor( new FromXmlRulesModule()
+        successfulConstructor( new FromXmlRulesModule()
         {
 
             @Override

@@ -134,7 +134,7 @@ final class DefaultRulesBinder
         }
         else if ( pattern.endsWith( "/" ) )
         {
-            // to help users who accidently add '/' to the end of their patterns
+            // to help users who accidentally add '/' to the end of their patterns
             keyPattern = pattern.substring( 0, pattern.length() - 1 );
         }
         else

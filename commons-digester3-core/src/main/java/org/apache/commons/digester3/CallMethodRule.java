@@ -273,7 +273,7 @@ public class CallMethodRule
      * @param methodName Method name of the parent method to call
      * @param paramCount The number of parameters to collect, or zero for a single argument from the body of the element
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
+     *            corresponding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      */
     public CallMethodRule( final String methodName, final int paramCount, final String[] paramTypes )

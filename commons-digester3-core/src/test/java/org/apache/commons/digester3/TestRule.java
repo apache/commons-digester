@@ -62,7 +62,7 @@ public class TestRule
 
     }
 
-    /** String identifing this particular {@code TestRule} */
+    /** String identifying this particular {@code TestRule} */
     private final String identifier;
 
     /** Used when testing body text */

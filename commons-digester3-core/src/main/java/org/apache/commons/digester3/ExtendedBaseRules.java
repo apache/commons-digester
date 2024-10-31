@@ -47,7 +47,7 @@ import org.xml.sax.Attributes;
  * <li>Parent-match patterns (eg "a/b/?") allow matching for all direct children of a specified element.</li>
  * <li>Ancestor-match patterns (eg "a/b/*") allow matching all elements nested within a specified element to any nesting
  * depth.</li>
- * <li>Completely-wild patterns ("*" or "!*") allow matching all elements.</li>
+ * <li>Completely-wildcard patterns ("*" or "!*") allow matching all elements.</li>
  * </ul>
  * <h2>Universal Match Patterns</h2>
  * <p>
@@ -104,7 +104,7 @@ import org.xml.sax.Attributes;
  *  {@code "*&#47;a/b/*"} matches any elements whose path contains an element 'a' followed by an element 'b'.
  * The longest matching still applies but the length excludes the '*' at the end.</li>
  * </ul>
- * <h2>Completely Wild Patterns</h2>
+ * <h2>Completely Wildcard Patterns</h2>
  * <p>
  * Pattern {@code "*"} matches every pattern that isn't matched by any other basic rule.
  * </p>
@@ -168,7 +168,7 @@ public class ExtendedBaseRules
     }
 
     /**
-     * Finds an exact ancester match for given pattern
+     * Finds an exact ancestor match for given pattern
      *
      * @param parentPattern The input pattern
      * @return A list of {@code Rule} related to the input pattern
@@ -232,14 +232,14 @@ public class ExtendedBaseRules
             else
             {
                 // if not, shorten tempParent to move /*/ one position to the left.
-                // as last part of patttern is always added we make sure pattern is allowed anywhere.
+                // as last part of pattern is always added we make sure pattern is allowed anywhere.
                 tempParentPattern = parentPattern.substring( 0, parentLastIndex );
             }
 
             parentLastIndex = tempParentPattern.lastIndexOf( '/' );
         }
 
-        // Universal all wildards ('!*')
+        // Universal all wildcards ('!*')
         // These are always matched so always add them
         List<Rule> tempList = this.cache.get( "!*" );
         if ( tempList != null )
@@ -277,7 +277,7 @@ public class ExtendedBaseRules
             }
             else
             {
-                // we don't have a match yet - so try exact ancester
+                // we don't have a match yet - so try exact ancestor
                 rulesList = findExactAncesterMatch( pattern );
                 if ( rulesList != null )
                 {
@@ -295,7 +295,7 @@ public class ExtendedBaseRules
 
         for ( String key : this.cache.keySet() )
         {
-            // find out if it's a univeral pattern
+            // find out if it's a universal pattern
             // set a flag
             final boolean isUniversal = key.startsWith( "!" );
             if ( isUniversal )
@@ -311,7 +311,7 @@ public class ExtendedBaseRules
             {
                 boolean parentMatched = false;
                 boolean basicMatched = false;
-                boolean ancesterMatched = false;
+                boolean ancestorMatched = false;
 
                 final boolean parentMatchEnd = key.endsWith( "/?" );
                 if ( parentMatchEnd )
@@ -321,17 +321,17 @@ public class ExtendedBaseRules
                 }
                 else if ( wildcardMatchEnd )
                 {
-                    // check for ancester match
+                    // check for ancestor match
                     if ( wildcardMatchStart )
                     {
                         final String patternBody = key.substring( 2, key.length() - 2 );
                         if ( pattern.endsWith( patternBody ) )
                         {
-                            ancesterMatched = true;
+                            ancestorMatched = true;
                         }
                         else
                         {
-                            ancesterMatched = pattern.contains( patternBody + "/" );
+                            ancestorMatched = pattern.contains( patternBody + "/" );
                         }
                     }
                     else
@@ -342,11 +342,11 @@ public class ExtendedBaseRules
                             if ( pattern.length() == bodyPattern.length() )
                             {
                                 // exact match
-                                ancesterMatched = true;
+                                ancestorMatched = true;
                             }
                             else
                             {
-                                ancesterMatched = pattern.charAt( bodyPattern.length() ) == '/';
+                                ancestorMatched = pattern.charAt( bodyPattern.length() ) == '/';
                             }
                         }
                     }
@@ -357,7 +357,7 @@ public class ExtendedBaseRules
                     basicMatched = basicMatch( key, pattern );
                 }
 
-                if ( parentMatched || basicMatched || ancesterMatched )
+                if ( parentMatched || basicMatched || ancestorMatched )
                 {
                     if ( isUniversal )
                     {

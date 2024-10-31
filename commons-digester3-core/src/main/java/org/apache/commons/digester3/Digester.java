@@ -307,7 +307,7 @@ public class Digester
     /**
      * Constructs a new Digester, allowing an XMLReader to be passed in. This allows Digester to be used in environments
      * which are unfriendly to JAXP1.1 (such as WebLogic 6.0). Note that if you use this option you have to configure
-     * namespace and validation support yourself, as these properties only affect the SAXParser and emtpy constructor.
+     * namespace and validation support yourself, as these properties only affect the SAXParser and empty constructor.
      *
      * @param reader The XMLReader used to parse XML streams
      */
@@ -373,7 +373,7 @@ public class Digester
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @param paramTypes The Java class names of the arguments (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
+     *            corresponding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      * @see CallMethodRule
      */
@@ -391,7 +391,7 @@ public class Digester
      * @param methodName Method name to be called
      * @param paramCount Number of expected parameters (or zero for a single parameter from the body of this element)
      * @param paramTypes Set of Java class names for the types of the expected parameters (if you wish to use a
-     *            primitive type, specify the corresonding Java wrapper class instead, such as
+     *            primitive type, specify the corresponding Java wrapper class instead, such as
      *            {@link Boolean} for a {@code boolean} parameter)
      * @see CallMethodRule
      */
@@ -737,7 +737,7 @@ public class Digester
      * Adds an {@link SetNestedPropertiesRule}.
      *
      * @param pattern register the rule with this pattern
-     * @param elementName elment name that a property maps to
+     * @param elementName element name that a property maps to
      * @param propertyName property name of the element mapped from
      * @since 1.6
      */
@@ -750,7 +750,7 @@ public class Digester
      * Adds an {@link SetNestedPropertiesRule}.
      *
      * @param pattern register the rule with this pattern
-     * @param elementNames elment names that (in order) map to properties
+     * @param elementNames element names that (in order) map to properties
      * @param propertyNames property names that (in order) elements are mapped to
      * @since 1.6
      */
@@ -777,7 +777,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
+     *            corresponding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      * @see SetNextRule
      */
@@ -881,7 +881,7 @@ public class Digester
      * @param pattern Element matching pattern
      * @param methodName Method name to call on the parent element
      * @param paramType Java class name of the expected parameter type (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
+     *            corresponding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      * @see SetTopRule
      */

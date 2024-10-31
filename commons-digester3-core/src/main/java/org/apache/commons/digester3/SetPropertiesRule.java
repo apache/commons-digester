@@ -60,7 +60,7 @@ public class SetPropertiesRule
     }
 
     /**
-     * Constructor allows attribute to property mapping to be overriden.
+     * Constructor allows attribute to property mapping to be overridden.
      *
      * @param aliases attribute to property mapping
      * @since 3.0
@@ -92,7 +92,7 @@ public class SetPropertiesRule
 
     /**
      * <p>
-     * Constructor allows attribute to property mapping to be overriden.
+     * Constructor allows attribute to property mapping to be overridden.
      * </p>
      * <p>
      * Two arrays are passed in. One contains the attribute names and the other the property names. The attribute name /
@@ -101,7 +101,7 @@ public class SetPropertiesRule
      * </p>
      * <p>
      * If a property name is null or the attribute name has no matching property name, then this indicates that the
-     * attibute should be ignored.
+     * attribute should be ignored.
      * </p>
      * <b>Example One</b>
      * <p>
@@ -199,9 +199,9 @@ public class SetPropertiesRule
                 // considered too risky.
                 //
                 // Using two different classes (PropertyUtils vs BeanUtils) to
-                // do the test and the set is also ugly; the codepaths
+                // do the test and the set is also ugly; the code paths
                 // are different which could potentially lead to trouble.
-                // However the BeanUtils/ProperyUtils code has been carefully
+                // However the BeanUtils/PropertyUtils code has been carefully
                 // compared and the PropertyUtils functionality does appear
                 // compatible so we'll accept the risk here.
 

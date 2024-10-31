@@ -31,7 +31,7 @@ import org.xml.sax.Attributes;
  * <p>
  * The regex implementation is pluggable, allowing different strategies to be used. The basic way that this class work
  * does not vary. All patterns are tested to see if they match the path using the regex matcher. All those that do are
- * return in the order which the rules were added.
+ * returned in the order in which the rules were added.
  * </p>
  *
  * @since 1.5

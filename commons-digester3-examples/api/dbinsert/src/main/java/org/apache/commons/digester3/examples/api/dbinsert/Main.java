@@ -68,7 +68,7 @@ public class Main
 
         // Map *any* attributes on the table tag to appropriate
         // setter-methods on the top object on the stack (the Table
-        // instance created by the preceeding rule). We only expect one
+        // instance created by the preceding rule). We only expect one
         // attribute, though: a 'name' attribute specifying what table
         // we are inserting rows into.
         d.addSetProperties( "database/table" );

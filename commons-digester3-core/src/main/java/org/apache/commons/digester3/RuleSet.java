@@ -22,7 +22,7 @@ package org.apache.commons.digester3;
 /**
  * <p>
  * Public interface defining a shorthand means of configuring a complete set of related {@code Rule} definitions,
- * possibly associated with a particular namespace URI, in one operation. To use an instance of a class that imlements
+ * possibly associated with a particular namespace URI, in one operation. To use an instance of a class that implements
  * this interface:
  * </p>
  * <ul>

@@ -336,7 +336,7 @@ public class CallMethodRuleTestCase
             {
                 // Here, we use the "grandchild element name" as a parameter to
                 // the created element, to ensure that all the params aren't
-                // avaiable to the CallMethodRule until some other rules have fired,
+                // available to the CallMethodRule until some other rules have fired,
                 // in particular an ObjectCreateRule. The CallMethodRule should still
                 // function correctly in this scenario.
                 forPattern( "toplevel/element" ).createObject().ofType( NamedBean.class )
@@ -504,7 +504,7 @@ public class CallMethodRuleTestCase
         assertTrue( bean.getSetBooleanCalled(), "Bean 1 property not called" );
         assertFalse( bean.getBoolean(), "Bean 1 property incorrect" );
         bean = list.get( 2 );
-        // no attibute, no call is what's expected
+        // no attribute, no call is what's expected
         assertFalse( bean.getSetBooleanCalled(), "Bean 2 property called" );
         bean = list.get( 3 );
         assertTrue( bean.getSetBooleanCalled(), "Bean 3 property not called" );

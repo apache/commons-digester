@@ -52,7 +52,7 @@ BUGS FIXED SINCE PREVIOUS RELEASE
 ===========================
 
  * [DIGESTER-161] Document thread-safety in javadoc of Rule class.
- * [DIGESTER-162] ObjectCreateRule doesn't allow create objects wich type is specified in attributeName only
+ * [DIGESTER-162] ObjectCreateRule doesn't allow create objects which type is specified in attributeName only
 
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================

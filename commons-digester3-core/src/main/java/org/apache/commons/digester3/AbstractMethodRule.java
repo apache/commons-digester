@@ -77,7 +77,7 @@ public abstract class AbstractMethodRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramType Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
+     *            corresponding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      */
     public AbstractMethodRule( final String methodName, final Class<?> paramType )
@@ -91,7 +91,7 @@ public abstract class AbstractMethodRule
      *
      * @param methodName Method name of the parent method to call
      * @param paramTypeName Java class of the parent method's argument (if you wish to use a primitive type, specify the
-     *            corresonding Java wrapper class instead, such as {@link Boolean} for a
+     *            corresponding Java wrapper class instead, such as {@link Boolean} for a
      *            {@code boolean} parameter)
      */
     public AbstractMethodRule( final String methodName, final String paramTypeName )
@@ -192,7 +192,7 @@ public abstract class AbstractMethodRule
      * Is exact matching being used.
      * </p>
      * <p>
-     * This rule uses {@code org.apache.commons.beanutils.MethodUtils} to introspect the relevent objects so that
+     * This rule uses {@code org.apache.commons.beanutils.MethodUtils} to introspect the relevant objects so that
      * the right method can be called. Originally, {@code MethodUtils.invokeExactMethod} was used. This matches
      * methods very strictly and so may not find a matching method when one exists. This is still the behavior when
      * exact matching is enabled.

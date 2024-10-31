@@ -198,7 +198,7 @@ this is the case, that you have already created a concrete implementation
 of that base class or interface, and are wondering what changes need to
 be made to that class to make it suitable for a "plugin".</p>
 <p>
-Well, if the class has a no-argument constuctor, and only simple configuration
+Well, if the class has a no-argument constructor, and only simple configuration
 needs that can be met by a SetPropertiesRule, then no changes need to be
 made at all.</p>
 <p>

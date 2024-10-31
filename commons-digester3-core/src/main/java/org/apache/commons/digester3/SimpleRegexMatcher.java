@@ -119,7 +119,7 @@ public class SimpleRegexMatcher
                     // this matches anything let - so return true
                     return true;
                 }
-                // go through every subsequent apperance of the next character
+                // go through every subsequent appearance of the next character
                 // and so if the rest of the regex matches
                 final char nextRegex = regexPattern.charAt( regexAt );
                 if ( log.isTraceEnabled() )
@@ -149,7 +149,7 @@ public class SimpleRegexMatcher
             default:
                 if ( log.isTraceEnabled() )
                 {
-                    log.trace( "Camparing " + regexCurrent + " to " + basePattern.charAt( baseAt ) );
+                    log.trace( "Comparing " + regexCurrent + " to " + basePattern.charAt( baseAt ) );
                 }
                 if ( regexCurrent == basePattern.charAt( baseAt ) )
                 {

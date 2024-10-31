@@ -73,7 +73,7 @@ public class PluginDeclarationRule
 
         // Note that it is perfectly safe to redeclare a plugin, because
         // the declaration doesn't add any rules to digester; all it does
-        // is create a RuleLoader instance whch is *capable* of adding the
+        // is create a RuleLoader instance which is *capable* of adding the
         // rules to the digester.
     }
 

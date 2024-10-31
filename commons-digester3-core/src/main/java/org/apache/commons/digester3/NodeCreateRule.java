@@ -40,7 +40,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * <li>the default is to create an {@link org.w3c.dom.Element Element} node. The created element will correspond to the
  * element that matched the rule, containing all XML content underneath that element.</li>
  * <li>alternatively, this rule can create nodes of type {@link org.w3c.dom.DocumentFragment DocumentFragment}, which
- * will contain only the XML content under the element the rule was trigged on.</li>
+ * will contain only the XML content under the element the rule was triggered on.</li>
  * </ul>
  * The created node will be normalized, meaning it will not contain text nodes that only contain white space characters.
  * <p>

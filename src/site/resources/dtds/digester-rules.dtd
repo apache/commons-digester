@@ -112,10 +112,10 @@
 <!--
     ObjectParamRule
     attrname  
-           - an arbitrary Object defined programatically, assigned if the 
+           - an arbitrary Object defined programmatically, assigned if the 
              element pattern AND specified attribute name are matched
     param 
-           - an arbitrary Object defined programatically, assigned when the 
+           - an arbitrary Object defined programmatically, assigned when the 
              element pattern associated with the Rule is matched
     type 
            - class name for object

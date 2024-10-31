@@ -43,7 +43,7 @@ public class RulesBaseTestCase
 
     /**
      * <p>
-     * This should be overriden by subclasses.
+     * This should be overridden by subclasses.
      *
      * @return the matching rules to be tested.
      */
@@ -76,7 +76,7 @@ public class RulesBaseTestCase
     }
 
     /**
-     * Test basic matchings involving namespaces.
+     * Test basic matching involving namespaces.
      */
     @Test
     public void testBasicNamespaceMatching()

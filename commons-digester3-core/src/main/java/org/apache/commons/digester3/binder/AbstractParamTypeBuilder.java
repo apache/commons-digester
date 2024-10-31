@@ -101,7 +101,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
     /**
      * Sets the Java class of the method's argument.
      *
-     * If you wish to use a primitive type, specify the corresonding
+     * If you wish to use a primitive type, specify the corresponding
      * Java wrapper class instead, such as {@link Boolean}
      * for a {@code boolean} parameter.
      *
@@ -122,7 +122,7 @@ public abstract class AbstractParamTypeBuilder<R extends AbstractMethodRule>
     /**
      * Sets the Java class name of the method's argument.
      *
-     * If you wish to use a primitive type, specify the corresonding
+     * If you wish to use a primitive type, specify the corresponding
      * Java wrapper class instead, such as {@link Boolean}
      * for a {@code boolean} parameter.
      *

@@ -55,7 +55,7 @@ final class IncludeRule
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
-        // The path attribute gives the URI to another digester rules xml file
+        // The path attribute gives the URI to another digester rules XML file
         final String fileName = attributes.getValue( "url" );
         if ( fileName != null && !fileName.isEmpty() )
         {
@@ -84,7 +84,7 @@ final class IncludeRule
                 }
                 catch ( final MalformedURLException e )
                 {
-                    targetRulesBinder.addError( "An error occurred while inculing file from '%s': %s", fileName,
+                    targetRulesBinder.addError( "An error occurred while including file from '%s': %s", fileName,
                                                 e.getMessage() );
                     return;
                 }

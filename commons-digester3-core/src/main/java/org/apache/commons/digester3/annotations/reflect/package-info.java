@@ -18,7 +18,7 @@
  */
 
 /**
- * The {@code reflect} package supply missing JVM classes to alow user
+ * The {@code reflect} package supply missing JVM classes to allow user
  * manipulate entities as {@link java.lang.reflect.AnnotatedElement}.
  */
 package org.apache.commons.digester3.annotations.reflect;

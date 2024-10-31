@@ -40,7 +40,7 @@ public abstract class AbstractRulesImpl
     /** Digester using this {@code Rules} implementation */
     private Digester digester;
 
-    /** Namespace uri to assoicate with subsequent {@code Rule}'s */
+    /** Namespace uri to associate with subsequent {@code Rule}s */
     private String namespaceURI;
 
     @Override

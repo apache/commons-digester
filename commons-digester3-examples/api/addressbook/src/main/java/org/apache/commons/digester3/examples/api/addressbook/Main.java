@@ -52,7 +52,7 @@ public class Main
 
         // map *any* attributes on the tag to appropriate
         // setter-methods on the top object on the stack (the Person
-        // instance created by the preceeding rule).
+        // instance created by the preceding rule).
         //
         // For example:
         // if attribute "id" exists on the xml tag, and method setId

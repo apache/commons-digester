@@ -199,9 +199,9 @@ public abstract class FromAnnotationsRuleModule
                 if ( element instanceof Constructor )
                 {
                     // constructor args
-                    final Constructor<?> construcotr = (Constructor<?>) element;
-                    parameterAnnotations = construcotr.getParameterAnnotations();
-                    parameterTypes = construcotr.getParameterTypes();
+                    final Constructor<?> constructor = (Constructor<?>) element;
+                    parameterAnnotations = constructor.getParameterAnnotations();
+                    parameterTypes = constructor.getParameterTypes();
                 }
                 else
                 {

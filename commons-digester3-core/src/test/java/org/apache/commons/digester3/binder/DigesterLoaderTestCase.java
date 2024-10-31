@@ -32,7 +32,7 @@ public final class DigesterLoaderTestCase
 {
 
     @Test
-    public void testDigeser152()
+    public void testDigester152()
     {
         final Locator expected = new Locator()
         {

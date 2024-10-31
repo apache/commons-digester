@@ -122,7 +122,7 @@ public class SetNestedPropertiesRule
             String propName = currChildElementName;
             if ( elementNames.containsKey( currChildElementName ) )
             {
-                // overide propName
+                // override propName
                 propName = elementNames.get( currChildElementName );
                 if ( propName == null )
                 {
@@ -295,7 +295,7 @@ public class SetNestedPropertiesRule
             // There is only one known case where this is called; when a rule
             // returned from AnyChildRules.match is invoked and throws a
             // SAXException then method Digester.endDocument will be called
-            // without having "uninstalled" the AnyChildRules ionstance. That
+            // without having "uninstalled" the AnyChildRules instance. That
             // method attempts to invoke the "finish" method for every Rule
             // instance - and thus needs to call rules() on its Rules object,
             // which is this one. Actually, java 1.5 and 1.6beta2 have a

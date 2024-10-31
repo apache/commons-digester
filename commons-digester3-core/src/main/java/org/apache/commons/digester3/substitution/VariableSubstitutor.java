@@ -51,7 +51,7 @@ public class VariableSubstitutor
     private final VariableExpander bodyTextExpander;
 
     /**
-     * Constructs a Substitutor which uses the same VariableExpander for both body text and attibutes.
+     * Constructs a Substitutor which uses the same VariableExpander for both body text and attributes.
      *
      * @param expander VariableExpander implementation, null if no substitutions are to be performed
      */

@@ -42,7 +42,7 @@ public abstract class Substitutor
 
     /**
      * <p>
-     * Substitutes the attributes (before they are passed to the {@code Rule} implementations's).
+     * Substitutes the attributes (before they are passed to the {@code Rule} implementations).
      * </p>
      * <p>
      * {@code Digester} will only call this method a second time once the original {@code Attributes} instance

@@ -55,7 +55,7 @@ public class RulesBase
 
     /**
      * The set of registered Rule instances, keyed by the matching pattern. Each value is a List containing the Rules
-     * for that pattern, in the order that they were orginally registered.
+     * for that pattern, in the order that they were originally registered.
      */
     protected HashMap<String, List<Rule>> cache = new HashMap<>();
 
@@ -143,7 +143,7 @@ public class RulesBase
     @Override
     protected void registerRule( String pattern, final Rule rule )
     {
-        // to help users who accidently add '/' to the end of their patterns
+        // to help users who accidentally add '/' to the end of their patterns
         final int patternLength = pattern.length();
         if ( patternLength > 1 && pattern.endsWith( "/" ) )
         {
