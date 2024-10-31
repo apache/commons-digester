@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>Implementation object representing a <strong>channel</strong> in the
@@ -41,17 +42,17 @@ public class Channel
     /**
      * The set of items associated with this Channel.
      */
-    protected ArrayList<Item> items = new ArrayList<>();
+    protected final List<Item> items = new ArrayList<>();
 
     /**
      * The set of skip days for this channel.
      */
-    protected ArrayList<String> skipDays = new ArrayList<>();
+    protected final List<String> skipDays = new ArrayList<>();
 
     /**
      * The set of skip hours for this channel.
      */
-    protected ArrayList<String> skipHours = new ArrayList<>();
+    protected final List<String> skipHours = new ArrayList<>();
 
     /**
      * The channel copyright (1-100 characters).
