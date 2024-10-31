@@ -118,7 +118,7 @@ public final class ObjectCreateBuilder
         }
         catch ( final ClassNotFoundException e )
         {
-            reportError( "createObject().ofType( String )", String.format( "class '%s' cannot be load", className ) );
+            reportError( "createObject().ofType( String )", format( "class '%s' cannot be load", className ) );
             return this;
         }
     }

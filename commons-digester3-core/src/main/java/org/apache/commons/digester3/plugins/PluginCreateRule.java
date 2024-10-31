@@ -129,7 +129,7 @@ public class PluginCreateRule
      * @throws Exception if any error occurs
      */
     @Override
-    public void begin( final String namespace, final String name, final org.xml.sax.Attributes attributes )
+    public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
     {
         final Log log = getDigester().getLogger();

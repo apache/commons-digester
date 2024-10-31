@@ -919,7 +919,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final File file )
     {
-        return asyncParse( () -> Digester.this.parse( file ) );
+        return asyncParse( () -> parse( file ) );
     }
 
     /**
@@ -933,7 +933,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final InputSource input )
     {
-        return asyncParse( () -> Digester.this.parse( input ) );
+        return asyncParse( () -> parse( input ) );
     }
 
     /**
@@ -947,7 +947,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final InputStream input )
     {
-        return asyncParse( () -> Digester.this.parse( input ) );
+        return asyncParse( () -> parse( input ) );
     }
 
     /**
@@ -961,7 +961,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final Reader reader )
     {
-        return asyncParse( () -> Digester.this.parse( reader ) );
+        return asyncParse( () -> parse( reader ) );
     }
 
     /**
@@ -975,7 +975,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final String uri )
     {
-        return asyncParse( () -> Digester.this.parse( uri ) );
+        return asyncParse( () -> parse( uri ) );
     }
 
     /**
@@ -989,7 +989,7 @@ public class Digester
      */
     public <T> Future<T> asyncParse( final URL url )
     {
-        return asyncParse( () -> Digester.this.parse( url ) );
+        return asyncParse( () -> parse( url ) );
     }
 
     @Override
