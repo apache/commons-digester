@@ -68,7 +68,7 @@ the developer to focus on the processing to be performed.</p>
     the order that they were listed.</li>
 <li>Call the <code>digester.parse()</code> method, passing a reference to the
     XML document to be parsed in one of a variety of forms.  See the
-    <a href="../apidocs/Digester.html#parse(java.io.File)">Digester.parse()</a>
+    <a href="../apidocs/org/apache/commons/digester3/Digester.html#parse(java.io.File)">Digester.parse()</a>
     documentation for details.  Note that you will need to be prepared to
     catch any <code>IOException</code> or <code>SAXException</code> that is
     thrown by the parser, or any runtime expression that is thrown by one of
@@ -223,7 +223,7 @@ including the following:</p>
     of the object stack.</li>
 <li><a href="../apidocs/org/apache/commons/digester3/Digester.html#peek()">peek()</a> - Return a reference to the top
     object on the stack, without removing it.</li>
-<li><a href="../apidocs/Digester.html#pop()">pop()</a> - Remove the top object from the
+<li><a href="../apidocs/org/apache/commons/digester3/Digester.html#pop()">pop()</a> - Remove the top object from the
     stack and return it.</li>
 <li><a href="../apidocs/org/apache/commons/digester3/Digester.html#push(T)">push()</a> - Push a new
     object onto the top of the stack.</li>
@@ -900,9 +900,9 @@ elements are ignored for matching purposes.</p>
 pattern of nested elements as described under
 <a href="#doc.Patterns">Element Matching Patterns</a>.  If you prefer to use
 different selection policies, however, you can create your own implementation
-of the <a href="../apidocs/Rules.html">org.apache.commons.digester3.Rules</a> interface,
-or subclass the corresponding convenience base class
-<a href="../apidocs/RulesBase.html">org.apache.commons.digester3.RulesBase</a>.
+of the <a href="../apidocs/org/apache/commons/digester3/Rules.html">org.apache.commons.digester3.Rules</a>
+interface, or subclass the corresponding convenience base class
+<a href="../apidocs/org/apache/commons/digester3/RulesBase.html">org.apache.commons.digester3.RulesBase</a>.
 Your implementation of the <code>match()</code> method will be called when the
 processing for a particular element is started or ended, and you must return
 a <code>List</code> of the rules that are relevant for the current nesting
@@ -921,7 +921,7 @@ that:</p>
 </ul>
 
       <subsection name="ExtendedBaseRules">
-        <p><a href="../apidocs/ExtendedBaseRules.html">ExtendedBaseRules</a>,
+        <p><a href="../apidocs/org/apache/commons/digester3/ExtendedBaseRules.html">ExtendedBaseRules</a>,
 adds some additional expression syntax for pattern matching
 to the default mechanism, but it also executes more slowly.  See the
 Javadocs for more details on the new pattern matching syntax, and suggestions
@@ -937,9 +937,9 @@ following as part of your Digester initialization:</p>
       </subsection>
 
       <subsection name="RegexRules">
-        <p><a href="../apidocs/RegexRules.html">RegexRules</a> is an advanced <code>Rules</code> 
-implementation which does not build on the default pattern matching rules.
-It uses a pluggable <a href="../apidocs/RegexMatcher.html">RegexMatcher</a> implementation to test 
+        <p><a href="../apidocs/org/apache/commons/digester3/RegexRules.html">RegexRules</a>
+is an advanced <code>Rules</code> implementation which does not build on the default pattern matching rules.
+It uses a pluggable <a href="../apidocs/org/apache/commons/digester3/RegexMatcher.html">RegexMatcher</a> implementation to test
 if a path matches the pattern for a Rule. All matching rules are returned 
 (note that this behaviour differs from longest matching rule of the default
  pattern matching rules). See the Java Docs for more details.
@@ -959,7 +959,7 @@ Example usage:
       <subsection name="RegexMatchers">
         <p>
 <code>Digester</code> ships only with one <code>RegexMatcher</code>
-implementation: <a href="../apidocs/SimpleRegexMatcher.html">SimpleRegexMatcher</a>.
+implementation: <a href="../apidocs/org/apache/commons/digester3/SimpleRegexMatcher.html">SimpleRegexMatcher</a>.
 This implementation is unsophisticated and lacks many good features
 found in more powerful libraries. There are some good reasons
 why this approach was adopted. The first is that <code>SimpleRegexMatcher</code>
@@ -1022,8 +1022,8 @@ could package a set of rules into a single class, which could be easily
 loaded and registered with a <code>Digester</code> instance in one easy step.
 </p>
 
-<p>The <a href="../apidocs/RuleSet.html">RuleSet</a> interface (and the convenience base
-class <a href="../apidocs/RuleSetBase.html">RuleSetBase</a>) make it possible to do this.
+<p>The <a href="../apidocs/org/apache/commons/digester3/RuleSet.html">RuleSet</a> interface (and the convenience base
+class <a href="../apidocs/org/apache/commons/digester3/RuleSetBase.html">RuleSetBase</a>) make it possible to do this.
 In addition, the rule instances registered with a particular
 <code>RuleSet</code> can optionally be associated with a particular namespace,
 as described under <a href="#doc.Namespace">Namespace Aware Processing</a>.</p>
