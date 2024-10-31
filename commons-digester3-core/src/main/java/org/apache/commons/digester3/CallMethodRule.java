@@ -355,10 +355,6 @@ public class CallMethodRule
             }
 
             parameters = new Object[] { bodyText };
-            if ( paramTypes.length == 0 )
-            {
-                paramTypes = new Class[] { String.class };
-            }
         }
         else
         {
