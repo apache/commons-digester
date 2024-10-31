@@ -368,10 +368,6 @@ public class ExtendedBaseRules
                                 ancesterMatched = pattern.charAt( bodyPattern.length() ) == '/';
                             }
                         }
-                        else
-                        {
-                            ancesterMatched = false;
-                        }
                     }
                 }
                 else
