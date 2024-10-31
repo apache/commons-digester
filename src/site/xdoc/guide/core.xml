@@ -24,14 +24,8 @@ limitations under the License.
   </properties>
   <body>
     <section name="External Dependencies" id="doc.Depend">
-      <p><em>Apache Commons Digester</em> Version 2.0 is dependent upon implementations of the following
-        standard libraries:</p>
-      <ul>
-        <li><strong>XML Parser</strong> compatible with the JAXP/1.3 specification.
-        Compatible implementations are included in JDKs 1.5 and above.</li>
-      </ul>
-      <p>It is also dependent on a compatible set of
-        <a href="https://commons.apache.org">Apache Commons</a> library components.
+      <p><em>Apache Commons Digester</em> is dependent on a compatible set of
+        <a href="https://commons.apache.org">Apache Commons</a> libraries.
         The recommended dependency set is:
       </p>
       <blockquote>

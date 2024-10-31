@@ -1118,7 +1118,7 @@ public class Digester
      * causes the jar archive file to be locked on disk ("in use") which makes it impossible to delete the jar file -
      * and that really stuffs up "undeploy" in webapps in particular.
      * <p>
-     * In JDK1.4 and later, Apache XercesJ is used as the XML parser. The InputSource object provided is converted into
+     * The InputSource object provided is converted into
      * an XMLInputSource, and eventually passed to an instance of XMLDocumentScannerImpl to specify the source data to
      * be converted into tokens for the rest of the XMLReader code to handle. XMLDocumentScannerImpl calls
      * fEntityManager.startDocumentEntity(source), where fEntityManager is declared in ancestor class XMLScanner to be
