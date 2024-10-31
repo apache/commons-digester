@@ -285,9 +285,6 @@ public class ObjectCreateRule
         this.attributeName = attributeName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -351,9 +348,6 @@ public class ObjectCreateRule
         getDigester().push( instance );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
@@ -408,9 +402,6 @@ public class ObjectCreateRule
         this.defaultConstructorArguments = constructorArguments;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

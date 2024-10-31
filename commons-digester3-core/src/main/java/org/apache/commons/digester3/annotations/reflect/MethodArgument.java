@@ -69,9 +69,6 @@ public final class MethodArgument
         this.annotations = annotations.clone();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public <T extends Annotation> T getAnnotation( final Class<T> annotationType )
     {
@@ -85,9 +82,6 @@ public final class MethodArgument
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Annotation[] getAnnotations()
     {
@@ -104,9 +98,6 @@ public final class MethodArgument
         return this.annotations.clone();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Annotation[] getDeclaredAnnotations()
     {
@@ -133,9 +124,6 @@ public final class MethodArgument
         return this.parameterType;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAnnotationPresent( final Class<? extends Annotation> annotationType )
     {

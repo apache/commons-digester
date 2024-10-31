@@ -69,9 +69,6 @@ public class RulesBase
      */
     protected ArrayList<Rule> rules = new ArrayList<>();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void clear()
     {
@@ -114,9 +111,6 @@ public class RulesBase
         return results;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
@@ -146,9 +140,6 @@ public class RulesBase
         return rulesList;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void registerRule( String pattern, final Rule rule )
     {
@@ -173,18 +164,12 @@ public class RulesBase
         rules.add( rule );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> rules()
     {
         return this.rules;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDigester( final Digester digester )
     {

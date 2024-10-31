@@ -191,9 +191,6 @@ public class ExtendedBaseRules
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
@@ -434,9 +431,6 @@ public class ExtendedBaseRules
         return parentPattern.endsWith( key.substring( 1, key.length() - 2 ) );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void registerRule( final String pattern, final Rule rule )
     {

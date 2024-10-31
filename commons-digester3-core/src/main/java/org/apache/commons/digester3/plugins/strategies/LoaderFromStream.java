@@ -88,9 +88,6 @@ public class LoaderFromStream
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addRules( final Digester d, final String path )
         throws PluginException

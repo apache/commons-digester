@@ -43,9 +43,6 @@ public final class CallParamBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected CallParamRule createRule()
     {

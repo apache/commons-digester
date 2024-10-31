@@ -37,27 +37,18 @@ final class PrefixedRulesBinder
         this.prefix = prefix;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         this.wrappedRulesBinder.addError( messagePattern, arguments );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final Throwable t )
     {
         this.wrappedRulesBinder.addError( t );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LinkedRuleBuilder forPattern( String pattern )
     {
@@ -68,18 +59,12 @@ final class PrefixedRulesBinder
         return this.wrappedRulesBinder.forPattern( pattern );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ClassLoader getContextClassLoader()
     {
         return this.wrappedRulesBinder.getContextClassLoader();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void install( final RulesModule rulesModule )
     {

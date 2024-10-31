@@ -992,9 +992,6 @@ public class Digester
         return asyncParse( () -> Digester.this.parse( url ) );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void characters( final char[] buffer, final int start, final int length )
         throws SAXException
@@ -1222,9 +1219,6 @@ public class Digester
         return new SAXException( message );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void endDocument()
         throws SAXException
@@ -1264,9 +1258,6 @@ public class Digester
         clear();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void endElement( final String namespaceURI, final String localName, final String qName )
         throws SAXException
@@ -1382,9 +1373,6 @@ public class Digester
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void endPrefixMapping( final String prefix )
         throws SAXException
@@ -1414,9 +1402,6 @@ public class Digester
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void error( final SAXParseException exception )
         throws SAXException
@@ -1425,9 +1410,6 @@ public class Digester
                 + exception.getMessage(), exception );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void fatalError( final SAXParseException exception )
         throws SAXException
@@ -1915,9 +1897,6 @@ public class Digester
         return this.schema;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void ignorableWhitespace( final char[] buffer, final int start, final int len )
         throws SAXException
@@ -1983,9 +1962,6 @@ public class Digester
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void notationDecl( final String name, final String publicId, final String systemId )
     {
@@ -2412,9 +2388,6 @@ public class Digester
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void processingInstruction( final String target, final String data )
         throws SAXException
@@ -2573,9 +2546,6 @@ public class Digester
         root = null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public InputSource resolveEntity( final String publicId, final String systemId )
         throws SAXException
@@ -2692,9 +2662,6 @@ public class Digester
         customContentHandler = handler;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDocumentLocator( final Locator locator )
     {
@@ -2909,9 +2876,6 @@ public class Digester
         this.schema = schema;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void skippedEntity( final String name )
         throws SAXException
@@ -2924,9 +2888,6 @@ public class Digester
         // No processing required
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void startDocument()
         throws SAXException
@@ -2942,9 +2903,6 @@ public class Digester
         configure();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void startElement( final String namespaceURI, final String localName, final String qName, Attributes list )
         throws SAXException
@@ -3030,9 +2988,6 @@ public class Digester
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void startPrefixMapping( final String prefix, final String namespaceURI )
         throws SAXException
@@ -3047,9 +3002,6 @@ public class Digester
         stack.push( namespaceURI );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void unparsedEntityDecl( final String name, final String publicId, final String systemId, final String notation )
     {
@@ -3059,9 +3011,6 @@ public class Digester
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void warning( final SAXParseException exception )
         throws SAXException

@@ -36,9 +36,6 @@ public final class ObjectCreateHandler
     implements AnnotationHandler<ObjectCreate, AnnotatedElement>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final ObjectCreate annotation, final AnnotatedElement element, final RulesBinder rulesBinder )
     {

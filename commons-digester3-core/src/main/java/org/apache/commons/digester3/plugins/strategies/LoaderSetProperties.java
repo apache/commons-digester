@@ -36,9 +36,6 @@ public class LoaderSetProperties
     extends RuleLoader
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addRules( final Digester digester, final String path )
     {

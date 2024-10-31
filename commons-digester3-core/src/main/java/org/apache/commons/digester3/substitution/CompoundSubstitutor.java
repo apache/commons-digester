@@ -63,18 +63,12 @@ public class CompoundSubstitutor
         this.b = b;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Attributes substitute( final Attributes attributes )
     {
         return b.substitute( a.substitute( attributes ) );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String substitute( final String bodyText )
     {

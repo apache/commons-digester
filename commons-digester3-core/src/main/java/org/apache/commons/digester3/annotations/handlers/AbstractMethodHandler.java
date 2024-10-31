@@ -116,9 +116,6 @@ abstract class AbstractMethodHandler<A extends Annotation> implements Annotation
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final A annotation, final Method element, final RulesBinder rulesBinder )
     {

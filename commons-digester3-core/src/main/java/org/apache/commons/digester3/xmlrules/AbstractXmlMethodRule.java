@@ -34,9 +34,6 @@ abstract class AbstractXmlMethodRule
         super( targetRulesBinder, patternStack );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected final void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception

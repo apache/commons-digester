@@ -70,9 +70,6 @@ public class RegexRules
         setRegexMatcher( matcher );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void clear()
     {
@@ -89,9 +86,6 @@ public class RegexRules
         return matcher;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
@@ -114,18 +108,12 @@ public class RegexRules
         return rules;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void registerRule( final String pattern, final Rule rule )
     {
         registeredRules.add( new RegisteredRule( pattern, rule ) );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> rules()
     {

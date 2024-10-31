@@ -59,9 +59,6 @@ final class DefaultRulesBinder
         this.errors.add( errorMessage );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( String messagePattern, final Object... arguments )
     {
@@ -108,9 +105,6 @@ final class DefaultRulesBinder
         addError( new ErrorMessage( messagePattern, arguments ) );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final Throwable t )
     {
@@ -128,9 +122,6 @@ final class DefaultRulesBinder
         return errors.size();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LinkedRuleBuilder forPattern( final String pattern )
     {
@@ -154,9 +145,6 @@ final class DefaultRulesBinder
         return new LinkedRuleBuilder( this, fromBinderRuleSet, classLoader, keyPattern );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ClassLoader getContextClassLoader()
     {
@@ -205,9 +193,6 @@ final class DefaultRulesBinder
         errors.clear();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void install( final RulesModule rulesModule )
     {

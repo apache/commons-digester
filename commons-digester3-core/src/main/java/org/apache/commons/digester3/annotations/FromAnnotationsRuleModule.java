@@ -83,9 +83,6 @@ public abstract class FromAnnotationsRuleModule
         bindRulesFrom( type.getSuperclass() );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected final void configure()
     {

@@ -59,9 +59,6 @@ public class SimpleRegexMatcher
         return log;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean match( final String basePattern, final String regexPattern )
     {

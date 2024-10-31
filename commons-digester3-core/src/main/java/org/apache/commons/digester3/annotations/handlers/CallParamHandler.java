@@ -34,9 +34,6 @@ public final class CallParamHandler
     implements AnnotationHandler<CallParam, MethodArgument>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final CallParam annotation, final MethodArgument element, final RulesBinder rulesBinder )
     {

@@ -38,9 +38,6 @@ final class SetTopRule
         super( targetRulesBinder, patternStack );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final String methodName, final String paramType,
                              final boolean exactMatch, final boolean fireOnBegin )

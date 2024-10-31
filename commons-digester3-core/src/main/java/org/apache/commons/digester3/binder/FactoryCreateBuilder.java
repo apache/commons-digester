@@ -48,9 +48,6 @@ public final class FactoryCreateBuilder
         this.classLoader = classLoader;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected FactoryCreateRule createRule()
     {

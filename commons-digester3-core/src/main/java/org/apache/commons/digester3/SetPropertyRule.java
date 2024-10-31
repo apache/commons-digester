@@ -59,9 +59,6 @@ public class SetPropertyRule
         this.value = value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -132,9 +129,6 @@ public class SetPropertyRule
         setProperty( top, actualName, actualValue );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

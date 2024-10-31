@@ -62,9 +62,6 @@ public abstract class AbstractRulesModule
      */
     protected abstract void configure();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final void configure( final RulesBinder rulesBinder )
     {

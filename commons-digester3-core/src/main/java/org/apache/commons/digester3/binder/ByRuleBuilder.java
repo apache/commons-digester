@@ -39,9 +39,6 @@ public final class ByRuleBuilder<R extends Rule>
         this.rule = rule;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected R createRule()
     {

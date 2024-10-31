@@ -337,9 +337,6 @@ public class PluginRules
         return rulesFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> match( final String namespaceURI, final String path, final String name, final Attributes attributes )
     {

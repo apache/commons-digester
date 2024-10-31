@@ -51,9 +51,6 @@ final class IncludeRule
         this.targetRulesBinder = targetRulesBinder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception

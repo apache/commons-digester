@@ -88,9 +88,6 @@ final class ErrorMessage
         return message;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

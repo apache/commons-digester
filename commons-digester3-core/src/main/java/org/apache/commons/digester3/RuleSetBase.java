@@ -53,9 +53,6 @@ public abstract class RuleSetBase
         this.namespaceURI = namespaceURI;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getNamespaceURI()
     {

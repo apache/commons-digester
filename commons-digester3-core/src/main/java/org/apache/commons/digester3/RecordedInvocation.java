@@ -119,9 +119,6 @@ final class RecordedInvocation
         return invokedMethod;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

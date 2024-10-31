@@ -409,9 +409,6 @@ public class NodeCreateRule
         getDigester().setCustomContentHandler( builder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception

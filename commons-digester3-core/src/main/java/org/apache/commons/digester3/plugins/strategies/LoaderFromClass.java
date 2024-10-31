@@ -93,9 +93,6 @@ public class LoaderFromClass
         this.rulesMethod = method;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addRules( final Digester d, final String path )
         throws PluginException

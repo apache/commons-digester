@@ -28,9 +28,6 @@ public class DigesterRulesSourceTestImpl
     extends AbstractRulesModule
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void configure()
     {

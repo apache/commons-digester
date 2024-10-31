@@ -83,9 +83,6 @@ public class ObjectParamRule
         this.param = param;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -109,9 +106,6 @@ public class ObjectParamRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

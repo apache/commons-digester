@@ -53,9 +53,6 @@ public @interface FactoryCreate
         extends AbstractObjectCreationFactory<Object>
     {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public Object createObject( final Attributes attributes )
             throws Exception

@@ -33,9 +33,6 @@ public final class FactoryCreateHandler
     implements AnnotationHandler<FactoryCreate, Class<?>>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final FactoryCreate annotation, final Class<?> element, final RulesBinder rulesBinder )
     {

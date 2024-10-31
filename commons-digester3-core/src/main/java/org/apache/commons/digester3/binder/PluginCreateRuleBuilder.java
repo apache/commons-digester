@@ -65,9 +65,6 @@ public final class PluginCreateRuleBuilder
         return this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected PluginCreateRule createRule()
     {

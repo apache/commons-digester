@@ -33,9 +33,6 @@ public final class SetNextHandler
     extends AbstractMethodHandler<SetNext>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void doBind( final String pattern, final String namespaceURI, final Method method, final Class<?> type, final boolean fireOnBegin,
                            final RulesBinder rulesBinder )

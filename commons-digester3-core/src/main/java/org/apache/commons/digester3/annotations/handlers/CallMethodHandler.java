@@ -35,9 +35,6 @@ public class CallMethodHandler
     implements AnnotationHandler<CallMethod, Method>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final CallMethod annotation, final Method element, final RulesBinder rulesBinder )
     {

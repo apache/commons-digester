@@ -43,9 +43,6 @@ public abstract class AbstractRulesImpl
     /** Namespace uri to assoicate with subsequent {@code Rule}'s */
     private String namespaceURI;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final void add( final String pattern, final Rule rule )
     {
@@ -63,18 +60,12 @@ public abstract class AbstractRulesImpl
         registerRule( pattern, rule );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Digester getDigester()
     {
         return digester;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getNamespaceURI()
     {
@@ -90,18 +81,12 @@ public abstract class AbstractRulesImpl
      */
     protected abstract void registerRule( String pattern, Rule rule );
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDigester( final Digester digester )
     {
         this.digester = digester;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setNamespaceURI( final String namespaceURI )
     {

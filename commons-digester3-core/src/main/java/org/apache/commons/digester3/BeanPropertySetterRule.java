@@ -87,9 +87,6 @@ public class BeanPropertySetterRule
         this.propertyName = propertyName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -103,9 +100,6 @@ public class BeanPropertySetterRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void body( final String namespace, final String name, final String text )
         throws Exception
@@ -121,9 +115,6 @@ public class BeanPropertySetterRule
         bodyText = text.trim();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
@@ -174,9 +165,6 @@ public class BeanPropertySetterRule
         setProperty( top, property, bodyText );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void finish()
         throws Exception
@@ -215,9 +203,6 @@ public class BeanPropertySetterRule
         this.propertyNameFromAttribute = propertyNameFromAttribute;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

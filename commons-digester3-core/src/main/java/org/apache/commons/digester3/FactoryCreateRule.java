@@ -216,9 +216,6 @@ public class FactoryCreateRule
         this.ignoreCreateExceptions = ignoreCreateExceptions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -278,9 +275,6 @@ public class FactoryCreateRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
@@ -311,9 +305,6 @@ public class FactoryCreateRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void finish()
         throws Exception
@@ -357,9 +348,6 @@ public class FactoryCreateRule
         return creationFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

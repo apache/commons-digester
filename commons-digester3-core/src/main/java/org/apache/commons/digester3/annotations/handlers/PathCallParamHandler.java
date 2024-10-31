@@ -33,9 +33,6 @@ public final class PathCallParamHandler
     implements AnnotationHandler<PathCallParam, MethodArgument>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final PathCallParam annotation, final MethodArgument element, final RulesBinder rulesBinder )
     {

@@ -71,9 +71,6 @@ public final class SetPropertiesBuilder
         return addAlias( attributeName ).forProperty( propertyName );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected SetPropertiesRule createRule()
     {

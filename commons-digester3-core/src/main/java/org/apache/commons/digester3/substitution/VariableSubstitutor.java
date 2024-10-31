@@ -75,9 +75,6 @@ public class VariableSubstitutor
         variableAttributes = new VariableAttributes();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Attributes substitute( final Attributes attributes )
     {
@@ -90,9 +87,6 @@ public class VariableSubstitutor
         return results;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String substitute( final String bodyText )
     {

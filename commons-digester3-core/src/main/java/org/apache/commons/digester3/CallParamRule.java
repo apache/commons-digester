@@ -121,9 +121,6 @@ public class CallParamRule
         this.attributeName = attributeName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -162,9 +159,6 @@ public class CallParamRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void body( final String namespace, final String name, final String text )
         throws Exception
@@ -182,9 +176,6 @@ public class CallParamRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
     {
@@ -207,9 +198,6 @@ public class CallParamRule
         this.attributeName = attributeName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

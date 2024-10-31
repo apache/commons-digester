@@ -56,9 +56,6 @@ final class FromBinderRuleSet
             this.namespaceURI = namespaceURI;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public boolean equals( final Object obj )
         {
@@ -101,18 +98,12 @@ final class FromBinderRuleSet
             return pattern;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public int hashCode()
         {
             return Objects.hash( namespaceURI, pattern );
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String toString()
         {
@@ -133,9 +124,6 @@ final class FromBinderRuleSet
     private final Map<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>> providersIndex =
         new HashMap<>();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addRuleInstances( final Digester digester )
     {
@@ -154,9 +142,6 @@ final class FromBinderRuleSet
         providersIndex.clear();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getNamespaceURI()
     {

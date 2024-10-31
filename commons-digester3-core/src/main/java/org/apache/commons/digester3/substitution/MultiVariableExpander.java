@@ -52,9 +52,6 @@ public class MultiVariableExpander
         sources.add( source );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String expand( String param )
     {

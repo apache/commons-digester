@@ -46,18 +46,12 @@ public abstract class AbstractObjectCreationFactory<T>
     public abstract T createObject( Attributes attributes )
         throws Exception;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Digester getDigester()
     {
         return this.digester;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDigester( final Digester digester )
     {

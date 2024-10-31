@@ -42,18 +42,12 @@ final class NameSpaceURIRulesBinder
         this.wrappedBinder = wrappedBinder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         wrappedBinder.addError( messagePattern, arguments );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final Throwable t )
     {
@@ -69,27 +63,18 @@ final class NameSpaceURIRulesBinder
         namespaceURIs.push( namespaceURI );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LinkedRuleBuilder forPattern( final String pattern )
     {
         return wrappedBinder.forPattern( pattern ).withNamespaceURI( namespaceURIs.peek() );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ClassLoader getContextClassLoader()
     {
         return wrappedBinder.getContextClassLoader();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void install( final RulesModule rulesModule )
     {

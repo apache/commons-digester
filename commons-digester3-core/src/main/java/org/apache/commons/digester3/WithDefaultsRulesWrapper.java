@@ -82,9 +82,6 @@ public class WithDefaultsRulesWrapper
         this.wrappedRules = wrappedRules;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void add( final String pattern, final Rule rule )
     {
@@ -114,9 +111,6 @@ public class WithDefaultsRulesWrapper
         allRules.add( rule );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void clear()
     {
@@ -135,27 +129,18 @@ public class WithDefaultsRulesWrapper
         return defaultRules;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Digester getDigester()
     {
         return wrappedRules.getDigester();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getNamespaceURI()
     {
         return wrappedRules.getNamespaceURI();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> match( final String namespaceURI, final String pattern, final String name, final Attributes attributes )
     {
@@ -169,18 +154,12 @@ public class WithDefaultsRulesWrapper
         return matches;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Rule> rules()
     {
         return allRules;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDigester( final Digester digester )
     {
@@ -191,9 +170,6 @@ public class WithDefaultsRulesWrapper
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setNamespaceURI( final String namespaceURI )
     {

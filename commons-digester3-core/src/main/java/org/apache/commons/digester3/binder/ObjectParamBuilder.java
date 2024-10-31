@@ -44,9 +44,6 @@ public final class ObjectParamBuilder<T>
         this.paramObj = paramObj;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected ObjectParamRule createRule()
     {

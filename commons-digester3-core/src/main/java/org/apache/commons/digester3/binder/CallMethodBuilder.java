@@ -54,9 +54,6 @@ public final class CallMethodBuilder
         this.classLoader = classLoader;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected CallMethodRule createRule()
     {

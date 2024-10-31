@@ -47,9 +47,6 @@ final class XmlRulesModule
         this.rootPath = rootPath;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void configure( final RulesBinder rulesBinder )
     {

@@ -36,9 +36,6 @@ public final class SetNextBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder, methodName, classLoader );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected SetNextRule createRule()
     {

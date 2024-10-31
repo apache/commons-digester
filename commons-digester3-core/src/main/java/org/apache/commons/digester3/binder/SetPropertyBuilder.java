@@ -43,9 +43,6 @@ public final class SetPropertyBuilder
         this.attributePropertyName = attributePropertyName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected SetPropertyRule createRule()
     {

@@ -258,9 +258,6 @@ public class PluginCreateRule
         fireBeginMethods( rules, namespace, name, attributes );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void body( final String namespace, final String name, final String text )
         throws Exception
@@ -285,9 +282,6 @@ public class PluginCreateRule
         fireBodyMethods( rules, namespace, name, text );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
@@ -436,9 +430,6 @@ public class PluginCreateRule
         return pattern;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void postRegisterInit( final String matchPattern )
     {

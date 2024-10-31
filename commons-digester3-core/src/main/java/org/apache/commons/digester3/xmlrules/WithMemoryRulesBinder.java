@@ -51,36 +51,24 @@ final class WithMemoryRulesBinder
         this.wrappedRulesBinder = wrappedRulesBinder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final String messagePattern, final Object... arguments )
     {
         this.wrappedRulesBinder.addError( messagePattern, arguments );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addError( final Throwable t )
     {
         this.wrappedRulesBinder.addError( t );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LinkedRuleBuilder forPattern( final String pattern )
     {
         return this.wrappedRulesBinder.forPattern( pattern );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ClassLoader getContextClassLoader()
     {
@@ -103,9 +91,6 @@ final class WithMemoryRulesBinder
         return this.patternStack;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void install( final RulesModule rulesModule )
     {

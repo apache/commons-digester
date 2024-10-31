@@ -89,9 +89,6 @@ public final class NestedPropertiesBuilder
         return this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected SetNestedPropertiesRule createRule()
     {

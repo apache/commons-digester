@@ -439,9 +439,6 @@ public class SetNestedPropertiesRule
         elementNames.put( elementName, propertyName );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -454,9 +451,6 @@ public class SetNestedPropertiesRule
         getDigester().setRules( newRules );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void body( final String namespace, final String name, final String text )
         throws Exception
@@ -506,9 +500,6 @@ public class SetNestedPropertiesRule
         this.allowUnknownChildElements = allowUnknownChildElements;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDigester( final Digester digester )
     {
@@ -527,9 +518,6 @@ public class SetNestedPropertiesRule
         this.trimData = trimData;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

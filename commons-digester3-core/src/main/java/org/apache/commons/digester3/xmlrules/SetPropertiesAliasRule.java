@@ -29,9 +29,6 @@ final class SetPropertiesAliasRule
     extends Rule
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception

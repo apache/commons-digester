@@ -42,90 +42,61 @@ public class VariableAttributes
     private VariableExpander expander;
 
     // plain proxy methods follow : nothing interesting :-)
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public int getIndex( final String qName )
     {
         return attrs.getIndex( qName );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getIndex( final String uri, final String localPart )
     {
         return attrs.getIndex( uri, localPart );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getLength()
     {
         return attrs.getLength();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getLocalName( final int index )
     {
         return attrs.getLocalName( index );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getQName( final int index )
     {
         return attrs.getQName( index );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getType( final int index )
     {
         return attrs.getType( index );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getType( final String qName )
     {
         return attrs.getType( qName );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getType( final String uri, final String localName )
     {
         return attrs.getType( uri, localName );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getURI( final int index )
     {
         return attrs.getURI( index );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue( final int index )
     {
@@ -161,9 +132,6 @@ public class VariableAttributes
         return s;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue( final String qName )
     {
@@ -175,9 +143,6 @@ public class VariableAttributes
         return getValue( index );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue( final String uri, final String localName )
     {

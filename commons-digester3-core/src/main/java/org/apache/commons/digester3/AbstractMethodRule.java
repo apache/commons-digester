@@ -100,9 +100,6 @@ public abstract class AbstractMethodRule
         this.paramTypeName = paramTypeName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -113,9 +110,6 @@ public abstract class AbstractMethodRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
@@ -260,9 +254,6 @@ public abstract class AbstractMethodRule
         this.fireOnBegin = fireOnBegin;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final String toString()
     {

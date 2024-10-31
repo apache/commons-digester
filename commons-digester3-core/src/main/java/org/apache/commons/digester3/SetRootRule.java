@@ -70,18 +70,12 @@ public class SetRootRule
         super( methodName, paramType );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Object getChild()
     {
         return getDigester().peek( 0 );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Object getParent()
     {

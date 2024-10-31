@@ -36,9 +36,6 @@ public final class SetTopBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder, methodName, classLoader );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected SetTopRule createRule()
     {

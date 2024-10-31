@@ -51,9 +51,6 @@ public class PathCallParamRule
         this.paramIndex = paramIndex;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -67,9 +64,6 @@ public class PathCallParamRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

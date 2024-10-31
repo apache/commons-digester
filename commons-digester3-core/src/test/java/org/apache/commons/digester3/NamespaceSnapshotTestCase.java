@@ -47,9 +47,6 @@ public class NamespaceSnapshotTestCase
         public static class Provider implements RuleProvider<NamespaceSnapshotRule>
         {
 
-            /**
-             * {@inheritDoc}
-             */
             @Override
             public NamespaceSnapshotRule get()
             {

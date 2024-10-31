@@ -41,9 +41,6 @@ public final class ByRuleProviderBuilder<R extends Rule>
         this.provider = provider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected R createRule()
     {

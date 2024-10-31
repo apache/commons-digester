@@ -55,9 +55,6 @@ abstract class AbstractBackToLinkedRuleBuilder<R extends Rule>
      */
     protected abstract R createRule();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final R get()
     {

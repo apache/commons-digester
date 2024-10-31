@@ -281,9 +281,6 @@ public class CallMethodRule
         this( 0, methodName, paramCount, paramTypes );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -297,9 +294,6 @@ public class CallMethodRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void body( final String namespace, final String name, final String text )
         throws Exception
@@ -310,9 +304,6 @@ public class CallMethodRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
@@ -446,9 +437,6 @@ public class CallMethodRule
         processMethodCallResult( result );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void finish()
         throws Exception
@@ -477,9 +465,6 @@ public class CallMethodRule
         // do nothing
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setDigester( final Digester digester )
     {
@@ -514,9 +499,6 @@ public class CallMethodRule
         this.useExactMatch = useExactMatch;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

@@ -34,9 +34,6 @@ public final class SetTopHandler
     implements AnnotationHandler<SetTop, Method>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final SetTop annotation, final Method element, final RulesBinder rulesBinder )
     {

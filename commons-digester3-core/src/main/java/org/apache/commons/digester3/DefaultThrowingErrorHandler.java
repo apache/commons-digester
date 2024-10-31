@@ -30,9 +30,6 @@ public class DefaultThrowingErrorHandler
     implements ErrorHandler
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void error( final SAXParseException e )
         throws SAXException
@@ -40,9 +37,6 @@ public class DefaultThrowingErrorHandler
         throw e;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void fatalError( final SAXParseException e )
         throws SAXException
@@ -50,9 +44,6 @@ public class DefaultThrowingErrorHandler
         throw e;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void warning( final SAXParseException e )
         throws SAXException

@@ -43,9 +43,6 @@ public abstract class AbstractNamespaceURIBasedRulesModule
         this.namespaceURI = namespaceURI;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected LinkedRuleBuilder forPattern( final String pattern )
     {

@@ -154,9 +154,6 @@ public class SetPropertiesRule
         aliases.put( attributeName, propertyName );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -269,9 +266,6 @@ public class SetPropertiesRule
         this.ignoreMissingProperty = ignoreMissingProperty;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

@@ -38,9 +38,6 @@ final class NodeCreateRule
         super( targetRulesBinder, patternStack );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception

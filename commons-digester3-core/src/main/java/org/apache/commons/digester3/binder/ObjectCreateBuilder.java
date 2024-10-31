@@ -61,9 +61,6 @@ public final class ObjectCreateBuilder
         this.classLoader = classLoader;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected ObjectCreateRule createRule()
     {

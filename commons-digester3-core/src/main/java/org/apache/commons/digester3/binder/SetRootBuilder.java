@@ -36,9 +36,6 @@ public final class SetRootBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder, methodName, classLoader );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected SetRootRule createRule()
     {

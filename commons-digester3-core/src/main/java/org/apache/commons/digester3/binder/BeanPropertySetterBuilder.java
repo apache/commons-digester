@@ -38,9 +38,6 @@ public final class BeanPropertySetterBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected BeanPropertySetterRule createRule()
     {

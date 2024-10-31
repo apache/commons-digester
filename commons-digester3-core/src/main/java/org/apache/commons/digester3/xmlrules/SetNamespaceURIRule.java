@@ -36,9 +36,6 @@ final class SetNamespaceURIRule
         this.rulesBinder = rulesBinder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -46,9 +43,6 @@ final class SetNamespaceURIRule
         rulesBinder.addNamespaceURI( attributes.getValue( "namespaceURI" ) );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception

@@ -36,9 +36,6 @@ public final class PluginDeclarationRuleBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected PluginDeclarationRule createRule()
     {

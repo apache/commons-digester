@@ -38,9 +38,6 @@ public final class PathCallParamBuilder
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected PathCallParamRule createRule()
     {

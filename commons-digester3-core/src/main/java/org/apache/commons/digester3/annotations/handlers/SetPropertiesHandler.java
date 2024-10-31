@@ -35,9 +35,6 @@ public final class SetPropertiesHandler
     implements AnnotationHandler<SetProperty, Field>
 {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle( final SetProperty annotation, final Field element, final RulesBinder rulesBinder )
     {

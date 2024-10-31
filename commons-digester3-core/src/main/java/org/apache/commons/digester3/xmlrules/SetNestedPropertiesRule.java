@@ -35,9 +35,6 @@ final class SetNestedPropertiesRule
         super( targetRulesBinder, patternStack );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void bindRule( final LinkedRuleBuilder linkedRuleBuilder, final Attributes attributes )
         throws Exception
@@ -50,9 +47,6 @@ final class SetNestedPropertiesRule
         getDigester().push( builder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception

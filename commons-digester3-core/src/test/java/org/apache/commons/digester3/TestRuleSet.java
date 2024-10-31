@@ -74,9 +74,6 @@ public class TestRuleSet
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addRuleInstances( final Digester digester )
     {

@@ -70,18 +70,12 @@ public class SetTopRule
         super( methodName, paramType );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Object getChild()
     {
         return getDigester().peek( 1 );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Object getParent()
     {

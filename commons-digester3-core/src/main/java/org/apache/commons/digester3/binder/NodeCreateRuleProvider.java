@@ -125,9 +125,6 @@ public final class NodeCreateRuleProvider
         super( keyPattern, namespaceURI, mainBinder, mainBuilder );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected NodeCreateRule createRule()
     {

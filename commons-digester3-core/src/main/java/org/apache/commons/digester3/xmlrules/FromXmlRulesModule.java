@@ -56,9 +56,6 @@ public abstract class FromXmlRulesModule
 
     private String rootPath;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void configure()
     {

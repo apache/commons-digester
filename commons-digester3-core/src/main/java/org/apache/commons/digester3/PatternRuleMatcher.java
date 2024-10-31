@@ -94,9 +94,6 @@ final class PatternRuleMatcher
         return pattern;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int hashCode()
     {
@@ -107,9 +104,6 @@ final class PatternRuleMatcher
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean match( final String namespace, final String pattern, final String name, final Attributes attributes )
     {
@@ -120,9 +114,6 @@ final class PatternRuleMatcher
         return this.pattern.equals( pattern );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString()
     {

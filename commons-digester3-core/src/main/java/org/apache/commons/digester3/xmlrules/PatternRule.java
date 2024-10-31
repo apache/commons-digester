@@ -45,9 +45,6 @@ class PatternRule
         this.patternStack = patternStack;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
         throws Exception
@@ -59,9 +56,6 @@ class PatternRule
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void end( final String namespace, final String name )
         throws Exception
