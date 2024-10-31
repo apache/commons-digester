@@ -209,7 +209,7 @@ public class SetNestedPropertiesRule
 
         private Rules decoratedRules;
 
-        private final ArrayList<Rule> rules = new ArrayList<>( 1 );
+        private final List<Rule> rules = new ArrayList<>( 1 );
 
         private final AnyChildRule rule;
 

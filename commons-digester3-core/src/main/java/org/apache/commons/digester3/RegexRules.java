@@ -55,7 +55,7 @@ public class RegexRules
     }
 
     /** All registered {@code Rule}'s */
-    private final ArrayList<RegisteredRule> registeredRules = new ArrayList<>();
+    private final List<RegisteredRule> registeredRules = new ArrayList<>();
 
     /** The regex strategy used by this RegexRules */
     private RegexMatcher matcher;
@@ -97,7 +97,7 @@ public class RegexRules
         //
         // XXX FIX ME - Time And Optimize
         //
-        final ArrayList<Rule> rules = new ArrayList<>( registeredRules.size() );
+        final List<Rule> rules = new ArrayList<>( registeredRules.size() );
         for ( final RegisteredRule rr : registeredRules )
         {
             if ( matcher.match( pattern, rr.pattern ) )
@@ -117,7 +117,7 @@ public class RegexRules
     @Override
     public List<Rule> rules()
     {
-        final ArrayList<Rule> rules = new ArrayList<>( registeredRules.size() );
+        final List<Rule> rules = new ArrayList<>( registeredRules.size() );
         for ( final RegisteredRule rr : registeredRules )
         {
             rules.add( rr.rule );

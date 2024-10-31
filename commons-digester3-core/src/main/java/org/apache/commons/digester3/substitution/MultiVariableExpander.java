@@ -19,6 +19,7 @@ package org.apache.commons.digester3.substitution;
  * under the License.
  */
 
+import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
@@ -35,9 +36,9 @@ public class MultiVariableExpander
 
     private int nEntries;
 
-    private final ArrayList<String> markers = new ArrayList<>( 2 );
+    private final List<String> markers = new ArrayList<>( 2 );
 
-    private final ArrayList<Map<String, Object>> sources = new ArrayList<>( 2 );
+    private final List<Map<String, Object>> sources = new ArrayList<>( 2 );
 
     /**
      * Add a new variables source, identified by the input marker

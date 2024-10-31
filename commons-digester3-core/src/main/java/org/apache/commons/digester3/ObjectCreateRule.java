@@ -28,6 +28,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
@@ -49,7 +50,7 @@ public class ObjectCreateRule
     {
         Constructor<?> constructor;
         Object[] constructorArgs;
-        ArrayList<RecordedInvocation> invocations = new ArrayList<>();
+        List<RecordedInvocation> invocations = new ArrayList<>();
         Object delegate;
 
         DeferredConstructionCallback( final Constructor<?> constructor, final Object[] constructorArgs )

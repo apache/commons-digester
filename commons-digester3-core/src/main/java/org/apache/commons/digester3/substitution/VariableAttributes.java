@@ -22,6 +22,7 @@ package org.apache.commons.digester3.substitution;
 import org.xml.sax.Attributes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Wrapper for an {@link Attributes} object which expands any "variables" referenced in the attribute value via

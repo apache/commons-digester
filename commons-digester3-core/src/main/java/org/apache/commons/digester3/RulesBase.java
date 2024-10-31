@@ -67,7 +67,7 @@ public class RulesBase
     /**
      * The set of registered Rule instances, in the order that they were originally registered.
      */
-    protected ArrayList<Rule> rules = new ArrayList<>();
+    protected List<Rule> rules = new ArrayList<>();
 
     @Override
     public void clear()
@@ -100,7 +100,7 @@ public class RulesBase
         }
 
         // Select only Rules that match on the specified namespace URI
-        final ArrayList<Rule> results = new ArrayList<>();
+        final List<Rule> results = new ArrayList<>();
         for ( final Rule item : list )
         {
             if ( namespaceURI.equals( item.getNamespaceURI() ) || item.getNamespaceURI() == null )
