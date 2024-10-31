@@ -56,7 +56,7 @@ included in this release.</p>
 demonstrates the basic functionality. In particular, you should read the 
 AddressBook example in the "api" subdirectory. You can view the examples
 directly from the Subversion repository via <a
-href="https://svn.apache.org/viewvc/commons/proper/digester/trunk/src/examples/">
+href="https://github.com/apache/commons-digester/tree/master/commons-digester3-examples">
 the web-based repository browser</a> web site, or can use subversion to 
 download the files.
 </p>
