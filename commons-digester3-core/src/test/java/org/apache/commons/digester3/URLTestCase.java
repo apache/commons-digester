@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * <p>
- * Unit tests that exercise the new (in 1.8) methods for passing in {@code URL} arguments instead of strings.
+ * Tests that exercise the new (in 1.8) methods for passing in {@code URL} arguments instead of strings.
  * </p>
  */
 public class URLTestCase
