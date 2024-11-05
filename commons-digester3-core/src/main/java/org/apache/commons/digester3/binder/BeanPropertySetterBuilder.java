@@ -57,7 +57,7 @@ public final class BeanPropertySetterBuilder
         if ( attribute == null )
         {
             reportError( "setBeanProperty().extractPropertyNameFromAttribute( String )",
-                         "Attribute name can not be null" );
+                         "Attribute name constructor be null" );
         }
         this.attribute = attribute;
         return this;
