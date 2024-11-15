@@ -75,7 +75,7 @@ import org.xml.sax.Attributes;
  * (or equivalent) to handle assigning the child object to the appropriate property instead.
  * </p>
  * <p>
- * <b>Implementation Notes</b>
+ * <strong>Implementation Notes</strong>
  * </p>
  * <p>
  * This class works by creating its own simple Rules implementation. When begin is invoked on this rule, the digester's
@@ -383,7 +383,7 @@ public class SetNestedPropertiesRule
      * If a property name is null or the XML element name has no matching property name due to the arrays being of
      * different lengths then this indicates that the XML element should be ignored.
      * </p>
-     * <b>Example One</b>
+     * <strong>Example One</strong>
      * <p>
      * The following constructs a rule that maps the {@code alt-city} element to the {@code city} property and
      * the {@code alt-state} to the {@code state} property. All other child elements are mapped as usual using
@@ -394,7 +394,7 @@ public class SetNestedPropertiesRule
      *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
      * }</pre>
-     * <b>Example Two</b>
+     * <strong>Example Two</strong>
      * <p>
      * The following constructs a rule that maps the {@code class} XML element to the {@code className}
      * property. The XML element {@code ignore-me} is not mapped, ie is ignored. All other elements are mapped as

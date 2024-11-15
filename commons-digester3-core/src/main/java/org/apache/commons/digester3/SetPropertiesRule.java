@@ -103,7 +103,7 @@ public class SetPropertiesRule
      * If a property name is null or the attribute name has no matching property name, then this indicates that the
      * attribute should be ignored.
      * </p>
-     * <b>Example One</b>
+     * <strong>Example One</strong>
      * <p>
      * The following constructs a rule that maps the {@code alt-city} attribute to the {@code city} property
      * and the {@code alt-state} to the {@code state} property. All other attributes are mapped as usual using
@@ -114,7 +114,7 @@ public class SetPropertiesRule
      *                new String[] {"alt-city", "alt-state"},
      *                new String[] {"city", "state"});
      * }</pre>
-     * <b>Example Two</b>
+     * <strong>Example Two</strong>
      * <p>
      * The following constructs a rule that maps the {@code class} attribute to the {@code className}
      * property. The attribute {@code ignore-me} is not mapped. All other attributes are mapped as usual using

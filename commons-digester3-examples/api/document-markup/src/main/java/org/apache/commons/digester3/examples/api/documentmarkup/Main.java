@@ -37,7 +37,7 @@ public class Main
     }
 
     /** The input XML to be parsed by this example. */
-    String in = "<p>Hi, this is an <em>example</em> of some <b>bold</b> text.</p>";
+    String in = "<p>Hi, this is an <em>example</em> of some <strong>bold</strong> text.</p>";
 
     /**
      * Invoked via a standard Digester CallMethodRule, passing the
