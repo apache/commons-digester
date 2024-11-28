@@ -69,7 +69,6 @@ public class MarkupDigester
      * @param buffer The characters from the XML document
      * @param start Starting offset into the buffer
      * @param length Number of characters from the buffer
-     *
      * @throws SAXException if a parsing error is to be reported
      */
     @Override
