@@ -38,7 +38,6 @@ import org.xml.sax.SAXException;
 public class VariableExpansionTestCase
 {
 
-
     // method used in tests4
     private final LinkedList<SimpleTestBean> simpleTestBeans = new LinkedList<>();
 
