@@ -15,9 +15,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
   -->
-<document xmlns="http://maven.apache.org/changes/1.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+<document xmlns="http://maven.apache.org/changes/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 http://maven.apache.org/xsd/changes-2.0.0.xsd">
   <properties>
     <title>Apache Commons Digester Changes</title>
   </properties>
@@ -67,8 +67,8 @@
       ObjectCreationFactory is now a functional interface and can be used as a lambda expression
     </action>
     <!-- UPDATE -->
-    <action dev="ggregory" type="update">
-      Bump commons-parent from 28 to 78 #146, #161, #169, #189, #193, #197, #200, #206.
+    <action dev="ggregory" type="update" due-to="Gary Gregory">
+      Bump commons-parent from 28 to 79 #146, #161, #169, #189, #193, #197, #200, #206.
     </action>
     <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">
       Bump GitHub action versions.
