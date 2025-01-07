@@ -37,146 +37,6 @@
   <url>https://commons.apache.org/proper/commons-digester/</url>
   <inceptionYear>2001</inceptionYear>
 
-  <developers>
-    <developer>
-      <name>Craig McClanahan</name>
-      <id>craigmcc</id>
-      <email>craigmcc@apache.org</email>
-    </developer>
-    <developer>
-      <name>Robert Burrell Donkin</name>
-      <id>rdonkin</id>
-      <email>rdonkin@apache.org</email>
-    </developer>
-    <developer>
-      <name>Scott Sanders</name>
-      <id>sanders</id>
-      <email>sanders@totalsync.com</email>
-    </developer>
-    <developer>
-      <name>James Strachan</name>
-      <id>jstrachan</id>
-      <email>jstrachan@apache.org</email>
-    </developer>
-    <developer>
-      <name>Jason van Zyl</name>
-      <id>jvanzyl</id>
-      <email>jvanzyl@apache.org</email>
-    </developer>
-    <developer>
-      <name>Tim OBrien</name>
-      <id>tobrien</id>
-      <email>tobrien@apache.org</email>
-    </developer>
-    <developer>
-      <name>Jean-Francois Arcand</name>
-      <id>jfarcand</id>
-      <email>jfarcand@apache.org</email>
-    </developer>
-    <developer>
-      <name>Simon Kitching</name>
-      <id>skitching</id>
-      <email>skitching@apache.org</email>
-    </developer>
-    <developer>
-      <name>Rahul Akolkar</name>
-      <id>rahul</id>
-      <email>rahul AT apache DOT org</email>
-    </developer>
-    <developer>
-      <name>Simone Tripodi</name>
-      <id>simonetripodi</id>
-      <email>simonetripodi AT apache DOT org</email>
-    </developer>
-    <developer>
-      <name>Matt Benson</name>
-      <id>mbenson</id>
-      <email>mbenson AT apache DOT org</email>
-    </developer>
-    <developer>
-      <id>ggregory</id>
-      <name>Gary Gregory</name>
-      <email>ggregory at apache.org</email>
-      <url>https://www.garygregory.com</url>
-      <organization>The Apache Software Foundation</organization>
-      <organizationUrl>https://www.apache.org/</organizationUrl>      
-      <roles>
-        <role>PMC Member</role>
-      </roles>
-      <timezone>America/New_York</timezone>
-      <properties>
-        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
-      </properties>
-    </developer>
-  </developers>
-  <contributors>
-    <contributor>
-      <name>Bradley M. Handy</name>
-      <email>bhandy@users.sf.net</email>
-    </contributor>
-    <contributor>
-      <name>Christopher Lenz</name>
-    </contributor>
-    <contributor>
-      <name>Ted Husted</name>
-    </contributor>
-    <contributor>
-      <name>David H. Martin</name>
-    </contributor>
-    <contributor>
-      <name>Henri Chen</name>
-    </contributor>
-    <contributor>
-      <name>Janek Bogucki</name>
-    </contributor>
-    <contributor>
-      <name>Mark Huisman</name>
-    </contributor>
-    <contributor>
-      <name>Paul Jack</name>
-    </contributor>
-    <contributor>
-      <name>Anton Maslovsky</name>
-    </contributor>
-    <contributor>
-      <name>Matt Cleveland</name>
-    </contributor>
-    <contributor>
-      <name>Gabriele Carcassi</name>
-    </contributor>
-    <contributor>
-      <name>Wendy Smoak</name>
-      <email>java@wendysmoak.com</email>
-    </contributor>
-    <contributor>
-      <name>Kevin Ross</name>
-      <email>kevin.ross@iverticalleap.com</email>
-    </contributor>
-    <contributor>
-      <name>Daniele Testa</name>
-      <email>mrwolfgraphics AT gmail DOT com</email>
-      <roles>
-        <role>graphic designer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Torsten Krah</name>
-      <email>tkrah AT fachschaft DOT imn DOT htwk-leipzig DOT de</email>
-    </contributor>
-    <contributor>
-      <name>Frank David Martinez</name>
-      <email>mnesarco at gmail dot com</email>
-    </contributor>
-    <contributor>
-      <name>Dirk Schaube</name>
-      <email>Dirk dot Schaube at dwpbank dot de</email>
-    </contributor>
-    <contributor>
-      <name>Ivan Diana</name>
-      <email>iwo dot diana at gmail dot com</email>
-    </contributor>
-  </contributors>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/commons-digester</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-digester</developerConnection>
@@ -406,6 +266,144 @@
         </plugins>
       </build>
     </profile>
-
   </profiles>
+  <developers>
+    <developer>
+      <name>Craig McClanahan</name>
+      <id>craigmcc</id>
+      <email>craigmcc@apache.org</email>
+    </developer>
+    <developer>
+      <name>Robert Burrell Donkin</name>
+      <id>rdonkin</id>
+      <email>rdonkin@apache.org</email>
+    </developer>
+    <developer>
+      <name>Scott Sanders</name>
+      <id>sanders</id>
+      <email>sanders@totalsync.com</email>
+    </developer>
+    <developer>
+      <name>James Strachan</name>
+      <id>jstrachan</id>
+      <email>jstrachan@apache.org</email>
+    </developer>
+    <developer>
+      <name>Jason van Zyl</name>
+      <id>jvanzyl</id>
+      <email>jvanzyl@apache.org</email>
+    </developer>
+    <developer>
+      <name>Tim OBrien</name>
+      <id>tobrien</id>
+      <email>tobrien@apache.org</email>
+    </developer>
+    <developer>
+      <name>Jean-Francois Arcand</name>
+      <id>jfarcand</id>
+      <email>jfarcand@apache.org</email>
+    </developer>
+    <developer>
+      <name>Simon Kitching</name>
+      <id>skitching</id>
+      <email>skitching@apache.org</email>
+    </developer>
+    <developer>
+      <name>Rahul Akolkar</name>
+      <id>rahul</id>
+      <email>rahul AT apache DOT org</email>
+    </developer>
+    <developer>
+      <name>Simone Tripodi</name>
+      <id>simonetripodi</id>
+      <email>simonetripodi AT apache DOT org</email>
+    </developer>
+    <developer>
+      <name>Matt Benson</name>
+      <id>mbenson</id>
+      <email>mbenson AT apache DOT org</email>
+    </developer>
+    <developer>
+      <id>ggregory</id>
+      <name>Gary Gregory</name>
+      <email>ggregory at apache.org</email>
+      <url>https://www.garygregory.com</url>
+      <organization>The Apache Software Foundation</organization>
+      <organizationUrl>https://www.apache.org/</organizationUrl>      
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+      <properties>
+        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
+      </properties>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Bradley M. Handy</name>
+      <email>bhandy@users.sf.net</email>
+    </contributor>
+    <contributor>
+      <name>Christopher Lenz</name>
+    </contributor>
+    <contributor>
+      <name>Ted Husted</name>
+    </contributor>
+    <contributor>
+      <name>David H. Martin</name>
+    </contributor>
+    <contributor>
+      <name>Henri Chen</name>
+    </contributor>
+    <contributor>
+      <name>Janek Bogucki</name>
+    </contributor>
+    <contributor>
+      <name>Mark Huisman</name>
+    </contributor>
+    <contributor>
+      <name>Paul Jack</name>
+    </contributor>
+    <contributor>
+      <name>Anton Maslovsky</name>
+    </contributor>
+    <contributor>
+      <name>Matt Cleveland</name>
+    </contributor>
+    <contributor>
+      <name>Gabriele Carcassi</name>
+    </contributor>
+    <contributor>
+      <name>Wendy Smoak</name>
+      <email>java@wendysmoak.com</email>
+    </contributor>
+    <contributor>
+      <name>Kevin Ross</name>
+      <email>kevin.ross@iverticalleap.com</email>
+    </contributor>
+    <contributor>
+      <name>Daniele Testa</name>
+      <email>mrwolfgraphics AT gmail DOT com</email>
+      <roles>
+        <role>graphic designer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Torsten Krah</name>
+      <email>tkrah AT fachschaft DOT imn DOT htwk-leipzig DOT de</email>
+    </contributor>
+    <contributor>
+      <name>Frank David Martinez</name>
+      <email>mnesarco at gmail dot com</email>
+    </contributor>
+    <contributor>
+      <name>Dirk Schaube</name>
+      <email>Dirk dot Schaube at dwpbank dot de</email>
+    </contributor>
+    <contributor>
+      <name>Ivan Diana</name>
+      <email>iwo dot diana at gmail dot com</email>
+    </contributor>
+  </contributors>
 </project>
