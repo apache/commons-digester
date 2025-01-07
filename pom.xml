@@ -68,6 +68,7 @@
     <commons.componentid>digester</commons.componentid>
     <commons.module.name>org.apache.commons.digester3</commons.module.name>
     <commons.release.version>3.3</commons.release.version>
+    <commons.bc.version>3.2</commons.bc.version>
     <commons.release.desc>(minimum JDK 7)</commons.release.desc>
     <commons.release.2.version>2.1</commons.release.2.version>
     <commons.release.2.desc>(minimum JDK 1.5)</commons.release.2.desc>
