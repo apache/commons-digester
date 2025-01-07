@@ -67,7 +67,7 @@ public class RulesBase
     /**
      * The set of registered Rule instances, in the order that they were originally registered.
      */
-    protected List<Rule> rules = new ArrayList<>();
+    protected ArrayList<Rule> rules = new ArrayList<>();
 
     @Override
     public void clear()
