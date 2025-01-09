@@ -28,11 +28,11 @@
   <body>
     <menu name="Digester">
       <item name="Overview"             href="/index.html" />
+      <item name="Download"             href="/download_digester.cgi" />
+      <item name="Javadoc"              href="/apidocs/index.html" />
       <item name="Mailing Lists"        href="/mail-lists.html" />
       <item name="Issue Tracking"       href="/issue-tracking.html" />
       <item name="Source Repository"    href="/source-repository.html" />
-      <item name="Download"             href="/download_digester.cgi" />
-      <item name="Javadoc"              href="/apidocs/index.html" />
     </menu>
 
     <menu name="Developers Guide">
