@@ -55,9 +55,9 @@ included in this release.</p>
 <p>The "examples" directory in the source code repository contains code which 
 demonstrates the basic functionality. In particular, you should read the 
 AddressBook example in the "api" subdirectory. You can view the examples
-directly from the Subversion repository via <a
+directly from the Git repository via <a
 href="https://github.com/apache/commons-digester/tree/master/commons-digester3-examples">
-the web-based repository browser</a> web site, or can use subversion to 
+the web-based repository browser</a> web site, or can use Git to
 download the files.
 </p>
 
