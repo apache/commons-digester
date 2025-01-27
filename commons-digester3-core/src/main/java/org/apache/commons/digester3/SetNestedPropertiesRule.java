@@ -91,7 +91,7 @@ import org.xml.sax.Attributes;
  * SetNestedPropertiesRule.
  * </p>
  * <p>
- * TODO: Optimise this class. Currently, each time begin is called, new AnyChildRules and AnyChildRule objects are
+ * TODO: Optimize this class. Currently, each time begin is called, new AnyChildRules and AnyChildRule objects are
  * created. It should be possible to cache these in normal use (though watch out for when a rule instance is invoked
  * re-entrantly!).
  * </p>
