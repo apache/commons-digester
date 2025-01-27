@@ -80,10 +80,10 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
-     * Test that you can customise the property mappings using the constructor which takes arrays-of-strings.
+     * Test that you can customize the property mappings using the constructor which takes arrays-of-strings.
      */
     @Test
-    public void testCustomisedProperties1() throws Exception
+    public void testCustomizedProperties1() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -124,7 +124,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can ignore a single input XML element using the constructor which takes a single remapping.
      */
     @Test
-    public void testCustomisedProperties2a() throws Exception
+    public void testCustomizedProperties2a() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -160,10 +160,10 @@ public class SetNestedPropertiesRuleTestCase
     }
 
     /**
-     * Test that you can customise the property mappings using the constructor which takes a single remapping.
+     * Test that you can customize the property mappings using the constructor which takes a single remapping.
      */
     @Test
-    public void testCustomisedProperties2b() throws Exception
+    public void testCustomizedProperties2b() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
