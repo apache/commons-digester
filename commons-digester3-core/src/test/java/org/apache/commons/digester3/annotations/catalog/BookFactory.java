@@ -27,7 +27,7 @@ public final class BookFactory
     extends AbstractObjectCreationFactory<Book>
 {
 
-    private final static String ISBN = "isbn";
+    private static final String ISBN = "isbn";
 
     @Override
     public Book createObject( final Attributes attributes )

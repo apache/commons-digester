@@ -42,19 +42,19 @@ public class SetPropertiesRuleTestCase
     /**
      * Simple test XML document used in the tests.
      */
-    protected final static String TEST_XML_1 =
+    protected static final String TEST_XML_1 =
         "<?xml version='1.0'?><root alpha='ALPHA VALUE' beta='BETA VALUE' delta='DELTA VALUE'/>";
 
     /**
      * Simple test XML document used in the tests.
      */
-    protected final static String TEST_XML_2 =
+    protected static final String TEST_XML_2 =
         "<?xml version='1.0'?><root alpa='ALPA VALUE' beta='BETA VALUE' delta='DELTA VALUE'/>";
 
     /**
      * Simple test XML document used in the tests.
      */
-    protected final static String TEST_XML_3 =
+    protected static final String TEST_XML_3 =
         "<?xml version='1.0'?><root alpha='ALPHA VALUE' beta='BETA VALUE' delta='DELTA VALUE' ignore='ignore value'/>";
 
     /**

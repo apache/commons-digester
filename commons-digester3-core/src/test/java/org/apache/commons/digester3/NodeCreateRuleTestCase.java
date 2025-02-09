@@ -54,7 +54,7 @@ public class NodeCreateRuleTestCase
     /**
      * Simple test XML document used in the tests.
      */
-    protected final static String TEST_XML = "<?xml version='1.0'?><root>ROOT BODY<alpha>ALPHA BODY</alpha>"
+    protected static final String TEST_XML = "<?xml version='1.0'?><root>ROOT BODY<alpha>ALPHA BODY</alpha>"
         + "<beta>BETA BODY</beta><gamma>GAMMA BODY</gamma></root>";
 
     /**
