@@ -83,7 +83,7 @@
       Bump Java requirement from version 5 to 8.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-187">
-      Bump Apache Commons BeanUtils from 1.8.3 to 1.10.0.
+      Bump commons-beanutils:commons-beanutils from 1.8.3 to 1.10.1.
     </action>
     <action dev="ggregory" type="update" issue="DIGESTER-188" due-to="Dependabot">
       Bump cglib from 2.2.2 to 3.3.0 #9.
