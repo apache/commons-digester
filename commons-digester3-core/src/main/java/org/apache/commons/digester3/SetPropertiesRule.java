@@ -78,8 +78,7 @@ public class SetPropertiesRule
      * Convenience constructor overrides the mapping for just one property.
      * </p>
      * <p>
-     * For details about how this works, see {@link #SetPropertiesRule(String[] attributeNames, String[] propertyNames)}
-     * .
+     * For details about how this works, see {@link #SetPropertiesRule(String[] attributeNames, String[] propertyNames)}.
      * </p>
      *
      * @param attributeName map this attribute
