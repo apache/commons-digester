@@ -22,8 +22,8 @@ package org.apache.commons.digester3.binder;
 import java.util.Map;
 
 /**
- * @since 3.2
  * @param <B> the parent builder type.
+ * @since 3.2
  */
 public final class AddAliasBuilder<B>
 {

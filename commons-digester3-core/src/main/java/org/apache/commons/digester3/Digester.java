@@ -1974,10 +1974,10 @@ public class Digester
     /**
      * Helps casting the input object to given type, avoiding NPEs.
      *
-     * @since 3.0
      * @param <T> the type the input object has to be cast.
      * @param obj the object has to be cast.
      * @return the casted object, if input object is not null, null otherwise.
+     * @since 3.0
      */
     private <T> T npeSafeCast( final Object obj )
     {
