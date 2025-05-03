@@ -83,9 +83,9 @@ public class ObjectTestImpl
         this.mapValue.put( name, value );
     }
 
-    public void setProperty( final String pProperty )
+    public void setProperty( final String property )
     {
-        property = pProperty;
+        this.property = property;
     }
 
     public void setStringValue( final String val )
