@@ -49,7 +49,7 @@ public final class EmployeeTestCase
     }
 
     @Test
-    public void testEmployee()
+    void testEmployee()
         throws Exception
     {
         final Employee employee = new Employee();

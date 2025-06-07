@@ -65,7 +65,7 @@ public class TestConfigurablePluginAttributes
     }
 
     @Test
-    public void testDefaultBehaviour()
+    void testDefaultBehaviour()
         throws Exception
     {
         // tests that by default the attributes used are
@@ -112,7 +112,7 @@ public class TestConfigurablePluginAttributes
     }
 
     @Test
-    public void testGlobalOverride()
+    void testGlobalOverride()
         throws Exception
     {
         // Tests that using setDefaultPluginXXXX overrides behavior for all
@@ -168,7 +168,7 @@ public class TestConfigurablePluginAttributes
     // inner classes used for testing
 
     @Test
-    public void testInstanceOverride()
+    void testInstanceOverride()
         throws Exception
     {
         // Tests that using setPluginXXXX overrides behavior for only

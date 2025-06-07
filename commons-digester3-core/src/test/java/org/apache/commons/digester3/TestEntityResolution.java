@@ -32,7 +32,7 @@ public class TestEntityResolution
 {
 
     @Test
-    public void testDigesterResolveRelative()
+    void testDigesterResolveRelative()
         throws Exception
     {
         final Digester digester = new Digester();
@@ -41,7 +41,7 @@ public class TestEntityResolution
     }
 
     @Test
-    public void testParserResolveRelative()
+    void testParserResolveRelative()
         throws Exception
     {
         final SAXParserFactory factory = SAXParserFactory.newInstance();

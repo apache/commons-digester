@@ -64,7 +64,7 @@ public final class AsyncReaderTestCase
     }
 
     @Test
-    public void testParseFromClasspathURL()
+    void testParseFromClasspathURL()
         throws Exception
     {
         final Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ) );
@@ -72,7 +72,7 @@ public final class AsyncReaderTestCase
     }
 
     @Test
-    public void testParseFromFile()
+    void testParseFromFile()
         throws Exception
     {
         final Future<Employee> future = digester.asyncParse( new File( getProperty( "user.dir" ),
@@ -81,7 +81,7 @@ public final class AsyncReaderTestCase
     }
 
     @Test
-    public void testParseFromInputSource()
+    void testParseFromInputSource()
         throws Exception
     {
         final Future<Employee> future =
@@ -90,7 +90,7 @@ public final class AsyncReaderTestCase
     }
 
     @Test
-    public void testParseFromInputStream()
+    void testParseFromInputStream()
         throws Exception
     {
         final Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ).openStream() );
@@ -98,7 +98,7 @@ public final class AsyncReaderTestCase
     }
 
     @Test
-    public void testParseFromReader()
+    void testParseFromReader()
         throws Exception
     {
         final Future<Employee> future =
@@ -107,7 +107,7 @@ public final class AsyncReaderTestCase
     }
 
     @Test
-    public void testParseFromUri()
+    void testParseFromUri()
         throws Exception
     {
         final Future<Employee> future = digester.asyncParse( getClass().getResource( "Test9.xml" ).toExternalForm() );

@@ -33,7 +33,7 @@ public class TestLocalRules
 {
 
     @Test
-    public void testLocalRules()
+    void testLocalRules()
         throws Exception
     {
         // * tests that the plugin class can define an addRules method,
@@ -87,7 +87,7 @@ public class TestLocalRules
     }
 
     @Test
-    public void testNonStandardLocalRules()
+    void testNonStandardLocalRules()
         throws Exception
     {
         // * tests that using PluginDeclarationRule to declare an alternate

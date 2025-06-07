@@ -32,7 +32,7 @@ public class TestDefaultPlugin
 {
 
     @Test
-    public void testDefaultPlugins1()
+    void testDefaultPlugins1()
         throws Exception
     {
         // * tests that when a PluginCreateRule is defined with a default
@@ -76,7 +76,7 @@ public class TestDefaultPlugin
     }
 
     @Test
-    public void testDefaultPlugins2()
+    void testDefaultPlugins2()
     {
         // * tests that when there is no default plugin, it is an error
         // not to have one of plugin-class or plugin-id specified
@@ -106,7 +106,7 @@ public class TestDefaultPlugin
     }
 
     @Test
-    public void testDefaultPlugins3()
+    void testDefaultPlugins3()
     {
         // * tests that the default plugin must implement or extend the
         // plugin base class.

@@ -34,7 +34,7 @@ public class ErrorHandlerTest
 {
 
     @Test
-    public void testCustomErrorHandler()
+    void testCustomErrorHandler()
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -74,7 +74,7 @@ public class ErrorHandlerTest
     }
 
     @Test
-    public void testCustomErrorHandlerWithStack()
+    void testCustomErrorHandlerWithStack()
     {
 
         final ErrorHandler customErrorHandler = new ErrorHandler()
@@ -114,7 +114,7 @@ public class ErrorHandlerTest
     }
 
     @Test
-    public void testNoCustomErrorHandler()
+    void testNoCustomErrorHandler()
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {

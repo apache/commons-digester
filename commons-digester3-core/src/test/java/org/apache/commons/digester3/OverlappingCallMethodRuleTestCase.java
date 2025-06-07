@@ -50,7 +50,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     @Test
-    public void testItem1() throws Exception
+    void testItem1() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -84,7 +84,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     @Test
-    public void testItem2() throws Exception
+    void testItem2() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -118,7 +118,7 @@ public class OverlappingCallMethodRuleTestCase
     }
 
     @Test
-    public void testItem3() throws Exception
+    void testItem3() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -175,7 +175,7 @@ public class OverlappingCallMethodRuleTestCase
      * design.
      */
     @Test
-    public void testItem4() throws Exception
+    void testItem4() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<root>" );
@@ -220,7 +220,7 @@ public class OverlappingCallMethodRuleTestCase
      * begin[1]/begin[2]/body[2]/end[2]/body[1]/end[1]
      */
     @Test
-    public void testWildcard1() throws Exception
+    void testWildcard1() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<box id='A1'>" );
@@ -263,7 +263,7 @@ public class OverlappingCallMethodRuleTestCase
      * begin[1]/begin[2]/body[2]/end[2]/body[1]/end[1]
      */
     @Test
-    public void testWildcard2() throws Exception
+    void testWildcard2() throws Exception
     {
         final StringBuilder input = new StringBuilder();
         input.append( "<box>A1" );

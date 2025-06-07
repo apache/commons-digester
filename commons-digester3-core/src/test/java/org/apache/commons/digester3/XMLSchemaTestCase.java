@@ -130,7 +130,7 @@ public class XMLSchemaTestCase
     }
 
     @Test
-    public void testBadDocument() throws Exception
+    void testBadDocument() throws Exception
     {
 
         // Listen to validation errors
@@ -147,7 +147,7 @@ public class XMLSchemaTestCase
      * Test XML Schema validation.
      */
     @Test
-    public void testGoodDocument() throws Exception
+    void testGoodDocument() throws Exception
     {
 
         // Listen to validation errors

@@ -27,7 +27,7 @@ public final class RssTestCase
 {
 
     @Test
-    public void testRss()
+    void testRss()
         throws Exception
     {
         final Channel channel = new Channel();

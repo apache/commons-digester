@@ -47,7 +47,7 @@ public class ObjectParamRuleTestCase
      * parameter, provided that either the element or the element + attribute has been matched.
      */
     @Test
-    public void testBasic()
+    void testBasic()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()

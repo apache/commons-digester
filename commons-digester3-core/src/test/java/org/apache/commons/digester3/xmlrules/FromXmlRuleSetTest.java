@@ -79,7 +79,7 @@ public class FromXmlRuleSetTest
      * test loading rules at a base position other than the root.
      */
     @Test
-    public void testBasePath()
+    void testBasePath()
         throws Exception
     {
         final String xmlRules =
@@ -106,7 +106,7 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testCallParamRule()
+    void testCallParamRule()
         throws Exception
     {
         final URL rules = getClass().getResource( "test-call-param-rules.xml" );
@@ -132,7 +132,7 @@ public class FromXmlRuleSetTest
      * file, and also includes programmatically created rules.
      */
     @Test
-    public void testCreateDigester()
+    void testCreateDigester()
         throws Exception
     {
         final URL rules = getClass().getResource( "testrules.xml" );
@@ -145,7 +145,7 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testFactoryCreateRule()
+    void testFactoryCreateRule()
         throws Exception
     {
         final URL rules = getClass().getResource( "testfactory.xml" );
@@ -171,7 +171,7 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testFactoryIgnoreCreateRule()
+    void testFactoryIgnoreCreateRule()
     {
         final URL rules = getClass().getResource( "testfactoryignore.xml" );
 
@@ -184,7 +184,7 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testFactoryNotIgnoreCreateRule()
+    void testFactoryNotIgnoreCreateRule()
     {
         final URL rules = getClass().getResource( "testfactorynoignore.xml" );
 
@@ -194,7 +194,7 @@ public class FromXmlRuleSetTest
     }
 
     @Test
-    public void testInputSourceLoader() throws Exception {
+    void testInputSourceLoader() throws Exception {
         final String rulesXml = "<?xml version='1.0'?>"
                 + "<digester-rules>"
                 + " <pattern value='root'>"
@@ -235,7 +235,7 @@ public class FromXmlRuleSetTest
      * also includes programmatically created rules.
      */
     @Test
-    public void testLoad1()
+    void testLoad1()
         throws Exception
     {
         final ClassLoader classLoader = getClass().getClassLoader();
@@ -266,7 +266,7 @@ public class FromXmlRuleSetTest
      * DigesterLoader as an InputStream instead of a URL.
      */
     @Test
-    public void testLoad2()
+    void testLoad2()
         throws Exception
     {
         final URL rules = getClass().getResource( "testrules.xml" );
@@ -287,7 +287,7 @@ public class FromXmlRuleSetTest
     /**
      */
     @Test
-    public void testSetCustomProperties()
+    void testSetCustomProperties()
         throws Exception
     {
         final URL rules = this.getClass().getResource( "testPropertyAliasRules.xml" );

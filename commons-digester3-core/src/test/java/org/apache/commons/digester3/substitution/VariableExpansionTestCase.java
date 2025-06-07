@@ -89,7 +89,7 @@ public class VariableExpansionTestCase
      * Test expansion of text in element bodies.
      */
     @Test
-    public void testBodyExpansion()
+    void testBodyExpansion()
         throws SAXException, IOException
     {
 
@@ -128,7 +128,7 @@ public class VariableExpansionTestCase
      * Test that an unknown variable causes a RuntimeException.
      */
     @Test
-    public void testExpansionException()
+    void testExpansionException()
     {
 
         final String xml = "<root alpha='${attr1}'/>";
@@ -158,7 +158,7 @@ public class VariableExpansionTestCase
      * @throws SAXException
      */
     @Test
-    public void testExpansionOfPropertyInProperty()
+    void testExpansionOfPropertyInProperty()
         throws SAXException, IOException
     {
         final String xml =
@@ -181,7 +181,7 @@ public class VariableExpansionTestCase
      * multiple elements exist.
      */
     @Test
-    public void testExpansionWithMultipleSources()
+    void testExpansionWithMultipleSources()
         throws SAXException, IOException
     {
 
@@ -241,7 +241,7 @@ public class VariableExpansionTestCase
      * @throws SAXException
      */
     @Test
-    public void testExpansionWithMutableSource()
+    void testExpansionWithMutableSource()
         throws SAXException, IOException
     {
         final String xml = "<root>" + "<property name='attr' value='prop.value'/>" + "<bean alpha='${attr}'/>" + "</root>";
@@ -261,7 +261,7 @@ public class VariableExpansionTestCase
      * Test that a MultiVariableExpander with no sources does no expansion.
      */
     @Test
-    public void testExpansionWithNoSource()
+    void testExpansionWithNoSource()
         throws SAXException, IOException
     {
 
@@ -288,7 +288,7 @@ public class VariableExpansionTestCase
      * Test that by default no expansion occurs.
      */
     @Test
-    public void testNoExpansion()
+    void testNoExpansion()
         throws SAXException, IOException
     {
 

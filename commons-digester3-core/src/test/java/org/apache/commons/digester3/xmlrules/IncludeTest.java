@@ -62,7 +62,7 @@ public class IncludeTest
     }
 
     @Test
-    public void testBasicInclude()
+    void testBasicInclude()
         throws Exception
     {
         final String rulesXml = "<?xml version='1.0'?>"
@@ -98,7 +98,7 @@ public class IncludeTest
      * Validates that circular includes are detected and result in an exception
      */
     @Test
-    public void testCircularInclude()
+    void testCircularInclude()
     {
         final URL url = ClassLoader.getSystemResource( "org/apache/commons/digester3/xmlrules/testCircularRules.xml" );
         assertThrows( DigesterLoadingException.class, () -> newLoader( new FromXmlRulesModule()
@@ -114,7 +114,7 @@ public class IncludeTest
     }
 
     @Test
-    public void testUrlInclude()
+    void testUrlInclude()
         throws Exception
     {
         final String rulesXml = "<?xml version='1.0'?>"

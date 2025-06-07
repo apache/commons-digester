@@ -27,7 +27,7 @@ public final class AddressBookTestCase
 {
 
     @Test
-    public void testAddressBook()
+    void testAddressBook()
         throws Exception
     {
         final AddressBook addressBook = new AddressBook();

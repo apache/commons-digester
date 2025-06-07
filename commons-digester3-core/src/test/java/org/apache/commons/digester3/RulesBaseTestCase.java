@@ -79,7 +79,7 @@ public class RulesBaseTestCase
      * Test basic matching involving namespaces.
      */
     @Test
-    public void testBasicNamespaceMatching()
+    void testBasicNamespaceMatching()
     {
 
         // clear any existing rules
@@ -128,7 +128,7 @@ public class RulesBaseTestCase
      * Rules must always be returned in the correct order.
      */
     @Test
-    public void testOrdering()
+    void testOrdering()
     {
 
         // clear any existing rules
@@ -160,7 +160,7 @@ public class RulesBaseTestCase
      * Basic test for rule creation and matching.
      */
     @Test
-    public void testRules()
+    void testRules()
     {
 
         // clear any existing rules
@@ -197,7 +197,7 @@ public class RulesBaseTestCase
      * </ul>
      */
     @Test
-    public void testRulesBase()
+    void testRulesBase()
     {
 
         // clear any existing rules
@@ -235,7 +235,7 @@ public class RulesBaseTestCase
 
     /** Tests the behavior when a rule is added with a trailing slash */
     @Test
-    public void testTrailingSlash()
+    void testTrailingSlash()
     {
         // clear any existing rules
         digester.getRules().clear();

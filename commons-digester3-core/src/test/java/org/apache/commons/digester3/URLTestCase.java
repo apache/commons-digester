@@ -87,7 +87,7 @@ public class URLTestCase
 
     // Test a pristine instance
     @Test
-    public void testPristine()
+    void testPristine()
     {
 
         assertNotNull( digester );
@@ -96,7 +96,7 @@ public class URLTestCase
 
     // Test parsing a resource, using a registered DTD, both passed with URLs
     @Test
-    public void testResource()
+    void testResource()
         throws Exception
     {
 

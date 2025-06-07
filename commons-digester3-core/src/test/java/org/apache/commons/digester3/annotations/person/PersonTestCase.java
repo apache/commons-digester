@@ -27,7 +27,7 @@ public final class PersonTestCase
 {
 
     @Test
-    public void testPerson()
+    void testPerson()
         throws Exception
     {
         final Person person = new Person();

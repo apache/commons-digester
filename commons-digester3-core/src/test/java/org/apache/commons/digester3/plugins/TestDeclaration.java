@@ -33,7 +33,7 @@ public class TestDeclaration
 {
 
     @Test
-    public void testPredeclaration()
+    void testPredeclaration()
         throws Exception
     {
         // * tests that rules can be declared via a PluginDeclarationRule

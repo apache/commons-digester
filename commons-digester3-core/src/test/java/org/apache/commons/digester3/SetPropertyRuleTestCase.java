@@ -98,7 +98,7 @@ public class SetPropertyRuleTestCase
      * Test SetPropertyRule when matched XML element has no attributes. See: DIGESTER-114
      */
     @Test
-    public void testElementWithNoAttributes()
+    void testElementWithNoAttributes()
         throws Exception
     {
         final String TEST_XML_3 = "<?xml version='1.0'?><root><set/></root>";
@@ -113,7 +113,7 @@ public class SetPropertyRuleTestCase
      * Negative test for SetPropertyRule.
      */
     @Test
-    public void testNegative()
+    void testNegative()
     {
         // Parse the input (should fail)
         SAXException e = assertThrows( SAXException.class, () -> digester.parse( xmlTestReader( TEST_XML_2 ) ) );
@@ -124,7 +124,7 @@ public class SetPropertyRuleTestCase
      * Positive test for SetPropertyRule.
      */
     @Test
-    public void testPositive()
+    void testPositive()
         throws Exception
     {
         // Parse the input

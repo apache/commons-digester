@@ -34,7 +34,7 @@ public class DTDValidationTestCase
 {
 
     @Test
-    public void testDigesterDTDError()
+    void testDigesterDTDError()
     {
         Digester digester = newLoader( new AbstractRulesModule() {
 
@@ -76,7 +76,7 @@ public class DTDValidationTestCase
     }
 
     @Test
-    public void testDigesterLoaderFeatureDisabled()
+    void testDigesterLoaderFeatureDisabled()
         throws Exception
     {
        newLoader( new AbstractRulesModule()
@@ -98,7 +98,7 @@ public class DTDValidationTestCase
     }
 
     @Test
-    public void testDigesterNoDTDValidation()
+    void testDigesterNoDTDValidation()
         throws Exception
     {
         newLoader( new AbstractRulesModule()
@@ -117,7 +117,7 @@ public class DTDValidationTestCase
     }
 
     @Test
-    public void testDigesterValidation()
+    void testDigesterValidation()
         throws Exception
     {
         newLoader( new AbstractRulesModule()

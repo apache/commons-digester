@@ -85,7 +85,7 @@ public class NamespaceSnapshotTestCase
      * Namespace snapshot test case.
      */
     @Test
-    public void testNamespaceSnapshots()
+    void testNamespaceSnapshots()
         throws Exception
     {
 

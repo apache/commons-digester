@@ -92,7 +92,7 @@ public final class Digester133TestCase
     }
 
     @Test
-    public void testDigester()
+    void testDigester()
         throws IOException, SAXException
     {
         final PropertyUtilsBean propertyUtils = new MyPropertyUtilsBean();

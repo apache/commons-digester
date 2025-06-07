@@ -49,7 +49,7 @@ public class TestRecursion
     }
 
     @Test
-    public void testRecursiveRules()
+    void testRecursiveRules()
         throws Exception
     {
         // * tests that a rule can declare custom PluginCreateRules

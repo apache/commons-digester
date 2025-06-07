@@ -29,7 +29,7 @@ public final class BeanPropertySetterRuleTestCase
 {
 
     @Test
-    public void testExtractPropertyNameFromAttribute() throws Exception
+    void testExtractPropertyNameFromAttribute() throws Exception
     {
         final Employee expected = new Employee( "John", "Doe" );
 

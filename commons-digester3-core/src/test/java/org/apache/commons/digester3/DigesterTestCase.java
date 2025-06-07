@@ -125,7 +125,7 @@ public class DigesterTestCase
     }
 
     @Test
-    public void testBasicSubstitution()
+    void testBasicSubstitution()
         throws Exception
     {
         final class TestSubRule
@@ -194,7 +194,7 @@ public class DigesterTestCase
      * Test the Digester.getRoot method.
      */
     @Test
-    public void testGetRoot()
+    void testGetRoot()
         throws Exception
     {
         final Digester digester = new Digester();
@@ -212,7 +212,7 @@ public class DigesterTestCase
 
     /** Tests that values are stored independently */
     @Test
-    public void testNamedIndependence()
+    void testNamedIndependence()
     {
         final String testStackOneName = "org.apache.commons.digester3.tests.testNamedIndependenceOne";
         final String testStackTwoName = "org.apache.commons.digester3.tests.testNamedIndependenceTwo";
@@ -225,7 +225,7 @@ public class DigesterTestCase
 
     /** Tests for isEmpty */
     @Test
-    public void testNamedStackIsEmpty()
+    void testNamedStackIsEmpty()
     {
         final String testStackName = "org.apache.commons.digester3.tests.testNamedStackIsEmpty";
         final Digester digester = new Digester();
@@ -243,7 +243,7 @@ public class DigesterTestCase
 
     /** Tests the push-peek-pop cycle for a named stack */
     @Test
-    public void testNamedStackPushPeekPop()
+    void testNamedStackPushPeekPop()
     {
         final BigDecimal archimedesAveragePi = new BigDecimal( "3.1418" );
         final String testStackName = "org.apache.commons.digester3.tests.testNamedStackPushPeekPop";
@@ -274,43 +274,43 @@ public class DigesterTestCase
      * Test {@code null} parsing. (should lead to {@code IllegalArgumentException}s)
      */
     @Test
-    public void testNullFileParse()
+    void testNullFileParse()
     {
         assertThrows( IllegalArgumentException.class, () -> digester.parse( ( File ) null ) );
     }
 
     @Test
-    public void testNullInputSourceParse()
+    void testNullInputSourceParse()
     {
         assertThrows( IllegalArgumentException.class, () -> digester.parse( ( InputSource ) null ) );
     }
 
     @Test
-    public void testNullInputStreamParse()
+    void testNullInputStreamParse()
     {
         assertThrows( IllegalArgumentException.class, () -> digester.parse( ( InputStream ) null ) );
     }
 
     @Test
-    public void testNullReaderParse()
+    void testNullReaderParse()
     {
         assertThrows( IllegalArgumentException.class, () -> digester.parse( ( Reader ) null ) );
     }
 
     @Test
-    public void testNullStringParse()
+    void testNullStringParse()
     {
         assertThrows( IllegalArgumentException.class, () -> digester.parse( ( String ) null ) );
     }
 
     @Test
-    public void testNullURLParse()
+    void testNullURLParse()
     {
         assertThrows( IllegalArgumentException.class, () -> digester.parse( ( URL ) null ) );
     }
 
     @Test
-    public void testOnceAndOnceOnly()
+    void testOnceAndOnceOnly()
         throws Exception
     {
 
@@ -340,7 +340,7 @@ public class DigesterTestCase
 
     /** Tests popping named stack not yet pushed */
     @Test
-    public void testPopNamedStackNotPushed()
+    void testPopNamedStackNotPushed()
     {
         String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
         Digester digester = new Digester();
@@ -349,7 +349,7 @@ public class DigesterTestCase
 
     /** Tests peeking named stack not yet pushed */
     @Test
-    public void testPeekNamedStackNotPushed()
+    void testPeekNamedStackNotPushed()
     {
         String testStackName = "org.apache.commons.digester3.tests.testPopNamedStackNotPushed";
         Digester digester = new Digester();
@@ -360,7 +360,7 @@ public class DigesterTestCase
      * Test the basic property getters and setters.
      */
     @Test
-    public void testProperties()
+    void testProperties()
     {
 
         assertNull( digester.getErrorHandler(), "Initial error handler is null" );
@@ -387,7 +387,7 @@ public class DigesterTestCase
      * Test registration of URLs for specified public identifiers.
      */
     @Test
-    public void testRegistrations()
+    void testRegistrations()
     {
 
         Map<String, URL> map = digester.getRegistrations();
@@ -430,7 +430,7 @@ public class DigesterTestCase
      * Basic test for rule creation and matching.
      */
     @Test
-    public void testRules()
+    void testRules()
     {
 
         assertEquals( 0, digester.getRules().match( null, "a", null, null ).size(), "Initial rules list is empty" );
@@ -459,7 +459,7 @@ public class DigesterTestCase
      * </ul>
      */
     @Test
-    public void testRulesBase()
+    void testRulesBase()
     {
 
         assertEquals( 0, digester.getRules().rules().size(), "Initial rules list is empty" );
@@ -487,7 +487,7 @@ public class DigesterTestCase
      * Test custom StackAction subclasses.
      */
     @Test
-    public void testStackAction()
+    void testStackAction()
     {
         final TrackingStackAction action = new TrackingStackAction();
 
@@ -557,7 +557,7 @@ public class DigesterTestCase
      * Test the basic stack mechanisms.
      */
     @Test
-    public void testStackMethods()
+    void testStackMethods()
     {
 
         Object value;

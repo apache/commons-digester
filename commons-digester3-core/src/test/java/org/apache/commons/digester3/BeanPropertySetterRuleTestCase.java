@@ -53,7 +53,7 @@ public class BeanPropertySetterRuleTestCase
      * Test that you can successfully automatically set properties.
      */
     @Test
-    public void testAutomaticallySetProperties()
+    void testAutomaticallySetProperties()
         throws SAXException, IOException
     {
         final Digester digester = newLoader(new AbstractRulesModule()
@@ -84,7 +84,7 @@ public class BeanPropertySetterRuleTestCase
      * functioning correctly.
      */
     @Test
-    public void testDigesterBodyTextStack()
+    void testDigesterBodyTextStack()
         throws SAXException, IOException
     {
         final List<Rule> callOrder = new ArrayList<>();
@@ -120,7 +120,7 @@ public class BeanPropertySetterRuleTestCase
      * properly enforced.
      */
     @Test
-    public void testDigesterRuleCallOrder()
+    void testDigesterRuleCallOrder()
         throws SAXException, IOException
     {
 
@@ -172,7 +172,7 @@ public class BeanPropertySetterRuleTestCase
     }
 
     @Test
-    public void testExtractPropertyNameFromAttribute() throws Exception
+    void testExtractPropertyNameFromAttribute() throws Exception
     {
         final Employee expected = new Employee( "John", "Doe" );
 
@@ -198,7 +198,7 @@ public class BeanPropertySetterRuleTestCase
      * Test that you can successfully set a given property
      */
     @Test
-    public void testSetGivenProperty()
+    void testSetGivenProperty()
         throws SAXException, IOException
     {
         final Digester digester = newLoader(new AbstractRulesModule()
@@ -237,7 +237,7 @@ public class BeanPropertySetterRuleTestCase
      * Test that trying to set an unknown property throws an exception.
      */
     @Test
-    public void testSetUnknownProperty()
+    void testSetUnknownProperty()
     {
         final Digester digester = newLoader(new AbstractRulesModule()
         {

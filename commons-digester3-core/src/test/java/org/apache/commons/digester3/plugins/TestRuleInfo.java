@@ -33,7 +33,7 @@ public class TestRuleInfo
 {
 
     @Test
-    public void testRuleInfoAutoDetect()
+    void testRuleInfoAutoDetect()
         throws Exception
     {
         // * tests that custom rules can be declared on a
@@ -72,7 +72,7 @@ public class TestRuleInfo
     }
 
     @Test
-    public void testRuleInfoExplicitClass()
+    void testRuleInfoExplicitClass()
         throws Exception
     {
         // * tests that custom rules can be declared on a
@@ -110,7 +110,7 @@ public class TestRuleInfo
     }
 
     @Test
-    public void testRuleInfoExplicitMethod()
+    void testRuleInfoExplicitMethod()
         throws Exception
     {
         // * tests that custom rules can be declared on a

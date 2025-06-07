@@ -47,7 +47,7 @@ public class ExtendedBaseRulesTestCase
     }
 
     @Test
-    public void testAncestorMatch()
+    void testAncestorMatch()
     {
         // test fixed root ancestor
         digester.getRules().clear();
@@ -110,7 +110,7 @@ public class ExtendedBaseRulesTestCase
      * parent has a wildcard prefix. This method tests non-universal wildcards.
      */
     @Test
-    public void testBasicParentMatch()
+    void testBasicParentMatch()
     {
 
         // clear any existing rules
@@ -171,7 +171,7 @@ public class ExtendedBaseRulesTestCase
      * Basic test of universal matching rules. Universal rules act independent.
      */
     @Test
-    public void testBasicUniversal()
+    void testBasicUniversal()
     {
 
         // clear any existing rules
@@ -245,7 +245,7 @@ public class ExtendedBaseRulesTestCase
     }
 
     @Test
-    public void testInstructors()
+    void testInstructors()
     {
         digester.getRules().clear();
 
@@ -259,7 +259,7 @@ public class ExtendedBaseRulesTestCase
     }
 
     @Test
-    public void testLongMatch()
+    void testLongMatch()
     {
 
         digester.getRules().clear();
@@ -283,7 +283,7 @@ public class ExtendedBaseRulesTestCase
     }
 
     @Test
-    public void testMiddleInstructors()
+    void testMiddleInstructors()
     {
         digester.getRules().clear();
 
@@ -299,7 +299,7 @@ public class ExtendedBaseRulesTestCase
      * not matched by something else. This method tests non-universal and universal wildcard matches.
      */
     @Test
-    public void testRootTailMatch()
+    void testRootTailMatch()
     {
 
         // clear any existing rules
@@ -345,7 +345,7 @@ public class ExtendedBaseRulesTestCase
      * not matched by something else. This method tests non-universal and universal wildcard matches.
      */
     @Test
-    public void testWildCardMatch()
+    void testWildCardMatch()
     {
 
         // clear any existing rules

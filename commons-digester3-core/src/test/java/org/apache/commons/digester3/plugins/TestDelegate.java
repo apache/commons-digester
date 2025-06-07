@@ -30,7 +30,7 @@ public class TestDelegate
 {
     @Test
     @Disabled
-    public void testDelegate() throws Exception
+    void testDelegate() throws Exception
     {
         // this method tests the Delegate functionality by capturing all
         // data below the specified pattern, and printing it to stdout.

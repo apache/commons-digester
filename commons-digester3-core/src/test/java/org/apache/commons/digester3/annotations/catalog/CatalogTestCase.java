@@ -49,7 +49,7 @@ public final class CatalogTestCase
     }
 
     @Test
-    public void testCatalog()
+    void testCatalog()
         throws Exception
     {
         final Catalog catalog = new Catalog();

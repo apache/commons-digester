@@ -74,7 +74,7 @@ public class NodeCreateRuleTestCase
      * Tests whether attributes are correctly imported into the fragment, using the example in the Test1 XML file.
      */
     @Test
-    public void testAttributes()
+    void testAttributes()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -119,7 +119,7 @@ public class NodeCreateRuleTestCase
      * Tests simple fragment construction, using the {@link #TEST_XML} XML input data.
      */
     @Test
-    public void testDocumentFragment()
+    void testDocumentFragment()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -172,7 +172,7 @@ public class NodeCreateRuleTestCase
      * Tests simple element construction, using the {@link #TEST_XML} XML input data.
      */
     @Test
-    public void testElement()
+    void testElement()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -203,7 +203,7 @@ public class NodeCreateRuleTestCase
      * one.
      */
     @Test
-    public void testEntityText()
+    void testEntityText()
         throws Exception
     {
         final String TEST_XML2 = "<?xml version='1.0'?><root><alpha>&#65; &#65;</alpha></root>";
@@ -234,7 +234,7 @@ public class NodeCreateRuleTestCase
      * Tests whether the created fragment can be imported into an existing document.
      */
     @Test
-    public void testImport()
+    void testImport()
         throws SAXException, ParserConfigurationException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -264,61 +264,61 @@ public class NodeCreateRuleTestCase
      * Tests simple element construction, using the {@link #TEST_XML} XML input data.
      */
     @Test
-    public void testInvalidAttributeNode()
+    void testInvalidAttributeNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.ATTRIBUTE_NODE ) );
     }
 
     @Test
-    public void testInvalidCDATANode()
+    void testInvalidCDATANode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.CDATA_SECTION_NODE ) );
     }
 
     @Test
-    public void testInvalidCommentNode()
+    void testInvalidCommentNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.COMMENT_NODE ) );
     }
 
     @Test
-    public void testInvalidDocumentNode()
+    void testInvalidDocumentNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.DOCUMENT_NODE ) );
     }
 
     @Test
-    public void testInvalidTypeNode()
+    void testInvalidTypeNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.DOCUMENT_TYPE_NODE ) );
     }
 
     @Test
-    public void testInvalidEntityNode()
+    void testInvalidEntityNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.ENTITY_NODE ) );
     }
 
     @Test
-    public void testInvalidReferenceNode()
+    void testInvalidReferenceNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.ENTITY_REFERENCE_NODE ) );
     }
 
     @Test
-    public void testInvalidNotationNode()
+    void testInvalidNotationNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.NOTATION_NODE ) );
     }
 
     @Test
-    public void testInvalidProcessingInstructionNode()
+    void testInvalidProcessingInstructionNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.PROCESSING_INSTRUCTION_NODE ) );
     }
 
     @Test
-    public void testInvalidTextNode()
+    void testInvalidTextNode()
     {
         assertThrows( IllegalArgumentException.class, () -> new NodeCreateRule( Node.TEXT_NODE ) );
     }
@@ -327,7 +327,7 @@ public class NodeCreateRuleTestCase
      * Tests whether namespaced attributes are handled correctly, using the example from the file Test10 XML file.
      */
     @Test
-    public void testNamespacedAttribute()
+    void testNamespacedAttribute()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -359,7 +359,7 @@ public class NodeCreateRuleTestCase
      * Tests whether namespaces are handled correctly, using the example from the file Test3 XML file.
      */
     @Test
-    public void testNamespaces()
+    void testNamespaces()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -410,7 +410,7 @@ public class NodeCreateRuleTestCase
      * Tests whether control is returned to digester after fragment construction.
      */
     @Test
-    public void testNested()
+    void testNested()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -452,7 +452,7 @@ public class NodeCreateRuleTestCase
      * Tests whether non-namespaced attributes are handled correctly, using the example from the file Test11 XML file.
      */
     @Test
-    public void testNonNamespacedAttribute()
+    void testNonNamespacedAttribute()
         throws SAXException, IOException
     {
         final Digester digester = newLoader( new AbstractRulesModule()

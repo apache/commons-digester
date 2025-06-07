@@ -53,7 +53,7 @@ public class XIncludeTestCase
      * Test XInclude.
      */
     @Test
-    public void testXInclude() throws Exception
+    void testXInclude() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {

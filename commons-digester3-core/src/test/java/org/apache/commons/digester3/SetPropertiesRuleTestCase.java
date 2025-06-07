@@ -61,7 +61,7 @@ public class SetPropertiesRuleTestCase
      * Positive test for SetPropertyRule ignoring missing properties.
      */
     @Test
-    public void testIgnoreMissing()
+    void testIgnoreMissing()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -92,7 +92,7 @@ public class SetPropertiesRuleTestCase
      * Negative test for SetPropertyRule ignoring missing properties.
      */
     @Test
-    public void testNegativeNotIgnoreMissing()
+    void testNegativeNotIgnoreMissing()
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -116,7 +116,7 @@ public class SetPropertiesRuleTestCase
      * Positive test for SetPropertiesRule.
      */
     @Test
-    public void testPositive()
+    void testPositive()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -147,7 +147,7 @@ public class SetPropertiesRuleTestCase
      * Negative test for SetPropertyRule ignoring missing properties.
      */
     @Test
-    public void testPositiveNotIgnoreMissingWithIgnoreAttributes()
+    void testPositiveNotIgnoreMissingWithIgnoreAttributes()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()

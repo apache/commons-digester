@@ -32,7 +32,7 @@ public class WithDefaultsRulesWrapperTestCase
 {
 
     @Test
-    public void testClear()
+    void testClear()
     {
         // test clear wrapped
         final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
@@ -61,7 +61,7 @@ public class WithDefaultsRulesWrapperTestCase
     }
 
     @Test
-    public void testMatch()
+    void testMatch()
     {
         // test no defaults
         final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );
@@ -84,7 +84,7 @@ public class WithDefaultsRulesWrapperTestCase
     }
 
     @Test
-    public void testRules()
+    void testRules()
     {
         // test rules
         final WithDefaultsRulesWrapper rules = new WithDefaultsRulesWrapper( new RulesBase() );

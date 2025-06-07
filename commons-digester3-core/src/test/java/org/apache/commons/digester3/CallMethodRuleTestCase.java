@@ -64,7 +64,7 @@ public class CallMethodRuleTestCase
      * several rule syntaxes.
      */
     @Test
-    public void testBasic() throws Exception
+    void testBasic() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -97,7 +97,7 @@ public class CallMethodRuleTestCase
      * Test invoking an object which does not exist on the stack.
      */
     @Test
-    public void testCallInvalidTarget()
+    void testCallInvalidTarget()
     {
 
         final Digester digester = new Digester();
@@ -116,7 +116,7 @@ public class CallMethodRuleTestCase
      * Test method calls with the CallMethodRule reading from the element body, with no CallParamMethod rules added.
      */
     @Test
-    public void testCallMethodOnly()
+    void testCallMethodOnly()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -145,7 +145,7 @@ public class CallMethodRuleTestCase
      * Test invoking an object which is at top-1 on the stack, like SetNextRule does...
      */
     @Test
-    public void testCallNext()
+    void testCallNext()
         throws Exception
     {
 
@@ -176,7 +176,7 @@ public class CallMethodRuleTestCase
      * Test invoking an object which is at the root of the stack, like SetRoot does...
      */
     @Test
-    public void testCallRoot()
+    void testCallRoot()
         throws Exception
     {
 
@@ -204,7 +204,7 @@ public class CallMethodRuleTestCase
     }
 
     @Test
-    public void testFromStack()
+    void testFromStack()
         throws Exception
     {
 
@@ -266,7 +266,7 @@ public class CallMethodRuleTestCase
     }
 
     @Test
-    public void testNestedBody()
+    void testNestedBody()
         throws Exception
     {
 
@@ -325,7 +325,7 @@ public class CallMethodRuleTestCase
      * CallMethodRule triggered on.
      */
     @Test
-    public void testOrderNestedPartA()
+    void testOrderNestedPartA()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -370,7 +370,7 @@ public class CallMethodRuleTestCase
      * on this call order so this test is present to ensure that no-one changes this behavior.
      */
     @Test
-    public void testOrderNestedPartB()
+    void testOrderNestedPartB()
         throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
@@ -401,7 +401,7 @@ public class CallMethodRuleTestCase
      * This tests the call methods params enhancement that provides for more complex stack-based calls.
      */
     @Test
-    public void testParamsFromStack() throws Exception
+    void testParamsFromStack() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -439,7 +439,7 @@ public class CallMethodRuleTestCase
 
     /** Test for the PathCallParamRule */
     @Test
-    public void testPathCallParam()
+    void testPathCallParam()
         throws Exception
     {
         final String xml =
@@ -465,7 +465,7 @@ public class CallMethodRuleTestCase
     }
 
     @Test
-    public void testPrimitiveReading()
+    void testPrimitiveReading()
         throws Exception
     {
         final StringReader reader =
@@ -518,7 +518,7 @@ public class CallMethodRuleTestCase
     }
 
     @Test
-    public void testProcessingHook()
+    void testProcessingHook()
         throws Exception
     {
 
@@ -568,7 +568,7 @@ public class CallMethodRuleTestCase
      * float should all be acceptable as parameter types.
      */
     @Test
-    public void testSettingProperties() throws Exception
+    void testSettingProperties() throws Exception
     {
         Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -649,7 +649,7 @@ public class CallMethodRuleTestCase
     }
 
     @Test
-    public void testTwoCalls()
+    void testTwoCalls()
         throws Exception
     {
 

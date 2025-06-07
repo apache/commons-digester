@@ -34,7 +34,7 @@ public class RegexRulesTestCase
 
     /** Test rules and clear methods */
     @Test
-    public void testClear()
+    void testClear()
     {
         // set up which should match every rule
         final RegexRules rules = new RegexRules( new RegexMatcher()
@@ -73,7 +73,7 @@ public class RegexRulesTestCase
 
     /** Test regex that matches everything */
     @Test
-    public void testMatchAll()
+    void testMatchAll()
     {
         // set up which should match every rule
         final RegexRules rules = new RegexRules( new RegexMatcher()
@@ -106,7 +106,7 @@ public class RegexRulesTestCase
 
     /** Test a mixed regex - in other words, one that sometimes returns true and sometimes false */
     @Test
-    public void testMatchMixed()
+    void testMatchMixed()
     {
         // set up which should match every rule
         final RegexRules rules = new RegexRules( new RegexMatcher()
@@ -134,7 +134,7 @@ public class RegexRulesTestCase
 
     /** Test regex matcher that matches nothing */
     @Test
-    public void testMatchNothing()
+    void testMatchNothing()
     {
         // set up which should match every rule
         final RegexRules rules = new RegexRules( new RegexMatcher()
@@ -160,7 +160,7 @@ public class RegexRulesTestCase
     }
 
     @Test
-    public void testSimpleRegexMatch()
+    void testSimpleRegexMatch()
     {
 
         final SimpleRegexMatcher matcher = new SimpleRegexMatcher();

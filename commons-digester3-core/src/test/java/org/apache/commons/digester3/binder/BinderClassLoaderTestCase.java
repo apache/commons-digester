@@ -177,7 +177,7 @@ public final class BinderClassLoaderTestCase
     private final BinderClassLoader classLoader = createBinderClassLoader( new ExtendedClassLoader() );
 
     @Test
-    public void testGetPrefixedResource()
+    void testGetPrefixedResource()
         throws Exception
     {
         final URL resource = classLoader.getResource( "inmemory:dummyResource" );
@@ -191,7 +191,7 @@ public final class BinderClassLoaderTestCase
     }
 
     @Test
-    public void testGetResource()
+    void testGetResource()
     {
         final ClassLoader clToAdapt = new ClassLoader()
         {
@@ -212,28 +212,28 @@ public final class BinderClassLoaderTestCase
     }
 
     @Test
-    public void testLoadBoolean()
+    void testLoadBoolean()
         throws Exception
     {
         typeFound( "boolean", boolean.class );
     }
 
     @Test
-    public void testLoadByte()
+    void testLoadByte()
         throws Exception
     {
         typeFound( "byte", byte.class );
     }
 
     @Test
-    public void testLoadChar()
+    void testLoadChar()
         throws Exception
     {
         typeFound( "char", char.class );
     }
 
     @Test
-    public void testLoadClass()
+    void testLoadClass()
         throws Exception
     {
         final Class<?> dummyClass1 = Dummy.class;
@@ -247,35 +247,35 @@ public final class BinderClassLoaderTestCase
     }
 
     @Test
-    public void testLoadDouble()
+    void testLoadDouble()
         throws Exception
     {
         typeFound( "double", double.class );
     }
 
     @Test
-    public void testLoadFloat()
+    void testLoadFloat()
         throws Exception
     {
         typeFound( "float", float.class );
     }
 
     @Test
-    public void testLoadInt()
+    void testLoadInt()
         throws Exception
     {
         typeFound( "int", int.class );
     }
 
     @Test
-    public void testLoadLong()
+    void testLoadLong()
         throws Exception
     {
         typeFound( "long", long.class );
     }
 
     @Test
-    public void testLoadShort()
+    void testLoadShort()
         throws Exception
     {
         typeFound( "short", short.class );

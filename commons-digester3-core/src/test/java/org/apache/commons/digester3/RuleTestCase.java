@@ -84,7 +84,7 @@ public class RuleTestCase
      * Test rule addition - this boils down to making sure that digester is set properly on rule addition.
      */
     @Test
-    public void testAddRule()
+    void testAddRule()
     {
         final Digester digester = new Digester();
         final TestRule rule = new TestRule( "Test" );
@@ -99,7 +99,7 @@ public class RuleTestCase
      * appropriate Employee object to be returned.
      */
     @Test
-    public void testObjectCreate1() throws Exception
+    void testObjectCreate1() throws Exception
     {
 
         // Configure the digester as required
@@ -121,7 +121,7 @@ public class RuleTestCase
      * well, but will not attempt to add them to the Employee.
      */
     @Test
-    public void testObjectCreate2() throws Exception
+    void testObjectCreate2() throws Exception
     {
 
         // Configure the digester as required
@@ -145,7 +145,7 @@ public class RuleTestCase
      * well, and will add them to the owning Employee.
      */
     @Test
-    public void testObjectCreate3() throws Exception
+    void testObjectCreate3() throws Exception
     {
 
         // Configure the digester as required
@@ -171,7 +171,7 @@ public class RuleTestCase
      * Same as testObjectCreate1(), except use individual call method rules to set the properties of the Employee.
      */
     @Test
-    public void testObjectCreate4() throws Exception
+    void testObjectCreate4() throws Exception
     {
 
         // Configure the digester as required
@@ -196,7 +196,7 @@ public class RuleTestCase
      * the body of the element is the argument of the method).
      */
     @Test
-    public void testObjectCreate5() throws Exception
+    void testObjectCreate5() throws Exception
     {
 
         // Configure the digester as required
@@ -218,7 +218,7 @@ public class RuleTestCase
      * identical object instances.
      */
     @Test
-    public void testRepeatedParse() throws Exception
+    void testRepeatedParse() throws Exception
     {
 
         // Configure the digester as required
@@ -251,7 +251,7 @@ public class RuleTestCase
      * well, but will not attempt to add them to the Employee.
      */
     @Test
-    public void testRuleSet1() throws Exception
+    void testRuleSet1() throws Exception
     {
 
         // Configure the digester as required
@@ -273,7 +273,7 @@ public class RuleTestCase
      * Same as {@code testRuleSet1} except using a single namespace.
      */
     @Test
-    public void testRuleSet2() throws Exception
+    void testRuleSet2() throws Exception
     {
 
         // Configure the digester as required
@@ -297,7 +297,7 @@ public class RuleTestCase
      * for address that we should skip.
      */
     @Test
-    public void testRuleSet3() throws Exception
+    void testRuleSet3() throws Exception
     {
 
         // Configure the digester as required
@@ -319,7 +319,7 @@ public class RuleTestCase
     /**
      */
     @Test
-    public void testSetCustomProperties() throws Exception
+    void testSetCustomProperties() throws Exception
     {
 
         final Digester digester = new Digester();
@@ -378,7 +378,7 @@ public class RuleTestCase
     }
 
     @Test
-    public void testSetNext() throws Exception
+    void testSetNext() throws Exception
     {
         final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
@@ -410,7 +410,7 @@ public class RuleTestCase
     }
 
     @Test
-    public void testSetTop() throws Exception
+    void testSetTop() throws Exception
     {
         final Digester digester = new Digester();
         digester.setRules( new ExtendedBaseRules() );
@@ -461,7 +461,7 @@ public class RuleTestCase
      * argument form is tested in {@code testSetTopRule2}.
      */
     @Test
-    public void testSetTopRule1() throws Exception
+    void testSetTopRule1() throws Exception
     {
 
         // Configure the digester as required
@@ -482,7 +482,7 @@ public class RuleTestCase
      * Same as {@code testSetTopRule1} except using the three argument form of the SetTopRule rule.
      */
     @Test
-    public void testSetTopRule2() throws Exception
+    void testSetTopRule2() throws Exception
     {
 
         // Configure the digester as required

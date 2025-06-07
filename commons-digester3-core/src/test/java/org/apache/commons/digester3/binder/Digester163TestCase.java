@@ -61,7 +61,7 @@ public class Digester163TestCase
     }
 
     @Test
-    public void test()
+    void test()
         throws InterruptedException
     {
         final ThreadPoolExecutor executor = new ThreadPoolExecutor( MAX_THREADS,
@@ -116,7 +116,7 @@ public class Digester163TestCase
     }
 
     @Test
-    public void testSingle()
+    void testSingle()
         throws IOException, SAXException
     {
         final Digester dig = loader.newDigester();

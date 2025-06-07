@@ -27,7 +27,7 @@ public final class ServletBeanTestCase
 {
 
     @Test
-    public void testServletBean()
+    void testServletBean()
         throws Exception
     {
         final ServletBean servletBean = new ServletBean();

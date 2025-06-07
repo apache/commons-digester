@@ -38,7 +38,7 @@ public class TestFactoryCreate
 {
     @ParameterizedTest
     @ValueSource( booleans = { true, false } )
-    public void testFactoryCreateRule( boolean ignoreCreateExceptions )
+    void testFactoryCreateRule( boolean ignoreCreateExceptions )
         throws Exception
     {
 
@@ -141,7 +141,7 @@ public class TestFactoryCreate
 
     @ParameterizedTest
     @ValueSource( booleans = { true, false } )
-    public void testPropagateException( boolean ignoreCreateExceptions )
+    void testPropagateException( boolean ignoreCreateExceptions )
     {
 
         // only used with this method

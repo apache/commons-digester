@@ -33,7 +33,7 @@ public class TestInline
 {
 
     @Test
-    public void testInlineDeclaration()
+    void testInlineDeclaration()
         throws Exception
     {
         // * tests that plugins can be specified by class, and that the
@@ -75,7 +75,7 @@ public class TestInline
     }
 
     @Test
-    public void testLeadingSlash()
+    void testLeadingSlash()
         throws Exception
     {
         // Tests that PluginRules handles patterns with a leading slash.

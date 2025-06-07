@@ -33,7 +33,7 @@ public class TestXmlRuleInfo
 {
 
     @Test
-    public void testXmlRuleImplicitResource()
+    void testXmlRuleImplicitResource()
         throws Exception
     {
         // * tests that custom rules can be declared on a
@@ -69,7 +69,7 @@ public class TestXmlRuleInfo
     }
 
     @Test
-    public void testXmlRuleInfoExplicitFile()
+    void testXmlRuleInfoExplicitFile()
         throws Exception
     {
         // * tests that custom rules can be declared on a
@@ -105,7 +105,7 @@ public class TestXmlRuleInfo
     }
 
     @Test
-    public void testXmlRuleInfoExplicitResource()
+    void testXmlRuleInfoExplicitResource()
         throws Exception
     {
         // * tests that custom rules can be declared on a

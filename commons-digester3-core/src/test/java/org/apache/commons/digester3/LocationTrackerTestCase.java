@@ -70,7 +70,7 @@ public class LocationTrackerTestCase
     }
 
     @Test
-    public void testAll()
+    void testAll()
         throws Exception
     {
         final String TEST_XML =

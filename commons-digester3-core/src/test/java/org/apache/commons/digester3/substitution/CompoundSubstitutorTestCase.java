@@ -114,7 +114,7 @@ public final class CompoundSubstitutorTestCase
     }
 
     @Test
-    public void testChaining()
+    void testChaining()
     {
         final Substitutor a = new SubstitutorStub( "XYZ", "", "a", "", "abc" );
         final Substitutor b = new SubstitutorStub( "STU", "", "b", "", "bcd" );
@@ -130,7 +130,7 @@ public final class CompoundSubstitutorTestCase
     }
 
     @Test
-    public void testConstructors()
+    void testConstructors()
     {
         assertThrows( IllegalArgumentException.class, () -> new CompoundSubstitutor( null, null ) );
 

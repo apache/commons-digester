@@ -52,7 +52,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can successfully automatically set properties.
      */
     @Test
-    public void testAutomaticallySetProperties() throws Exception
+    void testAutomaticallySetProperties() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -83,7 +83,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can customize the property mappings using the constructor which takes arrays-of-strings.
      */
     @Test
-    public void testCustomizedProperties1() throws Exception
+    void testCustomizedProperties1() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -124,7 +124,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can ignore a single input XML element using the constructor which takes a single remapping.
      */
     @Test
-    public void testCustomizedProperties2a() throws Exception
+    void testCustomizedProperties2a() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -163,7 +163,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that you can customize the property mappings using the constructor which takes a single remapping.
      */
     @Test
-    public void testCustomizedProperties2b() throws Exception
+    void testCustomizedProperties2b() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -202,7 +202,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that it is an error when a child element exists but no corresponding Java property exists.
      */
     @Test
-    public void testMandatoryProperties()
+    void testMandatoryProperties()
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -232,7 +232,7 @@ public class SetNestedPropertiesRuleTestCase
      * </ul>
      */
     @Test
-    public void testMultiRuleMatch() throws Exception
+    void testMultiRuleMatch() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -281,7 +281,7 @@ public class SetNestedPropertiesRuleTestCase
      * See bugzilla entry 31393.
      */
     @Test
-    public void testRecursiveNestedProperties() throws Exception
+    void testRecursiveNestedProperties() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -310,7 +310,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that unknown child elements trigger an exception.
      */
     @Test
-    public void testUnknownChildrenCausesException()
+    void testUnknownChildrenCausesException()
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {
@@ -339,7 +339,7 @@ public class SetNestedPropertiesRuleTestCase
      * Test that unknown child elements are allowed if the appropriate flag is set.
      */
     @Test
-    public void testUnknownChildrenExceptionOverride() throws Exception
+    void testUnknownChildrenExceptionOverride() throws Exception
     {
         final Digester digester = newLoader( new AbstractRulesModule()
         {

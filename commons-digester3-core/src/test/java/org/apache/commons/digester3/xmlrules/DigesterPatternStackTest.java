@@ -40,13 +40,13 @@ public class DigesterPatternStackTest
     }
 
     @Test
-    public void test1()
+    void test1()
     {
         assertEquals( "", patternStack.toString() );
     }
 
     @Test
-    public void test2()
+    void test2()
     {
         patternStack.push( "A" );
         assertEquals( "A", patternStack.toString() );
@@ -55,7 +55,7 @@ public class DigesterPatternStackTest
     }
 
     @Test
-    public void test3()
+    void test3()
     {
         patternStack.push( "A" );
         patternStack.push( "B" );
@@ -66,7 +66,7 @@ public class DigesterPatternStackTest
     }
 
     @Test
-    public void test4()
+    void test4()
     {
         patternStack.push( "" );
         assertEquals( "", patternStack.toString() );
@@ -76,7 +76,7 @@ public class DigesterPatternStackTest
     }
 
     @Test
-    public void test5()
+    void test5()
     {
         patternStack.push( "A" );
         assertEquals( "A", patternStack.toString() );
@@ -88,7 +88,7 @@ public class DigesterPatternStackTest
     }
 
     @Test
-    public void test6()
+    void test6()
     {
         patternStack.push( "A" );
         patternStack.push( "B" );
@@ -97,7 +97,7 @@ public class DigesterPatternStackTest
     }
 
     @Test
-    public void test7()
+    void test7()
     {
         patternStack.push( "///" );
         assertEquals( "///", patternStack.toString() );
