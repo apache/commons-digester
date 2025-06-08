@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test for the include class functionality
  */
-public class IncludeTest
+class IncludeTest
 {
 
     public static class TestDigesterRulesModule

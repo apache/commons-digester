@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  * returns a /-separated representation of the stack's elements. The tests ensure that
  * DigesterRuleParser.PatternStack.toString() returns the properly formatted string.
  */
-public class DigesterPatternStackTest
+class DigesterPatternStackTest
 {
 
     private final PatternStack patternStack = new PatternStack();

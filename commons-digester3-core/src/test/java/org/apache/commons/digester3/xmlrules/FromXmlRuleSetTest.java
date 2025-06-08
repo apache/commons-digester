@@ -43,7 +43,7 @@ import org.xml.sax.SAXParseException;
  * Tests loading Digester rules from an XML file.
  */
 
-public class FromXmlRuleSetTest
+class FromXmlRuleSetTest
 {
 
     private RulesModule createRules( final String xmlText )
