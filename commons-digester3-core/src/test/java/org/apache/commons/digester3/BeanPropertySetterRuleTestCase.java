@@ -46,8 +46,8 @@ public class BeanPropertySetterRuleTestCase
     /**
      * Simple test XML document used in the tests.
      */
-    protected static final String TEST_XML = "<?xml version='1.0'?>" + "<root>ROOT BODY" + "<alpha>ALPHA BODY</alpha>"
-        + "<beta>BETA BODY</beta>" + "<gamma>GAMMA BODY</gamma>" + "<delta>DELTA BODY</delta>" + "</root>";
+    protected static final String TEST_XML = "<?xml version='1.0'?><root>ROOT BODY" + "<alpha>ALPHA BODY</alpha>"
+        + "<beta>BETA BODY</beta><gamma>GAMMA BODY</gamma>" + "<delta>DELTA BODY</delta>" + "</root>";
 
     /**
      * Test that you can successfully automatically set properties.

@@ -271,8 +271,8 @@ public class CallMethodRuleTestCase
     {
 
         final StringReader reader =
-            new StringReader( "<?xml version='1.0' ?><root>" + "<spam>Simple</spam>"
-                + "<spam>Complex<spam>Deep<spam>Deeper<spam>Deepest</spam></spam></spam></spam>" + "</root>" );
+            new StringReader( "<?xml version='1.0' ?><root><spam>Simple</spam>"
+                + "<spam>Complex<spam>Deep<spam>Deeper<spam>Deepest</spam></spam></spam></spam></root>" );
 
         final Digester digester = new Digester();
 
@@ -443,8 +443,8 @@ public class CallMethodRuleTestCase
         throws Exception
     {
         final String xml =
-            "<?xml version='1.0'?><main>" + "<alpha><beta>Ignore this</beta></alpha>"
-                + "<beta><epsilon><gamma>Ignore that</gamma></epsilon></beta>" + "</main>";
+            "<?xml version='1.0'?><main><alpha><beta>Ignore this</beta></alpha>"
+                + "<beta><epsilon><gamma>Ignore that</gamma></epsilon></beta></main>";
 
         final SimpleTestBean bean = new SimpleTestBean();
         bean.setAlphaBeta( "[UNSET]", "[UNSET]" );
@@ -654,8 +654,8 @@ public class CallMethodRuleTestCase
     {
 
         final StringReader reader =
-            new StringReader( "<?xml version='1.0' ?><root>" + "<param class='int' coolness='true'>25</param>"
-                + "<param class='long'>50</param>" + "<param class='float' coolness='false'>90</param></root>" );
+            new StringReader( "<?xml version='1.0' ?><root><param class='int' coolness='true'>25</param>"
+                + "<param class='long'>50</param><param class='float' coolness='false'>90</param></root>" );
 
         final Digester digester = new Digester();
         // SimpleLog log = new SimpleLog("{testTwoCalls:Digester]");

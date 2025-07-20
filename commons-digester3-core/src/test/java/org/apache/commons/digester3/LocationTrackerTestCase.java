@@ -73,9 +73,15 @@ public class LocationTrackerTestCase
     void testAll()
         throws Exception
     {
+        // @formatter:off
         final String TEST_XML =
-            "<?xml version='1.0'?>\n" + "<box id='root'>\n" + "  <subBox id='box1'/>\n" + "  <ignoreme/>\n"
-                + "  <subBox id='box2'/> <subBox id='box3'/>\n" + "</box>";
+            "<?xml version='1.0'?>\n" +
+            "<box id='root'>\n" +
+            "  <subBox id='box1'/>\n" +
+            "  <ignoreme/>\n" +
+            "  <subBox id='box2'/> <subBox id='box3'/>\n" +
+            "</box>";
+        // @formatter:on
 
         final LocationTracker locnTracker = new LocationTracker();
 

@@ -159,7 +159,7 @@ public class PluginRules
 
         if ( debug )
         {
-            log.debug( "add entry" + ": mapping pattern [" + pattern + "]" + " to rule of type ["
+            log.debug( "add entry: mapping pattern [" + pattern + "] to rule of type ["
                 + rule.getClass().getName() + "]" );
         }
 
@@ -179,7 +179,7 @@ public class PluginRules
 
             // alas, can't throw exception
             log.warn( "An attempt was made to add a rule with a pattern that"
-                + "is not at or below the mountpoint of the current" + " PluginRules object." + " Rule pattern: "
+                + "is not at or below the mountpoint of the current PluginRules object. Rule pattern: "
                 + pattern + ", mountpoint: " + mountPoint + ", rule type: " + rule.getClass().getName() );
             return;
         }
@@ -210,7 +210,7 @@ public class PluginRules
 
         if ( debug )
         {
-            log.debug( "add exit" + ": mapped pattern [" + pattern + "]" + " to rule of type ["
+            log.debug( "add exit: mapped pattern [" + pattern + "] to rule of type ["
                 + rule.getClass().getName() + "]" );
         }
     }

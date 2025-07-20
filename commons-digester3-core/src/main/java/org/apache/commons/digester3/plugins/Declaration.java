@@ -194,13 +194,13 @@ public class Declaration
         {
             if ( ruleLoader == null )
             {
-                log.debug( "No ruleLoader found for plugin declaration" + " id [" + id + "]" + ", class ["
+                log.debug( "No ruleLoader found for plugin declaration id [" + id + "], class ["
                     + pluginClass.getName() + "]." );
             }
             else
             {
                 log.debug( "RuleLoader of type [" + ruleLoader.getClass().getName()
-                    + "] associated with plugin declaration" + " id [" + id + "]" + ", class ["
+                    + "] associated with plugin declaration id [" + id + "], class ["
                     + pluginClass.getName() + "]." );
             }
         }

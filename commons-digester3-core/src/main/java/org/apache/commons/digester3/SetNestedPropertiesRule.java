@@ -188,7 +188,7 @@ public class SetNestedPropertiesRule
             }
             catch ( final NullPointerException e )
             {
-                log.error( "NullPointerException: " + "top=" + top + ",propName=" + propName + ",value=" + text + "!" );
+                log.error( "NullPointerException: top=" + top + ",propName=" + propName + ",value=" + text + "!" );
                 throw e;
             }
         }

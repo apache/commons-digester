@@ -93,7 +93,7 @@ public class VariableExpansionTestCase
         throws SAXException, IOException
     {
 
-        final String xml = "<root>" + "Twas noun{1} and the noun{2}" + " did verb{1} and verb{2} in the noun{3}" + "</root>";
+        final String xml = "<root>" + "Twas noun{1} and the noun{2} did verb{1} and verb{2} in the noun{3}" + "</root>";
 
         final StringReader input = new StringReader( xml );
         final Digester digester = new Digester();
@@ -121,7 +121,7 @@ public class VariableExpansionTestCase
 
         assertNotNull( root, "Digester returned no object" );
 
-        assertEquals( "Twas brillig and the slithy toves" + " did gyre and gimble in the wabe", root.getAlpha() );
+        assertEquals( "Twas brillig and the slithy toves did gyre and gimble in the wabe", root.getAlpha() );
     }
 
     /**
@@ -162,8 +162,8 @@ public class VariableExpansionTestCase
         throws SAXException, IOException
     {
         final String xml =
-            "<root>" + "<property name='attr1' value='prop.value1'/>"
-                + "<property name='attr2' value='substituted-${attr1}'/>" + "<bean alpha='${attr2}'/>" + "</root>";
+            "<root><property name='attr1' value='prop.value1'/>"
+                + "<property name='attr2' value='substituted-${attr1}'/><bean alpha='${attr2}'/>" + "</root>";
         final StringReader input = new StringReader( xml );
         final Digester digester = createDigesterThatCanDoAnt();
 
@@ -186,7 +186,7 @@ public class VariableExpansionTestCase
     {
 
         final String xml =
-            "<root>" + "<bean alpha='${attr1}' beta='var{attr1}'/>" + "<bean alpha='${attr2}' beta='var{attr2}'/>"
+            "<root>" + "<bean alpha='${attr1}' beta='var{attr1}'/><bean alpha='${attr2}' beta='var{attr2}'/>"
                 + "</root>";
 
         final StringReader input = new StringReader( xml );
@@ -244,7 +244,7 @@ public class VariableExpansionTestCase
     void testExpansionWithMutableSource()
         throws SAXException, IOException
     {
-        final String xml = "<root>" + "<property name='attr' value='prop.value'/>" + "<bean alpha='${attr}'/>" + "</root>";
+        final String xml = "<root>" + "<property name='attr' value='prop.value'/>" + "<bean alpha='${attr}'/></root>";
         final StringReader input = new StringReader( xml );
         final Digester digester = createDigesterThatCanDoAnt();
 

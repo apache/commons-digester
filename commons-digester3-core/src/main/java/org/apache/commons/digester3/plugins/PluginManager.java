@@ -100,7 +100,7 @@ public class PluginManager
             declarationsById.put( id, decl );
             if ( debug )
             {
-                log.debug( "Indexing plugin-id [" + id + "]" + " -> class [" + pluginClass.getName() + "]" );
+                log.debug( "Indexing plugin-id [" + id + "] -> class [" + pluginClass.getName() + "]" );
             }
         }
     }
@@ -147,8 +147,8 @@ public class PluginManager
             }
             catch ( final PluginException e )
             {
-                throw new PluginException( "Unable to locate plugin rules for plugin" + " with id [" + id + "]"
-                    + ", and class [" + pluginClass.getName() + "]" + ":" + e.getMessage(), e.getCause() );
+                throw new PluginException( "Unable to locate plugin rules for plugin with id [" + id + "]"
+                    + ", and class [" + pluginClass.getName() + "]:" + e.getMessage(), e.getCause() );
             }
         }
         log.debug( "scanned ruleFinders." );

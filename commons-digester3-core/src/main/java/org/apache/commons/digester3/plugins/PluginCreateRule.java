@@ -136,7 +136,7 @@ public class PluginCreateRule
         final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
-            log.debug( "PluginCreateRule.begin" + ": pattern=[" + pattern + "]" + " match=[" + getDigester().getMatch()
+            log.debug( "PluginCreateRule.begin: pattern=[" + pattern + "] match=[" + getDigester().getMatch()
                 + "]" );
         }
 
@@ -247,8 +247,8 @@ public class PluginCreateRule
         getDigester().push( instance );
         if ( debug )
         {
-            log.debug( "PluginCreateRule.begin" + ": pattern=[" + pattern + "]" + " match=[" + getDigester().getMatch()
-                + "]" + " pushed instance of plugin [" + pluginClass.getName() + "]" );
+            log.debug( "PluginCreateRule.begin: pattern=[" + pattern + "] match=[" + getDigester().getMatch()
+                + "] pushed instance of plugin [" + pluginClass.getName() + "]" );
         }
 
         // and now we have to fire any custom rules which would have
@@ -437,7 +437,7 @@ public class PluginCreateRule
         final boolean debug = log.isDebugEnabled();
         if ( debug )
         {
-            log.debug( "PluginCreateRule.postRegisterInit" + ": rule registered for pattern [" + matchPattern + "]" );
+            log.debug( "PluginCreateRule.postRegisterInit: rule registered for pattern [" + matchPattern + "]" );
         }
 
         if ( getDigester() == null )
@@ -447,7 +447,7 @@ public class PluginCreateRule
             // to a Rules object which has not yet been added to a
             // Digester object.
             initException =
-                new PluginConfigurationException( "Invalid invocation of postRegisterInit" + ": digester not set." );
+                new PluginConfigurationException( "Invalid invocation of postRegisterInit: digester not set." );
             throw initException;
         }
 
@@ -480,8 +480,8 @@ public class PluginCreateRule
             // as done by PluginRules. Without wildcards, "below"
             // just means startsWith, which is easy to check.
             initException =
-                new PluginConfigurationException( "A PluginCreateRule instance has been mapped to" + " pattern ["
-                    + matchPattern + "]." + " This pattern includes a wildcard character."
+                new PluginConfigurationException( "A PluginCreateRule instance has been mapped to pattern ["
+                    + matchPattern + "]. This pattern includes a wildcard character."
                     + " This is not supported by the plugin architecture." );
             throw initException;
         }
@@ -529,13 +529,13 @@ public class PluginCreateRule
 
             if ( debug )
             {
-                log.debug( "init: pluginClassAttr set to per-digester values [" + "ns=" + pluginClassAttrNs + ", name="
+                log.debug( "init: pluginClassAttr set to per-digester values [ns=" + pluginClassAttrNs + ", name="
                     + pluginClassAttr + "]" );
             }
         }
         else if ( debug )
         {
-            log.debug( "init: pluginClassAttr set to rule-specific values [" + "ns=" + pluginClassAttrNs
+            log.debug( "init: pluginClassAttr set to rule-specific values [ns=" + pluginClassAttrNs
                 + ", name=" + pluginClassAttr + "]" );
         }
 
@@ -548,13 +548,13 @@ public class PluginCreateRule
 
             if ( debug )
             {
-                log.debug( "init: pluginIdAttr set to per-digester values [" + "ns=" + pluginIdAttrNs + ", name="
+                log.debug( "init: pluginIdAttr set to per-digester values [ns=" + pluginIdAttrNs + ", name="
                     + pluginIdAttr + "]" );
             }
         }
         else if ( debug )
         {
-            log.debug( "init: pluginIdAttr set to rule-specific values [" + "ns=" + pluginIdAttrNs + ", name="
+            log.debug( "init: pluginIdAttr set to rule-specific values [ns=" + pluginIdAttrNs + ", name="
                 + pluginIdAttr + "]" );
         }
     }
