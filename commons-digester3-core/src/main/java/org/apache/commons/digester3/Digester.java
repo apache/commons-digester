@@ -1600,7 +1600,7 @@ public class Digester
 
     /**
      * Returns a flag indicating whether the requested feature is supported by the underlying implementation of
-     * {@code org.xml.sax.XMLReader}. See <a href="http://www.saxproject.org">the saxproject website</a> for
+     * {@code org.xml.sax.XMLReader}. See <a href="https://www.saxproject.org">the saxproject website</a> for
      * information about the standard SAX2 feature flags.
      *
      * @param feature Name of the feature to inquire about
@@ -1691,7 +1691,7 @@ public class Digester
     /**
      * Gets the current value of the specified property for the underlying {@code XMLReader} implementation.
      *
-     * See <a href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2
+     * See <a href="https://www.saxproject.org">the saxproject website</a> for information about the standard SAX2
      * properties.
      *
      * @param property Property name to be retrieved
@@ -2707,7 +2707,7 @@ public class Digester
 
     /**
      * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
-     * {@code org.xml.sax.XMLReader}. See <a href="http://www.saxproject.org">the saxproject website</a> for
+     * {@code org.xml.sax.XMLReader}. See <a href="https://www.saxproject.org">the saxproject website</a> for
      * information about the standard SAX2 feature flags. In order to be effective, this method must be called
      * <strong>before</strong> the {@code getParser()} method is called for the first time, either directly or
      * indirectly.
@@ -2746,7 +2746,7 @@ public class Digester
 
     /**
      * Sets the current value of the specified property for the underlying {@code XMLReader} implementation. See <a
-     * href="http://www.saxproject.org">the saxproject website</a> for information about the standard SAX2 properties.
+     * href="https://www.saxproject.org">the saxproject website</a> for information about the standard SAX2 properties.
      *
      * @param property Property name to be set
      * @param value Property value to be set
