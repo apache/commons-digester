@@ -43,7 +43,6 @@
     <url>https://gitbox.apache.org/repos/asf/commons-digester</url>
   </scm>
   <issueManagement>
-    <system>jira</system>
     <url>https://issues.apache.org/jira/browse/DIGESTER</url>
   </issueManagement>
 
