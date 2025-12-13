@@ -32,10 +32,10 @@ import org.xml.sax.Attributes;
  * This parameter may be:
  * </p>
  * <ul>
- * <li>from an attribute of the current element See {@link #CallParamRule(int paramIndex, String attributeName)}
- * <li>from current the element body See {@link #CallParamRule(int paramIndex)}
- * <li>from the top object on the stack. See {@link #CallParamRule(int paramIndex, boolean fromStack)}
- * <li>the current path being processed (separate {@code Rule}). See {@link PathCallParamRule}
+ * <li>from an attribute of the current element See {@link #CallParamRule(int paramIndex, String attributeName)}</li>
+ * <li>from current the element body See {@link #CallParamRule(int paramIndex)}</li>
+ * <li>from the top object on the stack. See {@link #CallParamRule(int paramIndex, boolean fromStack)}</li>
+ * <li>the current path being processed (separate {@code Rule}). See {@link PathCallParamRule}</li>
  * </ul>
  */
 public class CallParamRule

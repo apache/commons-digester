@@ -30,8 +30,8 @@ import org.apache.commons.logging.LogFactory;
  * This uses just two wildcards:
  * </p>
  * <ul>
- * <li>{@code *} matches any sequence of none, one or more characters
- * <li>{@code ?} matches any one character
+ * <li>{@code *} matches any sequence of none, one or more characters</li>
+ * <li>{@code ?} matches any one character</li>
  * </ul>
  * <p>
  * Escaping these wildcards is not supported.

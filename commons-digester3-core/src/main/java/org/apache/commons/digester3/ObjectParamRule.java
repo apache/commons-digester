@@ -32,9 +32,9 @@ import org.xml.sax.Attributes;
  * </p>
  * <ul>
  * <li>an arbitrary Object defined programmatically, assigned when the element pattern associated with the Rule is
- * matched. See {@link #ObjectParamRule(int paramIndex, Object param)}.
+ * matched. See {@link #ObjectParamRule(int paramIndex, Object param)}.</li>
  * <li>an arbitrary Object defined programmatically, assigned if the element pattern AND specified attribute name are
- * matched. See {@link #ObjectParamRule(int paramIndex, String attributeName, Object param)}.
+ * matched. See {@link #ObjectParamRule(int paramIndex, String attributeName, Object param)}.</li>
  * </ul>
  *
  * @since 1.4

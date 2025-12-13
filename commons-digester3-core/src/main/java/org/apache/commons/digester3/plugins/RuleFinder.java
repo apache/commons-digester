@@ -45,17 +45,20 @@ public abstract class RuleFinder
      * <p>
      * This method is invoked when a plugin is declared by the user, either via an explicit use of
      * PluginDeclarationRule, or implicitly via an "inline declaration" where the declaration and use are simultaneous.
+     * </p>
      * <p>
      * If dynamic rules for the specified plugin class are located, then the RuleFinder will return a RuleLoader object
      * encapsulating those rules, and this object will be invoked each time the user actually requests an instance of
      * the declared plugin class, to load the custom rules associated with that plugin instance.
+     * </p>
      * <p>
      * If no dynamic rules can be found, null is returned. This is not an error; merely an indication that this
      * particular algorithm found no matches.
+     * </p>
      * <p>
      * The properties object holds any XML attributes the user may have specified on the plugin declaration in order to
      * indicate how to locate the plugin rules.
-     * <p>
+     * </p>
      *
      * @param d The digester instance where locating plugin classes
      * @param pluginClass The plugin Java class
