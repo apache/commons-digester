@@ -222,7 +222,7 @@ public class Declaration
     }
 
     /**
-     * Copy all (key,value) pairs in the param into the properties member of this object.
+     * Copy all (key, value) pairs in the param into the properties member of this object.
      * <p>
      * The declaration properties cannot be explicit member variables, because the set of useful properties a user can
      * provide on a declaration depends on what RuleFinder classes are available - and extra RuleFinders can be added by
