@@ -68,7 +68,7 @@
     </action>
     <!-- UPDATE -->
     <action dev="ggregory" type="update" due-to="Gary Gregory">
-      Bump commons-parent from 28 to 93 #146, #161, #169, #189, #193, #197, #200, #206.
+      Bump commons-parent from 28 to 94 #146, #161, #169, #189, #193, #197, #200, #206.
     </action>
     <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">
       Bump GitHub action versions.
