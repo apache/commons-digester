@@ -22,7 +22,7 @@ package org.apache.commons.digester3;
 import org.xml.sax.Attributes;
 
 /**
- * Abstract class for {@code ObjectCreationFactory} implementations.
+ * Abstract classs for {@code ObjectCreationFactory} implementations.
  *
  * @param <T> The object type will be instantiate by this factory.
  */
