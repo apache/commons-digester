@@ -42,6 +42,7 @@ import org.xml.sax.Attributes;
 public class ObjectParamRule
     extends Rule
 {
+
     /**
      * The attribute which we are attempting to match
      */
