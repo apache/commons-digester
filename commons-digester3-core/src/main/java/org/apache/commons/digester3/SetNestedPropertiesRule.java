@@ -339,7 +339,7 @@ public class SetNestedPropertiesRule
     }
 
     /**
-     * Constructor which allows element to property mapping to be overridden.
+     * Constructs a new instance to set the property mapping to be overridden.
      *
      * @param elementNames names of elements to properties to map
      * @since 3.0
@@ -354,7 +354,7 @@ public class SetNestedPropertiesRule
 
     /**
      * <p>
-     * Convenience constructor which overrides the default mappings for just one property.
+     * Constructs a new instance to override the default mappings for just one property.
      * </p>
      * <p>
      * For details about how this works, see
@@ -372,7 +372,7 @@ public class SetNestedPropertiesRule
 
     /**
      * <p>
-     * Constructor which allows element to property mapping to be overridden.
+     * Constructs a new instance to set the element to property mapping to override.
      * </p>
      * <p>
      * Two arrays are passed in. One contains XML element names and the other Java bean property names. The element name
