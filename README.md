@@ -45,7 +45,7 @@ Apache Commons Digester
 
 [![Java CI](https://github.com/apache/commons-digester/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-digester/actions/workflows/maven.yml)
 [![Coverage Status](https://codecov.io/gh/apache/commons-digester/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-digester)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-digester3-parent/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-digester3-parent/?gav=true)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.commons/commons-digester3?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.commons/commons-digester3)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-digester3-parent/3.3.svg)](https://javadoc.io/doc/org.apache.commons/commons-digester3-parent/3.3)
 [![CodeQL](https://github.com/apache/commons-digester/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-digester/actions/workflows/codeql-analysis.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-digester/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-digester)
