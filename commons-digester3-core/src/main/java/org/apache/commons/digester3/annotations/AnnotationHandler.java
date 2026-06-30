@@ -28,8 +28,8 @@ import org.apache.commons.digester3.binder.RulesBinder;
  * Intercepts a {@code Class} visit performed by
  * the {@link org.apache.commons.digester3.binder.DigesterLoader}.
  *
- * @param <A> the current visited annotation type.
- * @param <E> the current visited annotated element type.
+ * @param <A> The current visited annotation type.
+ * @param <E> The current visited annotated element type.
  * @since 3.0
  */
 public interface AnnotationHandler<A extends Annotation, E extends AnnotatedElement>

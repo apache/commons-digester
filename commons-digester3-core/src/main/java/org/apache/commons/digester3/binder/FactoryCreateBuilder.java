@@ -146,7 +146,7 @@ public final class FactoryCreateBuilder
     /**
      * Constructs a factory create rule using the given, already instantiated, {@link ObjectCreationFactory}.
      *
-     * @param <T> the type of created object by the given factory
+     * @param <T> The type of created object by the given factory
      * @param creationFactory called on to create the object
      * @return this builder instance
      */

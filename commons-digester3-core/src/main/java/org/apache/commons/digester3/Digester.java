@@ -893,7 +893,7 @@ public class Digester
     /**
      * Execute the parse in async mode.
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param callable
      * @return a Future that can be used to track when the parse has been fully processed.
      * @since 3.1
@@ -1743,7 +1743,7 @@ public class Digester
      * such return value is available; in this case, this method allows you to access the root object that has been
      * created after parsing has completed.
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @return the root object that has been created after parsing or null if the digester has not parsed any XML yet.
      */
     public <T> T getRoot()
@@ -1974,7 +1974,7 @@ public class Digester
     /**
      * Helps casting the input object to given type, avoiding NPEs.
      *
-     * @param <T> the type the input object has to be cast.
+     * @param <T> The type the input object has to be cast.
      * @param obj the object has to be cast.
      * @return the casted object, if input object is not null, null otherwise.
      * @since 3.0
@@ -1996,7 +1996,7 @@ public class Digester
      * Parse the content of the specified file using this Digester. Returns the root element from the object stack (if
      * any).
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param file File containing the XML data to be parsed
      * @return the root element from the object stack (if any)
      * @throws IOException if an input/output error occurs
@@ -2020,7 +2020,7 @@ public class Digester
      * Parse the content of the specified input source using this Digester. Returns the root element from the object
      * stack (if any).
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param input Input source containing the XML data to be parsed
      * @return the root element from the object stack (if any)
      * @throws IOException if an input/output error occurs
@@ -2060,7 +2060,7 @@ public class Digester
      * Parse the content of the specified input stream using this Digester. Returns the root element from the object
      * stack (if any).
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param input Input stream containing the XML data to be parsed
      * @return the root element from the object stack (if any)
      * @throws IOException if an input/output error occurs
@@ -2081,7 +2081,7 @@ public class Digester
      * Parse the content of the specified reader using this Digester. Returns the root element from the object stack (if
      * any).
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param reader Reader containing the XML data to be parsed
      * @return the root element from the object stack (if any)
      * @throws IOException if an input/output error occurs
@@ -2102,7 +2102,7 @@ public class Digester
      * Parse the content of the specified URI using this Digester. Returns the root element from the object stack (if
      * any).
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param uri URI containing the XML data to be parsed
      * @return the root element from the object stack (if any)
      * @throws IOException if an input/output error occurs
@@ -2123,7 +2123,7 @@ public class Digester
      * Parse the content of the specified URL using this Digester. Returns the root element from the object stack (if
      * any).
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param url URL containing the XML data to be parsed
      * @return the root element from the object stack (if any)
      * @throws IOException if an input/output error occurs
@@ -2146,7 +2146,7 @@ public class Digester
      *
      * If there are no objects on the stack, return {@code null}.
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @return the top object on the stack without removing it.
      */
     public <T> T peek()
@@ -2166,7 +2166,7 @@ public class Digester
      * Return the n'th object down the stack, where 0 is the top element and [getCount()-1] is the bottom element. If
      * the specified index is out of range, return {@code null}.
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
      * @return the n'th object down the stack
      */
@@ -2197,7 +2197,7 @@ public class Digester
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack to be peeked
      * @return the top {@code Object} on the stack or null if the stack is either empty or has not been created yet
      * @since 1.6
@@ -2215,7 +2215,7 @@ public class Digester
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack to be peeked
      * @param n Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
      * @return the specified {@code Object} on the stack.
@@ -2303,7 +2303,7 @@ public class Digester
      * Pop the top object off of the stack, and return it. If there are no objects on the stack, return
      * {@code null}.
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @return the top object popped off of the stack
      */
     public <T> T pop()
@@ -2332,7 +2332,7 @@ public class Digester
      * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
      * </p>
      *
-     * @param <T> the type used to auto-cast the returned object to the assigned variable type
+     * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param stackName the name of the stack from which the top value is to be popped.
      * @return the top {@code Object} on the stack or throws {@code EmptyStackException}
      *         if the stack is either empty or has not been created yet
