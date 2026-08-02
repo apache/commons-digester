@@ -42,7 +42,7 @@ public abstract class AbstractAnnotatedPojoTestCase
      * XML and verify the digester produces the same result.
      *
      * @param expected The expected object
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     public final void verifyExpectedEqualsToParsed(final Object expected) throws Exception {
         final Class<?> clazz = expected.getClass();

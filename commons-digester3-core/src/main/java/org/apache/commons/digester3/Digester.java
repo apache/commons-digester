@@ -1100,7 +1100,7 @@ public class Digester
      *
      * @param url URL for which to create an {@code InputSource}
      * @return The InputSource that reads from the input URL
-     * @throws IOException if any error occurs while reading the input URL
+     * @throws IOException Thrown if any error occurs while reading the input URL
      * @since 1.8
      */
     public InputSource createInputSourceFromURL( final String url )
@@ -1139,7 +1139,7 @@ public class Digester
      *
      * @param url The URL has to be read
      * @return The InputSource that reads from the input URL
-     * @throws IOException if any error occurs while reading the input URL
+     * @throws IOException Thrown if any error occurs while reading the input URL
      * @since 1.8
      */
     public InputSource createInputSourceFromURL( final URL url )
@@ -1852,7 +1852,7 @@ public class Digester
      * FIXME: there is a bug in JAXP/XERCES that prevent the use of a parser that contains a schema with a DTD.
      *
      * @return The XMLReader to be used for parsing the input document.
-     * @throws SAXException if no XMLReader can be instantiated
+     * @throws SAXException Thrown if no XMLReader can be instantiated
      */
     public XMLReader getXMLReader()
         throws SAXException
@@ -1999,8 +1999,8 @@ public class Digester
      * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param file File containing the XML data to be parsed
      * @return The root element from the object stack (if any)
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     public <T> T parse( final File file )
         throws IOException, SAXException
@@ -2023,8 +2023,8 @@ public class Digester
      * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param input Input source containing the XML data to be parsed
      * @return The root element from the object stack (if any)
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     public <T> T parse( final InputSource input )
         throws IOException, SAXException
@@ -2063,8 +2063,8 @@ public class Digester
      * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param input Input stream containing the XML data to be parsed
      * @return The root element from the object stack (if any)
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     public <T> T parse( final InputStream input )
         throws IOException, SAXException
@@ -2084,8 +2084,8 @@ public class Digester
      * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param reader Reader containing the XML data to be parsed
      * @return The root element from the object stack (if any)
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     public <T> T parse( final Reader reader )
         throws IOException, SAXException
@@ -2105,8 +2105,8 @@ public class Digester
      * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param uri URI containing the XML data to be parsed
      * @return The root element from the object stack (if any)
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     public <T> T parse( final String uri )
         throws IOException, SAXException
@@ -2126,8 +2126,8 @@ public class Digester
      * @param <T> The type used to auto-cast the returned object to the assigned variable type
      * @param url URL containing the XML data to be parsed
      * @return The root element from the object stack (if any)
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      * @since 1.8
      */
     public <T> T parse( final URL url )

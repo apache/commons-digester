@@ -92,7 +92,7 @@ public class PluginDeclarationRule
      * @param namespace The XML namespace in which the XML element which triggered this rule resides.
      * @param name The name of the XML element which triggered this rule.
      * @param attributes The set of attributes on the XML element which triggered this rule.
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )

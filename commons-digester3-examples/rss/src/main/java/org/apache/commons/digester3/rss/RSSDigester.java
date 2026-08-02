@@ -190,8 +190,8 @@ public class RSSDigester
      * the root element from the object stack (which will be the Channel).
      *
      * @param file File containing the XML data to be parsed
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     @Override
     public <T> T parse( final File file )
@@ -207,8 +207,8 @@ public class RSSDigester
      * Channel).
      *
      * @param input Input source containing the XML data to be parsed
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     @Override
     public <T> T parse( final InputSource input )
@@ -224,8 +224,8 @@ public class RSSDigester
      * the Channel).
      *
      * @param input Input stream containing the XML data to be parsed
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     @Override
     public <T> T parse( final InputStream input )
@@ -241,8 +241,8 @@ public class RSSDigester
      * the Channel).
      *
      * @param uri URI containing the XML data to be parsed
-     * @throws IOException if an input/output error occurs
-     * @throws SAXException if a parsing exception occurs
+     * @throws IOException Thrown if an input/output error occurs
+     * @throws SAXException Thrown if a parsing exception occurs
      */
     @Override
     public <T> T parse( final String uri )

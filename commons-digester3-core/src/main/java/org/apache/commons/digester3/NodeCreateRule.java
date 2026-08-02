@@ -112,7 +112,7 @@ public class NodeCreateRule
          * @param doc The document to use to create nodes
          * @param root The root node
          * @throws ParserConfigurationException if the DocumentBuilderFactory could not be instantiated
-         * @throws SAXException if the XMLReader could not be instantiated by Digester (should not happen)
+         * @throws SAXException Thrown if the XMLReader could not be instantiated by Digester (should not happen)
          */
         NodeBuilder( final Document doc, final Node root )
             throws ParserConfigurationException, SAXException
@@ -171,7 +171,7 @@ public class NodeCreateRule
          * @param ch The characters from the XML document
          * @param start The start position in the array
          * @param length The number of characters to read from the array
-         * @throws SAXException if the DOM implementation throws an exception
+         * @throws SAXException Thrown if the DOM implementation throws an exception
          */
         @Override
         public void characters( final char[] ch, final int start, final int length )
@@ -186,7 +186,7 @@ public class NodeCreateRule
          * @param namespaceURI The namespace URI
          * @param localName The local name
          * @param qName The qualified (prefixed) name
-         * @throws SAXException if the DOM implementation throws an exception
+         * @throws SAXException Thrown if the DOM implementation throws an exception
          */
         @Override
         public void endElement( final String namespaceURI, final String localName, final String qName )
@@ -217,7 +217,7 @@ public class NodeCreateRule
          *
          * @param target The processing instruction target
          * @param data The processing instruction data, or null if none was supplied
-         * @throws SAXException if the DOM implementation throws an exception
+         * @throws SAXException Thrown if the DOM implementation throws an exception
          */
         @Override
         public void processingInstruction( final String target, final String data )
@@ -240,7 +240,7 @@ public class NodeCreateRule
          * @param localName The local name
          * @param qName The qualified (prefixed) name
          * @param atts The list of attributes
-         * @throws SAXException if the DOM implementation throws an exception
+         * @throws SAXException Thrown if the DOM implementation throws an exception
          */
         @Override
         public void startElement( final String namespaceURI, final String localName, final String qName, final Attributes atts )

@@ -126,7 +126,7 @@ public class PluginCreateRule
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
      * @param attributes The attribute list of this element
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     @Override
     public void begin( final String namespace, final String name, final Attributes attributes )
@@ -310,7 +310,7 @@ public class PluginCreateRule
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
      * @param list The attribute list of this element
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     public void fireBeginMethods( final List<Rule> rules, final String namespace, final String name, final Attributes list )
         throws Exception
@@ -349,7 +349,7 @@ public class PluginCreateRule
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
      * @param text The text of the body of this element
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     private void fireBodyMethods( final List<Rule> rules, final String namespaceURI, final String name, final String text )
         throws Exception
@@ -385,7 +385,7 @@ public class PluginCreateRule
      * @param namespaceURI The namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     public void fireEndMethods( final List<Rule> rules, final String namespaceURI, final String name )
         throws Exception

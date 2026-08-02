@@ -69,7 +69,7 @@ import org.xml.sax.Attributes;
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
      * @param attributes The attribute list of this element
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      * @since 1.4
      */
     public void begin( final String namespace, final String name, final Attributes attributes )
@@ -86,7 +86,7 @@ import org.xml.sax.Attributes;
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
      * @param text The text of the body of this element
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      * @since 1.4
      */
     public void body( final String namespace, final String name, final String text )
@@ -101,7 +101,7 @@ import org.xml.sax.Attributes;
      * @param namespace The namespace URI of the matching element, or an empty string if the parser is not namespace
      *            aware or the element has no namespace
      * @param name The local name if the parser is namespace aware, or just the element name otherwise
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      * @since 1.4
      */
     public void end( final String namespace, final String name )
@@ -113,7 +113,7 @@ import org.xml.sax.Attributes;
     /**
      * This method is called after all parsing methods have been called, to allow Rules to remove temporary data.
      *
-     * @throws Exception if any error occurs
+     * @throws Exception Thrown if any error occurs
      */
     public void finish()
         throws Exception

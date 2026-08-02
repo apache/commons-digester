@@ -52,7 +52,7 @@ public class LoaderFromStream
      * The caller is responsible for closing the input stream after this method has returned.
      *
      * @param s The input stream has to be loaded into memory
-     * @throws Exception if any error occurs while reading the input stream
+     * @throws Exception Thrown if any error occurs while reading the input stream
      */
     public LoaderFromStream( final InputStream s )
         throws Exception

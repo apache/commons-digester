@@ -72,7 +72,7 @@ public class NamespaceSnapshotTestCase
      * Gets an appropriate InputStream for the specified test file (which must be inside our current package.
      *
      * @param name Name of the test file we want
-     * @throws IOException if an input/output error occurs
+     * @throws IOException Thrown if an input/output error occurs
      */
     protected InputStream getInputStream( final String name )
     {

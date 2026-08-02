@@ -137,7 +137,7 @@ public abstract class AbstractMethodRule
     /**
      * Just performs the method execution.
      *
-     * @throws Exception if any error occurs.
+     * @throws Exception Thrown if any error occurs.
      */
     private void invoke()
         throws Exception
