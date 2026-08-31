@@ -27,6 +27,9 @@
     <action dev="simonetripodi" type="add" issue="DIGESTER-171" due-to="Nick Williams, Ivan Diana">Add DefaultThrowingErrorHandler to Digester API.</action>
     <action dev="ggregory" type="add" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
     <!--  FIX -->
+    <action dev="pkarwasz" type="fix">
+      Create SAX parser and document builder factories through org.apache.commons:commons-secure-xml, which bounds entity expansion and enables XML secure processing.
+    </action>
     <action dev="simonetripodi" type="fix" issue="DIGESTER-175">
       Regression: DigesterTestCase#testPopNamedStackNotPushed expects EmptyStackException.
     </action>
