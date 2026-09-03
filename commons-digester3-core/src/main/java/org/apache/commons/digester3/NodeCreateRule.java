@@ -23,6 +23,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.xml.secure.SecureDocumentBuilderFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -335,7 +336,7 @@ public class NodeCreateRule
     public NodeCreateRule( final int nodeType )
         throws ParserConfigurationException
     {
-        this( nodeType, DocumentBuilderFactory.newInstance().newDocumentBuilder() );
+        this( nodeType, SecureDocumentBuilderFactory.newInstance().newDocumentBuilder() );
     }
 
     /**

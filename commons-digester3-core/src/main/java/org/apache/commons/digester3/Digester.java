@@ -48,6 +48,7 @@ import javax.xml.validation.Schema;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.xml.secure.SecureSAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
@@ -1589,7 +1590,7 @@ public class Digester
     {
         if ( factory == null )
         {
-            factory = SAXParserFactory.newInstance();
+            factory = SecureSAXParserFactory.newInstance();
             factory.setNamespaceAware( namespaceAware );
             factory.setXIncludeAware( xincludeAware );
             factory.setValidating( validating );
