@@ -43,6 +43,7 @@ import org.apache.commons.digester3.Rules;
 import org.apache.commons.digester3.RulesBase;
 import org.apache.commons.digester3.StackAction;
 import org.apache.commons.digester3.Substitutor;
+import org.apache.commons.xml.secure.SecureSAXParserFactory;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.Locator;
@@ -107,7 +108,7 @@ public final class DigesterLoader
     /**
      * The SAXParserFactory to create new default {@link Digester} instances.
      */
-    private final SAXParserFactory factory = SAXParserFactory.newInstance();
+    private final SAXParserFactory factory = SecureSAXParserFactory.newInstance();
 
     private final Iterable<RulesModule> rulesModules;
 
