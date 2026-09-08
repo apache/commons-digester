@@ -22,6 +22,7 @@ import java.io.File;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.commons.xml.secure.SecureSAXParserFactory;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -44,7 +45,7 @@ public class TestEntityResolution
     void testParserResolveRelative()
         throws Exception
     {
-        final SAXParserFactory factory = SAXParserFactory.newInstance();
+        final SAXParserFactory factory = SecureSAXParserFactory.newInstance();
         factory.setValidating( true );
         factory.setNamespaceAware( true );
         final SAXParser parser = factory.newSAXParser();
