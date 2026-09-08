@@ -45,9 +45,8 @@ public class TestEntityResolution
     void testParserResolveRelative()
         throws Exception
     {
-        final SAXParserFactory factory = SecureSAXParserFactory.newInstance();
+        final SAXParserFactory factory = SecureSAXParserFactory.newNSInstance();
         factory.setValidating( true );
-        factory.setNamespaceAware( true );
         final SAXParser parser = factory.newSAXParser();
 
         parser.parse( new File( "src/test/resources/org/apache/commons/digester3/document-with-relative-dtd.xml" ),
