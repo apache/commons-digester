@@ -16,6 +16,8 @@
 github:
   description: "Apache Commons Digester"
   homepage: https://commons.apache.org/digester/
+  autolink_jira:
+    - DIGESTER
   
   pull_requests:
     # allow auto-merge
