@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -171,16 +170,12 @@ class FromXmlRuleSetTest
     }
 
     @Test
-    void testFactoryIgnoreCreateRule()
+    void testFactoryIgnoreCreateRule() throws Exception
     {
         final URL rules = getClass().getResource( "testfactoryignore.xml" );
 
         final String xml = "<?xml version='1.0' ?><root one='good' two='bad' three='ugly'><foo/></root>";
-        try {
-            newLoader(createRules(rules)).newDigester().parse(new StringReader(xml));
-        } catch (final Exception e) {
-            fail("This exception should have been ignored: " + e.getClass().getName());
-        }
+        newLoader( createRules( rules ) ).newDigester().parse( new StringReader( xml ) );
     }
 
     @Test
